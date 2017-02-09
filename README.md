@@ -10,7 +10,7 @@ NotAutoLayoutView is a framework to help you layout subviews without Auto Layout
 Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```
-github "isair/ManualLayout"
+github "el-hoshino/NotAutoLayout"
 ```
 
 Then do `carthage update`. After that, add the framework to your project.
