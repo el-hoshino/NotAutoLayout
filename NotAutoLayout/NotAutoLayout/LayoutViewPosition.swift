@@ -12,30 +12,9 @@ extension LayoutView {
 	
 	public enum Position {
 		
-		public enum CustomValue {
-			case absolute(CGFloat)
-			case relative(CGFloat)
-		}
-		
 		case absolute(CGRect)
 		case relative(CGRect)
-		case custom(x: CustomValue, y: CustomValue, width: CustomValue, height: CustomValue)
-		
-	}
-	
-}
-
-extension LayoutView.Position.CustomValue {
-	
-	func absoluteValue(in length: CGFloat) -> CGFloat {
-		
-		switch self {
-		case .absolute(let value):
-			return value
-			
-		case .relative(let value):
-			return value * length
-		}
+		case custom((CGSize) -> CGRect)
 		
 	}
 	
@@ -52,12 +31,8 @@ extension LayoutView.Position {
 		case .relative(let rect):
 			return rect.absoluteRectApplied(to: size)
 			
-		case .custom(x: let x, y: let y, width: let width, height: let height):
-			let x = x.absoluteValue(in: size.width)
-			let y = y.absoluteValue(in: size.height)
-			let width = width.absoluteValue(in: size.width)
-			let height = height.absoluteValue(in: size.height)
-			return CGRect(x: x, y: y, width: width, height: height)
+		case .custom(let rectClosure):
+			return rectClosure(size)
 		}
 		
 	}
