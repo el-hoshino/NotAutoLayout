@@ -1,5 +1,5 @@
 //
-//  LayoutViewRectType.swift
+//  LayoutViewPosition.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/02/09.
@@ -10,7 +10,7 @@ import Foundation
 
 extension LayoutView {
 	
-	enum RectType {
+	public enum Position {
 		case absolute(CGRect)
 		case relative(CGRect)
 	}
