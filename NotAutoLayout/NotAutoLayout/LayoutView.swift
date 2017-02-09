@@ -10,8 +10,9 @@ import UIKit
 
 public class LayoutView: UIView {
 	
-	public typealias LayoutCondition = (condition: (CGSize) -> Bool, position: Position)
-	public typealias SubviewTuple = (view: UIView, layoutConditions: [LayoutCondition])
+	public typealias Condition = (CGSize) -> Bool
+	public typealias LayoutMethod = (condition: (CGSize) -> Bool, position: Position)
+	public typealias SubviewTuple = (view: UIView, layoutConditions: [LayoutMethod])
 	
 	public var layoutingSubviews: [SubviewTuple] = []
 	
