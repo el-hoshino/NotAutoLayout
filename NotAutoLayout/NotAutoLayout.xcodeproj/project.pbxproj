@@ -12,6 +12,7 @@
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		798378A61E4CB36200D3E1C2 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A51E4CB36200D3E1C2 /* LayoutView.swift */; };
 		798378A81E4CB3B600D3E1C2 /* LayoutViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */; };
+		798378AA1E4CB81C00D3E1C2 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A91E4CB81C00D3E1C2 /* CGRect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		798378A51E4CB36200D3E1C2 /* LayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewPosition.swift; sourceTree = "<group>"; };
+		798378A91E4CB81C00D3E1C2 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */,
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
+				798378A91E4CB81C00D3E1C2 /* CGRect.swift */,
 				798378A51E4CB36200D3E1C2 /* LayoutView.swift */,
 				798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */,
 			);
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				798378A81E4CB3B600D3E1C2 /* LayoutViewPosition.swift in Sources */,
+				798378AA1E4CB81C00D3E1C2 /* CGRect.swift in Sources */,
 				798378A61E4CB36200D3E1C2 /* LayoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
