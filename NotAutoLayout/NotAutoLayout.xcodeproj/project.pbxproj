@@ -420,6 +420,7 @@
 				798378A11E4CB2B200D3E1C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		798378A21E4CB2B200D3E1C2 /* Build configuration list for PBXNativeTarget "NotAutoLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +429,7 @@
 				798378A41E4CB2B200D3E1C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
