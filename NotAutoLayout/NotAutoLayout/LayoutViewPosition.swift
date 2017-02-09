@@ -16,3 +16,19 @@ extension LayoutView {
 	}
 	
 }
+
+extension LayoutView.Position {
+	
+	func absoluteRect(in size: CGSize) -> CGRect {
+		
+		switch self {
+		case .absolute(let rect):
+			return rect
+			
+		case .relative(let rect):
+			return rect.absoluteRectApplied(to: size)
+		}
+		
+	}
+	
+}
