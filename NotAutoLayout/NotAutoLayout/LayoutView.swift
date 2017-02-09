@@ -74,7 +74,3 @@ extension LayoutView {
 	}
 	
 }
-
-private func * (lhs: CGRect, rhs: CGRect) -> CGRect {
-	return CGRect(x: lhs.origin.x * rhs.origin.x, y: lhs.origin.y * rhs.origin.y, width: lhs.width * rhs.width, height: lhs.height * rhs.height)
-}
