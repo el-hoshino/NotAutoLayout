@@ -12,7 +12,7 @@ public class LayoutView: UIView {
 	
 	public typealias Condition = (CGSize) -> Bool
 	public typealias LayoutMethod = (condition: (CGSize) -> Bool, position: Position)
-	public typealias SubviewTuple = (view: UIView, layoutConditions: [LayoutMethod])
+	public typealias SubviewTuple = (view: UIView, layoutMethods: [LayoutMethod])
 	
 	public var layoutingSubviews: [SubviewTuple] = []
 	
@@ -32,9 +32,9 @@ extension LayoutView {
 	
 	private func layout(_ viewTuple: SubviewTuple) {
 		
-		for layoutCondition in viewTuple.layoutConditions {
-			if layoutCondition.condition(self.bounds.size) == true {
-				self.place(viewTuple.view, at: layoutCondition.position)
+		for layoutMethod in viewTuple.layoutMethods {
+			if layoutMethod.condition(self.bounds.size) == true {
+				self.place(viewTuple.view, at: layoutMethod.position)
 				break
 			}
 		}
