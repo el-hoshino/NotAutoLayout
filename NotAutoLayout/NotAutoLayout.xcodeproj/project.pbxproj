@@ -10,6 +10,9 @@
 		798378951E4CB2B200D3E1C2 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */; };
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		798378A61E4CB36200D3E1C2 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A51E4CB36200D3E1C2 /* LayoutView.swift */; };
+		798378A81E4CB3B600D3E1C2 /* LayoutViewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */; };
+		798378AA1E4CB81C00D3E1C2 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A91E4CB81C00D3E1C2 /* CGRect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		798378941E4CB2B200D3E1C2 /* NotAutoLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotAutoLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutTests.swift; sourceTree = "<group>"; };
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		798378A51E4CB36200D3E1C2 /* LayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
+		798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewPosition.swift; sourceTree = "<group>"; };
+		798378A91E4CB81C00D3E1C2 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,9 @@
 			children = (
 				7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */,
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
+				798378A91E4CB81C00D3E1C2 /* CGRect.swift */,
+				798378A51E4CB36200D3E1C2 /* LayoutView.swift */,
+				798378A71E4CB3B600D3E1C2 /* LayoutViewPosition.swift */,
 			);
 			path = NotAutoLayout;
 			sourceTree = "<group>";
@@ -149,6 +158,7 @@
 					7983788A1E4CB2B100D3E1C2 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = KC8N9BMQJY;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					798378931E4CB2B200D3E1C2 = {
@@ -198,6 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				798378A81E4CB3B600D3E1C2 /* LayoutViewPosition.swift in Sources */,
+				798378AA1E4CB81C00D3E1C2 /* CGRect.swift in Sources */,
+				798378A61E4CB36200D3E1C2 /* LayoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +335,7 @@
 		798378A01E4CB2B200D3E1C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
@@ -330,10 +344,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -341,6 +357,7 @@
 		798378A11E4CB2B200D3E1C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
@@ -349,6 +366,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -360,6 +378,7 @@
 		798378A31E4CB2B200D3E1C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = NotAutoLayoutTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -372,6 +391,7 @@
 		798378A41E4CB2B200D3E1C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = NotAutoLayoutTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
