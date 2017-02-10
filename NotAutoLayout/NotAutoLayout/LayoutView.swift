@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class LayoutView: UIView {
+open class LayoutView: UIView {
 	
 	public typealias Condition = (CGSize) -> Bool
 	public typealias LayoutMethod = (condition: (CGSize) -> Bool, position: Position)
@@ -41,7 +41,7 @@ extension LayoutView {
 		
 	}
 	
-	public override func layoutSubviews() {
+	open override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		self.layoutingSubviews.forEach { (tuple) in
