@@ -98,7 +98,7 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	private func getSubviewsSortedByIndex() -> [UIView] {
+	private func getSubviewsSortedByZIndex() -> [UIView] {
 		
 		let subviewTuples = self.subviews.map { (view) -> (view: UIView, index: Int) in
 			let index = self.zIndexInfo[view] ?? 0
@@ -133,7 +133,7 @@ extension LayoutControllable {
 	
 	public func reloadSubviews() {
 		
-		let subviews = self.getSubviewsSortedByIndex()
+		let subviews = self.getSubviewsSortedByZIndex()
 		self.removeAllSubviews()
 		self.addSubviews(subviews)
 		
