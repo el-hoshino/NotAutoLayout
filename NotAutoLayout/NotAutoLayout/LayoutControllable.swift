@@ -11,7 +11,7 @@ import UIKit
 public protocol LayoutControllable: class {
 	
 	var subviews: [UIView] { get }
-	var boundSize: CGSize { get }
+	var canvasSize: CGSize { get }
 	
 	var layoutInfo: [UIView: [LayoutMethod]] { get set }
 	var zIndexInfo: [UIView: Int] { get set }
@@ -70,7 +70,7 @@ extension LayoutControllable {
 	
 	private func place(_ view: UIView, at position: LayoutPosition) {
 		
-		let rect = position.absoluteRect(in: self.boundSize)
+		let rect = position.absoluteRect(in: self.canvasSize)
 		view.bounds.size = rect.size
 		view.center = rect.centerPosition
 		
@@ -78,7 +78,7 @@ extension LayoutControllable {
 	
 	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
 		
-		if let method = methods.first(where: { $0.condition(self.boundSize) == true }) {
+		if let method = methods.first(where: { $0.condition(self.canvasSize) == true }) {
 			self.place(view, at: method.position)
 		}
 		
