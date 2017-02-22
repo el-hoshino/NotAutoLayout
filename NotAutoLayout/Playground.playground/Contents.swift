@@ -12,6 +12,33 @@ typealias LayoutOutput = (condition: LayoutCondition, viewA: LayoutPosition, vie
 
 let oneThird: CGFloat = 1 / 3
 
+let labelA: UILabel = {
+	let label = UILabel()
+	label.backgroundColor = .red
+	label.textAlignment = .center
+	label.text = "Label A"
+	view.addSubview(label)
+	return label
+}()
+
+let labelB: UILabel = {
+	let label = UILabel()
+	label.backgroundColor = .green
+	label.textAlignment = .center
+	label.text = "Label B"
+	view.addSubview(label)
+	return label
+}()
+
+let labelC: UILabel = {
+	let label = UILabel()
+	label.backgroundColor = .blue
+	label.textAlignment = .center
+	label.text = "Label C"
+	view.addSubview(label)
+	return label
+}()
+
 let landscapeLayout: LayoutOutput = {
 	let isLandscape: LayoutCondition = { $0.width > $0.height }
 	let viewA = LayoutPosition.relative(CGRect(x: 0, y: 0, width: oneThird, height: 1))
@@ -28,43 +55,18 @@ let otherLayout: LayoutOutput = {
 	return (condition, viewA, viewB, viewC)
 }()
 
-let labelA: UILabel = {
-	let label = UILabel()
-	label.backgroundColor = .red
-	label.textAlignment = .center
-	label.text = "Label A"
-	return label
-}()
-
-let labelB: UILabel = {
-	let label = UILabel()
-	label.backgroundColor = .green
-	label.textAlignment = .center
-	label.text = "Label B"
-	return label
-}()
-
-let labelC: UILabel = {
-	let label = UILabel()
-	label.backgroundColor = .blue
-	label.textAlignment = .center
-	label.text = "Label C"
-	return label
-}()
-
 do {
 	let layout = landscapeLayout
-	view.appendLayoutPosition(layout.viewA, while: layout.condition, for: labelA)
-	view.appendLayoutPosition(layout.viewB, while: layout.condition, for: labelB)
-	view.appendLayoutPosition(layout.viewC, while: layout.condition, for: labelC)
+	view.setLayout(of: labelA, at: layout.viewA, while: layout.condition)
+	view.setLayout(of: labelB, at: layout.viewB, while: layout.condition)
+	view.setLayout(of: labelC, at: layout.viewC, while: layout.condition)
 }
 
 do {
 	let layout = otherLayout
-	view.appendLayoutPosition(layout.viewA, while: layout.condition, for: labelA)
-	view.appendLayoutPosition(layout.viewB, while: layout.condition, for: labelB)
-	view.appendLayoutPosition(layout.viewC, while: layout.condition, for: labelC)
+	view.setLayout(of: labelA, at: layout.viewA, while: layout.condition)
+	view.setLayout(of: labelB, at: layout.viewB, while: layout.condition)
+	view.setLayout(of: labelC, at: layout.viewC, while: layout.condition)
 }
 
-view.reloadLayoutingSubviews()
 view.setNeedsLayout()
