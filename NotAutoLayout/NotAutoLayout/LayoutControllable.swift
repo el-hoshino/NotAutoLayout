@@ -124,4 +124,17 @@ extension LayoutControllable where Self: UIView {
 		
 	}
 	
+	public func appendLayoutPosition(_ position: LayoutPosition, while condition: @escaping LayoutCondition, for subview: UIView) {
+		
+		let method: LayoutMethod = (condition, position)
+		
+		if let index = self.index(of: subview) {
+			self.layoutingSubviews[index].layoutMethods.append(method)
+			
+		} else {
+			self.layoutingSubviews.append((subview, [method]))
+		}
+		
+	}
+	
 }
