@@ -37,10 +37,8 @@ extension LayoutControllable where Self: UIView {
 	
 	private func layout(_ viewTuple: SubviewTuple) {
 		
-		for method in viewTuple.layoutMethods {
-			if method.condition(self.bounds.size) == true {
-				self.place(viewTuple.view, at: method.position)
-			}
+		if let method = viewTuple.layoutMethods.first(where: { $0.condition(self.bounds.size) == true }) {
+			self.place(viewTuple.view, at: method.position)
 		}
 		
 	}
