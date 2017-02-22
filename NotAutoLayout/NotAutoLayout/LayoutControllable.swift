@@ -25,7 +25,7 @@ public protocol LayoutControllable: class {
 	func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView)
 	func setConstantPosition(_ position: LayoutPosition, for subview: UIView)
 	func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView)
-	func setSubview(_ subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
+	func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
 	
 }
 
@@ -167,7 +167,7 @@ extension LayoutControllable where Self: UIView {
 
 extension LayoutControllable where Self: UIView {
 	
-	public func setSubview(_ subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
+	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
 		
 		let method: LayoutMethod = (condition, position)
 		
