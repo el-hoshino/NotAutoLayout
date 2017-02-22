@@ -10,7 +10,8 @@ import UIKit
 
 open class LayoutView: UIView, LayoutControllable {
 	
-	public var layoutingSubviews: [SubviewTuple] = []
+	public var layoutInfo: [UIView: [LayoutMethod]] = [:]
+	public var zIndexInfo: [UIView : Int] = [:]
 	
 }
 

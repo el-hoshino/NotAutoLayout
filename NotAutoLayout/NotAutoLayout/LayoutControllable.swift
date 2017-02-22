@@ -10,18 +10,54 @@ import UIKit
 
 public protocol LayoutControllable: class {
 	
-	var layoutingSubviews: [SubviewTuple] { get set }
+	var layoutInfo: [UIView: [LayoutMethod]] { get set }
+	var zIndexInfo: [UIView: Int] { get set }
 	
 	func layoutSubviews()
 	func setNeedsLayout()
 	
-	func layoutControl()
-	func reloadLayoutingSubviews()
+	func refreshLayoutInfo()
+	func refreshZIndexInfo()
 	
-	func contains(_ subview: UIView) -> Bool
-	func index(of subview: UIView) -> Int?
+	func layoutControl()
+	func reloadSubviews()
+	
 	func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView)
-	func setAlwaysTrueLayoutPosition(_ position: LayoutPosition, for subview: UIView)
+	func setConstantPosition(_ position: LayoutPosition, for subview: UIView)
+	func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView)
+	func setSubview(_ subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
+	
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func refreshLayoutInfo() {
+		
+		var info: [UIView: [LayoutMethod]] = [:]
+		
+		self.subviews.forEach { (view) in
+			info[view] = self.layoutInfo[view]
+		}
+		
+		self.layoutInfo = info
+		
+	}
+	
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func refreshZIndexInfo() {
+		
+		var info: [UIView: Int] = [:]
+		
+		self.subviews.forEach { (view) in
+			info[view] = self.zIndexInfo[view]
+		}
+		
+		self.zIndexInfo = info
+		
+	}
 	
 }
 
@@ -35,18 +71,20 @@ extension LayoutControllable where Self: UIView {
 		
 	}
 	
-	private func layout(_ viewTuple: SubviewTuple) {
+	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
 		
-		if let method = viewTuple.layoutMethods.first(where: { $0.condition(self.bounds.size) == true }) {
-			self.place(viewTuple.view, at: method.position)
+		if let method = methods.first(where: { $0.condition(self.bounds.size) == true }) {
+			self.place(view, at: method.position)
 		}
 		
 	}
 	
 	public func layoutControl() {
 		
-		self.layoutingSubviews.forEach { (tuple) in
-			self.layout(tuple)
+		self.subviews.forEach { (view) in
+			if let methods = self.layoutInfo[view] {
+				self.layout(view, withMethods: methods)
+			}
 		}
 		
 	}
@@ -55,22 +93,44 @@ extension LayoutControllable where Self: UIView {
 
 extension LayoutControllable where Self: UIView {
 	
+	private func getSubviewsSortedByIndex() -> [UIView] {
+		
+		let subviewTuples = self.subviews.map { (view) -> (view: UIView, index: Int) in
+			let index = self.zIndexInfo[view] ?? 0
+			return (view, index)
+		}
+		
+		let sortedTuples = subviewTuples.sorted(by: {$0.index < $1.index})
+		
+		let views = sortedTuples.map({ (view, _) -> UIView in
+			return view
+		})
+		
+		return views
+		
+	}
+	
 	private func removeAllSubviews() {
+		
 		self.subviews.forEach { (view) in
 			view.removeFromSuperview()
 		}
+		
 	}
 	
-	private func addLayoutingSubviews() {
-		self.layoutingSubviews.forEach { (view, _) in
+	private func addSubviews(_ views: [UIView]) {
+		
+		views.forEach { (view) in
 			self.addSubview(view)
 		}
+		
 	}
 	
-	public func reloadLayoutingSubviews() {
+	public func reloadSubviews() {
 		
+		let subviews = self.getSubviewsSortedByIndex()
 		self.removeAllSubviews()
-		self.addLayoutingSubviews()
+		self.addSubviews(subviews)
 		
 	}
 	
@@ -78,60 +138,40 @@ extension LayoutControllable where Self: UIView {
 
 extension LayoutControllable where Self: UIView {
 	
-	public func contains(_ subview: UIView) -> Bool {
-		
-		let subviewTuple = self.layoutingSubviews.filter { (tuple) -> Bool in
-			tuple.view === subview
-		}
-		
-		return !subviewTuple.isEmpty
-		
-	}
-	
-	public func index(of subview: UIView) -> Int? {
-		
-		let tuple = self.layoutingSubviews.enumerated().first { (offset, tuple) -> Bool in
-			return tuple.view === subview
-		}
-		
-		return tuple?.offset
-		
-	}
-	
 	public func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView) {
 		
-		if let index = self.index(of: subview) {
-			self.layoutingSubviews[index].layoutMethods = methods
-			
-		} else {
-			self.layoutingSubviews.append((subview, methods))
-		}
+		self.layoutInfo[subview] = methods
 		
 	}
 	
-	public func setAlwaysTrueLayoutPosition(_ position: LayoutPosition, for subview: UIView) {
+	public func setConstantPosition(_ position: LayoutPosition, for subview: UIView) {
 		
 		let method: LayoutMethod = ({ _ in true }, position)
 		
-		if let index = self.index(of: subview) {
-			self.layoutingSubviews[index].layoutMethods = [method]
+		self.layoutInfo[subview] = [method]
+		
+	}
+	
+	public func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView) {
+		
+		if let methods = self.layoutInfo[subview] {
+			self.layoutInfo[subview] = methods + [method]
 			
 		} else {
-			self.layoutingSubviews.append((subview, [method]))
+			self.layoutInfo[subview] = [method]
 		}
 		
 	}
 	
-	public func appendLayoutPosition(_ position: LayoutPosition, while condition: @escaping LayoutCondition, for subview: UIView) {
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func setSubview(_ subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
 		
 		let method: LayoutMethod = (condition, position)
 		
-		if let index = self.index(of: subview) {
-			self.layoutingSubviews[index].layoutMethods.append(method)
-			
-		} else {
-			self.layoutingSubviews.append((subview, [method]))
-		}
+		self.appendLayoutMethod(method, for: subview)
 		
 	}
 	

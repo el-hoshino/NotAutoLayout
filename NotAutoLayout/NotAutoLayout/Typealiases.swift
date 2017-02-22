@@ -10,4 +10,3 @@ import Foundation
 
 public typealias LayoutCondition = (_ canvasSize: CGSize) -> Bool
 public typealias LayoutMethod = (condition: LayoutCondition, position: LayoutPosition)
-public typealias SubviewTuple = (view: UIView, layoutMethods: [LayoutMethod])
