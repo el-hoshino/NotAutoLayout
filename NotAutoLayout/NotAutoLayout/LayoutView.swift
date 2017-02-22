@@ -13,10 +13,6 @@ open class LayoutView: UIView, LayoutControllable {
 	public var layoutInfo: [UIView: [LayoutMethod]] = [:]
 	public var zIndexInfo: [UIView : Int] = [:]
 	
-}
-
-extension LayoutView {
-	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
 		self.layoutControl()

@@ -10,8 +10,13 @@ import UIKit
 
 public protocol LayoutControllable: class {
 	
+	var subviews: [UIView] { get }
+	var boundSize: CGSize { get }
+	
 	var layoutInfo: [UIView: [LayoutMethod]] { get set }
 	var zIndexInfo: [UIView: Int] { get set }
+	
+	func addSubview(_ subview: UIView)
 	
 	func layoutSubviews()
 	func setNeedsLayout()
@@ -29,7 +34,7 @@ public protocol LayoutControllable: class {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	public func refreshLayoutInfo() {
 		
@@ -45,7 +50,7 @@ extension LayoutControllable where Self: UIView {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	public func refreshZIndexInfo() {
 		
@@ -61,11 +66,11 @@ extension LayoutControllable where Self: UIView {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	private func place(_ view: UIView, at position: LayoutPosition) {
 		
-		let rect = position.absoluteRect(in: self.bounds.size)
+		let rect = position.absoluteRect(in: self.boundSize)
 		view.bounds.size = rect.size
 		view.center = rect.centerPosition
 		
@@ -73,7 +78,7 @@ extension LayoutControllable where Self: UIView {
 	
 	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
 		
-		if let method = methods.first(where: { $0.condition(self.bounds.size) == true }) {
+		if let method = methods.first(where: { $0.condition(self.boundSize) == true }) {
 			self.place(view, at: method.position)
 		}
 		
@@ -91,7 +96,7 @@ extension LayoutControllable where Self: UIView {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	private func getSubviewsSortedByIndex() -> [UIView] {
 		
@@ -136,7 +141,7 @@ extension LayoutControllable where Self: UIView {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	public func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView) {
 		
@@ -165,7 +170,7 @@ extension LayoutControllable where Self: UIView {
 	
 }
 
-extension LayoutControllable where Self: UIView {
+extension LayoutControllable {
 	
 	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
 		

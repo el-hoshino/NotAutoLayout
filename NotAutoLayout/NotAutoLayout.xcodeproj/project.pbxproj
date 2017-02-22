@@ -11,6 +11,7 @@
 		16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */; };
 		16FE58C51E5DA931001A9DC2 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C41E5DA931001A9DC2 /* Typealiases.swift */; };
 		16FE58D41E5DB53D001A9DC2 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58D31E5DB53D001A9DC2 /* CGRect.swift */; };
+		793417041E5DEB9500EDA668 /* LayoutControllableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793417031E5DEB9500EDA668 /* LayoutControllableView.swift */; };
 		798378951E4CB2B200D3E1C2 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */; };
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +34,7 @@
 		16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutControllable.swift; sourceTree = "<group>"; };
 		16FE58C41E5DA931001A9DC2 /* Typealiases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		16FE58D31E5DB53D001A9DC2 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		793417031E5DEB9500EDA668 /* LayoutControllableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutControllableView.swift; sourceTree = "<group>"; };
 		7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotAutoLayout.h; sourceTree = "<group>"; };
 		7983788F1E4CB2B100D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				16FE58D31E5DB53D001A9DC2 /* CGRect.swift */,
 				16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */,
 				16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */,
+				793417031E5DEB9500EDA668 /* LayoutControllableView.swift */,
 				798378A51E4CB36200D3E1C2 /* LayoutView.swift */,
 			);
 			path = NotAutoLayout;
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793417041E5DEB9500EDA668 /* LayoutControllableView.swift in Sources */,
 				16FE58C11E5D9E23001A9DC2 /* LayoutPosition.swift in Sources */,
 				16FE58D41E5DB53D001A9DC2 /* CGRect.swift in Sources */,
 				16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */,
