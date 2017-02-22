@@ -52,35 +52,19 @@ let labelC: UILabel = {
 	return label
 }()
 
-let subviewTuples: [SubviewTuple] = {
-	
-	var viewALayoutMethods: [LayoutMethod] = []
-	var viewBLayoutMethods: [LayoutMethod] = []
-	var viewCLayoutMethods: [LayoutMethod] = []
-	
-	do {
-		let layout = landscapeLayout
-		viewALayoutMethods.append((layout.condition, layout.viewA))
-		viewBLayoutMethods.append((layout.condition, layout.viewB))
-		viewCLayoutMethods.append((layout.condition, layout.viewC))
-	}
-	
-	do {
-		let layout = otherLayout
-		viewALayoutMethods.append((layout.condition, layout.viewA))
-		viewBLayoutMethods.append((layout.condition, layout.viewB))
-		viewCLayoutMethods.append((layout.condition, layout.viewC))
-	}
-	
-	let a: SubviewTuple = (labelA, viewALayoutMethods)
-	let b: SubviewTuple = (labelB, viewBLayoutMethods)
-	let c: SubviewTuple = (labelC, viewCLayoutMethods)
-	
-	return [a, b, c]
+do {
+	let layout = landscapeLayout
+	view.appendLayoutPosition(layout.viewA, while: layout.condition, for: labelA)
+	view.appendLayoutPosition(layout.viewB, while: layout.condition, for: labelB)
+	view.appendLayoutPosition(layout.viewC, while: layout.condition, for: labelC)
+}
 
-}()
-
-view.layoutingSubviews = subviewTuples
+do {
+	let layout = otherLayout
+	view.appendLayoutPosition(layout.viewA, while: layout.condition, for: labelA)
+	view.appendLayoutPosition(layout.viewB, while: layout.condition, for: labelB)
+	view.appendLayoutPosition(layout.viewC, while: layout.condition, for: labelC)
+}
 
 view.reloadLayoutingSubviews()
 view.setNeedsLayout()
