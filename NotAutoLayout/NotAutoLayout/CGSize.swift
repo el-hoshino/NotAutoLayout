@@ -52,9 +52,29 @@ extension CGSize {
 
 extension CGSize {
 	
-	func absolutePosition(appliedTo transform: (CGSize) -> CGRect) -> PositionRect {
+	func absolutePositionAppliedTo(frame frameTransform: (CGSize) -> CGRect) -> PositionRect {
 		
-		let frame = transform(self)
+		let frame = frameTransform(self)
+		return PositionRect(frame: frame)
+		
+	}
+	
+	func absolutePositionAppliedTo(origin originTransform: (CGSize) -> CGPoint, size sizeTransform: (CGSize) -> CGSize) -> PositionRect {
+		
+		let origin = originTransform(self)
+		let size = sizeTransform(self)
+		let frame = CGRect(origin: origin, size: size)
+		return PositionRect(frame: frame)
+		
+	}
+	
+	func absolutePositionAppliedTo(x xTransform: (CGSize) -> CGFloat, y yTransform: (CGSize) -> CGFloat, width widthTransform: (CGSize) -> CGFloat, height heightTransform: (CGSize) -> CGFloat) -> PositionRect {
+		
+		let x = xTransform(self)
+		let y = yTransform(self)
+		let width = widthTransform(self)
+		let height = heightTransform(self)
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		return PositionRect(frame: frame)
 		
 	}
