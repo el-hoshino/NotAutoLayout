@@ -30,6 +30,7 @@ public protocol LayoutControllable: class {
 	func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView)
 	func setConstantPosition(_ position: LayoutPosition, for subview: UIView)
 	func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView)
+	func appendConstantPosition(_ position: LayoutPosition, for subview: UIView)
 	func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
 	
 }
@@ -161,6 +162,19 @@ extension LayoutControllable {
 		
 		if let methods = self.layoutInfo[subview] {
 			self.layoutInfo[subview] = methods + [method]
+			
+		} else {
+			self.layoutInfo[subview] = [method]
+		}
+		
+	}
+	
+	public func appendConstantPosition(_ position: LayoutPosition, for subview: UIView) {
+		
+		let method: LayoutMethod = ({ _ in true }, position)
+		
+		if let methods = self.layoutInfo[subview] {
+			layoutInfo[subview] = methods + [method]
 			
 		} else {
 			self.layoutInfo[subview] = [method]
