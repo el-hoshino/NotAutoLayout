@@ -42,9 +42,63 @@ extension CGSize {
 
 extension CGSize {
 	
-	func absolutePosition(offsetBy value: UIOffset, from type: LayoutPosition.OffsetType, forObjectSize objectSize: CGSize) -> PositionRect {
+	func absolutePosition(offsetBy offset: UIOffset, from offsetOrigin: LayoutPosition.OffsetOrigin, forObjectSize objectSize: CGSize) -> PositionRect {
 		
-		return type.getPosition(offset: value, boundSize: self, objectSize: objectSize)
+		let boundHorizontalCenter = self.width / 2
+		let boundVerticalCenter = self.height / 2
+		
+		let objectHorizontalCenter = objectSize.width / 2
+		let objectVerticalCenter = objectSize.height / 2
+		
+		let horizontalCenterDiff = boundHorizontalCenter - objectHorizontalCenter
+		let verticalCenterDiff = boundVerticalCenter - objectVerticalCenter
+		
+		let baseX: CGFloat
+		let baseY: CGFloat
+		
+		switch offsetOrigin {
+		case .topLeft:
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
+			
+		case .topCenter:
+			baseX = offset.horizontal
+			baseY = offset.vertical - verticalCenterDiff
+			
+		case .topRight:
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
+			
+		case .middleLeft:
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical
+			
+		case .middleCenter:
+			baseX = offset.horizontal
+			baseY = offset.vertical
+			
+		case .middleRight:
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical
+			
+		case .bottomLeft:
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
+			
+		case .bottomCenter:
+			baseX = offset.horizontal
+			baseY = offset.vertical + verticalCenterDiff
+			
+		case .bottomRight:
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
+		}
+		
+		let centerX = baseX + boundHorizontalCenter
+		let centerY = baseY + boundVerticalCenter
+		let center = CGPoint(x: centerX, y: centerY)
+		
+		return PositionRect(center: center, size: objectSize)
 		
 	}
 	
