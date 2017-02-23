@@ -39,22 +39,22 @@ public enum LayoutPosition {
 
 extension LayoutPosition {
 	
-	func absoluteRect(in size: CGSize) -> CGRect {
+	func absolutePosition(in size: CGSize) -> PositionRect {
 		switch self {
 		case .absolute(let rect):
-			return rect
+			return PositionRect(frame: rect)
 			
 		case .relative(let rect):
-			return size.absoluteRect(relatedTo: rect)
+			return size.absolutePosition(relatedTo: rect)
 			
 		case .insets(let insets):
-			return size.absoluteRect(withinInsets: insets)
+			return size.absolutePosition(withinInsets: insets)
 			
 		case .offset(value: let value, type: let type, size: let objectSize):
-			return size.absoluteRect(offsetBy: value, from: type, for: objectSize)
+			return size.absolutePosition(offsetBy: value, from: type, forObjectSize: objectSize)
 			
 		case .custom(let transform):
-			return size.absoluteRect(appliedTo: transform)
+			return size.absolutePosition(appliedTo: transform)
 		}
 	}
 	
@@ -62,68 +62,63 @@ extension LayoutPosition {
 
 extension LayoutPosition.OffsetType {
 	
-	func getOrigin(offset: UIOffset, canvasSize: CGSize, objectSize: CGSize) -> CGPoint {
+	func getPosition(offset: UIOffset, boundSize: CGSize, objectSize: CGSize) -> PositionRect {
 		
-		let originX: CGFloat
-		let originY: CGFloat
+		let boundHorizontalCenter = boundSize.width / 2
+		let boundVerticalCenter = boundSize.height / 2
+		
+		let objectHorizontalCenter = objectSize.width / 2
+		let objectVerticalCenter = objectSize.height / 2
+		
+		let horizontalCenterDiff = boundHorizontalCenter - objectHorizontalCenter
+		let verticalCenterDiff = boundVerticalCenter - objectVerticalCenter
+		
+		let baseX: CGFloat
+		let baseY: CGFloat
 		
 		switch self {
 		case .topLeft:
-			originX = offset.horizontal
-			originY = offset.vertical
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .topCenter:
-			let canvasCenter = canvasSize.width / 2
-			let offsetCenter = canvasCenter + offset.horizontal
-			originX = offsetCenter - (objectSize.width / 2)
-			originY = offset.vertical
+			baseX = offset.horizontal
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .topRight:
-			let offsetRight = canvasSize.width + offset.horizontal
-			originX = offsetRight - objectSize.width
-			originY = offset.vertical
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .middleLeft:
-			let canvasMiddle = canvasSize.height / 2
-			let offsetMiddle = canvasMiddle + offset.vertical
-			originX = offset.horizontal
-			originY = offsetMiddle - (objectSize.height / 2)
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical
 			
 		case .middleCenter:
-			let canvasCenter = canvasSize.width / 2
-			let offsetCenter = canvasCenter + offset.horizontal
-			let canvasMiddle = canvasSize.height / 2
-			let offsetMiddle = canvasMiddle + offset.vertical
-			originX = offsetCenter - (objectSize.width / 2)
-			originY = offsetMiddle - (objectSize.height / 2)
+			baseX = offset.horizontal
+			baseY = offset.vertical
 			
 		case .middleRight:
-			let offsetRight = canvasSize.width + offset.horizontal
-			let canvasMiddle = canvasSize.height / 2
-			let offsetMiddle = canvasMiddle + offset.vertical
-			originX = offsetRight - (objectSize.width)
-			originY = offsetMiddle - (objectSize.height / 2)
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical
 			
 		case .bottomLeft:
-			let offsetBottom = canvasSize.height + offset.vertical
-			originX = offset.horizontal
-			originY = offsetBottom - objectSize.height
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
 			
 		case .bottomCenter:
-			let canvasCenter = canvasSize.width / 2
-			let offsetCenter = canvasCenter + offset.horizontal
-			let offsetBottom = canvasSize.height + offset.vertical
-			originX = offsetCenter - (objectSize.width / 2)
-			originY = offsetBottom - objectSize.height
+			baseX = offset.horizontal
+			baseY = offset.vertical + verticalCenterDiff
 			
 		case .bottomRight:
-			let offsetRight = canvasSize.width + offset.horizontal
-			let offsetBottom = canvasSize.height + offset.vertical
-			originX = offsetRight - objectSize.width
-			originY = offsetBottom - objectSize.height
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
 		}
 		
-		return CGPoint(x: originX, y: originY)
+		let centerX = baseX + boundHorizontalCenter
+		let centerY = baseY + boundVerticalCenter
+		let center = CGPoint(x: centerX, y: centerY)
+		
+		return PositionRect(center: center, size: objectSize)
 		
 	}
 	

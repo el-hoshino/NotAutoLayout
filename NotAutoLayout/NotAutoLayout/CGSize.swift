@@ -10,14 +10,15 @@ import Foundation
 
 extension CGSize {
 	
-	func absoluteRect(relatedTo rect: CGRect) -> CGRect {
+	func absolutePosition(relatedTo rect: CGRect) -> PositionRect {
 		
 		let x = rect.origin.x * self.width
 		let y = rect.origin.y * self.height
 		let width = rect.width * self.width
 		let height = rect.height * self.height
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
-		return CGRect(x: x, y: y, width: width, height: height)
+		return PositionRect(frame: frame)
 		
 	}
 	
@@ -25,26 +26,15 @@ extension CGSize {
 
 extension CGSize {
 
-	func absoluteRect(withinInsets insets: UIEdgeInsets) -> CGRect {
+	func absolutePosition(withinInsets insets: UIEdgeInsets) -> PositionRect {
 		
 		let x = insets.left
 		let y = insets.top
 		let width = self.width - (insets.left + insets.right)
 		let height = self.height - (insets.top + insets.bottom)
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
-		return CGRect(x: x, y: y, width: width, height: height)
-		
-	}
-	
-}
-
-extension CGSize {
-	
-	func absoluteRect(offsetBy value: UIOffset, from type: LayoutPosition.OffsetType, for size: CGSize) -> CGRect {
-		
-		let origin = type.getOrigin(offset: value, canvasSize: self, objectSize: size)
-		
-		return CGRect(origin: origin, size: size)
+		return PositionRect(frame: frame)
 		
 	}
 	
@@ -52,9 +42,20 @@ extension CGSize {
 
 extension CGSize {
 	
-	func absoluteRect(appliedTo transform: (CGSize) -> CGRect) -> CGRect {
+	func absolutePosition(offsetBy value: UIOffset, from type: LayoutPosition.OffsetType, forObjectSize objectSize: CGSize) -> PositionRect {
 		
-		return transform(self)
+		return type.getPosition(offset: value, boundSize: self, objectSize: objectSize)
+		
+	}
+	
+}
+
+extension CGSize {
+	
+	func absolutePosition(appliedTo transform: (CGSize) -> CGRect) -> PositionRect {
+		
+		let frame = transform(self)
+		return PositionRect(frame: frame)
 		
 	}
 	
