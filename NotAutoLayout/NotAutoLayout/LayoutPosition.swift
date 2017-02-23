@@ -33,6 +33,11 @@ public enum LayoutPosition {
 	
 	case offset(value: UIOffset, type: OffsetType, size: CGSize)
 	
+	case customByFrame(frame: (CGSize) -> CGRect)
+	case customByOriginSize(origin: (CGSize) -> CGPoint, size: (CGSize) -> CGSize)
+	case customByXYWidthHeight(x: (CGSize) -> CGFloat, y: (CGSize) -> CGFloat, width: (CGSize) -> CGFloat, height: (CGSize) -> CGFloat)
+	
+	@available(*, deprecated: 0.6, message: "Use customByFrame, customByOriginSize or customByXYWidthHeight instead")
 	case custom((CGSize) -> CGRect)
 	
 }
@@ -53,8 +58,17 @@ extension LayoutPosition {
 		case .offset(value: let value, type: let type, size: let objectSize):
 			return size.absolutePosition(offsetBy: value, from: type, forObjectSize: objectSize)
 			
+		case .customByFrame(frame: let frameTransform):
+			return size.absolutePositionAppliedTo(frame: frameTransform)
+			
+		case .customByOriginSize(origin: let originTransform, size: let sizeTransform):
+			return size.absolutePositionAppliedTo(origin: originTransform, size: sizeTransform)
+			
+		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
+			return size.absolutePositionAppliedTo(x: xTransform, y: yTransform, width: widthTransform, height: heightTransform)
+			
 		case .custom(let transform):
-			return size.absolutePosition(appliedTo: transform)
+			return size.absolutePositionAppliedTo(frame: transform)
 		}
 	}
 	
