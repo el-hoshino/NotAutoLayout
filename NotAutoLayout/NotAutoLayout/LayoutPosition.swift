@@ -62,7 +62,7 @@ extension LayoutPosition {
 
 extension LayoutPosition.OffsetType {
 	
-	func getCenter(offset: UIOffset, boundSize: CGSize, objectSize: CGSize) -> CGPoint {
+	func getPosition(offset: UIOffset, boundSize: CGSize, objectSize: CGSize) -> PositionRect {
 		
 		let boundHorizontalCenter = boundSize.width / 2
 		let boundVerticalCenter = boundSize.height / 2
@@ -73,48 +73,52 @@ extension LayoutPosition.OffsetType {
 		let horizontalCenterDiff = boundHorizontalCenter - objectHorizontalCenter
 		let verticalCenterDiff = boundVerticalCenter - objectVerticalCenter
 		
-		let centerX: CGFloat
-		let centerY: CGFloat
+		let baseX: CGFloat
+		let baseY: CGFloat
 		
 		switch self {
 		case .topLeft:
-			centerX = offset.horizontal - horizontalCenterDiff
-			centerY = offset.vertical - verticalCenterDiff
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .topCenter:
-			centerX = offset.horizontal
-			centerY = offset.vertical - verticalCenterDiff
+			baseX = offset.horizontal
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .topRight:
-			centerX = offset.horizontal + horizontalCenterDiff
-			centerY = offset.vertical - verticalCenterDiff
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical - verticalCenterDiff
 			
 		case .middleLeft:
-			centerX = offset.horizontal - horizontalCenterDiff
-			centerY = offset.vertical
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical
 			
 		case .middleCenter:
-			centerX = offset.horizontal
-			centerY = offset.vertical
+			baseX = offset.horizontal
+			baseY = offset.vertical
 			
 		case .middleRight:
-			centerX = offset.horizontal + horizontalCenterDiff
-			centerY = offset.vertical
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical
 			
 		case .bottomLeft:
-			centerX = offset.horizontal - horizontalCenterDiff
-			centerY = offset.vertical + verticalCenterDiff
+			baseX = offset.horizontal - horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
 			
 		case .bottomCenter:
-			centerX = offset.horizontal
-			centerY = offset.vertical + verticalCenterDiff
+			baseX = offset.horizontal
+			baseY = offset.vertical + verticalCenterDiff
 			
 		case .bottomRight:
-			centerX = offset.horizontal + horizontalCenterDiff
-			centerY = offset.vertical + verticalCenterDiff
+			baseX = offset.horizontal + horizontalCenterDiff
+			baseY = offset.vertical + verticalCenterDiff
 		}
 		
-		return CGPoint(x: centerX, y: centerY)
+		let centerX = baseX + boundHorizontalCenter
+		let centerY = baseY + boundVerticalCenter
+		let center = CGPoint(x: centerX, y: centerY)
+		
+		return PositionRect(center: center, size: objectSize)
 		
 	}
 	

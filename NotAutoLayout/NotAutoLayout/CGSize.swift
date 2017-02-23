@@ -44,9 +44,7 @@ extension CGSize {
 	
 	func absolutePosition(offsetBy value: UIOffset, from type: LayoutPosition.OffsetType, forObjectSize objectSize: CGSize) -> PositionRect {
 		
-		let center = type.getCenter(offset: value, boundSize: self, objectSize: objectSize)
-		
-		return PositionRect(center: center, size: objectSize)
+		return type.getPosition(offset: value, boundSize: self, objectSize: objectSize)
 		
 	}
 	
