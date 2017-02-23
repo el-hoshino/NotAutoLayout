@@ -71,9 +71,9 @@ extension LayoutControllable {
 	
 	private func place(_ view: UIView, at position: LayoutPosition) {
 		
-		let rect = position.absoluteRect(in: self.boundSize)
-		view.bounds.size = rect.size
-		view.center = rect.centerPosition
+		let positionRect = position.absolutePosition(in: self.boundSize)
+		view.bounds.size = positionRect.size
+		view.center = positionRect.center
 		
 	}
 	
