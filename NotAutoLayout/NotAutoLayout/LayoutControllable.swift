@@ -195,3 +195,13 @@ extension LayoutControllable {
 	}
 	
 }
+
+extension LayoutControllable {
+	
+	public func setZIndex(_ zIndex: Int, for subview: UIView) {
+		
+		self.zIndexInfo[subview] = zIndex
+		
+	}
+	
+}
