@@ -8,10 +8,6 @@ let view = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
 view.backgroundColor = .white
 PlaygroundPage.current.liveView = view
 
-typealias LayoutOutput = (condition: LayoutCondition, viewA: LayoutPosition, viewB: LayoutPosition, viewC: LayoutPosition)
-
-let oneThird: CGFloat = 1 / 3
-
 let label: UILabel = {
 	let label = UILabel()
 	label.backgroundColor = .red
