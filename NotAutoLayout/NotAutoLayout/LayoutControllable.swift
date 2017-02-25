@@ -33,6 +33,8 @@ public protocol LayoutControllable: class {
 	func appendConstantPosition(_ position: LayoutPosition, for subview: UIView)
 	func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
 	
+	func setZIndex(_ zIndex: Int, for subview: UIView)
+	
 }
 
 extension LayoutControllable {
