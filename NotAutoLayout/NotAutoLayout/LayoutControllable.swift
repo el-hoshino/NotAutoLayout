@@ -37,6 +37,9 @@ public protocol LayoutControllable: class {
 	
 	func setZIndex(_ zIndex: Int, for subview: UIView)
 	
+	func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]?, andZIndex zIndex: Int?)
+	func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int?)
+	
 }
 
 extension LayoutControllable {
@@ -205,6 +208,37 @@ extension LayoutControllable {
 	public func setZIndex(_ zIndex: Int, for subview: UIView) {
 		
 		self.zIndexInfo[subview.hash] = zIndex
+		
+	}
+	
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]? = nil, andZIndex zIndex: Int? = nil) {
+		
+		if let methods = methods {
+			self.layoutInfo[view.hash] = methods
+		}
+
+		if let zIndex = zIndex {
+			self.zIndexInfo[view.hash] = zIndex
+		}
+		
+		(self as UIView).addSubview(view)
+		
+	}
+	
+	public func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int? = nil) {
+		
+		let method = LayoutMethod(constantPosition: position)
+		self.layoutInfo[view.hash] = [method]
+		
+		if let zIndex = zIndex {
+			self.zIndexInfo[view.hash] = zIndex
+		}
+		
+		(self as UIView).addSubview(view)
 		
 	}
 	
