@@ -18,7 +18,7 @@ public protocol LayoutControllable: class {
 	var layoutInfo: [Hash: [LayoutMethod]] { get set }
 	var zIndexInfo: [Hash: Int] { get set }
 	
-	func addSubview(_ subview: UIView)
+	func addSubview(_ view: UIView)
 	
 	func layoutSubviews()
 	func setNeedsLayout()
@@ -156,7 +156,7 @@ extension LayoutControllable {
 	
 	public func setConstantPosition(_ position: LayoutPosition, for subview: UIView) {
 		
-		let method: LayoutMethod = ({ _ in true }, position)
+		let method = LayoutMethod(constantPosition: position)
 		
 		self.layoutInfo[subview.hash] = [method]
 		
@@ -175,7 +175,7 @@ extension LayoutControllable {
 	
 	public func appendConstantPosition(_ position: LayoutPosition, for subview: UIView) {
 		
-		let method: LayoutMethod = ({ _ in true }, position)
+		let method = LayoutMethod(constantPosition: position)
 		
 		if let methods = self.layoutInfo[subview.hash] {
 			layoutInfo[subview.hash] = methods + [method]
@@ -192,7 +192,7 @@ extension LayoutControllable {
 	
 	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
 		
-		let method: LayoutMethod = (condition, position)
+		let method = LayoutMethod(condition: condition, position: position)
 		
 		self.appendLayoutMethod(method, for: subview)
 		
