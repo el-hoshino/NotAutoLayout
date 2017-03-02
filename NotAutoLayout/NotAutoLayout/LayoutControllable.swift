@@ -10,13 +10,15 @@ import UIKit
 
 public protocol LayoutControllable: class {
 	
+	typealias Hash = Int
+	
 	var subviews: [UIView] { get }
 	var boundSize: CGSize { get }
 	
-	var layoutInfo: [UIView: [LayoutMethod]] { get set }
-	var zIndexInfo: [UIView: Int] { get set }
+	var layoutInfo: [Hash: [LayoutMethod]] { get set }
+	var zIndexInfo: [Hash: Int] { get set }
 	
-	func addSubview(_ subview: UIView)
+	func addSubview(_ view: UIView)
 	
 	func layoutSubviews()
 	func setNeedsLayout()
@@ -35,16 +37,19 @@ public protocol LayoutControllable: class {
 	
 	func setZIndex(_ zIndex: Int, for subview: UIView)
 	
+	func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]?, andZIndex zIndex: Int?)
+	func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int?)
+	
 }
 
 extension LayoutControllable {
 	
 	public func refreshLayoutInfo() {
 		
-		var info: [UIView: [LayoutMethod]] = [:]
+		var info: [Int: [LayoutMethod]] = [:]
 		
 		self.subviews.forEach { (view) in
-			info[view] = self.layoutInfo[view]
+			info[view.hash] = self.layoutInfo[view.hash]
 		}
 		
 		self.layoutInfo = info
@@ -57,10 +62,10 @@ extension LayoutControllable {
 	
 	public func refreshZIndexInfo() {
 		
-		var info: [UIView: Int] = [:]
+		var info: [Int: Int] = [:]
 		
 		self.subviews.forEach { (view) in
-			info[view] = self.zIndexInfo[view]
+			info[view.hash] = self.zIndexInfo[view.hash]
 		}
 		
 		self.zIndexInfo = info
@@ -90,7 +95,7 @@ extension LayoutControllable {
 	public func layoutControl() {
 		
 		self.subviews.forEach { (view) in
-			if let methods = self.layoutInfo[view] {
+			if let methods = self.layoutInfo[view.hash] {
 				self.layout(view, withMethods: methods)
 			}
 		}
@@ -104,7 +109,7 @@ extension LayoutControllable {
 	private func getSubviewsSortedByZIndex() -> [UIView] {
 		
 		let subviewTuples = self.subviews.map { (view) -> (view: UIView, index: Int) in
-			let index = self.zIndexInfo[view] ?? 0
+			let index = self.zIndexInfo[view.hash] ?? 0
 			return (view, index)
 		}
 		
@@ -148,38 +153,38 @@ extension LayoutControllable {
 	
 	public func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView) {
 		
-		self.layoutInfo[subview] = methods
+		self.layoutInfo[subview.hash] = methods
 		
 	}
 	
 	public func setConstantPosition(_ position: LayoutPosition, for subview: UIView) {
 		
-		let method: LayoutMethod = ({ _ in true }, position)
+		let method = LayoutMethod(constantPosition: position)
 		
-		self.layoutInfo[subview] = [method]
+		self.layoutInfo[subview.hash] = [method]
 		
 	}
 	
 	public func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView) {
 		
-		if let methods = self.layoutInfo[subview] {
-			self.layoutInfo[subview] = methods + [method]
+		if let methods = self.layoutInfo[subview.hash] {
+			self.layoutInfo[subview.hash] = methods + [method]
 			
 		} else {
-			self.layoutInfo[subview] = [method]
+			self.layoutInfo[subview.hash] = [method]
 		}
 		
 	}
 	
 	public func appendConstantPosition(_ position: LayoutPosition, for subview: UIView) {
 		
-		let method: LayoutMethod = ({ _ in true }, position)
+		let method = LayoutMethod(constantPosition: position)
 		
-		if let methods = self.layoutInfo[subview] {
-			layoutInfo[subview] = methods + [method]
+		if let methods = self.layoutInfo[subview.hash] {
+			layoutInfo[subview.hash] = methods + [method]
 			
 		} else {
-			self.layoutInfo[subview] = [method]
+			self.layoutInfo[subview.hash] = [method]
 		}
 		
 	}
@@ -190,7 +195,7 @@ extension LayoutControllable {
 	
 	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
 		
-		let method: LayoutMethod = (condition, position)
+		let method = LayoutMethod(condition: condition, position: position)
 		
 		self.appendLayoutMethod(method, for: subview)
 		
@@ -202,7 +207,38 @@ extension LayoutControllable {
 	
 	public func setZIndex(_ zIndex: Int, for subview: UIView) {
 		
-		self.zIndexInfo[subview] = zIndex
+		self.zIndexInfo[subview.hash] = zIndex
+		
+	}
+	
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]? = nil, andZIndex zIndex: Int? = nil) {
+		
+		if let methods = methods {
+			self.layoutInfo[view.hash] = methods
+		}
+
+		if let zIndex = zIndex {
+			self.zIndexInfo[view.hash] = zIndex
+		}
+		
+		(self as UIView).addSubview(view)
+		
+	}
+	
+	public func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int? = nil) {
+		
+		let method = LayoutMethod(constantPosition: position)
+		self.layoutInfo[view.hash] = [method]
+		
+		if let zIndex = zIndex {
+			self.zIndexInfo[view.hash] = zIndex
+		}
+		
+		(self as UIView).addSubview(view)
 		
 	}
 	

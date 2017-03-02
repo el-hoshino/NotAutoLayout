@@ -10,8 +10,8 @@ import UIKit
 
 open class LayoutView: UIView, LayoutControllable {
 	
-	public var layoutInfo: [UIView: [LayoutMethod]] = [:]
-	public var zIndexInfo: [UIView : Int] = [:]
+	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]
+	public var zIndexInfo: [LayoutControllable.Hash : Int] = [:]
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()

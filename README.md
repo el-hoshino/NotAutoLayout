@@ -3,16 +3,20 @@
 
 NotAutoLayoutView is a framework to help you layout subviews without Auto Layout constraints.
 
-Please note that this framework hasn't been tested widely yet, therefore it's still under a beta version. And currently it's for iOS only.
+Please note that this framework hasn't been tested widely yet, therefore it's still under a beta version which means the APIs are not stable yet. And currently it's for iOS only.
 
 Please open an issue or send me a pull request if you have any problems, better ideas or any other things you want me to know.
 
 ## Why NotAutoLayout
 Apple introduced Interface Builder and Storyboard to help developers create views visually, which is a very good idea. But after iPhone 5, things changed. There're more and more screen resolutions with different aspect ratios that drives developer crazy. To solve this problem, Apple introduced Auto Layout and Size Classes.
 
-But the problem is, they're just making things more complicated (and that's why they introduced UIStackView and NSGridView, maybe). You have to create dozens of constraints in order to just create a very simple view in the storyboard, which makes the system complicated and hard to debug. So there are some frameworks like [Snapkit](https://github.com/SnapKit/SnapKit) and [PureLayout](https://github.com/PureLayout/PureLayout) to help you create Auto Layout constraints much more easily (which should be Xcode's duty). But there are still some *old school* developers (like me :P) just don't like, or even hate Auto Layout and want to create layout through codes. That's why I created NotAutoLayout framework.
+But the problem is, they're just making things more complicated (and that's why they introduced UIStackView and NSGridView, maybe). You have to create dozens of constraints in order to just create a very simple view in the storyboard, which makes the system complicated and hard to debug. In addition, there is no hierarchy for the constraints, which means that you have to manage all those dozens of constraints in one place, which is just not intuitive because we always add many subviews to views, and even more further subviews to subviews, which makes a hierarchy of views.
 
-With NotAutoLayout, you don't need to care about anything like constraints or size classes, instead you just need to focus on where should I place the element, how big should I resize the element, and which zIndex should I lay the element on. You can  even create a CSS-style responsive layout with just a couple lines of code. Every layout process done through NotAutoLayout framework is inside the `layoutSubviews()` method, which makes it easier to debug than constraints (Yes you can even put a breaker to get the detailed layout information!).
+So, there are some frameworks like [Snapkit](https://github.com/SnapKit/SnapKit) and [PureLayout](https://github.com/PureLayout/PureLayout) to help you create Auto Layout constraints much more easily (which should be Xcode's duty). But there are still some *old school* developers (like me :P) just don't like, or even hate Auto Layout and want to create layout through codes. That's why I created NotAutoLayout framework.
+
+With NotAutoLayout, you don't need to care about anything like constraints or size classes, instead you just need to focus on **where** should I place the element, **how big** should I resize the element, and **which zIndex** should I lay the element on. You can  even create a CSS-style responsive layout with just a couple lines of code. Every layout process done through NotAutoLayout framework is inside the `layoutSubviews()` method, which makes it easier to debug than constraints (Yes you can even put a breaker to get the detailed layout information!).
+
+Also, `LayoutView`s can be nested, which means that you can manage the layout of subviews with hierarchies, just like you manage your subviews with hierarchies.
 
 In addition, you can also subclass the `LayoutView` class, or subclass any other `UIView` class and conform it to `LayoutControllable` protocol, so you can keep the layouts in Views to prevent fat Controllers.
 
@@ -38,33 +42,55 @@ github "el-hoshino/NotAutoLayout"
 
 ## Usage
 ### TL;DR
-A very simple sample code is written in the Playground file, which may help you get the idea.
+I wrote a barely practical sample code Playground file, which may help you get the idea. Here's the main source code, and you can find the full sample code inside the project
 ```swift
 import UIKit
 import PlaygroundSupport
 import NotAutoLayout
 
-let view = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
-view.backgroundColor = .white
-PlaygroundPage.current.liveView = view
+let baseView = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
+PlaygroundPage.current.liveView = baseView
 
-let label: UILabel = {
-	let label = UILabel()
-	label.backgroundColor = .red
-	label.textAlignment = .center
-	label.text = "Label A"
-	view.addSubview(label)
-	return label
-}()
+let titleView = TitleView()
+let contentView = UITableView()
+let tabView = TabView()
 
-let position = LayoutPosition.customByXYWidthHeight(x: { $0.width * 0.8 - 10 },
-                                                    y: { _ in 10 },
-                                                    width: { $0.width * 0.2 },
-                                                    height: { $0.width * 0.2 })
-view.setConstantPosition(position, for: label)
+let titleViewPosition = LayoutPosition
+	.customByXYWidthHeight(x: { _ in 0 },
+	                       y: { _ in 0 },
+	                       width: { $0.width },
+	                       height: { _ in 60 })
+let contentViewPosition = LayoutPosition
+	.customByXYWidthHeight(x: { _ in 0 },
+	                       y: { _ in titleView.frame.origin.y + titleView.frame.height },
+	                       width: { $0.width },
+	                       height: { $0.height - ((titleView.frame.origin.y + titleView.frame.height) + 60) })
+let tabViewPosition = LayoutPosition
+	.customByXYWidthHeight(x: { _ in 0 },
+	                       y: { _ in contentView.frame.origin.y + contentView.frame.height },
+	                       width: { $0.width },
+	                       height: { _ in 60 })
 
-view.setNeedsLayout()
+titleView.backgroundColor = .red
+contentView.backgroundColor = .green
+tabView.backgroundColor = .blue
+
+baseView.addSubview(titleView, withAssociatedConstantPosition: titleViewPosition)
+baseView.addSubview(contentView, withAssociatedConstantPosition: contentViewPosition)
+baseView.addSubview(tabView, withAssociatedConstantPosition: tabViewPosition)
+
+titleView.setTitle("Hello NotAutoLayout!")
+
+for i in 0 ..< 10 {
+	let tabItem = UIView()
+	tabItem.backgroundColor = .brown
+	tabView.addSubview(tabItem, withAssociatedLayoutMethods: tabView.makeTabItemLayoutMethods(at: i))
+}
+
+baseView.setNeedsLayout()
+tabView.updateContentSize() // You can implement this into a ViewController's viewDidLayoutSubviews() method, which makes more sense if you have a ViewController that holds the tabView.
 ```
+![screenshot](https://raw.githubusercontent.com/el-hoshino/NotAutoLayout/develop/Sample.png)
 
 ### Tell me more
 There are basically 2 ways to use NotAutoLayout framework. The easiest one is simply create a `LayoutView` to layout the subviews in it, or you can also choose to subclass `LayoutView` or even subclass any other `UIView` and conform it to `LayoutControllable` protocol.
@@ -76,7 +102,7 @@ You can just create an instance of `LayoutView` like any other `UIView` objects 
 You can just subclass a `LayoutView` like subclassing any other `UIView` classes, and you may add subviews as well as layout information for these subviews inside the subclass so you don't need to do it in a `UIViewController`, which may help you prevent a fat Controller.
 
 - Conform other `UIView` subclasses to `LayoutControllable` protocol
-Sometimes you may want to create classes other than `LayoutView`'s subclass, like you want to create a `UIImageView`'s subclass. In this case, all you need to do is to store `var layoutInfo: [UIView: [NotAutoLayout.LayoutMethod]]` dictionary and `var zIndexInfo: [UIView: Int]` dictionary, and override `layoutSubviews()` method and run `layoutControl()` after `super.layoutSubviews()`. Now you're ready to use your own subclass to layout.
+Sometimes you may want to create classes other than `LayoutView`'s subclass, like you want to create a `UIImageView`'s subclass. In this case, all you need to do is to store `var layoutInfo: [Hash: [NotAutoLayout.LayoutMethod]]` dictionary and `var zIndexInfo: [Hash: Int]` dictionary (`Hash` here is a typealias of `Int`, which is actually the target `View`'s `hash` property), and override `layoutSubviews()` method and run `layoutControl()` after `super.layoutSubviews()`. Now you're ready to use your own subclass to layout.
 
 After the LayoutView object created, you can then add subviews to it, just like any other UIView objects. Also you may want to set the layout information of that subview through methods like `setLayoutMethods(_ methods: [NotAutoLayout.LayoutMethod], for subview: UIView)` and `setZIndex(_ zIndex: Int, for subview: UIView)`.
 
@@ -106,11 +132,11 @@ A class-only protocol created to handle the layout stuff, which is basically con
 #### boundSize: CGSize { get }
 `CGSize` get-only property. In `UIView` it's get from `bounds.size`.
 
-#### layoutInfo: [UIView: [LayoutMethod]] { get set }
-`[UIView: [LayoutMethod]]` get-set property. Stores the needed layout information to layout subviews.
+#### layoutInfo: [Hash: [LayoutMethod]] { get set }
+`[Hash: [LayoutMethod]]` get-set property. Stores the needed layout information to layout subviews, and using the subviews' hash value as its keys.
 
-#### zIndexInfo: [UIView: [Int]] { get set }
-`[UIView: Int]` get-set property. Stores the needed zIndex information in `reloadSubviews()` methods. If a subview doesn't have a linked zIndex info, the method will consider a default value `0`.
+#### zIndexInfo: [Hash: [Int]] { get set }
+`[Hash: Int]` get-set property. Stores the needed zIndex information in `reloadSubviews()` methods, and using the subviews' hash value as its keys. If a subview doesn't have a linked zIndex info, the method will consider a default value `0`.
 
 #### addSubview(_ subview: UIView)
 Void method. Every `UIView` has it.
@@ -150,6 +176,13 @@ Void method. In protocol extension this links a `subview` with a layout method o
 
 #### setZIndex(_ zIndex: Int, for subview: UIView)
 Void method. In protocol extension this links a `subview` with a ZIndex information. If there's already another ZIndex information linked to `subview`, the old value will be erased.
+
+#### addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]?, andZIndex zIndex: Int?)
+Void method. In protocol extension for `Self: UIView`, this is a wrapper method of `self.setLayoutMethods(methods, for: view); self.setZIndex(zIndex, for: view); self.addSubview(view)` (if either `methods` or `zIndex` is not `nil`, of course).
+
+#### addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int?)
+Void method. In protocol extension for `Self: UIView`, this is a wrapper method of `self.setConstantPosition(position, for: view); self.setZIndex(zIndex, for: view); self.addSubview(view)` (if `zIndex` is not `nil`, of course).
+
 
 ### LayoutView
 A very basic `LayoutControllable` protocol-conformed subclass of `UIView`. For many situations you just need to create an instance of `LayoutView` to use it. But if you want to store your own properties in `LayoutView`, you'll need to subclass it.

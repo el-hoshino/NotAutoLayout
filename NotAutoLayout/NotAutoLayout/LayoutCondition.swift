@@ -9,4 +9,3 @@
 import Foundation
 
 public typealias LayoutCondition = (_ boundSize: CGSize) -> Bool
-public typealias LayoutMethod = (condition: LayoutCondition, position: LayoutPosition)
