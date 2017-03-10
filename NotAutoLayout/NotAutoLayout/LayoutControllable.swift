@@ -23,23 +23,6 @@ public protocol LayoutControllable: class {
 	func layoutSubviews()
 	func setNeedsLayout()
 	
-	func refreshLayoutInfo()
-	func refreshZIndexInfo()
-	
-	func layoutControl()
-	func reloadSubviews()
-	
-	func setLayoutMethods(_ methods: [LayoutMethod], for subview: UIView)
-	func setConstantPosition(_ position: LayoutPosition, for subview: UIView)
-	func appendLayoutMethod(_ method: LayoutMethod, for subview: UIView)
-	func appendConstantPosition(_ position: LayoutPosition, for subview: UIView)
-	func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition)
-	
-	func setZIndex(_ zIndex: Int, for subview: UIView)
-	
-	func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]?, andZIndex zIndex: Int?)
-	func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int?)
-	
 }
 
 extension LayoutControllable {
