@@ -13,7 +13,7 @@ public struct LayoutMethod {
 	public let condition: LayoutCondition
 	public let position: LayoutPosition
 	
-	init(condition: @escaping LayoutCondition, position: LayoutPosition) {
+	public init(condition: @escaping LayoutCondition, position: LayoutPosition) {
 		self.condition = condition
 		self.position = position
 	}
