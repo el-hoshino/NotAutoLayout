@@ -10,8 +10,13 @@ import Foundation
 
 public struct LayoutMethod {
 	
-	let condition: LayoutCondition
-	let position: LayoutPosition
+	public let condition: LayoutCondition
+	public let position: LayoutPosition
+	
+	public init(condition: @escaping LayoutCondition, position: LayoutPosition) {
+		self.condition = condition
+		self.position = position
+	}
 	
 }
 
