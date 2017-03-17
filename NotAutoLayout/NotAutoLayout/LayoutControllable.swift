@@ -78,6 +78,59 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
+	private func place(_ view: UIView, at position: LayoutPosition.Individual) {
+		
+		let positionRect = position.absolutePosition(in: self.boundSize)
+		view.bounds.size = positionRect.size
+		view.center = positionRect.center
+		
+	}
+	
+	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
+		
+		if let method = methods.first(where: { $0.condition(self.boundSize) == true }) {
+			switch method.position {
+			case .individual(let position):
+				self.place(view, at: position)
+				
+			default:
+				//
+				break
+			}
+		}
+		
+	}
+	
+	fileprivate func layoutNormally(subviews: [UIView]) {
+		
+		subviews.forEach { (view) in
+			if let methods = self.layoutInfo[view.hash] {
+				self.layout(view, withMethods: methods)
+			}
+		}
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	fileprivate func layoutSequencially(subviews: [UIView]) {
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	fileprivate func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
 	private func getSortOrder(of view: UIView) -> Int {
 		return self.orderInfo[view.hash] ?? 0
 	}
@@ -92,32 +145,20 @@ extension LayoutControllable {
 		
 	}
 	
-	private func place(_ view: UIView, at position: LayoutPosition) {
-		
-		let positionRect = position.absolutePosition(in: self.boundSize)
-		view.bounds.size = positionRect.size
-		view.center = positionRect.center
-		
-	}
-	
-	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
-		
-		if let method = methods.first(where: { $0.condition(self.boundSize) == true }) {
-			self.place(view, at: method.position)
-		}
-		
-	}
-	
 	public func layoutControl() {
 		
 		let subviews = self.getSubviewsSortedByOrder()
 		
-		subviews.forEach { (view) in
-			if let methods = self.layoutInfo[view.hash] {
-				self.layout(view, withMethods: methods)
-			}
+		switch self.layoutOptimization {
+		case .none:
+			self.layoutNormally(subviews: subviews)
+			
+		case .sequence:
+			self.layoutSequencially(subviews: subviews)
+			
+		case .matrix(colsPerRow: let colsPerRow):
+			self.layoutMatrically(subviews: subviews, colsPerRow: colsPerRow)
 		}
-		
 	}
 	
 }
