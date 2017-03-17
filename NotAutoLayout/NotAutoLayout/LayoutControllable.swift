@@ -16,6 +16,7 @@ public protocol LayoutControllable: class {
 	var boundSize: CGSize { get }
 	
 	var layoutInfo: [Hash: [LayoutMethod]] { get set }
+	var orderInfo: [Hash: Int] { get set }
 	var zIndexInfo: [Hash: Int] { get set }
 	
 	func addSubview(_ view: UIView)
@@ -29,7 +30,7 @@ extension LayoutControllable {
 	
 	public func refreshLayoutInfo() {
 		
-		var info: [Int: [LayoutMethod]] = [:]
+		var info: [Hash: [LayoutMethod]] = [:]
 		
 		self.subviews.forEach { (view) in
 			info[view.hash] = self.layoutInfo[view.hash]
@@ -45,7 +46,7 @@ extension LayoutControllable {
 	
 	public func refreshZIndexInfo() {
 		
-		var info: [Int: Int] = [:]
+		var info: [Hash: Int] = [:]
 		
 		self.subviews.forEach { (view) in
 			info[view.hash] = self.zIndexInfo[view.hash]
@@ -58,6 +59,36 @@ extension LayoutControllable {
 }
 
 extension LayoutControllable {
+	
+	public func refreshOrderInfo() {
+		
+		var info: [Hash: Int] = [:]
+		
+		self.subviews.forEach { (view) in
+			info[view.hash] = self.orderInfo[view.hash]
+		}
+		
+		self.orderInfo = info
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	private func getSortOrder(of view: UIView) -> Int {
+		return self.orderInfo[view.hash] ?? 0
+	}
+	
+	private func getSubviewsSortedByOrder() -> [UIView] {
+		
+		guard !self.orderInfo.isEmpty else { return self.subviews }
+		
+		let subviews = self.subviews.sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
+		
+		return subviews
+		
+	}
 	
 	private func place(_ view: UIView, at position: LayoutPosition) {
 		
@@ -77,7 +108,9 @@ extension LayoutControllable {
 	
 	public func layoutControl() {
 		
-		self.subviews.forEach { (view) in
+		let subviews = self.getSubviewsSortedByOrder()
+		
+		subviews.forEach { (view) in
 			if let methods = self.layoutInfo[view.hash] {
 				self.layout(view, withMethods: methods)
 			}
@@ -89,20 +122,19 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
+	private func getZIndex(of view: UIView) -> Int {
+		
+		return self.zIndexInfo[view.hash] ?? 0
+		
+	}
+	
 	private func getSubviewsSortedByZIndex() -> [UIView] {
 		
-		let subviewTuples = self.subviews.map { (view) -> (view: UIView, index: Int) in
-			let index = self.zIndexInfo[view.hash] ?? 0
-			return (view, index)
-		}
+		guard !self.zIndexInfo.isEmpty else { return self.subviews }
 		
-		let sortedTuples = subviewTuples.sorted(by: {$0.index < $1.index})
+		let subviews = self.subviews.sorted { self.getZIndex(of: $0) < self.getZIndex(of: $1) }
 		
-		let views = sortedTuples.map({ (view, _) -> UIView in
-			return view
-		})
-		
-		return views
+		return subviews
 		
 	}
 	

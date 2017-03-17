@@ -11,6 +11,7 @@ import UIKit
 open class LayoutView: UIView, LayoutControllable {
 	
 	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]
+	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
 	public var zIndexInfo: [LayoutControllable.Hash : Int] = [:]
 	
 	open override func layoutSubviews() {
