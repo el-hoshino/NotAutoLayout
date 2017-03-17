@@ -19,6 +19,8 @@ public protocol LayoutControllable: class {
 	var orderInfo: [Hash: Int] { get set }
 	var zIndexInfo: [Hash: Int] { get set }
 	
+	var layoutOptimization: LayoutOptimization { get }
+	
 	func addSubview(_ view: UIView)
 	
 	func layoutSubviews()

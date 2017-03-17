@@ -14,6 +14,8 @@ open class LayoutView: UIView, LayoutControllable {
 	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
 	public var zIndexInfo: [LayoutControllable.Hash : Int] = [:]
 	
+	public var layoutOptimization: LayoutOptimization = .none
+	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
 		self.layoutControl()
