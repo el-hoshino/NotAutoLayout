@@ -29,8 +29,8 @@ extension PositionRect {
 extension PositionRect {
 	
 	init(frame: CGRect) {
-		let centerX = frame.origin.x + (frame.width / 2)
-		let centerY = frame.origin.y + (frame.height / 2)
+		let centerX = frame.midX
+		let centerY = frame.midY
 		let center = CGPoint(x: centerX, y: centerY)
 		self.center = center
 		self.size = frame.size
