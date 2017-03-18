@@ -18,12 +18,12 @@ let titleViewPosition = LayoutPosition
 	            height: { _ in 60 })
 let contentViewPosition = LayoutPosition
 	.makeCustom(x: { _ in 0 },
-	            y: { _ in titleView.frame.origin.y + titleView.frame.height },
+	            y: { _ in titleView.frame.maxY },
 	            width: { $0.width },
-	            height: { $0.height - ((titleView.frame.origin.y + titleView.frame.height) + 64) })
+	            height: { $0.height - (titleView.frame.maxY + 64) })
 let tabViewPosition = LayoutPosition
 	.makeCustom(x: { _ in 0 },
-	            y: { _ in contentView.frame.origin.y + contentView.frame.height },
+	            y: { _ in contentView.frame.maxY },
 	            width: { $0.width },
 	            height: { _ in 64 })
 
