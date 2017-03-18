@@ -118,31 +118,31 @@ extension LayoutPosition {
 	public typealias IndividualSizeToSize = Individual.SizeToSize
 	public typealias IndividualSizeToFloat = Individual.SizeToFloat
 	
-	public func makeAbsolute(frame: CGRect) -> LayoutPosition {
+	public static func makeAbsolute(frame: CGRect) -> LayoutPosition {
 		return .individual(.absolute(frame))
 	}
 	
-	public func makeRelative(frame: CGRect) -> LayoutPosition {
+	public static func makeRelative(frame: CGRect) -> LayoutPosition {
 		return .individual(.relative(frame))
 	}
 	
-	public func makeInsets(insets: UIEdgeInsets) -> LayoutPosition {
+	public static func makeInsets(insets: UIEdgeInsets) -> LayoutPosition {
 		return .individual(.insets(insets))
 	}
 	
-	public func makeOffset(value: UIOffset, from base: OffsetOrigin, size: CGSize) -> LayoutPosition {
+	public static func makeOffset(value: UIOffset, from base: OffsetOrigin, size: CGSize) -> LayoutPosition {
 		return .individual(.offset(value: value, from: base, size: size))
 	}
 	
-	public func makeCustom(frame: @escaping IndividualSizeToFrame) -> LayoutPosition {
+	public static func makeCustom(frame: @escaping IndividualSizeToFrame) -> LayoutPosition {
 		return .individual(.customByFrame(frame: frame))
 	}
 	
-	public func makeCustom(origin: @escaping IndividualSizeToPoint, size: @escaping IndividualSizeToSize) -> LayoutPosition {
+	public static func makeCustom(origin: @escaping IndividualSizeToPoint, size: @escaping IndividualSizeToSize) -> LayoutPosition {
 		return .individual(.customByOriginSize(origin: origin, size: size))
 	}
 	
-	public func makeCustom(x: @escaping IndividualSizeToFloat, y: @escaping IndividualSizeToFloat, width: @escaping IndividualSizeToFloat, height: @escaping IndividualSizeToFloat) -> LayoutPosition {
+	public static func makeCustom(x: @escaping IndividualSizeToFloat, y: @escaping IndividualSizeToFloat, width: @escaping IndividualSizeToFloat, height: @escaping IndividualSizeToFloat) -> LayoutPosition {
 		return .individual(.customByXYWidthHeight(x: x, y: y, width: width, height: height))
 	}
 	
@@ -162,7 +162,7 @@ extension LayoutPosition {
 	public typealias SequentialSizeToFrame = Sequential.SizeToFrame
 	public typealias SequentialPreviousFrameAndSizeToFrame = Sequential.PreviousFrameAndSizeToFrame
 	
-	public func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+	public static func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .sequential(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
@@ -172,7 +172,7 @@ extension LayoutPosition {
 		}
 	}
 	
-	public func makeRelative(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+	public static func makeRelative(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .sequential(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
@@ -182,7 +182,7 @@ extension LayoutPosition {
 		}
 	}
 	
-	public func makeCustom(initialFrame: @escaping SequentialSizeToFrame, restFrame: @escaping SequentialPreviousFrameAndSizeToFrame) -> LayoutPosition {
+	public static func makeCustom(initialFrame: @escaping SequentialSizeToFrame, restFrame: @escaping SequentialPreviousFrameAndSizeToFrame) -> LayoutPosition {
 		return .sequential(.customByFrame(initial: initialFrame, rest: restFrame))
 	}
 	
@@ -204,7 +204,7 @@ extension LayoutPosition {
 	public typealias MatricalPreviousRowFrameAndSizeToFrame = Matrical.PreviousRowFrameAndSizeToFrame
 	public typealias MatricalPreviousRowColFrameAndSizeToFrame = Matrical.PreviousRowColFrameAndSizeToFrame
 	
-	public func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+	public static func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .matrical(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
@@ -214,7 +214,7 @@ extension LayoutPosition {
 		}
 	}
 	
-	public func makeRelative(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+	public static func makeRelative(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .matrical(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
@@ -224,7 +224,7 @@ extension LayoutPosition {
 		}
 	}
 	
-	public func makeCustom(initialFrame: @escaping MatricalSizeToFrame, firstInCol: @escaping MatricalPreviousColFrameAndSizeToFrame, firstInRow: @escaping MatricalPreviousRowFrameAndSizeToFrame, rest: @escaping MatricalPreviousRowColFrameAndSizeToFrame) -> LayoutPosition {
+	public static func makeCustom(initialFrame: @escaping MatricalSizeToFrame, firstInCol: @escaping MatricalPreviousColFrameAndSizeToFrame, firstInRow: @escaping MatricalPreviousRowFrameAndSizeToFrame, rest: @escaping MatricalPreviousRowColFrameAndSizeToFrame) -> LayoutPosition {
 		return .matrical(.customByFrame(initial: initialFrame, firstInCol: firstInCol, firstInRow: firstInRow, rest: rest))
 	}
 	
