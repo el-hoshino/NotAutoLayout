@@ -28,6 +28,11 @@ public enum LayoutPosition {
 	
 	public enum Individual {
 		
+		public typealias SizeToFrame = (CGSize) -> CGRect
+		public typealias SizeToPoint = (CGSize) -> CGPoint
+		public typealias SizeToSize = (CGSize) -> CGSize
+		public typealias SizeToFloat = (CGSize) -> CGFloat
+		
 		case absolute(CGRect)
 		case relative(CGRect)
 		
@@ -35,9 +40,9 @@ public enum LayoutPosition {
 		
 		case offset(value: UIOffset, from: OffsetOrigin, size: CGSize)
 		
-		case customByFrame(frame: (CGSize) -> CGRect)
-		case customByOriginSize(origin: (CGSize) -> CGPoint, size: (CGSize) -> CGSize)
-		case customByXYWidthHeight(x: (CGSize) -> CGFloat, y: (CGSize) -> CGFloat, width: (CGSize) -> CGFloat, height: (CGSize) -> CGFloat)
+		case customByFrame(frame: SizeToFrame)
+		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
+		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
 		
 		@available(*, deprecated: 0.6, message: "Use customByFrame, customByOriginSize or customByXYWidthHeight instead")
 		case custom((CGSize) -> CGRect)
@@ -46,33 +51,33 @@ public enum LayoutPosition {
 	
 	public enum Sequential {
 		
+		public typealias SizeToFrame = (CGSize) -> CGRect
+		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> CGRect
+		
 		case horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
 		case verticallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
 		
 		case horizontallyEqualSizedRelative(initial: CGRect, margin: CGFloat)
 		case verticallyEqualSizedRelative(initial: CGRect, margin: CGFloat)
 		
-		case customByFrame(
-			initial: (CGSize) -> CGRect,
-			rest: (_ previousFrame: CGRect, _ boundSize: CGSize)
-			-> CGRect)
+		case customByFrame(initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame)
 		
 	}
 	
 	public enum Matrical {
 		
-		case rowByRowEqualSizedAbsolute(initial: CGRect, colMargin: CGFloat, rowMargin: CGFloat)
-		case colByColEqualSizedAbsolute(initial: CGRect, colMargin: CGFloat, rowMargin: CGFloat)
+		public typealias SizeToFrame = (CGSize) -> CGRect
+		public typealias PreviousColFrameAndSizeToFrame = (_ previousColFrame: CGRect, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousRowFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousRowColFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ boundSize: CGSize) -> CGRect
 		
-		case rowByRowEqualSizedRelative(initial: CGRect, colMargin: CGFloat, rowMargin: CGFloat)
-		case colByColEqualSizedRelative(initial: CGRect, colMargin: CGFloat, rowMargin: CGFloat)
+		case horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
+		case verticallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
 		
-		case customByFrame(
-			initial: (CGSize) -> CGRect,
-			firstInRow: (_ previousColFrame: CGRect, _ boundSize: CGSize) -> CGRect,
-			firstInCol: (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> CGRect,
-			rest: (_ previousColFrame: CGRect, _ previousRowFrame: CGRect, _ boundSize: CGSize)
-			-> CGRect)
+		case horizontallyEqualSizedRelative(initial: CGRect, margin: CGVector)
+		case verticallyEqualSizedRelative(initial: CGRect, margin: CGVector)
+		
+		case customByFrame(initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame)
 		
 	}
 	
@@ -82,160 +87,121 @@ public enum LayoutPosition {
 	
 }
 
-extension LayoutPosition.Individual {
+extension LayoutPosition {
 	
-	func absolutePosition(in size: CGSize) -> PositionRect {
-		switch self {
-		case .absolute(let rect):
-			return PositionRect(frame: rect)
-			
-		case .relative(let rect):
-			return size.absolutePosition(relatedTo: rect)
-			
-		case .insets(let insets):
-			return size.absolutePosition(withinInsets: insets)
-			
-		case .offset(value: let value, from: let offsetOrigin, size: let objectSize):
-			return size.absolutePosition(offsetBy: value, from: offsetOrigin, forObjectSize: objectSize)
-			
-		case .customByFrame(frame: let frameTransform):
-			return size.absolutePositionAppliedTo(frame: frameTransform)
-			
-		case .customByOriginSize(origin: let originTransform, size: let sizeTransform):
-			return size.absolutePositionAppliedTo(origin: originTransform, size: sizeTransform)
-			
-		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
-			return size.absolutePositionAppliedTo(x: xTransform, y: yTransform, width: widthTransform, height: heightTransform)
-			
-		case .custom(let transform):
-			return size.absolutePositionAppliedTo(frame: transform)
-		}
+	public typealias IndividualSizeToFrame = Individual.SizeToFrame
+	public typealias IndividualSizeToPoint = Individual.SizeToPoint
+	public typealias IndividualSizeToSize = Individual.SizeToSize
+	public typealias IndividualSizeToFloat = Individual.SizeToFloat
+	
+	public func makeAbsolute(frame: CGRect) -> LayoutPosition {
+		return .individual(.absolute(frame))
+	}
+	
+	public func makeRelative(frame: CGRect) -> LayoutPosition {
+		return .individual(.relative(frame))
+	}
+	
+	public func makeInsets(insets: UIEdgeInsets) -> LayoutPosition {
+		return .individual(.insets(insets))
+	}
+	
+	public func makeOffset(value: UIOffset, from base: OffsetOrigin, size: CGSize) -> LayoutPosition {
+		return .individual(.offset(value: value, from: base, size: size))
+	}
+	
+	public func makeCustom(frame: @escaping IndividualSizeToFrame) -> LayoutPosition {
+		return .individual(.customByFrame(frame: frame))
+	}
+	
+	public func makeCustom(origin: @escaping IndividualSizeToPoint, size: @escaping IndividualSizeToSize) -> LayoutPosition {
+		return .individual(.customByOriginSize(origin: origin, size: size))
+	}
+	
+	public func makeCustom(x: @escaping IndividualSizeToFloat, y: @escaping IndividualSizeToFloat, width: @escaping IndividualSizeToFloat, height: @escaping IndividualSizeToFloat) -> LayoutPosition {
+		return .individual(.customByXYWidthHeight(x: x, y: y, width: width, height: height))
 	}
 	
 }
 
 extension LayoutPosition.Sequential {
 	
-	private func getRect(after previousView: UIView, withHorizontalMargin margin: CGFloat) -> PositionRect {
-		
-		let size = previousView.frame.size
-		let previousMaxX = previousView.frame.maxX
-		let x = previousMaxX + margin
-		let origin = CGPoint(x: x, y: previousView.frame.minY)
-		let frame = CGRect(origin: origin, size: size)
-		let rect = PositionRect(frame: frame)
-		
-		return rect
-		
+	public enum Direction {
+		case horizontal
+		case vertical
 	}
 	
-	private func getRect(after previousView: UIView, withVerticalMargin margin: CGFloat) -> PositionRect {
-		
-		let size = previousView.frame.size
-		let previousMaxY = previousView.frame.maxY
-		let y = previousMaxY + margin
-		let origin = CGPoint(x: previousView.frame.minX, y: y)
-		let frame = CGRect(origin: origin, size: size)
-		let rect = PositionRect(frame: frame)
-		
-		return rect
-		
+}
+
+extension LayoutPosition {
+	
+	public typealias SequentialSizeToFrame = Sequential.SizeToFrame
+	public typealias SequentialPreviousFrameAndSizeToFrame = Sequential.PreviousFrameAndSizeToFrame
+	
+	public func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+		switch direction {
+		case .horizontal:
+			return .sequential(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
+			
+		case .vertical:
+			return .sequential(.verticallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
+		}
 	}
 	
-	private enum PositioningMethod {
-		
-		case absolutely
-		case relatively
-		
-		func absoluteValue(_ value: CGFloat, by comparingValue: CGFloat) -> CGFloat {
+	public func makeRelative(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+		switch direction {
+		case .horizontal:
+			return .sequential(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
 			
-			switch self {
-			case .absolutely:
-				return value
-				
-			case .relatively:
-				return comparingValue * value
-			}
-			
+		case .vertical:
+			return .sequential(.verticallyEqualSizedRelative(initial: initialFrame, margin: margin))
 		}
-		
-		func absoluteRect(_ rect: CGRect, by comparingSize: CGSize) -> PositionRect {
-			
-			switch self {
-			case .absolutely:
-				return PositionRect(frame: rect)
-				
-			case .relatively:
-				return comparingSize.absolutePosition(relatedTo: rect)
-			}
-			
-		}
-		
 	}
 	
-	private func getHorizontalRect(after previousView: UIView?, in boundSize: CGSize, initialRect: CGRect, margin: CGFloat, _ method: PositioningMethod) -> PositionRect {
-		
-		if let previousView = previousView {
-			let margin = method.absoluteValue(margin, by: boundSize.width)
-			let rect = self.getRect(after: previousView, withHorizontalMargin: margin)
-			return rect
-			
-		} else {
-			let rect = method.absoluteRect(initialRect, by: boundSize)
-			return rect
-		}
-		
+	public func makeCustom(initialFrame: @escaping SequentialSizeToFrame, restFrame: @escaping SequentialPreviousFrameAndSizeToFrame) -> LayoutPosition {
+		return .sequential(.customByFrame(initial: initialFrame, rest: restFrame))
 	}
 	
-	private func getVerticalRect(after previousView: UIView?, in boundSize: CGSize, initialRect: CGRect, margin: CGFloat, _ method: PositioningMethod) -> PositionRect {
-		
-		if let previousView = previousView {
-			
-			let rect = self.getRect(after: previousView, withVerticalMargin: margin)
-			return rect
-			
-		} else {
-			let rect = PositionRect(frame: initialRect)
-			return rect
-		}
-		
+}
+
+extension LayoutPosition.Matrical {
+	
+	public enum Direction {
+		case horizontal
+		case vertical
 	}
 	
-	private func getRect(after previousView: UIView?, in boundSize: CGSize, initial: (CGSize) -> CGRect, rest: (_ previousFrame: CGRect, _ boundSize: CGSize) -> CGRect) -> PositionRect {
-		
-		if let previousView = previousView {
-			let frame = rest(previousView.frame, boundSize)
-			let rect = PositionRect(frame: frame)
-			return rect
+}
+
+extension LayoutPosition {
+	
+	public typealias MatricalSizeToFrame = Matrical.SizeToFrame
+	public typealias MatricalPreviousColFrameAndSizeToFrame = Matrical.PreviousColFrameAndSizeToFrame
+	public typealias MatricalPreviousRowFrameAndSizeToFrame = Matrical.PreviousRowFrameAndSizeToFrame
+	public typealias MatricalPreviousRowColFrameAndSizeToFrame = Matrical.PreviousRowColFrameAndSizeToFrame
+	
+	public func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+		switch direction {
+		case .horizontal:
+			return .matrical(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
 			
-		} else {
-			let frame = initial(boundSize)
-			let rect = PositionRect(frame: frame)
-			return rect
+		case .vertical:
+			return .matrical(.verticallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
 		}
-		
 	}
 	
-	func absolutePosition(after previousView: UIView? = nil, in boundSize: CGSize) -> PositionRect {
-		
-		switch self {
-		case .horizontallyEqualSizedAbsolute(initial: let initialRect, margin: let margin):
-			return self.getHorizontalRect(after: previousView, in: boundSize, initialRect: initialRect, margin: margin, .absolutely)
+	public func makeRelative(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+		switch direction {
+		case .horizontal:
+			return .matrical(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
 			
-		case .verticallyEqualSizedAbsolute(initial: let initialRect, margin: let margin):
-			return self.getVerticalRect(after: previousView, in: boundSize, initialRect: initialRect, margin: margin, .absolutely)
-			
-		case .horizontallyEqualSizedRelative(initial: let initialRect, margin: let margin):
-			return self.getHorizontalRect(after: previousView, in: boundSize, initialRect: initialRect, margin: margin, .relatively)
-			
-		case .verticallyEqualSizedRelative(initial: let initialRect, margin: let margin):
-			return self.getVerticalRect(after: previousView, in: boundSize, initialRect: initialRect, margin: margin, .relatively)
-			
-		case .customByFrame(initial: let initialRectClosure, rest: let restRectClosure):
-			return self.getRect(after: previousView, in: boundSize, initial: initialRectClosure, rest: restRectClosure)
-			
+		case .vertical:
+			return .matrical(.verticallyEqualSizedRelative(initial: initialFrame, margin: margin))
 		}
-		
+	}
+	
+	public func makeCustom(initialFrame: @escaping MatricalSizeToFrame, firstInCol: @escaping MatricalPreviousColFrameAndSizeToFrame, firstInRow: @escaping MatricalPreviousRowFrameAndSizeToFrame, rest: @escaping MatricalPreviousRowColFrameAndSizeToFrame) -> LayoutPosition {
+		return .matrical(.customByFrame(initial: initialFrame, firstInCol: firstInCol, firstInRow: firstInRow, rest: rest))
 	}
 	
 }
