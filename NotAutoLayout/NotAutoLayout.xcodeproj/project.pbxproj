@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		167AC91E1E5E8D34006D8F9F /* PositionRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167AC91D1E5E8D34006D8F9F /* PositionRect.swift */; };
+		167AC91E1E5E8D34006D8F9F /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167AC91D1E5E8D34006D8F9F /* Position.swift */; };
 		16FE58C11E5D9E23001A9DC2 /* LayoutPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */; };
 		16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */; };
 		16FE58C51E5DA931001A9DC2 /* LayoutCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C41E5DA931001A9DC2 /* LayoutCondition.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		167AC91D1E5E8D34006D8F9F /* PositionRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionRect.swift; sourceTree = "<group>"; };
+		167AC91D1E5E8D34006D8F9F /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPosition.swift; sourceTree = "<group>"; };
 		16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutControllable.swift; sourceTree = "<group>"; };
 		16FE58C41E5DA931001A9DC2 /* LayoutCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutCondition.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 				7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */,
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
 				796396851E7D3373006A60F7 /* PositionMethod.swift */,
-				167AC91D1E5E8D34006D8F9F /* PositionRect.swift */,
+				167AC91D1E5E8D34006D8F9F /* Position.swift */,
 				16FE58C41E5DA931001A9DC2 /* LayoutCondition.swift */,
 				16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */,
 				7963967F1E7D31B2006A60F7 /* LayoutPositionIndividual.swift */,
@@ -237,7 +237,7 @@
 			files = (
 				796396861E7D3373006A60F7 /* PositionMethod.swift in Sources */,
 				796396821E7D31E8006A60F7 /* LayoutPositionSequential.swift in Sources */,
-				167AC91E1E5E8D34006D8F9F /* PositionRect.swift in Sources */,
+				167AC91E1E5E8D34006D8F9F /* Position.swift in Sources */,
 				793417041E5DEB9500EDA668 /* LayoutControllableView.swift in Sources */,
 				796396841E7D3259006A60F7 /* LayoutPositionMatrical.swift in Sources */,
 				794BA6931E7C3EB500FFD070 /* LayoutOptimization.swift in Sources */,
