@@ -27,7 +27,7 @@ public class TitleView: LayoutView {
 	
 	private func makeTitleLabelLayoutMethods() -> [LayoutMethod] {
 		
-		let position = LayoutPosition.customByFrame { (boundSize) -> CGRect in
+		let position = LayoutPosition.makeCustom { (boundSize) -> CGRect in
 			let size = CGSize(width: 200, height: 40)
 			let x = (boundSize.width - size.width) / 2
 			let y = (boundSize.height - size.height) / 2

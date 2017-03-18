@@ -4,10 +4,13 @@ import NotAutoLayout
 public class TabView: UIScrollView, LayoutControllable {
 	
 	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]
+	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
 	public var zIndexInfo: [LayoutControllable.Hash: Int] = [:]
 	
 	fileprivate let tabItemSize = CGSize(width: 48, height: 48)
-	fileprivate let tabItemHorizontalMargin: CGFloat = 16
+	fileprivate let tabItemHorizontalMargin: CGFloat = 8
+	
+	public var layoutOptimization: LayoutOptimization = .sequence
 	
 	override public func layoutSubviews() {
 		super.layoutSubviews()
@@ -18,15 +21,15 @@ public class TabView: UIScrollView, LayoutControllable {
 
 extension TabView {
 	
-	public func makeTabItemLayoutMethods(at index: Int) -> [LayoutMethod] {
+	public func makeTabItemLayoutMethods() -> [LayoutMethod] {
 		
-		let position = LayoutPosition.customByFrame { [unowned self] (boundSize) -> CGRect in
-			let index = CGFloat(index)
-			let originX = (self.tabItemSize.width * index) + (self.tabItemHorizontalMargin * (index + 1))
-			let originY = (boundSize.height - self.tabItemSize.height) / 2
-			let origin = CGPoint(x: originX, y: originY)
-			return CGRect(origin: origin, size: self.tabItemSize)
-		}
+		let position = LayoutPosition
+			.makeAbsolute(initialFrame: CGRect(origin: CGPoint(x: self.tabItemHorizontalMargin,
+			                                                   y: self.tabItemHorizontalMargin),
+			                                   size: self.tabItemSize),
+			              margin: self.tabItemHorizontalMargin,
+			              direction: .horizontal)
+		
 		let method = LayoutMethod(constantPosition: position)
 		
 		return [method]

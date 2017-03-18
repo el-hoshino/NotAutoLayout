@@ -56,20 +56,20 @@ let contentView = UITableView()
 let tabView = TabView()
 
 let titleViewPosition = LayoutPosition
-	.customByXYWidthHeight(x: { _ in 0 },
-	                       y: { _ in 0 },
-	                       width: { $0.width },
-	                       height: { _ in 60 })
+	.makeCustom(x: { _ in 0 },
+	            y: { _ in 0 },
+	            width: { $0.width },
+	            height: { _ in 60 })
 let contentViewPosition = LayoutPosition
-	.customByXYWidthHeight(x: { _ in 0 },
-	                       y: { _ in titleView.frame.origin.y + titleView.frame.height },
-	                       width: { $0.width },
-	                       height: { $0.height - ((titleView.frame.origin.y + titleView.frame.height) + 60) })
+	.makeCustom(x: { _ in 0 },
+	            y: { _ in titleView.frame.origin.y + titleView.frame.height },
+	            width: { $0.width },
+	            height: { $0.height - ((titleView.frame.origin.y + titleView.frame.height) + 64) })
 let tabViewPosition = LayoutPosition
-	.customByXYWidthHeight(x: { _ in 0 },
-	                       y: { _ in contentView.frame.origin.y + contentView.frame.height },
-	                       width: { $0.width },
-	                       height: { _ in 60 })
+	.makeCustom(x: { _ in 0 },
+	            y: { _ in contentView.frame.origin.y + contentView.frame.height },
+	            width: { $0.width },
+	            height: { _ in 64 })
 
 titleView.backgroundColor = .red
 contentView.backgroundColor = .green
@@ -81,10 +81,10 @@ baseView.addSubview(tabView, withAssociatedConstantPosition: tabViewPosition)
 
 titleView.setTitle("Hello NotAutoLayout!")
 
-for i in 0 ..< 10 {
+for _ in 0 ..< 10 {
 	let tabItem = UIView()
 	tabItem.backgroundColor = .brown
-	tabView.addSubview(tabItem, withAssociatedLayoutMethods: tabView.makeTabItemLayoutMethods(at: i))
+	tabView.addSubview(tabItem, withAssociatedLayoutMethods: tabView.makeTabItemLayoutMethods())
 }
 
 baseView.setNeedsLayout()
@@ -118,7 +118,7 @@ To layout the subviews you added, there're some structures and enums to store th
 
 `LayoutCondition` is a closure with type `(CGSize) -> Bool`. You can judge if `LayoutControllable` should use this `LayoutMethod` under current canvas size (or of course you can set it as `{_ in true}` that will always return a true regardless of the canvas size). If the result of `condition(bounds.size)` is true, the `LayoutPosition` will be calculated to layout the subview. And since each subview may have a linked *array* of  `LayoutMethod`, you can set multiple layout methods to a subview for different conditions like under landscape, in a big screen like iPad, etc. But be careful that only the first `condition` in the `LayoutMethod` array that returns true will be chosen in layout process.
 
-`LayoutPosition` is a enum that you can put various frame information, like `.absolute(CGRect)` which will always place the linked subview in the given frame, no matter how `LayoutView` itself's bound size changes; and `.relative(CGRect)` will always place the linked subview depending on how big the `LayoutSubview` itself's bound size is, in to the `LayoutPosition` instance. You may find the details in API Reference chapter.
+`LayoutPosition` is a enum that you can put various frame information, like `.individual(.absolute(CGRect))` which will always place the linked subview in the given frame, no matter how `LayoutView` itself's bound size changes; and `.individual(.relative(CGRect))` will always place the linked subview depending on how big the `LayoutSubview` itself's bound size is, in to the `LayoutPosition` instance. You may find the details in API Reference chapter.
 
 In addition, although the layout information is designed to be like a `frame` information, it's actually set to the `bounds.size` and `center` property so theoretically it's OK to apply `CGAffineTransform` to the subviews.
 
@@ -135,8 +135,14 @@ A class-only protocol created to handle the layout stuff, which is basically con
 #### layoutInfo: [Hash: [LayoutMethod]] { get set }
 `[Hash: [LayoutMethod]]` get-set property. Stores the needed layout information to layout subviews, and using the subviews' hash value as its keys.
 
+#### orderInfo: [Hash: Int] { get set }
+`[Hash: Int]` get-set property. Stores the subviews' layout order info. If a subview doesn't have a linked order info, the method will consider a default value `0`.
+
 #### zIndexInfo: [Hash: [Int]] { get set }
 `[Hash: Int]` get-set property. Stores the needed zIndex information in `reloadSubviews()` methods, and using the subviews' hash value as its keys. If a subview doesn't have a linked zIndex info, the method will consider a default value `0`.
+
+#### layoutOptimization: LayoutOptimization { get }
+`LayoutOptimization` get-only property, but you may set it as a stored variable while creating your own LayoutControllable views. The layout engine only needs to read the value.
 
 #### addSubview(_ subview: UIView)
 Void method. Every `UIView` has it.
@@ -187,6 +193,9 @@ Void method. In protocol extension for `Self: UIView`, this is a wrapper method 
 ### LayoutView
 A very basic `LayoutControllable` protocol-conformed subclass of `UIView`. For many situations you just need to create an instance of `LayoutView` to use it. But if you want to store your own properties in `LayoutView`, you'll need to subclass it.
 
+### LayoutOptimization
+A property to optimize `layoutControl()` methods. If all of your subviews are using `LayoutPosition.Sequential` positions, set it to `sequence` would have a theoretically better performance while layouting subviews. In addition if you need to layout your subviews matrically with a fixed row size, you also need to set it to `matrix(colsPerRow: Int)` to layout subviews in the specific row size.
+
 ### LayoutMethod
 This is a typealias of (condition: LayoutCondition, position: LayoutPosition).
 
@@ -196,31 +205,69 @@ This is a typealias of `(_ boundSize: CGSize) -> Bool`. Specifically it's a clos
 Since this closure is a part of `LayoutMethod`, which is possibly stored in `layoutInfo` property in `LayoutControllable`, remember to write a [capture list](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID56) if needed to prevent memory leak.
 
 ### LayoutPosition
-This is an enum that contains values to calculate the required frame information.
+This is an enum that contains values to calculate the required frame information. Also there are some `make` generation static methods to help you create a `LayoutPosition` more easily.
 
-#### .absolute(CGRect)
+#### .individual(Individual)
+Basic layout position settings to set each view's frame only based on current bound size.
+
+##### Individual.absolute(CGRect)
 The contained `CGRect` value represents the absolute `frame` of linked `UIView` object.
 
-#### .relative(CGRect)
+##### Individual.relative(CGRect)
 The contained `CGRect` value represents the percentage of `frame` compared to `LayoutControllable#boundSize`. For example, if the `LayoutView`'s bound size is `CGSize(width: 100, height: 200)`, and the `LayoutPosition` value is `.relative(CGRect(x:0.2, y: 0.2, width: 0.6, height: 0.4))`, the linked subview's frame will be `CGRect(x: 100*0.2/*=20*/, y: 200*0.2/*=40*/, width: 100*0.6/*=60*/, height: 200*0.6/*=120*/)`
 
-#### .insets(UIEdgeInsets)
+##### Individual.insets(UIEdgeInsets)
 The contained `UIEdgeInsets` value represents the inset from the linked `UIView` object to `LayoutControllable` object. For example, if the `LayoutView`'s bound size is `CGSize(width: 100, height: 200)` and the `LayoutPosition` value is `.insets(UIEdgeInsets(top: 10, left: 20, bottom: 30, right: 40))`, the linked subview's frame will be `CGRect(x: 20, y: 10, width: 100-20-40/*=40*/, height: 200-10-30/*=160*/)`
 
-#### .offset(value: UIOffset, from: OffsetOrigin, size: CGSize)
+##### Individual.offset(value: UIOffset, from: OffsetOrigin, size: CGSize)
 The contained `value` represents the offset value, `from` represents which point should be the standard point, and `size` represents the `UIView` object's size. You can define 9 kinds of `OffsetOrigin` including `.topLeft`, `.topCenter`, `.topRight`, `.middleLeft`, `.middleCenter`, `.middleRight`, `.bottomLeft`, `.bottomCenter` and `.bottomRight`. For example if the `LayoutView`'s bound size is `CGSize(width: 100, height: 200)` and the `LayoutPosition` value is `.offset(value: UIOffset(horizontal: -10, vertical: 20), from: .topRight, size: CGSize(width:30, height: 40))`, the linked subview's frame will be `CGRect(x: 100-30+(-10)/*=60*/, y: 20, width: 30, height: 40)`
 
-
-#### .customByFrame(frame: (CGSize) -> CGRect)
+##### Individual.customByFrame(frame: (CGSize) -> CGRect)
 This contained frame closure will produce a CGRect value dynamically and directly from the `LayoutView`'s bound size, that represents the linked subview's frame. For example if the `LayoutView`'s bound size is `CGSize(width: 100, height: 200)` and the `LayoutPosition` is `.customByFrame(frame: {CGRect(x: 0, y: $0.width*0.2+20, width: $0.width, height: $0.height*0.5)})`, the linked subview's frame will be `CGRect(x: 0, y: 100*0.2+20/*=40*/, width: 100, height: 200*0.5/*=100*/)`
 
 Be careful that although this case is very powerful that it can produce any kind of layout information dynamically as you wish, since it's a part of `LayoutMethod` which is possibly stored in `layoutInfo` property, remember to write a [capture list](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID56) if needed to prevent memory leak.
 
-#### .customByOriginSize(origin: (CGSize) -> CGPoint, size: (CGSize) -> CGSize)
+##### Individual.customByOriginSize(origin: (CGSize) -> CGPoint, size: (CGSize) -> CGSize)
 A very similar case with `.customByFrame(frame: (CGSize) -> CGRect)` that it only separately produces the `origin` and `size` properties, which may be useful in some situations that you may need less code than `.customByFrame`.
 
-#### .customByXYWidthHeight(x: (CGSize) -> CGFloat, y: (CGSize) -> CGFloat, width: (CGSize) -> CGFloat, height: (CGSize) -> CGFloat)
+##### Individual.customByXYWidthHeight(x: (CGSize) -> CGFloat, y: (CGSize) -> CGFloat, width: (CGSize) -> CGFloat, height: (CGSize) -> CGFloat)
 Another very similar case with `.customByFrame(frame: (CGSize) -> CGRect)` that it only separately produces the `x`, `y`, `width` and `height` properties, which may be useful in some situations that you may need less code that `.customByFrame`.
+
+#### .sequential(Sequential)
+Sequential layout position settings to set each view's frame based on its previous view's frame and current bound size.
+
+##### Sequential.horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
+The first subview uses the absolute initial `CGRect` value as its frame, others uses the same size and the same `frame.origin.y` value. `frame.origin.x` value is represented by the last view's `frame.maxX` plus `margin`.
+
+##### Sequential.verticallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
+The first subview uses the absolute initial `CGRect` value as its frame, others uses the same size and the same `frame.origin.x` value. `frame.origin.y` value is represented by the last view's `frame.maxY` plus `margin`.
+
+##### Sequential.horizontallyEqualSizedRelative(initial: CGRect, margin: CGFloat)
+The first subview uses the relative initial `CGRect` value as its frame, others uses the same size and the same `frame.origin.y` value. `frame.origin.x` value is represented by the last view's `frame.maxX` plus relative `margin`, which is `margin * boundSize.width`.
+
+##### Sequential.verticallyEqualSizedRelative(initial: CGRect, margin: CGFloat)
+The first subview uses the relative initial `CGRect` value as its frame, others uses the same size and the same `frame.origin.x` value. `frame.origin.y` value is represented by the last view's `frame.maxY` plus relative `margin`, which is `margin * boundSize.height`.
+
+##### Sequential.customByFrame(initial: (CGSize) -> CGRect, rest: (CGRect, CGSize) -> CGRect)
+This contained initial closure will produce the first subview's frame value dynamically from current bound size, and the contained rest closure will produce the other subviews' frame dynamically from the previous view's frame and current bound size. Check `Individual.customByFrame(frame: (CGSize) -> CGRect)` for further dynamic layout information.
+
+#### .matrical(Matrical)
+Matrical layout position settings to set each view's frame based on its previous column view's frame, its previous row view's frame and current bound size. The row size should be set in `layoutOptimization` property otherwise it'll do the same layout as .sequential(Sequential).
+
+##### Matrical.horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
+The first subview uses the absolute initial `CGRect` value as its frame, others use the same size as the initial `CGRect.size` value. `Matrical.horizontal` layout first places views one by one vertically until it reaches the `LayoutOptimazation.matrical(colsPerRow)` value, then the layout engine will start a new line horizontally next to the previous line and do the same thing to rest subviews. For example if the `colsPerRow` value is 3 and current view has 6 subviews, it'll place subviews of `0`, `1`, `2` in the first vertical line, and `3`, `4`, `5` in the another vertical line horizontally next to the first one. The `margin.dx` represents the margin between views horizontally next to each other, and `margin.dy` represents the margin between views vertically next to each other.
+
+##### Matrical.verticallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
+The vertical version of `Matrical.horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)`
+
+##### Matrical.horizontallyEqualSizedRelative(initial: CGRect, margin: CGVector)
+The relative version of `Matrical.horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)`.
+
+##### Matrical.verticallyEqualSizedRelative(initial: CGRect, margin: CGVector)
+The vertical relative version of `Matrical.horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)`.
+
+##### Matrical.customByFrame(initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame)
+The matrical version of `Sequential.customByFrame`, which the first view in a column and the first view in a row also has its own closure to get the frame size from its previous column'sview or previous row's view frame in addition to current bound size. Check `Individual.customByFrame(frame: (CGSize) -> CGRect)` for further dynamic layout information.
 
 ## License
 NotAutoLayout is released under the Apache license. See LICENSE for details.

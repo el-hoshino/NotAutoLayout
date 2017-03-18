@@ -1,5 +1,5 @@
 //
-//  PositionRect.swift
+//  Position.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/02/23.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct PositionRect {
+struct Position {
 	
 	var center: CGPoint
 	var size: CGSize
 	
 }
 
-extension PositionRect {
+extension Position {
 	
 	init(centerX: CGFloat, centerY: CGFloat, width: CGFloat, height: CGFloat) {
 		let center = CGPoint(x: centerX, y: centerY)
@@ -26,11 +26,11 @@ extension PositionRect {
 	
 }
 
-extension PositionRect {
+extension Position {
 	
 	init(frame: CGRect) {
-		let centerX = frame.origin.x + (frame.width / 2)
-		let centerY = frame.origin.y + (frame.height / 2)
+		let centerX = frame.midX
+		let centerY = frame.midY
 		let center = CGPoint(x: centerX, y: centerY)
 		self.center = center
 		self.size = frame.size
