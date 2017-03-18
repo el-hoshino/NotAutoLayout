@@ -44,4 +44,4 @@ for _ in 0 ..< 10 {
 }
 
 baseView.setNeedsLayout()
-tabView.updateContentSize()
+tabView.updateContentSize() // You can implement this into a ViewController's viewDidLayoutSubviews() method, which makes more sense if you have a ViewController that holds the tabView.
