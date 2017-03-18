@@ -50,7 +50,7 @@ extension LayoutControllable {
 		
 		var info: [Hash: Int] = [:]
 		
-		self.subviews.forEach { (view) in
+		self.getLayoutRequiredSubviews().forEach { (view) in
 			info[view.hash] = self.zIndexInfo[view.hash]
 		}
 		
@@ -66,7 +66,7 @@ extension LayoutControllable {
 		
 		var info: [Hash: Int] = [:]
 		
-		self.subviews.forEach { (view) in
+		self.getLayoutRequiredSubviews().forEach { (view) in
 			info[view.hash] = self.orderInfo[view.hash]
 		}
 		
@@ -78,25 +78,106 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	private func place(_ view: UIView, at position: LayoutPosition.Individual) {
+	private func getSortOrder(of view: UIView) -> Int {
+		return self.orderInfo[view.hash] ?? 0
+	}
+	
+	fileprivate func getSubviewsSortedByOrder() -> [UIView] {
 		
-		let positionRect = position.absolutePosition(in: self.boundSize)
-		view.bounds.size = positionRect.size
-		view.center = positionRect.center
+		guard !self.orderInfo.isEmpty else { return self.subviews }
+		
+		let subviews = self.getLayoutRequiredSubviews().sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
+		
+		return subviews
 		
 	}
 	
-	private func layout(_ view: UIView, withMethods methods: [LayoutMethod]) {
+}
+
+extension LayoutControllable {
+	
+	fileprivate func getLayoutRequiredSubviews() -> [UIView] {
 		
-		if let method = methods.first(where: { $0.condition(self.boundSize) == true }) {
-			switch method.position {
-			case .individual(let position):
-				self.place(view, at: position)
-				
-			default:
-				//
-				break
-			}
+		let subviews = self.subviews.filter { (view) -> Bool in
+			self.layoutInfo.containsKey(view.hash)
+		}
+		
+		return subviews
+		
+	}
+	
+	fileprivate func getCurrentLayoutPosition(of view: UIView) -> LayoutPosition? {
+		
+		let currentMethod = self.layoutInfo[view.hash]?.first { method in
+			return method.condition(self.boundSize) == true
+		}
+		
+		return currentMethod?.position
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	fileprivate func place(_ view: UIView, at position: Position) {
+		
+		view.bounds.size = position.size
+		view.center = position.center
+		
+	}
+	
+	fileprivate func place(_ view: UIView, at position: LayoutPosition.Individual) {
+		
+		let position = position.absolutePosition(in: self.boundSize)
+		self.place(view, at: position)
+		
+	}
+	
+	fileprivate func place(_ view: UIView, after previousView: UIView?, at position: LayoutPosition.Sequential) {
+		
+		let position = position.absolutePosition(after: previousView, in: self.boundSize)
+		self.place(view, at: position)
+		
+	}
+	
+	fileprivate func place(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, at position: LayoutPosition.Matrical) {
+		
+		let position = position.absolutePosition(afterRow: previousRowView, afterCol: previousColView, in: self.boundSize)
+		self.place(view, at: position)
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	private func getPreviousSequentialView(of view: UIView) -> UIView? {
+		
+		let subviews = self.getSubviewsSortedByOrder()
+		guard let index = subviews.index(of: view) else { return nil }
+		
+		let lastSequentialView = subviews.last(before: index) { (view) -> Bool in
+			return self.getCurrentLayoutPosition(of: view)?.isSequential ?? false
+		}
+		
+		return lastSequentialView
+		
+	}
+	
+	private func layout(_ view: UIView, withPosition position: LayoutPosition) {
+		
+		switch position {
+		case .individual(let position):
+			self.place(view, at: position)
+			
+		case .sequential(let position):
+			let previousView = self.getPreviousSequentialView(of: view)
+			self.place(view, after: previousView, at: position)
+			
+		case .matrical(let position):
+			let previousRowView = self.getPreviousSequentialView(of: view)
+			self.place(view, afterRow: previousRowView, afterCol: nil, at: position)
 		}
 		
 	}
@@ -104,8 +185,8 @@ extension LayoutControllable {
 	fileprivate func layoutNormally(subviews: [UIView]) {
 		
 		subviews.forEach { (view) in
-			if let methods = self.layoutInfo[view.hash] {
-				self.layout(view, withMethods: methods)
+			if let position = self.getCurrentLayoutPosition(of: view) {
+				self.layout(view, withPosition: position)
 			}
 		}
 		
@@ -115,35 +196,63 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
+	private func layout(_ view: UIView, after previousView: UIView?, withPosition position: LayoutPosition) {
+		
+		switch position {
+		case .individual(let position):
+			self.place(view, at: position)
+			
+		case .sequential(let position):
+			self.place(view, after: previousView, at: position)
+			
+		case .matrical(let position):
+			self.place(view, afterRow: previousView, afterCol: nil, at: position)
+		}
+		
+	}
+	
 	fileprivate func layoutSequencially(subviews: [UIView]) {
+		
+		subviews.forEachPair { (previousView, view) in
+			if let position = self.getCurrentLayoutPosition(of: view) {
+				self.layout(view, after: previousView, withPosition: position)
+			}
+		}
 		
 	}
 	
 }
 
 extension LayoutControllable {
+	
+	private func layout(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, withPosition position: LayoutPosition) {
+		
+		switch position {
+		case .individual(let position):
+			self.place(view, at: position)
+			
+		case .sequential(let position):
+			self.place(view, after: previousColView, at: position)
+			
+		case .matrical(let position):
+			self.place(view, afterRow: previousRowView, afterCol: previousColView, at: position)
+		}
+		
+	}
 	
 	fileprivate func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
 		
+		subviews.forEachCell(underColsPerRow: colsPerRow) { (previousRow, previousCol, view) in
+			if let position = self.getCurrentLayoutPosition(of: view) {
+				self.layout(view, afterRow: previousRow, afterCol: previousCol, withPosition: position)
+			}
+		}
+		
 	}
 	
 }
 
 extension LayoutControllable {
-	
-	private func getSortOrder(of view: UIView) -> Int {
-		return self.orderInfo[view.hash] ?? 0
-	}
-	
-	private func getSubviewsSortedByOrder() -> [UIView] {
-		
-		guard !self.orderInfo.isEmpty else { return self.subviews }
-		
-		let subviews = self.subviews.sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
-		
-		return subviews
-		
-	}
 	
 	public func layoutControl() {
 		

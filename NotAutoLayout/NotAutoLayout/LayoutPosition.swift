@@ -89,6 +89,30 @@ public enum LayoutPosition {
 
 extension LayoutPosition {
 	
+	var isSequential: Bool {
+		switch self {
+		case .sequential:
+			return true
+			
+		case _:
+			return false
+		}
+	}
+	
+	var isMatrical: Bool {
+		switch self {
+		case .matrical:
+			return true
+			
+		case _:
+			return false
+		}
+	}
+	
+}
+
+extension LayoutPosition {
+	
 	public typealias IndividualSizeToFrame = Individual.SizeToFrame
 	public typealias IndividualSizeToPoint = Individual.SizeToPoint
 	public typealias IndividualSizeToSize = Individual.SizeToSize
