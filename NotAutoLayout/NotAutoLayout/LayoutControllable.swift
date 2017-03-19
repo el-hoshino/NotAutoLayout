@@ -82,29 +82,27 @@ extension LayoutControllable {
 		return self.orderInfo[view.hash] ?? 0
 	}
 	
-	fileprivate func getSubviewsSortedByOrder() -> [UIView] {
+	public func getLayoutRequiredSubviews(sortedByOrder shouldSortSubviews: Bool = false) -> [UIView] {
 		
 		guard !self.orderInfo.isEmpty else { return self.subviews }
 		
-		let subviews = self.getLayoutRequiredSubviews().sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
+		let layoutRequiredSubviews = self.subviews.filter { (view) -> Bool in
+			self.layoutInfo.containsKey(view.hash)
+		}
 		
-		return subviews
+		if shouldSortSubviews {
+			let sortedSubviews = layoutRequiredSubviews.sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
+			return sortedSubviews
+			
+		} else {
+			return layoutRequiredSubviews
+		}
 		
 	}
 	
 }
 
 extension LayoutControllable {
-	
-	fileprivate func getLayoutRequiredSubviews() -> [UIView] {
-		
-		let subviews = self.subviews.filter { (view) -> Bool in
-			self.layoutInfo.containsKey(view.hash)
-		}
-		
-		return subviews
-		
-	}
 	
 	fileprivate func getCurrentLayoutPosition(of view: UIView) -> LayoutPosition? {
 		
@@ -154,7 +152,7 @@ extension LayoutControllable {
 	
 	private func getPreviousSequentialView(of view: UIView) -> UIView? {
 		
-		let subviews = self.getSubviewsSortedByOrder()
+		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: true)
 		guard let index = subviews.index(of: view) else { return nil }
 		
 		let lastSequentialView = subviews.last(before: index) { (view) -> Bool in
@@ -256,7 +254,7 @@ extension LayoutControllable {
 	
 	public func layoutControl() {
 		
-		let subviews = self.getSubviewsSortedByOrder()
+		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: true)
 		
 		switch self.layoutOptimization {
 		case .none:
