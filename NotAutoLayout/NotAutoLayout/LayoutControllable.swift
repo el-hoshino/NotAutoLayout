@@ -380,6 +380,7 @@ extension LayoutControllable {
 
 extension LayoutControllable where Self: UIView {
 	
+	@available(*, deprecated: 0.10.0, message: "Use LayoutControllable#addSubview(_: layoutMethods: order: zIndex:) instead.")
 	public func addSubview(_ view: UIView, withAssociatedLayoutMethods methods: [LayoutMethod]? = nil, andZIndex zIndex: Int? = nil) {
 		
 		if let methods = methods {
@@ -394,6 +395,7 @@ extension LayoutControllable where Self: UIView {
 		
 	}
 	
+	@available(*, deprecated: 0.10.0, message: "Use LayoutControllable#addSubview(_: constantPosition: order: zIndex:) instead.")
 	public func addSubview(_ view: UIView, withAssociatedConstantPosition position: LayoutPosition, andZIndex zIndex: Int? = nil) {
 		
 		let method = LayoutMethod(constantPosition: position)
@@ -404,6 +406,34 @@ extension LayoutControllable where Self: UIView {
 		}
 		
 		(self as UIView).addSubview(view)
+		
+	}
+	
+}
+
+extension LayoutControllable where Self: UIView {
+	
+	public func addSubview(_ view: UIView, layoutMethods: [LayoutMethod], order: Int? = nil, zIndex: Int? = nil) {
+		
+		self.layoutInfo[view.hash] = layoutMethods
+		
+		if let order = order {
+			self.orderInfo[view.hash] = order
+		}
+		
+		if let zIndex = zIndex {
+			self.zIndexInfo[view.hash] = zIndex
+		}
+		
+		(self as UIView).addSubview(view)
+		
+	}
+	
+	public func addSubview(_ view: UIView, constantPosition: LayoutPosition, order: Int? = nil, zIndex: Int? = nil) {
+		
+		let method = LayoutMethod(constantPosition: constantPosition)
+		
+		self.addSubview(view, layoutMethods: [method], order: order, zIndex: zIndex)
 		
 	}
 	
