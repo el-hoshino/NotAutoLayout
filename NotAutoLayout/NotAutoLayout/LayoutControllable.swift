@@ -84,13 +84,11 @@ extension LayoutControllable {
 	
 	public func getLayoutRequiredSubviews(sortedByOrder shouldSortSubviews: Bool = false) -> [UIView] {
 		
-		guard !self.orderInfo.isEmpty else { return self.subviews }
-		
 		let layoutRequiredSubviews = self.subviews.filter { (view) -> Bool in
 			self.layoutInfo.containsKey(view.hash)
 		}
-		
-		if shouldSortSubviews {
+				
+		if shouldSortSubviews, !self.orderInfo.isEmpty {
 			let sortedSubviews = layoutRequiredSubviews.sorted { self.getSortOrder(of: $0) < self.getSortOrder(of: $1) }
 			return sortedSubviews
 			
