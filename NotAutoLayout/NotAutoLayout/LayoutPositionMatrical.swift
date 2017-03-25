@@ -204,7 +204,39 @@ extension LayoutPosition.Matrical {
 
 extension LayoutPosition.Matrical {
 	
-	func absolutePosition(afterRow previousRowView: UIView? = nil, afterCol previousColView: UIView? = nil, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(for view: UIView, thatFits fittingSize: CGSize, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame) -> Position {
+		
+		let fitSize = view.sizeThatFits(fittingSize)
+		
+		switch (previousRowView, previousColView) {
+		case (.some(let previousRowView), .some(let previousColView)):
+			let frame = rest(previousRowView.frame, previousColView.frame, fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+			
+		case (.some(let previousRowView), .none):
+			let frame = firstInRow(previousRowView.frame, fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+			
+		case (.none, .some(let previousColView)):
+			let frame = firstInCol(previousColView.frame, fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+			
+		case (.none, .none):
+			let frame = initial(fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+		}
+		
+	}
+	
+}
+
+extension LayoutPosition.Matrical {
+	
+	func absolutePosition(of view: UIView, afterRow previousRowView: UIView? = nil, afterCol previousColView: UIView? = nil, in boundSize: CGSize) -> Position {
 		
 		switch self {
 		case .horizontallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):
@@ -222,6 +254,8 @@ extension LayoutPosition.Matrical {
 		case .customByFrame(initial: let initialFrameClosure, firstInCol: let firstInColFrameClosure, firstInRow: let firstInRowFrameClosure, rest: let restFrameClosure):
 			return self.getPosition(afterRow: previousRowView, afterCol: previousColView, in: boundSize, initial: initialFrameClosure, firstInCol: firstInColFrameClosure, firstInRow: firstInRowFrameClosure, rest: restFrameClosure)
 			
+		case .customFitsSizeByFrame(fittingSize: let fittingSize, initial: let initialFrameClosure, firstInCol: let firstInColFrameClosure, firstInRow: let firstInRowFrameClosure, rest: let restFrameClosure):
+			return self.getPosition(for: view, thatFits: fittingSize, afterRow: previousRowView, afterCol: previousColView, in: boundSize, initial: initialFrameClosure, firstInCol: firstInColFrameClosure, firstInRow: firstInRowFrameClosure, rest: restFrameClosure)
 		}
 		
 	}

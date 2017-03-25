@@ -135,11 +135,22 @@ extension LayoutPosition.Individual {
 		
 	}
 	
+	fileprivate func getPosition(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Position {
+		
+		let fitSize = view.sizeThatFits(fittingSize)
+		let frame = transform(fitSize, boundSize)
+		let position = Position(frame: frame)
+		
+		return position
+		
+	}
+	
 }
 
 extension LayoutPosition.Individual {
 	
-	func absolutePosition(in boundSize: CGSize) -> Position {
+	func absolutePosition(of view: UIView, in boundSize: CGSize) -> Position {
+		
 		switch self {
 		case .absolute(let frame):
 			return self.getPosition(of: frame, in: boundSize, .absolutely)
@@ -164,7 +175,12 @@ extension LayoutPosition.Individual {
 			
 		case .custom(let transform):
 			return self.getPosition(of: transform, in: boundSize)
+			
+		case .customFitsSizeByFrame(fittingSize: let fittingSize, frame: let frame):
+			return self.getPosition(of: frame, for: view, thatFits: fittingSize, in: boundSize)
+			
 		}
+		
 	}
 	
 }

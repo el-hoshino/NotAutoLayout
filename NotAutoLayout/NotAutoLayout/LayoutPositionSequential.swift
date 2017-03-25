@@ -73,7 +73,7 @@ extension LayoutPosition.Sequential {
 
 extension LayoutPosition.Sequential {
 	
-	fileprivate func getPosition(after previousView: UIView?, in boundSize: CGSize, initial: (CGSize) -> CGRect, rest: (_ previousFrame: CGRect, _ boundSize: CGSize) -> CGRect) -> Position {
+	fileprivate func getPosition(after previousView: UIView?, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Position {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, boundSize)
@@ -92,7 +92,28 @@ extension LayoutPosition.Sequential {
 
 extension LayoutPosition.Sequential {
 	
-	func absolutePosition(after previousView: UIView? = nil, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame) -> Position {
+		
+		let fitSize = view.sizeThatFits(fittingSize)
+		
+		if let previousView = previousView {
+			let frame = rest(previousView.frame, fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+			
+		} else {
+			let frame = initial(fitSize, boundSize)
+			let position = Position(frame: frame)
+			return position
+		}
+		
+	}
+	
+}
+
+extension LayoutPosition.Sequential {
+	
+	func absolutePosition(of view: UIView, after previousView: UIView? = nil, in boundSize: CGSize) -> Position {
 		
 		switch self {
 		case .horizontallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):
@@ -110,6 +131,8 @@ extension LayoutPosition.Sequential {
 		case .customByFrame(initial: let initialFrameClosure, rest: let restFrameClosure):
 			return self.getPosition(after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 			
+		case .customFitsSizeByFrame(fittingSize: let fittingSize, initial: let initialFrameClosure, rest: let restFrameClosure):
+			return self.getPosition(for: view, tahtFits: fittingSize, after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 		}
 		
 	}

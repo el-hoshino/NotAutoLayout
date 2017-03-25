@@ -32,6 +32,7 @@ public enum LayoutPosition {
 		public typealias SizeToPoint = (CGSize) -> CGPoint
 		public typealias SizeToSize = (CGSize) -> CGSize
 		public typealias SizeToFloat = (CGSize) -> CGFloat
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
 		
 		case absolute(CGRect)
 		case relative(CGRect)
@@ -44,6 +45,8 @@ public enum LayoutPosition {
 		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
 		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
 		
+		case customFitsSizeByFrame(fittingSize: CGSize, frame: FitSizeBoundSizeToFrame)
+		
 		@available(*, deprecated: 0.6, message: "Use customByFrame, customByOriginSize or customByXYWidthHeight instead")
 		case custom((CGSize) -> CGRect)
 		
@@ -54,6 +57,9 @@ public enum LayoutPosition {
 		public typealias SizeToFrame = (CGSize) -> CGRect
 		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> CGRect
 		
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousFrameFitSizeAndSizeToFrame = (_ previousFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		
 		case horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
 		case verticallyEqualSizedAbsolute(initial: CGRect, margin: CGFloat)
 		
@@ -61,6 +67,8 @@ public enum LayoutPosition {
 		case verticallyEqualSizedRelative(initial: CGRect, margin: CGFloat)
 		
 		case customByFrame(initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame)
+		
+		case customFitsSizeByFrame(fittingSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame)
 		
 	}
 	
@@ -71,6 +79,11 @@ public enum LayoutPosition {
 		public typealias PreviousRowFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> CGRect
 		public typealias PreviousRowColFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ boundSize: CGSize) -> CGRect
 		
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousColFrameFitSizeAndSizeToFrame = (_ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousRowFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		public typealias PreviousRowColFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> CGRect
+		
 		case horizontallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
 		case verticallyEqualSizedAbsolute(initial: CGRect, margin: CGVector)
 		
@@ -78,6 +91,8 @@ public enum LayoutPosition {
 		case verticallyEqualSizedRelative(initial: CGRect, margin: CGVector)
 		
 		case customByFrame(initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame)
+		
+		case customFitsSizeByFrame(fittingSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame)
 		
 	}
 	
@@ -113,11 +128,6 @@ extension LayoutPosition {
 
 extension LayoutPosition {
 	
-	public typealias IndividualSizeToFrame = Individual.SizeToFrame
-	public typealias IndividualSizeToPoint = Individual.SizeToPoint
-	public typealias IndividualSizeToSize = Individual.SizeToSize
-	public typealias IndividualSizeToFloat = Individual.SizeToFloat
-	
 	public static func makeAbsolute(frame: CGRect) -> LayoutPosition {
 		return .individual(.absolute(frame))
 	}
@@ -134,16 +144,20 @@ extension LayoutPosition {
 		return .individual(.offset(value: value, from: base, size: size))
 	}
 	
-	public static func makeCustom(frame: @escaping IndividualSizeToFrame) -> LayoutPosition {
+	public static func makeCustom(frame: @escaping Individual.SizeToFrame) -> LayoutPosition {
 		return .individual(.customByFrame(frame: frame))
 	}
 	
-	public static func makeCustom(origin: @escaping IndividualSizeToPoint, size: @escaping IndividualSizeToSize) -> LayoutPosition {
+	public static func makeCustom(origin: @escaping Individual.SizeToPoint, size: @escaping Individual.SizeToSize) -> LayoutPosition {
 		return .individual(.customByOriginSize(origin: origin, size: size))
 	}
 	
-	public static func makeCustom(x: @escaping IndividualSizeToFloat, y: @escaping IndividualSizeToFloat, width: @escaping IndividualSizeToFloat, height: @escaping IndividualSizeToFloat) -> LayoutPosition {
+	public static func makeCustom(x: @escaping Individual.SizeToFloat, y: @escaping Individual.SizeToFloat, width: @escaping Individual.SizeToFloat, height: @escaping Individual.SizeToFloat) -> LayoutPosition {
 		return .individual(.customByXYWidthHeight(x: x, y: y, width: width, height: height))
+	}
+	
+	public static func makeCustome(thatFits fittingSize: CGSize, frame: @escaping Individual.FitSizeBoundSizeToFrame) -> LayoutPosition {
+		return .individual(.customFitsSizeByFrame(fittingSize: fittingSize, frame: frame))
 	}
 	
 }
@@ -158,9 +172,6 @@ extension LayoutPosition.Sequential {
 }
 
 extension LayoutPosition {
-	
-	public typealias SequentialSizeToFrame = Sequential.SizeToFrame
-	public typealias SequentialPreviousFrameAndSizeToFrame = Sequential.PreviousFrameAndSizeToFrame
 	
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
 		switch direction {
@@ -182,8 +193,12 @@ extension LayoutPosition {
 		}
 	}
 	
-	public static func makeCustom(initialFrame: @escaping SequentialSizeToFrame, restFrame: @escaping SequentialPreviousFrameAndSizeToFrame) -> LayoutPosition {
+	public static func makeCustom(initialFrame: @escaping Sequential.SizeToFrame, restFrame: @escaping Sequential.PreviousFrameAndSizeToFrame) -> LayoutPosition {
 		return .sequential(.customByFrame(initial: initialFrame, rest: restFrame))
+	}
+	
+	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Sequential.FitSizeBoundSizeToFrame, restFrame: @escaping Sequential.PreviousFrameFitSizeAndSizeToFrame) -> LayoutPosition {
+		return .sequential(.customFitsSizeByFrame(fittingSize: fittingSize, initial: initialFrame, rest: restFrame))
 	}
 	
 }
@@ -198,11 +213,6 @@ extension LayoutPosition.Matrical {
 }
 
 extension LayoutPosition {
-	
-	public typealias MatricalSizeToFrame = Matrical.SizeToFrame
-	public typealias MatricalPreviousColFrameAndSizeToFrame = Matrical.PreviousColFrameAndSizeToFrame
-	public typealias MatricalPreviousRowFrameAndSizeToFrame = Matrical.PreviousRowFrameAndSizeToFrame
-	public typealias MatricalPreviousRowColFrameAndSizeToFrame = Matrical.PreviousRowColFrameAndSizeToFrame
 	
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
 		switch direction {
@@ -224,8 +234,12 @@ extension LayoutPosition {
 		}
 	}
 	
-	public static func makeCustom(initialFrame: @escaping MatricalSizeToFrame, firstInCol: @escaping MatricalPreviousColFrameAndSizeToFrame, firstInRow: @escaping MatricalPreviousRowFrameAndSizeToFrame, rest: @escaping MatricalPreviousRowColFrameAndSizeToFrame) -> LayoutPosition {
-		return .matrical(.customByFrame(initial: initialFrame, firstInCol: firstInCol, firstInRow: firstInRow, rest: rest))
+	public static func makeCustom(initialFrame: @escaping Matrical.SizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameAndSizeToFrame, restFrame: @escaping Matrical.PreviousRowColFrameAndSizeToFrame) -> LayoutPosition {
+		return .matrical(.customByFrame(initial: initialFrame, firstInCol: firstInColFrame, firstInRow: firstInRowFrame, rest: restFrame))
+	}
+	
+	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Matrical.FitSizeBoundSizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameFitSizeAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameFitSizeAndSizeToFrame, restFrame: @escaping Matrical.PreviousRowColFrameFitSizeAndSizeToFrame) -> LayoutPosition {
+		return .matrical(.customFitsSizeByFrame(fittingSize: fittingSize, initial: initialFrame, firstInCol: firstInColFrame, firstInRow: firstInRowFrame, rest: restFrame))
 	}
 	
 }

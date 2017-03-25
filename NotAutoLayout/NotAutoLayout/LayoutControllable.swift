@@ -125,21 +125,21 @@ extension LayoutControllable {
 	
 	fileprivate func place(_ view: UIView, at position: LayoutPosition.Individual) {
 		
-		let position = position.absolutePosition(in: self.boundSize)
+		let position = position.absolutePosition(of: view, in: self.boundSize)
 		self.place(view, at: position)
 		
 	}
 	
 	fileprivate func place(_ view: UIView, after previousView: UIView?, at position: LayoutPosition.Sequential) {
 		
-		let position = position.absolutePosition(after: previousView, in: self.boundSize)
+		let position = position.absolutePosition(of: view, after: previousView, in: self.boundSize)
 		self.place(view, at: position)
 		
 	}
 	
 	fileprivate func place(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, at position: LayoutPosition.Matrical) {
 		
-		let position = position.absolutePosition(afterRow: previousRowView, afterCol: previousColView, in: self.boundSize)
+		let position = position.absolutePosition(of: view, afterRow: previousRowView, afterCol: previousColView, in: self.boundSize)
 		self.place(view, at: position)
 		
 	}
