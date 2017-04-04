@@ -57,3 +57,41 @@ public struct LayoutFrame {
 	}
 	
 }
+
+extension LayoutFrame {
+	
+	func position(in canvasSize: CGSize) -> Position {
+		
+		let x: CGFloat
+		let y: CGFloat
+		
+		switch self.reference.horizontal {
+		case .left:
+			x = self.origin.x + (self.size.width / 2)
+			
+		case .center:
+			x = self.origin.x + (canvasSize.width / 2)
+			
+		case .right:
+			x = self.origin.x + (canvasSize.width - self.size.width)
+		}
+		
+		switch self.reference.vertical {
+		case .top:
+			y = self.origin.y + (self.size.height / 2)
+			
+		case .middle:
+			y = self.origin.y + (canvasSize.height / 2)
+			
+		case .bottom:
+			y = self.origin.y + (canvasSize.height - self.size.height)
+		}
+		
+		let center = CGPoint(x: x, y: y)
+		let position = Position(center: center, size: self.size)
+		
+		return position
+		
+	}
+	
+}
