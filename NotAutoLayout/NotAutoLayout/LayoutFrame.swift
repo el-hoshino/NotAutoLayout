@@ -73,7 +73,7 @@ extension LayoutFrame {
 			x = self.origin.x + (canvasSize.width / 2)
 			
 		case .right:
-			x = self.origin.x + (canvasSize.width - self.size.width)
+			x = self.origin.x + canvasSize.width - (self.size.width / 2)
 		}
 		
 		switch self.reference.vertical {
@@ -84,7 +84,7 @@ extension LayoutFrame {
 			y = self.origin.y + (canvasSize.height / 2)
 			
 		case .bottom:
-			y = self.origin.y + (canvasSize.height - self.size.height)
+			y = self.origin.y + canvasSize.height - (self.size.height / 2)
 		}
 		
 		let center = CGPoint(x: x, y: y)
