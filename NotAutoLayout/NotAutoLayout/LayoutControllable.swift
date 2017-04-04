@@ -102,6 +102,49 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
+	public func getLayoutRequiredSubviewsTotalFrame() -> CGRect {
+		
+		let subviews = self.getLayoutRequiredSubviews()
+		
+		let insets = subviews.reduce(nil) { (result, subview) -> UIEdgeInsets? in
+			
+			if let result = result {
+				let top = min(result.top, subview.frame.minY)
+				let left = min(result.left, subview.frame.minX)
+				let bottom = max(result.bottom, subview.frame.maxY)
+				let right = max(result.right, subview.frame.maxX)
+				let result = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+				return result
+				
+			} else {
+				let top = subview.frame.minY
+				let left = subview.frame.minX
+				let bottom = subview.frame.maxY
+				let right = subview.frame.maxX
+				let result = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+				return result
+			}
+			
+		}
+		
+		guard let resultInsets = insets else {
+			return .zero
+		}
+		
+		let x = resultInsets.left
+		let y = resultInsets.top
+		let width = resultInsets.right - resultInsets.left
+		let height = resultInsets.bottom - resultInsets.top
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
 	fileprivate func getCurrentLayoutPosition(of view: UIView) -> LayoutPosition? {
 		
 		let currentMethod = self.layoutInfo[view.hash]?.first { method in
