@@ -10,23 +10,6 @@ import Foundation
 
 public enum LayoutPosition {
 	
-	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
-	public enum OffsetOrigin {
-		
-		case topLeft
-		case topCenter
-		case topRight
-		
-		case middleLeft
-		case middleCenter
-		case middleRight
-		
-		case bottomLeft
-		case bottomCenter
-		case bottomRight
-		
-	}
-	
 	public enum Individual {
 		
 		public typealias SizeToFrame = (CGSize) -> LayoutFrame
@@ -40,17 +23,11 @@ public enum LayoutPosition {
 		
 		case insets(UIEdgeInsets)
 		
-		@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
-		case offset(value: UIOffset, from: OffsetOrigin, size: CGSize)
-		
 		case customByFrame(frame: SizeToFrame)
 		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
 		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
 		
 		case customFitsSizeByFrame(fittingSize: CGSize, frame: FitSizeBoundSizeToFrame)
-		
-		@available(*, deprecated: 0.6, message: "Use customByFrame, customByOriginSize or customByXYWidthHeight instead")
-		case custom((CGSize) -> CGRect)
 		
 	}
 	
@@ -150,11 +127,6 @@ extension LayoutPosition {
 	
 	public static func makeInsets(insets: UIEdgeInsets) -> LayoutPosition {
 		return .individual(.insets(insets))
-	}
-	
-	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
-	public static func makeOffset(value: UIOffset, from base: OffsetOrigin, size: CGSize) -> LayoutPosition {
-		return .individual(.offset(value: value, from: base, size: size))
 	}
 	
 	public static func makeCustom(frame: @escaping Individual.SizeToFrame) -> LayoutPosition {

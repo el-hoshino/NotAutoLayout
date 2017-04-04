@@ -46,81 +46,6 @@ extension LayoutPosition.Individual {
 
 extension LayoutPosition.Individual {
 	
-	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
-	fileprivate func getPosition(by offset: UIOffset, from base: LayoutPosition.OffsetOrigin, objectSize: CGSize, in boundSize: CGSize) -> Position {
-		
-		let boundHorizontalCenter = boundSize.width / 2
-		let boundVerticalCenter = boundSize.height / 2
-		
-		let objectHorizontalCenter = objectSize.width / 2
-		let objectVerticalCenter = objectSize.height / 2
-		
-		let horizontalCenterDiff = boundHorizontalCenter - objectHorizontalCenter
-		let verticalCenterDiff = boundVerticalCenter - objectVerticalCenter
-		
-		let baseX: CGFloat
-		let baseY: CGFloat
-		
-		switch base {
-		case .topLeft:
-			baseX = offset.horizontal - horizontalCenterDiff
-			baseY = offset.vertical - verticalCenterDiff
-			
-		case .topCenter:
-			baseX = offset.horizontal
-			baseY = offset.vertical - verticalCenterDiff
-			
-		case .topRight:
-			baseX = offset.horizontal + horizontalCenterDiff
-			baseY = offset.vertical - verticalCenterDiff
-			
-		case .middleLeft:
-			baseX = offset.horizontal - horizontalCenterDiff
-			baseY = offset.vertical
-			
-		case .middleCenter:
-			baseX = offset.horizontal
-			baseY = offset.vertical
-			
-		case .middleRight:
-			baseX = offset.horizontal + horizontalCenterDiff
-			baseY = offset.vertical
-			
-		case .bottomLeft:
-			baseX = offset.horizontal - horizontalCenterDiff
-			baseY = offset.vertical + verticalCenterDiff
-			
-		case .bottomCenter:
-			baseX = offset.horizontal
-			baseY = offset.vertical + verticalCenterDiff
-			
-		case .bottomRight:
-			baseX = offset.horizontal + horizontalCenterDiff
-			baseY = offset.vertical + verticalCenterDiff
-		}
-		
-		let centerX = baseX + boundHorizontalCenter
-		let centerY = baseY + boundVerticalCenter
-		let center = CGPoint(x: centerX, y: centerY)
-		
-		return Position(center: center, size: objectSize)
-		
-	}
-	
-}
-
-extension LayoutPosition.Individual {
-	
-//	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
-	fileprivate func getPosition(of transform: (CGSize) -> CGRect, in boundSize: CGSize) -> Position {
-		
-		let frame = transform(boundSize)
-		let position = Position(frame: frame)
-		
-		return position
-		
-	}
-	
 	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Position {
 		
 		let frame = transform(boundSize)
@@ -180,9 +105,6 @@ extension LayoutPosition.Individual {
 		case .insets(let insets):
 			return self.getPosition(by: insets, in: boundSize)
 			
-		case .offset(value: let offset, from: let offsetOrigin, size: let objectSize):
-			return self.getPosition(by: offset, from: offsetOrigin, objectSize: objectSize, in: boundSize)
-			
 		case .customByFrame(frame: let frameTransform):
 			return self.getPosition(of: frameTransform, in: boundSize)
 			
@@ -191,9 +113,6 @@ extension LayoutPosition.Individual {
 			
 		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
 			return self.getPosition(of: xTransform, yTransform, widthTransform, heightTransform, in: boundSize)
-			
-		case .custom(let transform):
-			return self.getPosition(of: transform, in: boundSize)
 			
 		case .customFitsSizeByFrame(fittingSize: let fittingSize, frame: let frame):
 			return self.getPosition(of: frame, for: view, thatFits: fittingSize, in: boundSize)
