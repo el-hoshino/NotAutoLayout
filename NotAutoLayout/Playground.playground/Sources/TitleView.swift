@@ -13,7 +13,7 @@ public class TitleView: LayoutView {
 		
 		super.init(frame: frame)
 		
-		self.addSubview(self.titleLabel, withAssociatedLayoutMethods: self.makeTitleLabelLayoutMethods())
+		self.addSubview(self.titleLabel, layoutMethods: self.makeTitleLabelLayoutMethods())
 		
 	}
 	
@@ -27,11 +27,11 @@ public class TitleView: LayoutView {
 	
 	private func makeTitleLabelLayoutMethods() -> [LayoutMethod] {
 		
-		let position = LayoutPosition.makeCustom { (boundSize) -> CGRect in
+		let position = LayoutPosition.makeCustom { (boundSize) -> LayoutFrame in
+			let reference = ReferencePoint.middleCenter
+			let origin = CGPoint.zero
 			let size = CGSize(width: 200, height: 40)
-			let x = (boundSize.width - size.width) / 2
-			let y = (boundSize.height - size.height) / 2
-			return CGRect(x: x, y: y, width: size.width, height: size.height)
+			return LayoutFrame(reference: reference, origin: origin, size: size)
 		}
 		
 		let method = LayoutMethod(constantPosition: position)

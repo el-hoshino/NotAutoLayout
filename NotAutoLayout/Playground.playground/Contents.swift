@@ -31,16 +31,16 @@ titleView.backgroundColor = .red
 contentView.backgroundColor = .green
 tabView.backgroundColor = .blue
 
-baseView.addSubview(titleView, withAssociatedConstantPosition: titleViewPosition)
-baseView.addSubview(contentView, withAssociatedConstantPosition: contentViewPosition)
-baseView.addSubview(tabView, withAssociatedConstantPosition: tabViewPosition)
+baseView.addSubview(titleView, constantPosition: titleViewPosition)
+baseView.addSubview(contentView, constantPosition: contentViewPosition)
+baseView.addSubview(tabView, constantPosition: tabViewPosition)
 
 titleView.setTitle("Hello NotAutoLayout!")
 
 for _ in 0 ..< 10 {
 	let tabItem = UIView()
 	tabItem.backgroundColor = .brown
-	tabView.addSubview(tabItem, withAssociatedLayoutMethods: tabView.makeTabItemLayoutMethods())
+	tabView.addSubview(tabItem, layoutMethods: tabView.makeTabItemLayoutMethods())
 }
 
 baseView.setNeedsLayout()
