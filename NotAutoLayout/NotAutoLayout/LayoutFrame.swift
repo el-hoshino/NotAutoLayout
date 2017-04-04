@@ -40,7 +40,7 @@ public struct ReferencePoint {
 	
 	public static let bottomLeft = ReferencePoint(horizontal: .left, vertical: .bottom)
 	public static let bottomCenter = ReferencePoint(horizontal: .center, vertical: .bottom)
-	public static let bottomRigt = ReferencePoint(horizontal: .right, vertical: .bottom)
+	public static let bottomRight = ReferencePoint(horizontal: .right, vertical: .bottom)
 	
 }
 
