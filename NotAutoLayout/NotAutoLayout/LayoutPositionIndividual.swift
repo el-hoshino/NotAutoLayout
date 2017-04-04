@@ -10,10 +10,18 @@ import Foundation
 
 extension LayoutPosition.Individual {
 	
+	fileprivate func getPosition(of frame: LayoutFrame, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
+		
+		let frame = method.absoluteFrame(frame, by: boundSize)
+		let position = frame.position(in: boundSize)
+		return position
+		
+	}
+	
 	fileprivate func getPosition(of frame: CGRect, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
-		let position = Position(frame: frame)
+		let position = frame.position(in: boundSize)
 		return position
 		
 	}
@@ -38,6 +46,7 @@ extension LayoutPosition.Individual {
 
 extension LayoutPosition.Individual {
 	
+	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
 	fileprivate func getPosition(by offset: UIOffset, from base: LayoutPosition.OffsetOrigin, objectSize: CGSize, in boundSize: CGSize) -> Position {
 		
 		let boundHorizontalCenter = boundSize.width / 2
@@ -102,10 +111,20 @@ extension LayoutPosition.Individual {
 
 extension LayoutPosition.Individual {
 	
-	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Position {
+//	@available(*, deprecated: 0.10.0, message: "Use new absolute or relative position which does exactly the same thing")
+	fileprivate func getPosition(of transform: (CGSize) -> CGRect, in boundSize: CGSize) -> Position {
 		
 		let frame = transform(boundSize)
 		let position = Position(frame: frame)
+		
+		return position
+		
+	}
+	
+	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Position {
+		
+		let frame = transform(boundSize)
+		let position = frame.position(in: boundSize)
 		
 		return position
 		
@@ -139,7 +158,7 @@ extension LayoutPosition.Individual {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		let frame = transform(fitSize, boundSize)
-		let position = Position(frame: frame)
+		let position = frame.position(in: boundSize)
 		
 		return position
 		

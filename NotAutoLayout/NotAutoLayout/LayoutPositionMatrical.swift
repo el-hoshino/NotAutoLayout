@@ -62,7 +62,7 @@ extension LayoutPosition.Matrical {
 		
 	}
 	
-	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: CGRect, margin: CGVector, _ method: PositioningMethod) -> Position {
+	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGVector, _ method: PositioningMethod) -> Position {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -82,7 +82,7 @@ extension LayoutPosition.Matrical {
 			
 		case (.none, .none):
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		
@@ -144,7 +144,7 @@ extension LayoutPosition.Matrical {
 		
 	}
 	
-	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: CGRect, margin: CGVector, _ method: PositioningMethod) -> Position {
+	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGVector, _ method: PositioningMethod) -> Position {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -164,7 +164,7 @@ extension LayoutPosition.Matrical {
 			
 		case (.none, .none):
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		
@@ -179,22 +179,22 @@ extension LayoutPosition.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let frame = rest(previousRowView.frame, previousColView.frame, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.some(let previousRowView), .none):
 			let frame = firstInRow(previousRowView.frame, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.none, .some(let previousColView)):
 			let frame = firstInCol(previousColView.frame, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.none, .none):
 			let frame = initial(boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		
@@ -211,22 +211,22 @@ extension LayoutPosition.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let frame = rest(previousRowView.frame, previousColView.frame, fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.some(let previousRowView), .none):
 			let frame = firstInRow(previousRowView.frame, fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.none, .some(let previousColView)):
 			let frame = firstInCol(previousColView.frame, fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		case (.none, .none):
 			let frame = initial(fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		

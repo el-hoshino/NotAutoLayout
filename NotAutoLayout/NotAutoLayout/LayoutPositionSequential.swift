@@ -23,7 +23,7 @@ extension LayoutPosition.Sequential {
 		
 	}
 	
-	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: CGRect, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGFloat, _ method: PositioningMethod) -> Position {
 		
 		if let previousView = previousView {
 			let margin = method.absoluteWidth(margin, by: boundSize)
@@ -32,7 +32,7 @@ extension LayoutPosition.Sequential {
 			
 		} else {
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		
@@ -55,7 +55,7 @@ extension LayoutPosition.Sequential {
 		
 	}
 	
-	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: CGRect, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGFloat, _ method: PositioningMethod) -> Position {
 		
 		if let previousView = previousView {
 			
@@ -63,7 +63,7 @@ extension LayoutPosition.Sequential {
 			return position
 			
 		} else {
-			let position = Position(frame: initialFrame)
+			let position = initialFrame.position(in: boundSize)
 			return position
 		}
 		
@@ -77,12 +77,12 @@ extension LayoutPosition.Sequential {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		} else {
 			let frame = initial(boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		
@@ -98,12 +98,12 @@ extension LayoutPosition.Sequential {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 			
 		} else {
 			let frame = initial(fitSize, boundSize)
-			let position = Position(frame: frame)
+			let position = frame.position(in: boundSize)
 			return position
 		}
 		

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		165CE1CA1E937C9300F942A3 /* LayoutFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165CE1C91E937C9300F942A3 /* LayoutFrame.swift */; };
 		167AC91E1E5E8D34006D8F9F /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167AC91D1E5E8D34006D8F9F /* Position.swift */; };
 		16FE58C11E5D9E23001A9DC2 /* LayoutPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */; };
 		16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		165CE1C91E937C9300F942A3 /* LayoutFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutFrame.swift; sourceTree = "<group>"; };
 		167AC91D1E5E8D34006D8F9F /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPosition.swift; sourceTree = "<group>"; };
 		16FE58C21E5DA08E001A9DC2 /* LayoutControllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutControllable.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				796396851E7D3373006A60F7 /* PositionMethod.swift */,
 				167AC91D1E5E8D34006D8F9F /* Position.swift */,
 				16FE58C41E5DA931001A9DC2 /* LayoutCondition.swift */,
+				165CE1C91E937C9300F942A3 /* LayoutFrame.swift */,
 				16FE58C01E5D9E23001A9DC2 /* LayoutPosition.swift */,
 				7963967F1E7D31B2006A60F7 /* LayoutPositionIndividual.swift */,
 				796396811E7D31E8006A60F7 /* LayoutPositionSequential.swift */,
@@ -250,6 +253,7 @@
 				16FE58C11E5D9E23001A9DC2 /* LayoutPosition.swift in Sources */,
 				16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */,
 				795463AF1E68628200952122 /* LayoutMethod.swift in Sources */,
+				165CE1CA1E937C9300F942A3 /* LayoutFrame.swift in Sources */,
 				796396881E7DACD2006A60F7 /* Array.swift in Sources */,
 				16FE58C51E5DA931001A9DC2 /* LayoutCondition.swift in Sources */,
 				7963968A1E7DBDCF006A60F7 /* Dictionary.swift in Sources */,
