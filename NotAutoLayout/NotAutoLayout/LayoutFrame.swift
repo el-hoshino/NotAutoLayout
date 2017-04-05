@@ -76,6 +76,26 @@ extension LayoutFrame {
 
 extension LayoutFrame {
 	
+	public var x: CGFloat {
+		return self.origin.x
+	}
+	
+	public var y: CGFloat {
+		return self.origin.y
+	}
+	
+	public var width: CGFloat {
+		return self.size.width
+	}
+	
+	public var height: CGFloat {
+		return self.size.height
+	}
+	
+}
+
+extension LayoutFrame {
+	
 	func position(in canvasSize: CGSize) -> Position {
 		
 		let x: CGFloat
