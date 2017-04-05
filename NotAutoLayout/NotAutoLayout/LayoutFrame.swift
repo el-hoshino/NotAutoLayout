@@ -151,3 +151,23 @@ public func * (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
 public func *= (lhs: inout LayoutFrame, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
+
+public func / (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
+	
+	let x = lhs.x / rhs
+	let y = lhs.y / rhs
+	let width = lhs.width / rhs
+	let height = lhs.height / rhs
+	
+	let origin = CGPoint(x: x, y: y)
+	let size = CGSize(width: width, height: height)
+	
+	let frame = LayoutFrame(reference: lhs.reference, origin: origin, size: size)
+	
+	return frame
+	
+}
+
+public func /= (lhs: inout LayoutFrame, rhs: CGFloat) {
+	lhs = lhs / rhs
+}
