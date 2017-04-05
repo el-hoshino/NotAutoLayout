@@ -60,6 +60,22 @@ public struct LayoutFrame {
 
 extension LayoutFrame {
 	
+	public init(xReference: HorizontalReference, yReference: VerticalReference, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
+		
+		let reference = ReferencePoint(horizontal: xReference, vertical: yReference)
+		let origin = CGPoint(x: x, y: y)
+		let size = CGSize(width: width, height: height)
+		
+		self.reference = reference
+		self.origin = origin
+		self.size = size
+		
+	}
+	
+}
+
+extension LayoutFrame {
+	
 	func position(in canvasSize: CGSize) -> Position {
 		
 		let x: CGFloat
