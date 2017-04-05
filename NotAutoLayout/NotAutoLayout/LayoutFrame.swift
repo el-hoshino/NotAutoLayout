@@ -60,7 +60,7 @@ public struct LayoutFrame {
 
 extension LayoutFrame {
 	
-	public init(x: CGFloat, from xReference: HorizontalReference, y: CGFloat, from yReference: VerticalReference, width: CGFloat, height: CGFloat) {
+	public init(x: CGFloat, from xReference: HorizontalReference = .left, y: CGFloat, from yReference: VerticalReference = .top, width: CGFloat, height: CGFloat) {
 		
 		let reference = ReferencePoint(horizontal: xReference, vertical: yReference)
 		let origin = CGPoint(x: x, y: y)
