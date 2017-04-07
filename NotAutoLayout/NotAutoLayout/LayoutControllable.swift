@@ -307,6 +307,18 @@ extension LayoutControllable {
 		case .matrix(colsPerRow: let colsPerRow):
 			self.layoutMatrically(subviews: subviews, colsPerRow: colsPerRow)
 		}
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
+	public func place(_ view: UIView, at layoutFrame: LayoutFrame) {
+		
+		let position = layoutFrame.position(in: self.boundSize)
+		self.place(view, at: position)
+		
 	}
 	
 }
