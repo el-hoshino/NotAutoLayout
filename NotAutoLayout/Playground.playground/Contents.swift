@@ -11,17 +11,17 @@ let titleView = TitleView()
 let contentView = UITableView()
 let tabView = TabView()
 
-let titleViewPosition = LayoutPosition
+let titleViewPosition = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in 0 },
 	            width: { $0.width },
 	            height: { _ in 60 })
-let contentViewPosition = LayoutPosition
+let contentViewPosition = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in titleView.frame.maxY },
 	            width: { $0.width },
 	            height: { $0.height - (titleView.frame.maxY + 64) })
-let tabViewPosition = LayoutPosition
+let tabViewPosition = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in contentView.frame.maxY },
 	            width: { $0.width },

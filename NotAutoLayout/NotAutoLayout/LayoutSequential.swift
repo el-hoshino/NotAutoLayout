@@ -1,5 +1,5 @@
 //
-//  LayoutPositionSequential.swift
+//  LayoutSequential.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension LayoutPosition.Sequential {
+extension Layout.Sequential {
 	
 	private func getHorizontalPosition(after previousView: UIView, margin: CGFloat) -> Position {
 		
@@ -40,7 +40,7 @@ extension LayoutPosition.Sequential {
 	
 }
 
-extension LayoutPosition.Sequential {
+extension Layout.Sequential {
 	
 	private func getVerticalPosition(after previousView: UIView, margin: CGFloat) -> Position {
 		
@@ -71,7 +71,7 @@ extension LayoutPosition.Sequential {
 	
 }
 
-extension LayoutPosition.Sequential {
+extension Layout.Sequential {
 	
 	fileprivate func getPosition(after previousView: UIView?, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Position {
 		
@@ -90,7 +90,7 @@ extension LayoutPosition.Sequential {
 	
 }
 
-extension LayoutPosition.Sequential {
+extension Layout.Sequential {
 	
 	fileprivate func getPosition(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame) -> Position {
 		
@@ -111,7 +111,7 @@ extension LayoutPosition.Sequential {
 	
 }
 
-extension LayoutPosition.Sequential {
+extension Layout.Sequential {
 	
 	func absolutePosition(of view: UIView, after previousView: UIView? = nil, in boundSize: CGSize) -> Position {
 		

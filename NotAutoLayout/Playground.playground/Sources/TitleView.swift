@@ -27,7 +27,7 @@ public class TitleView: LayoutView {
 	
 	private func makeTitleLabelLayoutMethods() -> [LayoutMethod] {
 		
-		let position = LayoutPosition.makeCustom { (boundSize) -> Frame in
+		let position = Layout.makeCustom { (boundSize) -> Frame in
 			let reference = ReferencePoint.middleCenter
 			let origin = CGPoint.zero
 			let size = CGSize(width: 200, height: 40)

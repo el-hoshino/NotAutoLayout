@@ -1,5 +1,5 @@
 //
-//  LayoutPositionMatrical.swift
+//  LayoutMatrical.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension LayoutPosition.Matrical {
+extension Layout.Matrical {
 	
 	private func getHorizontalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Position {
 		
@@ -90,7 +90,7 @@ extension LayoutPosition.Matrical {
 	
 }
 
-extension LayoutPosition.Matrical {
+extension Layout.Matrical {
 	
 	private func getVerticalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Position {
 		
@@ -172,7 +172,7 @@ extension LayoutPosition.Matrical {
 	
 }
 
-extension LayoutPosition.Matrical {
+extension Layout.Matrical {
 	
 	fileprivate func getPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame) -> Position {
 		
@@ -202,7 +202,7 @@ extension LayoutPosition.Matrical {
 	
 }
 
-extension LayoutPosition.Matrical {
+extension Layout.Matrical {
 	
 	fileprivate func getPosition(for view: UIView, thatFits fittingSize: CGSize, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame) -> Position {
 		
@@ -234,7 +234,7 @@ extension LayoutPosition.Matrical {
 	
 }
 
-extension LayoutPosition.Matrical {
+extension Layout.Matrical {
 	
 	func absolutePosition(of view: UIView, afterRow previousRowView: UIView? = nil, afterCol previousColView: UIView? = nil, in boundSize: CGSize) -> Position {
 		

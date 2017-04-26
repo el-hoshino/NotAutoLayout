@@ -1,5 +1,5 @@
 //
-//  LayoutPositionIndividual.swift
+//  LayoutIndividual.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension LayoutPosition.Individual {
+extension Layout.Individual {
 	
 	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
 		
@@ -28,7 +28,7 @@ extension LayoutPosition.Individual {
 	
 }
 
-extension LayoutPosition.Individual {
+extension Layout.Individual {
 	
 	fileprivate func getPosition(by insets: UIEdgeInsets, in boundSize: CGSize) -> Position {
 		
@@ -44,7 +44,7 @@ extension LayoutPosition.Individual {
 	
 }
 
-extension LayoutPosition.Individual {
+extension Layout.Individual {
 	
 	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Position {
 		
@@ -91,7 +91,7 @@ extension LayoutPosition.Individual {
 	
 }
 
-extension LayoutPosition.Individual {
+extension Layout.Individual {
 	
 	func absolutePosition(of view: UIView, in boundSize: CGSize) -> Position {
 		
