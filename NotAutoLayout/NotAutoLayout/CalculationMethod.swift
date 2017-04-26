@@ -1,5 +1,5 @@
 //
-//  PositionMethod.swift
+//  CalculationMethod.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PositioningMethod {
+enum CalculationMethod {
 	
 	case absolutely
 	case relatively

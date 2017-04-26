@@ -145,7 +145,7 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	fileprivate func getCurrentLayoutPosition(of view: UIView) -> Layout? {
+	fileprivate func getCurrentLayout(of view: UIView) -> Layout? {
 		
 		let currentMethod = self.layoutInfo[view.hash]?.first { method in
 			return method.condition(self.boundSize) == true
@@ -197,7 +197,7 @@ extension LayoutControllable {
 		guard let index = subviews.index(of: view) else { return nil }
 		
 		let lastSequentialView = subviews.last(before: index) { (view) -> Bool in
-			return self.getCurrentLayoutPosition(of: view)?.isSequential ?? false
+			return self.getCurrentLayout(of: view)?.isSequential ?? false
 		}
 		
 		return lastSequentialView
@@ -224,7 +224,7 @@ extension LayoutControllable {
 	fileprivate func layoutNormally(subviews: [UIView]) {
 		
 		subviews.forEach { (view) in
-			if let bounds = self.getCurrentLayoutPosition(of: view) {
+			if let bounds = self.getCurrentLayout(of: view) {
 				self.layout(view, withPosition: bounds)
 			}
 		}
@@ -253,7 +253,7 @@ extension LayoutControllable {
 	fileprivate func layoutSequencially(subviews: [UIView]) {
 		
 		subviews.forEachPair { (previousView, view) in
-			if let bounds = self.getCurrentLayoutPosition(of: view) {
+			if let bounds = self.getCurrentLayout(of: view) {
 				self.layout(view, after: previousView, withPosition: bounds)
 			}
 		}
@@ -282,7 +282,7 @@ extension LayoutControllable {
 	fileprivate func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
 		
 		subviews.forEachCell(underColsPerRow: colsPerRow) { (previousRow, previousCol, view) in
-			if let bounds = self.getCurrentLayoutPosition(of: view) {
+			if let bounds = self.getCurrentLayout(of: view) {
 				self.layout(view, afterRow: previousRow, afterCol: previousCol, withPosition: bounds)
 			}
 		}

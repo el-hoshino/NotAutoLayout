@@ -62,7 +62,7 @@ extension Layout.Matrical {
 		
 	}
 	
-	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Bounds {
+	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: CalculationMethod) -> Bounds {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -144,7 +144,7 @@ extension Layout.Matrical {
 		
 	}
 	
-	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Bounds {
+	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: CalculationMethod) -> Bounds {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
