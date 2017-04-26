@@ -1,5 +1,5 @@
 //
-//  LayoutFrame.swift
+//  Frame.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/04/04.
@@ -44,7 +44,7 @@ public struct ReferencePoint {
 	
 }
 
-public struct LayoutFrame {
+public struct Frame {
 	
 	public var reference: ReferencePoint
 	public var origin: CGPoint
@@ -58,7 +58,7 @@ public struct LayoutFrame {
 	
 }
 
-extension LayoutFrame {
+extension Frame {
 	
 	public init(x: CGFloat, from xReference: HorizontalReference = .left, y: CGFloat, from yReference: VerticalReference = .top, width: CGFloat, height: CGFloat) {
 		
@@ -74,7 +74,7 @@ extension LayoutFrame {
 	
 }
 
-extension LayoutFrame {
+extension Frame {
 	
 	public var x: CGFloat {
 		return self.origin.x
@@ -94,9 +94,9 @@ extension LayoutFrame {
 	
 }
 
-extension LayoutFrame {
+extension Frame {
 	
-	func position(in canvasSize: CGSize) -> Position {
+	func bounds(in canvasSize: CGSize) -> Bounds {
 		
 		let x: CGFloat
 		let y: CGFloat
@@ -124,15 +124,15 @@ extension LayoutFrame {
 		}
 		
 		let center = CGPoint(x: x, y: y)
-		let position = Position(center: center, size: self.size)
+		let bounds = Bounds(center: center, size: self.size)
 		
-		return position
+		return bounds
 		
 	}
 	
 }
 
-public func * (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
+public func * (lhs: Frame, rhs: CGFloat) -> Frame {
 	
 	let x = lhs.x * rhs
 	let y = lhs.y * rhs
@@ -142,17 +142,17 @@ public func * (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
 	let origin = CGPoint(x: x, y: y)
 	let size = CGSize(width: width, height: height)
 	
-	let frame = LayoutFrame(reference: lhs.reference, origin: origin, size: size)
+	let frame = Frame(reference: lhs.reference, origin: origin, size: size)
 	
 	return frame
 	
 }
 
-public func *= (lhs: inout LayoutFrame, rhs: CGFloat) {
+public func *= (lhs: inout Frame, rhs: CGFloat) {
 	lhs = lhs * rhs
 }
 
-public func / (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
+public func / (lhs: Frame, rhs: CGFloat) -> Frame {
 	
 	let x = lhs.x / rhs
 	let y = lhs.y / rhs
@@ -162,12 +162,12 @@ public func / (lhs: LayoutFrame, rhs: CGFloat) -> LayoutFrame {
 	let origin = CGPoint(x: x, y: y)
 	let size = CGSize(width: width, height: height)
 	
-	let frame = LayoutFrame(reference: lhs.reference, origin: origin, size: size)
+	let frame = Frame(reference: lhs.reference, origin: origin, size: size)
 	
 	return frame
 	
 }
 
-public func /= (lhs: inout LayoutFrame, rhs: CGFloat) {
+public func /= (lhs: inout Frame, rhs: CGFloat) {
 	lhs = lhs / rhs
 }

@@ -27,14 +27,14 @@ public class TitleView: LayoutView {
 	
 	private func makeTitleLabelLayoutMethods() -> [LayoutMethod] {
 		
-		let position = LayoutPosition.makeCustom { (boundSize) -> LayoutFrame in
+		let layout = Layout.makeCustom { (boundSize) -> Frame in
 			let reference = ReferencePoint.middleCenter
 			let origin = CGPoint.zero
 			let size = CGSize(width: 200, height: 40)
-			return LayoutFrame(reference: reference, origin: origin, size: size)
+			return Frame(reference: reference, origin: origin, size: size)
 		}
 		
-		let method = LayoutMethod(constantPosition: position)
+		let method = LayoutMethod(constantLayout: layout)
 		return [method]
 		
 	}
