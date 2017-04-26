@@ -151,7 +151,7 @@ extension LayoutControllable {
 			return method.condition(self.boundSize) == true
 		}
 		
-		return currentMethod?.bounds
+		return currentMethod?.layout
 		
 	}
 	
@@ -159,31 +159,31 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	fileprivate func place(_ view: UIView, at bounds: Bounds) {
+	fileprivate func place(_ view: UIView, with bounds: Bounds) {
 		
 		view.bounds.size = bounds.size
 		view.center = bounds.center
 		
 	}
 	
-	fileprivate func place(_ view: UIView, at bounds: Layout.Individual) {
+	fileprivate func place(_ view: UIView, with layout: Layout.Individual) {
 		
-		let bounds = bounds.absolutePosition(of: view, in: self.boundSize)
-		self.place(view, at: bounds)
-		
-	}
-	
-	fileprivate func place(_ view: UIView, after previousView: UIView?, at bounds: Layout.Sequential) {
-		
-		let bounds = bounds.absolutePosition(of: view, after: previousView, in: self.boundSize)
-		self.place(view, at: bounds)
+		let bounds = layout.absoluteBounds(of: view, in: self.boundSize)
+		self.place(view, with: bounds)
 		
 	}
 	
-	fileprivate func place(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, at bounds: Layout.Matrical) {
+	fileprivate func place(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
 		
-		let bounds = bounds.absolutePosition(of: view, afterRow: previousRowView, afterCol: previousColView, in: self.boundSize)
-		self.place(view, at: bounds)
+		let bounds = layout.absoluteBounds(of: view, after: previousView, in: self.boundSize)
+		self.place(view, with: bounds)
+		
+	}
+	
+	fileprivate func place(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, with layout: Layout.Matrical) {
+		
+		let bounds = layout.absoluteBounds(of: view, afterRow: previousRowView, afterCol: previousColView, in: self.boundSize)
+		self.place(view, with: bounds)
 		
 	}
 	
@@ -204,19 +204,19 @@ extension LayoutControllable {
 		
 	}
 	
-	private func layout(_ view: UIView, withPosition bounds: Layout) {
+	private func layout(_ view: UIView, with layout: Layout) {
 		
-		switch bounds {
-		case .individual(let bounds):
-			self.place(view, at: bounds)
+		switch layout {
+		case .individual(let layout):
+			self.place(view, with: layout)
 			
-		case .sequential(let bounds):
+		case .sequential(let layout):
 			let previousView = self.getPreviousSequentialView(of: view)
-			self.place(view, after: previousView, at: bounds)
+			self.place(view, after: previousView, with: layout)
 			
-		case .matrical(let bounds):
+		case .matrical(let layout):
 			let previousRowView = self.getPreviousSequentialView(of: view)
-			self.place(view, afterRow: previousRowView, afterCol: nil, at: bounds)
+			self.place(view, afterRow: previousRowView, afterCol: nil, with: layout)
 		}
 		
 	}
@@ -224,8 +224,8 @@ extension LayoutControllable {
 	fileprivate func layoutNormally(subviews: [UIView]) {
 		
 		subviews.forEach { (view) in
-			if let bounds = self.getCurrentLayout(of: view) {
-				self.layout(view, withPosition: bounds)
+			if let layout = self.getCurrentLayout(of: view) {
+				self.layout(view, with: layout)
 			}
 		}
 		
@@ -235,17 +235,17 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	private func layout(_ view: UIView, after previousView: UIView?, withPosition bounds: Layout) {
+	private func layout(_ view: UIView, after previousView: UIView?, with layout: Layout) {
 		
-		switch bounds {
-		case .individual(let bounds):
-			self.place(view, at: bounds)
+		switch layout {
+		case .individual(let layout):
+			self.place(view, with: layout)
 			
-		case .sequential(let bounds):
-			self.place(view, after: previousView, at: bounds)
+		case .sequential(let layout):
+			self.place(view, after: previousView, with: layout)
 			
-		case .matrical(let bounds):
-			self.place(view, afterRow: previousView, afterCol: nil, at: bounds)
+		case .matrical(let layout):
+			self.place(view, afterRow: previousView, afterCol: nil, with: layout)
 		}
 		
 	}
@@ -254,7 +254,7 @@ extension LayoutControllable {
 		
 		subviews.forEachPair { (previousView, view) in
 			if let bounds = self.getCurrentLayout(of: view) {
-				self.layout(view, after: previousView, withPosition: bounds)
+				self.layout(view, after: previousView, with: bounds)
 			}
 		}
 		
@@ -264,17 +264,17 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	private func layout(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, withPosition bounds: Layout) {
+	private func layout(_ view: UIView, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, with layout: Layout) {
 		
-		switch bounds {
-		case .individual(let bounds):
-			self.place(view, at: bounds)
+		switch layout {
+		case .individual(let layout):
+			self.place(view, with: layout)
 			
-		case .sequential(let bounds):
-			self.place(view, after: previousColView, at: bounds)
+		case .sequential(let layout):
+			self.place(view, after: previousColView, with: layout)
 			
-		case .matrical(let bounds):
-			self.place(view, afterRow: previousRowView, afterCol: previousColView, at: bounds)
+		case .matrical(let layout):
+			self.place(view, afterRow: previousRowView, afterCol: previousColView, with: layout)
 		}
 		
 	}
@@ -283,7 +283,7 @@ extension LayoutControllable {
 		
 		subviews.forEachCell(underColsPerRow: colsPerRow) { (previousRow, previousCol, view) in
 			if let bounds = self.getCurrentLayout(of: view) {
-				self.layout(view, afterRow: previousRow, afterCol: previousCol, withPosition: bounds)
+				self.layout(view, afterRow: previousRow, afterCol: previousCol, with: bounds)
 			}
 		}
 		
@@ -314,10 +314,10 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	public func place(_ view: UIView, at layoutFrame: Frame) {
+	public func place(_ view: UIView, with frame: Frame) {
 		
-		let bounds = layoutFrame.bounds(in: self.boundSize)
-		self.place(view, at: bounds)
+		let bounds = frame.bounds(in: self.boundSize)
+		self.place(view, with: bounds)
 		
 	}
 	
@@ -375,9 +375,9 @@ extension LayoutControllable {
 		
 	}
 	
-	public func setConstantPosition(_ bounds: Layout, for subview: UIView) {
+	public func setConstantLayout(_ layout: Layout, for subview: UIView) {
 		
-		let method = LayoutMethod(constantPosition: bounds)
+		let method = LayoutMethod(constantLayout: layout)
 		
 		self.layoutInfo[subview.hash] = [method]
 		
@@ -394,9 +394,9 @@ extension LayoutControllable {
 		
 	}
 	
-	public func appendConstantPosition(_ bounds: Layout, for subview: UIView) {
+	public func appendConstantLayout(_ layout: Layout, for subview: UIView) {
 		
-		let method = LayoutMethod(constantPosition: bounds)
+		let method = LayoutMethod(constantLayout: layout)
 		
 		if let methods = self.layoutInfo[subview.hash] {
 			layoutInfo[subview.hash] = methods + [method]
@@ -411,9 +411,9 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	public func setLayout(of subview: UIView, at bounds: Layout, while condition: @escaping Condition) {
+	public func setLayout(of subview: UIView, with layout: Layout, while condition: @escaping Condition) {
 		
-		let method = LayoutMethod(condition: condition, bounds: bounds)
+		let method = LayoutMethod(condition: condition, layout: layout)
 		
 		self.appendLayoutMethod(method, for: subview)
 		
@@ -449,9 +449,9 @@ extension LayoutControllable where Self: UIView {
 		
 	}
 	
-	public func addSubview(_ view: UIView, constantPosition: Layout, order: Int? = nil, zIndex: Int? = nil) {
+	public func addSubview(_ view: UIView, constantLayout: Layout, order: Int? = nil, zIndex: Int? = nil) {
 		
-		let method = LayoutMethod(constantPosition: constantPosition)
+		let method = LayoutMethod(constantLayout: constantLayout)
 		
 		self.addSubview(view, layoutMethods: [method], order: order, zIndex: zIndex)
 		

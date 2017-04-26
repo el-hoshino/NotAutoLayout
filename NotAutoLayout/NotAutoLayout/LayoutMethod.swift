@@ -11,20 +11,20 @@ import Foundation
 public struct LayoutMethod {
 	
 	public let condition: Condition
-	public let bounds: Layout
+	public let layout: Layout
 	
-	public init(condition: @escaping Condition, bounds: Layout) {
+	public init(condition: @escaping Condition, layout: Layout) {
 		self.condition = condition
-		self.bounds = bounds
+		self.layout = layout
 	}
 	
 }
 
 extension LayoutMethod {
 	
-	public init(constantPosition: Layout) {
+	public init(constantLayout: Layout) {
 		self.condition = { _ in true }
-		self.bounds = constantPosition
+		self.layout = constantLayout
 	}
 	
 }

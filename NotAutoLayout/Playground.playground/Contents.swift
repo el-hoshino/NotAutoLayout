@@ -11,17 +11,17 @@ let titleView = TitleView()
 let contentView = UITableView()
 let tabView = TabView()
 
-let titleViewPosition = Layout
+let titleViewLayout = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in 0 },
 	            width: { $0.width },
 	            height: { _ in 60 })
-let contentViewPosition = Layout
+let contentViewLayout = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in titleView.frame.maxY },
 	            width: { $0.width },
 	            height: { $0.height - (titleView.frame.maxY + 64) })
-let tabViewPosition = Layout
+let tabViewLayout = Layout
 	.makeCustom(x: { _ in 0 },
 	            y: { _ in contentView.frame.maxY },
 	            width: { $0.width },
@@ -31,9 +31,9 @@ titleView.backgroundColor = .red
 contentView.backgroundColor = .green
 tabView.backgroundColor = .blue
 
-baseView.addSubview(titleView, constantPosition: titleViewPosition)
-baseView.addSubview(contentView, constantPosition: contentViewPosition)
-baseView.addSubview(tabView, constantPosition: tabViewPosition)
+baseView.addSubview(titleView, constantLayout: titleViewLayout)
+baseView.addSubview(contentView, constantLayout: contentViewLayout)
+baseView.addSubview(tabView, constantLayout: tabViewLayout)
 
 titleView.setTitle("Hello NotAutoLayout!")
 

@@ -10,7 +10,7 @@ import Foundation
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(of frame: Frame, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
 		let bounds = frame.bounds(in: boundSize)
@@ -18,7 +18,7 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of frame: CGRect, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(of frame: CGRect, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
 		let bounds = frame.bounds(in: boundSize)
@@ -30,7 +30,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(by insets: UIEdgeInsets, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(by insets: UIEdgeInsets, in boundSize: CGSize) -> Bounds {
 		
 		let x = insets.left
 		let y = insets.top
@@ -46,7 +46,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of transform: SizeToFrame, in boundSize: CGSize) -> Bounds {
 		
 		let frame = transform(boundSize)
 		let bounds = frame.bounds(in: boundSize)
@@ -55,7 +55,7 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, in boundSize: CGSize) -> Bounds {
 		
 		let origin = originTransform(boundSize)
 		let size = sizeTransform(boundSize)
@@ -66,7 +66,7 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, in boundSize: CGSize) -> Bounds {
 		
 		let x = xTransform(boundSize)
 		let y = yTransform(boundSize)
@@ -79,7 +79,7 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		let frame = transform(fitSize, boundSize)
@@ -93,29 +93,29 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func absolutePosition(of view: UIView, in boundSize: CGSize) -> Bounds {
+	func absoluteBounds(of view: UIView, in boundSize: CGSize) -> Bounds {
 		
 		switch self {
 		case .absolute(let frame):
-			return self.getPosition(of: frame, in: boundSize, .absolutely)
+			return self.getBounds(of: frame, in: boundSize, .absolutely)
 			
 		case .relative(let frame):
-			return self.getPosition(of: frame, in: boundSize, .relatively)
+			return self.getBounds(of: frame, in: boundSize, .relatively)
 			
 		case .insets(let insets):
-			return self.getPosition(by: insets, in: boundSize)
+			return self.getBounds(by: insets, in: boundSize)
 			
 		case .customByFrame(frame: let frameTransform):
-			return self.getPosition(of: frameTransform, in: boundSize)
+			return self.getBounds(of: frameTransform, in: boundSize)
 			
 		case .customByOriginSize(origin: let originTransform, size: let sizeTransform):
-			return self.getPosition(of: originTransform, sizeTransform, in: boundSize)
+			return self.getBounds(of: originTransform, sizeTransform, in: boundSize)
 			
 		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
-			return self.getPosition(of: xTransform, yTransform, widthTransform, heightTransform, in: boundSize)
+			return self.getBounds(of: xTransform, yTransform, widthTransform, heightTransform, in: boundSize)
 			
 		case .customFitsSizeByFrame(fittingSize: let fittingSize, frame: let frame):
-			return self.getPosition(of: frame, for: view, thatFits: fittingSize, in: boundSize)
+			return self.getBounds(of: frame, for: view, thatFits: fittingSize, in: boundSize)
 			
 		}
 		
