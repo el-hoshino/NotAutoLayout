@@ -25,6 +25,7 @@ public protocol LayoutControllable: class {
 	
 	func layoutSubviews()
 	func setNeedsLayout()
+	func layoutIfNeeded()
 	
 }
 
@@ -191,6 +192,17 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
+	public func place(_ view: UIView, with frame: Frame) {
+		
+		let bounds = frame.bounds(in: self.boundSize)
+		self.place(view, with: bounds)
+		
+	}
+	
+}
+
+extension LayoutControllable {
+	
 	private func getPreviousSequentialView(of view: UIView) -> UIView? {
 		
 		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: true)
@@ -307,17 +319,6 @@ extension LayoutControllable {
 		case .matrix(colsPerRow: let colsPerRow):
 			self.layoutMatrically(subviews: subviews, colsPerRow: colsPerRow)
 		}
-		
-	}
-	
-}
-
-extension LayoutControllable {
-	
-	public func place(_ view: UIView, with frame: Frame) {
-		
-		let bounds = frame.bounds(in: self.boundSize)
-		self.place(view, with: bounds)
 		
 	}
 	
