@@ -411,7 +411,7 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping LayoutCondition) {
+	public func setLayout(of subview: UIView, at position: LayoutPosition, while condition: @escaping Condition) {
 		
 		let method = LayoutMethod(condition: condition, position: position)
 		

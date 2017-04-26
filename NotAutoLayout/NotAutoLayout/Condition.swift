@@ -1,5 +1,5 @@
 //
-//  Typealiases.swift
+//  Condition.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/02/22.
@@ -8,4 +8,4 @@
 
 import Foundation
 
-public typealias LayoutCondition = (_ boundSize: CGSize) -> Bool
+public typealias Condition = (_ boundSize: CGSize) -> Bool
