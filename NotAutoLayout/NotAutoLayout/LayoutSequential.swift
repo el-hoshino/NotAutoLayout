@@ -10,20 +10,20 @@ import Foundation
 
 extension Layout.Sequential {
 	
-	private func getHorizontalPosition(after previousView: UIView, margin: CGFloat) -> Position {
+	private func getHorizontalPosition(after previousView: UIView, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
 		let previousMaxX = previousView.frame.maxX
 		let x = previousMaxX + margin
 		let origin = CGPoint(x: x, y: previousView.frame.minY)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Bounds {
 		
 		if let previousView = previousView {
 			let margin = method.absoluteWidth(margin, by: boundSize)
@@ -42,20 +42,20 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	private func getVerticalPosition(after previousView: UIView, margin: CGFloat) -> Position {
+	private func getVerticalPosition(after previousView: UIView, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
 		let previousMaxY = previousView.frame.maxY
 		let y = previousMaxY + margin
 		let origin = CGPoint(x: previousView.frame.minX, y: y)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Bounds {
 		
 		if let previousView = previousView {
 			
@@ -73,7 +73,7 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	fileprivate func getPosition(after previousView: UIView?, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Position {
+	fileprivate func getPosition(after previousView: UIView?, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Bounds {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, boundSize)
@@ -92,7 +92,7 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	fileprivate func getPosition(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame) -> Position {
+	fileprivate func getPosition(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame) -> Bounds {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		
@@ -113,7 +113,7 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	func absolutePosition(of view: UIView, after previousView: UIView? = nil, in boundSize: CGSize) -> Position {
+	func absolutePosition(of view: UIView, after previousView: UIView? = nil, in boundSize: CGSize) -> Bounds {
 		
 		switch self {
 		case .horizontallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):

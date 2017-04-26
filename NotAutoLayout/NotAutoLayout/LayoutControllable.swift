@@ -159,7 +159,7 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	fileprivate func place(_ view: UIView, at position: Position) {
+	fileprivate func place(_ view: UIView, at position: Bounds) {
 		
 		view.bounds.size = position.size
 		view.center = position.center

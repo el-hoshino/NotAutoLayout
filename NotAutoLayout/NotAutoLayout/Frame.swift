@@ -96,7 +96,7 @@ extension Frame {
 
 extension Frame {
 	
-	func position(in canvasSize: CGSize) -> Position {
+	func position(in canvasSize: CGSize) -> Bounds {
 		
 		let x: CGFloat
 		let y: CGFloat
@@ -124,7 +124,7 @@ extension Frame {
 		}
 		
 		let center = CGPoint(x: x, y: y)
-		let position = Position(center: center, size: self.size)
+		let position = Bounds(center: center, size: self.size)
 		
 		return position
 		

@@ -10,7 +10,7 @@ import Foundation
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
+	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: PositioningMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
 		let position = frame.position(in: boundSize)
@@ -18,7 +18,7 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of frame: CGRect, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
+	fileprivate func getPosition(of frame: CGRect, in boundSize: CGSize, _ method: PositioningMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
 		let position = frame.position(in: boundSize)
@@ -30,7 +30,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(by insets: UIEdgeInsets, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(by insets: UIEdgeInsets, in boundSize: CGSize) -> Bounds {
 		
 		let x = insets.left
 		let y = insets.top
@@ -38,7 +38,7 @@ extension Layout.Individual {
 		let height = boundSize.height - (insets.top + insets.bottom)
 		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
-		return Position(frame: frame)
+		return Bounds(frame: frame)
 		
 	}
 	
@@ -46,7 +46,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Bounds {
 		
 		let frame = transform(boundSize)
 		let position = frame.position(in: boundSize)
@@ -55,31 +55,31 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getPosition(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, in boundSize: CGSize) -> Bounds {
 		
 		let origin = originTransform(boundSize)
 		let size = sizeTransform(boundSize)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getPosition(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, in boundSize: CGSize) -> Bounds {
 		
 		let x = xTransform(boundSize)
 		let y = yTransform(boundSize)
 		let width = widthTransform(boundSize)
 		let height = heightTransform(boundSize)
 		let frame = CGRect(x: x, y: y, width: width, height: height)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getPosition(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Position {
+	fileprivate func getPosition(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		let frame = transform(fitSize, boundSize)
@@ -93,7 +93,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func absolutePosition(of view: UIView, in boundSize: CGSize) -> Position {
+	func absolutePosition(of view: UIView, in boundSize: CGSize) -> Bounds {
 		
 		switch self {
 		case .absolute(let frame):

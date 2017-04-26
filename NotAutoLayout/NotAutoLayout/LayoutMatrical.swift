@@ -10,7 +10,7 @@ import Foundation
 
 extension Layout.Matrical {
 	
-	private func getHorizontalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Position {
+	private func getHorizontalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Bounds {
 		
 		let previousMaxX = previousRowView.frame.maxX
 		let x = previousMaxX + margin.dx
@@ -22,13 +22,13 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	private func getHorizontalPosition(afterRow previousRowView: UIView, margin: CGVector) -> Position {
+	private func getHorizontalPosition(afterRow previousRowView: UIView, margin: CGVector) -> Bounds {
 		
 		let previousMaxX = previousRowView.frame.maxX
 		let x = previousMaxX + margin.dx
@@ -39,13 +39,13 @@ extension Layout.Matrical {
 		let size = previousRowView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	private func getHorizontalPosition(afterCol previousColView: UIView, margin: CGVector) -> Position {
+	private func getHorizontalPosition(afterCol previousColView: UIView, margin: CGVector) -> Bounds {
 		
 		let x = previousColView.frame.minX
 		
@@ -56,13 +56,13 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Position {
+	fileprivate func getHorizontalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Bounds {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -92,7 +92,7 @@ extension Layout.Matrical {
 
 extension Layout.Matrical {
 	
-	private func getVerticalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Position {
+	private func getVerticalPosition(afterRow previousRowView: UIView, afterCol previousColView: UIView, margin: CGVector) -> Bounds {
 		
 		let previousMaxX = previousColView.frame.maxX
 		let x = previousMaxX + margin.dx
@@ -104,13 +104,13 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	private func getVerticalPosition(afterRow previousRowView: UIView, margin: CGVector) -> Position {
+	private func getVerticalPosition(afterRow previousRowView: UIView, margin: CGVector) -> Bounds {
 		
 		let x = previousRowView.frame.minX
 		
@@ -121,13 +121,13 @@ extension Layout.Matrical {
 		let size = previousRowView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	private func getVerticalPosition(afterCol previousColView: UIView, margin: CGVector) -> Position {
+	private func getVerticalPosition(afterCol previousColView: UIView, margin: CGVector) -> Bounds {
 		
 		let previousMaxX = previousColView.frame.maxX
 		let x = previousMaxX + margin.dx
@@ -138,13 +138,13 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Position(frame: frame)
+		let position = Bounds(frame: frame)
 		
 		return position
 		
 	}
 	
-	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Position {
+	fileprivate func getVerticalPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGVector, _ method: PositioningMethod) -> Bounds {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -174,7 +174,7 @@ extension Layout.Matrical {
 
 extension Layout.Matrical {
 	
-	fileprivate func getPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame) -> Position {
+	fileprivate func getPosition(afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame) -> Bounds {
 		
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
@@ -204,7 +204,7 @@ extension Layout.Matrical {
 
 extension Layout.Matrical {
 	
-	fileprivate func getPosition(for view: UIView, thatFits fittingSize: CGSize, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame) -> Position {
+	fileprivate func getPosition(for view: UIView, thatFits fittingSize: CGSize, afterRow previousRowView: UIView?, afterCol previousColView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame) -> Bounds {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		
@@ -236,7 +236,7 @@ extension Layout.Matrical {
 
 extension Layout.Matrical {
 	
-	func absolutePosition(of view: UIView, afterRow previousRowView: UIView? = nil, afterCol previousColView: UIView? = nil, in boundSize: CGSize) -> Position {
+	func absolutePosition(of view: UIView, afterRow previousRowView: UIView? = nil, afterCol previousColView: UIView? = nil, in boundSize: CGSize) -> Bounds {
 		
 		switch self {
 		case .horizontallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):
