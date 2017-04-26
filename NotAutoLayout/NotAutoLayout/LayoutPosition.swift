@@ -12,14 +12,14 @@ public enum LayoutPosition {
 	
 	public enum Individual {
 		
-		public typealias SizeToFrame = (CGSize) -> LayoutFrame
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
+		public typealias SizeToFrame = (CGSize) -> Frame
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
 		public typealias SizeToPoint = (CGSize) -> CGPoint
 		public typealias SizeToSize = (CGSize) -> CGSize
 		public typealias SizeToFloat = (CGSize) -> CGFloat
 		
-		case absolute(LayoutFrame)
-		case relative(LayoutFrame)
+		case absolute(Frame)
+		case relative(Frame)
 		
 		case insets(UIEdgeInsets)
 		
@@ -33,17 +33,17 @@ public enum LayoutPosition {
 	
 	public enum Sequential {
 		
-		public typealias SizeToFrame = (CGSize) -> LayoutFrame
-		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> LayoutFrame
+		public typealias SizeToFrame = (CGSize) -> Frame
+		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> Frame
 		
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousFrameFitSizeAndSizeToFrame = (_ previousFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
+		public typealias PreviousFrameFitSizeAndSizeToFrame = (_ previousFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
 		
-		case horizontallyEqualSizedAbsolute(initial: LayoutFrame, margin: CGFloat)
-		case verticallyEqualSizedAbsolute(initial: LayoutFrame, margin: CGFloat)
+		case horizontallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
+		case verticallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
 		
-		case horizontallyEqualSizedRelative(initial: LayoutFrame, margin: CGFloat)
-		case verticallyEqualSizedRelative(initial: LayoutFrame, margin: CGFloat)
+		case horizontallyEqualSizedRelative(initial: Frame, margin: CGFloat)
+		case verticallyEqualSizedRelative(initial: Frame, margin: CGFloat)
 		
 		case customByFrame(initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame)
 		
@@ -53,21 +53,21 @@ public enum LayoutPosition {
 	
 	public enum Matrical {
 		
-		public typealias SizeToFrame = (CGSize) -> LayoutFrame
-		public typealias PreviousColFrameAndSizeToFrame = (_ previousColFrame: CGRect, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousRowFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousRowColFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ boundSize: CGSize) -> LayoutFrame
+		public typealias SizeToFrame = (CGSize) -> Frame
+		public typealias PreviousColFrameAndSizeToFrame = (_ previousColFrame: CGRect, _ boundSize: CGSize) -> Frame
+		public typealias PreviousRowFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> Frame
+		public typealias PreviousRowColFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ boundSize: CGSize) -> Frame
 		
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousColFrameFitSizeAndSizeToFrame = (_ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousRowFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
-		public typealias PreviousRowColFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> LayoutFrame
+		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
+		public typealias PreviousColFrameFitSizeAndSizeToFrame = (_ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
+		public typealias PreviousRowFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
+		public typealias PreviousRowColFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
 		
-		case horizontallyEqualSizedAbsolute(initial: LayoutFrame, margin: CGVector)
-		case verticallyEqualSizedAbsolute(initial: LayoutFrame, margin: CGVector)
+		case horizontallyEqualSizedAbsolute(initial: Frame, margin: CGVector)
+		case verticallyEqualSizedAbsolute(initial: Frame, margin: CGVector)
 		
-		case horizontallyEqualSizedRelative(initial: LayoutFrame, margin: CGVector)
-		case verticallyEqualSizedRelative(initial: LayoutFrame, margin: CGVector)
+		case horizontallyEqualSizedRelative(initial: Frame, margin: CGVector)
+		case verticallyEqualSizedRelative(initial: Frame, margin: CGVector)
 		
 		case customByFrame(initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame)
 		
@@ -107,21 +107,21 @@ extension LayoutPosition {
 
 extension LayoutPosition {
 	
-	public static func makeAbsolute(frame: LayoutFrame) -> LayoutPosition {
+	public static func makeAbsolute(frame: Frame) -> LayoutPosition {
 		return .individual(.absolute(frame))
 	}
 	
 	public static func makeAbsolute(frame: CGRect) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: frame.origin, size: frame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: frame.origin, size: frame.size)
 		return makeAbsolute(frame: layoutFrame)
 	}
 	
-	public static func makeRelative(frame: LayoutFrame) -> LayoutPosition {
+	public static func makeRelative(frame: Frame) -> LayoutPosition {
 		return .individual(.relative(frame))
 	}
 	
 	public static func makeRelative(frame: CGRect) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: frame.origin, size: frame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: frame.origin, size: frame.size)
 		return makeRelative(frame: layoutFrame)
 	}
 	
@@ -158,7 +158,7 @@ extension LayoutPosition.Sequential {
 
 extension LayoutPosition {
 	
-	public static func makeAbsolute(initialFrame: LayoutFrame, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+	public static func makeAbsolute(initialFrame: Frame, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .sequential(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
@@ -169,11 +169,11 @@ extension LayoutPosition {
 	}
 	
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeAbsolute(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
-	public static func makeRelative(initialFrame: LayoutFrame, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
+	public static func makeRelative(initialFrame: Frame, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .sequential(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
@@ -184,7 +184,7 @@ extension LayoutPosition {
 	}
 	
 	public static func makeRelative(initialFrame: CGRect, margin: CGFloat, direction: LayoutPosition.Sequential.Direction) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeRelative(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
@@ -209,7 +209,7 @@ extension LayoutPosition.Matrical {
 
 extension LayoutPosition {
 	
-	public static func makeAbsolute(initialFrame: LayoutFrame, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+	public static func makeAbsolute(initialFrame: Frame, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .matrical(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
@@ -220,11 +220,11 @@ extension LayoutPosition {
 	}
 	
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeAbsolute(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
-	public static func makeRelative(initialFrame: LayoutFrame, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
+	public static func makeRelative(initialFrame: Frame, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
 		switch direction {
 		case .horizontal:
 			return .matrical(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
@@ -235,7 +235,7 @@ extension LayoutPosition {
 	}
 	
 	public static func makeRelative(initialFrame: CGRect, margin: CGVector, direction: LayoutPosition.Matrical.Direction) -> LayoutPosition {
-		let layoutFrame = LayoutFrame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
+		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeRelative(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	

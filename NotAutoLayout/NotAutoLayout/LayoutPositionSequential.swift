@@ -23,7 +23,7 @@ extension LayoutPosition.Sequential {
 		
 	}
 	
-	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getHorizontalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Position {
 		
 		if let previousView = previousView {
 			let margin = method.absoluteWidth(margin, by: boundSize)
@@ -55,7 +55,7 @@ extension LayoutPosition.Sequential {
 		
 	}
 	
-	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: LayoutFrame, margin: CGFloat, _ method: PositioningMethod) -> Position {
+	fileprivate func getVerticalPosition(after previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: PositioningMethod) -> Position {
 		
 		if let previousView = previousView {
 			

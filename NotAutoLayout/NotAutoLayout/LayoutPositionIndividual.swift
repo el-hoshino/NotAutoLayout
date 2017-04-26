@@ -10,7 +10,7 @@ import Foundation
 
 extension LayoutPosition.Individual {
 	
-	fileprivate func getPosition(of frame: LayoutFrame, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
+	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: PositioningMethod) -> Position {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
 		let position = frame.position(in: boundSize)

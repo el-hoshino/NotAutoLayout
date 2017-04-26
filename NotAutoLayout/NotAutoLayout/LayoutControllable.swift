@@ -314,7 +314,7 @@ extension LayoutControllable {
 
 extension LayoutControllable {
 	
-	public func place(_ view: UIView, at layoutFrame: LayoutFrame) {
+	public func place(_ view: UIView, at layoutFrame: Frame) {
 		
 		let position = layoutFrame.position(in: self.boundSize)
 		self.place(view, at: position)
