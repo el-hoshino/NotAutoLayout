@@ -1,5 +1,5 @@
 //
-//  Position.swift
+//  Bounds.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/02/23.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct Position {
+struct Bounds {
 	
 	var center: CGPoint
 	var size: CGSize
 	
 }
 
-extension Position {
+extension Bounds {
 	
 	init(centerX: CGFloat, centerY: CGFloat, width: CGFloat, height: CGFloat) {
 		let center = CGPoint(x: centerX, y: centerY)
@@ -26,7 +26,7 @@ extension Position {
 	
 }
 
-extension Position {
+extension Bounds {
 	
 	init(frame: CGRect) {
 		let centerX = frame.midX

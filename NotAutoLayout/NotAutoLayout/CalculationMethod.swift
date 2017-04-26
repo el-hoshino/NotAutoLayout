@@ -1,5 +1,5 @@
 //
-//  PositionMethod.swift
+//  CalculationMethod.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PositioningMethod {
+enum CalculationMethod {
 	
 	case absolutely
 	case relatively
@@ -49,7 +49,7 @@ enum PositioningMethod {
 		
 	}
 	
-	func absoluteFrame(_ frame: CGRect, by comparingSize: CGSize) -> CGRect {
+	func absoluteFrame(_ frame: Frame, by comparingSize: CGSize) -> Frame {
 		
 		switch self {
 		case .absolutely:
@@ -58,6 +58,13 @@ enum PositioningMethod {
 		case .relatively:
 			return comparingSize.absoluteFrame(relatedTo: frame)
 		}
+		
+	}
+	
+	func absoluteFrame(_ frame: CGRect, by comparingSize: CGSize) -> Frame {
+		
+		let frame = Frame(reference: .topLeft, origin: frame.origin, size: frame.size)
+		return self.absoluteFrame(frame, by: comparingSize)
 		
 	}
 	
@@ -91,13 +98,17 @@ private extension CGSize {
 		
 	}
 	
-	func absoluteFrame(relatedTo relativeFrame: CGRect) -> CGRect {
+	func absoluteFrame(relatedTo relativeFrame: Frame) -> Frame {
 		
 		let x = relativeFrame.origin.x * self.width
 		let y = relativeFrame.origin.y * self.height
-		let width = relativeFrame.width * self.width
-		let height = relativeFrame.height * self.height
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let width = relativeFrame.size.width * self.width
+		let height = relativeFrame.size.height * self.height
+		
+		let reference = relativeFrame.reference
+		let origin = CGPoint(x: x, y: y)
+		let size = CGSize(width: width, height: height)
+		let frame = Frame(reference: reference, origin: origin, size: size)
 		
 		return frame
 		

@@ -10,21 +10,21 @@ import Foundation
 
 public struct LayoutMethod {
 	
-	public let condition: LayoutCondition
-	public let position: LayoutPosition
+	public let condition: Condition
+	public let layout: Layout
 	
-	public init(condition: @escaping LayoutCondition, position: LayoutPosition) {
+	public init(condition: @escaping Condition, layout: Layout) {
 		self.condition = condition
-		self.position = position
+		self.layout = layout
 	}
 	
 }
 
 extension LayoutMethod {
 	
-	public init(constantPosition: LayoutPosition) {
+	public init(constantLayout: Layout) {
 		self.condition = { _ in true }
-		self.position = constantPosition
+		self.layout = constantLayout
 	}
 	
 }
