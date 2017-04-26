@@ -23,14 +23,14 @@ extension TabView {
 	
 	public func makeTabItemLayoutMethods() -> [LayoutMethod] {
 		
-		let position = Layout
+		let bounds = Layout
 			.makeAbsolute(initialFrame: CGRect(origin: CGPoint(x: self.tabItemHorizontalMargin,
 			                                                   y: self.tabItemHorizontalMargin),
 			                                   size: self.tabItemSize),
 			              margin: self.tabItemHorizontalMargin,
 			              direction: .horizontal)
 		
-		let method = LayoutMethod(constantPosition: position)
+		let method = LayoutMethod(constantPosition: bounds)
 		
 		return [method]
 		

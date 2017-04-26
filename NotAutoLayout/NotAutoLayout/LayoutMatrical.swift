@@ -22,9 +22,9 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -39,9 +39,9 @@ extension Layout.Matrical {
 		let size = previousRowView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -56,9 +56,9 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -67,23 +67,23 @@ extension Layout.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getHorizontalPosition(afterRow: previousRowView, afterCol: previousColView, margin: margin)
-			return position
+			let bounds = self.getHorizontalPosition(afterRow: previousRowView, afterCol: previousColView, margin: margin)
+			return bounds
 			
 		case (.some(let previousRowView), .none):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getHorizontalPosition(afterRow: previousRowView, margin: margin)
-			return position
+			let bounds = self.getHorizontalPosition(afterRow: previousRowView, margin: margin)
+			return bounds
 			
 		case (.none, .some(let previousColView)):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getHorizontalPosition(afterCol: previousColView, margin: margin)
-			return position
+			let bounds = self.getHorizontalPosition(afterCol: previousColView, margin: margin)
+			return bounds
 			
 		case (.none, .none):
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -104,9 +104,9 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -121,9 +121,9 @@ extension Layout.Matrical {
 		let size = previousRowView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -138,9 +138,9 @@ extension Layout.Matrical {
 		let size = previousColView.frame.size
 		
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -149,23 +149,23 @@ extension Layout.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getVerticalPosition(afterRow: previousRowView, afterCol: previousColView, margin: margin)
-			return position
+			let bounds = self.getVerticalPosition(afterRow: previousRowView, afterCol: previousColView, margin: margin)
+			return bounds
 			
 		case (.some(let previousRowView), .none):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getVerticalPosition(afterRow: previousRowView, margin: margin)
-			return position
+			let bounds = self.getVerticalPosition(afterRow: previousRowView, margin: margin)
+			return bounds
 			
 		case (.none, .some(let previousColView)):
 			let margin = method.absoluteVector(margin, by: boundSize)
-			let position = self.getVerticalPosition(afterCol: previousColView, margin: margin)
-			return position
+			let bounds = self.getVerticalPosition(afterCol: previousColView, margin: margin)
+			return bounds
 			
 		case (.none, .none):
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -179,23 +179,23 @@ extension Layout.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let frame = rest(previousRowView.frame, previousColView.frame, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.some(let previousRowView), .none):
 			let frame = firstInRow(previousRowView.frame, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.none, .some(let previousColView)):
 			let frame = firstInCol(previousColView.frame, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.none, .none):
 			let frame = initial(boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -211,23 +211,23 @@ extension Layout.Matrical {
 		switch (previousRowView, previousColView) {
 		case (.some(let previousRowView), .some(let previousColView)):
 			let frame = rest(previousRowView.frame, previousColView.frame, fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.some(let previousRowView), .none):
 			let frame = firstInRow(previousRowView.frame, fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.none, .some(let previousColView)):
 			let frame = firstInCol(previousColView.frame, fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		case (.none, .none):
 			let frame = initial(fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}

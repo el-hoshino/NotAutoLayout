@@ -17,9 +17,9 @@ extension Layout.Sequential {
 		let x = previousMaxX + margin
 		let origin = CGPoint(x: x, y: previousView.frame.minY)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -27,13 +27,13 @@ extension Layout.Sequential {
 		
 		if let previousView = previousView {
 			let margin = method.absoluteWidth(margin, by: boundSize)
-			let position = self.getHorizontalPosition(after: previousView, margin: margin)
-			return position
+			let bounds = self.getHorizontalPosition(after: previousView, margin: margin)
+			return bounds
 			
 		} else {
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -49,9 +49,9 @@ extension Layout.Sequential {
 		let y = previousMaxY + margin
 		let origin = CGPoint(x: previousView.frame.minX, y: y)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -59,12 +59,12 @@ extension Layout.Sequential {
 		
 		if let previousView = previousView {
 			
-			let position = self.getVerticalPosition(after: previousView, margin: margin)
-			return position
+			let bounds = self.getVerticalPosition(after: previousView, margin: margin)
+			return bounds
 			
 		} else {
-			let position = initialFrame.position(in: boundSize)
-			return position
+			let bounds = initialFrame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -77,13 +77,13 @@ extension Layout.Sequential {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		} else {
 			let frame = initial(boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}
@@ -98,13 +98,13 @@ extension Layout.Sequential {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 			
 		} else {
 			let frame = initial(fitSize, boundSize)
-			let position = frame.position(in: boundSize)
-			return position
+			let bounds = frame.bounds(in: boundSize)
+			return bounds
 		}
 		
 	}

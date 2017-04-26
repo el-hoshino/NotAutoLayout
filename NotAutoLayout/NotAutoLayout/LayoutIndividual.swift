@@ -13,16 +13,16 @@ extension Layout.Individual {
 	fileprivate func getPosition(of frame: Frame, in boundSize: CGSize, _ method: PositioningMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
-		let position = frame.position(in: boundSize)
-		return position
+		let bounds = frame.bounds(in: boundSize)
+		return bounds
 		
 	}
 	
 	fileprivate func getPosition(of frame: CGRect, in boundSize: CGSize, _ method: PositioningMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
-		let position = frame.position(in: boundSize)
-		return position
+		let bounds = frame.bounds(in: boundSize)
+		return bounds
 		
 	}
 	
@@ -49,9 +49,9 @@ extension Layout.Individual {
 	fileprivate func getPosition(of transform: SizeToFrame, in boundSize: CGSize) -> Bounds {
 		
 		let frame = transform(boundSize)
-		let position = frame.position(in: boundSize)
+		let bounds = frame.bounds(in: boundSize)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -60,9 +60,9 @@ extension Layout.Individual {
 		let origin = originTransform(boundSize)
 		let size = sizeTransform(boundSize)
 		let frame = CGRect(origin: origin, size: size)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -73,9 +73,9 @@ extension Layout.Individual {
 		let width = widthTransform(boundSize)
 		let height = heightTransform(boundSize)
 		let frame = CGRect(x: x, y: y, width: width, height: height)
-		let position = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame)
 		
-		return position
+		return bounds
 		
 	}
 	
@@ -83,9 +83,9 @@ extension Layout.Individual {
 		
 		let fitSize = view.sizeThatFits(fittingSize)
 		let frame = transform(fitSize, boundSize)
-		let position = frame.position(in: boundSize)
+		let bounds = frame.bounds(in: boundSize)
 		
-		return position
+		return bounds
 		
 	}
 	
