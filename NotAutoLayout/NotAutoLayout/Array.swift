@@ -8,16 +8,11 @@
 
 import Foundation
 
-// FIXME: Seems like a compiler's bug that it shows an error while using `min(index, self.endIndex)` so I made this bypass function.
-private func minimum(_ x: Int, _ y: Int) -> Int {
-	return x < y ? x : y
-}
-
 extension Array {
 	
 	func last(before index: Index, where condition: (Element) throws -> Bool) rethrows -> Element? {
 		
-		let index = minimum(index, self.endIndex)
+		let index = Swift.min(index, self.endIndex)
 		
 		for item in self[self.startIndex ..< index].reversed() {
 			
