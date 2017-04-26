@@ -50,7 +50,7 @@ extension LayoutControllable {
 		
 		var info: [Hash: Int] = [:]
 		
-		self.getLayoutRequiredSubviews().forEach { (view) in
+		self.getLayoutRequiredSubviews(sortedByOrder: false).forEach { (view) in
 			info[view.hash] = self.zIndexInfo[view.hash]
 		}
 		
@@ -66,7 +66,7 @@ extension LayoutControllable {
 		
 		var info: [Hash: Int] = [:]
 		
-		self.getLayoutRequiredSubviews().forEach { (view) in
+		self.getLayoutRequiredSubviews(sortedByOrder: false).forEach { (view) in
 			info[view.hash] = self.orderInfo[view.hash]
 		}
 		
@@ -82,7 +82,7 @@ extension LayoutControllable {
 		return self.orderInfo[view.hash] ?? 0
 	}
 	
-	public func getLayoutRequiredSubviews(sortedByOrder shouldSortSubviews: Bool = false) -> [UIView] {
+	public func getLayoutRequiredSubviews(sortedByOrder shouldSortSubviews: Bool = true) -> [UIView] {
 		
 		let layoutRequiredSubviews = self.subviews.filter { (view) -> Bool in
 			self.layoutInfo.containsKey(view.hash)
@@ -104,7 +104,7 @@ extension LayoutControllable {
 	
 	public func getLayoutRequiredSubviewsTotalFrame() -> CGRect {
 		
-		let subviews = self.getLayoutRequiredSubviews()
+		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: false)
 		
 		let insets = subviews.reduce(nil) { (result, subview) -> UIEdgeInsets? in
 			
