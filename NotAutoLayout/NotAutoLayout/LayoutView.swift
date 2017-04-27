@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// The very basic `UIView` that conforms `LayoutControllable` protocol, to layout subviews.
 open class LayoutView: UIView, LayoutControllable {
 	
 	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]

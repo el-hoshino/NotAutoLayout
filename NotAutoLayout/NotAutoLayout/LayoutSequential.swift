@@ -8,6 +8,57 @@
 
 import Foundation
 
+extension Layout {
+	
+	/// An enum to provide serveral ways to store or retrieve a Frame value for sequential subviews.
+	///
+	/// - horizontallyEqualSizedAbsolute: Horizontally sorted absolute `Frame` and margin in `CGFloat` value.
+	/// - verticallyEqualSizedAbsolute: Vertically sorted absolute `Frame` and margin in `CGFloat` value.
+	/// - horizontallyEqualSizedRelative: Horizontally sorted relative `Frame` and margin in `CGFloat` value.
+	/// - verticallyEqualSizedRelative: Vertically sorted relative `Frame` and margin in `CGFloat` value.
+	/// - customByFrame: `SizeToFrame` if it's the first, otherwise `PreviousFrameAndSizeToFrame`
+	/// - customByFittingSizeFrame: Fitting size, and `FittedSizeBoundSizeToFrame` if it's the first, otherwise `PreviousFrameFittedSizeAndSizeToFrame`
+	public enum Sequential {
+		
+		// MARK: Typealias
+		
+		/// A closure to retrieve `Frame` value from current bound size.
+		public typealias SizeToFrame = (CGSize) -> Frame
+		
+		/// A closure to retrieve `Frame` value from previous subview's frame and current bound size.
+		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> Frame
+		
+		/// A closure to retrieve `Frame` value from fitted size and current bound size.
+		public typealias FittedSizeBoundSizeToFrame = (_ fittedSize: CGSize, _ boundSize: CGSize) -> Frame
+		
+		/// A closure to retrieve `Frame` value from previous subview's frame, fitted size and current bound size.
+		public typealias PreviousFrameFittedSizeAndSizeToFrame = (_ previousFrame: CGRect, _ fittedSize: CGSize, _ boundSize: CGSize) -> Frame
+		
+		
+		// MARK: Cases
+		
+		case horizontallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
+		case verticallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
+		
+		case horizontallyEqualSizedRelative(initial: Frame, margin: CGFloat)
+		case verticallyEqualSizedRelative(initial: Frame, margin: CGFloat)
+		
+		case customByFrame(initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame)
+		case customByFittingSizeFrame(fittingSize: CGSize, initial: FittedSizeBoundSizeToFrame, rest: PreviousFrameFittedSizeAndSizeToFrame)
+		
+	}
+	
+}
+
+extension Layout.Sequential {
+	
+	public enum Direction {
+		case horizontal
+		case vertical
+	}
+	
+}
+
 extension Layout.Sequential {
 	
 	private func getBounds(horizontallyAfter previousView: UIView, margin: CGFloat) -> Bounds {
@@ -92,17 +143,17 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	fileprivate func getBounds(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame) -> Bounds {
+	fileprivate func getBounds(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FittedSizeBoundSizeToFrame, rest: PreviousFrameFittedSizeAndSizeToFrame) -> Bounds {
 		
-		let fitSize = view.sizeThatFits(fittingSize)
+		let fittedSize = view.sizeThatFits(fittingSize)
 		
 		if let previousView = previousView {
-			let frame = rest(previousView.frame, fitSize, boundSize)
+			let frame = rest(previousView.frame, fittedSize, boundSize)
 			let bounds = frame.bounds(in: boundSize)
 			return bounds
 			
 		} else {
-			let frame = initial(fitSize, boundSize)
+			let frame = initial(fittedSize, boundSize)
 			let bounds = frame.bounds(in: boundSize)
 			return bounds
 		}
@@ -131,7 +182,7 @@ extension Layout.Sequential {
 		case .customByFrame(initial: let initialFrameClosure, rest: let restFrameClosure):
 			return self.getBounds(after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 			
-		case .customFitsSizeByFrame(fittingSize: let fittingSize, initial: let initialFrameClosure, rest: let restFrameClosure):
+		case .customByFittingSizeFrame(fittingSize: let fittingSize, initial: let initialFrameClosure, rest: let restFrameClosure):
 			return self.getBounds(for: view, tahtFits: fittingSize, after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 		}
 		
