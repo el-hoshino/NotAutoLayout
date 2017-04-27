@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.2</string>
+	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>20170324.0</string>
+	<string>20170327.0</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>
