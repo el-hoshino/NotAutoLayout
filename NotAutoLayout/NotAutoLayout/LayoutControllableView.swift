@@ -10,6 +10,7 @@ import Foundation
 
 extension LayoutControllable where Self: UIView {
 	
+	/// The bound size.
 	public var boundSize: CGSize {
 		return self.bounds.size
 	}

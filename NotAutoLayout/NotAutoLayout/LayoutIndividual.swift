@@ -8,6 +8,53 @@
 
 import Foundation
 
+extension Layout {
+	
+	/// A enum to provide serveral ways to store or retrieve a Frame value for individual subviews.
+	///
+	/// - absolute: Absolute `Frame` value.
+	/// - relative: Relative `Frame` value which origin and size value are represented as the ratio compared to the current view's bound size.
+	/// - insets: Margin values between the bounds of linked child view and current view.
+	/// - customByFrame: `Frame` from bound size.
+	/// - customByOriginSize: `origin` and `size` from bound size.
+	/// - customByXYWidthHeight: `x`, `y`, `width` and `height` from bound size.
+	/// - customByFittingSizeFrame: Fitting size, and `Frame` from fitted size and bound size.
+	public enum Individual {
+		
+		// MARK: Typealias
+		
+		/// A closure to retrieve `Frame` value from current bound size.
+		public typealias SizeToFrame = (CGSize) -> Frame
+		
+		/// A closure to retrieve `Frame` value from fitted size and current bound size.
+		public typealias FittedSizeBoundSizeToFrame = (_ fittedSize: CGSize, _ boundSize: CGSize) -> Frame
+		
+		/// A closure to retrieve `CGPoint` value from current bound size.
+		public typealias SizeToPoint = (CGSize) -> CGPoint
+		
+		/// A closure to retrieve `CGSize` value from current bound size.
+		public typealias SizeToSize = (CGSize) -> CGSize
+		
+		/// A closure to retrieve `CGFloat` value from current bound size.
+		public typealias SizeToFloat = (CGSize) -> CGFloat
+		
+		
+		// MARK: Cases
+		
+		case absolute(Frame)
+		case relative(Frame)
+		
+		case insets(UIEdgeInsets)
+		
+		case customByFrame(frame: SizeToFrame)
+		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
+		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
+		
+		case customByFittingSizeFrame(fittingSize: CGSize, frame: FittedSizeBoundSizeToFrame)
+		
+	}
+	
+}
 extension Layout.Individual {
 	
 	fileprivate func getBounds(of frame: Frame, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
@@ -79,10 +126,10 @@ extension Layout.Individual {
 		
 	}
 	
-	fileprivate func getBounds(of transform: FitSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of transform: FittedSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
 		
-		let fitSize = view.sizeThatFits(fittingSize)
-		let frame = transform(fitSize, boundSize)
+		let fittedSize = view.sizeThatFits(fittingSize)
+		let frame = transform(fittedSize, boundSize)
 		let bounds = frame.bounds(in: boundSize)
 		
 		return bounds
@@ -114,7 +161,7 @@ extension Layout.Individual {
 		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
 			return self.getBounds(of: xTransform, yTransform, widthTransform, heightTransform, in: boundSize)
 			
-		case .customFitsSizeByFrame(fittingSize: let fittingSize, frame: let frame):
+		case .customByFittingSizeFrame(fittingSize: let fittingSize, frame: let frame):
 			return self.getBounds(of: frame, for: view, thatFits: fittingSize, in: boundSize)
 			
 		}

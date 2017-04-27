@@ -8,75 +8,16 @@
 
 import Foundation
 
+/// An `enum` used to store the `Frame` value, or the closure(s) to retrieve the `Frame` value, from serveral ways available.
 public enum Layout {
 	
-	public enum Individual {
-		
-		public typealias SizeToFrame = (CGSize) -> Frame
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		public typealias SizeToPoint = (CGSize) -> CGPoint
-		public typealias SizeToSize = (CGSize) -> CGSize
-		public typealias SizeToFloat = (CGSize) -> CGFloat
-		
-		case absolute(Frame)
-		case relative(Frame)
-		
-		case insets(UIEdgeInsets)
-		
-		case customByFrame(frame: SizeToFrame)
-		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
-		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
-		
-		case customFitsSizeByFrame(fittingSize: CGSize, frame: FitSizeBoundSizeToFrame)
-		
-	}
-	
-	public enum Sequential {
-		
-		public typealias SizeToFrame = (CGSize) -> Frame
-		public typealias PreviousFrameAndSizeToFrame = (_ previousFrame: CGRect, _ boundSize: CGSize) -> Frame
-		
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		public typealias PreviousFrameFitSizeAndSizeToFrame = (_ previousFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		
-		case horizontallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
-		case verticallyEqualSizedAbsolute(initial: Frame, margin: CGFloat)
-		
-		case horizontallyEqualSizedRelative(initial: Frame, margin: CGFloat)
-		case verticallyEqualSizedRelative(initial: Frame, margin: CGFloat)
-		
-		case customByFrame(initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame)
-		
-		case customFitsSizeByFrame(fittingSize: CGSize, initial: FitSizeBoundSizeToFrame, rest: PreviousFrameFitSizeAndSizeToFrame)
-		
-	}
-	
-	public enum Matrical {
-		
-		public typealias SizeToFrame = (CGSize) -> Frame
-		public typealias PreviousColFrameAndSizeToFrame = (_ previousColFrame: CGRect, _ boundSize: CGSize) -> Frame
-		public typealias PreviousRowFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ boundSize: CGSize) -> Frame
-		public typealias PreviousRowColFrameAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ boundSize: CGSize) -> Frame
-		
-		public typealias FitSizeBoundSizeToFrame = (_ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		public typealias PreviousColFrameFitSizeAndSizeToFrame = (_ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		public typealias PreviousRowFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		public typealias PreviousRowColFrameFitSizeAndSizeToFrame = (_ previousRowFrame: CGRect, _ previousColFrame: CGRect, _ fitSize: CGSize, _ boundSize: CGSize) -> Frame
-		
-		case horizontallyEqualSizedAbsolute(initial: Frame, margin: CGVector)
-		case verticallyEqualSizedAbsolute(initial: Frame, margin: CGVector)
-		
-		case horizontallyEqualSizedRelative(initial: Frame, margin: CGVector)
-		case verticallyEqualSizedRelative(initial: Frame, margin: CGVector)
-		
-		case customByFrame(initial: SizeToFrame, firstInCol: PreviousColFrameAndSizeToFrame, firstInRow: PreviousRowFrameAndSizeToFrame, rest: PreviousRowColFrameAndSizeToFrame)
-		
-		case customFitsSizeByFrame(fittingSize: CGSize, initial: FitSizeBoundSizeToFrame, firstInCol: PreviousColFrameFitSizeAndSizeToFrame, firstInRow: PreviousRowFrameFitSizeAndSizeToFrame, rest: PreviousRowColFrameFitSizeAndSizeToFrame)
-		
-	}
-	
+	/// Layout cases for individual subviews.
 	case individual(Individual)
+	
+	/// Layout cases for sequential subviews.
 	case sequential(Sequential)
+	
+	/// Layout cases for matrical subviews.
 	case matrical(Matrical)
 	
 }
@@ -105,59 +46,103 @@ extension Layout {
 	
 }
 
+// MARK: Individual Layout making methods
 extension Layout {
 	
+	/// Make a `Layout` of individual absolute `Frame` value.
+	///
+	/// - Parameter frame: The absolute `Frame` value.
+	/// - Returns: The `Layout` value that contains that individual absolute `Frame` value.
 	public static func makeAbsolute(frame: Frame) -> Layout {
 		return .individual(.absolute(frame))
 	}
 	
+	/// Maket a `Layout` of individual absolute frame value in UIKit style `CGRect`.
+	///
+	/// - Parameter frame: The absolute frame value in `CGRect`.
+	/// - Returns: The `Layout` value that contains that individual absolute frame value.
 	public static func makeAbsolute(frame: CGRect) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: frame.origin, size: frame.size)
 		return makeAbsolute(frame: layoutFrame)
 	}
 	
+	/// Make a `Layout` of individual relative `Frame` value.
+	///
+	/// - Parameter frame: The relative `Frame` value.
+	/// - Returns: The `Layout` value that contains that individual relative `Frame` value.
 	public static func makeRelative(frame: Frame) -> Layout {
 		return .individual(.relative(frame))
 	}
 	
+	/// Make a `Layout` of individual relative frame value in UIKit style CGRect.
+	///
+	/// - Parameter frame: The relative frame value in `CGRect`.
+	/// - Returns: The `Layout` value that contains that individual relative frame value.
 	public static func makeRelative(frame: CGRect) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: frame.origin, size: frame.size)
 		return makeRelative(frame: layoutFrame)
 	}
 	
+	/// Make a `Layout` of individual insets value.
+	///
+	/// - Parameter insets: The insets value.
+	/// - Returns: The `Layout` value that contains that insets value.
 	public static func makeInsets(insets: UIEdgeInsets) -> Layout {
 		return .individual(.insets(insets))
 	}
 	
+	/// Make a `Layout` of individual `customByFrame` value.
+	///
+	/// - Parameter frame: The `Frame` value closure which will be produced from the bound size.
+	/// - Returns: The `Layout` that contains that closure.
 	public static func makeCustom(frame: @escaping Individual.SizeToFrame) -> Layout {
 		return .individual(.customByFrame(frame: frame))
 	}
 	
+	/// Make a `Layout` of individual `customByOriginSize` value.
+	///
+	/// - Parameters:
+	///   - origin: The CGPoint origin value closure which will be produced from the bound size.
+	///   - size: The CGSize size value closure which will be produced from the bound size.
+	/// - Returns: The Layout value that contains those closures.
 	public static func makeCustom(origin: @escaping Individual.SizeToPoint, size: @escaping Individual.SizeToSize) -> Layout {
 		return .individual(.customByOriginSize(origin: origin, size: size))
 	}
 	
+	/// Make a `Layout` of individual `customByXYWidthHeight` value.
+	///
+	/// - Parameters:
+	///   - x: The `CGFloat` x value closure which will be produced from the bound size.
+	///   - y: The `CGFloat` y value closure which will be produced from the bound size.
+	///   - width: The `CGFloat` width value closure which will be produced from the bound size.
+	///   - height: The `CGFloat` height value closure which will be produced from the bound size.
+	/// - Returns: The `Layout` value that contains those closures.
 	public static func makeCustom(x: @escaping Individual.SizeToFloat, y: @escaping Individual.SizeToFloat, width: @escaping Individual.SizeToFloat, height: @escaping Individual.SizeToFloat) -> Layout {
 		return .individual(.customByXYWidthHeight(x: x, y: y, width: width, height: height))
 	}
 	
-	public static func makeCustome(thatFits fittingSize: CGSize, frame: @escaping Individual.FitSizeBoundSizeToFrame) -> Layout {
-		return .individual(.customFitsSizeByFrame(fittingSize: fittingSize, frame: frame))
+	/// Make a `Layout` of individual `customByFittingSizeFrame` value.
+	///
+	/// - Parameters:
+	///   - fittingSize: The `CGSize` value that will be used as the parameter in `UIView#sizeThatFits(_ size: CGSize)`.
+	///   - frame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)` and the bound size.
+	/// - Returns: The `Layout` value that contains that Frame closure.
+	public static func makeCustome(thatFits fittingSize: CGSize, frame: @escaping Individual.FittedSizeBoundSizeToFrame) -> Layout {
+		return .individual(.customByFittingSizeFrame(fittingSize: fittingSize, frame: frame))
 	}
 	
 }
 
-extension Layout.Sequential {
-	
-	public enum Direction {
-		case horizontal
-		case vertical
-	}
-	
-}
-
+// MARK: Sequential Layout making methods
 extension Layout {
 	
+	/// Make a `Layout` of sequential absolute `Frame` value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The absolute `Frame` value if the linked subview is the first in the subviews sequence.
+	///   - margin: The margin distance between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	///   - direction: The margin direction between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains this sequential absolute `Frame` value.
 	public static func makeAbsolute(initialFrame: Frame, margin: CGFloat, direction: Layout.Sequential.Direction) -> Layout {
 		switch direction {
 		case .horizontal:
@@ -168,11 +153,25 @@ extension Layout {
 		}
 	}
 	
+	/// Make a `Layout` of sequential absolute frame value in UIKit style `CGRect`.
+	///
+	/// - Parameters:
+	///   - initialFrame: The absolute frame value in `CGRect` if the linked subview is the first in the subviews sequence.
+	///   - margin: The margin distance between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	///   - direction: The margin direction between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains that sequential absolute frame value.
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGFloat, direction: Layout.Sequential.Direction) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeAbsolute(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
+	/// Make a `Layout` of sequential relative `Frame` value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The relative `Frame` value if the linked subview is the first in the subviews sequence.
+	///   - margin: The margin distance between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	///   - direction: The margin direction between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains that sequential relative `Frame` value.
 	public static func makeRelative(initialFrame: Frame, margin: CGFloat, direction: Layout.Sequential.Direction) -> Layout {
 		switch direction {
 		case .horizontal:
@@ -183,68 +182,125 @@ extension Layout {
 		}
 	}
 	
+	/// Make a `Layout` of sequential relative frame value in UIKit style `CGRect`.
+	///
+	/// - Parameters:
+	///   - initialFrame: The relative frame value in UIKit style `CGRect` if the linked subview is the first in the subviews sequence.
+	///   - margin: The margin distance between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	///   - direction: The margin direction between the linked subview and the subview before it, if it's not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains that sequential relative frame value.
 	public static func makeRelative(initialFrame: CGRect, margin: CGFloat, direction: Layout.Sequential.Direction) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeRelative(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
+	/// Make a `Layout` of sequential `customByFrame` value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The `Frame` value closure which will be produced from the bound size, if the linked subview is the first in the subviews sequence.
+	///   - restFrame: The `Frame` value closure which will be produced from the frame in `CGRect` of the subview before the linked subview, and the bound size, if the linked subview is not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains those closures.
 	public static func makeCustom(initialFrame: @escaping Sequential.SizeToFrame, restFrame: @escaping Sequential.PreviousFrameAndSizeToFrame) -> Layout {
 		return .sequential(.customByFrame(initial: initialFrame, rest: restFrame))
 	}
 	
-	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Sequential.FitSizeBoundSizeToFrame, restFrame: @escaping Sequential.PreviousFrameFitSizeAndSizeToFrame) -> Layout {
-		return .sequential(.customFitsSizeByFrame(fittingSize: fittingSize, initial: initialFrame, rest: restFrame))
+	/// Make a `Layout` of sequential `customByFittingSizeFrame` value.
+	///
+	/// - Parameters:
+	///   - fittingSize: The `CGSize` value that will be used as the parameter in `UIView#sizeThatFits(_ size: CGSize)`.
+	///   - initialFrame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)` and the bound size, if the linked subview is the first in the subviews sequence.
+	///   - restFrame: The `Frame` value closure which will be produced from the fitted size retrieved from the `linkedSubview.sizeThatFits(fittingSize)`, the frame in `CGRect` of subview before the linked subview, and the bound size, if the linked subview is not the first in the subviews sequence.
+	/// - Returns: The `Layout` value that contains those `Frame` closures.
+	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Sequential.FittedSizeBoundSizeToFrame, restFrame: @escaping Sequential.PreviousFrameFittedSizeAndSizeToFrame) -> Layout {
+		return .sequential(.customByFittingSizeFrame(fittingSize: fittingSize, initial: initialFrame, rest: restFrame))
 	}
 	
 }
 
-extension Layout.Matrical {
-	
-	public enum Direction {
-		case horizontal
-		case vertical
-	}
-	
-}
-
+// MARK: Matrical Layout making methods
 extension Layout {
 	
+	/// Make a `Layout` of matrical absolute Frame value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The absolute `Frame` value if the linked subview is the first in the subviews matrix.
+	///   - margin: The margin in `CGVector`, which `dx` represents the distance between the linked subview and the subview horizontally before it, if it's not horizontally the first in the subviews matrix, and `dy` represents the distance between the linked subview and the subview vertically before it, if it's not vertically the first in the subviews matrix.
+	///   - direction: The first priority margin direction between the linked subview and the subview before it in that direction, if it't not the first in the subviews matrix.
+	/// - Returns: The `Layout` value that contains this matrical absolute `Frame` value.
 	public static func makeAbsolute(initialFrame: Frame, margin: CGVector, direction: Layout.Matrical.Direction) -> Layout {
 		switch direction {
-		case .horizontal:
-			return .matrical(.horizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
+		case .horizontalBeforeVertical:
+			return .matrical(.horizontallyBeforeVerticallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
 			
-		case .vertical:
-			return .matrical(.verticallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
+		case .verticalBeforeHorizontal:
+			return .matrical(.verticallyBeforeHorizontallyEqualSizedAbsolute(initial: initialFrame, margin: margin))
 		}
 	}
 	
+	/// Make a `Layout` of matrical absolute frame value in UIKit style `CGRect`.
+	///
+	/// - Parameters:
+	///   - initialFrame: The absolute frame value in `CGRect` if the linked subview is the first in the subviews matrix.
+	///   - margin: The margin in `CGVector`, which `dx` represents the distance between the linked subview and the subview horizontally before it, if it's not horizontally the first in the subviews matrix, and `dy` represents the distance between the linked subview and the subview vertically before it, if it's not vertically the first in the subviews matrix.
+	///   - direction: The first priority margin direction between the linked subview and the subview before it in that direction, if it't not the first in the subviews matrix.
+	/// - Returns: The `Layout` value that contains this matrical absolute frame value.
 	public static func makeAbsolute(initialFrame: CGRect, margin: CGVector, direction: Layout.Matrical.Direction) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeAbsolute(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
+	/// Make a `Layout` of matrical relative Frame value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The relative `Frame` value if the linked subview is the first in the subviews matrix.
+	///   - margin: The margin in `CGVector`, which `dx` represents the distance between the linked subview and the subview horizontally before it, if it's not horizontally the first in the subviews matrix, and `dy` represents the distance between the linked subview and the subview vertically before it, if it's not vertically the first in the subviews matrix.
+	///   - direction: The first priority margin direction between the linked subview and the subview before it in that direction, if it't not the first in the subviews matrix.
+	/// - Returns: The `Layout` value that contains this matrical relative `Frame` value.
 	public static func makeRelative(initialFrame: Frame, margin: CGVector, direction: Layout.Matrical.Direction) -> Layout {
 		switch direction {
-		case .horizontal:
-			return .matrical(.horizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
+		case .horizontalBeforeVertical:
+			return .matrical(.horizontallyBeforeVerticallyEqualSizedRelative(initial: initialFrame, margin: margin))
 			
-		case .vertical:
-			return .matrical(.verticallyEqualSizedRelative(initial: initialFrame, margin: margin))
+		case .verticalBeforeHorizontal:
+			return .matrical(.verticallyBeforeHorizontallyEqualSizedRelative(initial: initialFrame, margin: margin))
 		}
 	}
 	
+	/// Make a `Layout` of matrical relative frame value in UIKit style `CGRect`.
+	///
+	/// - Parameters:
+	///   - initialFrame: The relative frame value in `CGRect` if the linked subview is the first in the subviews matrix.
+	///   - margin: The margin in `CGVector`, which `dx` represents the distance between the linked subview and the subview horizontally before it, if it's not horizontally the first in the subviews matrix, and `dy` represents the distance between the linked subview and the subview vertically before it, if it's not vertically the first in the subviews matrix.
+	///   - direction: The first priority margin direction between the linked subview and the subview before it in that direction, if it't not the first in the subviews matrix.
+	/// - Returns: The `Layout` value that contains this matrical relative frame value.
 	public static func makeRelative(initialFrame: CGRect, margin: CGVector, direction: Layout.Matrical.Direction) -> Layout {
 		let layoutFrame = Frame(reference: .topLeft, origin: initialFrame.origin, size: initialFrame.size)
 		return makeRelative(initialFrame: layoutFrame, margin: margin, direction: direction)
 	}
 	
-	public static func makeCustom(initialFrame: @escaping Matrical.SizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameAndSizeToFrame, restFrame: @escaping Matrical.PreviousRowColFrameAndSizeToFrame) -> Layout {
+	/// Make a `Layout` of matrical `customByFrame` value.
+	///
+	/// - Parameters:
+	///   - initialFrame: The `Frame` value closure which will be produced from the bound size, if the linked subview is the first in the subviews matrix.
+	///   - firstInColFrame: The `Frame` value closure which will be produced from the frame in `CGRect` of the subview before the linked view in row, and the bound size, if the linked subview is the first in the column but not the first in the row of the subviews matrix.
+	///   - firstInRowFrame: The `Frame` value closure which will be produced from the frame in `CGRect` of the subview before the linked view in column, and the bound size, if the linked subview is the first in the row but not the first in the column of the subviews matrix.
+	///   - restFrame: The `Frame` value closure which will be produced from the frame in `CGRect` of the subview before the linked subview in row, the subview before the linked view in column, and the bound size, if the linked subview is not the first in neither column nor row of the subviews matrix.
+	/// - Returns: The `Layout` value that contains those closures.
+	public static func makeCustom(initialFrame: @escaping Matrical.SizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameAndSizeToFrame, restFrame: @escaping Matrical.PreviousColRowFrameAndSizeToFrame) -> Layout {
 		return .matrical(.customByFrame(initial: initialFrame, firstInCol: firstInColFrame, firstInRow: firstInRowFrame, rest: restFrame))
 	}
 	
-	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Matrical.FitSizeBoundSizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameFitSizeAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameFitSizeAndSizeToFrame, restFrame: @escaping Matrical.PreviousRowColFrameFitSizeAndSizeToFrame) -> Layout {
-		return .matrical(.customFitsSizeByFrame(fittingSize: fittingSize, initial: initialFrame, firstInCol: firstInColFrame, firstInRow: firstInRowFrame, rest: restFrame))
+	/// Make a `Layout` of matrical `customByFittingSizeFrame` value.
+	///
+	/// - Parameters:
+	///   - fittingSize: The `CGSize` value that will be used as the parameter in `UIView#sizeThatFits(_ size: CGSize)`.
+	///   - initialFrame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)` and the bound size, if the linked subview is the first in the subviews matrix.
+	///   - firstInColFrame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)`, the frame in `CGRect` of the subview before the linked view in row, and the bound size, if the linked subview is the first in the column but not the first in the row of the subviews matrix.
+	///   - firstInRowFrame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)`, the frame in `CGRect` of the subview before the linked view in column, and the bound size, if the linked subview is the first in the row but not the first in the column of the subviews matrix.
+	///   - restFrame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)`, the frame in `CGRect` of the subview before the linked subview in row, the subview before the linked view in column, and the bound size, if the linked subview is not the first in neither column nor row of the subviews matrix.
+	/// - Returns: The `Layout` value that contains those closures.
+	public static func makeCustom(thatFits fittingSize: CGSize, initialFrame: @escaping Matrical.FittedSizeBoundSizeToFrame, firstInColFrame: @escaping Matrical.PreviousColFrameFittedSizeAndSizeToFrame, firstInRowFrame: @escaping Matrical.PreviousRowFrameFittedSizeAndSizeToFrame, restFrame: @escaping Matrical.PreviousColRowFrameFittedSizeAndSizeToFrame) -> Layout {
+		return .matrical(.customByFittingSizeFrame(fittingSize: fittingSize, initial: initialFrame, firstInCol: firstInColFrame, firstInRow: firstInRowFrame, rest: restFrame))
 	}
 	
 }

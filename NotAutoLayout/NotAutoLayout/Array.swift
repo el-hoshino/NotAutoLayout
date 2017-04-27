@@ -55,7 +55,7 @@ extension Array {
 
 extension Array {
 	
-	func forEachCell(underColsPerRow colsPerRow: Int, _ body: (_ previousRow: Element?, _ previousCol: Element?, _ current: Element) throws -> Void) rethrows {
+	func forEachCell(underColsPerRow colsPerRow: Int, _ body: (_ previousCol: Element?, _ previousRow: Element?, _ current: Element) throws -> Void) rethrows {
 		
 		var iterator = self.makeIterator()
 		var previousRowIterator: Iterator = self.makeIterator()
@@ -64,7 +64,7 @@ extension Array {
 		var previousRow: Element? = nil
 		var previousCol: Element? = nil
 		
-		func postProcess(previousRow: inout Element?, previousCol: inout Element?, current: Element) {
+		func postProcess(previousCol: inout Element?, previousRow: inout Element?, current: Element) {
 			
 			currentIndex += 1
 			
@@ -83,9 +83,9 @@ extension Array {
 		
 		while let next = iterator.next() {
 			
-			try body(previousRow, previousCol, next)
+			try body(previousCol, previousRow, next)
 			
-			postProcess(previousRow: &previousRow, previousCol: &previousCol, current: next)
+			postProcess(previousCol: &previousCol, previousRow: &previousRow, current: next)
 			
 		}
 		
