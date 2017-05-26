@@ -61,29 +61,29 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	private func getBounds(horizontallyAfter previousView: UIView, margin: CGFloat) -> Bounds {
+	private func getBounds(horizontallyAfter previousView: UIView, margin: CGFloat, under anchorPoint: CGPoint) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxX = previousView.frame.maxX
+		let previousMaxX = previousView.layoutFrame.maxX
 		let x = previousMaxX + margin
-		let origin = CGPoint(x: x, y: previousView.frame.minY)
+		let origin = CGPoint(x: x, y: previousView.layoutFrame.minY)
 		let frame = CGRect(origin: origin, size: size)
-		let bounds = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(horizontallyAfter previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(horizontallyAfter previousView: UIView?, under anchorPoint: CGPoint, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: CalculationMethod) -> Bounds {
 		
 		if let previousView = previousView {
 			let margin = method.absoluteWidth(margin, by: boundSize)
-			let bounds = self.getBounds(horizontallyAfter: previousView, margin: margin)
+			let bounds = self.getBounds(horizontallyAfter: previousView, margin: margin, under: anchorPoint)
 			return bounds
 			
 		} else {
 			let frame = method.absoluteFrame(initialFrame, by: boundSize)
-			let bounds = frame.bounds(in: boundSize)
+			let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 		}
 		
@@ -93,28 +93,27 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	private func getBounds(verticallyAfter previousView: UIView, margin: CGFloat) -> Bounds {
+	private func getBounds(verticallyAfter previousView: UIView, under anchorPoint: CGPoint, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxY = previousView.frame.maxY
+		let previousMaxY = previousView.layoutFrame.maxY
 		let y = previousMaxY + margin
-		let origin = CGPoint(x: previousView.frame.minX, y: y)
+		let origin = CGPoint(x: previousView.layoutFrame.minX, y: y)
 		let frame = CGRect(origin: origin, size: size)
-		let bounds = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(verticallyAfter previousView: UIView?, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(verticallyAfter previousView: UIView?, under anchorPoint: CGPoint, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: CalculationMethod) -> Bounds {
 		
 		if let previousView = previousView {
-			
-			let bounds = self.getBounds(verticallyAfter: previousView, margin: margin)
+			let bounds = self.getBounds(verticallyAfter: previousView, under: anchorPoint, margin: margin)
 			return bounds
 			
 		} else {
-			let bounds = initialFrame.bounds(in: boundSize)
+			let bounds = initialFrame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 		}
 		
@@ -124,16 +123,16 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	fileprivate func getBounds(after previousView: UIView?, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Bounds {
+	fileprivate func getBounds(after previousView: UIView?, under anchorPoint: CGPoint, in boundSize: CGSize, initial: SizeToFrame, rest: PreviousFrameAndSizeToFrame) -> Bounds {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, boundSize)
-			let bounds = frame.bounds(in: boundSize)
+			let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 			
 		} else {
 			let frame = initial(boundSize)
-			let bounds = frame.bounds(in: boundSize)
+			let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 		}
 		
@@ -143,18 +142,16 @@ extension Layout.Sequential {
 
 extension Layout.Sequential {
 	
-	fileprivate func getBounds(for view: UIView, tahtFits fittingSize: CGSize, after previousView: UIView?, in boundSize: CGSize, initial: FittedSizeBoundSizeToFrame, rest: PreviousFrameFittedSizeAndSizeToFrame) -> Bounds {
-		
-		let fittedSize = view.sizeThatFits(fittingSize)
+	fileprivate func getBounds(fittedIn fittedSize: CGSize, after previousView: UIView?, under anchorPoint: CGPoint, in boundSize: CGSize, initial: FittedSizeBoundSizeToFrame, rest: PreviousFrameFittedSizeAndSizeToFrame) -> Bounds {
 		
 		if let previousView = previousView {
 			let frame = rest(previousView.frame, fittedSize, boundSize)
-			let bounds = frame.bounds(in: boundSize)
+			let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 			
 		} else {
 			let frame = initial(fittedSize, boundSize)
-			let bounds = frame.bounds(in: boundSize)
+			let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 			return bounds
 		}
 		
@@ -166,24 +163,27 @@ extension Layout.Sequential {
 	
 	func absoluteBounds(of view: UIView, after previousView: UIView? = nil, in boundSize: CGSize) -> Bounds {
 		
+		let anchorPoint = view.layer.anchorPoint
+		
 		switch self {
 		case .horizontallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):
-			return self.getBounds(horizontallyAfter: previousView, in: boundSize, initialFrame: initialFrame, margin: margin, .absolutely)
+			return self.getBounds(horizontallyAfter: previousView, under: anchorPoint, in: boundSize, initialFrame: initialFrame, margin: margin, .absolutely)
 			
 		case .verticallyEqualSizedAbsolute(initial: let initialFrame, margin: let margin):
-			return self.getBounds(verticallyAfter: previousView, in: boundSize, initialFrame: initialFrame, margin: margin, .absolutely)
+			return self.getBounds(verticallyAfter: previousView, under: anchorPoint, in: boundSize, initialFrame: initialFrame, margin: margin, .absolutely)
 			
 		case .horizontallyEqualSizedRelative(initial: let initialFrame, margin: let margin):
-			return self.getBounds(horizontallyAfter: previousView, in: boundSize, initialFrame: initialFrame, margin: margin, .relatively)
+			return self.getBounds(horizontallyAfter: previousView, under: anchorPoint, in: boundSize, initialFrame: initialFrame, margin: margin, .relatively)
 			
 		case .verticallyEqualSizedRelative(initial: let initialFrame, margin: let margin):
-			return self.getBounds(verticallyAfter: previousView, in: boundSize, initialFrame: initialFrame, margin: margin, .relatively)
+			return self.getBounds(verticallyAfter: previousView, under: anchorPoint, in: boundSize, initialFrame: initialFrame, margin: margin, .relatively)
 			
 		case .customByFrame(initial: let initialFrameClosure, rest: let restFrameClosure):
-			return self.getBounds(after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
+			return self.getBounds(after: previousView, under: anchorPoint, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 			
 		case .customByFittingSizeFrame(fittingSize: let fittingSize, initial: let initialFrameClosure, rest: let restFrameClosure):
-			return self.getBounds(for: view, tahtFits: fittingSize, after: previousView, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
+			let fittedSize = view.sizeThatFits(fittingSize)
+			return self.getBounds(fittedIn: fittedSize, after: previousView, under: anchorPoint, in: boundSize, initial: initialFrameClosure, rest: restFrameClosure)
 		}
 		
 	}

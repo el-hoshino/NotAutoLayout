@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164FCA4F1ED7EB0500CFF666 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164FCA4E1ED7EB0500CFF666 /* UIView.swift */; };
 		165CE1CA1E937C9300F942A3 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165CE1C91E937C9300F942A3 /* Frame.swift */; };
 		167AC91E1E5E8D34006D8F9F /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167AC91D1E5E8D34006D8F9F /* Bounds.swift */; };
 		16FE58C11E5D9E23001A9DC2 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE58C01E5D9E23001A9DC2 /* Layout.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		164FCA4E1ED7EB0500CFF666 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		165CE1C91E937C9300F942A3 /* Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		167AC91D1E5E8D34006D8F9F /* Bounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bounds.swift; sourceTree = "<group>"; };
 		16FE58C01E5D9E23001A9DC2 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
 				796396871E7DACD2006A60F7 /* Array.swift */,
 				796396891E7DBDCF006A60F7 /* Dictionary.swift */,
+				164FCA4E1ED7EB0500CFF666 /* UIView.swift */,
 				796396851E7D3373006A60F7 /* CalculationMethod.swift */,
 				167AC91D1E5E8D34006D8F9F /* Bounds.swift */,
 				16FE58C41E5DA931001A9DC2 /* Condition.swift */,
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				164FCA4F1ED7EB0500CFF666 /* UIView.swift in Sources */,
 				796396861E7D3373006A60F7 /* CalculationMethod.swift in Sources */,
 				796396821E7D31E8006A60F7 /* LayoutSequential.swift in Sources */,
 				167AC91E1E5E8D34006D8F9F /* Bounds.swift in Sources */,
