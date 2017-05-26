@@ -78,10 +78,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(horizontallyAfterCol previousColView: UIView, verticallyAfterRow previousRowView: UIView, margin: CGVector) -> Bounds {
 		
-		let previousMaxX = previousColView.frame.maxX
+		let previousMaxX = previousColView.layoutFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let previousMaxY = previousRowView.frame.maxY
+		let previousMaxY = previousRowView.layoutFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)
@@ -96,10 +96,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(horizontallyAfterCol previousColView: UIView, margin: CGVector) -> Bounds {
 		
-		let previousMaxX = previousColView.frame.maxX
+		let previousMaxX = previousColView.layoutFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let y = previousColView.frame.minY
+		let y = previousColView.layoutFrame.minY
 		
 		let origin = CGPoint(x: x, y: y)
 		let size = previousColView.frame.size
@@ -113,9 +113,9 @@ extension Layout.Matrical {
 	
 	private func getBounds(verticallyAfterRow previousRowView: UIView, margin: CGVector) -> Bounds {
 		
-		let x = previousRowView.frame.minX
+		let x = previousRowView.layoutFrame.minX
 		
-		let previousMaxY = previousRowView.frame.maxY
+		let previousMaxY = previousRowView.layoutFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)
@@ -160,10 +160,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(verticallyAfterCol previousColView: UIView, horizontallyAfterRow previousRowView: UIView, margin: CGVector) -> Bounds {
 		
-		let previousMaxX = previousRowView.frame.maxX
+		let previousMaxX = previousRowView.layoutFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let previousMaxY = previousColView.frame.maxY
+		let previousMaxY = previousColView.layoutFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)

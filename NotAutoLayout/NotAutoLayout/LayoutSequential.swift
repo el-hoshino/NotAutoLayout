@@ -64,9 +64,9 @@ extension Layout.Sequential {
 	private func getBounds(horizontallyAfter previousView: UIView, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxX = previousView.frame.maxX
+		let previousMaxX = previousView.layoutFrame.maxX
 		let x = previousMaxX + margin
-		let origin = CGPoint(x: x, y: previousView.frame.minY)
+		let origin = CGPoint(x: x, y: previousView.layoutFrame.minY)
 		let frame = CGRect(origin: origin, size: size)
 		let bounds = Bounds(frame: frame)
 		
@@ -96,9 +96,9 @@ extension Layout.Sequential {
 	private func getBounds(verticallyAfter previousView: UIView, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxY = previousView.frame.maxY
+		let previousMaxY = previousView.layoutFrame.maxY
 		let y = previousMaxY + margin
-		let origin = CGPoint(x: previousView.frame.minX, y: y)
+		let origin = CGPoint(x: previousView.layoutFrame.minX, y: y)
 		let frame = CGRect(origin: origin, size: size)
 		let bounds = Bounds(frame: frame)
 		
