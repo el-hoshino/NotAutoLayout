@@ -57,18 +57,18 @@ extension Layout {
 }
 extension Layout.Individual {
 	
-	fileprivate func getBounds(of frame: Frame, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(of frame: Frame, under anchorPoint: CGPoint, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
-		let bounds = frame.bounds(in: boundSize)
+		let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(of frame: CGRect, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
+	fileprivate func getBounds(of frame: CGRect, under anchorPoint: CGPoint, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {
 		
 		let frame = method.absoluteFrame(frame, by: boundSize)
-		let bounds = frame.bounds(in: boundSize)
+		let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 		return bounds
 		
 	}
@@ -77,7 +77,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getBounds(by insets: UIEdgeInsets, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(by insets: UIEdgeInsets, under anchorPoint: CGPoint, in boundSize: CGSize) -> Bounds {
 		
 		let x = insets.left
 		let y = insets.top
@@ -85,7 +85,7 @@ extension Layout.Individual {
 		let height = boundSize.height - (insets.top + insets.bottom)
 		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
-		return Bounds(frame: frame)
+		return Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 	}
 	
@@ -93,44 +93,43 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	fileprivate func getBounds(of transform: SizeToFrame, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of transform: SizeToFrame, under anchorPoint: CGPoint, in boundSize: CGSize) -> Bounds {
 		
 		let frame = transform(boundSize)
-		let bounds = frame.bounds(in: boundSize)
+		let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 		
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of originTransform: SizeToPoint, _ sizeTransform: SizeToSize, under anchorPoint: CGPoint, in boundSize: CGSize) -> Bounds {
 		
 		let origin = originTransform(boundSize)
 		let size = sizeTransform(boundSize)
 		let frame = CGRect(origin: origin, size: size)
-		let bounds = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of xTransform: SizeToFloat, _ yTransform: SizeToFloat, _ widthTransform: SizeToFloat, _ heightTransform: SizeToFloat, under anchorPoint: CGPoint, in boundSize: CGSize) -> Bounds {
 		
 		let x = xTransform(boundSize)
 		let y = yTransform(boundSize)
 		let width = widthTransform(boundSize)
 		let height = heightTransform(boundSize)
 		let frame = CGRect(x: x, y: y, width: width, height: height)
-		let bounds = Bounds(frame: frame)
+		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 		return bounds
 		
 	}
 	
-	fileprivate func getBounds(of transform: FittedSizeBoundSizeToFrame, for view: UIView, thatFits fittingSize: CGSize, in boundSize: CGSize) -> Bounds {
+	fileprivate func getBounds(of transform: FittedSizeBoundSizeToFrame, fittedIn fittedSize: CGSize, under anchorPoint: CGPoint, in boundSize: CGSize) -> Bounds {
 		
-		let fittedSize = view.sizeThatFits(fittingSize)
 		let frame = transform(fittedSize, boundSize)
-		let bounds = frame.bounds(in: boundSize)
+		let bounds = frame.bounds(under: anchorPoint, in: boundSize)
 		
 		return bounds
 		
@@ -142,27 +141,30 @@ extension Layout.Individual {
 	
 	func absoluteBounds(of view: UIView, in boundSize: CGSize) -> Bounds {
 		
+		let anchorPoint = view.layer.anchorPoint
+		
 		switch self {
 		case .absolute(let frame):
-			return self.getBounds(of: frame, in: boundSize, .absolutely)
+			return self.getBounds(of: frame, under: anchorPoint, in: boundSize, .absolutely)
 			
 		case .relative(let frame):
-			return self.getBounds(of: frame, in: boundSize, .relatively)
+			return self.getBounds(of: frame, under: anchorPoint, in: boundSize, .relatively)
 			
 		case .insets(let insets):
-			return self.getBounds(by: insets, in: boundSize)
+			return self.getBounds(by: insets, under: anchorPoint, in: boundSize)
 			
 		case .customByFrame(frame: let frameTransform):
-			return self.getBounds(of: frameTransform, in: boundSize)
+			return self.getBounds(of: frameTransform, under: anchorPoint, in: boundSize)
 			
 		case .customByOriginSize(origin: let originTransform, size: let sizeTransform):
-			return self.getBounds(of: originTransform, sizeTransform, in: boundSize)
+			return self.getBounds(of: originTransform, sizeTransform, under: anchorPoint, in: boundSize)
 			
 		case .customByXYWidthHeight(x: let xTransform, y: let yTransform, width: let widthTransform, height: let heightTransform):
-			return self.getBounds(of: xTransform, yTransform, widthTransform, heightTransform, in: boundSize)
+			return self.getBounds(of: xTransform, yTransform, widthTransform, heightTransform, under: anchorPoint, in: boundSize)
 			
 		case .customByFittingSizeFrame(fittingSize: let fittingSize, frame: let frame):
-			return self.getBounds(of: frame, for: view, thatFits: fittingSize, in: boundSize)
+			let fittedSize = view.sizeThatFits(fittingSize)
+			return self.getBounds(of: frame, fittedIn: fittedSize, under: anchorPoint, in: boundSize)
 			
 		}
 		

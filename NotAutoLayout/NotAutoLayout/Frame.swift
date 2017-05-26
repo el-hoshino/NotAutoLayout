@@ -158,32 +158,80 @@ extension Frame {
 
 extension Frame {
 	
-	func bounds(in canvasSize: CGSize) -> Bounds {
+	private var horizontalReferenceAnchor: CGFloat {
 		
-		let x: CGFloat
-		let y: CGFloat
+		let anchor: CGFloat
 		
 		switch self.reference.horizontal {
 		case .left:
-			x = self.origin.x + (self.size.width / 2)
+			anchor = 0
 			
 		case .center:
-			x = self.origin.x + (canvasSize.width / 2)
+			anchor = 0.5
 			
 		case .right:
-			x = self.origin.x + canvasSize.width - (self.size.width / 2)
+			anchor = 1
 		}
+		
+		return anchor
+		
+	}
+	
+	private var verticalReferenceAnchor: CGFloat {
+		
+		let anchor: CGFloat
 		
 		switch self.reference.vertical {
 		case .top:
-			y = self.origin.y + (self.size.height / 2)
+			anchor = 0
 			
 		case .middle:
-			y = self.origin.y + (canvasSize.height / 2)
+			anchor = 0.5
 			
 		case .bottom:
-			y = self.origin.y + canvasSize.height - (self.size.height / 2)
+			anchor = 1
 		}
+		
+		return anchor
+		
+	}
+	
+	private func xOffset(forAnchor anchorX: CGFloat) -> CGFloat {
+		
+		let offset = self.size.width * (anchorX - self.horizontalReferenceAnchor)
+		
+		return offset
+		
+	}
+	
+	private func xOffset(forCanvas canvasWidth: CGFloat) -> CGFloat {
+		
+		let offset = canvasWidth * self.horizontalReferenceAnchor
+		
+		return offset
+		
+	}
+	
+	private func yOffset(forAnchor anchorY: CGFloat) -> CGFloat {
+		
+		let offset = self.size.height * (anchorY - self.verticalReferenceAnchor)
+		
+		return offset
+		
+	}
+	
+	private func yOffset(forCanvas canvasHeight: CGFloat) -> CGFloat {
+		
+		let offset = canvasHeight * self.verticalReferenceAnchor
+		
+		return offset
+		
+	}
+	
+	func bounds(under anchorPoint: CGPoint, in canvasSize: CGSize) -> Bounds {
+		
+		let x = self.origin.x + self.xOffset(forAnchor: anchorPoint.x) + self.xOffset(forCanvas: canvasSize.width)
+		let y = self.origin.y + self.yOffset(forAnchor: anchorPoint.y) + self.xOffset(forCanvas: canvasSize.height)
 		
 		let center = CGPoint(x: x, y: y)
 		let bounds = Bounds(center: center, size: self.size)

@@ -28,9 +28,9 @@ extension Bounds {
 
 extension Bounds {
 	
-	init(frame: CGRect) {
-		let centerX = frame.midX
-		let centerY = frame.midY
+	init(frame: CGRect, anchorPoint: CGPoint) {
+		let centerX = frame.origin.x + (frame.width * anchorPoint.x)
+		let centerY = frame.origin.y + (frame.height * anchorPoint.y)
 		let center = CGPoint(x: centerX, y: centerY)
 		self.center = center
 		self.size = frame.size

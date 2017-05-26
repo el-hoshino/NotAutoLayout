@@ -223,7 +223,8 @@ extension LayoutControllable {
 	///   - frame: The desired `Frame` for the target `UIView`
 	public func place(_ view: UIView, with frame: Frame) {
 		
-		let bounds = frame.bounds(in: self.boundSize)
+		let anchorPoint = view.layer.anchorPoint
+		let bounds = frame.bounds(under: anchorPoint, in: self.boundSize)
 		self.place(view, with: bounds)
 		
 	}
