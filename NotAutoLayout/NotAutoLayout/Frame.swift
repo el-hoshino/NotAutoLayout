@@ -33,10 +33,14 @@ public enum VerticalReference {
 /// Reference point, made up from the cross point of horizontal reference line and vertical reference line.
 public struct ReferencePoint {
 	
+	public typealias Horizontal = HorizontalReference
+	
+	public typealias Vertical = VerticalReference
+	
 	/// Horizontal reference line.
-	public var horizontal: HorizontalReference
+	public var horizontal: Horizontal
 	/// Vertical reference line.
-	public var vertical: VerticalReference
+	public var vertical: Vertical
 	
 	/// Initialize a reference point.
 	///
