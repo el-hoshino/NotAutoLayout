@@ -235,7 +235,7 @@ extension Frame {
 	func bounds(under anchorPoint: CGPoint, in canvasSize: CGSize) -> Bounds {
 		
 		let x = self.origin.x + self.xOffset(forAnchor: anchorPoint.x) + self.xOffset(forCanvas: canvasSize.width)
-		let y = self.origin.y + self.yOffset(forAnchor: anchorPoint.y) + self.xOffset(forCanvas: canvasSize.height)
+		let y = self.origin.y + self.yOffset(forAnchor: anchorPoint.y) + self.yOffset(forCanvas: canvasSize.height)
 		
 		let center = CGPoint(x: x, y: y)
 		let bounds = Bounds(center: center, size: self.size)
