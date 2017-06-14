@@ -127,8 +127,18 @@ extension Layout {
 	///   - fittingSize: The `CGSize` value that will be used as the parameter in `UIView#sizeThatFits(_ size: CGSize)`.
 	///   - frame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)` and the bound size.
 	/// - Returns: The `Layout` value that contains that Frame closure.
-	public static func makeCustome(thatFits fittingSize: @escaping Individual.BoundSizeToFittingSize, frame: @escaping Individual.FittedSizeBoundSizeToFrame) -> Layout {
+	public static func makeCustome(thatFits fittingSize: CGSize, frame: @escaping Individual.FittedSizeBoundSizeToFrame) -> Layout {
 		return .individual(.customByFittingSizeFrame(fittingSize: fittingSize, frame: frame))
+	}
+	
+	/// Make a `Layout` of individual `customByFittingSizeFrame` value.
+	///
+	/// - Parameters:
+	///   - fittingSize: The `CGSize` value closure which will be retrieved from the bound size, and the result will be used as the parameter in `UIView#sizeThatFits(_ size: CGSize)`.
+	///   - frame: The `Frame` value closure which will be produced from the fitted size retrieved from `linkedSubview.sizeThatFits(fittingSize)` and the bound size.
+	/// - Returns: The `Layout` value that contains that Frame closure.
+	public static func makeCustome(thatFits fittingSize: @escaping Individual.BoundSizeToFittingSize, frame: @escaping Individual.FittedSizeBoundSizeToFrame) -> Layout {
+		return .individual(.customByFittingComputedSizeFrame(fittingSize: fittingSize, frame: frame))
 	}
 	
 }

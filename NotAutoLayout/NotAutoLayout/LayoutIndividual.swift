@@ -53,7 +53,8 @@ extension Layout {
 		case customByOriginSize(origin: SizeToPoint, size: SizeToSize)
 		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
 		
-		case customByFittingSizeFrame(fittingSize: BoundSizeToFittingSize, frame: FittedSizeBoundSizeToFrame)
+		case customByFittingSizeFrame(fittingSize: CGSize, frame: FittedSizeBoundSizeToFrame)
+		case customByFittingComputedSizeFrame(fittingSize: BoundSizeToFittingSize, frame: FittedSizeBoundSizeToFrame)
 		
 	}
 	
@@ -166,9 +167,12 @@ extension Layout.Individual {
 			return self.getBounds(of: xTransform, yTransform, widthTransform, heightTransform, under: anchorPoint, in: boundSize)
 			
 		case .customByFittingSizeFrame(fittingSize: let fittingSize, frame: let frame):
-			let fittedSize = view.sizeThatFits(fittingSize(boundSize))
+			let fittedSize = view.sizeThatFits(fittingSize)
 			return self.getBounds(of: frame, fittedIn: fittedSize, under: anchorPoint, in: boundSize)
 			
+		case .customByFittingComputedSizeFrame(fittingSize: let fittingSize, frame: let frame):
+			let fittedSize = view.sizeThatFits(fittingSize(boundSize))
+			return self.getBounds(of: frame, fittedIn: fittedSize, under: anchorPoint, in: boundSize)
 		}
 		
 	}
