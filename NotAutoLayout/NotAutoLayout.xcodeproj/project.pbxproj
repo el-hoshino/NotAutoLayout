@@ -26,6 +26,7 @@
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		798378A61E4CB36200D3E1C2 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378A51E4CB36200D3E1C2 /* LayoutView.swift */; };
+		799F07011EF1854D00677106 /* NotAutoLayoutCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F07001EF1854D00677106 /* NotAutoLayoutCompatible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutTests.swift; sourceTree = "<group>"; };
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		798378A51E4CB36200D3E1C2 /* LayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
+		799F07001EF1854D00677106 /* NotAutoLayoutCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutCompatible.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */,
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
+				799F07001EF1854D00677106 /* NotAutoLayoutCompatible.swift */,
 				796396871E7DACD2006A60F7 /* Array.swift */,
 				796396891E7DBDCF006A60F7 /* Dictionary.swift */,
 				164FCA4E1ED7EB0500CFF666 /* UIView.swift */,
@@ -254,6 +257,7 @@
 				167AC91E1E5E8D34006D8F9F /* Bounds.swift in Sources */,
 				793417041E5DEB9500EDA668 /* LayoutControllableView.swift in Sources */,
 				796396841E7D3259006A60F7 /* LayoutMatrical.swift in Sources */,
+				799F07011EF1854D00677106 /* NotAutoLayoutCompatible.swift in Sources */,
 				794BA6931E7C3EB500FFD070 /* LayoutOptimization.swift in Sources */,
 				16FE58C11E5D9E23001A9DC2 /* Layout.swift in Sources */,
 				16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */,
