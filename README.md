@@ -135,5 +135,8 @@ There're serveral method provided to set the layout like `addSubview(_ view: UIV
 #### To layout
 In `layoutControl()`, the `LayoutControllable` object (usually current `UIView`) iterates the subviews, tries to find if there's a linked `[LayoutMethod]` information to each `subview`. It'll get the first `Layout` in the `LayoutMethod` array which returns `true` in `Condition`. Through `Layout`, the `LayoutControllable` will calculate the correct `Frame` value provided by user, and use it to set `bounds.size` and `center` for the `subview`.
 
+## Future
+NotAutoLayout was originally designed to help me writing layout codes faster, more accurate, as well as easier to understand the layout through codes. But unfortunetely, the current syntax is still not simple enough to reduce coding time, so the next major release will consider more about the syntax simplicity. I'm looking through other layout libraries like [PinLayout](https://github.com/mirego/PinLayout) and trying to figure out a better syntax that's easier to understand, easier to remember, and easier to write, while still keeping the current difficulty to fail.
+
 ## License
 NotAutoLayout is released under the Apache license. See LICENSE for details.
