@@ -36,33 +36,6 @@ extension NotAutoLayoutCompatible where Self: UIView {
 
 extension UIView: NotAutoLayoutCompatible { }
 
-extension NotAutoLayoutContainer where Containee: UIView {
-	
-	public enum FrameSetError: Swift.Error {
-		case noSuperviewFound
-		case superviewIsNotLayoutControllable
-	}
-	
-	public func setFrame(_ frameClosure: @escaping (_ boundSize: CGSize) -> Frame) throws {
-		
-		guard let superview = self.body.superview else {
-			throw FrameSetError.noSuperviewFound
-		}
-		
-		guard let layoutView = superview as? LayoutControllable else {
-			throw FrameSetError.superviewIsNotLayoutControllable
-		}
-		
-		let layout = Layout.makeCustom { (boundSize) -> Frame in
-			return frameClosure(boundSize)
-		}
-		
-		layoutView.setConstantLayout(layout, for: self.body)
-		
-	}
-	
-}
-
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	public func addSubview(_ subview: UIView, withConstantLayout layout: Layout) {

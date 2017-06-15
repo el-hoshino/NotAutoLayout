@@ -59,6 +59,7 @@ extension Layout {
 	}
 	
 }
+
 extension Layout.Individual {
 	
 	fileprivate func getBounds(of frame: Frame, under anchorPoint: CGPoint, in boundSize: CGSize, _ method: CalculationMethod) -> Bounds {

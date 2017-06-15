@@ -64,9 +64,9 @@ extension Layout.Sequential {
 	private func getBounds(horizontallyAfter previousView: UIView, margin: CGFloat, under anchorPoint: CGPoint) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxX = previousView.identityTransformedFrame.maxX
+		let previousMaxX = previousView.nal.identityFrame.maxX
 		let x = previousMaxX + margin
-		let origin = CGPoint(x: x, y: previousView.identityTransformedFrame.minY)
+		let origin = CGPoint(x: x, y: previousView.nal.identityFrame.minY)
 		let frame = CGRect(origin: origin, size: size)
 		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
@@ -96,15 +96,15 @@ extension Layout.Sequential {
 	private func getBounds(verticallyAfter previousView: UIView, under anchorPoint: CGPoint, margin: CGFloat) -> Bounds {
 		
 		let size = previousView.frame.size
-		let previousMaxY = previousView.identityTransformedFrame.maxY
+		let previousMaxY = previousView.nal.identityFrame.maxY
 		let y = previousMaxY + margin
-		let origin = CGPoint(x: previousView.identityTransformedFrame.minX, y: y)
+		let origin = CGPoint(x: previousView.nal.identityFrame.minX, y: y)
 		let frame = CGRect(origin: origin, size: size)
 		let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
 		
 		return bounds
 		
-	} 
+	}
 	
 	fileprivate func getBounds(verticallyAfter previousView: UIView?, under anchorPoint: CGPoint, in boundSize: CGSize, initialFrame: Frame, margin: CGFloat, _ method: CalculationMethod) -> Bounds {
 		
