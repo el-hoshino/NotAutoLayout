@@ -26,6 +26,9 @@ extension Layout {
 		/// A closure to retrieve `Frame` value from current bound size.
 		public typealias SizeToFrame = (CGSize) -> Frame
 		
+		/// A closure to retrieve `FittingSize` value from current bound size.
+		public typealias BoundSizeToFittingSize = (_ boundSize: CGSize) -> CGSize
+		
 		/// A closure to retrieve `Frame` value from fitted size and current bound size.
 		public typealias FittedSizeBoundSizeToFrame = (_ fittedSize: CGSize, _ boundSize: CGSize) -> Frame
 		
@@ -51,6 +54,7 @@ extension Layout {
 		case customByXYWidthHeight(x: SizeToFloat, y: SizeToFloat, width: SizeToFloat, height: SizeToFloat)
 		
 		case customByFittingSizeFrame(fittingSize: CGSize, frame: FittedSizeBoundSizeToFrame)
+		case customByFittingComputedSizeFrame(fittingSize: BoundSizeToFittingSize, frame: FittedSizeBoundSizeToFrame)
 		
 	}
 	
@@ -166,6 +170,9 @@ extension Layout.Individual {
 			let fittedSize = view.sizeThatFits(fittingSize)
 			return self.getBounds(of: frame, fittedIn: fittedSize, under: anchorPoint, in: boundSize)
 			
+		case .customByFittingComputedSizeFrame(fittingSize: let fittingSize, frame: let frame):
+			let fittedSize = view.sizeThatFits(fittingSize(boundSize))
+			return self.getBounds(of: frame, fittedIn: fittedSize, under: anchorPoint, in: boundSize)
 		}
 		
 	}

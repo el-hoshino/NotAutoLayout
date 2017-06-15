@@ -17,8 +17,8 @@ extension UIView {
 			
 		} else {
 			let anchorPoint = self.layer.anchorPoint
-			let x = self.center.x - (self.frame.width * anchorPoint.x)
-			let y = self.center.y - (self.frame.height * anchorPoint.y)
+			let x = self.center.x - (self.bounds.width * anchorPoint.x)
+			let y = self.center.y - (self.bounds.height * anchorPoint.y)
 			let origin = CGPoint(x: x, y: y)
 			let size = self.bounds.size
 			let frame = CGRect(origin: origin, size: size)
