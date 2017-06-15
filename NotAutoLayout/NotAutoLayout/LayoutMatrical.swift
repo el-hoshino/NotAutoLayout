@@ -78,10 +78,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(horizontallyAfterCol previousColView: UIView, verticallyAfterRow previousRowView: UIView, margin: CGVector, under anchorPoint: CGPoint) -> Bounds {
 		
-		let previousMaxX = previousColView.layoutFrame.maxX
+		let previousMaxX = previousColView.identityTransformedFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let previousMaxY = previousRowView.layoutFrame.maxY
+		let previousMaxY = previousRowView.identityTransformedFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)
@@ -96,10 +96,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(horizontallyAfterCol previousColView: UIView, margin: CGVector, under anchorPoint: CGPoint) -> Bounds {
 		
-		let previousMaxX = previousColView.layoutFrame.maxX
+		let previousMaxX = previousColView.identityTransformedFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let y = previousColView.layoutFrame.minY
+		let y = previousColView.identityTransformedFrame.minY
 		
 		let origin = CGPoint(x: x, y: y)
 		let size = previousColView.frame.size
@@ -113,9 +113,9 @@ extension Layout.Matrical {
 	
 	private func getBounds(verticallyAfterRow previousRowView: UIView, margin: CGVector, under anchorPoint: CGPoint) -> Bounds {
 		
-		let x = previousRowView.layoutFrame.minX
+		let x = previousRowView.identityTransformedFrame.minX
 		
-		let previousMaxY = previousRowView.layoutFrame.maxY
+		let previousMaxY = previousRowView.identityTransformedFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)
@@ -160,10 +160,10 @@ extension Layout.Matrical {
 	
 	private func getBounds(verticallyAfterCol previousColView: UIView, horizontallyAfterRow previousRowView: UIView, under anchorPoint: CGPoint, margin: CGVector) -> Bounds {
 		
-		let previousMaxX = previousRowView.layoutFrame.maxX
+		let previousMaxX = previousRowView.identityTransformedFrame.maxX
 		let x = previousMaxX + margin.dx
 		
-		let previousMaxY = previousColView.layoutFrame.maxY
+		let previousMaxY = previousColView.identityTransformedFrame.maxY
 		let y = previousMaxY + margin.dy
 		
 		let origin = CGPoint(x: x, y: y)

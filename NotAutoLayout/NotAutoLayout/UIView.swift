@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
 	
-	var layoutFrame: CGRect {
+	public var identityTransformedFrame: CGRect {
 		
 		if self.transform.isIdentity {
 			return self.frame
