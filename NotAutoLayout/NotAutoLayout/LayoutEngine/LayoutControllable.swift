@@ -157,7 +157,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	fileprivate func place(_ view: UIView, with bounds: Bounds) {
+	private func place(_ view: UIView, with bounds: Bounds) {
 		
 		view.bounds.size = bounds.size
 		view.center = bounds.center
@@ -168,20 +168,20 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	fileprivate func place(_ view: UIView, with layout: Layout.Individual) {
+	private func place(_ view: UIView, with layout: Layout.Individual) {
 		
 		let frame = layout.evaluatedFrame(in: self.boundSize)
 		self.place(view, with: frame)
 		
 	}
 	
-	fileprivate func place(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
+	private func place(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
 		
 		fatalError("Not implemented yet")
 		
 	}
 	
-	fileprivate func place(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
+	private func place(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
 		
 		fatalError("Not implemented yet")
 		
@@ -191,7 +191,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	fileprivate func layoutNormally(subviews: [UIView]) {
+	private func layoutNormally(subviews: [UIView]) {
 		
 		guard let layoutInfo = self.getCurrentLayoutInfo() else {
 			return
@@ -209,7 +209,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	fileprivate func layoutSequencially(subviews: [UIView]) {
+	private func layoutSequencially(subviews: [UIView]) {
 		
 		fatalError("Not implemented yet")
 		
@@ -219,7 +219,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	fileprivate func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
+	private func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
 		
 		fatalError("Not implemented yet")
 		

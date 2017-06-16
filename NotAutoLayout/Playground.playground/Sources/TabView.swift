@@ -7,8 +7,8 @@ public class TabView: UIScrollView, LayoutControllable {
 	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
 	public var zIndexInfo: [LayoutControllable.Hash: Int] = [:]
 	
-	fileprivate let tabItemSize = CGSize(width: 48, height: 48)
-	fileprivate let tabItemHorizontalMargin: CGFloat = 8
+	private let tabItemSize = CGSize(width: 48, height: 48)
+	private let tabItemHorizontalMargin: CGFloat = 8
 	
 	public var layoutOptimization: LayoutOptimization = .sequence
 	
