@@ -42,6 +42,21 @@ class NotAutoLayoutTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
+			let view = LayoutView()
+			let child = UIView()
+			
+			let layout = view.nal.makeLayout { maker in maker
+				.setLeft(to: 10)
+				.setTop(to: 10)
+				.setWidth(to: 100)
+				.setHeight(to: 100)
+			}
+			
+			view.nal.setupSubview(child) { (wizard) in wizard
+				.setDefaultLayout(to: layout)
+				.commit()
+			}
+			
         }
     }
     

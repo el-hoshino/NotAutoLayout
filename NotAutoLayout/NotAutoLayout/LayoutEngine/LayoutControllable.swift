@@ -83,11 +83,17 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendLayout(_ layout: Layout.Individual, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		let newInfo: LayoutInfo = [subview.nal.hash: layout]
+		self.body.layoutInfo[condition, default: [:]].append(newInfo)
+		
+	}
+	
 	func appendLayout(_ layout: Layout.Individual, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
-		let newInfo: LayoutInfo = [subview.nal.hash: layout]
-		self.body.layoutInfo[condition, default: [:]].append(newInfo)
+		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
@@ -130,11 +136,17 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendLayoutOrder(_ order: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		let newInfo: OrderInfo = [subview.nal.hash: order]
+		self.body.orderInfo[condition, default: [:]].append(newInfo)
+		
+	}
+	
 	func appendLayoutOrder(_ order: Int, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
-		let newInfo: OrderInfo = [subview.nal.hash: order]
-		self.body.orderInfo[condition, default: [:]].append(newInfo)
+		self.appendLayoutOrder(order, under: condition, for: subview)
 		
 	}
 	
@@ -177,11 +189,17 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendZIndex(_ index: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		let newInfo: ZIndexInfo = [subview.nal.hash: index]
+		self.body.zIndexInfo[condition, default: [:]].append(newInfo)
+		
+	}
+	
 	func appendZIndex(_ index: Int, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
-		let newInfo: ZIndexInfo = [subview.nal.hash: index]
-		self.body.zIndexInfo[condition, default: [:]].append(newInfo)
+		self.appendZIndex(index, under: condition, for: subview)
 		
 	}
 	

@@ -10,10 +10,26 @@ import Foundation
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	public func makeLayout(_ make: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
+	public func makeLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
 		
 		let maker = InitialLayoutMaker()
-		return make(maker)
+		return making(maker)
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func setupSubview(_ subview: UIView, setup: (inout SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>.Finished) {
+		
+		var setupWizard = SubviewSetupWizard(parent: self.body, settee: subview)
+		let result = setup(&setupWizard)
+		
+		switch result {
+		case .success:
+			break
+		}
 		
 	}
 	

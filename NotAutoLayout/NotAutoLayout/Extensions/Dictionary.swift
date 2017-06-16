@@ -10,13 +10,23 @@ import Foundation
 
 extension Dictionary {
 	
-	func containsKey(_ key: Key) -> Bool {
-		return self[key] != nil
+	static func + (lhs: Dictionary<Key, Value>, rhs: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
+		
+		return lhs.appending(rhs)
+		
 	}
 	
 }
 
 extension Dictionary {
+	
+	func appending(_ appending: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
+		
+		var result = self
+		result.append(appending)
+		return result
+		
+	}
 	
 	mutating func append(_ appending: Dictionary<Key, Value>) {
 		
@@ -24,6 +34,14 @@ extension Dictionary {
 			self[pair.key] = pair.value
 		}
 		
+	}
+	
+}
+
+extension Dictionary {
+	
+	func containsKey(_ key: Key) -> Bool {
+		return self[key] != nil
 	}
 	
 }
