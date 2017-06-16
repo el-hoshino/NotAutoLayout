@@ -8,6 +8,24 @@
 
 import UIKit
 
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	public typealias Hash = Int
+	
+	public var hash: Hash {
+		return self.body.hash
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	/// The bound size.
+	public var boundSize: CGSize {
+		return self.body.bounds.size
+	}
+	
+}
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
@@ -35,28 +53,24 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public enum FrameSetError: Swift.Error {
-		case noSuperviewFound
-		case superviewIsNotLayoutControllable
-	}
-	
-	public func setFrame(_ frameClosure: @escaping (_ boundSize: CGSize) -> Frame) throws {
-		
-		guard let superview = self.body.superview else {
-			throw FrameSetError.noSuperviewFound
-		}
-		
-		guard let layoutView = superview as? LayoutControllable else {
-			throw FrameSetError.superviewIsNotLayoutControllable
-		}
-		
-		let layout = Layout.makeCustom { (boundSize) -> Frame in
-			return frameClosure(boundSize)
-		}
-		
-		layoutView.setConstantLayout(layout, for: self.body)
-		
+	func layout(in layoutInfo: LayoutInfo) -> Layout.Individual? {
+		return layoutInfo[self.hash]
 	}
 	
 }
 
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	func order(in orderInfo: OrderInfo) -> Int? {
+		return orderInfo[self.hash]
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	func zIndex(in zIndexInfo: ZIndexInfo) -> Int? {
+		return zIndexInfo[self.hash]
+	}
+	
+}

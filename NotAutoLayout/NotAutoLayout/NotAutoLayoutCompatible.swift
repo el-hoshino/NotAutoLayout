@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NotAutoLayoutCompatible {
+public protocol NotAutoLayoutCompatible: class {
 	
 	///
 	associatedtype NAL
@@ -38,8 +38,9 @@ extension UIView: NotAutoLayoutCompatible { }
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	public func addSubview(_ subview: UIView, withConstantLayout layout: Layout) {
-		self.body.addSubview(subview, constantLayout: layout)
+	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
+		self.body.addSubview(subview)
+		self.setDefaultLayout(layout, for: subview)
 	}
 	
 }

@@ -15,3 +15,15 @@ extension Dictionary {
 	}
 	
 }
+
+extension Dictionary {
+	
+	mutating func append(_ appending: Dictionary<Key, Value>) {
+		
+		for pair in appending {
+			self[pair.key] = pair.value
+		}
+		
+	}
+	
+}

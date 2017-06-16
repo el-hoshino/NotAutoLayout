@@ -8,5 +8,13 @@
 
 import Foundation
 
-/// A closure of `(CGSize) -> Bool`, used in `LayoutMethod` to determine which `Layout` to use. `(CGSize)` is given by the bound size of current view.
-public typealias Condition = (_ boundSize: CGSize) -> Bool
+public protocol ConditionEnum {
+	
+	typealias RawValue = String
+	var rawValue: RawValue { get }
+	
+}
+
+public enum DefaultCondition: String, ConditionEnum {
+	case `default`
+}

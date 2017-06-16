@@ -11,15 +11,15 @@ import UIKit
 /// The very basic `UIView` that conforms `LayoutControllable` protocol, to layout subviews.
 open class LayoutView: UIView, LayoutControllable {
 	
-	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]
-	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
-	public var zIndexInfo: [LayoutControllable.Hash : Int] = [:]
+	public var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
+	public var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
+	public var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
 	
 	public var layoutOptimization: LayoutOptimization = .none
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
-		self.layoutControl()
+		self.nal.layoutControl()
 	}
 	
 }
