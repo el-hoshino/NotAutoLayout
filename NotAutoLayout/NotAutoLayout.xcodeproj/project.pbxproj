@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164DB2501EF3DBA200426499 /* LayoutControllableLayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB24F1EF3DBA200426499 /* LayoutControllableLayoutControlling.swift */; };
+		164DB2521EF3DF4700426499 /* LayoutControllableLayoutMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB2511EF3DF4700426499 /* LayoutControllableLayoutMaking.swift */; };
+		164DB2541EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB2531EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift */; };
 		164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A31EF3DA4900C0BB8F /* Array.swift */; };
 		164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */; };
 		164EA0BF1EF3DAE300C0BB8F /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A41EF3DA4900C0BB8F /* CGRect.swift */; };
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		164DB24F1EF3DBA200426499 /* LayoutControllableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableLayoutControlling.swift; sourceTree = "<group>"; };
+		164DB2511EF3DF4700426499 /* LayoutControllableLayoutMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableLayoutMaking.swift; sourceTree = "<group>"; };
+		164DB2531EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableOtherPublicAPIs.swift; sourceTree = "<group>"; };
 		164EA09D1EF3D98B00C0BB8F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		164EA09E1EF3D98B00C0BB8F /* LayoutIndividual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutIndividual.swift; sourceTree = "<group>"; };
 		164EA09F1EF3D98B00C0BB8F /* LayoutMatrical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMatrical.swift; sourceTree = "<group>"; };
@@ -122,6 +128,9 @@
 				164EA0AC1EF3DA5100C0BB8F /* Typealiases.swift */,
 				164EA0AB1EF3DA5100C0BB8F /* NotAutoLayoutCompatible.swift */,
 				164EA0A91EF3DA5100C0BB8F /* LayoutControllable.swift */,
+				164DB24F1EF3DBA200426499 /* LayoutControllableLayoutControlling.swift */,
+				164DB2511EF3DF4700426499 /* LayoutControllableLayoutMaking.swift */,
+				164DB2531EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift */,
 				164EA0AD1EF3DA5100C0BB8F /* UIView.swift */,
 				164EA0AA1EF3DA5100C0BB8F /* LayoutView.swift */,
 			);
@@ -345,6 +354,7 @@
 			files = (
 				164EA0C71EF3DAE300C0BB8F /* Condition.swift in Sources */,
 				164EA0CD1EF3DAE300C0BB8F /* Layout.swift in Sources */,
+				164DB2501EF3DBA200426499 /* LayoutControllableLayoutControlling.swift in Sources */,
 				164EA0CE1EF3DAE300C0BB8F /* LayoutIndividual.swift in Sources */,
 				164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */,
 				164EA0D01EF3DAE300C0BB8F /* LayoutOptimization.swift in Sources */,
@@ -352,6 +362,7 @@
 				164EA0BF1EF3DAE300C0BB8F /* CGRect.swift in Sources */,
 				164EA0CC1EF3DAE300C0BB8F /* LayoutView.swift in Sources */,
 				164EA0CA1EF3DAE300C0BB8F /* LayoutControllable.swift in Sources */,
+				164DB2521EF3DF4700426499 /* LayoutControllableLayoutMaking.swift in Sources */,
 				164EA0C51EF3DAE300C0BB8F /* LeftPointTopPointWidthDidSetFrameMaker.swift in Sources */,
 				164EA0C91EF3DAE300C0BB8F /* NotAutoLayoutCompatible.swift in Sources */,
 				164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */,
@@ -364,6 +375,7 @@
 				164EA0C11EF3DAE300C0BB8F /* PropertyCategory.swift in Sources */,
 				164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */,
 				164EA0C31EF3DAE300C0BB8F /* LeftPointDidSetFrameMaker.swift in Sources */,
+				164DB2541EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
