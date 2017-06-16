@@ -24,6 +24,18 @@ class NotAutoLayoutTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+		let view = LayoutView()
+		let layout = view.nal.makeLayout { maker in maker
+			.setLeft(to: 10)
+			.setTop(to: 10)
+			.setWidth(to: 100)
+			.setHeight(to: 100)
+		}
+		
+		let result = layout.evaluatedFrame(in: .zero)
+		let expected = CGRect(x: 10, y: 10, width: 100, height: 100)
+		XCTAssert(result == expected)
+		
     }
     
     func testPerformanceExample() {
