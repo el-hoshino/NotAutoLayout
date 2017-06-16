@@ -24,13 +24,15 @@ extension LeftPointTopPointWidthDidSetLayoutMaker: WidthPropertyDidSet { }
 
 extension LeftPointTopPointWidthDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> CGRect {
+	public func setHeight(to height: CGFloat) -> Layout.Individual {
 		
-		let frame = CGRect(x: self.left, from: .left,
-		                  y: self.top, from: .top,
+		let frame = CGRect(x: self.left,
+		                   y: self.top,
 		                  width: self.width,
 		                  height: height)
-		return frame
+		let layout = Layout.Individual.makeAbsolute(from: frame)
+		
+		return layout
 		
 	}
 	

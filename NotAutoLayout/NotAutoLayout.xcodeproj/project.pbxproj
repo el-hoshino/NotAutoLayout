@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164EA0981EF3D8BB00C0BB8F /* InitialLayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AB1EF289F4006DF788 /* InitialLayoutMaker.swift */; };
+		164EA0991EF3D8BE00C0BB8F /* LeftPointDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AF1EF289F4006DF788 /* LeftPointDidSetFrameMaker.swift */; };
+		164EA09A1EF3D8C000C0BB8F /* LeftPointTopPointDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2A91EF289F4006DF788 /* LeftPointTopPointDidSetFrameMaker.swift */; };
+		164EA09B1EF3D8C200C0BB8F /* LeftPointTopPointWidthDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AD1EF289F4006DF788 /* LeftPointTopPointWidthDidSetFrameMaker.swift */; };
 		164FCA4F1ED7EB0500CFF666 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164FCA4E1ED7EB0500CFF666 /* UIView.swift */; };
 		165FE2B21EF28A2C006DF788 /* PropertyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2B11EF28A2C006DF788 /* PropertyCategory.swift */; };
 		16A5A5A11EF393E8007ACB1C /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5A5A01EF39393007ACB1C /* Bounds.swift */; };
@@ -316,6 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A5A5A41EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift in Sources */,
+				164EA0981EF3D8BB00C0BB8F /* InitialLayoutMaker.swift in Sources */,
+				164EA0991EF3D8BE00C0BB8F /* LeftPointDidSetFrameMaker.swift in Sources */,
 				164FCA4F1ED7EB0500CFF666 /* UIView.swift in Sources */,
 				16A5A5A81EF3BDF1007ACB1C /* LayoutIndividual.swift in Sources */,
 				16A5A5A11EF393E8007ACB1C /* Bounds.swift in Sources */,
@@ -325,6 +331,8 @@
 				16A5A5A61EF3A50F007ACB1C /* CGRect.swift in Sources */,
 				794BA6931E7C3EB500FFD070 /* LayoutOptimization.swift in Sources */,
 				165FE2B21EF28A2C006DF788 /* PropertyCategory.swift in Sources */,
+				164EA09B1EF3D8C200C0BB8F /* LeftPointTopPointWidthDidSetFrameMaker.swift in Sources */,
+				164EA09A1EF3D8C000C0BB8F /* LeftPointTopPointDidSetFrameMaker.swift in Sources */,
 				16FE58C11E5D9E23001A9DC2 /* Layout.swift in Sources */,
 				16FE58C31E5DA08E001A9DC2 /* LayoutControllable.swift in Sources */,
 				795463AF1E68628200952122 /* Typealiases.swift in Sources */,

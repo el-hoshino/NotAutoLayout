@@ -16,6 +16,25 @@ extension Layout {
 		
 		private var additionalEvaluations: [FrameAdditionalEvaluation]
 		
+		private init(evaluation: @escaping (_ boundSize: CGSize) -> CGRect) {
+			self.basicFrameEvaluation = evaluation
+			self.additionalEvaluations = []
+		}
+		
+		private init(frame: CGRect) {
+			self.basicFrameEvaluation = { _ in return frame }
+			self.additionalEvaluations = []
+		}
+		
+	}
+	
+}
+
+extension Layout.Individual {
+	
+	static func makeAbsolute(from frame: CGRect) -> Layout.Individual {
+		let layout = Layout.Individual(frame: frame)
+		return layout
 	}
 	
 }
