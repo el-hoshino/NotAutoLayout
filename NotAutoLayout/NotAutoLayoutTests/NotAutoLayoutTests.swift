@@ -53,6 +53,7 @@ class NotAutoLayoutTests: XCTestCase {
 			}
 			
 			view.nal.setupSubview(child) { (wizard) in wizard
+				.addToSelf()
 				.setDefaultLayout(to: layout)
 				.commit()
 			}
