@@ -30,6 +30,22 @@ extension CGRect {
 		
 	}
 	
+	public struct PlaneBasePoint {
+		
+		var value: CGPoint
+		
+		public static let topLeft		= PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.0))
+		public static let topCenter		= PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.0))
+		public static let topRight		= PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.0))
+		public static let middleLeft	= PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.5))
+		public static let middleCenter	= PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.5))
+		public static let middleRight	= PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.5))
+		public static let bottomLeft	= PlaneBasePoint(value: CGPoint(x: 0.0, y: 1.0))
+		public static let bottomCenter	= PlaneBasePoint(value: CGPoint(x: 0.5, y: 1.0))
+		public static let bottomRight	= PlaneBasePoint(value: CGPoint(x: 1.0, y: 1.0))
+		
+	}
+	
 }
 
 extension CGRect.HorizontalBasePoint {

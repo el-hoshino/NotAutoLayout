@@ -22,7 +22,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func pinLeft(to referenceView: UIView, s referenceLine: CGRect.HorizontalBaseline, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> LeftDidSetLayoutMaker {
+	public func pinLeft(to referenceView: UIView, s horizontalReference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> LeftDidSetLayoutMaker {
 		
 		let left = CGRect.Float.closure { [weak referenceView] (_) -> CGFloat in
 			
@@ -32,7 +32,7 @@ extension InitialLayoutMaker {
 			
 			let frame = referenceView.nal.frame(thatIgnoresTransform: ignoresTransform)
 			
-			let leftReference = frame.x + (frame.width * referenceLine.value)
+			let leftReference = frame.x + (frame.width * horizontalReference.value)
 			
 			let result = leftReference + offset
 			
