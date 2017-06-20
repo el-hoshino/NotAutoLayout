@@ -16,8 +16,8 @@
 		164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */; };
 		164EA0C11EF3DAE300C0BB8F /* PropertyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2B11EF28A2C006DF788 /* PropertyCategory.swift */; };
 		164EA0C21EF3DAE300C0BB8F /* InitialLayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AB1EF289F4006DF788 /* InitialLayoutMaker.swift */; };
-		164EA0C31EF3DAE300C0BB8F /* LeftPointDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AF1EF289F4006DF788 /* LeftPointDidSetFrameMaker.swift */; };
-		164EA0C41EF3DAE300C0BB8F /* LeftPointTopPointDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2A91EF289F4006DF788 /* LeftPointTopPointDidSetFrameMaker.swift */; };
+		164EA0C31EF3DAE300C0BB8F /* LeftDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AF1EF289F4006DF788 /* LeftDidSetFrameMaker.swift */; };
+		164EA0C41EF3DAE300C0BB8F /* LeftTopDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2A91EF289F4006DF788 /* LeftTopDidSetFrameMaker.swift */; };
 		164EA0C51EF3DAE300C0BB8F /* LeftPointTopPointWidthDidSetFrameMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AD1EF289F4006DF788 /* LeftPointTopPointWidthDidSetFrameMaker.swift */; };
 		164EA0C61EF3DAE300C0BB8F /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A71EF3DA5100C0BB8F /* Bounds.swift */; };
 		164EA0C71EF3DAE300C0BB8F /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A81EF3DA5100C0BB8F /* Condition.swift */; };
@@ -67,10 +67,10 @@
 		164EA0AB1EF3DA5100C0BB8F /* NotAutoLayoutCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutCompatible.swift; sourceTree = "<group>"; };
 		164EA0AC1EF3DA5100C0BB8F /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		164EA0AD1EF3DA5100C0BB8F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		165FE2A91EF289F4006DF788 /* LeftPointTopPointDidSetFrameMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPointTopPointDidSetFrameMaker.swift; sourceTree = "<group>"; };
+		165FE2A91EF289F4006DF788 /* LeftTopDidSetFrameMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTopDidSetFrameMaker.swift; sourceTree = "<group>"; };
 		165FE2AB1EF289F4006DF788 /* InitialLayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLayoutMaker.swift; sourceTree = "<group>"; };
 		165FE2AD1EF289F4006DF788 /* LeftPointTopPointWidthDidSetFrameMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPointTopPointWidthDidSetFrameMaker.swift; sourceTree = "<group>"; };
-		165FE2AF1EF289F4006DF788 /* LeftPointDidSetFrameMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftPointDidSetFrameMaker.swift; sourceTree = "<group>"; };
+		165FE2AF1EF289F4006DF788 /* LeftDidSetFrameMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDidSetFrameMaker.swift; sourceTree = "<group>"; };
 		165FE2B11EF28A2C006DF788 /* PropertyCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCategory.swift; sourceTree = "<group>"; };
 		16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameAdditionalEvaluation.swift; sourceTree = "<group>"; };
 		794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewSetupWizard.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		165FE2A81EF289F4006DF788 /* 2PropertiesDidSetMakers */ = {
 			isa = PBXGroup;
 			children = (
-				165FE2A91EF289F4006DF788 /* LeftPointTopPointDidSetFrameMaker.swift */,
+				165FE2A91EF289F4006DF788 /* LeftTopDidSetFrameMaker.swift */,
 			);
 			path = 2PropertiesDidSetMakers;
 			sourceTree = "<group>";
@@ -181,7 +181,7 @@
 		165FE2AE1EF289F4006DF788 /* 1PropertyDidSetMakers */ = {
 			isa = PBXGroup;
 			children = (
-				165FE2AF1EF289F4006DF788 /* LeftPointDidSetFrameMaker.swift */,
+				165FE2AF1EF289F4006DF788 /* LeftDidSetFrameMaker.swift */,
 			);
 			path = 1PropertyDidSetMakers;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 				164EA0C91EF3DAE300C0BB8F /* NotAutoLayoutCompatible.swift in Sources */,
 				164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */,
 				164EA0D11EF3DAE300C0BB8F /* LayoutSequential.swift in Sources */,
-				164EA0C41EF3DAE300C0BB8F /* LeftPointTopPointDidSetFrameMaker.swift in Sources */,
+				164EA0C41EF3DAE300C0BB8F /* LeftTopDidSetFrameMaker.swift in Sources */,
 				164EA0C61EF3DAE300C0BB8F /* Bounds.swift in Sources */,
 				164EA0CF1EF3DAE300C0BB8F /* LayoutMatrical.swift in Sources */,
 				164EA0CB1EF3DAE300C0BB8F /* UIView.swift in Sources */,
@@ -390,7 +390,7 @@
 				164EA0C81EF3DAE300C0BB8F /* Typealiases.swift in Sources */,
 				164EA0C11EF3DAE300C0BB8F /* PropertyCategory.swift in Sources */,
 				164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */,
-				164EA0C31EF3DAE300C0BB8F /* LeftPointDidSetFrameMaker.swift in Sources */,
+				164EA0C31EF3DAE300C0BB8F /* LeftDidSetFrameMaker.swift in Sources */,
 				164DB2541EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

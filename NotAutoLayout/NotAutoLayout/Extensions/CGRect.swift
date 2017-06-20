@@ -10,16 +10,24 @@ import Foundation
 
 extension CGRect {
 	
-	enum HorizontalBaseline {
-		case left
-		case center
-		case right
+	public struct HorizontalBaseline {
+		
+		var value: CGFloat
+		
+		public static let left = HorizontalBaseline(value: 0)
+		public static let center = HorizontalBaseline(value: 0.5)
+		public static let right = HorizontalBaseline(value: 1)
+		
 	}
 	
-	enum VerticalBaseline {
-		case top
-		case middle
-		case bottom
+	public struct VerticalBaseline {
+		
+		var value: CGFloat
+		
+		public static let top = HorizontalBaseline(value: 0)
+		public static let middle = HorizontalBaseline(value: 0.5)
+		public static let bottom = HorizontalBaseline(value: 1)
+		
 	}
 	
 }
@@ -27,16 +35,9 @@ extension CGRect {
 extension CGRect.HorizontalBaseline {
 	
 	func originOffset(from widthDiff: CGFloat) -> CGFloat {
-		switch self {
-		case .left:
-			return 0
-			
-		case .center:
-			return -widthDiff / 2
-			
-		case .right:
-			return -widthDiff
-		}
+		
+		return 0 - (widthDiff * self.value)
+		
 	}
 	
 }
@@ -45,15 +46,138 @@ extension CGRect.VerticalBaseline {
 	
 	func originOffset(from heightDiff: CGFloat) -> CGFloat {
 		
+		return 0 - (heightDiff * self.value)
+		
+	}
+	
+}
+
+extension CGRect {
+	
+	enum Float {
+		case constant(CGFloat)
+		case closure((CGSize) -> CGFloat)
+	}
+	
+	enum Point {
+		case constant(CGPoint)
+		case closure((CGSize) -> CGPoint)
+	}
+	
+	enum Size {
+		case constant(CGSize)
+		case closure((CGSize) -> CGSize)
+	}
+	
+	enum Rect {
+		case constant(CGRect)
+		case closure((CGSize) -> CGRect)
+	}
+	
+}
+
+extension CGRect.Float {
+	
+	var constantValue: CGFloat? {
+		
+		if case .constant(let value) = self {
+			return value
+		}
+		else {
+			return nil
+		}
+		
+	}
+	
+	var closureValue: (CGSize) -> CGFloat {
+		
 		switch self {
-		case .top:
-			return 0
+		case .constant(let value):
+			return { _ in value }
 			
-		case .middle:
-			return -heightDiff / 2
+		case .closure(let closure):
+			return closure
+		}
+		
+	}
+	
+}
+
+extension CGRect.Point {
+	
+	var constantValue: CGPoint? {
+		
+		if case .constant(let value) = self {
+			return value
+		}
+		else {
+			return nil
+		}
+		
+	}
+	
+	var closureValue: (CGSize) -> CGPoint {
+		
+		switch self {
+		case .constant(let value):
+			return { _ in value }
 			
-		case .bottom:
-			return -heightDiff
+		case .closure(let closure):
+			return closure
+		}
+		
+	}
+	
+}
+
+extension CGRect.Size {
+	
+	var constantValue: CGSize? {
+		
+		if case .constant(let value) = self {
+			return value
+		}
+		else {
+			return nil
+		}
+		
+	}
+	
+	var closureValue: (CGSize) -> CGSize {
+		
+		switch self {
+		case .constant(let value):
+			return { _ in value }
+			
+		case .closure(let closure):
+			return closure
+		}
+		
+	}
+	
+}
+
+extension CGRect.Rect {
+	
+	var constantValue: CGRect? {
+		
+		if case .constant(let value) = self {
+			return value
+		}
+		else {
+			return nil
+		}
+		
+	}
+	
+	var closureValue: (CGSize) -> CGRect {
+		
+		switch self {
+		case .constant(let value):
+			return { _ in value }
+			
+		case .closure(let closure):
+			return closure
 		}
 		
 	}

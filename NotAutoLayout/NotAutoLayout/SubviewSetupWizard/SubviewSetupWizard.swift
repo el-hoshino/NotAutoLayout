@@ -11,7 +11,7 @@ import Foundation
 public struct SubviewSetupWizard<ParentView> {
 	
 	private let parentView: ParentView
-	private let settingView: UIView
+	private let setteeView: UIView
 	
 	typealias ConditionLayout = [ConditionEnum.RawValue: Layout.Individual]
 	typealias ConditionOrder = [ConditionEnum.RawValue: Int]
@@ -21,12 +21,15 @@ public struct SubviewSetupWizard<ParentView> {
 	private var orders: ConditionOrder
 	private var zIndices: ConditionZIndex
 	
+	private var needsToAddSetteeToParent: Bool
+	
 	init(parent: ParentView, settee: UIView) {
 		self.parentView = parent
-		self.settingView = settee
+		self.setteeView = settee
 		self.layouts = [:]
 		self.orders = [:]
 		self.zIndices = [:]
+		self.needsToAddSetteeToParent = false
 	}
 	
 }
@@ -36,7 +39,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	private func setupLayouts() {
 		
 		for (condition, layout) in self.layouts {
-			self.parentView.nal.appendLayout(layout, under: condition, for: self.settingView)
+			self.parentView.nal.appendLayout(layout, under: condition, for: self.setteeView)
 		}
 		
 	}
@@ -44,7 +47,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	private func setupOrders() {
 		
 		for (condition, order) in self.orders {
-			self.parentView.nal.appendLayoutOrder(order, under: condition, for: self.settingView)
+			self.parentView.nal.appendLayoutOrder(order, under: condition, for: self.setteeView)
 		}
 		
 	}
@@ -52,7 +55,15 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	private func setupZIndices() {
 		
 		for (condition, zIndex) in self.zIndices {
-			self.parentView.nal.appendZIndex(zIndex, under: condition, for: self.settingView)
+			self.parentView.nal.appendZIndex(zIndex, under: condition, for: self.setteeView)
+		}
+		
+	}
+	
+	private func addSetteeToParent() {
+		
+		if self.needsToAddSetteeToParent {
+			self.parentView.addSubview(self.setteeView)
 		}
 		
 	}
@@ -62,6 +73,8 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		self.setupLayouts()
 		self.setupOrders()
 		self.setupZIndices()
+		
+		self.addSetteeToParent()
 		
 		return .success
 		
@@ -73,8 +86,9 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 	public func addToSelf() -> SubviewSetupWizard {
 		
-		self.parentView.addSubview(self.settingView)
-		return self
+		var wizard = self
+		wizard.needsToAddSetteeToParent = true
+		return wizard
 		
 	}
 	

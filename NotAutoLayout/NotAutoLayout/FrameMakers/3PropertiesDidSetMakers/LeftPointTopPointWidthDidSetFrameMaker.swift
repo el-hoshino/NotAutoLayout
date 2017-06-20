@@ -8,31 +8,36 @@
 
 import Foundation
 
-public struct LeftPointTopPointWidthDidSetLayoutMaker {
+public struct LeftTopWidthDidSetLayoutMaker {
 		
-	let left: CGFloat
+	let left: CGRect.Float
 	
-	let top: CGFloat
+	let top: CGRect.Float
 	
-	let width: CGFloat
+	let width: CGRect.Float
 	
 }
 
-extension LeftPointTopPointWidthDidSetLayoutMaker: LeftPointPropertyDidSet { }
-extension LeftPointTopPointWidthDidSetLayoutMaker: TopPointPropertyDidSet { }
-extension LeftPointTopPointWidthDidSetLayoutMaker: WidthPropertyDidSet { }
-
-extension LeftPointTopPointWidthDidSetLayoutMaker {
+extension LeftTopWidthDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> Layout.Individual {
 		
-		let frame = CGRect(x: self.left,
-		                   y: self.top,
-		                  width: self.width,
-		                  height: height)
-		let layout = Layout.Individual.makeAbsolute(from: frame)
-		
-		return layout
+		if let left = self.left.constantValue, let top = self.top.constantValue, let width = self.width.constantValue {
+			let frame = CGRect(x: left,
+			                   y: top,
+			                   width: width,
+			                   height: height)
+			let layout = Layout.Individual.makeAbsolute(from: frame)
+			
+			return layout
+		}
+		else {
+			let layout = Layout.Individual.makeCustom(x: self.left.closureValue,
+			                                          y: self.top.closureValue,
+			                                          width: self.width.closureValue,
+			                                          height: {_ in height})
+			return layout
+		}
 		
 	}
 	

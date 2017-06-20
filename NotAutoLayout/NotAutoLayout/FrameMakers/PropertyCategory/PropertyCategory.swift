@@ -8,14 +8,4 @@
 
 import Foundation
 
-protocol LeftPointPropertyDidSet {
-	var left: CGFloat { get }
-}
 
-protocol TopPointPropertyDidSet {
-	var top: CGFloat { get }
-}
-
-protocol WidthPropertyDidSet {
-	var width: CGFloat { get }
-}

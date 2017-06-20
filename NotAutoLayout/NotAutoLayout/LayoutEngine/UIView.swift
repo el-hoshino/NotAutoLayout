@@ -49,6 +49,17 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		
 	}
 	
+	public func frame(thatIgnoresTransform ignoresTransform: Bool) -> CGRect {
+		
+		if ignoresTransform {
+			return self.body.frame
+		}
+		else {
+			return self.identityFrame
+		}
+		
+	}
+	
 }
 
 extension NotAutoLayoutContainer where Containee: UIView {
