@@ -35,11 +35,11 @@ enum FrameAdditionalEvaluation {
 	case pinchBottomTo(Evaluation)
 	case pinchBottomBy(Evaluation)
 	
-	case expandWidthTo(Evaluation, from: CGRect.HorizontalBaseline)
-	case expandWidthBy(Evaluation, from: CGRect.HorizontalBaseline)
+	case expandWidthTo(Evaluation, from: CGRect.HorizontalBasePoint)
+	case expandWidthBy(Evaluation, from: CGRect.HorizontalBasePoint)
 	
-	case expandHeightTo(Evaluation, from: CGRect.VerticalBaseline)
-	case expandHeightBy(Evaluation, from: CGRect.VerticalBaseline)
+	case expandHeightTo(Evaluation, from: CGRect.VerticalBasePoint)
+	case expandHeightBy(Evaluation, from: CGRect.VerticalBasePoint)
 	
 }
 

@@ -10,29 +10,29 @@ import Foundation
 
 extension CGRect {
 	
-	public struct HorizontalBaseline {
+	public struct HorizontalBasePoint {
 		
 		var value: CGFloat
 		
-		public static let left = HorizontalBaseline(value: 0)
-		public static let center = HorizontalBaseline(value: 0.5)
-		public static let right = HorizontalBaseline(value: 1)
+		public static let left = HorizontalBasePoint(value: 0)
+		public static let center = HorizontalBasePoint(value: 0.5)
+		public static let right = HorizontalBasePoint(value: 1)
 		
 	}
 	
-	public struct VerticalBaseline {
+	public struct VerticalBasePoint {
 		
 		var value: CGFloat
 		
-		public static let top = HorizontalBaseline(value: 0)
-		public static let middle = HorizontalBaseline(value: 0.5)
-		public static let bottom = HorizontalBaseline(value: 1)
+		public static let top = HorizontalBasePoint(value: 0)
+		public static let middle = HorizontalBasePoint(value: 0.5)
+		public static let bottom = HorizontalBasePoint(value: 1)
 		
 	}
 	
 }
 
-extension CGRect.HorizontalBaseline {
+extension CGRect.HorizontalBasePoint {
 	
 	func originOffset(from widthDiff: CGFloat) -> CGFloat {
 		
@@ -42,7 +42,7 @@ extension CGRect.HorizontalBaseline {
 	
 }
 
-extension CGRect.VerticalBaseline {
+extension CGRect.VerticalBasePoint {
 	
 	func originOffset(from heightDiff: CGFloat) -> CGFloat {
 		
@@ -341,7 +341,7 @@ extension CGRect {
 		self.size.height += heightDiff
 	}
 	
-	mutating func expandWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBaseline) {
+	mutating func expandWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBasePoint) {
 		
 		let widthDiff = widthGoal - self.width
 		self.size.width = widthGoal
@@ -349,14 +349,14 @@ extension CGRect {
 		
 	}
 	
-	mutating func expandWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBaseline) {
+	mutating func expandWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBasePoint) {
 		
 		self.size.width += widthDiff
 		self.origin.x += baseline.originOffset(from: widthDiff)
 		
 	}
 	
-	mutating func expandHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBaseline) {
+	mutating func expandHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBasePoint) {
 		
 		let heightDiff = heightGoal - self.height
 		self.size.height = heightGoal
@@ -364,7 +364,7 @@ extension CGRect {
 		
 	}
 	
-	mutating func expandHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBaseline) {
+	mutating func expandHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBasePoint) {
 		
 		self.size.height += heightDiff
 		self.origin.y += baseline.originOffset(from: heightDiff)

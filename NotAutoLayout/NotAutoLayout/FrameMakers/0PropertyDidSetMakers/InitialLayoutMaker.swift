@@ -22,8 +22,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	
-	public func pinLeft(to referenceView: UIView, s referenceLine: CGRect.HorizontalBaseline, offsetBy offset: CGFloat, ignoresTransform: Bool = true) -> LeftDidSetLayoutMaker {
+	public func pinLeft(to referenceView: UIView, s referenceLine: CGRect.HorizontalBaseline, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> LeftDidSetLayoutMaker {
 		
 		let left = CGRect.Float.closure { [weak referenceView] (_) -> CGFloat in
 			
@@ -40,6 +39,16 @@ extension InitialLayoutMaker {
 			return result
 			
 		}
+		
+		let maker = LeftDidSetLayoutMaker(left: left)
+		
+		return maker
+		
+	}
+	
+	public func calculateLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftDidSetLayoutMaker {
+		
+		let left = CGRect.Float.closure(calculation)
 		
 		let maker = LeftDidSetLayoutMaker(left: left)
 		
