@@ -12,7 +12,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	public func makeLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
 		
-		let maker = InitialLayoutMaker()
+		let maker = InitialLayoutMaker(parentView: self.body)
 		return making(maker)
 		
 	}

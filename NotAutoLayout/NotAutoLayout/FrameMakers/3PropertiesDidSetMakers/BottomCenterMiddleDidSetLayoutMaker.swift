@@ -10,6 +10,8 @@ import Foundation
 
 public struct BottomCenterMiddleDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let bottomCenter: CGRect.Point
 	
 	let middle: CGRect.Float

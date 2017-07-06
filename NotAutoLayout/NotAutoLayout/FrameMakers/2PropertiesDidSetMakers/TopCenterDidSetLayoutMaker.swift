@@ -10,6 +10,57 @@ import Foundation
 
 public struct TopCenterDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let topCenter: CGRect.Point
+	
+}
+
+extension TopCenterDidSetLayoutMaker {
+	
+	public func setWidth(to width: CGFloat) -> TopCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.constant(width)
+		
+		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                            topCenter: self.topCenter,
+		                                            width: width)
+		
+		return maker
+		
+	}
+	
+	public func calculateWidth(by calcuation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calcuation)
+		
+		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                            topCenter: self.topCenter,
+		                                            width: width)
+		
+		return maker
+		
+	}
+	
+}
+
+extension TopCenterDidSetLayoutMaker {
+	
+	public func calculateSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			
+			let topCenter = self.topCenter.closureValue(boundSize)
+			let size = calculation(boundSize)
+			let origin = CGPoint(x: topCenter.x - size.halfWidth, y: topCenter.y)
+			let frame = CGRect(origin: origin, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
 	
 }

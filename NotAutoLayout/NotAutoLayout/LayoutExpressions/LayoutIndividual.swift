@@ -41,6 +41,12 @@ extension Layout {
 			
 		}
 		
+		private init(frame: @escaping (CGSize) -> CGRect) {
+			
+			self.basicFrameEvaluation = frame
+			self.additionalEvaluations = []
+			
+		}
 	}
 	
 }
@@ -54,6 +60,11 @@ extension Layout.Individual {
 	
 	static func makeCustom(x: @escaping (CGSize) -> CGFloat, y: @escaping (CGSize) -> CGFloat, width: @escaping (CGSize) -> CGFloat, height: @escaping (CGSize) -> CGFloat) -> Layout.Individual {
 		let layout = Layout.Individual(x: x, y: y, width: width, height: height)
+		return layout
+	}
+	
+	static func makeCustom(frame: @escaping (CGSize) -> CGRect) -> Layout.Individual {
+		let layout = Layout.Individual(frame: frame)
 		return layout
 	}
 	

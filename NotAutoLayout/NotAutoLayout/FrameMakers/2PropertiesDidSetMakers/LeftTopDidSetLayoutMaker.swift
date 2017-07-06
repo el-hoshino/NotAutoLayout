@@ -10,6 +10,8 @@ import Foundation
 
 public struct LeftTopDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let left: CGRect.Float
 	
 	let top: CGRect.Float
@@ -20,7 +22,8 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
-		let maker = LeftTopWidthDidSetLayoutMaker(left: self.left,
+		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                          left: self.left,
 		                                          top: self.top,
 		                                          width: .constant(width))
 		return maker

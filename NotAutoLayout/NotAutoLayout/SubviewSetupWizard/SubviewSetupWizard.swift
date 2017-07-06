@@ -101,4 +101,22 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
+	public func setLayout(_ layout: Layout.Individual, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.layouts[condition.rawValue] = layout
+		return wizard
+		
+	}
+	
+	public func makeLayout(forCondition condition: ConditionEnum, making: (InitialLayoutMaker) -> Layout.Individual) -> SubviewSetupWizard {
+		
+		var wizard = self
+		let maker = InitialLayoutMaker(parentView: wizard.parentView)
+		let layout = making(maker)
+		wizard.layouts[condition.rawValue] = layout
+		return wizard
+		
+	}
+	
 }

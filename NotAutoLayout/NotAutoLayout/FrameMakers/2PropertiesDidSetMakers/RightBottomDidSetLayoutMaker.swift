@@ -10,6 +10,8 @@ import Foundation
 
 public struct RightBottomDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let right: CGRect.Float
 	
 	let bottom: CGRect.Float

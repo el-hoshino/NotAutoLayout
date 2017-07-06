@@ -10,6 +10,8 @@ import Foundation
 
 public struct TopLeftDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let topLeft: CGRect.Point
 	
 }

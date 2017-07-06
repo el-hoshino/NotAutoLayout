@@ -10,6 +10,8 @@ import Foundation
 
 public struct MiddleLeftWidthDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let middleLeft: CGRect.Point
 	
 	let width: CGRect.Float

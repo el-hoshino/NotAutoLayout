@@ -10,6 +10,8 @@ import Foundation
 
 public struct LeftTopWidthDidSetLayoutMaker {
 		
+	let parentView: UIView
+	
 	let left: CGRect.Float
 	
 	let top: CGRect.Float
@@ -30,13 +32,18 @@ extension LeftTopWidthDidSetLayoutMaker {
 			let layout = Layout.Individual.makeAbsolute(from: frame)
 			
 			return layout
-		}
-		else {
-			let layout = Layout.Individual.makeCustom(x: self.left.closureValue,
-			                                          y: self.top.closureValue,
-			                                          width: self.width.closureValue,
-			                                          height: {_ in height})
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let width = self.width.closureValue(boundSize)
+				let x = self.left.closureValue(boundSize)
+				let y = self.top.closureValue(boundSize)
+				let frame = CGRect(x: x, y: y, width: width, height: height)
+				return frame
+			}
+			
 			return layout
+			
 		}
 		
 	}

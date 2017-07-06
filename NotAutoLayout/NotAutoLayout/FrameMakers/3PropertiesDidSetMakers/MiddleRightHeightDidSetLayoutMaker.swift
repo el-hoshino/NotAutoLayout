@@ -10,6 +10,8 @@ import Foundation
 
 public struct MiddleRightHeightDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let middleRight: CGRect.Point
 	
 	let height: CGRect.Float

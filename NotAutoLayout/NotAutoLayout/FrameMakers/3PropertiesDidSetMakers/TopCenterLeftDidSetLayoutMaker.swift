@@ -10,6 +10,8 @@ import Foundation
 
 public struct TopCenterLeftDidSetLayoutMaker {
 	
+	let parentView: UIView
+	
 	let topCenter: CGRect.Point
 	
 	let left: CGRect.Float
