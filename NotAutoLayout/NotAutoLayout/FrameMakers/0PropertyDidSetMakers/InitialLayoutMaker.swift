@@ -112,3 +112,17 @@ extension InitialLayoutMaker {
 	}
 	
 }
+
+extension InitialLayoutMaker {
+	
+	public func stickOnParent() -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			return CGRect(origin: .zero, size: boundSize)
+		}
+		
+		return layout
+		
+	}
+	
+}

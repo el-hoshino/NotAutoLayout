@@ -46,6 +46,35 @@ extension TopCenterDidSetLayoutMaker {
 
 extension TopCenterDidSetLayoutMaker {
 	
+	public func setSize(to size: CGSize) -> Layout.Individual {
+		
+		if let topCenter = self.topCenter.constantValue {
+			let x = topCenter.x - size.width.half
+			let y = topCenter.y
+			let origin = CGPoint(x: x, y: y)
+			let frame = CGRect(origin: origin, size: size)
+			let layout = Layout.Individual.makeAbsolute(from: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let topCenter = self.topCenter.closureValue(boundSize)
+				let x = topCenter.x - size.width.half
+				let y = topCenter.y
+				let origin = CGPoint(x: x, y: y)
+				let frame = CGRect(origin: origin, size: size)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
 	public func calculateSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
