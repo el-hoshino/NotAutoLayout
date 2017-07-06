@@ -24,9 +24,9 @@ extension CGRect {
 		
 		var value: CGFloat
 		
-		public static let top = HorizontalBasePoint(value: 0)
-		public static let middle = HorizontalBasePoint(value: 0.5)
-		public static let bottom = HorizontalBasePoint(value: 1)
+		public static let top = VerticalBasePoint(value: 0)
+		public static let middle = VerticalBasePoint(value: 0.5)
+		public static let bottom = VerticalBasePoint(value: 1)
 		
 	}
 	
