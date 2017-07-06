@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160CCA081F0CC57300783D73 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160CCA071F0CC57300783D73 /* CGFloat.swift */; };
+		162B95F91F0C9C6800960B51 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95F81F0C9C6800960B51 /* Calculations.swift */; };
+		162B95FF1F0CA40800960B51 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95FE1F0CA40800960B51 /* CGSize.swift */; };
 		164DB2501EF3DBA200426499 /* LayoutControllableLayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB24F1EF3DBA200426499 /* LayoutControllableLayoutControlling.swift */; };
 		164DB2521EF3DF4700426499 /* LayoutControllableLayoutMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB2511EF3DF4700426499 /* LayoutControllableLayoutMaking.swift */; };
 		164DB2541EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB2531EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift */; };
@@ -124,6 +127,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160CCA071F0CC57300783D73 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		162B95F81F0C9C6800960B51 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
+		162B95FE1F0CA40800960B51 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		164DB24F1EF3DBA200426499 /* LayoutControllableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableLayoutControlling.swift; sourceTree = "<group>"; };
 		164DB2511EF3DF4700426499 /* LayoutControllableLayoutMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableLayoutMaking.swift; sourceTree = "<group>"; };
 		164DB2531EF3DF5D00426499 /* LayoutControllableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllableOtherPublicAPIs.swift; sourceTree = "<group>"; };
@@ -305,7 +311,10 @@
 			children = (
 				164EA0A31EF3DA4900C0BB8F /* Array.swift */,
 				164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */,
+				160CCA071F0CC57300783D73 /* CGFloat.swift */,
+				162B95FE1F0CA40800960B51 /* CGSize.swift */,
 				164EA0A41EF3DA4900C0BB8F /* CGRect.swift */,
+				162B95F81F0C9C6800960B51 /* Calculations.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -700,6 +709,7 @@
 				79D8DE1A1EF9508600B74593 /* TopRightBottomDidSetLayoutMaker.swift in Sources */,
 				79D8DDA41EF93FDF00B74593 /* MiddleCenterDidSetLayoutMaker.swift in Sources */,
 				164EA0CC1EF3DAE300C0BB8F /* LayoutView.swift in Sources */,
+				162B95F91F0C9C6800960B51 /* Calculations.swift in Sources */,
 				79D8DDFC1EF94DC700B74593 /* TopLeftMiddleDidSetLayoutMaker.swift in Sources */,
 				164EA0CA1EF3DAE300C0BB8F /* LayoutControllable.swift in Sources */,
 				79D8DDB81EF9450C00B74593 /* LeftCenterBottomDidSetLayoutMaker.swift in Sources */,
@@ -710,11 +720,13 @@
 				79D8DDF41EF94CBF00B74593 /* CenterMiddleBottomDidSetLayoutMaker.swift in Sources */,
 				79D8DDA21EF93FC700B74593 /* MiddleLeftDidSetLayout.swift in Sources */,
 				79D8DDE61EF94B9500B74593 /* RightBottomWidthDidSetLayoutMaker.swift in Sources */,
+				160CCA081F0CC57300783D73 /* CGFloat.swift in Sources */,
 				79D8DDF61EF94CE200B74593 /* RightTopMiddleDidSetLayoutMaker.swift in Sources */,
 				79D8DE141EF9503600B74593 /* TopRightLeftDidSetLayoutMaker.swift in Sources */,
 				79D8DE081EF94F4E00B74593 /* TopCenterLeftDidSetLayoutMaker.swift in Sources */,
 				79D8DD821EF9369C00B74593 /* CenterRightDidSetLayoutMaker.swift in Sources */,
 				164EA0C91EF3DAE300C0BB8F /* NotAutoLayoutCompatible.swift in Sources */,
+				162B95FF1F0CA40800960B51 /* CGSize.swift in Sources */,
 				79D8DD6E1EF9343D00B74593 /* CenterDidSetLayoutMaker.swift in Sources */,
 				79D8DDFA1EF94D2B00B74593 /* RightMiddleBottomDidSetLayoutMaker.swift in Sources */,
 				164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */,

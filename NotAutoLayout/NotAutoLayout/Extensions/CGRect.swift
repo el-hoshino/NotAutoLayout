@@ -50,6 +50,32 @@ extension CGRect {
 
 extension CGRect.HorizontalBasePoint {
 	
+	func value(in frame: CGRect) -> CGFloat {
+		return frame.width * self.value + frame.x
+	}
+	
+}
+
+extension CGRect.VerticalBasePoint {
+	
+	func value(in frame: CGRect) -> CGFloat {
+		return frame.height * self.value + frame.y
+	}
+	
+}
+
+extension CGRect.PlaneBasePoint {
+	
+	func value(in frame: CGRect) -> CGPoint {
+		let x = frame.width * self.value.x + frame.x
+		let y = frame.height * self.value.y + frame.y
+		return CGPoint(x: x, y: y)
+	}
+	
+}
+
+extension CGRect.HorizontalBasePoint {
+	
 	func originOffset(from widthDiff: CGFloat) -> CGFloat {
 		
 		return 0 - (widthDiff * self.value)
