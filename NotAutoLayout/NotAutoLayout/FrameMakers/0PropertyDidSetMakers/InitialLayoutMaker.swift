@@ -89,6 +89,43 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setTopLeft(to topLeft: CGPoint) -> TopLeftDidSetLayoutMaker {
+		
+		let topLeft = CGRect.Point.constant(topLeft)
+		
+		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                     topLeft: topLeft)
+		
+		return maker
+		
+	}
+	
+	public func pinTopLeft(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopLeftDidSetLayoutMaker {
+		
+		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                     topLeft: topLeft)
+		
+		return maker
+		
+	}
+	
+	public func calculateTopLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopLeftDidSetLayoutMaker {
+		
+		let topLeft = CGRect.Point.closure(calculation)
+		
+		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                     topLeft: topLeft)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
 	public func setTopCenter(to topCenter: CGPoint) -> TopCenterDidSetLayoutMaker {
 		
 		let topCenter = CGRect.Point.constant(topCenter)
