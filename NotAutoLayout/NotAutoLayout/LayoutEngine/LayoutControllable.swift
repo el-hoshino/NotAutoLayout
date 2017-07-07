@@ -64,9 +64,9 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 // MARK: Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	func getLayout(for view: UIView, from layoutInfo: LayoutInfo) -> Layout.Individual? {
+	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo?) -> Layout.Individual? {
 		
-		let layout = layoutInfo[view.nal.hash]
+		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout
 		
 	}
@@ -76,6 +76,14 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		let currentCondition = self.getCurrentCondition()
 		let currentLayoutInfo = self.body.layoutInfo[currentCondition.rawValue]
 		return currentLayoutInfo
+		
+	}
+	
+	func getDefaultLayoutInfo() -> LayoutInfo? {
+		
+		let defaultCondition = self.body.getDefaultCondition()
+		let defaultLayoutInfo = self.body.layoutInfo[defaultCondition.rawValue]
+		return defaultLayoutInfo
 		
 	}
 	

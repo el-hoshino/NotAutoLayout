@@ -64,12 +64,11 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	private func layoutNormally(subviews: [UIView]) {
 		
-		guard let layoutInfo = self.getCurrentLayoutInfo() else {
-			return
-		}
+		let layoutInfo = self.getCurrentLayoutInfo()
+		let defaultLayoutInfo = self.getDefaultLayoutInfo()
 		
 		subviews.forEach { (view) in
-			if let layout = self.getLayout(for: view, from: layoutInfo) {
+			if let layout = self.getLayout(for: view, from: layoutInfo, or: defaultLayoutInfo) {
 				self.place(view, with: layout)
 			}
 		}
