@@ -15,3 +15,88 @@ public struct MiddleCenterDidSetLayoutMaker {
 	let middleCenter: CGRect.Point
 	
 }
+
+extension MiddleCenterDidSetLayoutMaker {
+	
+	private func makeFrame(middleCenter: CGPoint, size: CGSize) -> CGRect {
+		
+		let x = middleCenter.x - size.width.half
+		let y = middleCenter.y - size.height.half
+		let origin = CGPoint(x: x, y: y)
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
+}
+
+extension MiddleCenterDidSetLayoutMaker {
+	
+	public func setWidth(to width: CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.constant(width)
+		
+		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                               middleCenter: self.middleCenter,
+		                                               width: width)
+		
+		return maker
+		
+	}
+	
+	public func calculateWidth(by calcuation: @escaping (_ boundSize: CGSize) -> CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calcuation)
+		
+		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                               middleCenter: self.middleCenter,
+		                                               width: width)
+		
+		return maker
+		
+	}
+	
+}
+
+extension MiddleCenterDidSetLayoutMaker {
+	
+	public func setSize(to size: CGSize) -> Layout.Individual {
+		
+		if let middleCenter = self.middleCenter.constantValue {
+			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
+			let layout = Layout.Individual.makeAbsolute(from: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let middleCenter = self.middleCenter.closureValue(boundSize)
+				let frame = self.makeFrame(middleCenter: middleCenter, size: size)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func calculateSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let middleCenter = self.middleCenter.closureValue(boundSize)
+			let size = calculation(boundSize)
+			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+}

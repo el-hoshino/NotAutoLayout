@@ -15,3 +15,88 @@ public struct MiddleLeftDidSetLayoutMaker {
 	let middleLeft: CGRect.Point
 	
 }
+
+extension MiddleLeftDidSetLayoutMaker {
+	
+	private func makeFrame(middleLeft: CGPoint, size: CGSize) -> CGRect {
+		
+		let x = middleLeft.x
+		let y = middleLeft.y - size.height.half
+		let origin = CGPoint(x: x, y: y)
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
+}
+
+extension MiddleLeftDidSetLayoutMaker {
+	
+	public func setWidth(to width: CGFloat) -> MiddleLeftWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.constant(width)
+		
+		let maker = MiddleLeftWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                             middleLeft: self.middleLeft,
+		                                             width: width)
+		
+		return maker
+		
+	}
+	
+	public func calculateWidth(by calcuation: @escaping (_ boundSize: CGSize) -> CGFloat) -> MiddleLeftWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calcuation)
+		
+		let maker = MiddleLeftWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                             middleLeft: self.middleLeft,
+		                                             width: width)
+		
+		return maker
+		
+	}
+	
+}
+
+extension MiddleLeftDidSetLayoutMaker {
+	
+	public func setSize(to size: CGSize) -> Layout.Individual {
+		
+		if let middleLeft = self.middleLeft.constantValue {
+			let frame = self.makeFrame(middleLeft: middleLeft, size: size)
+			let layout = Layout.Individual.makeAbsolute(from: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let middleLeft = self.middleLeft.closureValue(boundSize)
+				let frame = self.makeFrame(middleLeft: middleLeft, size: size)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func calculateSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let middleLeft = self.middleLeft.closureValue(boundSize)
+			let size = calculation(boundSize)
+			let frame = self.makeFrame(middleLeft: middleLeft, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+}

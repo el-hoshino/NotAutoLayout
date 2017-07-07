@@ -52,9 +52,9 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func setCenter(to baseline: CGFloat) -> CenterDidSetLayoutMaker {
+	public func setCenter(to center: CGFloat) -> CenterDidSetLayoutMaker {
 		
-		let center = CGRect.Float.constant(baseline)
+		let center = CGRect.Float.constant(center)
 		
 		let maker = CenterDidSetLayoutMaker(parentView: self.parentView,
 		                                    center: center)
@@ -89,6 +89,17 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setTopCenter(to topCenter: CGPoint) -> TopCenterDidSetLayoutMaker {
+		
+		let topCenter = CGRect.Point.constant(topCenter)
+		
+		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                       topCenter: topCenter)
+		
+		return maker
+		
+	}
+	
 	public func pinTopCenter(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = true) -> TopCenterDidSetLayoutMaker {
 		
 		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
@@ -106,6 +117,80 @@ extension InitialLayoutMaker {
 		
 		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                       topCenter: topCenter)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
+	public func setMiddleLeft(to middleLeft: CGPoint) -> MiddleLeftDidSetLayoutMaker {
+		
+		let middleLeft = CGRect.Point.constant(middleLeft)
+		
+		let maker = MiddleLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                        middleLeft: middleLeft)
+		
+		return maker
+		
+	}
+	
+	public func pinMiddleLeft(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = true) -> MiddleLeftDidSetLayoutMaker {
+		
+		let middleLeft = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = MiddleLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                        middleLeft: middleLeft)
+		
+		return maker
+		
+	}
+	
+	public func calculateMiddleLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleLeftDidSetLayoutMaker {
+		
+		let middleLeft = CGRect.Point.closure(calculation)
+		
+		let maker = MiddleLeftDidSetLayoutMaker(parentView: self.parentView,
+		                                        middleLeft: middleLeft)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
+	public func setMiddleCenter(to middleCenter: CGPoint) -> MiddleCenterDidSetLayoutMaker {
+		
+		let middleCenter = CGRect.Point.constant(middleCenter)
+		
+		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          middleCenter: middleCenter)
+		
+		return maker
+		
+	}
+	
+	public func pinMiddleCenter(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = true) -> MiddleCenterDidSetLayoutMaker {
+		
+		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          middleCenter: middleCenter)
+		
+		return maker
+		
+	}
+	
+	public func calculateMiddleCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleCenterDidSetLayoutMaker {
+		
+		let middleCenter = CGRect.Point.closure(calculation)
+		
+		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          middleCenter: middleCenter)
 		
 		return maker
 		

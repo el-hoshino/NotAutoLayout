@@ -18,9 +18,9 @@ public struct CenterDidSetLayoutMaker {
 
 extension CenterDidSetLayoutMaker {
 	
-	public func setTop(to baseline: CGFloat) -> CenterTopDidSetLayoutMaker {
+	public func setTop(to top: CGFloat) -> CenterTopDidSetLayoutMaker {
 		
-		let top = CGRect.Float.constant(baseline)
+		let top = CGRect.Float.constant(top)
 		
 		let maker = CenterTopDidSetLayoutMaker(parentView: self.parentView,
 		                                       center: self.center,
@@ -48,6 +48,84 @@ extension CenterDidSetLayoutMaker {
 		let maker = CenterTopDidSetLayoutMaker(parentView: self.parentView,
 		                                       center: self.center,
 		                                       top: top)
+		
+		return maker
+		
+	}
+	
+}
+
+extension CenterDidSetLayoutMaker {
+	
+	public func setMiddle(to middle: CGFloat) -> CenterMiddleDidSetLayoutMaker {
+		
+		let middle = CGRect.Float.constant(middle)
+		
+		let maker = CenterMiddleDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          middle: middle)
+		return maker
+		
+	}
+	
+	public func pinMiddle(to referenceView: UIView, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> CenterMiddleDidSetLayoutMaker {
+		
+		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = CenterMiddleDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          middle: middle)
+		
+		return maker
+		
+	}
+	
+	public func calculateMiddle(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleDidSetLayoutMaker {
+		
+		let middle = CGRect.Float.closure(calculation)
+		
+		let maker = CenterMiddleDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          middle: middle)
+		
+		return maker
+		
+	}
+	
+}
+
+extension CenterDidSetLayoutMaker {
+	
+	public func setBottom(to bottom: CGFloat) -> CenterBottomDidSetLayoutMaker {
+		
+		let bottom = CGRect.Float.constant(bottom)
+		
+		let maker = CenterBottomDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          bottom: bottom)
+		return maker
+		
+	}
+	
+	public func pinBottom(to referenceView: UIView, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> CenterBottomDidSetLayoutMaker {
+		
+		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = CenterBottomDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          bottom: bottom)
+		
+		return maker
+		
+	}
+	
+	public func calculateBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterBottomDidSetLayoutMaker {
+		
+		let bottom = CGRect.Float.closure(calculation)
+		
+		let maker = CenterBottomDidSetLayoutMaker(parentView: self.parentView,
+		                                          center: self.center,
+		                                          bottom: bottom)
 		
 		return maker
 		
