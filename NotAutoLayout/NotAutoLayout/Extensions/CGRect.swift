@@ -14,19 +14,11 @@ extension CGRect {
 		
 		var value: CGFloat
 		
-		public static let left = HorizontalBasePoint(value: 0)
-		public static let center = HorizontalBasePoint(value: 0.5)
-		public static let right = HorizontalBasePoint(value: 1)
-		
 	}
 	
 	public struct VerticalBasePoint {
 		
 		var value: CGFloat
-		
-		public static let top = VerticalBasePoint(value: 0)
-		public static let middle = VerticalBasePoint(value: 0.5)
-		public static let bottom = VerticalBasePoint(value: 1)
 		
 	}
 	
@@ -34,17 +26,15 @@ extension CGRect {
 		
 		var value: CGPoint
 		
-		public static let topLeft		= PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.0))
-		public static let topCenter		= PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.0))
-		public static let topRight		= PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.0))
-		public static let middleLeft	= PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.5))
-		public static let middleCenter	= PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.5))
-		public static let middleRight	= PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.5))
-		public static let bottomLeft	= PlaneBasePoint(value: CGPoint(x: 0.0, y: 1.0))
-		public static let bottomCenter	= PlaneBasePoint(value: CGPoint(x: 0.5, y: 1.0))
-		public static let bottomRight	= PlaneBasePoint(value: CGPoint(x: 1.0, y: 1.0))
-		
 	}
+	
+}
+
+extension CGRect.HorizontalBasePoint {
+	
+	public static let left		= CGRect.HorizontalBasePoint(value: 0)
+	public static let center	= CGRect.HorizontalBasePoint(value: 0.5)
+	public static let right		= CGRect.HorizontalBasePoint(value: 1)
 	
 }
 
@@ -56,11 +46,49 @@ extension CGRect.HorizontalBasePoint {
 	
 }
 
+extension CGRect.HorizontalBasePoint: ExpressibleByFloatLiteral {
+	
+	public init(floatLiteral value: Double) {
+		self.value = CGFloat(value)
+	}
+	
+}
+
+extension CGRect.VerticalBasePoint {
+	
+	public static let top		= CGRect.VerticalBasePoint(value: 0)
+	public static let middle	= CGRect.VerticalBasePoint(value: 0.5)
+	public static let bottom	= CGRect.VerticalBasePoint(value: 1)
+	
+}
+
 extension CGRect.VerticalBasePoint {
 	
 	func value(in frame: CGRect) -> CGFloat {
 		return frame.height * self.value + frame.y
 	}
+	
+}
+
+extension CGRect.VerticalBasePoint: ExpressibleByFloatLiteral {
+	
+	public init(floatLiteral value: Double) {
+		self.value = CGFloat(value)
+	}
+	
+}
+
+extension CGRect.PlaneBasePoint {
+	
+	public static let topLeft		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.0))
+	public static let topCenter		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.0))
+	public static let topRight		= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.0))
+	public static let middleLeft	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.5))
+	public static let middleCenter	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.5))
+	public static let middleRight	= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.5))
+	public static let bottomLeft	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 1.0))
+	public static let bottomCenter	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 1.0))
+	public static let bottomRight	= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 1.0))
 	
 }
 
