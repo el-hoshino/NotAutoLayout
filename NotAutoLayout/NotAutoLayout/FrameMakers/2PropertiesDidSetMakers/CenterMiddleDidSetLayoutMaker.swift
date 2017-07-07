@@ -33,7 +33,7 @@ extension CenterMiddleDidSetLayoutMaker {
 		
 	}
 	
-	public func pinBottom(to referenceView: UIView, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> CenterMiddleBottomDidSetLayoutMaker {
+	public func pinBottom(to referenceView: UIView, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterMiddleBottomDidSetLayoutMaker {
 		
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		

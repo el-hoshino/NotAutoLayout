@@ -10,7 +10,7 @@ import Foundation
 
 extension UIView {
 	
-	func frame(in targetView: UIView, ignoresTransform: Bool = true) -> CGRect {
+	func frame(in targetView: UIView, ignoresTransform: Bool = false) -> CGRect {
 		
 		let convertingFrame: CGRect
 		
@@ -31,7 +31,7 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> CGRect.Float {
+	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self, weak referenceView] (_) -> CGFloat in
 			
@@ -53,7 +53,7 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = true) -> CGRect.Float {
+	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self, weak referenceView] (_) -> CGFloat in
 			
@@ -75,7 +75,7 @@ extension UIView {
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: UIView, offsetBY offset: CGVector = .zero, ignoresTransform: Bool = true) -> CGRect.Point {
+	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: UIView, offsetBY offset: CGVector = .zero, ignoresTransform: Bool = false) -> CGRect.Point {
 		
 		let reference = CGRect.Point.closure { [unowned self, weak referenceView] (_) -> CGPoint in
 			
