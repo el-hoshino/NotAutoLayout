@@ -39,7 +39,7 @@ extension TopCenterBottomDidSetLayoutMaker {
 		
 		if let topCenter = self.topCenter.constantValue, let bottom = self.bottom.constantValue {
 			let frame = self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			

@@ -29,7 +29,7 @@ extension CenterTopBottomDidSetLayoutMaker {
 			let x = center - width.half
 			let y = top
 			let frame = CGRect(x: x, y: y, width: width, height: height)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			

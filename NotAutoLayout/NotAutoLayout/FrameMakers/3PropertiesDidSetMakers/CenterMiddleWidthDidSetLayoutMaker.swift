@@ -29,7 +29,7 @@ extension CenterMiddleWidthDidSetLayoutMaker {
 			                   y: middle - height.half,
 			                   width: width,
 			                   height: height)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			

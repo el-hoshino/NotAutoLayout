@@ -163,6 +163,43 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setTopRight(to topRight: CGPoint) -> TopRightDidSetLayoutMaker {
+		
+		let topRight = CGRect.Point.constant(topRight)
+		
+		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
+		                                      topRight: topRight)
+		
+		return maker
+		
+	}
+	
+	public func pinTopRight(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopRightDidSetLayoutMaker {
+		
+		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
+		                                      topRight: topRight)
+		
+		return maker
+		
+	}
+	
+	public func calculateTopRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopRightDidSetLayoutMaker {
+		
+		let topRight = CGRect.Point.closure(calculation)
+		
+		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
+		                                      topRight: topRight)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
 	public func setMiddleLeft(to middleLeft: CGPoint) -> MiddleLeftDidSetLayoutMaker {
 		
 		let middleLeft = CGRect.Point.constant(middleLeft)
@@ -242,6 +279,34 @@ extension InitialLayoutMaker {
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 			return CGRect(origin: .zero, size: boundSize)
 		}
+		
+		return layout
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
+	public func makeFrame(_ frame: CGRect) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeAbsolute(frame: frame)
+		
+		return layout
+		
+	}
+	
+	public func makeFrame(_ frame: @escaping (CGSize) -> CGRect) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom(frame: frame)
+		
+		return layout
+		
+	}
+	
+	public func makeFrame(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ boundSize: CGSize) -> CGRect) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom(frame: frame)
 		
 		return layout
 		

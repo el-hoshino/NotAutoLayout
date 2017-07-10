@@ -12,17 +12,28 @@ extension Layout {
 	
 	public struct Individual {
 		
-		private var basicFrameEvaluation: (_ boundSize: CGSize) -> CGRect
+		fileprivate enum Frame {
+			case constant(CGRect)
+			case basicEvaluation((_ boundSize: CGSize) -> CGRect)
+			case fittingEvaluation((_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ boundSize: CGSize) -> CGRect)
+		}
+		
+		private var basicFrameEvaluation: Frame
 		
 		private var additionalEvaluations: [FrameAdditionalEvaluation]
 		
-		private init(evaluation: @escaping (_ boundSize: CGSize) -> CGRect) {
-			self.basicFrameEvaluation = evaluation
+		private init(frame: CGRect) {
+			self.basicFrameEvaluation = Frame.constant(frame)
 			self.additionalEvaluations = []
 		}
 		
-		private init(frame: CGRect) {
-			self.basicFrameEvaluation = { _ in return frame }
+		private init(evaluation: @escaping (_ boundSize: CGSize) -> CGRect) {
+			self.basicFrameEvaluation = Frame.basicEvaluation(evaluation)
+			self.additionalEvaluations = []
+		}
+		
+		private init(evaluation: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ boundSize: CGSize) -> CGRect) {
+			self.basicFrameEvaluation = Frame.fittingEvaluation(evaluation)
 			self.additionalEvaluations = []
 		}
 		
@@ -36,24 +47,18 @@ extension Layout {
 				return frame
 			}
 			
-			self.basicFrameEvaluation = frame
+			self.basicFrameEvaluation = Frame.basicEvaluation(frame)
 			self.additionalEvaluations = []
 			
 		}
 		
-		private init(frame: @escaping (CGSize) -> CGRect) {
-			
-			self.basicFrameEvaluation = frame
-			self.additionalEvaluations = []
-			
-		}
 	}
 	
 }
 
 extension Layout.Individual {
 	
-	static func makeAbsolute(from frame: CGRect) -> Layout.Individual {
+	static func makeAbsolute(frame: CGRect) -> Layout.Individual {
 		let layout = Layout.Individual(frame: frame)
 		return layout
 	}
@@ -64,7 +69,12 @@ extension Layout.Individual {
 	}
 	
 	static func makeCustom(frame: @escaping (CGSize) -> CGRect) -> Layout.Individual {
-		let layout = Layout.Individual(frame: frame)
+		let layout = Layout.Individual(evaluation: frame)
+		return layout
+	}
+	
+	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ boundSize: CGSize) -> CGRect) -> Layout.Individual {
+		let layout = Layout.Individual(evaluation: frame)
 		return layout
 	}
 	
@@ -92,15 +102,34 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func evaluatedFrame(in boundSize: CGSize) -> CGRect {
+	func evaluatedFrame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, in boundSize: CGSize) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation(boundSize)
+		var frame = self.basicFrameEvaluation.frame(fittedBy: fitting, in: boundSize)
 		
 		for evaluation in self.additionalEvaluations {
 			frame = evaluation.evaluated(from: frame, in: boundSize)
 		}
 		
 		return frame
+		
+	}
+	
+}
+
+extension Layout.Individual.Frame {
+	
+	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, in boundSize: CGSize) -> CGRect {
+		
+		switch self {
+		case .constant(let frame):
+			return frame
+			
+		case .basicEvaluation(let frame):
+			return frame(boundSize)
+			
+		case .fittingEvaluation(let frame):
+			return frame(fitting, boundSize)
+		}
 		
 	}
 	

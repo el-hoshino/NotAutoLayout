@@ -38,7 +38,7 @@ extension TopLeftDidSetLayoutMaker {
 		
 		if let topLeft = self.topLeft.constantValue {
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			
@@ -82,6 +82,22 @@ extension TopLeftDidSetLayoutMaker {
 		}
 		
 		return layout
+		
+	}
+	
+}
+
+extension TopLeftDidSetLayoutMaker {
+	
+	public func pinRight(to referenceView: UIView, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> TopLeftRightDidSetLayoutMaker {
+		
+		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = TopLeftRightDidSetLayoutMaker(parentView: self.parentView,
+		                                          topLeft: self.topLeft,
+		                                          right: right)
+		
+		return maker
 		
 	}
 	

@@ -65,7 +65,7 @@ extension MiddleCenterDidSetLayoutMaker {
 		
 		if let middleCenter = self.middleCenter.constantValue {
 			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			

@@ -41,7 +41,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	private func place(_ view: UIView, with layout: Layout.Individual) {
 		
-		let frame = layout.evaluatedFrame(in: self.boundSize)
+		let frame = layout.evaluatedFrame(fittedBy: { view.sizeThatFits($0)	}, in: self.boundSize)
 		self.place(view, with: frame)
 		
 	}

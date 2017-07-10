@@ -93,7 +93,7 @@ extension TopCenterDidSetLayoutMaker {
 			let y = topCenter.y
 			let origin = CGPoint(x: x, y: y)
 			let frame = CGRect(origin: origin, size: size)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			

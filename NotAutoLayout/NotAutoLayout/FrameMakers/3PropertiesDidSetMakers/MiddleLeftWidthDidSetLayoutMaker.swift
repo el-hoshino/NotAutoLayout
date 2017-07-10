@@ -40,7 +40,7 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 		
 		if let middleLeft = self.middleLeft.constantValue, let width = self.width.constantValue {
 			let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
-			let layout = Layout.Individual.makeAbsolute(from: frame)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
 			
