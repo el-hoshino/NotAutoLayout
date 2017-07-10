@@ -10,7 +10,7 @@ import Foundation
 
 public struct MiddleRightHeightDidSetLayoutMaker {
 	
-	unowned let parentView: UIView
+	public unowned let parentView: UIView
 	
 	let middleRight: CGRect.Point
 	

@@ -10,7 +10,7 @@ import Foundation
 
 public struct CenterBottomHeightDidSetLayoutMaker {
 	
-	unowned let parentView: UIView
+	public unowned let parentView: UIView
 	
 	let center: CGRect.Float
 	

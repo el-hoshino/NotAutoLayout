@@ -10,7 +10,7 @@ import Foundation
 
 public struct BottomCenterMiddleDidSetLayoutMaker {
 	
-	unowned let parentView: UIView
+	public unowned let parentView: UIView
 	
 	let bottomCenter: CGRect.Point
 	
