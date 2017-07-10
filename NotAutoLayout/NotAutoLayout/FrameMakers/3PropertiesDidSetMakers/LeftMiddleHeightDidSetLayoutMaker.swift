@@ -10,7 +10,7 @@ import Foundation
 
 public struct LeftMiddleHeightDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let left: CGRect.Float
 	

@@ -10,7 +10,7 @@ import Foundation
 
 public struct RightTopHeightDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let right: CGRect.Float
 	

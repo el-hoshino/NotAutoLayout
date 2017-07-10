@@ -10,7 +10,7 @@ import Foundation
 
 public struct LeftTopBottomDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let left: CGRect.Float
 	

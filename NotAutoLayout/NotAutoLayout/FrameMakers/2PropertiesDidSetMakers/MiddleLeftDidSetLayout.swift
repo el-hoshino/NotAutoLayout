@@ -10,7 +10,7 @@ import Foundation
 
 public struct MiddleLeftDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let middleLeft: CGRect.Point
 	

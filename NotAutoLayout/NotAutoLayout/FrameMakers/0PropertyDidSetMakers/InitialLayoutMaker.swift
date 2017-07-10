@@ -10,7 +10,7 @@ import Foundation
 
 public struct InitialLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 }
 

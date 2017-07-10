@@ -10,7 +10,7 @@ import Foundation
 
 public struct TopLeftDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let topLeft: CGRect.Point
 	
@@ -43,11 +43,11 @@ extension TopLeftDidSetLayoutMaker {
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom(frame: { (boundSize) -> CGRect in
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 				let topLeft = self.topLeft.closureValue(boundSize)
 				let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 				return frame
-			})
+			}
 			
 			return layout
 			
@@ -57,9 +57,9 @@ extension TopLeftDidSetLayoutMaker {
 	
 	public func pinBottomRight(to referenceView: UIView, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+		let layout = Layout.Individual.makeCustom { [unowned parentView, weak referenceView] (boundSize) -> CGRect in
 			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame

@@ -10,7 +10,7 @@ import Foundation
 
 public struct TopLeftHeightDidSetLayoutMaker {
 	
-	let parentView: UIView
+	unowned let parentView: UIView
 	
 	let topLeft: CGRect.Point
 	
