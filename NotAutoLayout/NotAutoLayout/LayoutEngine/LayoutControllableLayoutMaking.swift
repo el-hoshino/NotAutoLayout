@@ -10,10 +10,10 @@ import Foundation
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	public func makeLayout(_ making: (_ parentView: UIView, _ maker: InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
+	public func makeLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
-		return making(self.body, maker)
+		return making(maker)
 		
 	}
 	
