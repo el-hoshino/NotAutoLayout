@@ -31,7 +31,7 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
+	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: UIView?, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self, weak referenceView] (_) -> CGFloat in
 			
@@ -53,7 +53,7 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: UIView, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
+	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: UIView?, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self, weak referenceView] (_) -> CGFloat in
 			
