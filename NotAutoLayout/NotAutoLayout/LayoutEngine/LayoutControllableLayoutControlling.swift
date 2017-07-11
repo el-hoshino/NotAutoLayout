@@ -39,7 +39,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	private func place(_ view: UIView, with layout: Layout.Individual) {
+	public func place(_ view: UIView, with layout: Layout.Individual) {
 		
 		let frame = layout.evaluatedFrame(fittedBy: { view.sizeThatFits($0)	}, in: self.boundSize)
 		self.place(view, with: frame)
@@ -101,10 +101,10 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 			self.layoutNormally(subviews: subviews)
 			
 		case .sequence:
-			fatalError("Not implemented yet")
+			self.layoutSequencially(subviews: subviews)
 			
-		case .matrix:
-			fatalError("Not implemented yet")
+		case .matrix(defaultLayout: _, colsPerRow: let colsPerRow):
+			self.layoutMatrically(subviews: subviews, colsPerRow: colsPerRow)
 		}
 		
 	}
