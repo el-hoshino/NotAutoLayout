@@ -10,9 +10,9 @@ import UIKit
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public typealias Hash = Int
+	typealias Hash = Int
 	
-	public var hash: Hash {
+	var hash: Hash {
 		return self.body.hash
 	}
 	

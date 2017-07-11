@@ -93,8 +93,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	func appendLayout(_ layout: Layout.Individual, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
-		let newInfo: LayoutInfo = [subview.nal.hash: layout]
-		self.body.layoutInfo[condition, default: [:]].append(newInfo)
+		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
@@ -108,8 +107,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	func setDefaultLayout(_ layout: Layout.Individual, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
-		let newInfo: LayoutInfo = [subview.nal.hash: layout]
-		self.body.layoutInfo[condition, default: [:]].append(newInfo)
+		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
@@ -117,20 +115,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 // MARK: Internal APIs: Order
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
-	func getOrder(for view: UIView, from orderInfo: OrderInfo) -> Int? {
-		
-		let order = orderInfo[view.nal.hash]
-		return order
-		
-	}
-	
-	func getFactOrder(for view: UIView, from orderInfo: OrderInfo) -> Int {
-		
-		let order = self.getOrder(for: view, from: orderInfo)
-		return order ?? 0
-		
-	}
 	
 	func getCurrentOrderInfo() -> OrderInfo? {
 		
@@ -146,8 +130,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	func appendLayoutOrder(_ order: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
-		let newInfo: OrderInfo = [subview.nal.hash: order]
-		self.body.orderInfo[condition, default: [:]].append(newInfo)
+		self.body.orderInfo[condition, default: [:]].set(order, for: subview)
 		
 	}
 	
@@ -161,8 +144,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	func setDefaultLayoutOrder(_ order: Int, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
-		let newInfo: OrderInfo = [subview.nal.hash: order]
-		self.body.orderInfo[condition, default: [:]].append(newInfo)
+		self.appendLayoutOrder(order, under: condition, for: subview)
 		
 	}
 	
@@ -170,20 +152,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 // MARK: Internal APIs: ZIndex
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
-	func getZIndex(for view: UIView, from zIndexInfo: ZIndexInfo) -> Int? {
-		
-		let zIndex = zIndexInfo[view.nal.hash]
-		return zIndex
-		
-	}
-	
-	func getFactZIndex(for view: UIView, from zIndexInfo: ZIndexInfo) -> Int {
-		
-		let zIndex = self.getZIndex(for: view, from: zIndexInfo)
-		return zIndex ?? 0
-		
-	}
 	
 	func getCurrentZIndexInfo() -> ZIndexInfo? {
 		
@@ -197,25 +165,23 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	func appendZIndex(_ index: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendZIndex(_ zIndex: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
-		let newInfo: ZIndexInfo = [subview.nal.hash: index]
-		self.body.zIndexInfo[condition, default: [:]].append(newInfo)
+		self.body.zIndexInfo[condition, default: [:]].set(zIndex, for: subview)
 		
 	}
 	
-	func appendZIndex(_ index: Int, under condition: ConditionEnum, for subview: UIView) {
+	func appendZIndex(_ zIndex: Int, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
-		self.appendZIndex(index, under: condition, for: subview)
+		self.appendZIndex(zIndex, under: condition, for: subview)
 		
 	}
 	
 	func setDefaultZIndex(_ zIndex: Int, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
-		let newInfo: ZIndexInfo = [subview.nal.hash: zIndex]
-		self.body.orderInfo[condition, default: [:]].append(newInfo)
+		self.appendZIndex(zIndex, under: condition, for: subview)
 		
 	}
 	

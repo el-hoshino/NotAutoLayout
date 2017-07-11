@@ -21,13 +21,12 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		}
 		
 		let layoutRequiredSubviews = self.body.subviews.filter { (view) -> Bool in
-			currentLayoutInfo.containsKey(view.nal.hash)
+			currentLayoutInfo.containsInfo(for: view)
 		}
 		
 		if shouldSortSubviews, let orderInfo = self.getCurrentOrderInfo() {
 			let sortedSubviews = layoutRequiredSubviews.sorted {
-				self.getFactOrder(for: $0, from: orderInfo) <
-					self.getFactOrder(for: $1, from: orderInfo)
+				return orderInfo[$0, default: 0] < orderInfo[$1, default: 0]
 			}
 			return sortedSubviews
 			
@@ -96,8 +95,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		}
 		
 		let sortedSubviews = subviews.sorted {
-			self.getFactZIndex(for: $0, from: zIndexInfo) <
-				self.getFactZIndex(for: $1, from: zIndexInfo)
+			zIndexInfo[$0, default: 0] < zIndexInfo[$1, default: 0]
 		}
 		
 		return sortedSubviews
