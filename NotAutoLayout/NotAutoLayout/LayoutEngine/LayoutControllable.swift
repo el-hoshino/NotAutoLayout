@@ -91,15 +91,35 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendLayout(_ layout: @escaping () -> Layout.Individual, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
+		
+	}
+	
 	func appendLayout(_ layout: Layout.Individual, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
+	func appendLayout(_ layout: @escaping () -> Layout.Individual, under condition: ConditionEnum, for subview: UIView) {
+		
+		let condition = condition.rawValue
+		self.appendLayout(layout, under: condition, for: subview)
+		
+	}
+	
 	func appendLayout(_ layout: Layout.Individual, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
+		self.appendLayout(layout, under: condition, for: subview)
+		
+	}
+	
+	func setDefaultLayout(_ layout: @escaping () -> Layout.Individual, for subview: UIView) {
+		
+		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
@@ -128,15 +148,35 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		self.body.orderInfo[condition, default: [:]].set(order, for: subview)
+		
+	}
+	
 	func appendLayoutOrder(_ order: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.orderInfo[condition, default: [:]].set(order, for: subview)
 		
 	}
 	
+	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum, for subview: UIView) {
+		
+		let condition = condition.rawValue
+		self.appendLayoutOrder(order, under: condition, for: subview)
+		
+	}
+	
 	func appendLayoutOrder(_ order: Int, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
+		self.appendLayoutOrder(order, under: condition, for: subview)
+		
+	}
+	
+	func setDefaultLayoutOrder(_ order: @escaping () -> Int, for subview: UIView) {
+		
+		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayoutOrder(order, under: condition, for: subview)
 		
 	}
@@ -165,15 +205,35 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
+		
+		self.body.zIndexInfo[condition, default: [:]].set(zIndex, for: subview)
+		
+	}
+	
 	func appendZIndex(_ zIndex: Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.zIndexInfo[condition, default: [:]].set(zIndex, for: subview)
 		
 	}
 	
+	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum, for subview: UIView) {
+		
+		let condition = condition.rawValue
+		self.appendZIndex(zIndex, under: condition, for: subview)
+		
+	}
+	
 	func appendZIndex(_ zIndex: Int, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
+		self.appendZIndex(zIndex, under: condition, for: subview)
+		
+	}
+	
+	func setDefaultZIndex(_ zIndex: @escaping () -> Int, for subview: UIView) {
+		
+		let condition = self.body.getDefaultCondition().rawValue
 		self.appendZIndex(zIndex, under: condition, for: subview)
 		
 	}

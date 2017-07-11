@@ -13,9 +13,9 @@ public struct SubviewSetupWizard<ParentView> {
 	private let parentView: ParentView
 	private let setteeView: UIView
 	
-	typealias ConditionLayout = [ConditionEnum.RawValue: Layout.Individual]
-	typealias ConditionOrder = [ConditionEnum.RawValue: Int]
-	typealias ConditionZIndex = [ConditionEnum.RawValue: Int]
+	typealias ConditionLayout = [ConditionEnum.RawValue: () -> Layout.Individual]
+	typealias ConditionOrder = [ConditionEnum.RawValue: () -> Int]
+	typealias ConditionZIndex = [ConditionEnum.RawValue: () -> Int]
 	
 	private var layouts: ConditionLayout
 	private var orders: ConditionOrder
@@ -92,41 +92,52 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setDefaultLayout(to layout: Layout.Individual) -> SubviewSetupWizard {
+	public func setDefaultLayout(to layout: @escaping () -> Layout.Individual) -> SubviewSetupWizard {
 		
 		var wizard = self
 		let defaultCondition = self.parentView.getDefaultCondition()
 		wizard.layouts[defaultCondition.rawValue] = layout
+		return wizard
+		
+	}
+	
+	public func setDefaultLayout(to layout: Layout.Individual) -> SubviewSetupWizard {
+		
+		let layout = { layout }
+		return self.setDefaultLayout(to: layout)
+		
+	}
+	
+	public func setLayout(_ layout: @escaping () -> Layout.Individual, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.layouts[condition.rawValue] = layout
 		return wizard
 		
 	}
 	
 	public func setLayout(_ layout: Layout.Individual, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
 		
-		var wizard = self
-		wizard.layouts[condition.rawValue] = layout
-		return wizard
+		let layout = { layout }
+		return self.setLayout(layout, forCondition: condition)
 		
 	}
 	
 	public func makeDefaultLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> SubviewSetupWizard {
 		
-		var wizard = self
-		let defaultCondition = self.parentView.getDefaultCondition()
 		let maker = InitialLayoutMaker(parentView: self.parentView)
 		let layout = making(maker)
-		wizard.layouts[defaultCondition.rawValue] = layout
-		return wizard
+		
+		return self.setDefaultLayout(to: layout)
 		
 	}
 	
 	public func makeLayout(forCondition condition: ConditionEnum, making: (InitialLayoutMaker) -> Layout.Individual) -> SubviewSetupWizard {
 		
-		var wizard = self
-		let maker = InitialLayoutMaker(parentView: wizard.parentView)
+		let maker = InitialLayoutMaker(parentView: self.parentView)
 		let layout = making(maker)
-		wizard.layouts[condition.rawValue] = layout
-		return wizard
+		
+		return self.setLayout(layout, forCondition: condition)
 		
 	}
 	
