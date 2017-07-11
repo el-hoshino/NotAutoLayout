@@ -274,6 +274,43 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setMiddleRight(to middleRight: CGPoint) -> MiddleRightDidSetLayoutMaker {
+		
+		let middleRight = CGRect.Point.constant(middleRight)
+		
+		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         middleRight: middleRight)
+		
+		return maker
+		
+	}
+	
+	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleRightDidSetLayoutMaker {
+		
+		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         middleRight: middleRight)
+		
+		return maker
+		
+	}
+	
+	public func calculateMiddleRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleRightDidSetLayoutMaker {
+		
+		let middleRight = CGRect.Point.closure(calculation)
+		
+		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         middleRight: middleRight)
+		
+		return maker
+		
+	}
+
+}
+
+extension InitialLayoutMaker {
+	
 	public func setBottomCenter(to bottomCenter: CGPoint) -> BottomCenterDidSetLayoutMaker {
 		
 		let bottomCenter = CGRect.Point.constant(bottomCenter)
