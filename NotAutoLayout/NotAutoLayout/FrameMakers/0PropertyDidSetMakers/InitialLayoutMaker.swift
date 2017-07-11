@@ -274,6 +274,43 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setBottomCenter(to bottomCenter: CGPoint) -> BottomCenterDidSetLayoutMaker {
+		
+		let bottomCenter = CGRect.Point.constant(bottomCenter)
+		
+		let maker = BottomCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          bottomCenter: bottomCenter)
+		
+		return maker
+		
+	}
+	
+	public func pinBottomCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomCenterDidSetLayoutMaker {
+		
+		let bottomCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = BottomCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          bottomCenter: bottomCenter)
+		
+		return maker
+		
+	}
+	
+	public func calculateBottomCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> BottomCenterDidSetLayoutMaker {
+		
+		let bottomCenter = CGRect.Point.closure(calculation)
+		
+		let maker = BottomCenterDidSetLayoutMaker(parentView: self.parentView,
+		                                          bottomCenter: bottomCenter)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
 	public func stickOnParent() -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in

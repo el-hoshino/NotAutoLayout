@@ -82,9 +82,18 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
+	func addingAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) -> Layout.Individual {
+		
+		var layout = self
+		layout.additionalEvaluations.append(evaluation)
+		
+		return layout
+		
+	}
+	
 	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
 		
-		self.additionalEvaluations.append(evaluation)
+		self = self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
@@ -92,9 +101,18 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
+	func settingAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) -> Layout.Individual {
+		
+		var layout = self
+		layout.additionalEvaluations = evaluations
+		
+		return layout
+		
+	}
+	
 	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) {
 		
-		self.additionalEvaluations = evaluations
+		self = self.settingAdditionalEvaluations(evaluations)
 		
 	}
 	
