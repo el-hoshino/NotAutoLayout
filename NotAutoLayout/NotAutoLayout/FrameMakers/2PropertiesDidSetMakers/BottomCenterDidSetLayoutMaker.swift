@@ -71,4 +71,20 @@ extension BottomCenterDidSetLayoutMaker {
 		
 	}
 	
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let bottomCenter = self.bottomCenter.closureValue(boundSize)
+			let size = fitting(fittingSize)
+			let frame = self.makeFrame(bottomCenter: bottomCenter, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
 }

@@ -18,6 +18,21 @@ public struct TopCenterDidSetLayoutMaker {
 
 extension TopCenterDidSetLayoutMaker {
 	
+	private func makeFrame(topCenter: CGPoint, size: CGSize) -> CGRect {
+		
+		let x = topCenter.x - size.width.half
+		let y = topCenter.y
+		let origin = CGPoint(x: x, y: y)
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
+}
+
+extension TopCenterDidSetLayoutMaker {
+	
 	public func setBottom(to bottom: CGFloat) -> TopCenterBottomDidSetLayoutMaker {
 		
 		let bottom = CGRect.Float.constant(bottom)
@@ -89,10 +104,7 @@ extension TopCenterDidSetLayoutMaker {
 	public func setSize(to size: CGSize) -> Layout.Individual {
 		
 		if let topCenter = self.topCenter.constantValue {
-			let x = topCenter.x - size.width.half
-			let y = topCenter.y
-			let origin = CGPoint(x: x, y: y)
-			let frame = CGRect(origin: origin, size: size)
+			let frame = self.makeFrame(topCenter: topCenter, size: size)
 			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
@@ -100,10 +112,7 @@ extension TopCenterDidSetLayoutMaker {
 		} else {
 			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 				let topCenter = self.topCenter.closureValue(boundSize)
-				let x = topCenter.x - size.width.half
-				let y = topCenter.y
-				let origin = CGPoint(x: x, y: y)
-				let frame = CGRect(origin: origin, size: size)
+				let frame = self.makeFrame(topCenter: topCenter, size: size)
 				
 				return frame
 				
@@ -121,8 +130,23 @@ extension TopCenterDidSetLayoutMaker {
 			
 			let topCenter = self.topCenter.closureValue(boundSize)
 			let size = calculation(boundSize)
-			let origin = CGPoint(x: topCenter.x - size.halfWidth, y: topCenter.y)
-			let frame = CGRect(origin: origin, size: size)
+			let frame = self.makeFrame(topCenter: topCenter, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let topCenter = self.topCenter.closureValue(boundSize)
+			let size = fitting(fittingSize)
+			let frame = self.makeFrame(topCenter: topCenter, size: size)
 			
 			return frame
 			

@@ -35,18 +35,17 @@ extension TopLeftRightDidSetLayoutMaker {
 
 extension TopLeftRightDidSetLayoutMaker {
 	
-	public func fitHeight(by fittingHeight: CGFloat) -> Layout.Individual {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let topLeft = self.topLeft.closureValue(boundSize)
 			let right = self.right.closureValue(boundSize)
 			let x = topLeft.x
-			let y = topLeft.y
 			let width = right - x
 			let fittingSize = CGSize(width: width, height: fittingHeight)
 			let height = fitting(fittingSize).height
-			let frame = CGRect(x: x, y: y, width: width, height: height)
+			let frame = self.makeFrame(topLeft: topLeft, right: right, height: height)
 			
 			return frame
 			
