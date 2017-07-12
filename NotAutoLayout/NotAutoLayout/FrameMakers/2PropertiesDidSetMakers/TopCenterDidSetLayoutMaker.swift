@@ -93,9 +93,9 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateWidth(by calcuation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
+	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calcuation)
+		let width = CGRect.Float.closure(calculation)
 		
 		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                            topCenter: self.topCenter,

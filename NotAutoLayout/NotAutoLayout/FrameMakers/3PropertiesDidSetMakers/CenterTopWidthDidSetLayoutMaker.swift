@@ -52,10 +52,10 @@ extension CenterTopWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateHeight(by calcualation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let height = calcualation(boundSize)
+			let height = calculation(boundSize)
 			let width = self.width.closureValue(boundSize)
 			let x = self.center.closureValue(boundSize) - width.half
 			let y = self.top.closureValue(boundSize)
