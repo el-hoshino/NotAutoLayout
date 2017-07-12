@@ -37,7 +37,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftDidSetLayoutMaker {
+	public func setLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftDidSetLayoutMaker {
 		
 		let left = CGRect.Float.closure(calculation)
 		
@@ -74,7 +74,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterDidSetLayoutMaker {
+	public func setCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterDidSetLayoutMaker {
 		
 		let center = CGRect.Float.closure(calculation)
 		
@@ -111,7 +111,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateTopLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopLeftDidSetLayoutMaker {
+	public func setTopLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopLeftDidSetLayoutMaker {
 		
 		let topLeft = CGRect.Point.closure(calculation)
 		
@@ -148,7 +148,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateTopCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopCenterDidSetLayoutMaker {
+	public func setTopCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopCenterDidSetLayoutMaker {
 		
 		let topCenter = CGRect.Point.closure(calculation)
 		
@@ -185,7 +185,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateTopRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopRightDidSetLayoutMaker {
+	public func setTopRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> TopRightDidSetLayoutMaker {
 		
 		let topRight = CGRect.Point.closure(calculation)
 		
@@ -222,7 +222,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateMiddleLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleLeftDidSetLayoutMaker {
+	public func setMiddleLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleLeftDidSetLayoutMaker {
 		
 		let middleLeft = CGRect.Point.closure(calculation)
 		
@@ -259,7 +259,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateMiddleCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleCenterDidSetLayoutMaker {
+	public func setMiddleCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleCenterDidSetLayoutMaker {
 		
 		let middleCenter = CGRect.Point.closure(calculation)
 		
@@ -296,7 +296,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateMiddleRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleRightDidSetLayoutMaker {
+	public func setMiddleRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> MiddleRightDidSetLayoutMaker {
 		
 		let middleRight = CGRect.Point.closure(calculation)
 		
@@ -333,7 +333,7 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func calculateBottomCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> BottomCenterDidSetLayoutMaker {
+	public func setBottomCenter(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> BottomCenterDidSetLayoutMaker {
 		
 		let bottomCenter = CGRect.Point.closure(calculation)
 		

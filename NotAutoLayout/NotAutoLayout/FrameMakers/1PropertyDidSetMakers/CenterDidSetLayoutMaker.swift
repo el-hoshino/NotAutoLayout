@@ -41,7 +41,7 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateTop(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterTopDidSetLayoutMaker {
+	public func setTop(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterTopDidSetLayoutMaker {
 		
 		let top = CGRect.Float.closure(calculation)
 		
@@ -80,7 +80,7 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateMiddle(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleDidSetLayoutMaker {
+	public func setMiddle(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleDidSetLayoutMaker {
 		
 		let middle = CGRect.Float.closure(calculation)
 		
@@ -119,7 +119,7 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterBottomDidSetLayoutMaker {
+	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterBottomDidSetLayoutMaker {
 		
 		let bottom = CGRect.Float.closure(calculation)
 		

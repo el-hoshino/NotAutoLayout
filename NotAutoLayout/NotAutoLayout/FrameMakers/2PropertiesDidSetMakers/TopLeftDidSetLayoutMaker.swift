@@ -70,7 +70,7 @@ extension TopLeftDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateBottomRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> Layout.Individual {
+	public func setBottomRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 			let topLeft = self.topLeft.closureValue(boundSize)

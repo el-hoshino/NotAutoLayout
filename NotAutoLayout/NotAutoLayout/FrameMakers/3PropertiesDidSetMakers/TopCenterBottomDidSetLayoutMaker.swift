@@ -59,7 +59,7 @@ extension TopCenterBottomDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 			let topCenter = self.topCenter.closureValue(boundSize)

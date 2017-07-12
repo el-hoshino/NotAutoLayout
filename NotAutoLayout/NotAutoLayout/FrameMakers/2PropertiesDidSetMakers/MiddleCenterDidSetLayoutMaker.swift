@@ -84,7 +84,7 @@ extension MiddleCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 			let middleCenter = self.middleCenter.closureValue(boundSize)

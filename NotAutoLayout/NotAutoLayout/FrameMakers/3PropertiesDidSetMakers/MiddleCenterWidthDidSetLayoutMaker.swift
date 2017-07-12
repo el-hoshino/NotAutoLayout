@@ -60,7 +60,7 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func calculateHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 			let middleCenter = self.middleCenter.closureValue(boundSize)
