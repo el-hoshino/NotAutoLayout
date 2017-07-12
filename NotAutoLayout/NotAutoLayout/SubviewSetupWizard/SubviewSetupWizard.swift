@@ -201,7 +201,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func add() -> SubviewSetupWizard {
+	public func addToParent() -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.needsToAddSetteeToParent = true
