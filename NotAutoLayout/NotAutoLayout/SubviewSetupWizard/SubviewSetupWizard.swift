@@ -135,7 +135,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func setOrder(_ order: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setOrder(to order: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.orders[condition.rawValue] = order
@@ -143,24 +143,24 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setOrder(_ order: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setOrder(to order: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
 		
 		let order = { order }
-		return self.setOrder(order, forCondition: condition)
+		return self.setOrder(to: order, forCondition: condition)
 		
 	}
 	
-	public func setDefaultOrder(_ order: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultOrder(to order: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setOrder(order, forCondition: condition)
+		return self.setOrder(to: order, forCondition: condition)
 		
 	}
 	
-	public func setDefaultOrder(_ order: Int) -> SubviewSetupWizard {
+	public func setDefaultOrder(to order: Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setOrder(order, forCondition: condition)
+		return self.setOrder(to: order, forCondition: condition)
 		
 	}
 	
@@ -168,7 +168,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func setZIndex(_ zIndex: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setZIndex(to zIndex: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.zIndices[condition.rawValue] = zIndex
@@ -176,24 +176,24 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setZIndex(_ zIndex: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setZIndex(to zIndex: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
 		
 		let zIndex = { zIndex }
-		return self.setZIndex(zIndex, forCondition: condition)
+		return self.setZIndex(to: zIndex, forCondition: condition)
 		
 	}
 	
-	public func setDefaultZIndex(_ zIndex: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultZIndex(to zIndex: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setZIndex(zIndex, forCondition: condition)
+		return self.setZIndex(to: zIndex, forCondition: condition)
 		
 	}
 	
-	public func setDefaultZIndex(_ zIndex: Int) -> SubviewSetupWizard {
+	public func setDefaultZIndex(to zIndex: Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setZIndex(zIndex, forCondition: condition)
+		return self.setZIndex(to: zIndex, forCondition: condition)
 		
 	}
 	
