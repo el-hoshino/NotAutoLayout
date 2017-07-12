@@ -33,6 +33,19 @@ extension CenterMiddleDidSetLayoutMaker {
 		
 	}
 	
+	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleBottomDidSetLayoutMaker {
+		
+		let bottom = CGRect.Float.closure(calculation)
+		
+		let maker = CenterMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
+		                                                center: self.center,
+		                                                middle: self.middle,
+		                                                bottom: bottom)
+		
+		return maker
+		
+	}
+	
 	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterMiddleBottomDidSetLayoutMaker {
 		
     	let referenceView = { [weak referenceView] in referenceView }
@@ -49,19 +62,6 @@ extension CenterMiddleDidSetLayoutMaker {
 		                                                center: self.center,
 		                                                middle: self.middle,
 		                                                bottom: bottom)
-		
-		return maker
-		
-	}
-	
-	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleBottomDidSetLayoutMaker {
-		
-		let bottom = CGRect.Float.closure(calculation)
-		
-		let maker = CenterMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                             center: self.center,
-		                                             middle: self.middle,
-		                                             bottom: bottom)
 		
 		return maker
 		

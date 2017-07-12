@@ -55,6 +55,21 @@ extension TopLeftDidSetLayoutMaker {
 		
 	}
 	
+	public func setBottomRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let bottomRight = calculation(boundSize)
+			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
 	public func pinBottomRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
 		
 		let referenceView = { [weak referenceView] in referenceView }
@@ -68,21 +83,6 @@ extension TopLeftDidSetLayoutMaker {
 		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topLeft = self.topLeft.closureValue(boundSize)
 			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
-			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
-			
-			return frame
-			
-		}
-		
-		return layout
-		
-	}
-	
-	public func setBottomRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> Layout.Individual {
-		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = calculation(boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame
