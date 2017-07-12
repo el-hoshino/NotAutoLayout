@@ -101,7 +101,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func settingAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) -> Layout.Individual {
+	func settingAdditionalEvaluations(to evaluations: [FrameAdditionalEvaluation]) -> Layout.Individual {
 		
 		var layout = self
 		layout.additionalEvaluations = evaluations

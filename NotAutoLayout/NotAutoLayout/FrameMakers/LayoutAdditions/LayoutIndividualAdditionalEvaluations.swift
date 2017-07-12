@@ -16,7 +16,7 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	public var additionalEvaluationsRemoved: Layout.Individual {
+	public var resettingAdditionalEvaluations: Layout.Individual {
 		return self.settingAdditionalEvaluations([])
 	}
 	
