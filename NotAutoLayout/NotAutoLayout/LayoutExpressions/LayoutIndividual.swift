@@ -112,7 +112,7 @@ extension Layout.Individual {
 	
 	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) {
 		
-		self = self.settingAdditionalEvaluations(evaluations)
+		self = self.settingAdditionalEvaluations(to: evaluations)
 		
 	}
 	

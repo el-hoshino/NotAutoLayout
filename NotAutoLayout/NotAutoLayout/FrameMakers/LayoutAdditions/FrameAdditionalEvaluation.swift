@@ -10,36 +10,42 @@ import Foundation
 
 enum FrameAdditionalEvaluation {
 	
-	typealias Evaluation = (_ boundSize: CGSize) -> CGFloat
+	typealias FloatEvaluation = (_ boundSize: CGSize) -> CGFloat
+	typealias PointEvaluation = (_ boundSize: CGSize) -> CGPoint
+	typealias SizeEvaluation = (_ boundSize: CGSize) -> CGSize
 	
-	case moveLeftTo(Evaluation)
-	case moveCenterTo(Evaluation)
-	case moveRightTo(Evaluation)
+	case moveLeftTo(FloatEvaluation)
+	case moveCenterTo(FloatEvaluation)
+	case moveRightTo(FloatEvaluation)
 	
-	case moveTopTo(Evaluation)
-	case moveMiddleTo(Evaluation)
-	case moveBottomTo(Evaluation)
+	case moveTopTo(FloatEvaluation)
+	case moveMiddleTo(FloatEvaluation)
+	case moveBottomTo(FloatEvaluation)
 	
-	case moveHorizontallyBy(Evaluation)
-	case moveVerticallyBy(Evaluation)
+	case moveXBy(FloatEvaluation)
+	case moveYBy(FloatEvaluation)
+	case moveOriginBy(PointEvaluation)
 	
-	case pinchLeftTo(Evaluation)
-	case pinchLeftBy(Evaluation)
+	case pinchLeftTo(FloatEvaluation)
+	case pinchLeftBy(FloatEvaluation)
 	
-	case pinchRightTo(Evaluation)
-	case pinchRightBy(Evaluation)
+	case pinchRightTo(FloatEvaluation)
+	case pinchRightBy(FloatEvaluation)
 	
-	case pinchTopTo(Evaluation)
-	case pinchTopBy(Evaluation)
+	case pinchTopTo(FloatEvaluation)
+	case pinchTopBy(FloatEvaluation)
 	
-	case pinchBottomTo(Evaluation)
-	case pinchBottomBy(Evaluation)
+	case pinchBottomTo(FloatEvaluation)
+	case pinchBottomBy(FloatEvaluation)
 	
-	case expandWidthTo(Evaluation, from: CGRect.HorizontalBasePoint)
-	case expandWidthBy(Evaluation, from: CGRect.HorizontalBasePoint)
+	case expandWidthTo(FloatEvaluation, from: CGRect.HorizontalBasePoint)
+	case expandWidthBy(FloatEvaluation, from: CGRect.HorizontalBasePoint)
 	
-	case expandHeightTo(Evaluation, from: CGRect.VerticalBasePoint)
-	case expandHeightBy(Evaluation, from: CGRect.VerticalBasePoint)
+	case expandHeightTo(FloatEvaluation, from: CGRect.VerticalBasePoint)
+	case expandHeightBy(FloatEvaluation, from: CGRect.VerticalBasePoint)
+	
+	case expandSizeTo(SizeEvaluation, from: CGRect.PlaneBasePoint)
+	case expandSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	
 }
 
@@ -74,13 +80,17 @@ extension FrameAdditionalEvaluation {
 			let bottomGoal = evaluation(boundSize)
 			frame.moveBottom(to: bottomGoal)
 			
-		case .moveHorizontallyBy(let evaluation):
+		case .moveXBy(let evaluation):
 			let xOffset = evaluation(boundSize)
-			frame.moveHorizontally(by: xOffset)
+			frame.moveX(by: xOffset)
 			
-		case .moveVerticallyBy(let evaluation):
+		case .moveYBy(let evaluation):
 			let yOffset = evaluation(boundSize)
-			frame.moveVertically(by: yOffset)
+			frame.moveY(by: yOffset)
+			
+		case .moveOriginBy(let evaluation):
+			let originOffset = evaluation(boundSize)
+			frame.moveOrigin(by: originOffset)
 			
 		case .pinchLeftTo(let evaluation):
 			let leftGoal = evaluation(boundSize)
@@ -129,6 +139,14 @@ extension FrameAdditionalEvaluation {
 		case .expandHeightBy(let evaluation, from: let baseline):
 			let heightDiff = evaluation(boundSize)
 			frame.expandHeight(by: heightDiff, from: baseline)
+			
+		case .expandSizeTo(let evaluation, from: let basepoint):
+			let sizeDiff = evaluation(boundSize)
+			frame.expandSize(by: sizeDiff, from: basepoint)
+			
+		case .expandSizeBy(let evaluation, from: let basepoint):
+			let sizeGoal = evaluation(boundSize)
+			frame.expandSize(to: sizeGoal, from: basepoint)
 		}
 		
 		return frame

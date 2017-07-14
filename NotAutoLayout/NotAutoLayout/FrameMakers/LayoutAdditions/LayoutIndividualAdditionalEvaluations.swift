@@ -17,7 +17,7 @@ extension Layout.Individual {
 extension Layout.Individual {
 	
 	public var resettingAdditionalEvaluations: Layout.Individual {
-		return self.settingAdditionalEvaluations([])
+		return self.settingAdditionalEvaluations(to: [])
 	}
 	
 }
@@ -110,29 +110,42 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	public func movingHorizontally(by offset: @escaping (_ boundSize:CGSize) -> CGFloat) -> Layout.Individual {
+	public func movingX(by offset: @escaping (_ boundSize:CGSize) -> CGFloat) -> Layout.Individual {
 		
-		let evaluation = FrameAdditionalEvaluation.moveHorizontallyBy(offset)
+		let evaluation = FrameAdditionalEvaluation.moveXBy(offset)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func movingHorizontally(by offset: CGFloat) -> Layout.Individual {
+	public func movingX(by offset: CGFloat) -> Layout.Individual {
 		
-		return self.movingHorizontally(by: { _ in offset })
+		return self.movingX(by: { _ in offset })
 		
 	}
 	
-	public func movingVertically(by offset: @escaping (_ boundSize:CGSize) -> CGFloat) -> Layout.Individual {
+	public func movingY(by offset: @escaping (_ boundSize:CGSize) -> CGFloat) -> Layout.Individual {
 		
-		let evaluation = FrameAdditionalEvaluation.moveVerticallyBy(offset)
+		let evaluation = FrameAdditionalEvaluation.moveYBy(offset)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func movingVertically(by offset: CGFloat) -> Layout.Individual {
+	public func movingY(by offset: CGFloat) -> Layout.Individual {
 		
-		return self.movingVertically(by: { _ in offset })
+		return self.movingY(by: { _ in offset })
+		
+	}
+	
+	public func movingOrigin(by offset: @escaping (_ boundSize:CGSize) -> CGPoint) -> Layout.Individual {
+		
+		let evaluation = FrameAdditionalEvaluation.moveOriginBy(offset)
+		return self.addingAdditionalEvaluation(evaluation)
+		
+	}
+	
+	public func movingOrigin(by offset: CGPoint) -> Layout.Individual {
+		
+		return self.movingOrigin(by: { _ in offset })
 		
 	}
 	
@@ -269,7 +282,7 @@ extension Layout.Individual {
 	
 	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBasePoint) -> Layout.Individual {
 		
-		return self.expandingWidth(to:{ _ in width }, from: reference)
+		return self.expandingWidth(to: { _ in width }, from: reference)
 		
 	}
 	
@@ -282,7 +295,7 @@ extension Layout.Individual {
 	
 	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBasePoint) -> Layout.Individual {
 		
-		return self.expandingWidth(by:{ _ in diff }, from: reference)
+		return self.expandingWidth(by: { _ in diff }, from: reference)
 		
 	}
 	
@@ -299,7 +312,7 @@ extension Layout.Individual {
 	
 	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBasePoint) -> Layout.Individual {
 		
-		return self.expandingHeight(to:{ _ in height }, from: reference)
+		return self.expandingHeight(to: { _ in height }, from: reference)
 		
 	}
 	
@@ -312,7 +325,37 @@ extension Layout.Individual {
 	
 	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBasePoint) -> Layout.Individual {
 		
-		return self.expandingHeight(by:{ _ in diff }, from: reference)
+		return self.expandingHeight(by: { _ in diff }, from: reference)
+		
+	}
+	
+}
+
+extension Layout.Individual {
+	
+	public func expandingSize(to size: @escaping (_ boundSize: CGSize) -> CGSize, from reference: CGRect.PlaneBasePoint) -> Layout.Individual {
+		
+		let evaluation = FrameAdditionalEvaluation.expandSizeTo(size, from: reference)
+		return self.addingAdditionalEvaluation(evaluation)
+		
+	}
+	
+	public func expandingSize(to size: CGSize, from reference: CGRect.PlaneBasePoint) -> Layout.Individual {
+		
+		return self.expandingSize(to: { _ in size }, from: reference)
+		
+	}
+	
+	public func expandingSize(by diff: @escaping (_ boundSize: CGSize) -> CGSize, from reference: CGRect.PlaneBasePoint) -> Layout.Individual {
+		
+		let evaluation = FrameAdditionalEvaluation.expandSizeBy(diff, from: reference)
+		return self.addingAdditionalEvaluation(evaluation)
+		
+	}
+	
+	public func expandingSize(by diff: CGSize, from reference: CGRect.PlaneBasePoint) -> Layout.Individual {
+		
+		return self.expandingSize(by: { _ in diff }, from: reference)
 		
 	}
 	
