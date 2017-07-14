@@ -52,15 +52,6 @@ extension LayoutControllable {
 	
 }
 
-// MARK: Internal APIs: Condition
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
-	func getCurrentCondition() -> ConditionEnum {
-		return self.body.getCondition(underCurrentBoundSize: self.boundSize) ?? self.body.getDefaultCondition()
-	}
-	
-}
-
 // MARK: Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
@@ -68,22 +59,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		
 		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout
-		
-	}
-	
-	func getCurrentLayoutInfo() -> LayoutInfo? {
-		
-		let currentCondition = self.getCurrentCondition()
-		let currentLayoutInfo = self.body.layoutInfo[currentCondition.rawValue]
-		return currentLayoutInfo
-		
-	}
-	
-	func getDefaultLayoutInfo() -> LayoutInfo? {
-		
-		let defaultCondition = self.body.getDefaultCondition()
-		let defaultLayoutInfo = self.body.layoutInfo[defaultCondition.rawValue]
-		return defaultLayoutInfo
 		
 	}
 	
@@ -136,18 +111,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 // MARK: Internal APIs: Order
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	func getCurrentOrderInfo() -> OrderInfo? {
-		
-		let currentCondition = self.getCurrentCondition()
-		let currentOrderInfo = self.body.orderInfo[currentCondition.rawValue]
-		return currentOrderInfo
-		
-	}
-	
-}
-
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
 	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.orderInfo[condition, default: [:]].set(order, for: subview)
@@ -191,18 +154,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 }
 
 // MARK: Internal APIs: ZIndex
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
-	func getCurrentZIndexInfo() -> ZIndexInfo? {
-		
-		let currentCondition = self.getCurrentCondition()
-		let currentZIndexInfo = self.body.zIndexInfo[currentCondition.rawValue]
-		return currentZIndexInfo
-		
-	}
-	
-}
-
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {

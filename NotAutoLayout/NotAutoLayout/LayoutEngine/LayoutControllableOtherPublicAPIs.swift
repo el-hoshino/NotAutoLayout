@@ -10,6 +10,116 @@ import Foundation
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	public func getCurrentCondition() -> ConditionEnum {
+		return self.body.getCondition(underCurrentBoundSize: self.boundSize) ?? self.body.getDefaultCondition()
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func getCurrentLayoutInfo() -> LayoutInfo? {
+		
+		let currentCondition = self.getCurrentCondition()
+		let currentLayoutInfo = self.body.layoutInfo[currentCondition.rawValue]
+		return currentLayoutInfo
+		
+	}
+	
+	public func getDefaultLayoutInfo() -> LayoutInfo? {
+		
+		let defaultCondition = self.body.getDefaultCondition()
+		let defaultLayoutInfo = self.body.layoutInfo[defaultCondition.rawValue]
+		return defaultLayoutInfo
+		
+	}
+	
+	public func getCurrentLayout(for view: UIView) -> Layout.Individual? {
+		
+		if let layoutInfo = self.getCurrentLayoutInfo(), let layout = layoutInfo[view] {
+			return layout
+			
+		} else if let layoutInfo = self.getDefaultLayoutInfo(), let layout = layoutInfo[view] {
+			return layout
+			
+		} else {
+			return nil
+		}
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func getCurrentOrderInfo() -> OrderInfo? {
+		
+		let currentCondition = self.getCurrentCondition()
+		let currentOrderInfo = self.body.orderInfo[currentCondition.rawValue]
+		return currentOrderInfo
+		
+	}
+	
+	public func getDefaultOrderInfo() -> OrderInfo? {
+		
+		let defaultCondition = self.body.getDefaultCondition()
+		let currentOrderInfo = self.body.orderInfo[defaultCondition.rawValue]
+		return currentOrderInfo
+		
+	}
+	
+	public func getCurrentOrder(for view: UIView) -> Int? {
+		
+		if let orderInfo = self.getCurrentOrderInfo(), let order = orderInfo[view] {
+			return order
+			
+		} else if let orderInfo = self.getDefaultOrderInfo(), let order = orderInfo[view] {
+			return order
+			
+		} else {
+			return nil
+		}
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func getCurrentZIndexInfo() -> ZIndexInfo? {
+		
+		let currentCondition = self.getCurrentCondition()
+		let currentZIndexInfo = self.body.zIndexInfo[currentCondition.rawValue]
+		return currentZIndexInfo
+		
+	}
+	
+	public func getDefaultZIndexInfo() -> ZIndexInfo? {
+		
+		let defaultCondition = self.body.getDefaultCondition()
+		let currentZIndexInfo = self.body.zIndexInfo[defaultCondition.rawValue]
+		return currentZIndexInfo
+		
+	}
+	
+	public func getCurrentZIndex(for view: UIView) -> Int? {
+		
+		if let zIndexInfo = self.getCurrentZIndexInfo(), let zIndex = zIndexInfo[view] {
+			return zIndex
+			
+		} else if let zIndexInfo = self.getDefaultZIndexInfo(), let zIndex = zIndexInfo[view] {
+			return zIndex
+			
+		} else {
+			return nil
+		}
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
 	/// Gets an array of subviews which have linked layout information.
 	///
 	/// - Parameter shouldSortSubviews: If set true, the returned array will be sorted by layout order; otherwise, the returned array is in subviews order.
@@ -124,6 +234,20 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		let subviews = self.getSubviewsSortedByZIndex()
 		self.removeAllSubviews()
 		self.addSubviews(subviews)
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func addSubview(_ subview: UIView, withLayout layout: Layout.Individual) {
+		
+		self.setupSubview(subview) { (wizard) in wizard
+			.setDefaultLayout(to: layout)
+			.addToParent()
+			.commit()
+		}
 		
 	}
 	

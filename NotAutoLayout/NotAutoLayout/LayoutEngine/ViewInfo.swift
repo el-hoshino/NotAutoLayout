@@ -31,7 +31,7 @@ extension ViewInfo {
 		
 	}
 	
-	subscript (_ view: UIView) -> InfoType? {
+	public subscript (_ view: UIView) -> InfoType? {
 		
 		return self[view.nal.hash]
 		
@@ -43,7 +43,7 @@ extension ViewInfo {
 		
 	}
 	
-	subscript (_ view: UIView, `default` defaultValue: InfoType) -> InfoType {
+	public subscript (_ view: UIView, `default` defaultValue: InfoType) -> InfoType {
 		
 		return self[view] ?? defaultValue
 		
