@@ -122,6 +122,18 @@ extension CGRect.VerticalBasePoint {
 	
 }
 
+extension CGRect.PlaneBasePoint {
+	
+	func originOffset(from sizeDiff: CGSize) -> CGPoint {
+		
+		let x = 0 - (sizeDiff.width * self.value.x)
+		let y = 0 - (sizeDiff.height * self.value.y)
+		return CGPoint(x: x, y: y)
+		
+	}
+	
+}
+
 extension CGRect {
 	
 	enum Float {
@@ -359,12 +371,17 @@ extension CGRect {
 		self.origin.y = yGoal - self.height
 	}
 	
-	mutating func moveHorizontally(by xOffset: CGFloat) {
+	mutating func moveX(by xOffset: CGFloat) {
 		self.origin.x += xOffset
 	}
 	
-	mutating func moveVertically(by yOffset: CGFloat) {
+	mutating func moveY(by yOffset: CGFloat) {
 		self.origin.y += yOffset
+	}
+	
+	mutating func moveOrigin(by offset: CGPoint) {
+		self.origin.x += offset.x
+		self.origin.y += offset.y
 	}
 	
 	mutating func pinchLeft(to xGoal: CGFloat) {
@@ -438,6 +455,21 @@ extension CGRect {
 		
 		self.size.height += heightDiff
 		self.origin.y += baseline.originOffset(from: heightDiff)
+		
+	}
+	
+	mutating func expandSize(to sizeGoal: CGSize, from basepoint: CGRect.PlaneBasePoint) {
+		
+		let sizeDiff = sizeGoal - self.size
+		self.size = sizeGoal
+		self.origin = basepoint.originOffset(from: sizeDiff)
+		
+	}
+	
+	mutating func expandSize(by sizeDiff: CGSize, from basepoint: CGRect.PlaneBasePoint) {
+		
+		self.size += sizeDiff
+		self.origin += basepoint.originOffset(from: sizeDiff)
 		
 	}
 	
