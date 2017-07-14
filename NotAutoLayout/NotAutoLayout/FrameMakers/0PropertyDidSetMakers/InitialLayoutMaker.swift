@@ -420,6 +420,51 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
+	public func setBottomRight(to bottomRight: CGPoint) -> BottomRightDidSetLayoutMaker {
+		
+		let bottomRight = CGRect.Point.constant(bottomRight)
+		
+		let maker = BottomRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         bottomRight: bottomRight)
+		
+		return maker
+		
+	}
+	
+	public func setBottomRight(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> BottomRightDidSetLayoutMaker {
+		
+		let bottomRight = CGRect.Point.closure(calculation)
+		
+		let maker = BottomRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         bottomRight: bottomRight)
+		
+		return maker
+		
+	}
+	
+	public func pinBottomRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomRightDidSetLayoutMaker {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinBottomRight(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		
+	}
+	
+	public func pinBottomRight(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomRightDidSetLayoutMaker {
+		
+		let bottomRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
+		
+		let maker = BottomRightDidSetLayoutMaker(parentView: self.parentView,
+		                                         bottomRight: bottomRight)
+		
+		return maker
+		
+	}
+	
+}
+
+extension InitialLayoutMaker {
+	
 	public func stickOnParent() -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in

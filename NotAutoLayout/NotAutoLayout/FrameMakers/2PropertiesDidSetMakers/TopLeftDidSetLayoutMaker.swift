@@ -30,6 +30,16 @@ extension TopLeftDidSetLayoutMaker {
 		
 	}
 	
+	private func makeFrame(topLeft: CGPoint, size: CGSize) -> CGRect {
+		
+		let origin = topLeft
+		let size = size
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
 }
 
 extension TopLeftDidSetLayoutMaker {
@@ -114,6 +124,65 @@ extension TopLeftDidSetLayoutMaker {
 		                                          right: right)
 		
 		return maker
+		
+	}
+	
+}
+
+extension TopLeftDidSetLayoutMaker {
+	
+	public func setSize(to size: CGSize) -> Layout.Individual {
+		
+		if let topLeft = self.topLeft.constantValue {
+			let frame = self.makeFrame(topLeft: topLeft, size: size)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let topLeft = self.topLeft.closureValue(boundSize)
+				let frame = self.makeFrame(topLeft: topLeft, size: size)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let size = calculation(boundSize)
+			let frame = self.makeFrame(topLeft: topLeft, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let size = fitting(fittingSize)
+			let frame = self.makeFrame(topLeft: topLeft, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
 		
 	}
 	
