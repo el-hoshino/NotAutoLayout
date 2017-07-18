@@ -10,9 +10,9 @@ import Foundation
 
 enum FrameAdditionalEvaluation {
 	
-	typealias FloatEvaluation = (_ boundSize: CGSize) -> CGFloat
-	typealias PointEvaluation = (_ boundSize: CGSize) -> CGPoint
-	typealias SizeEvaluation = (_ boundSize: CGSize) -> CGSize
+	typealias FloatEvaluation = Layout.Individual.AdditionalFloatEvaluation
+	typealias PointEvaluation = Layout.Individual.AdditionalPointEvaluation
+	typealias SizeEvaluation = Layout.Individual.AdditionalSizeEvaluation
 	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
@@ -57,95 +57,95 @@ extension FrameAdditionalEvaluation {
 		
 		switch self {
 		case .moveLeftTo(let evaluation):
-			let leftGoal = evaluation(boundSize)
+			let leftGoal = evaluation(frame, boundSize)
 			frame.moveLeft(to: leftGoal)
 			
 		case .moveCenterTo(let evaluation):
-			let centerGoal = evaluation(boundSize)
+			let centerGoal = evaluation(frame, boundSize)
 			frame.moveCenter(to: centerGoal)
 			
 		case .moveRightTo(let evaluation):
-			let rightGoal = evaluation(boundSize)
+			let rightGoal = evaluation(frame, boundSize)
 			frame.moveRight(to: rightGoal)
 			
 		case .moveTopTo(let evaluation):
-			let topGoal = evaluation(boundSize)
+			let topGoal = evaluation(frame, boundSize)
 			frame.moveTop(to: topGoal)
 			
 		case .moveMiddleTo(let evaluation):
-			let middleGoal = evaluation(boundSize)
+			let middleGoal = evaluation(frame, boundSize)
 			frame.moveMiddle(to: middleGoal)
 			
 		case .moveBottomTo(let evaluation):
-			let bottomGoal = evaluation(boundSize)
+			let bottomGoal = evaluation(frame, boundSize)
 			frame.moveBottom(to: bottomGoal)
 			
 		case .moveXBy(let evaluation):
-			let xOffset = evaluation(boundSize)
+			let xOffset = evaluation(frame, boundSize)
 			frame.moveX(by: xOffset)
 			
 		case .moveYBy(let evaluation):
-			let yOffset = evaluation(boundSize)
+			let yOffset = evaluation(frame, boundSize)
 			frame.moveY(by: yOffset)
 			
 		case .moveOriginBy(let evaluation):
-			let originOffset = evaluation(boundSize)
+			let originOffset = evaluation(frame, boundSize)
 			frame.moveOrigin(by: originOffset)
 			
 		case .pinchLeftTo(let evaluation):
-			let leftGoal = evaluation(boundSize)
+			let leftGoal = evaluation(frame, boundSize)
 			frame.pinchLeft(to: leftGoal)
 			
 		case .pinchLeftBy(let evaluation):
-			let leftOffset = evaluation(boundSize)
+			let leftOffset = evaluation(frame, boundSize)
 			frame.pinchLeft(by: leftOffset)
 			
 		case .pinchRightTo(let evaluation):
-			let rightGoal = evaluation(boundSize)
+			let rightGoal = evaluation(frame, boundSize)
 			frame.pinchRight(to: rightGoal)
 			
 		case .pinchRightBy(let evaluation):
-			let rightOffset = evaluation(boundSize)
+			let rightOffset = evaluation(frame, boundSize)
 			frame.pinchRight(by: rightOffset)
 			
 		case .pinchTopTo(let evaluation):
-			let topGoal = evaluation(boundSize)
+			let topGoal = evaluation(frame, boundSize)
 			frame.pinchTop(to: topGoal)
 			
 		case .pinchTopBy(let evaluation):
-			let topOffset = evaluation(boundSize)
+			let topOffset = evaluation(frame, boundSize)
 			frame.pinchTop(by: topOffset)
 			
 		case .pinchBottomTo(let evaluation):
-			let bottomGoal = evaluation(boundSize)
+			let bottomGoal = evaluation(frame, boundSize)
 			frame.pinchBottom(to: bottomGoal)
 			
 		case .pinchBottomBy(let evaluation):
-			let bottomOffset = evaluation(boundSize)
+			let bottomOffset = evaluation(frame, boundSize)
 			frame.pinchBottom(by: bottomOffset)
 			
 		case .expandWidthTo(let evaluation, from: let baseline):
-			let widthGoal = evaluation(boundSize)
+			let widthGoal = evaluation(frame, boundSize)
 			frame.expandWidth(to: widthGoal, from: baseline)
 			
 		case .expandWidthBy(let evaluation, from: let baseline):
-			let widthDiff = evaluation(boundSize)
+			let widthDiff = evaluation(frame, boundSize)
 			frame.expandWidth(by: widthDiff, from: baseline)
 			
 		case .expandHeightTo(let evaluation, from: let baseline):
-			let heightGoal = evaluation(boundSize)
+			let heightGoal = evaluation(frame, boundSize)
 			frame.expandHeight(to: heightGoal, from: baseline)
 			
 		case .expandHeightBy(let evaluation, from: let baseline):
-			let heightDiff = evaluation(boundSize)
+			let heightDiff = evaluation(frame, boundSize)
 			frame.expandHeight(by: heightDiff, from: baseline)
 			
 		case .expandSizeTo(let evaluation, from: let basepoint):
-			let sizeDiff = evaluation(boundSize)
+			let sizeDiff = evaluation(frame, boundSize)
 			frame.expandSize(by: sizeDiff, from: basepoint)
 			
 		case .expandSizeBy(let evaluation, from: let basepoint):
-			let sizeGoal = evaluation(boundSize)
+			let sizeGoal = evaluation(frame, boundSize)
 			frame.expandSize(to: sizeGoal, from: basepoint)
 		}
 		
