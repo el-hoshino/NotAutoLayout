@@ -56,7 +56,23 @@ extension TopRightLeftDidSetLayoutMaker {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat) -> Layout.Individual {
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let topRight = self.topRight.closureValue(boundSize)
+			let left = self.left.closureValue(boundSize)
+			let height = calculation(boundSize)
+			let frame = self.makeFrame(topRight: topRight, left: left, height: height)
+
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
 			

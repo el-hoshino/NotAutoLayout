@@ -20,13 +20,25 @@ public struct TopCenterWidthDidSetLayoutMaker {
 
 extension TopCenterWidthDidSetLayoutMaker {
 	
+	private func makeFrame(topCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
+		
+		let frame = CGRect(x: topCenter.x - width.half,
+		                   y: topCenter.y,
+		                   width: width,
+		                   height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension TopCenterWidthDidSetLayoutMaker {
+	
 	public func setHeight(to height: CGFloat) -> Layout.Individual {
 		
 		if let topCenter = self.topCenter.constantValue, let width = self.width.constantValue {
-			let frame = CGRect(x: topCenter.x - width.half,
-			                   y: topCenter.y,
-			                   width: width,
-			                   height: height)
+			let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
 			let layout = Layout.Individual.makeAbsolute(frame: frame)
 			
 			return layout
@@ -35,10 +47,7 @@ extension TopCenterWidthDidSetLayoutMaker {
 			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
 				let topCenter = self.topCenter.closureValue(boundSize)
 				let width = self.width.closureValue(boundSize)
-				let frame = CGRect(x: topCenter.x - width.half,
-				                   y: topCenter.y,
-				                   width: width,
-				                   height: height)
+				let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
 				
 				return frame
 				
@@ -56,10 +65,24 @@ extension TopCenterWidthDidSetLayoutMaker {
 			let topCenter = self.topCenter.closureValue(boundSize)
 			let width = self.width.closureValue(boundSize)
 			let height = calculation(boundSize)
-			let frame = CGRect(x: topCenter.x - width.half,
-			                   y: topCenter.y,
-			                   width: width,
-			                   height: height)
+			let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let topCenter = self.topCenter.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let height = fitting(CGSize(width: width, height: fittingHeight)).height
+			let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
 			
 			return frame
 			
