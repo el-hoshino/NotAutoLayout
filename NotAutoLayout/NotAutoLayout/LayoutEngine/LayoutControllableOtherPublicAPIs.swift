@@ -120,6 +120,18 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
+	public func layout(_ subview: UIView) {
+		
+		if let layout = self.getCurrentLayout(for: subview) {
+			self.place(subview, with: layout)
+		}
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
 	/// Gets an array of subviews which have linked layout information.
 	///
 	/// - Parameter shouldSortSubviews: If set true, the returned array will be sorted by layout order; otherwise, the returned array is in subviews order.
