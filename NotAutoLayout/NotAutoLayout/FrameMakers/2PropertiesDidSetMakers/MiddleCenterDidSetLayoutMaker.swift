@@ -99,4 +99,20 @@ extension MiddleCenterDidSetLayoutMaker {
 		
 	}
 	
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let middleCenter = self.middleCenter.closureValue(boundSize)
+			let size = fitting(fittingSize)
+			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
 }
