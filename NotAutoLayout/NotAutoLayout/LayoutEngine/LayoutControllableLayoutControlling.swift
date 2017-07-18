@@ -92,7 +92,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 	/// Layout all the subviews which have linked layout information. If you conform your own `UIView` to `LayoutControllable` protocol, call this method inside `layoutSubviews()` method.
-	public func layoutControl() {
+	public func layoutSubviews() {
 		
 		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: true)
 		

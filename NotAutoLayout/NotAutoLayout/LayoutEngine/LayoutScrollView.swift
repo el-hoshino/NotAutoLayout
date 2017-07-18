@@ -18,7 +18,7 @@ open class LayoutScrollView: UIScrollView, LayoutControllable {
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
-		self.nal.layoutControl()
+		self.nal.layoutSubviews()
 	}
 	
 }
