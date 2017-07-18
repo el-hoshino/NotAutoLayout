@@ -80,6 +80,14 @@ extension CGRect.VerticalBasePoint: ExpressibleByFloatLiteral {
 
 extension CGRect.PlaneBasePoint {
 	
+	public init(point: CGPoint) {
+		self.value = point
+	}
+	
+}
+
+extension CGRect.PlaneBasePoint {
+	
 	public static let topLeft		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.0))
 	public static let topCenter		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.0))
 	public static let topRight		= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.0))
