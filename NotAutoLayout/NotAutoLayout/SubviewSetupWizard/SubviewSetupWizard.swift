@@ -21,7 +21,15 @@ public struct SubviewSetupWizard<ParentView> {
 	private var orders: ConditionOrder
 	private var zIndices: ConditionZIndex
 	
-	private var needsToAddSetteeToParent: Bool
+	private enum AddingMethod {
+		case none
+		case add
+		case insertAt(() -> Int?)
+		case insertAbove(() -> UIView?)
+		case insertBelow(() -> UIView?)
+	}
+	
+	private var addingMethod: AddingMethod
 	
 	init(parent: ParentView, settee: UIView) {
 		self.parentView = parent
@@ -29,7 +37,7 @@ public struct SubviewSetupWizard<ParentView> {
 		self.layouts = [:]
 		self.orders = [:]
 		self.zIndices = [:]
-		self.needsToAddSetteeToParent = false
+		self.addingMethod = .none
 	}
 	
 }
@@ -62,8 +70,33 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 	private func addSetteeToParent() {
 		
-		if self.needsToAddSetteeToParent {
+		switch self.addingMethod {
+		case .none:
+			break
+			
+		case .add:
 			self.parentView.addSubview(self.setteeView)
+			
+		case .insertAt(let index):
+			if let index = index() {
+				self.parentView.insertSubview(self.setteeView, at: index)
+			} else {
+				self.parentView.addSubview(self.setteeView)
+			}
+			
+		case .insertAbove(let view):
+			if let view = view() {
+				self.parentView.insertSubview(self.setteeView, aboveSubview: view)
+			} else {
+				self.parentView.addSubview(self.setteeView)
+			}
+			
+		case .insertBelow(let view):
+			if let view = view() {
+				self.parentView.insertSubview(self.setteeView, belowSubview: view)
+			} else {
+				self.parentView.addSubview(self.setteeView)
+			}
 		}
 		
 	}
@@ -204,7 +237,55 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	public func addToParent() -> SubviewSetupWizard {
 		
 		var wizard = self
-		wizard.needsToAddSetteeToParent = true
+		wizard.addingMethod = .add
+		return wizard
+		
+	}
+	
+	public func insertToParent(at index: Int) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertAt({ index })
+		return wizard
+		
+	}
+	
+	public func insertToParent(at index: @escaping () -> Int?) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertAt(index)
+		return wizard
+		
+	}
+	
+	public func insertToParent(above view: UIView) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertAbove({ [weak view] in view })
+		return wizard
+		
+	}
+	
+	public func insertToParent(above view: @escaping () -> UIView?) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertAbove(view)
+		return wizard
+		
+	}
+	
+	public func insertToParent(below view: UIView) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertBelow({ [weak view] in view })
+		return wizard
+		
+	}
+	
+	public func insertToParent(below view: @escaping () -> UIView?) -> SubviewSetupWizard {
+		
+		var wizard = self
+		wizard.addingMethod = .insertBelow(view)
 		return wizard
 		
 	}
