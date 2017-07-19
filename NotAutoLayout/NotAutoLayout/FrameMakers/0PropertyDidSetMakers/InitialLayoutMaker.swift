@@ -41,11 +41,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinLeft(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 	
 	}
 	
-	public func pinLeft(to referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftDidSetLayoutMaker {
+	public func pinLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftDidSetLayoutMaker {
 		
 		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
@@ -86,11 +86,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinCenter(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinCenter(to referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterDidSetLayoutMaker {
+	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterDidSetLayoutMaker {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
@@ -131,11 +131,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinTopLeft(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinTopLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinTopLeft(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopLeftDidSetLayoutMaker {
+	public func pinTopLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopLeftDidSetLayoutMaker {
 		
 		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -176,11 +176,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinTopCenter(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinTopCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinTopCenter(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopCenterDidSetLayoutMaker {
+	public func pinTopCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopCenterDidSetLayoutMaker {
 		
 		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -221,11 +221,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinTopRight(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinTopRight(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopRightDidSetLayoutMaker {
+	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopRightDidSetLayoutMaker {
 		
 		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -266,11 +266,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinMiddleLeft(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinMiddleLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinMiddleLeft(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleLeftDidSetLayoutMaker {
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleLeftDidSetLayoutMaker {
 		
 		let middleLeft = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -311,11 +311,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinMiddleCenter(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinMiddleCenter(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleCenterDidSetLayoutMaker {
+	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleCenterDidSetLayoutMaker {
 		
 		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -356,11 +356,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinMiddleRight(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinMiddleRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinMiddleRight(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleRightDidSetLayoutMaker {
+	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleRightDidSetLayoutMaker {
 		
 		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -401,11 +401,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinBottomCenter(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinBottomCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinBottomCenter(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomCenterDidSetLayoutMaker {
+	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomCenterDidSetLayoutMaker {
 		
 		let bottomCenter = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		
@@ -446,11 +446,11 @@ extension InitialLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinBottomRight(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinBottomRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinBottomRight(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomRightDidSetLayoutMaker {
+	public func pinBottomRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> BottomRightDidSetLayoutMaker {
 		
 		let bottomRight = self.parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform)
 		

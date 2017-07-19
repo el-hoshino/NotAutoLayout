@@ -164,7 +164,7 @@ extension Layout.Individual {
 	
 	public func pinchingLeft(to left: CGFloat) -> Layout.Individual {
 		
-		return self.pinchingLeft(to: { _, _ in left })
+		return self.pinchingLeft(by: { _, _ in left })
 		
 	}
 	
@@ -194,7 +194,7 @@ extension Layout.Individual {
 	
 	public func pinchingRight(to right: CGFloat) -> Layout.Individual {
 		
-		return self.pinchingRight(to: { _, _ in right })
+		return self.pinchingRight(by: { _, _ in right })
 		
 	}
 	
@@ -224,7 +224,7 @@ extension Layout.Individual {
 	
 	public func pinchingTop(to top: CGFloat) -> Layout.Individual {
 		
-		return self.pinchingTop(to: { _, _ in top })
+		return self.pinchingTop(by: { _, _ in top })
 		
 	}
 	
@@ -254,7 +254,7 @@ extension Layout.Individual {
 	
 	public func pinchingBottom(to bottom: CGFloat) -> Layout.Individual {
 		
-		return self.pinchingBottom(to: { _, _ in bottom })
+		return self.pinchingBottom(by: { _, _ in bottom })
 		
 	}
 	

@@ -45,11 +45,11 @@ extension CenterDidSetLayoutMaker {
 		
     	let referenceView = { [weak referenceView] in referenceView }
     	
-    	return self.pinTop(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+    	return self.pinTop(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
     	
 	}
 	
-	public func pinTop(to referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterTopDidSetLayoutMaker {
+	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterTopDidSetLayoutMaker {
 		
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
@@ -92,11 +92,11 @@ extension CenterDidSetLayoutMaker {
 		
     	let referenceView = { [weak referenceView] in referenceView }
     	
-    	return self.pinMiddle(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+    	return self.pinMiddle(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
     	
 	}
 	
-	public func pinMiddle(to referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterMiddleDidSetLayoutMaker {
+	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterMiddleDidSetLayoutMaker {
 		
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
@@ -139,11 +139,11 @@ extension CenterDidSetLayoutMaker {
 		
     	let referenceView = { [weak referenceView] in referenceView }
     	
-    	return self.pinBottom(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+    	return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
     	
 	}
 	
-	public func pinBottom(to referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterBottomDidSetLayoutMaker {
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterBottomDidSetLayoutMaker {
 		
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		

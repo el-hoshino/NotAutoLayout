@@ -50,11 +50,11 @@ extension TopRightDidSetLayoutMaker {
 		
     	let referenceView = { [weak referenceView] in referenceView }
     	
-    	return self.pinLeft(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+    	return self.pinLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
     	
 	}
 	
-	public func pinLeft(to referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> TopRightLeftDidSetLayoutMaker {
+	public func pinLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> TopRightLeftDidSetLayoutMaker {
 		
 		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
@@ -110,11 +110,11 @@ extension TopRightDidSetLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
-		return self.pinBottomLeft(to: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		return self.pinBottomLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
 		
 	}
 	
-	public func pinBottomLeft(to referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topRight = self.topRight.closureValue(boundSize)
