@@ -30,4 +30,17 @@ extension LeftTopDidSetLayoutMaker {
 		
 	}
 	
+	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftTopWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calculation)
+		
+		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                          left: self.left,
+		                                          top: self.top,
+		                                          width: width)
+		
+		return maker
+		
+	}
+	
 }

@@ -19,3 +19,83 @@ public struct LeftRightTopDidSetLayoutMaker {
 	let top: CGRect.Float
 	
 }
+
+extension LeftRightTopDidSetLayoutMaker {
+	
+	private func makeFrame(left: CGFloat, right: CGFloat, top: CGFloat, height: CGFloat) -> CGRect {
+		
+		let x = left
+		let y = top
+		let width = right - x
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension LeftRightTopDidSetLayoutMaker {
+	
+	public func setHeight(to height: CGFloat) -> Layout.Individual {
+		
+		if let left = self.left.constantValue, let right = self.right.constantValue, let top = self.top.constantValue {
+			let frame = self.makeFrame(left: left, right: right, top: top, height: height)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let left = self.left.closureValue(boundSize)
+				let right = self.right.closureValue(boundSize)
+				let top = self.top.closureValue(boundSize)
+				let frame = self.makeFrame(left: left, right: right, top: top, height: height)
+
+				return frame
+				
+			}
+			
+			return layout
+		}
+		
+	}
+	
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let left = self.left.closureValue(boundSize)
+			let right = self.right.closureValue(boundSize)
+			let top = self.top.closureValue(boundSize)
+			let height = calculation(boundSize)
+			let frame = self.makeFrame(left: left, right: right, top: top, height: height)
+
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let left = self.left.closureValue(boundSize)
+			let right = self.right.closureValue(boundSize)
+			let top = self.top.closureValue(boundSize)
+			let width = right - left
+			let fittingSize = CGSize(width: width, height: fittingHeight)
+			let height = fitting(fittingSize).height
+			let frame = self.makeFrame(left: left, right: right, top: top, height: height)
+
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+}
