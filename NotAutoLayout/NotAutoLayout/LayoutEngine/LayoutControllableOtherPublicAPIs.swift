@@ -264,3 +264,16 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	}
 	
 }
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+	
+	public func makeLayout(for subview: UIView, making: (_ maker: InitialLayoutMaker) -> Layout.Individual) {
+		
+		self.setupSubview(subview) { (wizard) in wizard
+			.makeDefaultLayout(making)
+			.commit()
+		}
+		
+	}
+	
+}
