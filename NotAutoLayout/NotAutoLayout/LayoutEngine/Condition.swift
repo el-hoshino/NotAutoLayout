@@ -10,11 +10,11 @@ import Foundation
 
 public protocol ConditionEnum {
 	
-	typealias RawValue = String
+	typealias RawValue = Int
 	var rawValue: RawValue { get }
 	
 }
 
-public enum DefaultCondition: String, ConditionEnum {
+public enum DefaultCondition: Int, ConditionEnum {
 	case `default`
 }
