@@ -35,12 +35,3 @@ extension NotAutoLayoutCompatible where Self: UIView {
 }
 
 extension UIView: NotAutoLayoutCompatible { }
-
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
-	
-	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
-		self.body.addSubview(subview)
-		self.setDefaultLayout(layout, for: subview)
-	}
-	
-}

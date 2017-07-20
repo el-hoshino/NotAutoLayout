@@ -253,7 +253,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	public func addSubview(_ subview: UIView, withLayout layout: Layout.Individual) {
+	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(to: layout)
