@@ -117,7 +117,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func setLayout(_ layout: @escaping () -> Layout.Individual, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> Layout.Individual) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.layouts[condition.rawValue] = layout
@@ -125,24 +125,24 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setLayout(_ layout: Layout.Individual, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, to layout: Layout.Individual) -> SubviewSetupWizard {
 		
 		let layout = { layout }
-		return self.setLayout(layout, forCondition: condition)
+		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
-	public func setDefaultLayout(to layout: @escaping () -> Layout.Individual) -> SubviewSetupWizard {
+	public func setDefaultLayout(by layout: @escaping () -> Layout.Individual) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setLayout(layout, forCondition: condition)
+		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
 	public func setDefaultLayout(to layout: Layout.Individual) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setLayout(layout, forCondition: condition)
+		return self.setLayout(for: condition, to: layout)
 		
 	}
 	
@@ -155,12 +155,12 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func makeLayout(forCondition condition: ConditionEnum, making: (InitialLayoutMaker) -> Layout.Individual) -> SubviewSetupWizard {
+	public func makeLayout(for condition: ConditionEnum, making: (InitialLayoutMaker) -> Layout.Individual) -> SubviewSetupWizard {
 		
 		let maker = InitialLayoutMaker(parentView: self.parentView)
 		let layout = making(maker)
 		
-		return self.setLayout(layout, forCondition: condition)
+		return self.setLayout(for: condition, to: layout)
 		
 	}
 	
@@ -168,7 +168,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func setOrder(to order: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setOrder(for condition: ConditionEnum, by order: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.orders[condition.rawValue] = order
@@ -176,24 +176,24 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setOrder(to order: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setOrder(for condition: ConditionEnum, to order: Int) -> SubviewSetupWizard {
 		
 		let order = { order }
-		return self.setOrder(to: order, forCondition: condition)
+		return self.setOrder(for: condition, by: order)
 		
 	}
 	
-	public func setDefaultOrder(to order: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultOrder(by order: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setOrder(to: order, forCondition: condition)
+		return self.setOrder(for: condition, by: order)
 		
 	}
 	
 	public func setDefaultOrder(to order: Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setOrder(to: order, forCondition: condition)
+		return self.setOrder(for: condition, to: order)
 		
 	}
 	
@@ -201,7 +201,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
-	public func setZIndex(to zIndex: @escaping () -> Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setZIndex(for condition: ConditionEnum, by zIndex: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.zIndices[condition.rawValue] = zIndex
@@ -209,24 +209,24 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func setZIndex(to zIndex: Int, forCondition condition: ConditionEnum) -> SubviewSetupWizard {
+	public func setZIndex(for condition: ConditionEnum, to zIndex: Int) -> SubviewSetupWizard {
 		
 		let zIndex = { zIndex }
-		return self.setZIndex(to: zIndex, forCondition: condition)
+		return self.setZIndex(for: condition, by: zIndex)
 		
 	}
 	
-	public func setDefaultZIndex(to zIndex: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultZIndex(by zIndex: @escaping () -> Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setZIndex(to: zIndex, forCondition: condition)
+		return self.setZIndex(for: condition, by: zIndex)
 		
 	}
 	
 	public func setDefaultZIndex(to zIndex: Int) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
-		return self.setZIndex(to: zIndex, forCondition: condition)
+		return self.setZIndex(for: condition, to: zIndex)
 		
 	}
 	
