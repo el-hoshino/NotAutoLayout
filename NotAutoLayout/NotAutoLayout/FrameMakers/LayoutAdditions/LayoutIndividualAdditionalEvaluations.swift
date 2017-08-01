@@ -230,7 +230,7 @@ extension Layout.Individual {
 	
 	public func pinchingTop(by top: @escaping AdditionalFloatEvaluation) -> Layout.Individual {
 		
-		let evaluation = FrameAdditionalEvaluation.pinchTopTo(top)
+		let evaluation = FrameAdditionalEvaluation.pinchTopBy(top)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
@@ -260,7 +260,7 @@ extension Layout.Individual {
 	
 	public func pinchingBottom(by bottom: @escaping AdditionalFloatEvaluation) -> Layout.Individual {
 		
-		let evaluation = FrameAdditionalEvaluation.pinchBottomTo(bottom)
+		let evaluation = FrameAdditionalEvaluation.pinchBottomBy(bottom)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
