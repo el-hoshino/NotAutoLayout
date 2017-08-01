@@ -30,13 +30,6 @@ public protocol LayoutControllable: class, NotAutoLayoutCompatible {
 	///
 	func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum?
 	
-	/// UIView's layoutSubviews() method
-	func layoutSubviews()
-	/// UIView's setNeedsLayout() method
-	func setNeedsLayout()
-	/// UIView's layoutIfNeeded() method
-	func layoutIfNeeded()
-	
 }
 
 // MARK: Default implement for override-able methods
