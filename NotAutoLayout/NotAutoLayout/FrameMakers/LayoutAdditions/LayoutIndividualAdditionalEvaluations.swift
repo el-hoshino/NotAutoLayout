@@ -14,6 +14,8 @@ extension Layout.Individual {
 	public typealias AdditionalPointEvaluation = (_ frame: CGRect, _ boundSize: CGSize) -> CGPoint
 	public typealias AdditionalSizeEvaluation = (_ frame: CGRect, _ boundSize: CGSize) -> CGSize
 	
+	public typealias AdditionalProcess = (_ view: UIView, _ frame: CGRect, _ boundSize: CGSize) -> Void
+	
 }
 
 extension Layout.Individual {
@@ -358,6 +360,17 @@ extension Layout.Individual {
 	public func expandingSize(by diff: CGSize, from reference: CGRect.PlaneBasePoint) -> Layout.Individual {
 		
 		return self.expandingSize(by: { _, _ in diff }, from: reference)
+		
+	}
+	
+}
+
+extension Layout.Individual {
+	
+	public func addingProcess(by process: @escaping AdditionalProcess) -> Layout.Individual {
+		
+		let evaluation = FrameAdditionalEvaluation.addotionalProcess(process)
+		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	

@@ -14,6 +14,8 @@ enum FrameAdditionalEvaluation {
 	typealias PointEvaluation = Layout.Individual.AdditionalPointEvaluation
 	typealias SizeEvaluation = Layout.Individual.AdditionalSizeEvaluation
 	
+	typealias Process = (_ view: UIView, _ frame: CGRect, _ boundSize: CGSize) -> Void
+	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
 	case moveRightTo(FloatEvaluation)
@@ -47,11 +49,13 @@ enum FrameAdditionalEvaluation {
 	case expandSizeTo(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	case expandSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	
+	case addotionalProcess(Process)
+	
 }
 
 extension FrameAdditionalEvaluation {
 	
-	func evaluated(from frame: CGRect, in boundSize: CGSize) -> CGRect {
+	func evaluated(for view: UIView, from frame: CGRect, in boundSize: CGSize) -> CGRect {
 		
 		var frame = frame
 		
@@ -147,6 +151,9 @@ extension FrameAdditionalEvaluation {
 		case .expandSizeBy(let evaluation, from: let basepoint):
 			let sizeGoal = evaluation(frame, boundSize)
 			frame.expandSize(to: sizeGoal, from: basepoint)
+			
+		case .addotionalProcess(let process):
+			process(view, frame, boundSize)
 		}
 		
 		return frame

@@ -120,12 +120,12 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func evaluatedFrame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, in boundSize: CGSize) -> CGRect {
+	func evaluatedFrame(for view: UIView, fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, in boundSize: CGSize) -> CGRect {
 		
 		var frame = self.basicFrameEvaluation.frame(fittedBy: fitting, in: boundSize)
 		
 		for evaluation in self.additionalEvaluations {
-			frame = evaluation.evaluated(from: frame, in: boundSize)
+			frame = evaluation.evaluated(for: view, from: frame, in: boundSize)
 		}
 		
 		return frame

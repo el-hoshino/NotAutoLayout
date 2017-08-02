@@ -142,8 +142,12 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 			return []
 		}
 		
+		guard let defaultLayoutInfo = self.getDefaultLayoutInfo() else {
+			return []
+		}
+		
 		let layoutRequiredSubviews = self.body.subviews.filter { (view) -> Bool in
-			currentLayoutInfo.containsInfo(for: view)
+			currentLayoutInfo.containsInfo(for: view) || defaultLayoutInfo.containsInfo(for: view)
 		}
 		
 		if shouldSortSubviews, let orderInfo = self.getCurrentOrderInfo() {
