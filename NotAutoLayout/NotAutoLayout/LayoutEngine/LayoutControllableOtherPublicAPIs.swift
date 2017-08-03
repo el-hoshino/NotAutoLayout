@@ -262,7 +262,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(to: layout)
 			.addToParent()
-			.commit()
 		}
 		
 	}
@@ -275,7 +274,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.makeDefaultLayout(making)
-			.commit()
 		}
 		
 	}

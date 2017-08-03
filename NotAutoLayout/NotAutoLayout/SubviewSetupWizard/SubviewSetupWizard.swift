@@ -101,15 +101,13 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 		
 	}
 	
-	public func commit() -> Finished {
+	func commit() {
 		
 		self.setupLayouts()
 		self.setupOrders()
 		self.setupZIndices()
 		
 		self.addSetteeToParent()
-		
-		return .success
 		
 	}
 	

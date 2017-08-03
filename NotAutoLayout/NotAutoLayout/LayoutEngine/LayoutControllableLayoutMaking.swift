@@ -21,15 +21,12 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
-	public func setupSubview(_ subview: UIView, setup: (SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>.Finished) {
+	public func setupSubview(_ subview: UIView, setup: (SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>) {
 		
 		let setupWizard = SubviewSetupWizard(parent: self.body, settee: subview)
 		let result = setup(setupWizard)
 		
-		switch result {
-		case .success:
-			break
-		}
+		result.commit()
 		
 	}
 	
