@@ -17,3 +17,79 @@ public struct TopLeftWidthDidSetLayoutMaker {
 	let width: CGRect.Float
 	
 }
+
+extension TopLeftWidthDidSetLayoutMaker {
+	
+	private func makeFrame(topLeft: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
+		
+		let frame = CGRect(x: topLeft.x,
+		                   y: topLeft.y,
+		                   width: width,
+		                   height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension TopLeftWidthDidSetLayoutMaker {
+	
+	public func setHeight(to height: CGFloat) -> Layout.Individual {
+		
+		if let topLeft = self.topLeft.constantValue, let width = self.width.constantValue {
+			let frame = self.makeFrame(topLeft: topLeft, width: width, height: height)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let topLeft = self.topLeft.closureValue(boundSize)
+				let width = self.width.closureValue(boundSize)
+				let frame = self.makeFrame(topLeft: topLeft, width: width, height: height)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let height = calculation(boundSize)
+			let frame = self.makeFrame(topLeft: topLeft, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let height = fitting(CGSize(width: width, height: fittingHeight)).height
+			let frame = self.makeFrame(topLeft: topLeft, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+}

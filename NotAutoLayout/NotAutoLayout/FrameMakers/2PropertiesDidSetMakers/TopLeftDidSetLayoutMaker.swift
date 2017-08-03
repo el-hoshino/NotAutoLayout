@@ -131,6 +131,34 @@ extension TopLeftDidSetLayoutMaker {
 
 extension TopLeftDidSetLayoutMaker {
 	
+	public func setWidth(to width: CGFloat) -> TopLeftWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.constant(width)
+		
+		let maker = TopLeftWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                          topLeft: self.topLeft,
+		                                          width: width)
+		
+		return maker
+		
+	}
+	
+	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopLeftWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calculation)
+		
+		let maker = TopLeftWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                          topLeft: self.topLeft,
+		                                          width: width)
+		
+		return maker
+		
+	}
+	
+}
+
+extension TopLeftDidSetLayoutMaker {
+	
 	public func setSize(to size: CGSize) -> Layout.Individual {
 		
 		if let topLeft = self.topLeft.constantValue {
