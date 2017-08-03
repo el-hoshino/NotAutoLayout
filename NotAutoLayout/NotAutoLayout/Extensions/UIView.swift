@@ -10,11 +10,21 @@ import Foundation
 
 extension UIView {
 	
-	func frame(in targetView: UIView, ignoresTransform: Bool = false) -> CGRect {
+	private var boundsWithZeroOrigin: CGRect {
+		
+		let origin = CGPoint.zero
+		let size = self.bounds.size
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
+	private func convertedFrame(in targetView: UIView, ignoresTransform: Bool) -> CGRect {
 		
 		let convertingFrame: CGRect
 		
-		if !self.transform.isIdentity && ignoresTransform {
+		if (self.transform.isIdentity == false) && ignoresTransform {
 			convertingFrame = self.nal.identityFrame
 			
 		} else {
@@ -24,6 +34,18 @@ extension UIView {
 		let frame = self.superview?.convert(convertingFrame, to: targetView)
 		
 		return frame ?? .zero
+		
+	}
+	
+	func frame(in targetView: UIView, ignoresTransform: Bool = false) -> CGRect {
+		
+		switch targetView {
+		case self:
+			return self.boundsWithZeroOrigin
+			
+		default:
+			return self.convertedFrame(in: targetView, ignoresTransform: ignoresTransform)
+		}
 		
 	}
 	
