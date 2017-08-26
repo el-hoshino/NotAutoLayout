@@ -20,6 +20,20 @@ public struct LeftTopDidSetLayoutMaker {
 
 extension LeftTopDidSetLayoutMaker {
 	
+	private func makeFrame(left: CGFloat, top: CGFloat, size: CGSize) -> CGRect {
+		
+		let origin = CGPoint(x: left, y: top)
+		let size = size
+		let frame = CGRect(origin: origin, size: size)
+		
+		return frame
+		
+	}
+	
+}
+
+extension LeftTopDidSetLayoutMaker {
+	
 	public func setWidth(to width: CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
 		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
@@ -40,6 +54,68 @@ extension LeftTopDidSetLayoutMaker {
 		                                          width: width)
 		
 		return maker
+		
+	}
+	
+}
+
+extension LeftTopDidSetLayoutMaker {
+	
+	public func setSize(to size: CGSize) -> Layout.Individual {
+		
+		if let left = self.left.constantValue, let top = self.top.constantValue {
+			let frame = self.makeFrame(left: left, top: top, size: size)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let left = self.left.closureValue(boundSize)
+				let top = self.top.closureValue(boundSize)
+				let frame = self.makeFrame(left: left, top: top, size: size)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			
+			let left = self.left.closureValue(boundSize)
+			let top = self.top.closureValue(boundSize)
+			let size = calculation(boundSize)
+			let frame = self.makeFrame(left: left, top: top, size: size)
+
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let left = self.left.closureValue(boundSize)
+			let top = self.top.closureValue(boundSize)
+			let size = fitting(fittingSize)
+			let frame = self.makeFrame(left: left, top: top, size: size)
+
+			return frame
+			
+		}
+		
+		return layout
 		
 	}
 	
