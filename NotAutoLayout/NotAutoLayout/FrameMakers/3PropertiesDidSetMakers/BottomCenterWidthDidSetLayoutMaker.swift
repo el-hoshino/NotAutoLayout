@@ -17,3 +17,79 @@ public struct BottomCenterWidthDidSetLayoutMaker {
 	let width: CGRect.Float
 	
 }
+
+extension BottomCenterWidthDidSetLayoutMaker {
+	
+	private func makeFrame(bottomCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
+		
+		let frame = CGRect(x: bottomCenter.x - width.half,
+		                   y: bottomCenter.y - height,
+		                   width: width,
+		                   height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension BottomCenterWidthDidSetLayoutMaker {
+	
+	public func setHeight(to height: CGFloat) -> Layout.Individual {
+		
+		if let bottomCenter = self.bottomCenter.constantValue, let width = self.width.constantValue {
+			let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
+			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			
+			return layout
+			
+		} else {
+			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+				let bottomCenter = self.bottomCenter.closureValue(boundSize)
+				let width = self.width.closureValue(boundSize)
+				let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
+				
+				return frame
+				
+			}
+			
+			return layout
+			
+		}
+		
+	}
+	
+	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let bottomCenter = self.bottomCenter.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let height = calculation(boundSize)
+			let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let bottomCenter = self.bottomCenter.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let height = fitting(CGSize(width: width, height: fittingHeight)).height
+			let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+}

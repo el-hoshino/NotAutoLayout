@@ -33,6 +33,34 @@ extension BottomCenterDidSetLayoutMaker {
 
 extension BottomCenterDidSetLayoutMaker {
 	
+	public func setWidth(to width: CGFloat) -> BottomCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.constant(width)
+		
+		let maker = BottomCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                               bottomCenter: self.bottomCenter,
+		                                               width: width)
+		
+		return maker
+		
+	}
+	
+	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> BottomCenterWidthDidSetLayoutMaker {
+		
+		let width = CGRect.Float.closure(calculation)
+		
+		let maker = BottomCenterWidthDidSetLayoutMaker(parentView: self.parentView,
+		                                               bottomCenter: self.bottomCenter,
+		                                               width: width)
+		
+		return maker
+		
+	}
+	
+}
+
+extension BottomCenterDidSetLayoutMaker {
+	
 	public func setSize(to size: CGSize) -> Layout.Individual {
 		
 		if let bottomCenter = self.bottomCenter.constantValue {
