@@ -1,27 +1,15 @@
-import Foundation
+import UIKit
 import NotAutoLayout
 
-public class TabView: UIScrollView, LayoutControllable {
-	
-	public var layoutInfo: [LayoutControllable.Hash: [LayoutMethod]] = [:]
-	public var orderInfo: [LayoutControllable.Hash : Int] = [:]
-	public var zIndexInfo: [LayoutControllable.Hash: Int] = [:]
-	
-	private let tabItemSize = CGSize(width: 48, height: 48)
-	private let tabItemHorizontalMargin: CGFloat = 8
-	
-	public var layoutOptimization: LayoutOptimization = .sequence
-	
-	override public func layoutSubviews() {
-		super.layoutSubviews()
-		self.layoutControl()
-	}
+/*
+public class TabView: LayoutScrollView {
 	
 }
 
 extension TabView {
 	
-	public func makeTabItemLayoutMethods() -> [LayoutMethod] {
+	public func makeTabItemLayout() -> LayoutInfo {
+		
 		
 		let layout = Layout
 			.makeAbsolute(initialFrame: CGRect(origin: CGPoint(x: self.tabItemHorizontalMargin,
@@ -53,3 +41,4 @@ extension TabView {
 	}
 	
 }
+*/
