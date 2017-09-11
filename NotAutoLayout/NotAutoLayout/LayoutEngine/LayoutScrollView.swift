@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class LayoutScrollView: UIScrollView, LayoutControllable {
+open class LayoutScrollView: UIScrollView, LayoutInfoStorable {
 	
 	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]

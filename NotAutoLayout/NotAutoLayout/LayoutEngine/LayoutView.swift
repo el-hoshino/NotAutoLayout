@@ -8,8 +8,8 @@
 
 import UIKit
 
-/// The very basic `UIView` that conforms `LayoutControllable` protocol, to layout subviews.
-open class LayoutView: UIView, LayoutControllable {
+/// The very basic `UIView` that conforms `LayoutInfoStorable` protocol, to layout subviews.
+open class LayoutView: UIView, LayoutInfoStorable {
 	
 	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]

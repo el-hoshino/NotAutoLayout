@@ -42,7 +42,7 @@ public struct SubviewSetupWizard<ParentView> {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
+extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 	private func setupLayouts() {
 		
@@ -113,7 +113,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
+extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> Layout.Individual) -> SubviewSetupWizard {
 		
@@ -164,7 +164,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
+extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 	public func setOrder(for condition: ConditionEnum, by order: @escaping () -> Int) -> SubviewSetupWizard {
 		
@@ -197,7 +197,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
+extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 	public func setZIndex(for condition: ConditionEnum, by zIndex: @escaping () -> Int) -> SubviewSetupWizard {
 		
@@ -230,7 +230,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutControllable {
+extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 	public func addToParent() -> SubviewSetupWizard {
 		

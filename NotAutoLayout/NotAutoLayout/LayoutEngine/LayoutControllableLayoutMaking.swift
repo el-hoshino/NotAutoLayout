@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func makeLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
 		
@@ -19,7 +19,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func setupSubview(_ subview: UIView, setup: (SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>) {
 		

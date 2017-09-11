@@ -1,5 +1,5 @@
 //
-//  LayoutControllable.swift
+//  LayoutInfoStorable.swift
 //  NotAutoLayout
 //
 //  Created by 史 翔新 on 2017/02/22.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// Fundamental class-only protocol that handles the layout.
-public protocol LayoutControllable: class, NotAutoLayoutCompatible {
+public protocol LayoutInfoStorable: class, NotAutoLayoutCompatible {
 	
 	/// The property to store the layout information for subviews.
 	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] { get set }
@@ -33,7 +33,7 @@ public protocol LayoutControllable: class, NotAutoLayoutCompatible {
 }
 
 // MARK: Default implement for override-able methods
-extension LayoutControllable {
+extension LayoutInfoStorable {
 	
 	public func getDefaultCondition() -> ConditionEnum {
 		return DefaultCondition.default
@@ -46,7 +46,7 @@ extension LayoutControllable {
 }
 
 // MARK: Internal APIs: Layout
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo?) -> Layout.Individual? {
 		
@@ -57,7 +57,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func appendLayout(_ layout: @escaping () -> Layout.Individual, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
@@ -102,7 +102,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 }
 
 // MARK: Internal APIs: Order
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
@@ -147,7 +147,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 }
 
 // MARK: Internal APIs: ZIndex
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		

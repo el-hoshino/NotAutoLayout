@@ -53,8 +53,8 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		
 		if ignoresTransform {
 			return self.identityFrame
-		}
-		else {
+			
+		} else {
 			return self.body.frame
 		}
 		

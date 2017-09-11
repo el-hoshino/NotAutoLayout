@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func getCurrentCondition() -> ConditionEnum {
 		return self.body.getCondition(underCurrentBoundSize: self.boundSize) ?? self.body.getDefaultCondition()
@@ -16,7 +16,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func getCurrentLayoutInfo() -> LayoutInfo? {
 		
@@ -50,7 +50,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func getCurrentOrderInfo() -> OrderInfo? {
 		
@@ -84,7 +84,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func getCurrentZIndexInfo() -> ZIndexInfo? {
 		
@@ -118,7 +118,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func layout(_ subview: UIView) {
 		
@@ -128,9 +128,18 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 		
 	}
 	
+	public func place(_ subview: UIView, with making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
+		
+		let maker = InitialLayoutMaker(parentView: self.body)
+		let layout = making(maker)
+		
+		self.place(subview, with: layout)
+		
+	}
+	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	/// Gets an array of subviews which have linked layout information.
 	///
@@ -164,7 +173,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	/// Gets a CGRect that represents the whole frame combined with all the subviews which have linked layout information, which may be useful in some situations like to setup contentSize in UIScrollView.
 	///
@@ -210,7 +219,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	private func getSubviewsSortedByZIndex() -> [UIView] {
 		
@@ -255,7 +264,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
 		
@@ -268,7 +277,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutControllable {
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func makeLayout(for subview: UIView, making: (_ maker: InitialLayoutMaker) -> Layout.Individual) {
 		
