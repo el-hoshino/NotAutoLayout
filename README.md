@@ -1,6 +1,6 @@
 # NotAutoLayout
-[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
-[![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
+[![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
+[![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 NotAutoLayoutView is a framework to help you layout subviews *without* Auto Layout constraints.
@@ -24,15 +24,15 @@ In addition, you can also subclass the `LayoutView` class, or subclass any other
 
 ## Requirements
 - iOS 8.0+
-- Xcode 8.0+
-- Swift 3.0+
+- Xcode 9.0+
+- Swift 4.0+
 
 ## Installation
 ### Use Carthage:
 - Download and install [Carthage](https://github.com/Carthage/Carthage#installing-carthage).
 - Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 ```
-github "el-hoshino/NotAutoLayout"
+github "el-hoshino/NotAutoLayout" ~> 2.0
 ```
 - Run `carthage update`.
 - Add the framework to your project.
