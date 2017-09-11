@@ -4,12 +4,12 @@ import UIKit
 import PlaygroundSupport
 import NotAutoLayout
 
-let baseView = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
+let baseView = LayoutInfoStoredView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
 PlaygroundPage.current.liveView = baseView
 
 baseView.backgroundColor = .white
 
-public class ProfileSummaryView: LayoutView {
+public class ProfileSummaryView: LayoutInfoStoredView {
 	
 	private let avatarView: UIImageView
 	private let mainTitleLabel: UILabel
@@ -82,6 +82,13 @@ public class ProfileSummaryView: LayoutView {
 		
 	}
 	
+	public override func layoutSubviews() {
+		super.layoutSubviews()
+		self.placeAvatarView()
+		self.placeMainTitleView()
+		self.placeSubTitleView()
+	}
+	
 }
 
 extension ProfileSummaryView {
@@ -90,16 +97,7 @@ extension ProfileSummaryView {
 		
 		self.avatarView.backgroundColor = .red
 		self.avatarView.clipsToBounds = true
-		self.nal.setupSubview(self.avatarView) { $0
-			.makeDefaultLayout { $0
-				.pinMiddleLeft(to: $0.parentView, s: .middleLeft)
-				.setSize(to: self.avatarSize)
-				.addingProcess(by: { (view, frame, _) in
-					view.layer.cornerRadius = min(frame.width, frame.height) / 2
-				})
-			}
-			.addToParent()
-		}
+		self.addSubview(self.avatarView)
 		
 	}
 	
@@ -108,16 +106,7 @@ extension ProfileSummaryView {
 		self.mainTitleLabel.clipsToBounds = true
 		self.mainTitleLabel.font = .boldSystemFont(ofSize: 14)
 		self.mainTitleLabel.textColor = .black
-		self.nal.setupSubview(self.mainTitleLabel) { $0
-			.makeDefaultLayout { $0
-				.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-				.pinRight(to: $0.parentView, s: .right)
-				.pinTop(to: $0.parentView, s: .top)
-				.pinBottom(to: $0.parentView, s: .middle)
-			}
-			.setDefaultOrder(to: 1)
-			.addToParent()
-		}
+		self.addSubview(self.mainTitleLabel)
 		
 	}
 	
@@ -126,15 +115,44 @@ extension ProfileSummaryView {
 		self.subTitleLabel.clipsToBounds = true
 		self.subTitleLabel.font = .systemFont(ofSize: 14)
 		self.subTitleLabel.textColor = .darkGray
-		self.nal.setupSubview(self.subTitleLabel) { $0
-			.makeDefaultLayout { $0
-				.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-				.pinRight(to: $0.parentView, s: .right)
-				.pinTop(to: $0.parentView, s: .middle)
-				.pinBottom(to: $0.parentView, s: 0.75)
-			}
-			.setDefaultOrder(to: 2)
-			.addToParent()
+		self.addSubview(self.subTitleLabel)
+		
+	}
+	
+}
+
+extension ProfileSummaryView {
+	
+	private func placeAvatarView() {
+		
+		self.nal.place(self.avatarView) { $0
+			.pinMiddleLeft(to: $0.parentView, s: .middleLeft)
+			.setSize(to: self.avatarSize)
+			.addingProcess(by: { (view, frame, _) in
+				view.layer.cornerRadius = min(frame.width, frame.height) / 2
+			})
+		}
+		
+	}
+	
+	private func placeMainTitleView() {
+		
+		self.nal.place(self.mainTitleLabel) { $0
+			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
+			.pinRight(to: $0.parentView, s: .right)
+			.pinTop(to: $0.parentView, s: .top)
+			.pinBottom(to: $0.parentView, s: .middle)
+		}
+		
+	}
+	
+	private func placeSubTitleView() {
+		
+		self.nal.place(self.subTitleLabel) { $0
+			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
+			.pinRight(to: $0.parentView, s: .right)
+			.pinTop(to: $0.parentView, s: .middle)
+			.pinBottom(to: $0.parentView, s: 0.75)
 		}
 		
 	}

@@ -128,15 +128,6 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func place(_ subview: UIView, with making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
-		
-		let maker = InitialLayoutMaker(parentView: self.body)
-		let layout = making(maker)
-		
-		self.place(subview, with: layout)
-		
-	}
-	
 }
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
@@ -266,6 +257,19 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
+	public func setupSubview(_ subview: UIView, setup: (SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>) {
+		
+		let setupWizard = SubviewSetupWizard(parent: self.body, settee: subview)
+		let result = setup(setupWizard)
+		
+		result.commit()
+		
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+	
 	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
@@ -288,3 +292,4 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	}
 	
 }
+
