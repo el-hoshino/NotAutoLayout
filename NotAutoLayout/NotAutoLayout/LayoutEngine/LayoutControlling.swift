@@ -39,7 +39,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	func place(_ view: UIView, with layout: Layout.Individual) {
+	public func place(_ view: UIView, with layout: Layout.Individual) {
 		
 		let frame = layout.evaluatedFrame(for: view, fittedBy: { view.sizeThatFits($0) }, in: self.boundSize)
 		self.place(view, with: frame)
@@ -62,7 +62,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func place(_ subview: UIView, with making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
+	public func place(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
 		let layout = making(maker)
