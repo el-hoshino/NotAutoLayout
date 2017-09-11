@@ -84,19 +84,24 @@ extension CGRect.PlaneBasePoint {
 		self.value = point
 	}
 	
+	public init(x: CGFloat, y: CGFloat) {
+		let point = CGPoint(x: x, y: y)
+		self.value = point
+	}
+	
 }
 
 extension CGRect.PlaneBasePoint {
 	
-	public static let topLeft		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.0))
-	public static let topCenter		= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.0))
-	public static let topRight		= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.0))
-	public static let middleLeft	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 0.5))
-	public static let middleCenter	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 0.5))
-	public static let middleRight	= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 0.5))
-	public static let bottomLeft	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.0, y: 1.0))
-	public static let bottomCenter	= CGRect.PlaneBasePoint(value: CGPoint(x: 0.5, y: 1.0))
-	public static let bottomRight	= CGRect.PlaneBasePoint(value: CGPoint(x: 1.0, y: 1.0))
+	public static let topLeft		= CGRect.PlaneBasePoint(x: 0.0, y: 0.0)
+	public static let topCenter		= CGRect.PlaneBasePoint(x: 0.5, y: 0.0)
+	public static let topRight		= CGRect.PlaneBasePoint(x: 1.0, y: 0.0)
+	public static let middleLeft	= CGRect.PlaneBasePoint(x: 0.0, y: 0.5)
+	public static let middleCenter	= CGRect.PlaneBasePoint(x: 0.5, y: 0.5)
+	public static let middleRight	= CGRect.PlaneBasePoint(x: 1.0, y: 0.5)
+	public static let bottomLeft	= CGRect.PlaneBasePoint(x: 0.0, y: 1.0)
+	public static let bottomCenter	= CGRect.PlaneBasePoint(x: 0.5, y: 1.0)
+	public static let bottomRight	= CGRect.PlaneBasePoint(x: 1.0, y: 1.0)
 	
 }
 
