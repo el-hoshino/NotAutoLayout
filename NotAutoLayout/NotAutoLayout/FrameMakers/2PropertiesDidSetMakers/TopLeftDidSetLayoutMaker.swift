@@ -92,7 +92,7 @@ extension TopLeftDidSetLayoutMaker {
 		
 		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBY: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame

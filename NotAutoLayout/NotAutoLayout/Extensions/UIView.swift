@@ -97,7 +97,7 @@ extension UIView {
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBY offset: CGVector = .zero, ignoresTransform: Bool = false) -> CGRect.Point {
+	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> CGRect.Point {
 		
 		let reference = CGRect.Point.closure { [unowned self] (_) -> CGPoint in
 			
