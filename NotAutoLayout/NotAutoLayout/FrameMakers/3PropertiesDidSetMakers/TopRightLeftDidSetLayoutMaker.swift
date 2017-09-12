@@ -20,6 +20,18 @@ public struct TopRightLeftDidSetLayoutMaker {
 
 extension TopRightLeftDidSetLayoutMaker {
 	
+	private func makeFrame(topRight: CGPoint, left: CGFloat, bottom: CGFloat) -> CGRect {
+		
+		let x = left
+		let y = topRight.y
+		let width = topRight.x - left
+		let height = bottom - topRight.y
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
 	private func makeFrame(topRight: CGPoint, left: CGFloat, height: CGFloat) -> CGRect {
 		
 		let x = left
@@ -28,6 +40,71 @@ extension TopRightLeftDidSetLayoutMaker {
 		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
 		return frame
+		
+	}
+	
+}
+
+extension TopRightLeftDidSetLayoutMaker {
+	
+	public func setBottom(to bottom: CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			
+			if let topRight = self.topRight.constantValue, let left = self.left.constantValue {
+				let frame = self.makeFrame(topRight: topRight, left: left, bottom: bottom)
+				return frame
+				
+			} else {
+				let topRight = self.topRight.closureValue(boundSize)
+				let left = self.left.closureValue(boundSize)
+				let frame = self.makeFrame(topRight: topRight, left: left, bottom: bottom)
+				return frame
+			}
+
+		}
+		
+		return layout
+		
+	}
+	
+	public func setBottom(by bottom: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let topRight = self.topRight.closureValue(boundSize)
+			let left = self.left.closureValue(boundSize)
+			let bottom = bottom(boundSize)
+			let frame = self.makeFrame(topRight: topRight, left: left, bottom: bottom)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout.Individual {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
+		
+	}
+	
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+			let topRight = self.topRight.closureValue(boundSize)
+			let left = self.left.closureValue(boundSize)
+			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
+			let frame = self.makeFrame(topRight: topRight, left: left, bottom: bottom)
+			
+			return frame
+			
+		}
+		
+		return layout
 		
 	}
 	
