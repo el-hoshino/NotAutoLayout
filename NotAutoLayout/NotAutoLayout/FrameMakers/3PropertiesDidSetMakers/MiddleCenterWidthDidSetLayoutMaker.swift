@@ -76,4 +76,22 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 		
 	}
 	
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+			
+			let middleCenter = self.middleCenter.closureValue(boundSize)
+			let width = self.width.closureValue(boundSize)
+			let fittingSize = CGSize(width: width, height: fittingHeight)
+			let height = fitting(fittingSize).height
+			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
 }
