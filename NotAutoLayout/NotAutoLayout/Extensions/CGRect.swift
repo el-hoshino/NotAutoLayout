@@ -281,6 +281,22 @@ extension CGRect.Rect {
 
 extension CGRect {
 	
+	func inside(_ insets: UIEdgeInsets) -> CGRect {
+		
+		let x = self.origin.x + insets.left
+		let y = self.origin.y + insets.top
+		let width = self.width - insets.width
+		let height = self.height - insets.height
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension CGRect {
+	
 	var x: CGFloat{
 		return self.origin.x
 	}

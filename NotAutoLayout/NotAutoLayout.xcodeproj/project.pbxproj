@@ -72,6 +72,7 @@
 		164EA0D01EF3DAE300C0BB8F /* LayoutOptimization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A01EF3D98B00C0BB8F /* LayoutOptimization.swift */; };
 		164EA0D11EF3DAE300C0BB8F /* LayoutSequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A11EF3D98B00C0BB8F /* LayoutSequential.swift */; };
 		16685B4D1F669A7F0089FF30 /* LayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16685B4C1F669A7F0089FF30 /* LayoutControlling.swift */; };
+		166C41571F6945330060C3E6 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166C41561F6945330060C3E6 /* UIEdgeInsets.swift */; };
 		1670CDD91F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */; };
 		16BA72221F692E7800A3D4CE /* LayoutControlParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA72211F692E7800A3D4CE /* LayoutControlParameter.swift */; };
 		794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */; };
@@ -194,6 +195,7 @@
 		165FE2AF1EF289F4006DF788 /* LeftDidSetLayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftDidSetLayoutMaker.swift; sourceTree = "<group>"; };
 		165FE2B11EF28A2C006DF788 /* PropertyCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCategory.swift; sourceTree = "<group>"; };
 		16685B4C1F669A7F0089FF30 /* LayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControlling.swift; sourceTree = "<group>"; };
+		166C41561F6945330060C3E6 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStoredScrollView.swift; sourceTree = "<group>"; };
 		16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameAdditionalEvaluation.swift; sourceTree = "<group>"; };
 		16BA72211F692E7800A3D4CE /* LayoutControlParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControlParameter.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				160CCA071F0CC57300783D73 /* CGFloat.swift */,
 				162B95FE1F0CA40800960B51 /* CGSize.swift */,
 				164EA0A41EF3DA4900C0BB8F /* CGRect.swift */,
+				166C41561F6945330060C3E6 /* UIEdgeInsets.swift */,
 				160CCA0B1F0DFF0000783D73 /* UIView.swift */,
 				162B95F81F0C9C6800960B51 /* Calculations.swift */,
 			);
@@ -851,6 +854,7 @@
 				163007351F0F380C00012C18 /* MiddleRightCenterDidSetLayoutMaker.swift in Sources */,
 				79D8DDD01EF949D600B74593 /* CenterRightBottomDidSetLayoutMaker.swift in Sources */,
 				79D8DDC81EF9485F00B74593 /* LeftBottomWidthDidSetLayout.swift in Sources */,
+				166C41571F6945330060C3E6 /* UIEdgeInsets.swift in Sources */,
 				79D8DDBE1EF9468100B74593 /* LeftRightMiddleDidSetLayoutMaker.swift in Sources */,
 				163007491F0F380C00012C18 /* BottomRightMiddleDidSetLayoutMaker.swift in Sources */,
 				164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */,

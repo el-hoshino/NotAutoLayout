@@ -20,31 +20,83 @@ extension UIView {
 		
 	}
 	
-	private func convertedFrame(in targetView: UIView, ignoresTransform: Bool) -> CGRect {
+	@available(iOS 11.0, *)
+	private var boundsWithZeroOriginInSafeArea: CGRect {
 		
-		let convertingFrame: CGRect
+		let bounds = self.boundsWithZeroOrigin
+		let insets = self.safeAreaInsets
+		let frame = bounds.inside(insets)
 		
-		if (self.transform.isIdentity == false) && ignoresTransform {
-			convertingFrame = self.nal.identityFrame
-			
-		} else {
-			convertingFrame = self.frame
-		}
-		
-		let frame = self.superview?.convert(convertingFrame, to: targetView)
-		
-		return frame ?? .zero
+		return frame
 		
 	}
 	
-	func frame(in targetView: UIView, ignoresTransform: Bool = false) -> CGRect {
-		
+
+	func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool = false) -> CGRect {
+
 		switch targetView {
 		case self:
 			return self.boundsWithZeroOrigin
 			
 		default:
-			return self.convertedFrame(in: targetView, ignoresTransform: ignoresTransform)
+			let checkingFrame: CGRect = {
+				if shouldIgnoreTransform {
+					return self.nal.identityFrame
+				} else {
+					return self.frame
+				}
+			}()
+			
+			let convertedFrame: CGRect = {
+				if let superview = self.superview {
+					return superview.convert(checkingFrame, to: targetView)
+				} else {
+					return checkingFrame
+				}
+			}()
+			
+			return convertedFrame
+		}
+
+	}
+	
+	@available(iOS 11.0, *)
+	func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
+		
+		switch targetView {
+		case self:
+			if shouldOnlyIncludeSafeArea {
+				return self.boundsWithZeroOriginInSafeArea
+			} else {
+				return self.boundsWithZeroOrigin
+			}
+			
+		default:
+			let checkingFrame: CGRect = {
+				if shouldIgnoreTransform {
+					return self.nal.identityFrame
+				} else {
+					return self.frame
+				}
+			}()
+			
+			let safeAreaFrame: CGRect = {
+				if shouldOnlyIncludeSafeArea {
+					return checkingFrame.inside(self.safeAreaInsets)
+				} else {
+					return checkingFrame
+				}
+			}()
+			
+			let convertedFrame: CGRect = {
+				if let superview = self.superview {
+					return superview.convert(safeAreaFrame, to: targetView)
+				} else {
+					return safeAreaFrame
+				}
+			}()
+			
+			return convertedFrame
 		}
 		
 	}
