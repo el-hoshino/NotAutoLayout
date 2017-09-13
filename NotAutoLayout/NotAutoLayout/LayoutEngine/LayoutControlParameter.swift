@@ -1,5 +1,5 @@
 //
-//  LayoutProperty.swift
+//  LayoutControlParameter.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/09/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LayoutProperty {
+public struct LayoutControlParameter {
 	
 	public let boundSize: CGSize
 	
@@ -16,9 +16,9 @@ public struct LayoutProperty {
 	
 }
 
-extension LayoutProperty {
+extension LayoutControlParameter {
 	
-	static func initialize(from view: UIView) -> LayoutProperty {
+	static func initialize(from view: UIView) -> LayoutControlParameter {
 		
 		let boundSize = view.bounds.size
 		let safeAreaInsets: UIEdgeInsets = {
@@ -29,9 +29,9 @@ extension LayoutProperty {
 			}
 		}()
 		
-		let layoutProperty = LayoutProperty(boundSize: boundSize, safeAreaInsets: safeAreaInsets)
+		let parameter = LayoutControlParameter(boundSize: boundSize, safeAreaInsets: safeAreaInsets)
 		
-		return layoutProperty
+		return parameter
 		
 	}
 	

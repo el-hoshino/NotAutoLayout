@@ -14,8 +14,8 @@ extension Layout {
 		
 		fileprivate enum Frame {
 			case constant(CGRect)
-			case basicEvaluation((_ layoutProperty: LayoutProperty) -> CGRect)
-			case fittingEvaluation((_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ layoutProperty: LayoutProperty) -> CGRect)
+			case basicEvaluation((_ parameter: LayoutControlParameter) -> CGRect)
+			case fittingEvaluation((_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect)
 		}
 		
 		private var basicFrameEvaluation: Frame
@@ -27,23 +27,23 @@ extension Layout {
 			self.additionalEvaluations = []
 		}
 		
-		private init(evaluation: @escaping (_ layoutProperty: LayoutProperty) -> CGRect) {
+		private init(evaluation: @escaping (_ parameter: LayoutControlParameter) -> CGRect) {
 			self.basicFrameEvaluation = Frame.basicEvaluation(evaluation)
 			self.additionalEvaluations = []
 		}
 		
-		private init(evaluation: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ layoutProperty: LayoutProperty) -> CGRect) {
+		private init(evaluation: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) {
 			self.basicFrameEvaluation = Frame.fittingEvaluation(evaluation)
 			self.additionalEvaluations = []
 		}
 		
-		private init(x: @escaping (LayoutProperty) -> CGFloat, y: @escaping (LayoutProperty) -> CGFloat, width: @escaping (LayoutProperty) -> CGFloat, height: @escaping (LayoutProperty) -> CGFloat) {
+		private init(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) {
 			
-			let frame: (LayoutProperty) -> CGRect = { layoutProperty in
-				let frame = CGRect(x: x(layoutProperty),
-				                   y: y(layoutProperty),
-				                   width: width(layoutProperty),
-				                   height: height(layoutProperty))
+			let frame: (LayoutControlParameter) -> CGRect = { parameter in
+				let frame = CGRect(x: x(parameter),
+				                   y: y(parameter),
+				                   width: width(parameter),
+				                   height: height(parameter))
 				return frame
 			}
 			
@@ -63,17 +63,17 @@ extension Layout.Individual {
 		return layout
 	}
 	
-	static func makeCustom(x: @escaping (LayoutProperty) -> CGFloat, y: @escaping (LayoutProperty) -> CGFloat, width: @escaping (LayoutProperty) -> CGFloat, height: @escaping (LayoutProperty) -> CGFloat) -> Layout.Individual {
+	static func makeCustom(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		let layout = Layout.Individual(x: x, y: y, width: width, height: height)
 		return layout
 	}
 	
-	static func makeCustom(frame: @escaping (LayoutProperty) -> CGRect) -> Layout.Individual {
+	static func makeCustom(frame: @escaping (LayoutControlParameter) -> CGRect) -> Layout.Individual {
 		let layout = Layout.Individual(evaluation: frame)
 		return layout
 	}
 	
-	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ layoutProperty: LayoutProperty) -> CGRect) -> Layout.Individual {
+	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout.Individual {
 		let layout = Layout.Individual(evaluation: frame)
 		return layout
 	}
@@ -120,12 +120,12 @@ extension Layout.Individual {
 
 extension Layout.Individual {
 	
-	func evaluatedFrame(for view: UIView, fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with layoutProperty: LayoutProperty) -> CGRect {
+	func evaluatedFrame(for view: UIView, fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.frame(fittedBy: fitting, with: layoutProperty)
+		var frame = self.basicFrameEvaluation.frame(fittedBy: fitting, with: parameter)
 		
 		for evaluation in self.additionalEvaluations {
-			frame = evaluation.evaluated(for: view, from: frame, with: layoutProperty)
+			frame = evaluation.evaluated(for: view, from: frame, with: parameter)
 		}
 		
 		return frame
@@ -136,17 +136,17 @@ extension Layout.Individual {
 
 extension Layout.Individual.Frame {
 	
-	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with layoutProperty: LayoutProperty) -> CGRect {
+	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		
 		switch self {
 		case .constant(let frame):
 			return frame
 			
 		case .basicEvaluation(let frame):
-			return frame(layoutProperty)
+			return frame(parameter)
 			
 		case .fittingEvaluation(let frame):
-			return frame(fitting, layoutProperty)
+			return frame(fitting, parameter)
 		}
 		
 	}

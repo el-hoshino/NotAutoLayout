@@ -20,18 +20,18 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public var layoutProperty: LayoutProperty {
-		return LayoutProperty.initialize(from: self.body)
+	public var layoutControlParameter: LayoutControlParameter {
+		return LayoutControlParameter.initialize(from: self.body)
 	}
 	
 	/// The bound size.
 	public var boundSize: CGSize {
-		return self.layoutProperty.boundSize
+		return self.layoutControlParameter.boundSize
 	}
 	
 	@available(iOS 11.0, *)
 	public var safeAreaInsets: UIEdgeInsets {
-		return self.layoutProperty.safeAreaInsets
+		return self.layoutControlParameter.safeAreaInsets
 	}
 	
 }
