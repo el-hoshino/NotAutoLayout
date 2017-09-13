@@ -59,12 +59,12 @@ extension TopCenterBottomDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topCenter = self.topCenter.closureValue(boundSize)
-			let bottom = self.bottom.closureValue(boundSize)
-			let width = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let topCenter = self.topCenter.closureValue(parameter)
+			let bottom = self.bottom.closureValue(parameter)
+			let width = width(parameter)
 			let frame = self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
 			
 			return frame

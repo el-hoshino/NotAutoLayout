@@ -33,9 +33,9 @@ extension CenterTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterTopBottomDidSetLayoutMaker {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterTopBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.closure(calculation)
+		let bottom = CGRect.Float.closure(bottom)
 		
 		let maker = CenterTopBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                             center: self.center,
@@ -84,9 +84,9 @@ extension CenterTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterTopWidthDidSetLayoutMaker {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterTopWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calculation)
+		let width = CGRect.Float.closure(width)
 		
 		let maker = CenterTopWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                            center: self.center,

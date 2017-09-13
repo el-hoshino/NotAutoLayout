@@ -52,13 +52,13 @@ extension CenterMiddleWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let height = calculation(boundSize)
-			let width = self.width.closureValue(boundSize)
-			let x = self.center.closureValue(boundSize) - width.half
-			let y = self.middle.closureValue(boundSize) - height.half
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let height = height(parameter)
+			let width = self.width.closureValue(parameter)
+			let x = self.center.closureValue(parameter) - width.half
+			let y = self.middle.closureValue(parameter) - height.half
 			let frame = CGRect(x: x,
 			                   y: y,
 			                   width: width,

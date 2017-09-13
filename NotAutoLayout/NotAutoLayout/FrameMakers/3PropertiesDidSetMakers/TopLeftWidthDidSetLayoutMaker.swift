@@ -59,12 +59,12 @@ extension TopLeftWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topLeft = self.topLeft.closureValue(boundSize)
-			let width = self.width.closureValue(boundSize)
-			let height = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let topLeft = self.topLeft.closureValue(parameter)
+			let width = self.width.closureValue(parameter)
+			let height = height(parameter)
 			let frame = self.makeFrame(topLeft: topLeft, width: width, height: height)
 			
 			return frame

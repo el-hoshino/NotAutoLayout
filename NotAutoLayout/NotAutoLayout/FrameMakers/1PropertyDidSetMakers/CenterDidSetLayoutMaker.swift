@@ -29,9 +29,9 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setTop(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterTopDidSetLayoutMaker {
+	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterTopDidSetLayoutMaker {
 		
-		let top = CGRect.Float.closure(calculation)
+		let top = CGRect.Float.closure(top)
 		
 		let maker = CenterTopDidSetLayoutMaker(parentView: self.parentView,
 		                                       center: self.center,
@@ -76,9 +76,9 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setMiddle(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterMiddleDidSetLayoutMaker {
+	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterMiddleDidSetLayoutMaker {
 		
-		let middle = CGRect.Float.closure(calculation)
+		let middle = CGRect.Float.closure(middle)
 		
 		let maker = CenterMiddleDidSetLayoutMaker(parentView: self.parentView,
 		                                          center: self.center,
@@ -123,9 +123,9 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> CenterBottomDidSetLayoutMaker {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.closure(calculation)
+		let bottom = CGRect.Float.closure(bottom)
 		
 		let maker = CenterBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                          center: self.center,

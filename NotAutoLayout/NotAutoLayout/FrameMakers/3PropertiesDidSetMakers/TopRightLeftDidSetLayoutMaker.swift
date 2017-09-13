@@ -68,12 +68,12 @@ extension TopRightLeftDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topRight = self.topRight.closureValue(boundSize)
-			let left = self.left.closureValue(boundSize)
-			let bottom = bottom(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let topRight = self.topRight.closureValue(parameter)
+			let left = self.left.closureValue(parameter)
+			let bottom = bottom(parameter)
 			let frame = self.makeFrame(topRight: topRight, left: left, bottom: bottom)
 			
 			return frame
@@ -133,12 +133,12 @@ extension TopRightLeftDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topRight = self.topRight.closureValue(boundSize)
-			let left = self.left.closureValue(boundSize)
-			let height = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let topRight = self.topRight.closureValue(parameter)
+			let left = self.left.closureValue(parameter)
+			let height = height(parameter)
 			let frame = self.makeFrame(topRight: topRight, left: left, height: height)
 
 			return frame

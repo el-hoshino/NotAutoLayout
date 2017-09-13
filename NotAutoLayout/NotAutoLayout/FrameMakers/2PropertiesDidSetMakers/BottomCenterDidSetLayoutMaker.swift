@@ -45,9 +45,9 @@ extension BottomCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> BottomCenterWidthDidSetLayoutMaker {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> BottomCenterWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calculation)
+		let width = CGRect.Float.closure(width)
 		
 		let maker = BottomCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               bottomCenter: self.bottomCenter,
@@ -84,11 +84,11 @@ extension BottomCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let bottomCenter = self.bottomCenter.closureValue(boundSize)
-			let size = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let bottomCenter = self.bottomCenter.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(bottomCenter: bottomCenter, size: size)
 			
 			return frame

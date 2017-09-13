@@ -91,11 +91,11 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottomLeft(by calculation: @escaping (_ boundSize: CGSize) -> CGPoint) -> Layout.Individual {
+	public func setBottomLeft(by bottomLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let topRight = self.topRight.closureValue(boundSize)
-			let bottomLeft = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let topRight = self.topRight.closureValue(parameter)
+			let bottomLeft = bottomLeft(parameter)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
 			
 			return frame
@@ -156,12 +156,12 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
 			
-			let topRight = self.topRight.closureValue(boundSize)
-			let size = calculation(boundSize)
+			let topRight = self.topRight.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(topRight: topRight, size: size)
 			
 			return frame

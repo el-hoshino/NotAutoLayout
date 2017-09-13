@@ -58,7 +58,7 @@ extension LeftRightTopDidSetLayoutMaker {
 			return layout
 			
 		} else {
-			let bottom: (_ boundSize: CGSize) -> CGFloat = { _ in bottom }
+			let bottom: (_ parameter: LayoutControlParameter) -> CGFloat = { _ in bottom }
 			
 			return self.setBottom(by: bottom)
 			
@@ -66,13 +66,13 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let left = self.left.closureValue(boundSize)
-			let right = self.right.closureValue(boundSize)
-			let top = self.right.closureValue(boundSize)
-			let bottom = bottom(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let left = self.left.closureValue(parameter)
+			let right = self.right.closureValue(parameter)
+			let top = self.right.closureValue(parameter)
+			let bottom = bottom(parameter)
 			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
 			
 			return frame
@@ -136,13 +136,13 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let left = self.left.closureValue(boundSize)
-			let right = self.right.closureValue(boundSize)
-			let top = self.top.closureValue(boundSize)
-			let height = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let left = self.left.closureValue(parameter)
+			let right = self.right.closureValue(parameter)
+			let top = self.top.closureValue(parameter)
+			let height = height(parameter)
 			let frame = self.makeFrame(left: left, right: right, top: top, height: height)
 
 			return frame

@@ -44,9 +44,9 @@ extension LeftTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftTopWidthDidSetLayoutMaker {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calculation)
+		let width = CGRect.Float.closure(width)
 		
 		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                          left: self.left,
@@ -85,13 +85,13 @@ extension LeftTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
 			
-			let left = self.left.closureValue(boundSize)
-			let top = self.top.closureValue(boundSize)
-			let size = calculation(boundSize)
+			let left = self.left.closureValue(parameter)
+			let top = self.top.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(left: left, top: top, size: size)
 
 			return frame

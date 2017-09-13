@@ -45,9 +45,9 @@ extension MiddleCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calculation)
+		let width = CGRect.Float.closure(width)
 		
 		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               middleCenter: self.middleCenter,
@@ -84,11 +84,11 @@ extension MiddleCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let middleCenter = self.middleCenter.closureValue(boundSize)
-			let size = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let middleCenter = self.middleCenter.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
 			
 			return frame

@@ -56,11 +56,11 @@ extension BottomRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
-			let bottomRight = self.bottomRight.closureValue(boundSize)
-			let size = calculation(boundSize)
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			let bottomRight = self.bottomRight.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
 			
 			return frame

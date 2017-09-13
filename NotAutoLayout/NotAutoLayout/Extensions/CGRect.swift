@@ -151,22 +151,22 @@ extension CGRect {
 	
 	enum Float {
 		case constant(CGFloat)
-		case closure((CGSize) -> CGFloat)
+		case closure((LayoutControlParameter) -> CGFloat)
 	}
 	
 	enum Point {
 		case constant(CGPoint)
-		case closure((CGSize) -> CGPoint)
+		case closure((LayoutControlParameter) -> CGPoint)
 	}
 	
 	enum Size {
 		case constant(CGSize)
-		case closure((CGSize) -> CGSize)
+		case closure((LayoutControlParameter) -> CGSize)
 	}
 	
 	enum Rect {
 		case constant(CGRect)
-		case closure((CGSize) -> CGRect)
+		case closure((LayoutControlParameter) -> CGRect)
 	}
 	
 }
@@ -184,7 +184,7 @@ extension CGRect.Float {
 		
 	}
 	
-	var closureValue: (CGSize) -> CGFloat {
+	var closureValue: (LayoutControlParameter) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -211,7 +211,7 @@ extension CGRect.Point {
 		
 	}
 	
-	var closureValue: (CGSize) -> CGPoint {
+	var closureValue: (LayoutControlParameter) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
@@ -238,7 +238,7 @@ extension CGRect.Size {
 		
 	}
 	
-	var closureValue: (CGSize) -> CGSize {
+	var closureValue: (LayoutControlParameter) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -265,7 +265,7 @@ extension CGRect.Rect {
 		
 	}
 	
-	var closureValue: (CGSize) -> CGRect {
+	var closureValue: (LayoutControlParameter) -> CGRect {
 		
 		switch self {
 		case .constant(let value):

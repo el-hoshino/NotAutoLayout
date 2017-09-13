@@ -45,9 +45,9 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopCenterBottomDidSetLayoutMaker {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopCenterBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.closure(calculation)
+		let bottom = CGRect.Float.closure(bottom)
 		
 		let maker = TopCenterBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                             topCenter: self.topCenter,
@@ -93,9 +93,9 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(calculation)
+		let width = CGRect.Float.closure(width)
 		
 		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                            topCenter: self.topCenter,
@@ -132,12 +132,12 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by calculation: @escaping (_ boundSize: CGSize) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
 		
-		let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
 			
-			let topCenter = self.topCenter.closureValue(boundSize)
-			let size = calculation(boundSize)
+			let topCenter = self.topCenter.closureValue(parameter)
+			let size = size(parameter)
 			let frame = self.makeFrame(topCenter: topCenter, size: size)
 			
 			return frame

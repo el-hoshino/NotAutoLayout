@@ -30,9 +30,9 @@ extension LeftRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setTop(by calculation: @escaping (_ boundSize: CGSize) -> CGFloat) -> LeftRightTopDidSetLayoutMaker {
+	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftRightTopDidSetLayoutMaker {
 		
-		let top = CGRect.Float.closure(calculation)
+		let top = CGRect.Float.closure(top)
 		
 		let maker = LeftRightTopDidSetLayoutMaker(parentView: self.parentView,
 		                                          left: self.left,
