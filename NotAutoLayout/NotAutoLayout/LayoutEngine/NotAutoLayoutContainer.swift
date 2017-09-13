@@ -29,6 +29,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		return self.layoutProperty.boundSize
 	}
 	
+	@available(iOS 11.0, *)
 	public var safeAreaInsets: UIEdgeInsets {
 		return self.layoutProperty.safeAreaInsets
 	}

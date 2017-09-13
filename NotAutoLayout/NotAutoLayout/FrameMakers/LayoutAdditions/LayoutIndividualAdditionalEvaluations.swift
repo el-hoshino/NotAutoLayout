@@ -10,11 +10,11 @@ import Foundation
 
 extension Layout.Individual {
 	
-	public typealias AdditionalFloatEvaluation = (_ frame: CGRect, _ boundSize: CGSize) -> CGFloat
-	public typealias AdditionalPointEvaluation = (_ frame: CGRect, _ boundSize: CGSize) -> CGPoint
-	public typealias AdditionalSizeEvaluation = (_ frame: CGRect, _ boundSize: CGSize) -> CGSize
+	public typealias AdditionalFloatEvaluation = (_ frame: CGRect, _ layoutProperty: LayoutProperty) -> CGFloat
+	public typealias AdditionalPointEvaluation = (_ frame: CGRect, _ layoutProperty: LayoutProperty) -> CGPoint
+	public typealias AdditionalSizeEvaluation = (_ frame: CGRect, _ layoutProperty: LayoutProperty) -> CGSize
 	
-	public typealias AdditionalProcess = (_ view: UIView, _ frame: CGRect, _ boundSize: CGSize) -> Void
+	public typealias AdditionalProcess = (_ view: UIView, _ frame: CGRect, _ layoutProperty: LayoutProperty) -> Void
 	
 }
 
