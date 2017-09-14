@@ -24,17 +24,19 @@ class NotAutoLayoutTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-		let view = LayoutInfoStoredView()
-		let layout = view.nal.makeLayout { maker in maker
+		let parent = UIView()
+		let child = UIView()
+		let layout = parent.nal.makeLayout { maker in maker
 			.setLeft(to: 10)
 			.setTop(to: 10)
 			.setWidth(to: 100)
 			.setHeight(to: 100)
 		}
 		
-		let result = layout.evaluatedFrame(in: .zero)
+		parent.nal.place(child, with: layout)
+		let result = child.frame
 		let expected = CGRect(x: 10, y: 10, width: 100, height: 100)
-		XCTAssert(result == expected)
+		XCTAssertEqual(result, expected)
 		
     }
     
@@ -53,9 +55,8 @@ class NotAutoLayoutTests: XCTestCase {
 			}
 			
 			view.nal.setupSubview(child) { (wizard) in wizard
-				.addToSelf()
+				.addToParent()
 				.setDefaultLayout(to: layout)
-				.commit()
 			}
 			
         }
