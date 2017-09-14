@@ -20,53 +20,12 @@ extension UIView {
 		
 	}
 	
-	@available(iOS 11.0, *)
-	private var boundsWithZeroOriginInSafeArea: CGRect {
-		
-		let bounds = self.boundsWithZeroOrigin
-		let insets = self.safeAreaInsets
-		let frame = bounds.inside(insets)
-		
-		return frame
-		
-	}
-	
-
-	func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool = false) -> CGRect {
-
-		switch targetView {
-		case self:
-			return self.boundsWithZeroOrigin
-			
-		default:
-			let checkingFrame: CGRect = {
-				if shouldIgnoreTransform {
-					return self.nal.identityFrame
-				} else {
-					return self.frame
-				}
-			}()
-			
-			let convertedFrame: CGRect = {
-				if let superview = self.superview {
-					return superview.convert(checkingFrame, to: targetView)
-				} else {
-					return checkingFrame
-				}
-			}()
-			
-			return convertedFrame
-		}
-
-	}
-	
-	@available(iOS 11.0, *)
-	func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
+	private func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
 		
 		switch targetView {
 		case self:
-			if shouldOnlyIncludeSafeArea {
-				return self.boundsWithZeroOriginInSafeArea
+			if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
+				return self.boundsWithZeroOrigin.inside(self.safeAreaInsets)
 			} else {
 				return self.boundsWithZeroOrigin
 			}
@@ -81,7 +40,7 @@ extension UIView {
 			}()
 			
 			let safeAreaFrame: CGRect = {
-				if shouldOnlyIncludeSafeArea {
+				if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
 					return checkingFrame.inside(self.safeAreaInsets)
 				} else {
 					return checkingFrame
@@ -105,7 +64,7 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
+	func horizontalReference(_ reference: CGRect.HorizontalBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self] (_) -> CGFloat in
 			
@@ -113,7 +72,7 @@ extension UIView {
 				return offset
 			}
 			
-			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform)
+			let frame = referenceView.frame(in: self, ignoresTransform: shouldIgnoreTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 			
 			let reference = reference.value(in: frame)
 			
@@ -127,7 +86,7 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CGRect.Float {
+	func verticalReference(_ reference: CGRect.VerticalBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Float {
 		
 		let reference = CGRect.Float.closure { [unowned self] (_) -> CGFloat in
 			
@@ -135,7 +94,7 @@ extension UIView {
 				return offset
 			}
 			
-			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform)
+			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 			
 			let reference = reference.value(in: frame)
 			
@@ -149,7 +108,7 @@ extension UIView {
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> CGRect.Point {
+	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Point {
 		
 		let reference = CGRect.Point.closure { [unowned self] (_) -> CGPoint in
 			
@@ -157,7 +116,7 @@ extension UIView {
 				return CGPoint.zero + offset
 			}
 			
-			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform)
+			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 			
 			let reference = reference.value(in: frame)
 			
