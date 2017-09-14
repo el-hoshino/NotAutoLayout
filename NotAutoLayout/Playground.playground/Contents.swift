@@ -138,9 +138,8 @@ extension ProfileSummaryView {
 	private func placeMainTitleView() {
 		
 		self.nal.place(self.mainTitleLabel) { $0
+			.pinTopRight(to: $0.parentView, s: .topRight)
 			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-			.pinRight(to: $0.parentView, s: .right)
-			.pinTop(to: $0.parentView, s: .top)
 			.pinBottom(to: $0.parentView, s: .middle)
 		}
 		
@@ -149,9 +148,8 @@ extension ProfileSummaryView {
 	private func placeSubTitleView() {
 		
 		self.nal.place(self.subTitleLabel) { $0
+			.pinTopRight(to: $0.parentView, s: .middleRight)
 			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-			.pinRight(to: $0.parentView, s: .right)
-			.pinTop(to: $0.parentView, s: .middle)
 			.pinBottom(to: $0.parentView, s: 0.75)
 		}
 		
