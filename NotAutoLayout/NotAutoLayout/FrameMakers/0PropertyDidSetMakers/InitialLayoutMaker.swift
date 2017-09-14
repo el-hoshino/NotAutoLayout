@@ -675,10 +675,21 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func stickOnParent() -> Layout.Individual {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
-			return CGRect(origin: .zero, size: parameter.boundSize)
+			return parameter.boundsWithZeroOrigin(safeAreaOnly: false).inside(insets)
+		}
+		
+		return layout
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
 		}
 		
 		return layout
