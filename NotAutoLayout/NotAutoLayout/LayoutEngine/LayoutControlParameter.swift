@@ -36,3 +36,73 @@ extension LayoutControlParameter {
 	}
 	
 }
+
+extension LayoutControlParameter {
+	
+	public var boundWidth: CGFloat {
+		return self.boundSize.width
+	}
+	
+	public var boundHeight: CGFloat {
+		return self.boundSize.height
+	}
+	
+}
+
+extension LayoutControlParameter {
+	
+	public var topSafeAreaInset: CGFloat {
+		return self.safeAreaInsets.top
+	}
+	
+	public var bottomSafeAreaInset: CGFloat {
+		return self.safeAreaInsets.bottom
+	}
+	
+	public var leftSafeAreaInset: CGFloat {
+		return self.safeAreaInsets.left
+	}
+	
+	public var rightSafeAreaInset: CGFloat {
+		return self.safeAreaInsets.right
+	}
+	
+}
+
+extension LayoutControlParameter {
+	
+	public var safeWidth: CGFloat {
+		return self.boundWidth - self.safeAreaInsets.width
+	}
+	
+	public var safeHeight: CGFloat {
+		return self.boundHeight - self.safeAreaInsets.height
+	}
+	
+	public var safeOrigin: CGPoint {
+		return CGPoint(x: self.leftSafeAreaInset, y: self.topSafeAreaInset)
+	}
+	
+	public var safeSize: CGSize {
+		return CGSize(width: self.safeWidth, height: self.safeHeight)
+	}
+	
+}
+
+extension LayoutControlParameter {
+	
+	public func boundsWithZeroOrigin(safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
+		
+		let boundsWithZeroOrigin = CGRect(origin: .zero, size: self.boundSize)
+		
+		switch shouldOnlyIncludeSafeArea {
+		case true:
+			return boundsWithZeroOrigin.inside(self.safeAreaInsets)
+			
+		case false:
+			return boundsWithZeroOrigin
+		}
+		
+	}
+	
+}
