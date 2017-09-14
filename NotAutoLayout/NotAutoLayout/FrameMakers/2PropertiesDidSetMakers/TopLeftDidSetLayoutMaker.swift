@@ -88,11 +88,36 @@ extension TopLeftDidSetLayoutMaker {
 		
 	}
 	
+	@available(iOS 11.0, *)
+	public func pinBottomRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinBottomRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		
+	}
+	
 	public func pinBottomRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).closureValue(boundSize)
+			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func pinBottomRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+			let topLeft = self.topLeft.closureValue(boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).closureValue(boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame
@@ -115,9 +140,31 @@ extension TopLeftDidSetLayoutMaker {
 		
 	}
 	
+	@available(iOS 11.0, *)
+	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopLeftRightDidSetLayoutMaker {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		
+	}
+	
 	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> TopLeftRightDidSetLayoutMaker {
 		
-		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
+		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
+		
+		let maker = TopLeftRightDidSetLayoutMaker(parentView: self.parentView,
+		                                          topLeft: self.topLeft,
+		                                          right: right)
+		
+		return maker
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopLeftRightDidSetLayoutMaker {
+		
+		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = TopLeftRightDidSetLayoutMaker(parentView: self.parentView,
 		                                          topLeft: self.topLeft,

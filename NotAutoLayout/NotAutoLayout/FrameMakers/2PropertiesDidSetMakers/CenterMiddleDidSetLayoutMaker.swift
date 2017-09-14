@@ -54,9 +54,32 @@ extension CenterMiddleDidSetLayoutMaker {
     	
 	}
 	
+	@available(iOS 11.0, *)
+	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterMiddleBottomDidSetLayoutMaker {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		
+	}
+	
 	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterMiddleBottomDidSetLayoutMaker {
 		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform)
+		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
+		
+		let maker = CenterMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
+		                                                center: self.center,
+		                                                middle: self.middle,
+		                                                bottom: bottom)
+		
+		return maker
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterMiddleBottomDidSetLayoutMaker {
+		
+		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = CenterMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                                center: self.center,

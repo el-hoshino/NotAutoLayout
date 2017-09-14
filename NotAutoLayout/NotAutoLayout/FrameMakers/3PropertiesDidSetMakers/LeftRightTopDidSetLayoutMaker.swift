@@ -91,13 +91,40 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
+	@available(iOS 11.0, *)
+	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+		
+		let referenceView = { [weak referenceView] in referenceView }
+		
+		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		
+	}
+	
 	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout.Individual {
 		
 		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let left = self.left.closureValue(boundSize)
 			let right = self.right.closureValue(boundSize)
 			let top = self.top.closureValue(boundSize)
-			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform).closureValue(boundSize)
+			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).closureValue(boundSize)
+			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
+			
+			return frame
+			
+		}
+		
+		return layout
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+		
+		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+			let left = self.left.closureValue(boundSize)
+			let right = self.right.closureValue(boundSize)
+			let top = self.top.closureValue(boundSize)
+			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).closureValue(boundSize)
 			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
 			
 			return frame
