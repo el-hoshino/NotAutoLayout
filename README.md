@@ -1,6 +1,7 @@
 # NotAutoLayout
-[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
-[![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
+[![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
+[![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
+[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 NotAutoLayoutView is a framework to help you layout subviews *without* Auto Layout constraints.
@@ -9,6 +10,8 @@ Please note that this framework hasn't been widely tested yet, and currently it'
 
 Please open an issue or send me a pull request if you have any problems, better ideas or any other things you want me to know.
 
+Currently this README.md file doesn't cover the whole project yet, it will be fixed in future releases.
+
 ## Why NotAutoLayout
 Apple introduced Interface Builder and Storyboard to help developers create views visually, which is a very good idea. But after iPhone 5, things changed. There're more and more screen resolutions with different aspect ratios that drives developer crazy. To solve this problem, Apple introduced Auto Layout and Size Classes.
 
@@ -16,23 +19,19 @@ But the problem is, they're just making things more complicated (and that's why 
 
 So, there are some frameworks like [Snapkit](https://github.com/SnapKit/SnapKit) and [PureLayout](https://github.com/PureLayout/PureLayout) to help you create Auto Layout constraints much more easily (which should be Xcode's duty). But there are still some *old school* developers (like me :P) just don't like, or even hate Auto Layout and want to create layout through codes. That's why I created NotAutoLayout framework.
 
-With NotAutoLayout, you don't need to care about anything like constraints or size classes, instead you just need to focus on **where** should I place the element, **how big** should I resize the element, and **which zIndex** should I lay the element on. You can  even create a CSS-style responsive layout with just a couple lines of code. Every layout process done through NotAutoLayout framework is inside the `layoutSubviews()` method, which makes it easier to debug than constraints (Yes you can even put a breaker to get the detailed layout information!).
-
-Also, `LayoutView`s can be nested, which means that you can manage the layout of subviews with hierarchies, just like you manage your subviews with hierarchies.
-
-In addition, you can also subclass the `LayoutView` class, or subclass any other `UIView` class and conform it to `LayoutControllable` protocol, so you can keep the layouts in Views to prevent fat Controllers.
+With NotAutoLayout, you don't need to care about anything like constraints or size classes, instead you just need to focus on **where** is the edge of the element, **how big** should I resize the element, and maybe **what** should I do after layout process finished. Every layout process done through NotAutoLayout framework is through directly setting `frame` property if `transform` is `.identity`, or `bounds.size` and `center` properties otherwise, which makes it easier to debug than constraints (Yes you can even put a breaker to get the detailed layout information!).
 
 ## Requirements
 - iOS 8.0+
-- Xcode 8.0+
-- Swift 3.0+
+- Xcode 9.0+
+- Swift 4.0+
 
 ## Installation
 ### Use Carthage:
 - Download and install [Carthage](https://github.com/Carthage/Carthage#installing-carthage).
 - Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 ```
-github "el-hoshino/NotAutoLayout"
+github "el-hoshino/NotAutoLayout" ~> 2.0
 ```
 - Run `carthage update`.
 - Add the framework to your project.
@@ -50,93 +49,86 @@ import UIKit
 import PlaygroundSupport
 import NotAutoLayout
 
-let baseView = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
-PlaygroundPage.current.liveView = baseView
+let view = LayoutInfoStoredView(frame: .init(x: 0, y: 0, width: 320, height: 568))
+view.backgroundColor = .white
+PlaygroundPage.current.liveView = view
 
-let titleView = TitleView()
-let contentView = UITableView()
-let tabView = TabView()
+let margin: CGSize = .init(width: 10, height: 10)
+let summaryView = ProfileSummaryView()
+let contentsView = ContentsView()
+let replyView = ReplyView()
 
-let titleViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in 0 },
-	            width: { $0.width },
-	            height: { _ in 60 })
-let contentViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in titleView.frame.maxY },
-	            width: { $0.width },
-	            height: { $0.height - (titleView.frame.maxY + 64) })
-let tabViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in contentView.frame.maxY },
-	            width: { $0.width },
-	            height: { _ in 64 })
+summaryView.avatar = #imageLiteral(resourceName: "avatar.png")
+summaryView.mainTitle = "星野恵瑠＠今日も1日フレンズ㌠"
+summaryView.subTitle = "@lovee"
+contentsView.contents = """
+	Hello, NotAutoLayout!
+	The whole new NotAutoLayout 2.0 now has much better syntax which is:
+	- Easier to write (thanks to method-chain structures)
+	- Easier to read (thanks to more natural English-like statements)
+	- Even supports dynamic view sizes (with commands like `fitSize()`)!
+	"""
+contentsView.timeStamp = Date()
 
-titleView.backgroundColor = .red
-contentView.backgroundColor = .green
-tabView.backgroundColor = .blue
-
-baseView.addSubview(titleView, constantLayout: titleViewLayout)
-baseView.addSubview(contentView, constantLayout: contentViewLayout)
-baseView.addSubview(tabView, constantLayout: tabViewLayout)
-
-titleView.setTitle("Hello NotAutoLayout!")
-
-for _ in 0 ..< 10 {
-	let tabItem = UIView()
-	tabItem.backgroundColor = .brown
-	tabView.addSubview(tabItem, layoutMethods: tabView.makeTabItemLayoutMethods())
+view.nal.setupSubview(summaryView) { $0
+	.makeDefaultLayout { $0
+		.pinLeft(to: $0.parentView, s: .left, offsetBy: margin.width)
+		.pinRight(to: $0.parentView, s: .right, offsetBy: -margin.width)
+		.pinTop(to: $0.parentView, s: .top, offsetBy: margin.height)
+		.fitHeight()
+	}
+	.addToParent()
+}
+view.nal.setupSubview(contentsView) { $0
+	.makeDefaultLayout({ $0
+		.pinTopLeft(to: summaryView, s: .bottomLeft)
+		.pinRight(to: summaryView, s: .right)
+		.fitHeight()
+		.movingY(by: margin.height)
+	})
+	.setDefaultOrder(to: 1)
+	.addToParent()
+}
+view.nal.setupSubview(replyView) { $0
+	.makeDefaultLayout({ $0
+		.pinBottomCenter(to: $0.parentView, s: .bottomCenter)
+		.setWidth(by: { $0.boundWidth - (margin.width * 2) })
+		.fitHeight()
+	})
+	.addToParent()
 }
 
-baseView.setNeedsLayout()
-tabView.updateContentSize() // You can implement this into a ViewController's viewDidLayoutSubviews() method, which makes more sense if you have a ViewController that holds the tabView.
+view.setNeedsLayout()
 ```
-![screenshot](https://raw.githubusercontent.com/el-hoshino/NotAutoLayout/master/README_Resource/PlaygroundSample.png)
+![screenshot](README_Resource/PlaygroundSample.png)
 
 ### Tell me more
-There are basically 2 ways to use NotAutoLayout framework. The easiest one is simply create a `LayoutView` to layout the subviews in it, or you can also choose to subclass `LayoutView` or even subclass any other `UIView` and conform it to `LayoutControllable` protocol.
+Waiting to be filled ...
 
-- Use a `LayoutView`
-You can just create an instance of `LayoutView` like any other `UIView` objects through `LayoutView(frame: CGRect)` initializer.
+### How to make a layout
+You may call `nal.layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual)` to set a layout for subview from the parent view. The very basic idea is to make layouts through `LayoutMaker`s. With `LayoutMaker`, you can setup a layout by setting each part of a frame step by step to generate a specific layout, and then the parent view will use the generated layout to set the frame of the subview.
 
-- Subclass a `LayoutView`
-You can just subclass a `LayoutView` like subclassing any other `UIView` classes, and you may add subviews as well as layout information for these subviews inside the subclass so you don't need to do it in a `UIViewController`, which may help you prevent a fat Controller.
+To setup a layout by `LayoutMaker`, you may call methods like `$0.setTopLeft(to: .zero).fitSize()` in the provided `making` closure. Since it's a `(InitialLayoutMaker) -> Layout.Individual` type closure, it will guarantee that finally you'll get a specific layout that avoids things like ambiguous layout in Auto Layout. And since `InitialLayoutMaker` has lots of chaind methods those lead to a `Layout.Individual`, you can easily write a method chain without missing any part of a frame.
 
-- Conform other `UIView` subclasses to `LayoutControllable` protocol
-Sometimes you may want to create classes other than `LayoutView`'s subclass, like you want to create a `UIImageView`'s subclass. In this case, all you need to do is to store `var layoutInfo: [Hash: [NotAutoLayout.LayoutMethod]]` dictionary, `var orderInfo: [Hash: Int]` dictionary and `var zIndexInfo: [Hash: Int]` dictionary (`Hash` here is a typealias of `Int`, which is actually the target `View`'s `hash` property), setup a `var layoutOptimazation: LayoutOptimization` property, override `func layoutSubviews()` method and call `layoutControl()` after `super.layoutSubviews()`. Now you're ready to use your own subclass to layout.
+To make a certain frame, you'll need 4 elements: 2 unique horizontal positions and 2 unique vertical positions. Horizontal positions may be any of the things like `left`, `center`, `right` or any specific position like `0.3`, and `width` which also can represent a horizontal position. Vertical positions may be any of the things like `top`, `middle`, `bottom` or any specific position like `0.3`, and of course `height`. To set these elements through `LayoutMaker`, there is a approximate order that is:
+1. Set point-specific positions (like `.topLeft`) before line-specific positions (like `.top` or `.left`).
+2. Set line-specific positions before set size elements (`.width`, `.height` and `.size`).
+3. In line-specific positions, set horizontal positions (like `.left`) before vertical positions (like `.top`).
+4. In size elements, set `.width` before `.height` if you set them separately.
 
-After the LayoutView object created, you can then add subviews to it, just like any other UIView objects. Also you may want to set the layout information of that subview through methods like `setLayoutMethods(_ methods: [NotAutoLayout.LayoutMethod], for subview: UIView)` and `setZIndex(_ zIndex: Int, for subview: UIView)`. If this subview is not added yet, you may also call `addSubview(_ view: UIView, layoutMethods: [LayoutMethod], order: Int? = nil, zIndex: Int? = nil)` method to add the subview and setup the layout info for it at the same time.
+Since you only need 2 unique horizontal positions and 2 unique vertical positions to make a frame, you don't need to write all those 4 categories of statements. For example, you may write `$0.setTopLeft(to: .zero).fitSize()` to make a specific frame, which only have 2 statements.
 
-Basically the view object automatically layouts its subviews before it appears. For some reason if you want to manually forced layout it, you can call `setNeedsLayouts()` or `layoutIfNeeded()` from the main thread, just like what you do in normal `UIView` objects.
-
-In addition, although there is a `zIndexInfo` dictionary, it won't have any effect until you added all the subviews you need and call `reloadSubviews()`. This method will remove all the subviews on it temporarily, sort them from the information in `zIndexInfo`, and re-add them again in the sorted order. So it's a good idea to add the subviews using `addSubview` or `insertSubview` methods correctly, then you're not required to call `reloadSubviews()` every time.
-
-And sometimes, you may need to layout one subview before another because the other one needs the frame of that subview to layout. In this situation, you may store the layout orders of views in `orderInfo` dictionary. If there's no linked order info of a subview, it'll be considered as `0`, which means if you want to layout a specific subview before any other subviews, you may set its order to a minus number.
-
-To layout the subviews you added, there're some structures and enums to store the layout information, which is needed in `layoutSubviews()` method. You may find the details in markdown document comment. For instance, we just talk about the basic ideas here.
-
-`LayoutControllable` objects, or `LayoutView` in this case, links its each subview with `[LayoutMethod]`, `order` and `ZIndex` through `layoutInfo`, `orderInfo` and `zIndexInfo` dictionaries. If a subview doesn't have a linked `[LayoutMethod]` property, it won't get relayout in `layoutSubview()` process (but is still on the `LayoutView` object, if you have already added it).
-
-`LayoutMethod` is the most important structure that keeps your layout information. It's made up from 2 parts: `condition: Condition` and `layout: Layout`.
-
-`Condition` is a closure with type `(CGSize) -> Bool`. You can judge if `LayoutControllable` should use this `LayoutMethod` under current canvas size (or of course you can set it as `{_ in true}` that will always return a true regardless of the canvas size). If the result of `condition(bounds.size)` is true, the `Layout` will be calculated to layout the subview. And since each subview may have a linked *array* of  `LayoutMethod`, you can set multiple layout methods to a subview for different conditions like under landscape, in a big screen like iPad, etc. But be careful that only the first `condition` in the `LayoutMethod` array that returns true will be chosen in layout process.
-
-`Layout` is a enum that you can put various frame information, like `.individual(.absolute(CGRect))` which will always place the linked subview in the given frame, no matter how `LayoutView` itself's bound size changes; and `.individual(.relative(CGRect))` will always place the linked subview depending on how big the `LayoutSubview` itself's bound size is, in to the `LayoutPosition` instance. You may find the details in markdown document comment.
-
-In addition, although the layout information is designed to be like a `frame` information, it's actually set to the `bounds.size` and `center` property so theoretically it's OK to apply `CGAffineTransform` to the subviews.
+And in `LayoutMaker`s, you also have some methods that can get the parent view's size and safe area related properties (like `.setLeft(by: { $0.leftSafeAreaInset })`), which can help you in making responsive layouts.
 
 ### How it actually works
-You may already have got the basic idea how it works in previous chapter. Basically NotAutoLayout does 2 things.
+Waiting to be filled ...
 
-#### To set a layout
-There're serveral method provided to set the layout like `addSubview(_ view: UIView, layoutMethods: [LayoutMethod], order: Int? = nil, zIndex: Int? = nil)`. You can call these methods anytime, and the value you set will be used while it layouts the subviews.
-
-#### To layout
-In `layoutControl()`, the `LayoutControllable` object (usually current `UIView`) iterates the subviews, tries to find if there's a linked `[LayoutMethod]` information to each `subview`. It'll get the first `Layout` in the `LayoutMethod` array which returns `true` in `Condition`. Through `Layout`, the `LayoutControllable` will calculate the correct `Frame` value provided by user, and use it to set `bounds.size` and `center` for the `subview`.
-
-## Future
-NotAutoLayout was originally designed to help me writing layout codes faster, more accurate, as well as easier to understand the layout through codes. But unfortunetely, the current syntax is still not simple enough to reduce coding time, so the next major release will consider more about the syntax simplicity. I'm looking through other layout libraries like [PinLayout](https://github.com/mirego/PinLayout) and trying to figure out a better syntax that's easier to understand, easier to remember, and easier to write, while still keeping the current difficulty to fail.
+## Known issues
+- [ ] README.md file is not finished yet.
+- [ ] Inline documents are not finished yet.
+- [ ] Some `LayoutMaker` methods are not declared yet.
+- [ ] Sequencial layout is not implemented yet.
+- [ ] Matrical layout is not implemented yet.
 
 ## License
 NotAutoLayout is released under the Apache license. See LICENSE for details.

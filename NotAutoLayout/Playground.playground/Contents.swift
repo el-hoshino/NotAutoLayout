@@ -1,47 +1,54 @@
 //: Playground - noun: a place where people can play
-
-import UIKit
 import PlaygroundSupport
 import NotAutoLayout
 
-let baseView = LayoutView(frame: CGRect(x: 0, y: 0, width: 320, height: 568))
-PlaygroundPage.current.liveView = baseView
+let view = LayoutInfoStoredView(frame: .init(x: 0, y: 0, width: 320, height: 568))
+view.backgroundColor = .white
+PlaygroundPage.current.liveView = view
 
-let titleView = TitleView()
-let contentView = UITableView()
-let tabView = TabView()
+let margin: CGSize = .init(width: 10, height: 10)
+let summaryView = ProfileSummaryView()
+let contentsView = ContentsView()
+let replyView = ReplyView()
 
-let titleViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in 0 },
-	            width: { $0.width },
-	            height: { _ in 60 })
-let contentViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in titleView.frame.maxY },
-	            width: { $0.width },
-	            height: { $0.height - (titleView.frame.maxY + 64) })
-let tabViewLayout = Layout
-	.makeCustom(x: { _ in 0 },
-	            y: { _ in contentView.frame.maxY },
-	            width: { $0.width },
-	            height: { _ in 64 })
+summaryView.avatar = #imageLiteral(resourceName: "avatar.png")
+summaryView.mainTitle = "星野恵瑠＠今日も1日フレンズ㌠"
+summaryView.subTitle = "@lovee"
+contentsView.contents = """
+	Hello, NotAutoLayout!
+	The whole new NotAutoLayout 2.0 now has much better syntax which is:
+	- Easier to write (thanks to method-chain structures)
+	- Easier to read (thanks to more natural English-like statements)
+	- Even supports dynamic view sizes (with commands like `fitSize()`)!
+	"""
+contentsView.timeStamp = Date()
 
-titleView.backgroundColor = .red
-contentView.backgroundColor = .green
-tabView.backgroundColor = .blue
-
-baseView.addSubview(titleView, constantLayout: titleViewLayout)
-baseView.addSubview(contentView, constantLayout: contentViewLayout)
-baseView.addSubview(tabView, constantLayout: tabViewLayout)
-
-titleView.setTitle("Hello NotAutoLayout!")
-
-for _ in 0 ..< 10 {
-	let tabItem = UIView()
-	tabItem.backgroundColor = .brown
-	tabView.addSubview(tabItem, layoutMethods: tabView.makeTabItemLayoutMethods())
+view.nal.setupSubview(summaryView) { $0
+	.makeDefaultLayout { $0
+		.pinLeft(to: $0.parentView, s: .left, offsetBy: margin.width)
+		.pinRight(to: $0.parentView, s: .right, offsetBy: -margin.width)
+		.pinTop(to: $0.parentView, s: .top, offsetBy: margin.height)
+		.fitHeight()
+	}
+	.addToParent()
+}
+view.nal.setupSubview(contentsView) { $0
+	.makeDefaultLayout({ $0
+		.pinTopLeft(to: summaryView, s: .bottomLeft)
+		.pinRight(to: summaryView, s: .right)
+		.fitHeight()
+		.movingY(by: margin.height)
+	})
+	.setDefaultOrder(to: 1)
+	.addToParent()
+}
+view.nal.setupSubview(replyView) { $0
+	.makeDefaultLayout({ $0
+		.pinBottomCenter(to: $0.parentView, s: .bottomCenter)
+		.setWidth(by: { $0.boundWidth - (margin.width * 2) })
+		.fitHeight()
+	})
+	.addToParent()
 }
 
-baseView.setNeedsLayout()
-tabView.updateContentSize() // You can implement this into a ViewController's viewDidLayoutSubviews() method, which makes more sense if you have a ViewController that holds the tabView.
+view.setNeedsLayout()
