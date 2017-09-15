@@ -33,7 +33,7 @@ class NotAutoLayoutTests: XCTestCase {
 			.setHeight(to: 100)
 		}
 		
-		parent.nal.place(child, with: layout)
+		parent.nal.layout(child, with: layout)
 		let result = child.frame
 		let expected = CGRect(x: 10, y: 10, width: 100, height: 100)
 		XCTAssertEqual(result, expected)

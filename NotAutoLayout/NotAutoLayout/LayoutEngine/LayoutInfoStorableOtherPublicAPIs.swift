@@ -123,7 +123,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	public func layout(_ subview: UIView) {
 		
 		if let layout = self.getCurrentLayout(for: subview) {
-			self.place(subview, with: layout)
+			self.layout(subview, with: layout)
 		}
 		
 	}

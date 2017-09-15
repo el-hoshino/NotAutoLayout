@@ -17,7 +17,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 		subviews.forEach { (view) in
 			if let layout = self.getLayout(for: view, from: layoutInfo, or: defaultLayoutInfo) {
-				self.place(view, with: layout)
+				self.layout(view, with: layout)
 			}
 		}
 		

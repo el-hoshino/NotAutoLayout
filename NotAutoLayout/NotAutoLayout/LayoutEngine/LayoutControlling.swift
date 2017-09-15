@@ -10,12 +10,12 @@ import Foundation
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	/// Forcedly place a `view` with a specific `frame`.
+	/// Layout a `view` with a specific `frame`.
 	///
 	/// - Parameters:
 	///   - view: The target `UIView`.
 	///   - frame: The desired frame for the target `UIView`
-	public func place(_ view: UIView, with frame: CGRect) {
+	public func layout(_ view: UIView, with frame: CGRect) {
 		
 		if view.transform.isIdentity {
 			view.frame = frame
@@ -23,12 +23,12 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		} else {
 			let anchorPoint = view.layer.anchorPoint
 			let bounds = Bounds(frame: frame, anchorPoint: anchorPoint)
-			self.place(view, with: bounds)
+			self.layout(view, with: bounds)
 		}
 		
 	}
 	
-	private func place(_ view: UIView, with bounds: Bounds) {
+	private func layout(_ view: UIView, with bounds: Bounds) {
 		
 		view.bounds.size = bounds.size
 		view.center = bounds.center
@@ -39,20 +39,20 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func place(_ view: UIView, with layout: Layout.Individual) {
+	public func layout(_ view: UIView, with layout: Layout.Individual) {
 		
 		let frame = layout.evaluatedFrame(for: view, fittedBy: { view.sizeThatFits($0) }, with: self.layoutControlParameter)
-		self.place(view, with: frame)
+		self.layout(view, with: frame)
 		
 	}
 	
-	func place(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
+	func layout(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
 		
 		fatalError("Not implemented yet")
 		
 	}
 	
-	func place(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
+	func layout(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
 		
 		fatalError("Not implemented yet")
 		
@@ -62,12 +62,12 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func place(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
 		let layout = making(maker)
 		
-		self.place(subview, with: layout)
+		self.layout(subview, with: layout)
 		
 	}
 	
