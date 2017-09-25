@@ -11,7 +11,7 @@ import Foundation
 public struct Layout {
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, renamed: "Layout", message: "Layout.Individual has been renamed to Layout, in addition sequential layout and matrical layout will have their own type names in future release, too.")
-	typealias Individual = Layout
+	public typealias Individual = Layout
 	
 	fileprivate enum Frame {
 		case constant(CGRect)
