@@ -92,16 +92,16 @@ extension TopRightDidSetLayoutMaker {
 
 extension TopRightDidSetLayoutMaker {
 	
-	public func setBottomLeft(to bottomLeft: CGPoint) -> Layout.Individual {
+	public func setBottomLeft(to bottomLeft: CGPoint) -> Layout {
 		
 		if let topRight = self.topRight.constantValue {
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let topRight = self.topRight.closureValue(boundSize)
 				let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
 				return frame
@@ -113,9 +113,9 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottomLeft(by bottomLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> Layout.Individual {
+	public func setBottomLeft(by bottomLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let topRight = self.topRight.closureValue(parameter)
 			let bottomLeft = bottomLeft(parameter)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
@@ -128,7 +128,7 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
+	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -137,7 +137,7 @@ extension TopRightDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -145,9 +145,9 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout.Individual {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topRight = self.topRight.closureValue(boundSize)
 			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).closureValue(boundSize)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
@@ -161,9 +161,9 @@ extension TopRightDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let topRight = self.topRight.closureValue(boundSize)
 			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).closureValue(boundSize)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
@@ -180,16 +180,16 @@ extension TopRightDidSetLayoutMaker {
 
 extension TopRightDidSetLayoutMaker {
 	
-	public func setSize(to size: CGSize) -> Layout.Individual {
+	public func setSize(to size: CGSize) -> Layout {
 		
 		if let topRight = self.topRight.constantValue {
 			let frame = self.makeFrame(topRight: topRight, size: size)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let topRight = self.topRight.closureValue(boundSize)
 				let frame = self.makeFrame(topRight: topRight, size: size)
 				
@@ -203,9 +203,9 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			
 			let topRight = self.topRight.closureValue(parameter)
 			let size = size(parameter)
@@ -219,9 +219,9 @@ extension TopRightDidSetLayoutMaker {
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let topRight = self.topRight.closureValue(boundSize)
 			let size = fitting(fittingSize)

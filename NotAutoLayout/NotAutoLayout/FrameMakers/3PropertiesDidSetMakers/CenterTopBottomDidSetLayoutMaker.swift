@@ -22,19 +22,19 @@ public struct CenterTopBottomDidSetLayoutMaker {
 
 extension CenterTopBottomDidSetLayoutMaker {
 	
-	public func setWidth(to width: CGFloat) -> Layout.Individual {
+	public func setWidth(to width: CGFloat) -> Layout {
 		
 		if let center = self.center.constantValue, let top = self.top.constantValue, let bottom = self.bottom.constantValue {
 			let height = bottom - top
 			let x = center - width.half
 			let y = top
 			let frame = CGRect(x: x, y: y, width: width, height: height)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let top = self.top.closureValue(boundSize)
 				let bottom = self.bottom.closureValue(boundSize)
 				let height = bottom - top
@@ -53,9 +53,9 @@ extension CenterTopBottomDidSetLayoutMaker {
 		
 	}
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let top = self.top.closureValue(parameter)
 			let bottom = self.bottom.closureValue(parameter)
 			let height = bottom - top

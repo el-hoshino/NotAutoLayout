@@ -8,8 +8,9 @@
 
 import Foundation
 
-extension Layout {
+public struct Layout {
 	
+	@available(*, introduced: 2.0, deprecated: 2.1, renamed: "Layout", message: "Layout.Individual has been renamed to Layout, in addition sequential layout and matrical layout will have their own type names in future release, too.")
 	typealias Individual = Layout
 	
 	fileprivate enum Frame {
@@ -54,33 +55,33 @@ extension Layout {
 
 }
 
-extension Layout.Individual {
+extension Layout {
 	
-	static func makeAbsolute(frame: CGRect) -> Layout.Individual {
-		let layout = Layout.Individual(frame: frame)
+	static func makeAbsolute(frame: CGRect) -> Layout {
+		let layout = Layout(frame: frame)
 		return layout
 	}
 	
-	static func makeCustom(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) -> Layout.Individual {
-		let layout = Layout.Individual(x: x, y: y, width: width, height: height)
+	static func makeCustom(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) -> Layout {
+		let layout = Layout(x: x, y: y, width: width, height: height)
 		return layout
 	}
 	
-	static func makeCustom(frame: @escaping (LayoutControlParameter) -> CGRect) -> Layout.Individual {
-		let layout = Layout.Individual(evaluation: frame)
+	static func makeCustom(frame: @escaping (LayoutControlParameter) -> CGRect) -> Layout {
+		let layout = Layout(evaluation: frame)
 		return layout
 	}
 	
-	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout.Individual {
-		let layout = Layout.Individual(evaluation: frame)
+	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout {
+		let layout = Layout(evaluation: frame)
 		return layout
 	}
 	
 }
 
-extension Layout.Individual {
+extension Layout {
 	
-	func addingAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) -> Layout.Individual {
+	func addingAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) -> Layout {
 		
 		var layout = self
 		layout.additionalEvaluations.append(evaluation)
@@ -97,9 +98,9 @@ extension Layout.Individual {
 	
 }
 
-extension Layout.Individual {
+extension Layout {
 	
-	func settingAdditionalEvaluations(to evaluations: [FrameAdditionalEvaluation]) -> Layout.Individual {
+	func settingAdditionalEvaluations(to evaluations: [FrameAdditionalEvaluation]) -> Layout {
 		
 		var layout = self
 		layout.additionalEvaluations = evaluations
@@ -116,7 +117,7 @@ extension Layout.Individual {
 	
 }
 
-extension Layout.Individual {
+extension Layout {
 	
 	func evaluatedFrame(for view: UIView, fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		
@@ -132,7 +133,7 @@ extension Layout.Individual {
 	
 }
 
-extension Layout.Individual.Frame {
+extension Layout.Frame {
 	
 	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		

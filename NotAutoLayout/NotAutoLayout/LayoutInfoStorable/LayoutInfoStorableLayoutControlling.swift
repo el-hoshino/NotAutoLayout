@@ -42,7 +42,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	/// Layout all the subviews which have linked layout information. If you conform your own `UIView` to `LayoutInfoStorable` protocol, call this method inside `layoutSubviews()` method.
 	public func layoutSubviews() {
 		
-		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: true)
+		let subviews = self.getSubviews(sortedByOrder: true)
 		
 		switch self.body.layoutOptimization {
 		case .none:

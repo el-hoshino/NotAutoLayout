@@ -131,16 +131,16 @@ extension TopCenterDidSetLayoutMaker {
 
 extension TopCenterDidSetLayoutMaker {
 	
-	public func setSize(to size: CGSize) -> Layout.Individual {
+	public func setSize(to size: CGSize) -> Layout {
 		
 		if let topCenter = self.topCenter.constantValue {
 			let frame = self.makeFrame(topCenter: topCenter, size: size)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let topCenter = self.topCenter.closureValue(boundSize)
 				let frame = self.makeFrame(topCenter: topCenter, size: size)
 				
@@ -154,9 +154,9 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			
 			let topCenter = self.topCenter.closureValue(parameter)
 			let size = size(parameter)
@@ -170,9 +170,9 @@ extension TopCenterDidSetLayoutMaker {
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let topCenter = self.topCenter.closureValue(boundSize)
 			let size = fitting(fittingSize)

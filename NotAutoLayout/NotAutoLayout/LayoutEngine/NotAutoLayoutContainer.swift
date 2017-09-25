@@ -73,7 +73,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	func layout(in layoutInfo: LayoutInfo) -> Layout.Individual? {
+	func layout(in layoutInfo: LayoutInfo) -> Layout? {
 		return layoutInfo[self.hash]
 	}
 	

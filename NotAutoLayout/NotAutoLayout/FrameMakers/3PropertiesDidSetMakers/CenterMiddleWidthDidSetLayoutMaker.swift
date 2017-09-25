@@ -22,19 +22,19 @@ public struct CenterMiddleWidthDidSetLayoutMaker {
 
 extension CenterMiddleWidthDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> Layout.Individual {
+	public func setHeight(to height: CGFloat) -> Layout {
 		
 		if let center = self.center.constantValue, let middle = self.middle.constantValue, let width = self.width.constantValue {
 			let frame = CGRect(x: center - width.half,
 			                   y: middle - height.half,
 			                   width: width,
 			                   height: height)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let width = self.width.closureValue(boundSize)
 				let x = self.center.closureValue(boundSize) - width.half
 				let y = self.middle.closureValue(boundSize) - height.half
@@ -52,9 +52,9 @@ extension CenterMiddleWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let height = height(parameter)
 			let width = self.width.closureValue(parameter)
 			let x = self.center.closureValue(parameter) - width.half

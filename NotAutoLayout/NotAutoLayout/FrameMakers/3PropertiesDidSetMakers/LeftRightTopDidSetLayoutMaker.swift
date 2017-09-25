@@ -49,11 +49,11 @@ extension LeftRightTopDidSetLayoutMaker {
 
 extension LeftRightTopDidSetLayoutMaker {
 	
-	public func setBottom(to bottom: CGFloat) -> Layout.Individual {
+	public func setBottom(to bottom: CGFloat) -> Layout {
 		
 		if let left = self.left.constantValue, let right = self.right.constantValue, let top = self.top.constantValue {
 			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
@@ -66,9 +66,9 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
+	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let left = self.left.closureValue(parameter)
 			let right = self.right.closureValue(parameter)
 			let top = self.right.closureValue(parameter)
@@ -83,7 +83,7 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout.Individual {
+	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -92,7 +92,7 @@ extension LeftRightTopDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -100,9 +100,9 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout.Individual {
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let left = self.left.closureValue(boundSize)
 			let right = self.right.closureValue(boundSize)
 			let top = self.top.closureValue(boundSize)
@@ -118,9 +118,9 @@ extension LeftRightTopDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { [unowned parentView] (boundSize) -> CGRect in
+		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
 			let left = self.left.closureValue(boundSize)
 			let right = self.right.closureValue(boundSize)
 			let top = self.top.closureValue(boundSize)
@@ -139,16 +139,16 @@ extension LeftRightTopDidSetLayoutMaker {
 
 extension LeftRightTopDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> Layout.Individual {
+	public func setHeight(to height: CGFloat) -> Layout {
 		
 		if let left = self.left.constantValue, let right = self.right.constantValue, let top = self.top.constantValue {
 			let frame = self.makeFrame(left: left, right: right, top: top, height: height)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let left = self.left.closureValue(boundSize)
 				let right = self.right.closureValue(boundSize)
 				let top = self.top.closureValue(boundSize)
@@ -163,9 +163,9 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let left = self.left.closureValue(parameter)
 			let right = self.right.closureValue(parameter)
 			let top = self.top.closureValue(parameter)
@@ -180,9 +180,9 @@ extension LeftRightTopDidSetLayoutMaker {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let left = self.left.closureValue(boundSize)
 			let right = self.right.closureValue(boundSize)

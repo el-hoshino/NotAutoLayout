@@ -35,16 +35,16 @@ extension BottomCenterWidthDidSetLayoutMaker {
 
 extension BottomCenterWidthDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> Layout.Individual {
+	public func setHeight(to height: CGFloat) -> Layout {
 		
 		if let bottomCenter = self.bottomCenter.constantValue, let width = self.width.constantValue {
 			let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let bottomCenter = self.bottomCenter.closureValue(boundSize)
 				let width = self.width.closureValue(boundSize)
 				let frame = self.makeFrame(bottomCenter: bottomCenter, width: width, height: height)
@@ -59,9 +59,9 @@ extension BottomCenterWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout.Individual {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let bottomCenter = self.bottomCenter.closureValue(parameter)
 			let width = self.width.closureValue(parameter)
 			let height = height(parameter)
@@ -75,9 +75,9 @@ extension BottomCenterWidthDidSetLayoutMaker {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout.Individual {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let bottomCenter = self.bottomCenter.closureValue(boundSize)
 			let width = self.width.closureValue(boundSize)

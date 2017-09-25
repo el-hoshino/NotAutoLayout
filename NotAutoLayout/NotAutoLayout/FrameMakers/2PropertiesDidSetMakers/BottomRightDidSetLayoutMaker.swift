@@ -33,16 +33,16 @@ extension BottomRightDidSetLayoutMaker {
 
 extension BottomRightDidSetLayoutMaker {
 	
-	public func setSize(to size: CGSize) -> Layout.Individual {
+	public func setSize(to size: CGSize) -> Layout {
 		
 		if let bottomRight = self.bottomRight.constantValue {
 			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
-			let layout = Layout.Individual.makeAbsolute(frame: frame)
+			let layout = Layout.makeAbsolute(frame: frame)
 			
 			return layout
 			
 		} else {
-			let layout = Layout.Individual.makeCustom { (boundSize) -> CGRect in
+			let layout = Layout.makeCustom { (boundSize) -> CGRect in
 				let bottomRight = self.bottomRight.closureValue(boundSize)
 				let frame = self.makeFrame(bottomRight: bottomRight, size: size)
 				
@@ -56,9 +56,9 @@ extension BottomRightDidSetLayoutMaker {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout.Individual {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let bottomRight = self.bottomRight.closureValue(parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
@@ -71,9 +71,9 @@ extension BottomRightDidSetLayoutMaker {
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> Layout.Individual {
+	public func fitSize(by fittingSize: CGSize = .zero) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
 			let bottomRight = self.bottomRight.closureValue(boundSize)
 			let size = fitting(fittingSize)

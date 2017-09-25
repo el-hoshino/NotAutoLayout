@@ -675,9 +675,9 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> Layout.Individual {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			return parameter.boundsWithZeroOrigin(safeAreaOnly: false).inside(insets)
 		}
 		
@@ -686,9 +686,9 @@ extension InitialLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout.Individual {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom { (parameter) -> CGRect in
+		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
 		}
 		
@@ -700,25 +700,25 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func makeFrame(_ frame: CGRect) -> Layout.Individual {
+	public func makeFrame(_ frame: CGRect) -> Layout {
 		
-		let layout = Layout.Individual.makeAbsolute(frame: frame)
-		
-		return layout
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> Layout.Individual {
-		
-		let layout = Layout.Individual.makeCustom(frame: frame)
+		let layout = Layout.makeAbsolute(frame: frame)
 		
 		return layout
 		
 	}
 	
-	public func makeFrame(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout.Individual {
+	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> Layout {
 		
-		let layout = Layout.Individual.makeCustom(frame: frame)
+		let layout = Layout.makeCustom(frame: frame)
+		
+		return layout
+		
+	}
+	
+	public func makeFrame(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout {
+		
+		let layout = Layout.makeCustom(frame: frame)
 		
 		return layout
 		

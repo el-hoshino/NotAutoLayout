@@ -34,7 +34,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func getCurrentLayout(for view: UIView) -> Layout.Individual? {
+	public func getCurrentLayout(for view: UIView) -> Layout? {
 		
 		if let layoutInfo = self.getCurrentLayoutInfo(), let layout = layoutInfo[view] {
 			return layout
@@ -136,6 +136,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	///
 	/// - Parameter shouldSortSubviews: If set true, the returned array will be sorted by layout order; otherwise, the returned array is in subviews order.
 	/// - Returns: An array of subviews which have linked layout information.
+	@available(*, introduced: 2.0, deprecated: 2.1, message: "This method has been deprecated and will be removed in future release. \"LayoutRequiredSubviews\" doesn't make sense because views those layout subviews using sequential or matrical layouts may not contain specific layout info for each subview.")
 	public func getLayoutRequiredSubviews(sortedByOrder shouldSortSubviews: Bool = true) -> [UIView] {
 		
 		guard let currentLayoutInfo = self.getCurrentLayoutInfo() else {
@@ -162,6 +163,20 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 	}
 	
+	public func getSubviews(sortedByOrder shouldSortSubviews: Bool = false) -> [UIView] {
+		
+		if shouldSortSubviews == true, let orderInfo = self.getCurrentOrderInfo() {
+			let sortedSubviews = self.body.subviews.sorted {
+				return orderInfo[$0, default: 0] < orderInfo[$1, default: 0]
+			}
+			return sortedSubviews
+			
+		} else {
+			return self.body.subviews
+		}
+		
+	}
+	
 }
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
@@ -169,6 +184,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	/// Gets a CGRect that represents the whole frame combined with all the subviews which have linked layout information, which may be useful in some situations like to setup contentSize in UIScrollView.
 	///
 	/// - Returns: A CGRect value that represents the whole frame of layout required subviews.
+	@available(*, introduced: 2.0, deprecated: 2.1, message: "This method has been deprecated and will be removed in future release. \"LayoutRequiredSubviews\" doesn't make sense because views those layout subviews using sequential or matrical layouts may not contain specific layout info for each subview.")
 	public func getLayoutRequiredSubviewsTotalFrame() -> CGRect {
 		
 		let subviews = self.getLayoutRequiredSubviews(sortedByOrder: false)
@@ -270,7 +286,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout.Individual) {
+	public func addSubview(_ subview: UIView, withDefaultLayout layout: Layout) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(to: layout)
@@ -283,7 +299,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	public func makeLayout(for subview: UIView, making: (_ maker: InitialLayoutMaker) -> Layout.Individual) {
+	public func makeLayout(for subview: UIView, making: (_ maker: InitialLayoutMaker) -> Layout) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.makeDefaultLayout(making)
