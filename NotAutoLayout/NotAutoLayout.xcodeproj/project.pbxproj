@@ -66,8 +66,8 @@
 		164EA0CA1EF3DAE300C0BB8F /* LayoutInfoStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A91EF3DA5100C0BB8F /* LayoutInfoStorable.swift */; };
 		164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0AD1EF3DA5100C0BB8F /* NotAutoLayoutContainer.swift */; };
 		164EA0CC1EF3DAE300C0BB8F /* LayoutInfoStoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0AA1EF3DA5100C0BB8F /* LayoutInfoStoredView.swift */; };
-		164EA0CD1EF3DAE300C0BB8F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09D1EF3D98B00C0BB8F /* Layout.swift */; };
-		164EA0CE1EF3DAE300C0BB8F /* LayoutIndividual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09E1EF3D98B00C0BB8F /* LayoutIndividual.swift */; };
+		164EA0CD1EF3DAE300C0BB8F /* LayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09D1EF3D98B00C0BB8F /* LayoutExtension.swift */; };
+		164EA0CE1EF3DAE300C0BB8F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09E1EF3D98B00C0BB8F /* Layout.swift */; };
 		164EA0CF1EF3DAE300C0BB8F /* LayoutMatrical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09F1EF3D98B00C0BB8F /* LayoutMatrical.swift */; };
 		164EA0D01EF3DAE300C0BB8F /* LayoutOptimization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A01EF3D98B00C0BB8F /* LayoutOptimization.swift */; };
 		164EA0D11EF3DAE300C0BB8F /* LayoutSequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A11EF3D98B00C0BB8F /* LayoutSequential.swift */; };
@@ -174,8 +174,8 @@
 		162B95FE1F0CA40800960B51 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		164DB24F1EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableLayoutControlling.swift; sourceTree = "<group>"; };
 		164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableOtherPublicAPIs.swift; sourceTree = "<group>"; };
-		164EA09D1EF3D98B00C0BB8F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
-		164EA09E1EF3D98B00C0BB8F /* LayoutIndividual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutIndividual.swift; sourceTree = "<group>"; };
+		164EA09D1EF3D98B00C0BB8F /* LayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutExtension.swift; sourceTree = "<group>"; };
+		164EA09E1EF3D98B00C0BB8F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		164EA09F1EF3D98B00C0BB8F /* LayoutMatrical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMatrical.swift; sourceTree = "<group>"; };
 		164EA0A01EF3D98B00C0BB8F /* LayoutOptimization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutOptimization.swift; sourceTree = "<group>"; };
 		164EA0A11EF3D98B00C0BB8F /* LayoutSequential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSequential.swift; sourceTree = "<group>"; };
@@ -341,10 +341,10 @@
 		164EA09C1EF3D98B00C0BB8F /* LayoutExpressions */ = {
 			isa = PBXGroup;
 			children = (
-				164EA09D1EF3D98B00C0BB8F /* Layout.swift */,
-				164EA09E1EF3D98B00C0BB8F /* LayoutIndividual.swift */,
+				164EA09E1EF3D98B00C0BB8F /* Layout.swift */,
 				164EA0A11EF3D98B00C0BB8F /* LayoutSequential.swift */,
 				164EA09F1EF3D98B00C0BB8F /* LayoutMatrical.swift */,
+				164EA09D1EF3D98B00C0BB8F /* LayoutExtension.swift */,
 				164EA0A01EF3D98B00C0BB8F /* LayoutOptimization.swift */,
 			);
 			path = LayoutExpressions;
@@ -375,11 +375,6 @@
 				164EA0AB1EF3DA5100C0BB8F /* NotAutoLayoutCompatible.swift */,
 				164EA0AD1EF3DA5100C0BB8F /* NotAutoLayoutContainer.swift */,
 				16685B4C1F669A7F0089FF30 /* LayoutControlling.swift */,
-				164EA0A91EF3DA5100C0BB8F /* LayoutInfoStorable.swift */,
-				164DB24F1EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift */,
-				164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */,
-				164EA0AA1EF3DA5100C0BB8F /* LayoutInfoStoredView.swift */,
-				1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */,
 			);
 			path = LayoutEngine;
 			sourceTree = "<group>";
@@ -548,6 +543,18 @@
 			path = PropertyCategory;
 			sourceTree = "<group>";
 		};
+		168667AF1F7912FD00AD774E /* LayoutInfoStorable */ = {
+			isa = PBXGroup;
+			children = (
+				164EA0A91EF3DA5100C0BB8F /* LayoutInfoStorable.swift */,
+				164DB24F1EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift */,
+				164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */,
+				164EA0AA1EF3DA5100C0BB8F /* LayoutInfoStoredView.swift */,
+				1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */,
+			);
+			path = LayoutInfoStorable;
+			sourceTree = "<group>";
+		};
 		16A5A5A21EF39F8E007ACB1C /* LayoutAdditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +599,7 @@
 				165FE29F1EF28448006DF788 /* FrameMakers */,
 				794B59041EF43C8100E25BD0 /* SubviewSetupWizard */,
 				164EA0A61EF3DA5100C0BB8F /* LayoutEngine */,
+				168667AF1F7912FD00AD774E /* LayoutInfoStorable */,
 				164EA09C1EF3D98B00C0BB8F /* LayoutExpressions */,
 			);
 			path = NotAutoLayout;
@@ -722,7 +730,7 @@
 			files = (
 				164EA0C71EF3DAE300C0BB8F /* Condition.swift in Sources */,
 				79D8DE0E1EF94FA300B74593 /* TopCenterBottomDidSetLayoutMaker.swift in Sources */,
-				164EA0CD1EF3DAE300C0BB8F /* Layout.swift in Sources */,
+				164EA0CD1EF3DAE300C0BB8F /* LayoutExtension.swift in Sources */,
 				79D8DDB41EF9432C00B74593 /* LeftCenterTopDidSetLayoutMaker.swift in Sources */,
 				164DB2501EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift in Sources */,
 				79D8DDE41EF94B6A00B74593 /* RightMiddleHeightDidSetLayoutMaker.swift in Sources */,
@@ -739,7 +747,7 @@
 				79D8DD781EF9352500B74593 /* LeftRightDidSetLayoutMaker.swift in Sources */,
 				1630073C1F0F380C00012C18 /* BottomLeftTopDidSetLayoutMaker.swift in Sources */,
 				79D8DDCA1EF9487400B74593 /* LeftBottomHeightDidSetLayout.swift in Sources */,
-				164EA0CE1EF3DAE300C0BB8F /* LayoutIndividual.swift in Sources */,
+				164EA0CE1EF3DAE300C0BB8F /* Layout.swift in Sources */,
 				1630073F1F0F380C00012C18 /* BottomLeftHeightDidSetLayoutMaker.swift in Sources */,
 				164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */,
 				164EA0D01EF3DAE300C0BB8F /* LayoutOptimization.swift in Sources */,
