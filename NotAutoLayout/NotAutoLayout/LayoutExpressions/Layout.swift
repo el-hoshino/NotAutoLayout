@@ -13,12 +13,6 @@ public struct Layout {
 	@available(*, introduced: 2.0, deprecated: 2.1, renamed: "Layout", message: "Layout.Individual has been renamed to Layout, in addition sequential layout and matrical layout will have their own type names in future release, too.")
 	public typealias Individual = Layout
 	
-	fileprivate enum Frame {
-		case constant(CGRect)
-		case basicEvaluation((_ parameter: LayoutControlParameter) -> CGRect)
-		case fittingEvaluation((_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect)
-	}
-	
 	private var basicFrameEvaluation: Frame
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
@@ -133,25 +127,6 @@ extension Layout {
 		}
 		
 		return frame
-		
-	}
-	
-}
-
-extension Layout.Frame {
-	
-	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
-		
-		switch self {
-		case .constant(let frame):
-			return frame
-			
-		case .basicEvaluation(let frame):
-			return frame(parameter)
-			
-		case .fittingEvaluation(let frame):
-			return frame(fitting, parameter)
-		}
 		
 	}
 	

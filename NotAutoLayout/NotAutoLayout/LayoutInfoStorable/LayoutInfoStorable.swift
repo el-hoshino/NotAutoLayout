@@ -32,7 +32,7 @@ public protocol LayoutInfoStorable: class, NotAutoLayoutCompatible {
 	
 }
 
-// MARK: Default implement for override-able methods
+// MARK: - Default implement for override-able methods
 extension LayoutInfoStorable {
 	
 	public func getDefaultCondition() -> ConditionEnum {
@@ -45,7 +45,7 @@ extension LayoutInfoStorable {
 	
 }
 
-// MARK: Internal APIs: Layout
+// MARK: - Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo?) -> Layout? {
@@ -101,7 +101,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 }
 
-// MARK: Internal APIs: Order
+// MARK: - Internal APIs: Order
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
@@ -146,7 +146,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 }
 
-// MARK: Internal APIs: ZIndex
+// MARK: - Internal APIs: ZIndex
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
@@ -187,6 +187,31 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendZIndex(zIndex, under: condition, for: subview)
 		
+	}
+	
+}
+
+// MARK: - Internal APIs: ViewInfo Retrieving
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	func layout(in layoutInfo: LayoutInfo) -> Layout? {
+		return layoutInfo[self.hash]
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	func order(in orderInfo: OrderInfo) -> Int? {
+		return orderInfo[self.hash]
+	}
+	
+}
+
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	func zIndex(in zIndexInfo: ZIndexInfo) -> Int? {
+		return zIndexInfo[self.hash]
 	}
 	
 }

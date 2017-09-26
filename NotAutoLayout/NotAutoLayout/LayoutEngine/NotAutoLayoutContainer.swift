@@ -70,27 +70,3 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	}
 	
 }
-
-extension NotAutoLayoutContainer where Containee: UIView {
-	
-	func layout(in layoutInfo: LayoutInfo) -> Layout? {
-		return layoutInfo[self.hash]
-	}
-	
-}
-
-extension NotAutoLayoutContainer where Containee: UIView {
-	
-	func order(in orderInfo: OrderInfo) -> Int? {
-		return orderInfo[self.hash]
-	}
-	
-}
-
-extension NotAutoLayoutContainer where Containee: UIView {
-	
-	func zIndex(in zIndexInfo: ZIndexInfo) -> Int? {
-		return zIndexInfo[self.hash]
-	}
-	
-}
