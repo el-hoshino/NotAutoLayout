@@ -48,7 +48,7 @@ extension LayoutInfoStorable {
 // MARK: - Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo?) -> Layout? {
+	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> Layout? {
 		
 		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout

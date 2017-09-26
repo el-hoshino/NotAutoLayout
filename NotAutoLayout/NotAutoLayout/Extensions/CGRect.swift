@@ -503,3 +503,145 @@ extension CGRect {
 	}
 	
 }
+
+extension CGRect {
+	
+	func movingLeft(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveLeft(to: xGoal)
+		return frame
+	}
+	
+	func movingCenter(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveCenter(to: xGoal)
+		return frame
+	}
+	
+	func movingRight(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveRight(to: xGoal)
+		return frame
+	}
+	
+	func movingTop(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveTop(to: yGoal)
+		return frame
+	}
+	
+	func movingMiddle(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveMiddle(to: yGoal)
+		return frame
+	}
+	
+	func movingBottom(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveBottom(to: yGoal)
+		return frame
+	}
+	
+	func movingX(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveX(by: xOffset)
+		return frame
+	}
+	
+	func movingY(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveY(by: yOffset)
+		return frame
+	}
+	
+	func movingOrigin(by offset: CGPoint) -> CGRect {
+		var frame = self
+		frame.moveOrigin(by: offset)
+		return frame
+	}
+	
+	func pinchingLeft(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchLeft(to: xGoal)
+		return frame
+	}
+	
+	func pinchingLeft(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchLeft(by: xOffset)
+		return frame
+	}
+	
+	func pinchingRight(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchRight(to: xGoal)
+		return frame
+	}
+	
+	func pinchingRight(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchRight(by: xOffset)
+		return frame
+	}
+	
+	func pinchingTop(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchTop(to: yGoal)
+		return frame
+	}
+	
+	func pinchingTop(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchTop(by: yOffset)
+		return frame
+	}
+	
+	func pinchingBottom(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchBottom(to: yGoal)
+		return frame
+	}
+	
+	func pinchingBottom(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchBottom(by: yOffset)
+		return frame
+	}
+	
+	func expandingWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandWidth(to: widthGoal, from: baseline)
+		return frame
+	}
+	
+	func expandingWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandWidth(by: widthDiff, from: baseline)
+		return frame
+	}
+	
+	func expandingHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandHeight(to: heightGoal, from: baseline)
+		return frame
+	}
+	
+	func expandingHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandHeight(by: heightDiff, from: baseline)
+		return frame
+	}
+	
+	func expandingSize(to sizeGoal: CGSize, from basepoint: CGRect.PlaneBasePoint) -> CGRect {
+		var frame = self
+		frame.expandSize(to: sizeGoal, from: basepoint)
+		return frame
+	}
+	
+	func expandingSize(by sizeDiff: CGSize, from basepoint: CGRect.PlaneBasePoint) -> CGRect {
+		var frame = self
+		frame.expandSize(by: sizeDiff, from: basepoint)
+		return frame
+	}
+
+}

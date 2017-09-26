@@ -23,13 +23,31 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 	}
 	
-	private func layoutSequencially(subviews: [UIView]) {
+	private func layoutSequencially(subviews: [UIView], with sequentialLayout: SequentialLayout) {
 		
-		fatalError("Not implemented yet")
+		let layoutInfo = self.getCurrentLayoutInfo()
+		
+		let specificSubviewsWithLayouts = subviews.flatMap { (subview) -> (UIView, Layout)? in
+			if let layout = self.getLayout(for: subview, from: layoutInfo) {
+				return (subview, layout)
+			} else {
+				return nil
+			}
+		}
+		
+		let sequentialSubviews = subviews.filter { (subview) -> Bool in
+			specificSubviewsWithLayouts.contains(where: { $0.0 === subview }) == false
+		}
+		
+		specificSubviewsWithLayouts.forEach { (view, layout) in
+			self.layout(view, with: layout)
+		}
+		
+		self.layout(sequentialSubviews, with: sequentialLayout)
 		
 	}
 	
-	private func layoutMatrically(subviews: [UIView], colsPerRow: Int) {
+	private func layoutMatrically(subviews: [UIView], columnsPerRow: Int) {
 		
 		fatalError("Not implemented yet")
 		
@@ -48,11 +66,11 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		case .none:
 			self.layoutNormally(subviews: subviews)
 			
-		case .sequence:
-			self.layoutSequencially(subviews: subviews)
+		case .sequence(sequentialLayout: let sequentialLayout):
+			self.layoutSequencially(subviews: subviews, with: sequentialLayout)
 			
-		case .matrix(defaultLayout: _, colsPerRow: let colsPerRow):
-			self.layoutMatrically(subviews: subviews, colsPerRow: colsPerRow)
+		case .matrix(matricalLayout: _, columnsPerRow: let columnsPerRow):
+			self.layoutMatrically(subviews: subviews, columnsPerRow: columnsPerRow)
 		}
 		
 	}

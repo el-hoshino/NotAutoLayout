@@ -700,11 +700,12 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func makeFrame(_ frame: CGRect) -> Layout {
+	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
 		
 		let layout = Layout.makeAbsolute(frame: frame)
+		let editor = LayoutEditor(layout)
 		
-		return layout
+		return editor
 		
 	}
 	

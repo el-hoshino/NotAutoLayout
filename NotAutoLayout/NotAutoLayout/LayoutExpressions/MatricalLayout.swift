@@ -1,5 +1,5 @@
 //
-//  LayoutSequential.swift
+//  MatricalLayout.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/03/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SequentialLayout {
+public struct MatricalLayout {
 	
 	private var firstLayout: Layout
 	

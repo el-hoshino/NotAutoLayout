@@ -10,9 +10,9 @@ import Foundation
 
 enum FrameAdditionalEvaluation {
 	
-	typealias FloatEvaluation = LayoutEditor.AdditionalFloatEvaluation
-	typealias PointEvaluation = LayoutEditor.AdditionalPointEvaluation
-	typealias SizeEvaluation = LayoutEditor.AdditionalSizeEvaluation
+	typealias FloatEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGFloat
+	typealias PointEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGPoint
+	typealias SizeEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGSize
 	
 	typealias Process = (_ view: UIView, _ frame: CGRect, _ layourProperty: LayoutControlParameter) -> Void
 	
