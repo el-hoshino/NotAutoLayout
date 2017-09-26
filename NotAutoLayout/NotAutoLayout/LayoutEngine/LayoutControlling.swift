@@ -46,13 +46,13 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		
 	}
 	
-	func layout(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
+	public func layout(_ views: [UIView], with layout: Layout.Sequential) {
 		
 		fatalError("Not implemented yet")
 		
 	}
 	
-	func layout(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
+	public func layout(_ views: [UIView], by numberOfColumnsInRow: @autoclosure () -> Int, with layout: Layout.Matrical) {
 		
 		fatalError("Not implemented yet")
 		

@@ -8,4 +8,18 @@
 
 import Foundation
 
-
+public struct SequentialLayout {
+	
+	private var firstLayout: Layout
+	
+	private var restLayoutEvaluations: [FrameAdditionalEvaluation]
+	
+	private init(frame: CGRect, offset: CGPoint) {
+		
+		self.firstLayout = Layout.makeAbsolute(frame: frame)
+		
+		self.restLayoutEvaluations = Layout.dummy.editing({ $0.movingOrigin(by: offset) }).frameAdditionalEvaluations
+		
+	}
+	
+}

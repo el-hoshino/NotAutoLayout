@@ -57,6 +57,12 @@ public struct Layout {
 
 extension Layout {
 	
+	static let dummy: Layout = Layout(frame: .zero)
+	
+}
+
+extension Layout {
+	
 	static func makeAbsolute(frame: CGRect) -> Layout {
 		let layout = Layout(frame: frame)
 		return layout
@@ -81,18 +87,20 @@ extension Layout {
 
 extension Layout {
 	
-	func addingAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) -> Layout {
-		
-		var layout = self
-		layout.additionalEvaluations.append(evaluation)
-		
-		return layout
-		
+	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
+		return self.additionalEvaluations
 	}
 	
-	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
+}
+
+extension Layout {
+	
+	public func editing(_ editing: (LayoutEditor) -> LayoutEditor) -> Layout {
 		
-		self = self.addingAdditionalEvaluation(evaluation)
+		let editor = LayoutEditor(self)
+		let result = editing(editor).layout
+		
+		return result
 		
 	}
 	
@@ -100,18 +108,15 @@ extension Layout {
 
 extension Layout {
 	
-	func settingAdditionalEvaluations(to evaluations: [FrameAdditionalEvaluation]) -> Layout {
+	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
 		
-		var layout = self
-		layout.additionalEvaluations = evaluations
-		
-		return layout
+		self.additionalEvaluations.append(evaluation)
 		
 	}
 	
 	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) {
 		
-		self = self.settingAdditionalEvaluations(to: evaluations)
+		self.additionalEvaluations = evaluations
 		
 	}
 	
