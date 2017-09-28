@@ -61,31 +61,13 @@ extension LeftTopDidSetLayoutMaker {
 
 extension LeftTopDidSetLayoutMaker {
 	
-	public func setSize(to size: CGSize) -> Layout {
+	public func setSize(to size: CGSize) -> LayoutEditor {
 		
-		if let left = self.left.constantValue, let top = self.top.constantValue {
-			let frame = self.makeFrame(left: left, top: top, size: size)
-			let layout = Layout.makeAbsolute(frame: frame)
-			
-			return layout
-			
-		} else {
-			let layout = Layout.makeCustom { (boundSize) -> CGRect in
-				let left = self.left.closureValue(boundSize)
-				let top = self.top.closureValue(boundSize)
-				let frame = self.makeFrame(left: left, top: top, size: size)
-				
-				return frame
-				
-			}
-			
-			return layout
-			
-		}
+		return self.setSize(by: { _ in size })
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			
@@ -98,11 +80,13 @@ extension LeftTopDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> Layout {
+	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
@@ -115,7 +99,9 @@ extension LeftTopDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	

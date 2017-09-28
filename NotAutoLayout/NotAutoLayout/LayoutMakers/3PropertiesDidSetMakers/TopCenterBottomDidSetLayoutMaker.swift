@@ -35,31 +35,13 @@ extension TopCenterBottomDidSetLayoutMaker {
 
 extension TopCenterBottomDidSetLayoutMaker {
 	
-	public func setWidth(to width: CGFloat) -> Layout {
+	public func setWidth(to width: CGFloat) -> LayoutEditor {
 		
-		if let topCenter = self.topCenter.constantValue, let bottom = self.bottom.constantValue {
-			let frame = self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
-			let layout = Layout.makeAbsolute(frame: frame)
-			
-			return layout
-			
-		} else {
-			let layout = Layout.makeCustom { (boundSize) -> CGRect in
-				let topCenter = self.topCenter.closureValue(boundSize)
-				let bottom = self.bottom.closureValue(boundSize)
-				let frame = self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
-				
-				return frame
-				
-			}
-			
-			return layout
-			
-		}
+		return self.setWidth(by: { _ in width })
 		
 	}
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
+	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let topCenter = self.topCenter.closureValue(parameter)
@@ -71,7 +53,9 @@ extension TopCenterBottomDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	

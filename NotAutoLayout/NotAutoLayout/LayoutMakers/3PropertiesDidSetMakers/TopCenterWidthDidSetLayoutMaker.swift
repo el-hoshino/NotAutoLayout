@@ -35,31 +35,13 @@ extension TopCenterWidthDidSetLayoutMaker {
 
 extension TopCenterWidthDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> Layout {
+	public func setHeight(to height: CGFloat) -> LayoutEditor {
 		
-		if let topCenter = self.topCenter.constantValue, let width = self.width.constantValue {
-			let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
-			let layout = Layout.makeAbsolute(frame: frame)
-			
-			return layout
-			
-		} else {
-			let layout = Layout.makeCustom { (boundSize) -> CGRect in
-				let topCenter = self.topCenter.closureValue(boundSize)
-				let width = self.width.closureValue(boundSize)
-				let frame = self.makeFrame(topCenter: topCenter, width: width, height: height)
-				
-				return frame
-				
-			}
-			
-			return layout
-			
-		}
+		return self.setHeight(by: { _ in height })
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let topCenter = self.topCenter.closureValue(parameter)
@@ -71,11 +53,13 @@ extension TopCenterWidthDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> Layout {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
@@ -88,7 +72,9 @@ extension TopCenterWidthDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	

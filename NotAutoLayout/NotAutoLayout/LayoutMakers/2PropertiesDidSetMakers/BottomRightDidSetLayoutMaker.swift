@@ -33,30 +33,13 @@ extension BottomRightDidSetLayoutMaker {
 
 extension BottomRightDidSetLayoutMaker {
 	
-	public func setSize(to size: CGSize) -> Layout {
+	public func setSize(to size: CGSize) -> LayoutEditor {
 		
-		if let bottomRight = self.bottomRight.constantValue {
-			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
-			let layout = Layout.makeAbsolute(frame: frame)
-			
-			return layout
-			
-		} else {
-			let layout = Layout.makeCustom { (boundSize) -> CGRect in
-				let bottomRight = self.bottomRight.closureValue(boundSize)
-				let frame = self.makeFrame(bottomRight: bottomRight, size: size)
-				
-				return frame
-				
-			}
-			
-			return layout
-			
-		}
+		return self.setSize(by: { _ in size })
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> Layout {
+	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let bottomRight = self.bottomRight.closureValue(parameter)
@@ -67,11 +50,13 @@ extension BottomRightDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> Layout {
+	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
 			
@@ -83,7 +68,9 @@ extension BottomRightDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	

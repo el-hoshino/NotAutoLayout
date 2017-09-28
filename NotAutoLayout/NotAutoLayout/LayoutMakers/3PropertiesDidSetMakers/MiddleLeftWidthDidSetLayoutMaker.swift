@@ -36,31 +36,13 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 
 extension MiddleLeftWidthDidSetLayoutMaker {
 	
-	public func setHeight(to height: CGFloat) -> Layout {
+	public func setHeight(to height: CGFloat) -> LayoutEditor {
 		
-		if let middleLeft = self.middleLeft.constantValue, let width = self.width.constantValue {
-			let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
-			let layout = Layout.makeAbsolute(frame: frame)
-			
-			return layout
-			
-		} else {
-			let layout = Layout.makeCustom { (boundSize) -> CGRect in
-				let middleLeft = self.middleLeft.closureValue(boundSize)
-				let width = self.width.closureValue(boundSize)
-				let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
-				
-				return frame
-				
-			}
-			
-			return layout
-			
-		}
+		return self.setHeight(by: { _ in height })
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> Layout {
+	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			let middleLeft = self.middleLeft.closureValue(parameter)
@@ -72,7 +54,9 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 			
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	

@@ -675,24 +675,28 @@ extension InitialLayoutMaker {
 
 extension InitialLayoutMaker {
 	
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> Layout {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			return parameter.boundsWithZeroOrigin(safeAreaOnly: false).inside(insets)
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
 	@available(iOS 11.0, *)
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> Layout {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom { (parameter) -> CGRect in
 			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
 		}
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
@@ -709,19 +713,23 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> Layout {
+	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom(frame: frame)
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
-	public func makeFrame(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout {
+	public func makeFrame(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
 		
 		let layout = Layout.makeCustom(frame: frame)
 		
-		return layout
+		let editor = LayoutEditor(layout)
+		
+		return editor
 		
 	}
 	
