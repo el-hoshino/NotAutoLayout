@@ -24,7 +24,7 @@ public struct SequentialLayout {
 	
 	private init(frame: CGRect, offset: CGPoint) {
 		
-		self.firstLayout = Layout.makeAbsolute(frame: frame)
+		self.firstLayout = Layout(frame: frame)
 		
 		self.restFrameEvaluations = [.movingOriginBy({ _, _ in offset })]
 		

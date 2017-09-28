@@ -16,7 +16,7 @@ public struct MatricalLayout {
 	
 	private init(frame: CGRect, offset: CGPoint) {
 		
-		self.firstLayout = Layout.makeAbsolute(frame: frame)
+		self.firstLayout = Layout(frame: frame)
 		
 		self.restLayoutEvaluations = Layout.dummy.editing({ $0.movingOrigin(by: offset) }).frameAdditionalEvaluations
 		

@@ -30,11 +30,11 @@ extension CenterTopBottomDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let top = self.top.closureValue(parameter)
-			let bottom = self.bottom.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let top = self.top.evaluated(from: parameter)
+			let bottom = self.bottom.evaluated(from: parameter)
 			let height = bottom - top
-			let center = self.center.closureValue(parameter)
+			let center = self.center.evaluated(from: parameter)
 			let width = width(parameter)
 			let x = center - width.half
 			let y = top
@@ -42,9 +42,9 @@ extension CenterTopBottomDidSetLayoutMaker {
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		

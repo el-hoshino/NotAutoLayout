@@ -69,18 +69,18 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
+		let layout = Layout(frame: { (parameter) -> CGRect in
 			
-			let left = self.left.closureValue(parameter)
-			let top = self.top.closureValue(parameter)
+			let left = self.left.evaluated(from: parameter)
+			let top = self.top.evaluated(from: parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(left: left, top: top, size: size)
 
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -88,18 +88,18 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let left = self.left.closureValue(boundSize)
-			let top = self.top.closureValue(boundSize)
+			let left = self.left.evaluated(from: boundSize)
+			let top = self.top.evaluated(from: boundSize)
 			let size = fitting(fittingSize)
 			let frame = self.makeFrame(left: left, top: top, size: size)
 
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		

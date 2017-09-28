@@ -8,11 +8,25 @@
 
 import Foundation
 
-enum Frame {
+struct Frame {
 	
-	case constant(CGRect)
-	case basicEvaluation((_ parameter: LayoutControlParameter) -> CGRect)
-	case fittingEvaluation((_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect)
+	private let evaluation: (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect
+	
+}
+
+extension Frame {
+	
+	init(_ frame: CGRect) {
+		self.evaluation = { _, _ in frame }
+	}
+	
+	init(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) {
+		self.evaluation = { _, parameter in frame(parameter) }
+	}
+	
+	init(_ frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) {
+		self.evaluation = frame
+	}
 	
 }
 
@@ -20,16 +34,7 @@ extension Frame {
 	
 	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		
-		switch self {
-		case .constant(let frame):
-			return frame
-			
-		case .basicEvaluation(let frame):
-			return frame(parameter)
-			
-		case .fittingEvaluation(let frame):
-			return frame(fitting, parameter)
-		}
+		return self.evaluation(fitting, parameter)
 		
 	}
 	

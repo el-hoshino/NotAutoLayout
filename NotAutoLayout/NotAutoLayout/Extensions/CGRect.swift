@@ -149,50 +149,69 @@ extension CGRect.PlaneBasePoint {
 
 extension CGRect {
 	
-	enum Float {
-		case constant(CGFloat)
-		case closure((LayoutControlParameter) -> CGFloat)
+	struct Float {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGFloat
+		
+		static func constant(_ value: CGFloat) -> Float {
+			return Float(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Float {
+			return Float(value: value)
+		}
+		
 	}
 	
-	enum Point {
-		case constant(CGPoint)
-		case closure((LayoutControlParameter) -> CGPoint)
+	struct Point {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGPoint
+		
+		static func constant(_ value: CGPoint) -> Point {
+			return Point(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGPoint) -> Point {
+			return Point(value: value)
+		}
+		
 	}
 	
-	enum Size {
-		case constant(CGSize)
-		case closure((LayoutControlParameter) -> CGSize)
+	struct Size {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGSize
+		
+		static func constant(_ value: CGSize) -> Size {
+			return Size(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGSize) -> Size {
+			return Size(value: value)
+		}
+		
 	}
 	
-	enum Rect {
-		case constant(CGRect)
-		case closure((LayoutControlParameter) -> CGRect)
+	struct Rect {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGRect
+		
+		static func constant(_ value: CGRect) -> Rect {
+			return Rect(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGRect) -> Rect {
+			return Rect(value: value)
+		}
+		
 	}
 	
 }
 
 extension CGRect.Float {
 	
-	var constantValue: CGFloat? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGFloat {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
+		return self.value(parameter)
 		
 	}
 	
@@ -200,81 +219,30 @@ extension CGRect.Float {
 
 extension CGRect.Point {
 	
-	var constantValue: CGPoint? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGPoint {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGPoint {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }
 
 extension CGRect.Size {
 	
-	var constantValue: CGSize? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGSize {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGSize {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }
 
 extension CGRect.Rect {
 	
-	var constantValue: CGRect? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGRect {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGRect {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }

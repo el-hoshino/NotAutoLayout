@@ -43,15 +43,15 @@ extension TopLeftRightDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let topLeft = self.topLeft.closureValue(parameter)
-			let right = self.right.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let topLeft = self.topLeft.evaluated(from: parameter)
+			let right = self.right.evaluated(from: parameter)
 			let height = height(parameter)
 			let frame = self.makeFrame(topLeft: topLeft, right: right, height: height)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -61,10 +61,10 @@ extension TopLeftRightDidSetLayoutMaker {
 	
 	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let topLeft = self.topLeft.closureValue(boundSize)
-			let right = self.right.closureValue(boundSize)
+			let topLeft = self.topLeft.evaluated(from: boundSize)
+			let right = self.right.evaluated(from: boundSize)
 			let x = topLeft.x
 			let width = right - x
 			let fittingSize = CGSize(width: width, height: fittingHeight)
@@ -73,7 +73,7 @@ extension TopLeftRightDidSetLayoutMaker {
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		

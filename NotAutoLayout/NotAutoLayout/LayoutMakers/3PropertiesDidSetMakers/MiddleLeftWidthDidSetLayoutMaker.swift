@@ -44,17 +44,17 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let middleLeft = self.middleLeft.closureValue(parameter)
-			let width = self.width.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let middleLeft = self.middleLeft.evaluated(from: parameter)
+			let width = self.width.evaluated(from: parameter)
 			let height = height(parameter)
 			let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		

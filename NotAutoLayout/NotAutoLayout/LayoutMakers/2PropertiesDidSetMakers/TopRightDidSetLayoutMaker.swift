@@ -100,14 +100,14 @@ extension TopRightDidSetLayoutMaker {
 	
 	public func setBottomLeft(by bottomLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let topRight = self.topRight.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let topRight = self.topRight.evaluated(from: parameter)
 			let bottomLeft = bottomLeft(parameter)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -134,14 +134,14 @@ extension TopRightDidSetLayoutMaker {
 	
 	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
-			let topRight = self.topRight.closureValue(boundSize)
-			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).closureValue(boundSize)
+		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
+			let topRight = self.topRight.evaluated(from: boundSize)
+			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).evaluated(from: boundSize)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -152,14 +152,14 @@ extension TopRightDidSetLayoutMaker {
 	@available(iOS 11.0, *)
 	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
-			let topRight = self.topRight.closureValue(boundSize)
-			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).closureValue(boundSize)
+		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
+			let topRight = self.topRight.evaluated(from: boundSize)
+			let bottomLeft = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).evaluated(from: boundSize)
 			let frame = self.makeFrame(topRight: topRight, bottomLeft: bottomLeft)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -179,15 +179,15 @@ extension TopRightDidSetLayoutMaker {
 	
 	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
+		let layout = Layout(frame: { (parameter) -> CGRect in
 			
-			let topRight = self.topRight.closureValue(parameter)
+			let topRight = self.topRight.evaluated(from: parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(topRight: topRight, size: size)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -197,15 +197,15 @@ extension TopRightDidSetLayoutMaker {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let topRight = self.topRight.closureValue(boundSize)
+			let topRight = self.topRight.evaluated(from: boundSize)
 			let size = fitting(fittingSize)
 			let frame = self.makeFrame(topRight: topRight, size: size)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		

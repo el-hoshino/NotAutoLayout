@@ -44,15 +44,15 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let middleCenter = self.middleCenter.closureValue(parameter)
-			let width = self.width.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let middleCenter = self.middleCenter.evaluated(from: parameter)
+			let width = self.width.evaluated(from: parameter)
 			let height = height(parameter)
 			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		
@@ -62,17 +62,17 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 	
 	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let middleCenter = self.middleCenter.closureValue(boundSize)
-			let width = self.width.closureValue(boundSize)
+			let middleCenter = self.middleCenter.evaluated(from: boundSize)
+			let width = self.width.evaluated(from: boundSize)
 			let fittingSize = CGSize(width: width, height: fittingHeight)
 			let height = fitting(fittingSize).height
 			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
 			
 			return frame
 			
-		}
+		})
 		
 		let editor = LayoutEditor(layout)
 		

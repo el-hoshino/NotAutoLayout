@@ -69,16 +69,16 @@ extension MiddleRightDidSetLayoutMaker {
 	
 	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let middleRight = self.middleRight.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let middleRight = self.middleRight.evaluated(from: parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(middleRight: middleRight, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -86,17 +86,17 @@ extension MiddleRightDidSetLayoutMaker {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let middleRight = self.middleRight.closureValue(boundSize)
+			let middleRight = self.middleRight.evaluated(from: boundSize)
 			let size = fitting(fittingSize)
 			let frame = self.makeFrame(middleRight: middleRight, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		

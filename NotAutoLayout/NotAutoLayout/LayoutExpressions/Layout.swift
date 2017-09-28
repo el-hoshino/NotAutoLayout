@@ -17,36 +17,6 @@ public struct Layout {
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
 	
-	private init(frame: CGRect) {
-		self.basicFrameEvaluation = Frame.constant(frame)
-		self.additionalEvaluations = []
-	}
-	
-	private init(evaluation: @escaping (_ parameter: LayoutControlParameter) -> CGRect) {
-		self.basicFrameEvaluation = Frame.basicEvaluation(evaluation)
-		self.additionalEvaluations = []
-	}
-	
-	private init(evaluation: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) {
-		self.basicFrameEvaluation = Frame.fittingEvaluation(evaluation)
-		self.additionalEvaluations = []
-	}
-	
-	private init(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) {
-		
-		let frame: (LayoutControlParameter) -> CGRect = { parameter in
-			let frame = CGRect(x: x(parameter),
-			                   y: y(parameter),
-			                   width: width(parameter),
-			                   height: height(parameter))
-			return frame
-		}
-		
-		self.basicFrameEvaluation = Frame.basicEvaluation(frame)
-		self.additionalEvaluations = []
-		
-	}
-
 }
 
 extension Layout {
@@ -57,26 +27,21 @@ extension Layout {
 
 extension Layout {
 	
-	static func makeAbsolute(frame: CGRect) -> Layout {
-		let layout = Layout(frame: frame)
-		return layout
+	init(frame: CGRect) {
+		self.basicFrameEvaluation = Frame(frame)
+		self.additionalEvaluations = []
 	}
 	
-	static func makeCustom(x: @escaping (LayoutControlParameter) -> CGFloat, y: @escaping (LayoutControlParameter) -> CGFloat, width: @escaping (LayoutControlParameter) -> CGFloat, height: @escaping (LayoutControlParameter) -> CGFloat) -> Layout {
-		let layout = Layout(x: x, y: y, width: width, height: height)
-		return layout
+	init(frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) {
+		self.basicFrameEvaluation = Frame(frame)
+		self.additionalEvaluations = []
 	}
 	
-	static func makeCustom(frame: @escaping (LayoutControlParameter) -> CGRect) -> Layout {
-		let layout = Layout(evaluation: frame)
-		return layout
+	init(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) {
+		self.basicFrameEvaluation = Frame(frame)
+		self.additionalEvaluations = []
 	}
-	
-	static func makeCustom(frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> Layout {
-		let layout = Layout(evaluation: frame)
-		return layout
-	}
-	
+
 }
 
 extension Layout {

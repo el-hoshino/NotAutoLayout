@@ -139,17 +139,17 @@ extension TopCenterDidSetLayoutMaker {
 	
 	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
+		let layout = Layout(frame: { (parameter) -> CGRect in
 			
-			let topCenter = self.topCenter.closureValue(parameter)
+			let topCenter = self.topCenter.evaluated(from: parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(topCenter: topCenter, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -157,17 +157,17 @@ extension TopCenterDidSetLayoutMaker {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let topCenter = self.topCenter.closureValue(boundSize)
+			let topCenter = self.topCenter.evaluated(from: boundSize)
 			let size = fitting(fittingSize)
 			let frame = self.makeFrame(topCenter: topCenter, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		

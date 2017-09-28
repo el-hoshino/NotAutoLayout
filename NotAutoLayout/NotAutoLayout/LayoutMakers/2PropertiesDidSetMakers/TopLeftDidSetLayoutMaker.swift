@@ -52,16 +52,16 @@ extension TopLeftDidSetLayoutMaker {
 	
 	public func setBottomRight(by bottomRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
-			let topLeft = self.topLeft.closureValue(parameter)
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			let topLeft = self.topLeft.evaluated(from: parameter)
 			let bottomRight = bottomRight(parameter)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -86,16 +86,16 @@ extension TopLeftDidSetLayoutMaker {
 	
 	public func pinBottomRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
-			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).closureValue(boundSize)
+		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
+			let topLeft = self.topLeft.evaluated(from: boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).evaluated(from: boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -104,16 +104,16 @@ extension TopLeftDidSetLayoutMaker {
 	@available(iOS 11.0, *)
 	public func pinBottomRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { [unowned parentView] (boundSize) -> CGRect in
-			let topLeft = self.topLeft.closureValue(boundSize)
-			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).closureValue(boundSize)
+		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
+			let topLeft = self.topLeft.evaluated(from: boundSize)
+			let bottomRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).evaluated(from: boundSize)
 			let frame = self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -205,17 +205,17 @@ extension TopLeftDidSetLayoutMaker {
 	
 	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (parameter) -> CGRect in
+		let layout = Layout(frame: { (parameter) -> CGRect in
 			
-			let topLeft = self.topLeft.closureValue(parameter)
+			let topLeft = self.topLeft.evaluated(from: parameter)
 			let size = size(parameter)
 			let frame = self.makeFrame(topLeft: topLeft, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
@@ -223,17 +223,17 @@ extension TopLeftDidSetLayoutMaker {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
 		
-		let layout = Layout.makeCustom { (fitting, boundSize) -> CGRect in
+		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
 			
-			let topLeft = self.topLeft.closureValue(boundSize)
+			let topLeft = self.topLeft.evaluated(from: boundSize)
 			let size = fitting(fittingSize)
 			let frame = self.makeFrame(topLeft: topLeft, size: size)
 			
 			return frame
 			
-		}
-		
-		let editor = LayoutEditor(layout)
+		})
+        
+        let editor = LayoutEditor(layout)
 		
 		return editor
 		
