@@ -85,7 +85,7 @@ extension Layout {
 	
 	func evaluatedFrame(for view: UIView, with parameter: LayoutControlParameter) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.frame(fittedBy: { view.sizeThatFits($0) }, with: parameter)
+		var frame = self.basicFrameEvaluation.evaluated(fittedBy: { view.sizeThatFits($0) }, with: parameter)
 		
 		for evaluation in self.additionalEvaluations {
 			frame = evaluation.evaluated(for: view, from: frame, with: parameter)

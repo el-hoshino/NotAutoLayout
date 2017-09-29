@@ -32,7 +32,7 @@ extension Frame {
 
 extension Frame {
 	
-	func frame(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
+	func evaluated(fittedBy fitting: (_ fittingSize: CGSize) -> CGSize, with parameter: LayoutControlParameter) -> CGRect {
 		
 		return self.evaluation(fitting, parameter)
 		
