@@ -678,7 +678,7 @@ extension InitialLayoutMaker {
 	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return parameter.boundsWithZeroOrigin(safeAreaOnly: false).inside(insets)
+			return parameter.boundsWithZeroOrigin().inside(insets)
 		})
 		
 		let editor = LayoutEditor(layout)
