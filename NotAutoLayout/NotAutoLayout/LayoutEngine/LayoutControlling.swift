@@ -39,20 +39,23 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ view: UIView, with layout: Layout.Individual) {
+	public func layout(_ view: UIView, with layout: Layout) {
 		
-		let frame = layout.evaluatedFrame(for: view, fittedBy: { view.sizeThatFits($0) }, with: self.layoutControlParameter)
+		let frame = layout.evaluatedFrame(for: view, with: self.layoutControlParameter)
 		self.layout(view, with: frame)
 		
 	}
 	
-	func layout(_ view: UIView, after previousView: UIView?, with layout: Layout.Sequential) {
+	public func layout(_ views: [UIView], with layout: SequentialLayout) {
 		
-		fatalError("Not implemented yet")
+		views.forEachPair { (previousView, view) in
+			let frame = layout.evaluatedFrame(for: view, after: previousView, with: self.layoutControlParameter)
+			self.layout(view, with: frame)
+		}
 		
 	}
 	
-	func layout(_ view: UIView, afterCol previousColView: UIView?, afterRow previousRowView: UIView?, with layout: Layout.Matrical) {
+	public func layout(_ views: [UIView], by numberOfColumnsInRow: @autoclosure () -> Int, with layout: MatricalLayout) {
 		
 		fatalError("Not implemented yet")
 		
@@ -62,10 +65,10 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> LayoutEditor) {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
-		let layout = making(maker)
+		let layout = making(maker).layout
 		
 		self.layout(subview, with: layout)
 		
@@ -75,9 +78,16 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeLayout(_ making: (InitialLayoutMaker) -> Layout.Individual) -> Layout.Individual {
+	public func makeLayout(_ making: (InitialLayoutMaker) -> LayoutEditor) -> Layout {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
+		return making(maker).layout
+		
+	}
+	
+	public func makeSequentialLayout(_ making: (InitialSequentialLayoutMaker) -> SequentialLayout) -> SequentialLayout {
+		
+		let maker = InitialSequentialLayoutMaker(parentView: self.body)
 		return making(maker)
 		
 	}

@@ -91,6 +91,15 @@ extension LayoutControlParameter {
 
 extension LayoutControlParameter {
 	
+	public func boundsWithZeroOrigin() -> CGRect {
+		
+		let boundsWithZeroOrigin = CGRect(origin: .zero, size: self.boundSize)
+		
+		return boundsWithZeroOrigin
+		
+	}
+	
+	@available(iOS 11.0, *)
 	public func boundsWithZeroOrigin(safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
 		
 		let boundsWithZeroOrigin = CGRect(origin: .zero, size: self.boundSize)

@@ -149,50 +149,69 @@ extension CGRect.PlaneBasePoint {
 
 extension CGRect {
 	
-	enum Float {
-		case constant(CGFloat)
-		case closure((LayoutControlParameter) -> CGFloat)
+	struct Float {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGFloat
+		
+		static func constant(_ value: CGFloat) -> Float {
+			return Float(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Float {
+			return Float(value: value)
+		}
+		
 	}
 	
-	enum Point {
-		case constant(CGPoint)
-		case closure((LayoutControlParameter) -> CGPoint)
+	struct Point {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGPoint
+		
+		static func constant(_ value: CGPoint) -> Point {
+			return Point(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGPoint) -> Point {
+			return Point(value: value)
+		}
+		
 	}
 	
-	enum Size {
-		case constant(CGSize)
-		case closure((LayoutControlParameter) -> CGSize)
+	struct Size {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGSize
+		
+		static func constant(_ value: CGSize) -> Size {
+			return Size(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGSize) -> Size {
+			return Size(value: value)
+		}
+		
 	}
 	
-	enum Rect {
-		case constant(CGRect)
-		case closure((LayoutControlParameter) -> CGRect)
+	struct Rect {
+		
+		fileprivate let value: (LayoutControlParameter) -> CGRect
+		
+		static func constant(_ value: CGRect) -> Rect {
+			return Rect(value: { _ in value })
+		}
+		
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGRect) -> Rect {
+			return Rect(value: value)
+		}
+		
 	}
 	
 }
 
 extension CGRect.Float {
 	
-	var constantValue: CGFloat? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGFloat {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
+		return self.value(parameter)
 		
 	}
 	
@@ -200,81 +219,30 @@ extension CGRect.Float {
 
 extension CGRect.Point {
 	
-	var constantValue: CGPoint? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGPoint {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGPoint {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }
 
 extension CGRect.Size {
 	
-	var constantValue: CGSize? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGSize {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGSize {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }
 
 extension CGRect.Rect {
 	
-	var constantValue: CGRect? {
+	func evaluated(from parameter: LayoutControlParameter) -> CGRect {
 		
-		if case .constant(let value) = self {
-			return value
-		}
-		else {
-			return nil
-		}
-		
-	}
-	
-	var closureValue: (LayoutControlParameter) -> CGRect {
-		
-		switch self {
-		case .constant(let value):
-			return { _ in value }
-			
-		case .closure(let closure):
-			return closure
-		}
-		
+		return self.value(parameter)
+
 	}
 	
 }
@@ -502,4 +470,146 @@ extension CGRect {
 		
 	}
 	
+}
+
+extension CGRect {
+	
+	func movingLeft(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveLeft(to: xGoal)
+		return frame
+	}
+	
+	func movingCenter(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveCenter(to: xGoal)
+		return frame
+	}
+	
+	func movingRight(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveRight(to: xGoal)
+		return frame
+	}
+	
+	func movingTop(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveTop(to: yGoal)
+		return frame
+	}
+	
+	func movingMiddle(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveMiddle(to: yGoal)
+		return frame
+	}
+	
+	func movingBottom(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveBottom(to: yGoal)
+		return frame
+	}
+	
+	func movingX(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveX(by: xOffset)
+		return frame
+	}
+	
+	func movingY(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.moveY(by: yOffset)
+		return frame
+	}
+	
+	func movingOrigin(by offset: CGPoint) -> CGRect {
+		var frame = self
+		frame.moveOrigin(by: offset)
+		return frame
+	}
+	
+	func pinchingLeft(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchLeft(to: xGoal)
+		return frame
+	}
+	
+	func pinchingLeft(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchLeft(by: xOffset)
+		return frame
+	}
+	
+	func pinchingRight(to xGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchRight(to: xGoal)
+		return frame
+	}
+	
+	func pinchingRight(by xOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchRight(by: xOffset)
+		return frame
+	}
+	
+	func pinchingTop(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchTop(to: yGoal)
+		return frame
+	}
+	
+	func pinchingTop(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchTop(by: yOffset)
+		return frame
+	}
+	
+	func pinchingBottom(to yGoal: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchBottom(to: yGoal)
+		return frame
+	}
+	
+	func pinchingBottom(by yOffset: CGFloat) -> CGRect {
+		var frame = self
+		frame.pinchBottom(by: yOffset)
+		return frame
+	}
+	
+	func expandingWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandWidth(to: widthGoal, from: baseline)
+		return frame
+	}
+	
+	func expandingWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandWidth(by: widthDiff, from: baseline)
+		return frame
+	}
+	
+	func expandingHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandHeight(to: heightGoal, from: baseline)
+		return frame
+	}
+	
+	func expandingHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+		var frame = self
+		frame.expandHeight(by: heightDiff, from: baseline)
+		return frame
+	}
+	
+	func expandingSize(to sizeGoal: CGSize, from basepoint: CGRect.PlaneBasePoint) -> CGRect {
+		var frame = self
+		frame.expandSize(to: sizeGoal, from: basepoint)
+		return frame
+	}
+	
+	func expandingSize(by sizeDiff: CGSize, from basepoint: CGRect.PlaneBasePoint) -> CGRect {
+		var frame = self
+		frame.expandSize(by: sizeDiff, from: basepoint)
+		return frame
+	}
+
 }

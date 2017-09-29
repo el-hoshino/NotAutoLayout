@@ -6,6 +6,15 @@ let view = LayoutInfoStoredView(frame: .init(x: 0, y: 0, width: 320, height: 568
 view.backgroundColor = .white
 PlaygroundPage.current.liveView = view
 
+view.nal.makeSequentialLayout { $0
+	.makeFirstLayout(by: { $0
+		.makeFrame(.zero)
+	})
+	.setRestFrames(by: { $0
+		.movingX(by: 10)
+	})
+}
+
 let margin: CGSize = .init(width: 10, height: 10)
 let summaryView = ProfileSummaryView()
 let contentsView = ContentsView()
