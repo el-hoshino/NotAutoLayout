@@ -43,7 +43,7 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterRightDidSetLayoutMaker {
+	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterRightDidSetLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -52,7 +52,7 @@ extension CenterDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterRightDidSetLayoutMaker {
+	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterRightDidSetLayoutMaker {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -60,9 +60,9 @@ extension CenterDidSetLayoutMaker {
 		
 	}
 	
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterRightDidSetLayoutMaker {
+	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> CenterRightDidSetLayoutMaker {
 		
-		let right = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
+		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = CenterRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         center: self.center,
@@ -73,9 +73,9 @@ extension CenterDidSetLayoutMaker {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterRightDidSetLayoutMaker {
+	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBasePoint, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CenterRightDidSetLayoutMaker {
 		
-		let right = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = CenterRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         center: self.center,
