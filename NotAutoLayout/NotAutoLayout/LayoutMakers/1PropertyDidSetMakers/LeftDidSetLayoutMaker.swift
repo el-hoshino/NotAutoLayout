@@ -22,9 +22,11 @@ extension LeftDidSetLayoutMaker {
 	
 	public func setCenter(to center: CGFloat) -> LeftCenterDidSetLayoutMaker {
 		
+		let center = CGRect.Float.constant(center)
+		
 		let maker = LeftCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                        left: self.left,
-		                                        center: .constant(center))
+		                                        center: center)
 		return maker
 		
 	}
@@ -90,9 +92,11 @@ extension LeftDidSetLayoutMaker {
 	
 	public func setRight(to right: CGFloat) -> LeftRightDidSetLayoutMaker {
 		
+		let right = CGRect.Float.constant(right)
+		
 		let maker = LeftRightDidSetLayoutMaker(parentView: self.parentView,
 		                                       left: self.left,
-		                                       right: .constant(right))
+		                                       right: right)
 		return maker
 		
 	}
@@ -158,9 +162,11 @@ extension LeftDidSetLayoutMaker {
 	
 	public func setTop(to top: CGFloat) -> LeftTopDidSetLayoutMaker {
 		
+		let top = CGRect.Float.constant(top)
+		
 		let maker = LeftTopDidSetLayoutMaker(parentView: self.parentView,
 		                                     left: self.left,
-		                                     top: .constant(top))
+		                                     top: top)
 		return maker
 		
 	}
@@ -226,9 +232,11 @@ extension LeftDidSetLayoutMaker {
 	
 	public func setMiddle(to middle: CGFloat) -> LeftMiddleDidSetLayoutMaker {
 		
+		let middle = CGRect.Float.constant(middle)
+		
 		let maker = LeftMiddleDidSetLayoutMaker(parentView: self.parentView,
 		                                        left: self.left,
-		                                        middle: .constant(middle))
+		                                        middle: middle)
 		return maker
 		
 	}
@@ -294,9 +302,11 @@ extension LeftDidSetLayoutMaker {
 	
 	public func setBottom(to bottom: CGFloat) -> LeftBottomDidSetLayoutMaker {
 		
+		let bottom = CGRect.Float.constant(bottom)
+		
 		let maker = LeftBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                        left: self.left,
-		                                        bottom: .constant(bottom))
+		                                        bottom: bottom)
 		return maker
 		
 	}
