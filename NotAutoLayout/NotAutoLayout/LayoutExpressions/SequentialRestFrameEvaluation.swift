@@ -18,12 +18,12 @@ enum SequentialRestFrameEvaluation {
 	case movingYBy(FloatEvaluation)
 	case movingOriginBy(PointEvaluation)
 	
-	case expandingWidthBy(FloatEvaluation, from: CGRect.HorizontalBasePoint)
-	case expandingHeightBy(FloatEvaluation, from: CGRect.VerticalBasePoint)
+	case expandingWidthBy(FloatEvaluation, from: CGRect.HorizontalBaseLine)
+	case expandingHeightBy(FloatEvaluation, from: CGRect.VerticalBaseLine)
 	case expandingSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	
-	case fitWidthBy(FloatEvaluation, from: CGRect.HorizontalBasePoint)
-	case fitHeightBy(FloatEvaluation, from: CGRect.VerticalBasePoint)
+	case fitWidthBy(FloatEvaluation, from: CGRect.HorizontalBaseLine)
+	case fitHeightBy(FloatEvaluation, from: CGRect.VerticalBaseLine)
 	case fitSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	
 }
