@@ -65,9 +65,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> LayoutEditor) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<LayoutElementNone>) -> LayoutEditor) {
 		
-		let maker = InitialLayoutMaker(parentView: self.body)
+		let maker = LayoutMaker<LayoutElementNone>(parentView: self.body, didSetLayoutElement: .init())
 		let layout = making(maker).layout
 		
 		self.layout(subview, with: layout)
@@ -78,9 +78,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeLayout(_ making: (InitialLayoutMaker) -> LayoutEditor) -> Layout {
+	public func makeLayout(_ making: (LayoutMaker<LayoutElementNone>) -> LayoutEditor) -> Layout {
 		
-		let maker = InitialLayoutMaker(parentView: self.body)
+		let maker = LayoutMaker<LayoutElementNone>(parentView: self.body, didSetLayoutElement: .init())
 		return making(maker).layout
 		
 	}
