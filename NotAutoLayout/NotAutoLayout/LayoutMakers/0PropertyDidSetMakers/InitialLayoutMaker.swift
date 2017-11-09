@@ -8,15 +8,21 @@
 
 import Foundation
 
-public struct InitialLayoutMaker {
+public protocol LayoutElementNoneType: LayoutElementType {
 	
-	public unowned let parentView: UIView
+}
+
+public struct LayoutElementNone: LayoutElementNoneType {
+	
+}
+
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 }
 
 // MARK: - Set A Frame -
 // MARK: On Parent
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
 		
@@ -46,7 +52,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Custom Frame
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
 		
@@ -81,7 +87,7 @@ extension InitialLayoutMaker {
 
 // MARK: - Set A Point -
 // MARK: TopLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopLeft(to topLeft: CGPoint) -> TopLeftDidSetLayoutMaker {
 		
@@ -148,7 +154,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: TopCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopCenter(to topCenter: CGPoint) -> TopCenterDidSetLayoutMaker {
 		
@@ -215,7 +221,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: TopRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopRight(to topRight: CGPoint) -> TopRightDidSetLayoutMaker {
 		
@@ -282,7 +288,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleLeft(to middleLeft: CGPoint) -> MiddleLeftDidSetLayoutMaker {
 		
@@ -349,7 +355,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleCenter(to middleCenter: CGPoint) -> MiddleCenterDidSetLayoutMaker {
 		
@@ -416,7 +422,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleRight(to middleRight: CGPoint) -> MiddleRightDidSetLayoutMaker {
 		
@@ -483,7 +489,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomLeft(to bottomLeft: CGPoint) -> BottomLeftDidSetLayoutMaker {
 		
@@ -550,7 +556,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomCenter(to bottomCenter: CGPoint) -> BottomCenterDidSetLayoutMaker {
 		
@@ -617,7 +623,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomRight(to bottomRight: CGPoint) -> BottomRightDidSetLayoutMaker {
 		
@@ -685,7 +691,7 @@ extension InitialLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setLeft(to left: CGFloat) -> LeftDidSetLayoutMaker {
 		
@@ -751,7 +757,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Center
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setCenter(to center: CGFloat) -> CenterDidSetLayoutMaker {
 		
@@ -818,7 +824,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Right
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setRight(to right: CGFloat) -> RightDidSetLayoutMaker {
 		
