@@ -8,6 +8,13 @@
 
 import Foundation
 
+public protocol LayoutElementRightTopType: LayoutElementType {
+	
+	var right: LayoutElement.Float { get }
+	var top: LayoutElement.Float { get }
+	
+}
+
 public struct RightTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView

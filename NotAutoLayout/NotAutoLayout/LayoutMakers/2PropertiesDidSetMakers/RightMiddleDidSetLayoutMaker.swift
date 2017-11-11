@@ -8,6 +8,13 @@
 
 import Foundation
 
+public protocol LayoutElementRightMiddleType: LayoutElementType {
+	
+	var right: LayoutElement.Float { get }
+	var middle: LayoutElement.Float { get }
+	
+}
+
 public struct RightMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView

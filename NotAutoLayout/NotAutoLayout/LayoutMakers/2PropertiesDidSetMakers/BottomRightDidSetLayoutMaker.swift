@@ -8,6 +8,12 @@
 
 import Foundation
 
+public protocol LayoutElementBottomRightType: LayoutElementType {
+	
+	var bottomRight: LayoutElement.Point { get }
+	
+}
+
 public struct BottomRightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView

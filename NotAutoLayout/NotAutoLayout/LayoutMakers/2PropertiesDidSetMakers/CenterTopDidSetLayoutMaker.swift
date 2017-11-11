@@ -8,6 +8,13 @@
 
 import Foundation
 
+public protocol LayoutElementCenterTopType: LayoutElementType {
+	
+	var center: LayoutElement.Float { get }
+	var top: LayoutElement.Float { get }
+	
+}
+
 public struct CenterTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView

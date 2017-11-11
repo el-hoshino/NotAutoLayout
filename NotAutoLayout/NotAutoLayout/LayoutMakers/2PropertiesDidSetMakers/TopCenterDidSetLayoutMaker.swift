@@ -8,6 +8,12 @@
 
 import Foundation
 
+public protocol LayoutElementTopCenterType: LayoutElementType {
+	
+	var topCenter: LayoutElement.Point { get }
+	
+}
+
 public struct TopCenterDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
