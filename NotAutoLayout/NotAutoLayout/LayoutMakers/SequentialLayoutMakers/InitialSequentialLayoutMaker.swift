@@ -16,9 +16,9 @@ public struct InitialSequentialLayoutMaker {
 
 extension InitialSequentialLayoutMaker {
 	
-	public func makeFirstLayout(by making: (LayoutMaker<LayoutElementNone>) -> LayoutEditor) -> FirstLayoutDidSetSequentialLayoutMaker {
+	public func makeFirstLayout(by making: (LayoutMaker<LayoutElement.None>) -> LayoutEditor) -> FirstLayoutDidSetSequentialLayoutMaker {
 		
-		let firstLayoutMaker = LayoutMaker<LayoutElementNone>(parentView: self.parentView, didSetLayoutElement: .init())
+		let firstLayoutMaker = LayoutMaker<LayoutElement.None>(parentView: self.parentView, didSetLayoutElement: .init())
 		let firstLayout = making(firstLayoutMaker).layout
 		let maker = FirstLayoutDidSetSequentialLayoutMaker(parentView: self.parentView,
 		                                                   firstLayout: firstLayout)

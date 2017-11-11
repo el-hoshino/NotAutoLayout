@@ -12,7 +12,11 @@ public protocol LayoutElementNoneType: LayoutElementType {
 	
 }
 
-public struct LayoutElementNone: LayoutElementNoneType {
+extension LayoutElement {
+	
+	public struct None: LayoutElementNoneType {
+		
+	}
 	
 }
 
