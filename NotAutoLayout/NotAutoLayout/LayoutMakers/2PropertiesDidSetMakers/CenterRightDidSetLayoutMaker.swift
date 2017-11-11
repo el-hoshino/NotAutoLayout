@@ -28,14 +28,14 @@ extension LayoutElement {
 
 extension LayoutElement.CenterRight {
 	
-	init(right: LayoutElement.Float, others: LayoutElementCenterType) {
-		self.center = others.center
-		self.right = right
-	}
-	
 	init(center: LayoutElement.Float, others: LayoutElementRightType) {
 		self.center = center
 		self.right = others.right
+	}
+	
+	init(right: LayoutElement.Float, others: LayoutElementCenterType) {
+		self.center = others.center
+		self.right = right
 	}
 	
 }

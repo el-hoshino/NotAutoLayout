@@ -39,8 +39,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	public func setCenter(to center: CGFloat) -> LayoutMaker<LayoutElement.LeftCenter> {
 		
 		let center = LayoutElement.Float.constant(center)
-		let didSetElement = LayoutElement.LeftCenter(left: self.left,
-		                                             center: center)
+		let didSetElement = LayoutElement.LeftCenter(center: center,
+		                                             others: self.didSetLayoutElement)
 		let maker = LayoutMaker<LayoutElement.LeftCenter>(parentView: self.parentView,
 		                                                  didSetLayoutElement: didSetElement)
 		
@@ -51,8 +51,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutMaker<LayoutElement.LeftCenter> {
 		
 		let center = LayoutElement.Float.closure(center)
-		let didSetElement = LayoutElement.LeftCenter(left: self.left,
-		                                             center: center)
+		let didSetElement = LayoutElement.LeftCenter(center: center,
+		                                             others: self.didSetLayoutElement)
 		let maker = LayoutMaker<LayoutElement.LeftCenter>(parentView: self.parentView,
 		                                                  didSetLayoutElement: didSetElement)
 		
@@ -80,8 +80,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutMaker<LayoutElement.LeftCenter> {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		let didSetElement = LayoutElement.LeftCenter(left: self.left,
-		                                             center: center)
+		let didSetElement = LayoutElement.LeftCenter(center: center,
+		                                             others: self.didSetLayoutElement)
 		let maker = LayoutMaker<LayoutElement.LeftCenter>(parentView: self.parentView,
 		                                                  didSetLayoutElement: didSetElement)
 		
@@ -93,8 +93,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<LayoutElement.LeftCenter> {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		let didSetElement = LayoutElement.LeftCenter(left: self.left,
-		                                             center: center)
+		let didSetElement = LayoutElement.LeftCenter(center: center,
+		                                             others: self.didSetLayoutElement)
 		let maker = LayoutMaker<LayoutElement.LeftCenter>(parentView: self.parentView,
 		                                                  didSetLayoutElement: didSetElement)
 

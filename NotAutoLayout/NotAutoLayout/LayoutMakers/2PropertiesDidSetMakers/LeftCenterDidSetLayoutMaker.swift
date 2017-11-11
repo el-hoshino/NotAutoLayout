@@ -26,6 +26,20 @@ extension LayoutElement {
 	
 }
 
+extension LayoutElement.LeftCenter {
+	
+	init(left: LayoutElement.Float, others: LayoutElementCenterType) {
+		self.left = left
+		self.center = others.center
+	}
+	
+	init(center: LayoutElement.Float, others: LayoutElementLeftType) {
+		self.left = others.left
+		self.center = center
+	}
+	
+}
+
 extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 	
 	var left: LayoutElement.Float {
