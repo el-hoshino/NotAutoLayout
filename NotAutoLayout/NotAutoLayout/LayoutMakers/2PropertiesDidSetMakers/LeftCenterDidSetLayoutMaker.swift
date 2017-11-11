@@ -26,6 +26,18 @@ extension LayoutElement {
 	
 }
 
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
+	
+	var left: LayoutElement.Float {
+		return self.didSetLayoutElement.left
+	}
+	
+	var center: LayoutElement.Float {
+		return self.didSetLayoutElement.center
+	}
+
+}
+
 // MARK: - Set A Line -
 // MARK: Top
 extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
@@ -35,8 +47,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let top = LayoutElement.Float.constant(top)
 		
 		let maker = LeftCenterTopDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.didSetLayoutElement.left,
-		                                           center: self.didSetLayoutElement.center,
+		                                           left: self.left,
+		                                           center: self.center,
 		                                           top: top)
 		return maker
 		
@@ -47,8 +59,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let top = LayoutElement.Float.closure(top)
 		
 		let maker = LeftCenterTopDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.didSetLayoutElement.left,
-		                                           center: self.didSetLayoutElement.center,
+		                                           left: self.left,
+		                                           center: self.center,
 		                                           top: top)
 		
 		return maker
@@ -77,8 +89,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = LeftCenterTopDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.didSetLayoutElement.left,
-		                                           center: self.didSetLayoutElement.center,
+		                                           left: self.left,
+		                                           center: self.center,
 		                                           top: top)
 		
 		return maker
@@ -91,8 +103,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = LeftCenterTopDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.didSetLayoutElement.left,
-		                                           center: self.didSetLayoutElement.center,
+		                                           left: self.left,
+		                                           center: self.center,
 		                                           top: top)
 		
 		return maker
@@ -109,8 +121,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let middle = LayoutElement.Float.constant(middle)
 		
 		let maker = LeftCenterMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              middle: middle)
 		return maker
 		
@@ -121,8 +133,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let middle = LayoutElement.Float.closure(middle)
 		
 		let maker = LeftCenterMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              middle: middle)
 		
 		return maker
@@ -151,8 +163,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = LeftCenterMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              middle: middle)
 		
 		return maker
@@ -165,8 +177,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = LeftCenterMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              middle: middle)
 		
 		return maker
@@ -183,8 +195,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let bottom = LayoutElement.Float.constant(bottom)
 		
 		let maker = LeftCenterBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              bottom: bottom)
 		return maker
 		
@@ -195,8 +207,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let bottom = LayoutElement.Float.closure(bottom)
 		
 		let maker = LeftCenterBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              bottom: bottom)
 		
 		return maker
@@ -225,8 +237,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = LeftCenterBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              bottom: bottom)
 		
 		return maker
@@ -239,8 +251,8 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftCenterType {
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = LeftCenterBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.didSetLayoutElement.left,
-		                                              center: self.didSetLayoutElement.center,
+		                                              left: self.left,
+		                                              center: self.center,
 		                                              bottom: bottom)
 		
 		return maker

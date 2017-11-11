@@ -24,6 +24,14 @@ extension LayoutElement {
 	
 }
 
+extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
+	
+	var right: LayoutElement.Float {
+		return self.didSetLayoutElement.right
+	}
+	
+}
+
 // MARK: - Set A Line -
 // MARK: Top
 extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
@@ -33,7 +41,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let top = LayoutElement.Float.constant(top)
 		
 		let maker = RightTopDidSetLayoutMaker(parentView: self.parentView,
-		                                      right: self.didSetLayoutElement.right,
+		                                      right: self.right,
 		                                      top: top)
 		return maker
 		
@@ -44,7 +52,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let top = LayoutElement.Float.closure(top)
 		
 		let maker = RightTopDidSetLayoutMaker(parentView: self.parentView,
-		                                      right: self.didSetLayoutElement.right,
+		                                      right: self.right,
 		                                      top: top)
 		
 		return maker
@@ -73,7 +81,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = RightTopDidSetLayoutMaker(parentView: self.parentView,
-		                                      right: self.didSetLayoutElement.right,
+		                                      right: self.right,
 		                                      top: top)
 		
 		return maker
@@ -86,7 +94,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = RightTopDidSetLayoutMaker(parentView: self.parentView,
-		                                      right: self.didSetLayoutElement.right,
+		                                      right: self.right,
 		                                      top: top)
 		
 		return maker
@@ -103,7 +111,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let middle = LayoutElement.Float.constant(middle)
 		
 		let maker = RightMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         middle: middle)
 		return maker
 		
@@ -114,7 +122,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let middle = LayoutElement.Float.closure(middle)
 		
 		let maker = RightMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         middle: middle)
 		
 		return maker
@@ -143,7 +151,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = RightMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         middle: middle)
 		
 		return maker
@@ -156,7 +164,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = RightMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         middle: middle)
 		
 		return maker
@@ -173,7 +181,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let bottom = LayoutElement.Float.constant(bottom)
 		
 		let maker = RightBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         bottom: bottom)
 		return maker
 		
@@ -184,7 +192,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let bottom = LayoutElement.Float.closure(bottom)
 		
 		let maker = RightBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         bottom: bottom)
 		
 		return maker
@@ -213,7 +221,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
 		let maker = RightBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         bottom: bottom)
 		
 		return maker
@@ -226,7 +234,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementRightType {
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
 		let maker = RightBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                         right: self.didSetLayoutElement.right,
+		                                         right: self.right,
 		                                         bottom: bottom)
 		
 		return maker
