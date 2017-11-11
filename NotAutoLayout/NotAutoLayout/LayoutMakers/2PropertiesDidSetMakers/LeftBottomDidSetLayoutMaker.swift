@@ -8,18 +8,38 @@
 
 import Foundation
 
-public struct LeftBottomDidSetLayoutMaker {
+public protocol LayoutElementLeftBottomType: LayoutElementType {
 	
-	public unowned let parentView: UIView
+	var left: LayoutElement.Float { get }
+	var bottom: LayoutElement.Float { get }
 	
-	let left: LayoutElement.Float
+}
+
+extension LayoutElement {
 	
-	let bottom: LayoutElement.Float
+	public struct LeftBottom: LayoutElementLeftBottomType {
+		
+		public let left: LayoutElement.Float
+		public let bottom: LayoutElement.Float
+		
+	}
+	
+}
+
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftBottomType {
+	
+	var left: LayoutElement.Float {
+		return self.didSetLayoutElement.left
+	}
+	
+	var bottom: LayoutElement.Float {
+		return self.didSetLayoutElement.bottom
+	}
 	
 }
 
 // MARK: - Make Frame
-extension LeftBottomDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftBottomType {
 	
 	private func makeFrame(left: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -36,7 +56,7 @@ extension LeftBottomDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension LeftBottomDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftBottomType {
 	
 	public func setSize(to size: CGSize) -> LayoutEditor {
 		
@@ -86,7 +106,7 @@ extension LeftBottomDidSetLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension LeftBottomDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftBottomType {
 	
 	public func setWidth(to width: CGFloat) -> LeftBottomWidthDidSetLayoutMaker {
 		
@@ -116,7 +136,7 @@ extension LeftBottomDidSetLayoutMaker {
 }
 
 // MARK: Height
-extension LeftBottomDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftBottomType {
 	
 	public func setHeight(to height: CGFloat) -> LeftBottomHeightDidSetLayoutMaker {
 		
