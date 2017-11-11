@@ -12,9 +12,9 @@ public struct TopRightLeftDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let topRight: CGRect.Point
+	let topRight: LayoutElement.Point
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
 }
 

@@ -12,8 +12,8 @@ public struct BottomRightLeftDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let bottomRight: CGRect.Point
+	let bottomRight: LayoutElement.Point
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
 }

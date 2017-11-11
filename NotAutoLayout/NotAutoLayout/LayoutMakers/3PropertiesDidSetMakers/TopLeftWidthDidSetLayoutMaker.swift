@@ -12,9 +12,9 @@ public struct TopLeftWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let topLeft: CGRect.Point
+	let topLeft: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Float
 	
 }
 
