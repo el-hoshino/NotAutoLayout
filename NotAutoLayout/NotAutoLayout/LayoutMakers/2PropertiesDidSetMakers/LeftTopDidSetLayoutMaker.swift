@@ -8,18 +8,38 @@
 
 import Foundation
 
-public struct LeftTopDidSetLayoutMaker {
+public protocol LayoutElementLeftTopType: LayoutElementType {
 	
-	public unowned let parentView: UIView
+	var left: LayoutElement.Float { get }
+	var top: LayoutElement.Float { get }
 	
-	let left: LayoutElement.Float
+}
+
+extension LayoutElement {
 	
-	let top: LayoutElement.Float
+	public struct LeftTop: LayoutElementLeftTopType {
+		
+		public let left: LayoutElement.Float
+		public let top: LayoutElement.Float
+		
+	}
+	
+}
+
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
+	
+	var left: LayoutElement.Float {
+		return self.didSetLayoutElement.left
+	}
+	
+	var top: LayoutElement.Float {
+		return self.didSetLayoutElement.top
+	}
 	
 }
 
 // MARK: - Make Frame
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	private func makeFrame(left: CGFloat, top: CGFloat, size: CGSize) -> CGRect {
 		
@@ -35,7 +55,7 @@ extension LeftTopDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	public func setSize(to size: CGSize) -> LayoutEditor {
 		
@@ -85,7 +105,7 @@ extension LeftTopDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Middle
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	public func setMiddle(to middle: CGFloat) -> LeftTopMiddleDidSetLayoutMaker {
 		
@@ -159,7 +179,7 @@ extension LeftTopDidSetLayoutMaker {
 }
 
 // MARK: Bottom
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	public func setBottom(to bottom: CGFloat) -> LeftTopBottomDidSetLayoutMaker {
 		
@@ -234,7 +254,7 @@ extension LeftTopDidSetLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	public func setWidth(to width: CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
@@ -264,7 +284,7 @@ extension LeftTopDidSetLayoutMaker {
 }
 
 // MARK: Height
-extension LeftTopDidSetLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftTopType {
 	
 	public func setHeight(to height: CGFloat) -> LeftTopHeightDidSetLayoutMaker {
 		

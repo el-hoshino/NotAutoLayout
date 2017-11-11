@@ -178,30 +178,31 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 // MARK: Top
 extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	
-	public func setTop(to top: CGFloat) -> LeftTopDidSetLayoutMaker {
+	public func setTop(to top: CGFloat) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let top = LayoutElement.Float.constant(top)
+		let didSetElement = LayoutElement.LeftTop(left: self.left,
+		                                          top: top)
+		let maker = LayoutMaker<LayoutElement.LeftTop>(parentView: self.parentView,
+		                                               didSetLayoutElement: didSetElement)
 		
-		let maker = LeftTopDidSetLayoutMaker(parentView: self.parentView,
-		                                     left: self.left,
-		                                     top: top)
 		return maker
 		
 	}
 	
-	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopDidSetLayoutMaker {
+	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let top = LayoutElement.Float.closure(top)
-		
-		let maker = LeftTopDidSetLayoutMaker(parentView: self.parentView,
-		                                     left: self.left,
-		                                     top: top)
+		let didSetElement = LayoutElement.LeftTop(left: self.left,
+		                                          top: top)
+		let maker = LayoutMaker<LayoutElement.LeftTop>(parentView: self.parentView,
+		                                               didSetLayoutElement: didSetElement)
 		
 		return maker
 		
 	}
 	
-	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopDidSetLayoutMaker {
+	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -210,7 +211,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopDidSetLayoutMaker {
+	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -218,26 +219,26 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 		
 	}
 	
-	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopDidSetLayoutMaker {
+	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = LeftTopDidSetLayoutMaker(parentView: self.parentView,
-		                                     left: self.left,
-		                                     top: top)
+		let didSetElement = LayoutElement.LeftTop(left: self.left,
+		                                          top: top)
+		let maker = LayoutMaker<LayoutElement.LeftTop>(parentView: self.parentView,
+		                                               didSetLayoutElement: didSetElement)
 		
 		return maker
 		
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopDidSetLayoutMaker {
+	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<LayoutElement.LeftTop> {
 		
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = LeftTopDidSetLayoutMaker(parentView: self.parentView,
-		                                     left: self.left,
-		                                     top: top)
+		let didSetElement = LayoutElement.LeftTop(left: self.left,
+		                                          top: top)
+		let maker = LayoutMaker<LayoutElement.LeftTop>(parentView: self.parentView,
+		                                               didSetLayoutElement: didSetElement)
 		
 		return maker
 		
