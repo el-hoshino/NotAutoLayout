@@ -249,30 +249,31 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 // MARK: Middle
 extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	
-	public func setMiddle(to middle: CGFloat) -> LeftMiddleDidSetLayoutMaker {
+	public func setMiddle(to middle: CGFloat) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let middle = LayoutElement.Float.constant(middle)
+		let didSetElement = LayoutElement.LeftMiddle(left: self.left,
+		                                             middle: middle)
+		let maker = LayoutMaker<LayoutElement.LeftMiddle>(parentView: self.parentView,
+		                                                  didSetLayoutElement: didSetElement)
 		
-		let maker = LeftMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                        left: self.left,
-		                                        middle: middle)
 		return maker
 		
 	}
 	
-	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftMiddleDidSetLayoutMaker {
+	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let middle = LayoutElement.Float.closure(middle)
-		
-		let maker = LeftMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                        left: self.left,
-		                                        middle: middle)
+		let didSetElement = LayoutElement.LeftMiddle(left: self.left,
+		                                             middle: middle)
+		let maker = LayoutMaker<LayoutElement.LeftMiddle>(parentView: self.parentView,
+		                                                  didSetLayoutElement: didSetElement)
 		
 		return maker
 		
 	}
 	
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftMiddleDidSetLayoutMaker {
+	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -281,7 +282,7 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftMiddleDidSetLayoutMaker {
+	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -289,26 +290,26 @@ extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftType {
 		
 	}
 	
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftMiddleDidSetLayoutMaker {
+	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = LeftMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                        left: self.left,
-		                                        middle: middle)
+		let didSetElement = LayoutElement.LeftMiddle(left: self.left,
+		                                             middle: middle)
+		let maker = LayoutMaker<LayoutElement.LeftMiddle>(parentView: self.parentView,
+		                                                  didSetLayoutElement: didSetElement)
 		
 		return maker
 		
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftMiddleDidSetLayoutMaker {
+	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<LayoutElement.LeftMiddle> {
 		
 		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = LeftMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                        left: self.left,
-		                                        middle: middle)
+		let didSetElement = LayoutElement.LeftMiddle(left: self.left,
+		                                             middle: middle)
+		let maker = LayoutMaker<LayoutElement.LeftMiddle>(parentView: self.parentView,
+		                                                  didSetLayoutElement: didSetElement)
 		
 		return maker
 		
