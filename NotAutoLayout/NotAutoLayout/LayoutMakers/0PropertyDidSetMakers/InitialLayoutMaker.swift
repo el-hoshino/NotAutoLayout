@@ -8,15 +8,25 @@
 
 import Foundation
 
-public struct InitialLayoutMaker {
+public protocol LayoutElementNoneType: LayoutElementType {
 	
-	public unowned let parentView: UIView
+}
+
+extension LayoutElement {
+	
+	public struct None: LayoutElementNoneType {
+		
+	}
+	
+}
+
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 }
 
 // MARK: - Set A Frame -
 // MARK: On Parent
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
 		
@@ -46,7 +56,7 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Custom Frame
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
 		
@@ -81,11 +91,11 @@ extension InitialLayoutMaker {
 
 // MARK: - Set A Point -
 // MARK: TopLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopLeft(to topLeft: CGPoint) -> TopLeftDidSetLayoutMaker {
 		
-		let topLeft = CGRect.Point.constant(topLeft)
+		let topLeft = LayoutElement.Point.constant(topLeft)
 		
 		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                     topLeft: topLeft)
@@ -96,7 +106,7 @@ extension InitialLayoutMaker {
 	
 	public func setTopLeft(by topLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopLeftDidSetLayoutMaker {
 		
-		let topLeft = CGRect.Point.closure(topLeft)
+		let topLeft = LayoutElement.Point.closure(topLeft)
 		
 		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                     topLeft: topLeft)
@@ -148,11 +158,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: TopCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopCenter(to topCenter: CGPoint) -> TopCenterDidSetLayoutMaker {
 		
-		let topCenter = CGRect.Point.constant(topCenter)
+		let topCenter = LayoutElement.Point.constant(topCenter)
 		
 		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                       topCenter: topCenter)
@@ -163,7 +173,7 @@ extension InitialLayoutMaker {
 	
 	public func setTopCenter(by topCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopCenterDidSetLayoutMaker {
 		
-		let topCenter = CGRect.Point.closure(topCenter)
+		let topCenter = LayoutElement.Point.closure(topCenter)
 		
 		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                       topCenter: topCenter)
@@ -215,11 +225,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: TopRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setTopRight(to topRight: CGPoint) -> TopRightDidSetLayoutMaker {
 		
-		let topRight = CGRect.Point.constant(topRight)
+		let topRight = LayoutElement.Point.constant(topRight)
 		
 		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
 		                                      topRight: topRight)
@@ -230,7 +240,7 @@ extension InitialLayoutMaker {
 	
 	public func setTopRight(by topRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopRightDidSetLayoutMaker {
 		
-		let topRight = CGRect.Point.closure(topRight)
+		let topRight = LayoutElement.Point.closure(topRight)
 		
 		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
 		                                      topRight: topRight)
@@ -282,11 +292,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleLeft(to middleLeft: CGPoint) -> MiddleLeftDidSetLayoutMaker {
 		
-		let middleLeft = CGRect.Point.constant(middleLeft)
+		let middleLeft = LayoutElement.Point.constant(middleLeft)
 		
 		let maker = MiddleLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                        middleLeft: middleLeft)
@@ -297,7 +307,7 @@ extension InitialLayoutMaker {
 	
 	public func setMiddleLeft(by middleLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> MiddleLeftDidSetLayoutMaker {
 		
-		let middleLeft = CGRect.Point.closure(middleLeft)
+		let middleLeft = LayoutElement.Point.closure(middleLeft)
 		
 		let maker = MiddleLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                        middleLeft: middleLeft)
@@ -349,11 +359,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleCenter(to middleCenter: CGPoint) -> MiddleCenterDidSetLayoutMaker {
 		
-		let middleCenter = CGRect.Point.constant(middleCenter)
+		let middleCenter = LayoutElement.Point.constant(middleCenter)
 		
 		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                          middleCenter: middleCenter)
@@ -364,7 +374,7 @@ extension InitialLayoutMaker {
 	
 	public func setMiddleCenter(by middleCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> MiddleCenterDidSetLayoutMaker {
 		
-		let middleCenter = CGRect.Point.closure(middleCenter)
+		let middleCenter = LayoutElement.Point.closure(middleCenter)
 		
 		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                          middleCenter: middleCenter)
@@ -416,11 +426,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: MiddleRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setMiddleRight(to middleRight: CGPoint) -> MiddleRightDidSetLayoutMaker {
 		
-		let middleRight = CGRect.Point.constant(middleRight)
+		let middleRight = LayoutElement.Point.constant(middleRight)
 		
 		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         middleRight: middleRight)
@@ -431,7 +441,7 @@ extension InitialLayoutMaker {
 	
 	public func setMiddleRight(by middleRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> MiddleRightDidSetLayoutMaker {
 		
-		let middleRight = CGRect.Point.closure(middleRight)
+		let middleRight = LayoutElement.Point.closure(middleRight)
 		
 		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         middleRight: middleRight)
@@ -483,11 +493,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomLeft
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomLeft(to bottomLeft: CGPoint) -> BottomLeftDidSetLayoutMaker {
 		
-		let bottomLeft = CGRect.Point.constant(bottomLeft)
+		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
 		
 		let maker = BottomLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                        bottomLeft: bottomLeft)
@@ -498,7 +508,7 @@ extension InitialLayoutMaker {
 	
 	public func setBottomLeft(by bottomLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> BottomLeftDidSetLayoutMaker {
 		
-		let bottomLeft = CGRect.Point.closure(bottomLeft)
+		let bottomLeft = LayoutElement.Point.closure(bottomLeft)
 		
 		let maker = BottomLeftDidSetLayoutMaker(parentView: self.parentView,
 		                                        bottomLeft: bottomLeft)
@@ -550,11 +560,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomCenter
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomCenter(to bottomCenter: CGPoint) -> BottomCenterDidSetLayoutMaker {
 		
-		let bottomCenter = CGRect.Point.constant(bottomCenter)
+		let bottomCenter = LayoutElement.Point.constant(bottomCenter)
 		
 		let maker = BottomCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                          bottomCenter: bottomCenter)
@@ -565,7 +575,7 @@ extension InitialLayoutMaker {
 	
 	public func setBottomCenter(by bottomCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> BottomCenterDidSetLayoutMaker {
 		
-		let bottomCenter = CGRect.Point.closure(bottomCenter)
+		let bottomCenter = LayoutElement.Point.closure(bottomCenter)
 		
 		let maker = BottomCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                          bottomCenter: bottomCenter)
@@ -617,11 +627,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: BottomRight
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setBottomRight(to bottomRight: CGPoint) -> BottomRightDidSetLayoutMaker {
 		
-		let bottomRight = CGRect.Point.constant(bottomRight)
+		let bottomRight = LayoutElement.Point.constant(bottomRight)
 		
 		let maker = BottomRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         bottomRight: bottomRight)
@@ -632,7 +642,7 @@ extension InitialLayoutMaker {
 	
 	public func setBottomRight(by bottomRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> BottomRightDidSetLayoutMaker {
 		
-		let bottomRight = CGRect.Point.closure(bottomRight)
+		let bottomRight = LayoutElement.Point.closure(bottomRight)
 		
 		let maker = BottomRightDidSetLayoutMaker(parentView: self.parentView,
 		                                         bottomRight: bottomRight)
@@ -685,11 +695,11 @@ extension InitialLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setLeft(to left: CGFloat) -> LeftDidSetLayoutMaker {
 		
-		let left = CGRect.Float.constant(left)
+		let left = LayoutElement.Float.constant(left)
 		let maker = LeftDidSetLayoutMaker(parentView: self.parentView,
 		                                  left: left)
 		
@@ -699,7 +709,7 @@ extension InitialLayoutMaker {
 	
 	public func setLeft(by left: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftDidSetLayoutMaker {
 		
-		let left = CGRect.Float.closure(left)
+		let left = LayoutElement.Float.closure(left)
 		
 		let maker = LeftDidSetLayoutMaker(parentView: self.parentView,
 		                                  left: left)
@@ -751,11 +761,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Center
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setCenter(to center: CGFloat) -> CenterDidSetLayoutMaker {
 		
-		let center = CGRect.Float.constant(center)
+		let center = LayoutElement.Float.constant(center)
 		
 		let maker = CenterDidSetLayoutMaker(parentView: self.parentView,
 		                                    center: center)
@@ -766,7 +776,7 @@ extension InitialLayoutMaker {
 	
 	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterDidSetLayoutMaker {
 		
-		let center = CGRect.Float.closure(center)
+		let center = LayoutElement.Float.closure(center)
 		
 		let maker = CenterDidSetLayoutMaker(parentView: self.parentView,
 		                                    center: center)
@@ -818,11 +828,11 @@ extension InitialLayoutMaker {
 }
 
 // MARK: Right
-extension InitialLayoutMaker {
+extension LayoutMaker where DidSetLayoutElement: LayoutElementNoneType {
 	
 	public func setRight(to right: CGFloat) -> RightDidSetLayoutMaker {
 		
-		let right = CGRect.Float.constant(right)
+		let right = LayoutElement.Float.constant(right)
 		
 		let maker = RightDidSetLayoutMaker(parentView: self.parentView,
 		                                   right: right)
@@ -833,7 +843,7 @@ extension InitialLayoutMaker {
 	
 	public func setRight(by right: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightDidSetLayoutMaker {
 		
-		let right = CGRect.Float.closure(right)
+		let right = LayoutElement.Float.closure(right)
 		
 		let maker = RightDidSetLayoutMaker(parentView: self.parentView,
 		                                   right: right)

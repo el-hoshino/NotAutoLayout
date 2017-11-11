@@ -12,9 +12,9 @@ public struct TopCenterWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let topCenter: CGRect.Point
+	let topCenter: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Float
 	
 }
 

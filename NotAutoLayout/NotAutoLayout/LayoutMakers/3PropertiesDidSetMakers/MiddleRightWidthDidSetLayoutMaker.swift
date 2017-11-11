@@ -12,9 +12,9 @@ public struct MiddleRightWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleRight: CGRect.Point
+	let middleRight: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Float
 	
 }
 

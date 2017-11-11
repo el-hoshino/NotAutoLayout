@@ -12,11 +12,11 @@ public struct LeftTopWidthDidSetLayoutMaker {
 		
 	public unowned let parentView: UIView
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Float
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Float
 	
 }
 

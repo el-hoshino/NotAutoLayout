@@ -12,7 +12,7 @@ public struct MiddleLeftDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleLeft: CGRect.Point
+	let middleLeft: LayoutElement.Point
 	
 }
 
@@ -446,7 +446,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setCenter(to center: CGFloat) -> MiddleLeftCenterDidSetLayoutMaker {
 		
-		let center = CGRect.Float.constant(center)
+		let center = LayoutElement.Float.constant(center)
 		
 		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
@@ -458,7 +458,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftCenterDidSetLayoutMaker {
 		
-		let center = CGRect.Float.closure(center)
+		let center = LayoutElement.Float.closure(center)
 		
 		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
@@ -517,7 +517,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setRight(to right: CGFloat) -> MiddleLeftRightDidSetLayoutMaker {
 		
-		let right = CGRect.Float.constant(right)
+		let right = LayoutElement.Float.constant(right)
 		
 		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
 		                                             middleLeft: self.middleLeft,
@@ -529,7 +529,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setRight(by right: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftRightDidSetLayoutMaker {
 		
-		let right = CGRect.Float.closure(right)
+		let right = LayoutElement.Float.closure(right)
 		
 		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
 		                                             middleLeft: self.middleLeft,
@@ -588,7 +588,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setTop(to top: CGFloat) -> MiddleLeftTopDidSetLayoutMaker {
 		
-		let top = CGRect.Float.constant(top)
+		let top = LayoutElement.Float.constant(top)
 		
 		let maker = MiddleLeftTopDidSetLayoutMaker(parentView: self.parentView,
 		                                           middleLeft: self.middleLeft,
@@ -600,7 +600,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftTopDidSetLayoutMaker {
 		
-		let top = CGRect.Float.closure(top)
+		let top = LayoutElement.Float.closure(top)
 		
 		let maker = MiddleLeftTopDidSetLayoutMaker(parentView: self.parentView,
 		                                           middleLeft: self.middleLeft,
@@ -659,7 +659,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setBottom(to bottom: CGFloat) -> MiddleLeftBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.constant(bottom)
+		let bottom = LayoutElement.Float.constant(bottom)
 		
 		let maker = MiddleLeftBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
@@ -671,7 +671,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.closure(bottom)
+		let bottom = LayoutElement.Float.closure(bottom)
 		
 		let maker = MiddleLeftBottomDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
@@ -731,7 +731,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> MiddleLeftWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.constant(width)
+		let width = LayoutElement.Float.constant(width)
 		
 		let maker = MiddleLeftWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                             middleLeft: self.middleLeft,
@@ -743,7 +743,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(width)
+		let width = LayoutElement.Float.closure(width)
 		
 		let maker = MiddleLeftWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                             middleLeft: self.middleLeft,
@@ -760,7 +760,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> MiddleLeftHeightDidSetLayoutMaker {
 		
-		let height = CGRect.Float.constant(height)
+		let height = LayoutElement.Float.constant(height)
 		
 		let maker = MiddleLeftHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
@@ -772,7 +772,7 @@ extension MiddleLeftDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftHeightDidSetLayoutMaker {
 		
-		let height = CGRect.Float.closure(height)
+		let height = LayoutElement.Float.closure(height)
 		
 		let maker = MiddleLeftHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                              middleLeft: self.middleLeft,
