@@ -26,6 +26,20 @@ extension LayoutElement {
 	
 }
 
+extension LayoutElement.LeftRight {
+	
+	init(left: LayoutElement.Float, others: LayoutElementRightType) {
+		self.left = left
+		self.right = others.right
+	}
+	
+	init(right: LayoutElement.Float, others: LayoutElementLeftType) {
+		self.left = others.left
+		self.right = right
+	}
+	
+}
+
 extension LayoutMaker where DidSetLayoutElement: LayoutElementLeftRightType {
 	
 	var left: LayoutElement.Float {
