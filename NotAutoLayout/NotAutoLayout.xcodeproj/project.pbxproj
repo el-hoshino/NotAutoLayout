@@ -168,6 +168,9 @@
 		79FD2CD81FB859C600E6661C /* LayoutMakerCanSetMiddleLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD71FB859C600E6661C /* LayoutMakerCanSetMiddleLeftType.swift */; };
 		79FD2CDA1FB85B5000E6661C /* LayoutMakerCanSetMiddleCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD91FB85B5000E6661C /* LayoutMakerCanSetMiddleCenterType.swift */; };
 		79FD2CDC1FB85CC700E6661C /* LayoutMakerCanSetMiddleRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDB1FB85CC700E6661C /* LayoutMakerCanSetMiddleRightType.swift */; };
+		79FD2CDE1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDD1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift */; };
+		79FD2CE01FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */; };
+		79FD2CE21FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +348,9 @@
 		79FD2CD71FB859C600E6661C /* LayoutMakerCanSetMiddleLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetMiddleLeftType.swift; sourceTree = "<group>"; };
 		79FD2CD91FB85B5000E6661C /* LayoutMakerCanSetMiddleCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetMiddleCenterType.swift; sourceTree = "<group>"; };
 		79FD2CDB1FB85CC700E6661C /* LayoutMakerCanSetMiddleRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetMiddleRightType.swift; sourceTree = "<group>"; };
+		79FD2CDD1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomLeftType.swift; sourceTree = "<group>"; };
+		79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomCenterType.swift; sourceTree = "<group>"; };
+		79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomRightType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +665,9 @@
 				79FD2CD71FB859C600E6661C /* LayoutMakerCanSetMiddleLeftType.swift */,
 				79FD2CD91FB85B5000E6661C /* LayoutMakerCanSetMiddleCenterType.swift */,
 				79FD2CDB1FB85CC700E6661C /* LayoutMakerCanSetMiddleRightType.swift */,
+				79FD2CDD1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift */,
+				79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */,
+				79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */,
 				79C6C1821FB83DA500E32C54 /* LayoutMakerCanSetLeftType.swift */,
 			);
 			path = LayoutElement;
@@ -784,6 +793,7 @@
 				164DB2501EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift in Sources */,
 				79D8DDE41EF94B6A00B74593 /* RightMiddleHeightDidSetLayoutMaker.swift in Sources */,
 				79D8DDD21EF94A0C00B74593 /* CenterTopWidthDidSetLayoutMaker.swift in Sources */,
+				79FD2CE01FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift in Sources */,
 				79D8DE0A1EF94F7100B74593 /* TopCenterRightDidSetLayoutMaker.swift in Sources */,
 				79FD2CD41FB84E4F00E6661C /* LayoutMakerCanSetTopCenterType.swift in Sources */,
 				79D8DD861EF93D7600B74593 /* CenterMiddleDidSetLayoutMaker.swift in Sources */,
@@ -892,8 +902,10 @@
 				1630073A1F0F380C00012C18 /* BottomLeftCenterDidSetLayoutMaker.swift in Sources */,
 				163007391F0F380C00012C18 /* MiddleRightHeightDidSetLayoutMaker.swift in Sources */,
 				164EA0CF1EF3DAE300C0BB8F /* MatricalLayout.swift in Sources */,
+				79FD2CDE1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift in Sources */,
 				79D8DDB61EF944ED00B74593 /* LeftCenterMiddleDidSetLayoutMaker.swift in Sources */,
 				79D8DD7C1EF935F300B74593 /* LeftBottomDidSetLayoutMaker.swift in Sources */,
+				79FD2CE21FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift in Sources */,
 				164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */,
 				794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */,
 				163B7AA31F7A711500F2E105 /* FirstLayoutDidSetSequentialLayoutMaker.swift in Sources */,
