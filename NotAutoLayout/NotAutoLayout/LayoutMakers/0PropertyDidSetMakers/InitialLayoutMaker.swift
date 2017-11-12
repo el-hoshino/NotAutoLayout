@@ -14,74 +14,70 @@ public struct InitialLayoutMaker {
 	
 }
 
+// MARK: - Custom Frame
+extension InitialLayoutMaker {
+	
+	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
+		
+		let layout = Layout(frame: frame)
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
+		
+		let layout = Layout(frame: frame)
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+	public func makeFrame(_ frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
+		
+		let layout = Layout(frame: frame)
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
 // MARK: - Set A Frame -
 extension InitialLayoutMaker: LayoutMakerCanSetFrameType {
+	
+	public typealias WillSetFrameMaker = LayoutEditor
+	
+	public func setFrame(_ frame: LayoutElement.Rect) -> LayoutEditor {
+		
+		let layout = Layout { (parameter) -> CGRect in
+			return frame.evaluated(from: parameter)
+		}
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
 	
 }
 
 // MARK: - Set A Point -
 // MARK: TopLeft
-extension InitialLayoutMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetTopLeftType {
 	
-	public func setTopLeft(to topLeft: CGPoint) -> TopLeftDidSetLayoutMaker {
-		
-		let topLeft = LayoutElement.Point.constant(topLeft)
-		
-		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
-		                                     topLeft: topLeft)
-		
-		return maker
-		
-	}
+	public typealias WillSetTopLeftMaker = TopLeftDidSetLayoutMaker
 	
-	public func setTopLeft(by topLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopLeftDidSetLayoutMaker {
+	public func setTopLeft(_ topLeft: LayoutElement.Point) -> TopLeftDidSetLayoutMaker {
 		
-		let topLeft = LayoutElement.Point.closure(topLeft)
-		
-		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
-		                                     topLeft: topLeft)
-		
-		return maker
-		
-	}
-	
-	public func pinTopLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopLeftDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopLeftDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinTopLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopLeftDidSetLayoutMaker {
-		
-		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
-		                                     topLeft: topLeft)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopLeftDidSetLayoutMaker {
-		
-		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = TopLeftDidSetLayoutMaker(parentView: self.parentView,
-		                                     topLeft: topLeft)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topLeft: topLeft)
 		
 	}
 	

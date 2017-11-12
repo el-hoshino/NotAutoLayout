@@ -10,67 +10,37 @@ import Foundation
 
 public protocol LayoutMakerCanSetFrameType: LayoutMakerType {
 	
+	associatedtype WillSetFrameMaker
+	
+	func setFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker
+	
 }
 
 // MARK: - On Parent
 extension LayoutMakerCanSetFrameType {
 	
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> WillSetFrameMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return parameter.boundsWithZeroOrigin().inside(insets)
-		})
+		let frame = LayoutElement.Rect.closure { (parameter) -> CGRect in
+			parameter.boundsWithZeroOrigin().inside(insets)
+		}
 		
-		let editor = LayoutEditor(layout)
+		let maker = self.setFrame(frame)
 		
-		return editor
+		return maker
 		
 	}
 	
 	@available(iOS 11.0, *)
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
+	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetFrameMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
+		let frame = LayoutElement.Rect.closure { (parameter) -> CGRect in
 			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
-		})
+		}
 		
-		let editor = LayoutEditor(layout)
+		let maker = self.setFrame(frame)
 		
-		return editor
-		
-	}
-	
-}
-
-// MARK: - Custom Frame
-extension LayoutMakerCanSetFrameType {
-	
-	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	
