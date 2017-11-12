@@ -15,67 +15,7 @@ public struct InitialLayoutMaker {
 }
 
 // MARK: - Set A Frame -
-// MARK: On Parent
-extension InitialLayoutMaker {
-	
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return parameter.boundsWithZeroOrigin().inside(insets)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
-
-// MARK: Custom Frame
-extension InitialLayoutMaker {
-	
-	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
+extension InitialLayoutMaker: LayoutMakerCanSetFrameType {
 	
 }
 

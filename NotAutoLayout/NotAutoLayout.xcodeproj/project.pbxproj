@@ -161,6 +161,7 @@
 		79D8DE1A1EF9508600B74593 /* TopRightBottomDidSetLayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE191EF9508600B74593 /* TopRightBottomDidSetLayoutMaker.swift */; };
 		79D8DE1C1EF9509E00B74593 /* TopRightWidthDidSetLayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1B1EF9509E00B74593 /* TopRightWidthDidSetLayoutMaker.swift */; };
 		79D8DE1E1EF950B500B74593 /* TopRightHeightDidSetLayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1D1EF950B500B74593 /* TopRightHeightDidSetLayoutMaker.swift */; };
+		79FD2CD01FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,6 +332,7 @@
 		79D8DE661EF9564300B74593 /* BottomCenterLeftDidSetLayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterLeftDidSetLayoutMaker.swift; sourceTree = "<group>"; };
 		79D8DE671EF9564400B74593 /* BottomLeftHeightDidSetLayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftHeightDidSetLayoutMaker.swift; sourceTree = "<group>"; };
 		79D8DE681EF9564400B74593 /* BottomRightTopDidSetLayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightTopDidSetLayoutMaker.swift; sourceTree = "<group>"; };
+		79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetFrameType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -638,6 +640,7 @@
 			children = (
 				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
 				79C6C1861FB83FA100E32C54 /* LayoutMakerType.swift */,
+				79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */,
 				79C6C1821FB83DA500E32C54 /* LayoutMakerCanSetLeftType.swift */,
 			);
 			path = LayoutElement;
@@ -901,6 +904,7 @@
 				166C41571F6945330060C3E6 /* UIEdgeInsets.swift in Sources */,
 				79D8DDBE1EF9468100B74593 /* LeftRightMiddleDidSetLayoutMaker.swift in Sources */,
 				163007491F0F380C00012C18 /* BottomRightMiddleDidSetLayoutMaker.swift in Sources */,
+				79FD2CD01FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift in Sources */,
 				164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */,
 				79D8DDC21EF9473900B74593 /* LeftTopHeightDidSetLayoutMaker.swift in Sources */,
 				79D8DD9A1EF93E9900B74593 /* TopCenterDidSetLayoutMaker.swift in Sources */,
