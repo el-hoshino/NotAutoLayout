@@ -12,11 +12,11 @@ public struct LeftRightTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
-	let right: CGRect.Float
+	let right: LayoutElement.Float
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Float
 	
 }
 

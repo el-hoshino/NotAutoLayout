@@ -12,10 +12,10 @@ public struct LeftRightMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
-	let right: CGRect.Float
+	let right: LayoutElement.Float
 	
-	let middle: CGRect.Float
+	let middle: LayoutElement.Float
 	
 }

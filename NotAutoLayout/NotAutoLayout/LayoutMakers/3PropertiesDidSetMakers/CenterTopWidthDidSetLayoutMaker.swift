@@ -12,11 +12,11 @@ public struct CenterTopWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let center: CGRect.Float
+	let center: LayoutElement.Float
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Float
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Float
 	
 }
 

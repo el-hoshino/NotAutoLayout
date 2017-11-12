@@ -12,8 +12,8 @@ public struct MiddleRightLeftDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleRight: CGRect.Point
+	let middleRight: LayoutElement.Point
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Float
 	
 }

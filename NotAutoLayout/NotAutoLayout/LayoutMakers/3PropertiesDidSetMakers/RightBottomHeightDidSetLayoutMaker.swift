@@ -12,10 +12,10 @@ public struct RightBottomHeightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let right: CGRect.Float
+	let right: LayoutElement.Float
 	
-	let bottom: CGRect.Float
+	let bottom: LayoutElement.Float
 	
-	let height: CGRect.Float
+	let height: LayoutElement.Float
 	
 }
