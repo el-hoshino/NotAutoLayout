@@ -95,75 +95,16 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetTopLeftType {
 }
 
 // MARK: TopRight
-extension MiddleCenterDidSetLayoutMaker {
+extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetTopRightType {
 	
-	public func setTopRight(to topRight: CGPoint) -> LayoutEditor {
-		
-		return self.setTopRight(by: { _ in topRight })
-		
-	}
+	public typealias WillSetTopRightMaker = LayoutEditor
 	
-	public func setTopRight(by topRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> LayoutEditor {
+	public func setTopRight(_ topRight: LayoutElement.Point) -> LayoutEditor {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			let middleCenter = self.middleCenter.evaluated(from: parameter)
-			let topRight = topRight(parameter)
-			let frame = self.makeFrame(middleCenter: middleCenter, topRight: topRight)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let middleCenter = self.middleCenter.evaluated(from: boundSize)
-			let topRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).evaluated(from: boundSize)
-			let frame = self.makeFrame(middleCenter: middleCenter, topRight: topRight)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let middleCenter = self.middleCenter.evaluated(from: boundSize)
-			let topRight = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).evaluated(from: boundSize)
-			let frame = self.makeFrame(middleCenter: middleCenter, topRight: topRight)
-			
-			return frame
-			
+			let topRight = topRight.evaluated(from: parameter)
+			return self.makeFrame(middleCenter: middleCenter, topRight: topRight)
 		})
 		
 		let editor = LayoutEditor(layout)

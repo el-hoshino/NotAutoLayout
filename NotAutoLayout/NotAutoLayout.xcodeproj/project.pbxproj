@@ -164,6 +164,7 @@
 		79FD2CD01FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */; };
 		79FD2CD21FB8463200E6661C /* LayoutMakerCanSetTopLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD11FB8463200E6661C /* LayoutMakerCanSetTopLeftType.swift */; };
 		79FD2CD41FB84E4F00E6661C /* LayoutMakerCanSetTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD31FB84E4F00E6661C /* LayoutMakerCanSetTopCenterType.swift */; };
+		79FD2CD61FB8511700E6661C /* LayoutMakerCanSetTopRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD51FB8511700E6661C /* LayoutMakerCanSetTopRightType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +338,7 @@
 		79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetFrameType.swift; sourceTree = "<group>"; };
 		79FD2CD11FB8463200E6661C /* LayoutMakerCanSetTopLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetTopLeftType.swift; sourceTree = "<group>"; };
 		79FD2CD31FB84E4F00E6661C /* LayoutMakerCanSetTopCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetTopCenterType.swift; sourceTree = "<group>"; };
+		79FD2CD51FB8511700E6661C /* LayoutMakerCanSetTopRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetTopRightType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,6 +649,7 @@
 				79FD2CCF1FB8440C00E6661C /* LayoutMakerCanSetFrameType.swift */,
 				79FD2CD11FB8463200E6661C /* LayoutMakerCanSetTopLeftType.swift */,
 				79FD2CD31FB84E4F00E6661C /* LayoutMakerCanSetTopCenterType.swift */,
+				79FD2CD51FB8511700E6661C /* LayoutMakerCanSetTopRightType.swift */,
 				79C6C1821FB83DA500E32C54 /* LayoutMakerCanSetLeftType.swift */,
 			);
 			path = LayoutElement;
@@ -882,6 +885,7 @@
 				164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */,
 				794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */,
 				163B7AA31F7A711500F2E105 /* FirstLayoutDidSetSequentialLayoutMaker.swift in Sources */,
+				79FD2CD61FB8511700E6661C /* LayoutMakerCanSetTopRightType.swift in Sources */,
 				79D8DDEA1EF94BFC00B74593 /* LeftTopMiddleDidSetLayoutMaker.swift in Sources */,
 				163B7A9D1F7A64E600F2E105 /* InitialSequentialLayoutMaker.swift in Sources */,
 				79D8DDCE1EF949BC00B74593 /* CenterRightMiddleDidSetLayoutMaker.swift in Sources */,

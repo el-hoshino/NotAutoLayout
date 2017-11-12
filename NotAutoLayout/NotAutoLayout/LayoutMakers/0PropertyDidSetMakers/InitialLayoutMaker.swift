@@ -98,67 +98,14 @@ extension InitialLayoutMaker: LayoutMakerCanSetTopCenterType {
 }
 
 // MARK: TopRight
-extension InitialLayoutMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetTopRightType {
 	
-	public func setTopRight(to topRight: CGPoint) -> TopRightDidSetLayoutMaker {
-		
-		let topRight = LayoutElement.Point.constant(topRight)
-		
-		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
-		                                      topRight: topRight)
-		
-		return maker
-		
-	}
+	public typealias WillSetTopRightMaker = TopRightDidSetLayoutMaker
 	
-	public func setTopRight(by topRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopRightDidSetLayoutMaker {
+	public func setTopRight(_ topRight: LayoutElement.Point) -> TopRightDidSetLayoutMaker {
 		
-		let topRight = LayoutElement.Point.closure(topRight)
-		
-		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
-		                                      topRight: topRight)
-		
-		return maker
-		
-	}
-	
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopRightDidSetLayoutMaker {
-		
-		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
-		                                      topRight: topRight)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopRightDidSetLayoutMaker {
-		
-		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = TopRightDidSetLayoutMaker(parentView: self.parentView,
-		                                      topRight: topRight)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topRight: topRight)
 		
 	}
 	
