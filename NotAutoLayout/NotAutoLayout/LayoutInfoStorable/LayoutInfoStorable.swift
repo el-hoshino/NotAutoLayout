@@ -9,7 +9,7 @@
 import UIKit
 
 /// Fundamental class-only protocol that handles the layout.
-public protocol LayoutInfoStorable: class, NotAutoLayoutCompatible {
+public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	
 	/// The property to store the layout information for subviews.
 	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] { get set }
