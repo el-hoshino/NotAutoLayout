@@ -84,67 +84,14 @@ extension InitialLayoutMaker: LayoutMakerCanSetTopLeftType {
 }
 
 // MARK: TopCenter
-extension InitialLayoutMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetTopCenterType {
 	
-	public func setTopCenter(to topCenter: CGPoint) -> TopCenterDidSetLayoutMaker {
-		
-		let topCenter = LayoutElement.Point.constant(topCenter)
-		
-		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                       topCenter: topCenter)
-		
-		return maker
-		
-	}
+	public typealias WillSetTopCenterMaker = TopCenterDidSetLayoutMaker
 	
-	public func setTopCenter(by topCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> TopCenterDidSetLayoutMaker {
+	public func setTopCenter(_ topCenter: LayoutElement.Point) -> TopCenterDidSetLayoutMaker {
 		
-		let topCenter = LayoutElement.Point.closure(topCenter)
-		
-		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                       topCenter: topCenter)
-		
-		return maker
-		
-	}
-	
-	public func pinTopCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinTopCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> TopCenterDidSetLayoutMaker {
-		
-		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                       topCenter: topCenter)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> TopCenterDidSetLayoutMaker {
-		
-		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = TopCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                       topCenter: topCenter)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topCenter: topCenter)
 		
 	}
 	
