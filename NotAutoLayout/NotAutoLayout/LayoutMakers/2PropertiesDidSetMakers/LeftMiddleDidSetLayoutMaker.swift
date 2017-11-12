@@ -12,9 +12,9 @@ public struct LeftMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
-	let middle: LayoutElement.Float
+	let middle: LayoutElement.Line
 	
 }
 
@@ -90,7 +90,7 @@ extension LeftMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = LeftMiddleBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> LeftMiddleBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> LeftMiddleBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -107,7 +107,7 @@ extension LeftMiddleDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> LeftMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.constant(width)
+		let width = LayoutElement.Line.constant(width)
 		
 		let maker = LeftMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                             left: self.left,
@@ -119,7 +119,7 @@ extension LeftMiddleDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.closure(width)
+		let width = LayoutElement.Line.closure(width)
 		
 		let maker = LeftMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                             left: self.left,
@@ -137,7 +137,7 @@ extension LeftMiddleDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> LeftMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.constant(height)
+		let height = LayoutElement.Line.constant(height)
 		
 		let maker = LeftMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                              left: self.left,
@@ -149,7 +149,7 @@ extension LeftMiddleDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.closure(height)
+		let height = LayoutElement.Line.closure(height)
 		
 		let maker = LeftMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                              left: self.left,

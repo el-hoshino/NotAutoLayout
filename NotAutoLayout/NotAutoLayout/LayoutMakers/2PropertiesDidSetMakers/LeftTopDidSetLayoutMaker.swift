@@ -12,9 +12,9 @@ public struct LeftTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
-	let top: LayoutElement.Float
+	let top: LayoutElement.Line
 	
 }
 
@@ -89,7 +89,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = LeftTopMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Float) -> LeftTopMiddleDidSetLayoutMaker {
+	public func setMiddle(_ middle: LayoutElement.Line) -> LeftTopMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -105,7 +105,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = LeftTopBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> LeftTopBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> LeftTopBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -122,7 +122,7 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.constant(width)
+		let width = LayoutElement.Line.constant(width)
 		
 		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                          left: self.left,
@@ -134,7 +134,7 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.closure(width)
+		let width = LayoutElement.Line.closure(width)
 		
 		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                          left: self.left,
@@ -152,7 +152,7 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> LeftTopHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.constant(height)
+		let height = LayoutElement.Line.constant(height)
 		
 		let maker = LeftTopHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                           left: self.left,
@@ -164,7 +164,7 @@ extension LeftTopDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.closure(height)
+		let height = LayoutElement.Line.closure(height)
 		
 		let maker = LeftTopHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                           left: self.left,

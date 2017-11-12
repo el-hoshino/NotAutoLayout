@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetMiddleType: LayoutMakerType {
 	
 	associatedtype WillSetMiddleMaker
 	
-	func setMiddle(_ middle: LayoutElement.Float) -> WillSetMiddleMaker
+	func setMiddle(_ middle: LayoutElement.Line) -> WillSetMiddleMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanSetMiddleType {
 	
 	public func setMiddle(to middle: CGFloat) -> WillSetMiddleMaker {
 		
-		let middle = LayoutElement.Float.constant(middle)
+		let middle = LayoutElement.Line.constant(middle)
 		
 		let maker = self.setMiddle(middle)
 		
@@ -30,7 +30,7 @@ extension LayoutMakerCanSetMiddleType {
 	
 	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetMiddleMaker {
 		
-		let middle = LayoutElement.Float.closure(middle)
+		let middle = LayoutElement.Line.closure(middle)
 		
 		let maker = self.setMiddle(middle)
 		
@@ -80,13 +80,13 @@ extension LayoutMakerCanSetMiddleType {
 
 public protocol LayoutMakerCanSetMiddleToMakeLayoutEditorType: LayoutMakerCanSetMiddleType where WillSetMiddleMaker == LayoutEditor {
 	
-	func makeFrame(middle: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(middle: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetMiddleToMakeLayoutEditorType {
 	
-	public func setMiddle(_ middle: LayoutElement.Float) -> WillSetMiddleMaker {
+	public func setMiddle(_ middle: LayoutElement.Line) -> WillSetMiddleMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			return self.makeFrame(middle: middle, evaluatedFrom: parameter)

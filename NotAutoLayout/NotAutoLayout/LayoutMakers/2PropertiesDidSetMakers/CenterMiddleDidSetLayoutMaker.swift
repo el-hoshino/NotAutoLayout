@@ -12,9 +12,9 @@ public struct CenterMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let center: LayoutElement.Float
+	let center: LayoutElement.Line
 	
-	let middle: LayoutElement.Float
+	let middle: LayoutElement.Line
 	
 }
 
@@ -91,7 +91,7 @@ extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = CenterMiddleBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> CenterMiddleBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> CenterMiddleBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -108,7 +108,7 @@ extension CenterMiddleDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> CenterMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.constant(width)
+		let width = LayoutElement.Line.constant(width)
 		
 		let maker = CenterMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               center: self.center,
@@ -120,7 +120,7 @@ extension CenterMiddleDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.closure(width)
+		let width = LayoutElement.Line.closure(width)
 		
 		let maker = CenterMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               center: self.center,
@@ -138,7 +138,7 @@ extension CenterMiddleDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> CenterMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.constant(height)
+		let height = LayoutElement.Line.constant(height)
 		
 		let maker = CenterMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                                center: self.center,
@@ -150,7 +150,7 @@ extension CenterMiddleDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.closure(height)
+		let height = LayoutElement.Line.closure(height)
 		
 		let maker = CenterMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                                center: self.center,

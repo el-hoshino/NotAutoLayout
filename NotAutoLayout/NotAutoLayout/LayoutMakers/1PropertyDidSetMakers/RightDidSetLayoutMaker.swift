@@ -12,7 +12,7 @@ public struct RightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let right: LayoutElement.Float
+	let right: LayoutElement.Line
 	
 }
 
@@ -22,7 +22,7 @@ extension RightDidSetLayoutMaker: LayoutMakerCanSetTopType {
 	
 	public typealias WillSetTopMaker = RightTopDidSetLayoutMaker
 	
-	public func setTop(_ top: LayoutElement.Float) -> RightTopDidSetLayoutMaker {
+	public func setTop(_ top: LayoutElement.Line) -> RightTopDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,
@@ -37,7 +37,7 @@ extension RightDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = RightMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Float) -> RightMiddleDidSetLayoutMaker {
+	public func setMiddle(_ middle: LayoutElement.Line) -> RightMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,
@@ -52,7 +52,7 @@ extension RightDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = RightBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> RightBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> RightBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,

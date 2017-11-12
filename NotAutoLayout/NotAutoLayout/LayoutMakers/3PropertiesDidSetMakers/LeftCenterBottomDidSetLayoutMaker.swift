@@ -12,10 +12,10 @@ public struct LeftCenterBottomDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
-	let center: LayoutElement.Float
+	let center: LayoutElement.Line
 	
-	let bottom: LayoutElement.Float
+	let bottom: LayoutElement.Line
 	
 }

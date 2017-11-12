@@ -12,11 +12,11 @@ public struct CenterMiddleWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let center: LayoutElement.Float
+	let center: LayoutElement.Line
 	
-	let middle: LayoutElement.Float
+	let middle: LayoutElement.Line
 	
-	let width: LayoutElement.Float
+	let width: LayoutElement.Line
 	
 }
 

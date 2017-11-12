@@ -180,7 +180,7 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = MiddleCenterLeftDidSetLayoutMaker
 	
-	public func setLeft(_ left: LayoutElement.Float) -> MiddleCenterLeftDidSetLayoutMaker {
+	public func setLeft(_ left: LayoutElement.Line) -> MiddleCenterLeftDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 middleCenter: self.middleCenter,
@@ -195,7 +195,7 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetRightType {
 	
 	public typealias WillSetRightMaker = MiddleCenterRightDidSetLayoutMaker
 	
-	public func setRight(_ right: LayoutElement.Float) -> MiddleCenterRightDidSetLayoutMaker {
+	public func setRight(_ right: LayoutElement.Line) -> MiddleCenterRightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 middleCenter: self.middleCenter,
@@ -210,7 +210,7 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetTopType {
 	
 	public typealias WillSetTopMaker = MiddleCenterTopDidSetLayoutMaker
 	
-	public func setTop(_ top: LayoutElement.Float) -> MiddleCenterTopDidSetLayoutMaker {
+	public func setTop(_ top: LayoutElement.Line) -> MiddleCenterTopDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 middleCenter: self.middleCenter,
@@ -225,7 +225,7 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = MiddleCenterBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> MiddleCenterBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> MiddleCenterBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 middleCenter: self.middleCenter,
@@ -241,7 +241,7 @@ extension MiddleCenterDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.constant(width)
+		let width = LayoutElement.Line.constant(width)
 		
 		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               middleCenter: self.middleCenter,
@@ -253,7 +253,7 @@ extension MiddleCenterDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.closure(width)
+		let width = LayoutElement.Line.closure(width)
 		
 		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                               middleCenter: self.middleCenter,
@@ -270,7 +270,7 @@ extension MiddleCenterDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> MiddleCenterHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.constant(height)
+		let height = LayoutElement.Line.constant(height)
 		
 		let maker = MiddleCenterHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                                middleCenter: self.middleCenter,
@@ -282,7 +282,7 @@ extension MiddleCenterDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleCenterHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.closure(height)
+		let height = LayoutElement.Line.closure(height)
 		
 		let maker = MiddleCenterHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                                middleCenter: self.middleCenter,

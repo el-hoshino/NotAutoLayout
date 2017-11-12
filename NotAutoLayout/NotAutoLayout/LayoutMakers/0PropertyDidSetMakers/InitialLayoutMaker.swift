@@ -201,7 +201,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = LeftDidSetLayoutMaker
 	
-	public func setLeft(_ left: LayoutElement.Float) -> LeftDidSetLayoutMaker {
+	public func setLeft(_ left: LayoutElement.Line) -> LeftDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: left)
@@ -215,7 +215,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetCenterType {
 	
 	public typealias WillSetCenterMaker = CenterDidSetLayoutMaker
 	
-	public func setCenter(_ center: LayoutElement.Float) -> CenterDidSetLayoutMaker {
+	public func setCenter(_ center: LayoutElement.Line) -> CenterDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: center)
@@ -229,7 +229,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetRightType {
 	
 	public typealias WillSetRightMaker = RightDidSetLayoutMaker
 	
-	public func setRight(_ right: LayoutElement.Float) -> RightDidSetLayoutMaker {
+	public func setRight(_ right: LayoutElement.Line) -> RightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: right)

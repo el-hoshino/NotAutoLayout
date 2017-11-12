@@ -14,6 +14,6 @@ public struct BottomCenterMiddleDidSetLayoutMaker {
 	
 	let bottomCenter: LayoutElement.Point
 	
-	let middle: LayoutElement.Float
+	let middle: LayoutElement.Line
 	
 }

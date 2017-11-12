@@ -12,9 +12,9 @@ public struct RightMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let right: LayoutElement.Float
+	let right: LayoutElement.Line
 	
-	let middle: LayoutElement.Float
+	let middle: LayoutElement.Line
 	
 }
 
@@ -91,7 +91,7 @@ extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = RightMiddleBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> RightMiddleBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> RightMiddleBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,
@@ -108,7 +108,7 @@ extension RightMiddleDidSetLayoutMaker {
 	
 	public func setWidth(to width: CGFloat) -> RightMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.constant(width)
+		let width = LayoutElement.Line.constant(width)
 		
 		let maker = RightMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                              right: self.right,
@@ -120,7 +120,7 @@ extension RightMiddleDidSetLayoutMaker {
 	
 	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightMiddleWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Float.closure(width)
+		let width = LayoutElement.Line.closure(width)
 		
 		let maker = RightMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
 		                                              right: self.right,
@@ -138,7 +138,7 @@ extension RightMiddleDidSetLayoutMaker {
 	
 	public func setHeight(to height: CGFloat) -> RightMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.constant(height)
+		let height = LayoutElement.Line.constant(height)
 		
 		let maker = RightMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                               right: self.right,
@@ -150,7 +150,7 @@ extension RightMiddleDidSetLayoutMaker {
 	
 	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightMiddleHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Float.closure(height)
+		let height = LayoutElement.Line.closure(height)
 		
 		let maker = RightMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
 		                                               right: self.right,

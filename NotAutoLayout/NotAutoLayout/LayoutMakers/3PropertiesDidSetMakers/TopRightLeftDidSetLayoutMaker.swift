@@ -14,7 +14,7 @@ public struct TopRightLeftDidSetLayoutMaker {
 	
 	let topRight: LayoutElement.Point
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
 }
 
@@ -49,7 +49,7 @@ extension TopRightLeftDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEdit
 	
 	public typealias WillSetBottomMaker = LayoutEditor
 	
-	public func makeFrame(bottom: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(bottom: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
 		let topRight = self.topRight.evaluated(from: parameter)
 		let left = self.left.evaluated(from: parameter)
 		let bottom = bottom.evaluated(from: parameter)

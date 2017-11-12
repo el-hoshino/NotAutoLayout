@@ -14,7 +14,7 @@ public struct MiddleLeftWidthDidSetLayoutMaker {
 	
 	let middleLeft: LayoutElement.Point
 	
-	let width: LayoutElement.Float
+	let width: LayoutElement.Line
 	
 }
 

@@ -64,9 +64,9 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Float {
+	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Line {
 		
-		let reference = LayoutElement.Float.closure { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Line.closure { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset
@@ -86,9 +86,9 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Float {
+	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Line {
 		
-		let reference = LayoutElement.Float.closure { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Line.closure { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset

@@ -14,6 +14,6 @@ public struct MiddleCenterRightDidSetLayoutMaker {
 	
 	let middleCenter: LayoutElement.Point
 	
-	let right: LayoutElement.Float
+	let right: LayoutElement.Line
 	
 }

@@ -12,9 +12,9 @@ public struct LeftRightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
-	let right: LayoutElement.Float
+	let right: LayoutElement.Line
 	
 }
 
@@ -24,7 +24,7 @@ extension LeftRightDidSetLayoutMaker: LayoutMakerCanSetTopType {
 	
 	public typealias WillSetTopMaker = LeftRightTopDidSetLayoutMaker
 	
-	public func setTop(_ top: LayoutElement.Float) -> LeftRightTopDidSetLayoutMaker {
+	public func setTop(_ top: LayoutElement.Line) -> LeftRightTopDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -40,7 +40,7 @@ extension LeftRightDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = LeftRightMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Float) -> LeftRightMiddleDidSetLayoutMaker {
+	public func setMiddle(_ middle: LayoutElement.Line) -> LeftRightMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -56,7 +56,7 @@ extension LeftRightDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = LeftRightBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> LeftRightBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> LeftRightBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

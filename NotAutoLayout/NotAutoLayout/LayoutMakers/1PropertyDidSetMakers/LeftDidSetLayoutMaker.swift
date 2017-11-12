@@ -12,7 +12,7 @@ public struct LeftDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 		
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
 }
 
@@ -22,7 +22,7 @@ extension LeftDidSetLayoutMaker: LayoutMakerCanSetCenterType {
 	
 	public typealias WillSetCenterMaker = LeftCenterDidSetLayoutMaker
 	
-	public func setCenter(_ center: LayoutElement.Float) -> LeftCenterDidSetLayoutMaker {
+	public func setCenter(_ center: LayoutElement.Line) -> LeftCenterDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -37,7 +37,7 @@ extension LeftDidSetLayoutMaker: LayoutMakerCanSetRightType {
 	
 	public typealias WillSetRightMaker = LeftRightDidSetLayoutMaker
 	
-	public func setRight(_ right: LayoutElement.Float) -> LeftRightDidSetLayoutMaker {
+	public func setRight(_ right: LayoutElement.Line) -> LeftRightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -52,7 +52,7 @@ extension LeftDidSetLayoutMaker: LayoutMakerCanSetTopType {
 	
 	public typealias WillSetTopMaker = LeftTopDidSetLayoutMaker
 	
-	public func setTop(_ top: LayoutElement.Float) -> LeftTopDidSetLayoutMaker {
+	public func setTop(_ top: LayoutElement.Line) -> LeftTopDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -67,7 +67,7 @@ extension LeftDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = LeftMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Float) -> LeftMiddleDidSetLayoutMaker {
+	public func setMiddle(_ middle: LayoutElement.Line) -> LeftMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -82,7 +82,7 @@ extension LeftDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = LeftBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> LeftBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> LeftBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

@@ -14,16 +14,16 @@ public struct LayoutElement {
 
 extension LayoutElement {
 	
-	public struct Float {
+	public struct Line {
 		
 		fileprivate let value: (LayoutControlParameter) -> CGFloat
 		
-		static func constant(_ value: CGFloat) -> Float {
-			return Float(value: { _ in value })
+		static func constant(_ value: CGFloat) -> Line {
+			return Line(value: { _ in value })
 		}
 		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Float {
-			return Float(value: value)
+		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Line {
+			return Line(value: value)
 		}
 		
 	}
@@ -72,7 +72,7 @@ extension LayoutElement {
 	
 }
 
-extension LayoutElement.Float {
+extension LayoutElement.Line {
 	
 	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
 		

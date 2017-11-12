@@ -12,11 +12,11 @@ public struct LeftRightTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Float
+	let left: LayoutElement.Line
 	
-	let right: LayoutElement.Float
+	let right: LayoutElement.Line
 	
-	let top: LayoutElement.Float
+	let top: LayoutElement.Line
 	
 }
 
@@ -51,7 +51,7 @@ extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEdit
 	
 	public typealias WillSetBottomMaker = LayoutEditor
 	
-	public func makeFrame(bottom: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(bottom: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
 		let left = self.left.evaluated(from: parameter)
 		let right = self.right.evaluated(from: parameter)
 		let top = self.right.evaluated(from: parameter)

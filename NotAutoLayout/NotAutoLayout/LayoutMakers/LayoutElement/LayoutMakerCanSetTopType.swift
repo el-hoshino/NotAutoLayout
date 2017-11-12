@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetTopType: LayoutMakerType {
 	
 	associatedtype WillSetTopMaker
 	
-	func setTop(_ top: LayoutElement.Float) -> WillSetTopMaker
+	func setTop(_ top: LayoutElement.Line) -> WillSetTopMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanSetTopType {
 	
 	public func setTop(to top: CGFloat) -> WillSetTopMaker {
 		
-		let top = LayoutElement.Float.constant(top)
+		let top = LayoutElement.Line.constant(top)
 		
 		let maker = self.setTop(top)
 		
@@ -30,7 +30,7 @@ extension LayoutMakerCanSetTopType {
 	
 	public func setTop(by top: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetTopMaker {
 		
-		let top = LayoutElement.Float.closure(top)
+		let top = LayoutElement.Line.closure(top)
 		
 		let maker = self.setTop(top)
 		
@@ -80,13 +80,13 @@ extension LayoutMakerCanSetTopType {
 
 public protocol LayoutMakerCanSetTopToMakeLayoutEditorType: LayoutMakerCanSetTopType where WillSetTopMaker == LayoutEditor {
 	
-	func makeFrame(top: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(top: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetTopToMakeLayoutEditorType {
 	
-	public func setTop(_ top: LayoutElement.Float) -> WillSetTopMaker {
+	public func setTop(_ top: LayoutElement.Line) -> WillSetTopMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			return self.makeFrame(top: top, evaluatedFrom: parameter)

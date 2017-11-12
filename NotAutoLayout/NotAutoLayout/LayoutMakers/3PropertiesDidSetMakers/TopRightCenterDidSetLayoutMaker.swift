@@ -14,6 +14,6 @@ public struct TopRightCenterDidSetLayoutMaker {
 	
 	let topRight: LayoutElement.Point
 	
-	let center: LayoutElement.Float
+	let center: LayoutElement.Line
 	
 }

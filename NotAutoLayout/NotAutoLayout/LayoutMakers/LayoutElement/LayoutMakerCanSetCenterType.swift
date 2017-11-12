@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetCenterType: LayoutMakerType {
 	
 	associatedtype WillSetCenterMaker
 	
-	func setCenter(_ center: LayoutElement.Float) -> WillSetCenterMaker
+	func setCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanSetCenterType {
 	
 	public func setCenter(to center: CGFloat) -> WillSetCenterMaker {
 		
-		let center = LayoutElement.Float.constant(center)
+		let center = LayoutElement.Line.constant(center)
 		
 		let maker = self.setCenter(center)
 		
@@ -30,7 +30,7 @@ extension LayoutMakerCanSetCenterType {
 	
 	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetCenterMaker {
 		
-		let center = LayoutElement.Float.closure(center)
+		let center = LayoutElement.Line.closure(center)
 		
 		let maker = self.setCenter(center)
 		
@@ -80,13 +80,13 @@ extension LayoutMakerCanSetCenterType {
 
 public protocol LayoutMakerCanSetCenterToMakeLayoutEditorType: LayoutMakerCanSetCenterType where WillSetCenterMaker == LayoutEditor {
 	
-	func makeFrame(center: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(center: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetCenterToMakeLayoutEditorType {
 	
-	public func setCenter(_ center: LayoutElement.Float) -> WillSetCenterMaker {
+	public func setCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			return self.makeFrame(center: center, evaluatedFrom: parameter)

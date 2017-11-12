@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetBottomType: LayoutMakerType {
 	
 	associatedtype WillSetBottomMaker
 	
-	func setBottom(_ bottom: LayoutElement.Float) -> WillSetBottomMaker
+	func setBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanSetBottomType {
 	
 	public func setBottom(to bottom: CGFloat) -> WillSetBottomMaker {
 		
-		let bottom = LayoutElement.Float.constant(bottom)
+		let bottom = LayoutElement.Line.constant(bottom)
 		
 		let maker = self.setBottom(bottom)
 		
@@ -30,7 +30,7 @@ extension LayoutMakerCanSetBottomType {
 	
 	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetBottomMaker {
 		
-		let bottom = LayoutElement.Float.closure(bottom)
+		let bottom = LayoutElement.Line.closure(bottom)
 		
 		let maker = self.setBottom(bottom)
 		
@@ -80,13 +80,13 @@ extension LayoutMakerCanSetBottomType {
 
 public protocol LayoutMakerCanSetBottomToMakeLayoutEditorType: LayoutMakerCanSetBottomType where WillSetBottomMaker == LayoutEditor {
 	
-	func makeFrame(bottom: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(bottom: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetBottomToMakeLayoutEditorType {
 	
-	public func setBottom(_ bottom: LayoutElement.Float) -> WillSetBottomMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			return self.makeFrame(bottom: bottom, evaluatedFrom: parameter)

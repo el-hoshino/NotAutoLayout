@@ -14,6 +14,6 @@ public struct BottomRightTopDidSetLayoutMaker {
 	
 	let bottomRight: LayoutElement.Point
 	
-	let top: LayoutElement.Float
+	let top: LayoutElement.Line
 	
 }

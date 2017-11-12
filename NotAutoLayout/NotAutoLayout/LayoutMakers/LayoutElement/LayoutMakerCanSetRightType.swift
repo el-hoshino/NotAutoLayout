@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetRightType: LayoutMakerType {
 	
 	associatedtype WillSetRightMaker
 	
-	func setRight(_ right: LayoutElement.Float) -> WillSetRightMaker
+	func setRight(_ right: LayoutElement.Line) -> WillSetRightMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanSetRightType {
 	
 	public func setRight(to right: CGFloat) -> WillSetRightMaker {
 		
-		let right = LayoutElement.Float.constant(right)
+		let right = LayoutElement.Line.constant(right)
 		
 		let maker = self.setRight(right)
 		
@@ -30,7 +30,7 @@ extension LayoutMakerCanSetRightType {
 	
 	public func setRight(by right: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetRightMaker {
 		
-		let right = LayoutElement.Float.closure(right)
+		let right = LayoutElement.Line.closure(right)
 		
 		let maker = self.setRight(right)
 		
@@ -80,13 +80,13 @@ extension LayoutMakerCanSetRightType {
 
 public protocol LayoutMakerCanSetRightToMakeLayoutEditorType: LayoutMakerCanSetRightType where WillSetRightMaker == LayoutEditor {
 	
-	func makeFrame(right: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(right: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetRightToMakeLayoutEditorType {
 	
-	public func setRight(_ right: LayoutElement.Float) -> WillSetRightMaker {
+	public func setRight(_ right: LayoutElement.Line) -> WillSetRightMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
 			return self.makeFrame(right: right, evaluatedFrom: parameter)
