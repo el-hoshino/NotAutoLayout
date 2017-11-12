@@ -41,11 +41,11 @@ extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditor
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let center = self.center.evaluated(from: parameter)
 		let middle = self.middle.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
 		return self.makeFrame(center: center, middle: middle, size: size)
 		
 	}

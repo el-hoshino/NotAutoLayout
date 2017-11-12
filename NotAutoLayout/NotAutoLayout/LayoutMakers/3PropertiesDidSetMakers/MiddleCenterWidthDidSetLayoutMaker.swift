@@ -38,11 +38,11 @@ extension MiddleCenterWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayou
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	
-	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let middleCenter = self.middleCenter.evaluated(from: parameter)
-		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0))
-		let height = height.evaluated(from: parameter, theOtherAxis: .width(width))
+		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
 		return self.makeFrame(middleCenter: middleCenter, width: width, height: height)
 		
 	}

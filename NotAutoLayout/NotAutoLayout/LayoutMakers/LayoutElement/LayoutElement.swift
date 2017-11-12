@@ -92,17 +92,17 @@ extension LayoutElement.Length {
 		case width(CGFloat)
 		case height(CGFloat)
 		
-		func fittedTheOtherLength(from parameter: LayoutControlParameter, theOtherAxisFittingLength: CGFloat) -> CGFloat {
+		func fittedTheOtherLength(fittingCalculation: (CGSize) -> CGSize, fittingLength: CGFloat) -> CGFloat {
 			
 			switch self {
 			case .width(let width):
-				let fittingSize = CGSize(width: width, height: theOtherAxisFittingLength)
-				let fittedSize = parameter.fittingSizeCalculation(fittingSize)
+				let fittingSize = CGSize(width: width, height: fittingLength)
+				let fittedSize = fittingCalculation(fittingSize)
 				return fittedSize.height
 				
 			case .height(let height):
-				let fittingSize = CGSize(width: theOtherAxisFittingLength, height: height)
-				let fittedSize = parameter.fittingSizeCalculation(fittingSize)
+				let fittingSize = CGSize(width: fittingLength, height: height)
+				let fittedSize = fittingCalculation(fittingSize)
 				return fittedSize.width
 			}
 			
@@ -110,7 +110,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameter: LayoutControlParameter, theOtherAxis: Axis) -> CGFloat {
+	func evaluated(from parameter: LayoutControlParameter, theOtherAxis: Axis, fittingCalculation: (CGSize) -> CGSize) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -120,7 +120,7 @@ extension LayoutElement.Length {
 			return calculation(parameter)
 			
 		case .fits(let fitting):
-			return theOtherAxis.fittedTheOtherLength(from: parameter, theOtherAxisFittingLength: fitting)
+			return theOtherAxis.fittedTheOtherLength(fittingCalculation: fittingCalculation, fittingLength: fitting)
 		}
 		
 	}
@@ -129,7 +129,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameter: LayoutControlParameter) -> CGSize {
+	func evaluated(from parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -139,7 +139,7 @@ extension LayoutElement.Size {
 			return calculation(parameter)
 			
 		case .fits(let fitting):
-			return parameter.fittingSizeCalculation(fitting)
+			return fittingCalculation(fitting)
 		}
 		
 	}

@@ -131,10 +131,10 @@ extension MiddleRightDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorT
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let middleRight = self.middleRight.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
 		return self.makeFrame(middleRight: middleRight, size: size)
 		
 	}

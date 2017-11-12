@@ -131,10 +131,10 @@ extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorTyp
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let topCenter = self.topCenter.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
 		return self.makeFrame(topCenter: topCenter, size: size)
 		
 	}

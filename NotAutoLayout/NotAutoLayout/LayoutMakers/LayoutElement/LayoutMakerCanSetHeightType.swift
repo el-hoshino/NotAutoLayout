@@ -52,7 +52,7 @@ extension LayoutMakerCanSetHeightType {
 
 public protocol LayoutMakerCanSetHeightToMakeLayoutEditorType: LayoutMakerCanSetHeightType where WillSetHeightMaker == LayoutEditor {
 	
-	func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
@@ -60,8 +60,8 @@ extension LayoutMakerCanSetHeightToMakeLayoutEditorType {
 	
 	public func setHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(height: height, parameter: parameter)
+		let layout = Layout(frame: { (parameter, fitting) -> CGRect in
+			return self.makeFrame(height: height, parameter: parameter, fittingCalculation: fitting)
 		})
 		
 		let editor = LayoutEditor(layout)

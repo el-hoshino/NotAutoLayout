@@ -131,10 +131,10 @@ extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorT
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let bottomRight = self.bottomRight.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
 		return self.makeFrame(bottomRight: bottomRight, size: size)
 		
 	}

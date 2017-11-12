@@ -14,8 +14,6 @@ public struct LayoutControlParameter {
 	
 	public let safeAreaInsets: UIEdgeInsets
 	
-	let fittingSizeCalculation: (CGSize) -> CGSize
-	
 }
 
 extension LayoutControlParameter {
@@ -32,8 +30,7 @@ extension LayoutControlParameter {
 		}()
 		
 		let parameter = LayoutControlParameter(boundSize: boundSize,
-											   safeAreaInsets: safeAreaInsets,
-											   fittingSizeCalculation: view.sizeThatFits)
+											   safeAreaInsets: safeAreaInsets)
 		
 		return parameter
 		

@@ -65,13 +65,13 @@ extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEdit
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	
-	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect {
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameter)
 		let right = self.right.evaluated(from: parameter)
 		let top = self.top.evaluated(from: parameter)
 		let width = right - left
-		let height = height.evaluated(from: parameter, theOtherAxis: .width(width))
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
 		return self.makeFrame(left: left, right: right, top: top, height: height)
 		
 	}

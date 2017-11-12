@@ -52,7 +52,7 @@ extension LayoutMakerCanSetWidthType {
 
 public protocol LayoutMakerCanSetWidthToMakeLayoutEditorType: LayoutMakerCanSetWidthType where WillSetWidthMaker == LayoutEditor {
 	
-	func makeFrame(width: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect
+	func makeFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
@@ -60,8 +60,8 @@ extension LayoutMakerCanSetWidthToMakeLayoutEditorType {
 
 	public func setWidth(_ width: LayoutElement.Length) -> WillSetWidthMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(width: width, parameter: parameter)
+		let layout = Layout(frame: { (parameter, fitting) -> CGRect in
+			return self.makeFrame(width: width, parameter: parameter, fittingCalculation: fitting)
 		})
 		
 		let editor = LayoutEditor(layout)
