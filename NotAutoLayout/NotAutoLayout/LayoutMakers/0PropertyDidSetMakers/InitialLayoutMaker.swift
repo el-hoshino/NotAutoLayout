@@ -685,7 +685,7 @@ extension InitialLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension InitialLayoutMaker: LayoutElementCanSetLeftMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = LeftDidSetLayoutMaker
 	

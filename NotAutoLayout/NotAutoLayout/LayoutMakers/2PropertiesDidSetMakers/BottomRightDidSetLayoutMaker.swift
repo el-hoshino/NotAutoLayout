@@ -442,7 +442,7 @@ extension BottomRightDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension BottomRightDidSetLayoutMaker: LayoutElementCanSetLeftMaker {
+extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = BottomRightLeftDidSetLayoutMaker
 	

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMaker {
+public protocol LayoutMakerType {
 	
 	var parentView: UIView { get }
 	

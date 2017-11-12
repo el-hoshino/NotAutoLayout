@@ -443,7 +443,7 @@ extension TopCenterDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension TopCenterDidSetLayoutMaker: LayoutElementCanSetLeftMaker {
+extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = TopCenterLeftDidSetLayoutMaker
 	

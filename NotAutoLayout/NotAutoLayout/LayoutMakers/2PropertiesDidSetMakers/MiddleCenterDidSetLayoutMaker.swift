@@ -442,7 +442,7 @@ extension MiddleCenterDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension MiddleCenterDidSetLayoutMaker: LayoutElementCanSetLeftMaker {
+extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = MiddleCenterLeftDidSetLayoutMaker
 	

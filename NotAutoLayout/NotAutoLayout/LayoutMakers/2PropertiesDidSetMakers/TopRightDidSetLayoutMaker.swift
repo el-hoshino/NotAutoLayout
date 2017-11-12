@@ -444,7 +444,7 @@ extension TopRightDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension TopRightDidSetLayoutMaker: LayoutElementCanSetLeftMaker {
+extension TopRightDidSetLayoutMaker: LayoutMakerCanSetLeftType {
 	
 	public typealias WillSetLeftMaker = TopRightLeftDidSetLayoutMaker
 	
