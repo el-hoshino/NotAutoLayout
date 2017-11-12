@@ -106,11 +106,11 @@ extension ContentsView {
 	
 	private func placeContentsLabel() {
 		
-		self.nal.layout(self.contentsLabel) { $0
+		self.nal.layout(self.contentsLabel, by: { $0
 			.pinTopLeft(to: $0.parentView, s: .topLeft)
 			.setWidth(by: { $0.boundWidth })
 			.fitHeight()
-		}
+		})
 		
 	}
 	

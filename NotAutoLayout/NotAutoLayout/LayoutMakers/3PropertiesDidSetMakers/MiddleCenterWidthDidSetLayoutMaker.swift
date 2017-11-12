@@ -34,51 +34,17 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 	
 }
 
-//extension MiddleCenterWidthDidSetLayoutMaker {
-//	
-//	public func setHeight(to height: CGFloat) -> LayoutEditor {
-//		
-//		return self.setHeight(by: { _ in height })
-//		
-//	}
-//	
-//	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-//		
-//		let layout = Layout(frame: { (parameter) -> CGRect in
-//			let middleCenter = self.middleCenter.evaluated(from: parameter)
-//			let width = self.width.evaluated(from: parameter)
-//			let height = height(parameter)
-//			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
-//			
-//			return frame
-//			
-//		})
-//		
-//		let editor = LayoutEditor(layout)
-//		
-//		return editor
-//		
-//	}
-//	
-//	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
-//		
-//		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-//			
-//			let middleCenter = self.middleCenter.evaluated(from: boundSize)
-//			let width = self.width.evaluated(from: boundSize)
-//			let fittingSize = CGSize(width: width, height: fittingHeight)
-//			let height = fitting(fittingSize).height
-//			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
-//			
-//			return frame
-//			
-//		})
-//		
-//		let editor = LayoutEditor(layout)
-//		
-//		return editor
-//		
-//	}
-//	
-//}
-
+extension MiddleCenterWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+	
+	public typealias WillSetHeightMaker = LayoutEditor
+	
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect {
+		
+		let middleCenter = self.middleCenter.evaluated(from: parameter)
+		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0))
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width))
+		return self.makeFrame(middleCenter: middleCenter, width: width, height: height)
+		
+	}
+	
+}
