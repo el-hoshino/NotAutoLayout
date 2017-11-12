@@ -85,148 +85,32 @@ extension LeftTopDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Middle
-extension LeftTopDidSetLayoutMaker {
+extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
-	public func setMiddle(to middle: CGFloat) -> LeftTopMiddleDidSetLayoutMaker {
-		
-		let middle = LayoutElement.Float.constant(middle)
-		
-		let maker = LeftTopMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           middle: middle)
-		return maker
-		
-	}
+	public typealias WillSetMiddleMaker = LeftTopMiddleDidSetLayoutMaker
 	
-	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopMiddleDidSetLayoutMaker {
+	public func setMiddle(_ middle: LayoutElement.Float) -> LeftTopMiddleDidSetLayoutMaker {
 		
-		let middle = LayoutElement.Float.closure(middle)
-		
-		let maker = LeftTopMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           middle: middle)
-		
-		return maker
-		
-	}
-	
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopMiddleDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddle(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopMiddleDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddle(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopMiddleDidSetLayoutMaker {
-		
-		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = LeftTopMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           middle: middle)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopMiddleDidSetLayoutMaker {
-		
-		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = LeftTopMiddleDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           middle: middle)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 top: self.top,
+					 middle: middle)
 		
 	}
 	
 }
 
 // MARK: Bottom
-extension LeftTopDidSetLayoutMaker {
+extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
-	public func setBottom(to bottom: CGFloat) -> LeftTopBottomDidSetLayoutMaker {
-		
-		let bottom = LayoutElement.Float.constant(bottom)
-		
-		let maker = LeftTopBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           bottom: bottom)
-		return maker
-		
-	}
+	public typealias WillSetBottomMaker = LeftTopBottomDidSetLayoutMaker
 	
-	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Float) -> LeftTopBottomDidSetLayoutMaker {
 		
-		let bottom = LayoutElement.Float.closure(bottom)
-		
-		let maker = LeftTopBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           bottom: bottom)
-		
-		return maker
-		
-	}
-	
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopBottomDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopBottomDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LeftTopBottomDidSetLayoutMaker {
-		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = LeftTopBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           bottom: bottom)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LeftTopBottomDidSetLayoutMaker {
-		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = LeftTopBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           bottom: bottom)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 top: self.top,
+					 bottom: bottom)
 		
 	}
 	

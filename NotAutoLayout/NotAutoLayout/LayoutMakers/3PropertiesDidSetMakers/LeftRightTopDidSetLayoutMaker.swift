@@ -47,87 +47,16 @@ extension LeftRightTopDidSetLayoutMaker {
 	
 }
 
-extension LeftRightTopDidSetLayoutMaker {
+extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEditorType {
 	
-	public func setBottom(to bottom: CGFloat) -> LayoutEditor {
-		
-		return self.setBottom(by: { _ in bottom })
-		
-	}
+	public typealias WillSetBottomMaker = LayoutEditor
 	
-	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let left = self.left.evaluated(from: parameter)
-			let right = self.right.evaluated(from: parameter)
-			let top = self.right.evaluated(from: parameter)
-			let bottom = bottom(parameter)
-			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let left = self.left.evaluated(from: boundSize)
-			let right = self.right.evaluated(from: boundSize)
-			let top = self.top.evaluated(from: boundSize)
-			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).evaluated(from: boundSize)
-			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let left = self.left.evaluated(from: boundSize)
-			let right = self.right.evaluated(from: boundSize)
-			let top = self.top.evaluated(from: boundSize)
-			let bottom = parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).evaluated(from: boundSize)
-			let frame = self.makeFrame(left: left, right: right, top: top, bottom: bottom)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
+	public func makeFrame(bottom: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+		let left = self.left.evaluated(from: parameter)
+		let right = self.right.evaluated(from: parameter)
+		let top = self.right.evaluated(from: parameter)
+		let bottom = bottom.evaluated(from: parameter)
+		return self.makeFrame(left: left, right: right, top: top, bottom: bottom)
 	}
 	
 }
