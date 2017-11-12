@@ -12,11 +12,11 @@ public struct CenterTopHeightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let center: CGRect.Float
+	let center: LayoutElement.Line
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Line
 	
-	let height: CGRect.Float
+	let height: LayoutElement.Length
 	
 }
 

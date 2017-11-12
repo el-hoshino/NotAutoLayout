@@ -12,8 +12,8 @@ public struct TopCenterHeightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let topCenter: CGRect.Point
+	let topCenter: LayoutElement.Point
 	
-	let height: CGRect.Float
+	let height: LayoutElement.Length
 	
 }

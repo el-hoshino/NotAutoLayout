@@ -12,9 +12,9 @@ public struct MiddleCenterWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleCenter: CGRect.Point
+	let middleCenter: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Length
 	
 }
 
@@ -34,49 +34,16 @@ extension MiddleCenterWidthDidSetLayoutMaker {
 	
 }
 
-extension MiddleCenterWidthDidSetLayoutMaker {
+extension MiddleCenterWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
 	
-	public func setHeight(to height: CGFloat) -> LayoutEditor {
-		
-		return self.setHeight(by: { _ in height })
-		
-	}
+	public typealias WillSetHeightMaker = LayoutEditor
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let middleCenter = self.middleCenter.evaluated(from: parameter)
-			let width = self.width.evaluated(from: parameter)
-			let height = height(parameter)
-			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let middleCenter = self.middleCenter.evaluated(from: boundSize)
-			let width = self.width.evaluated(from: boundSize)
-			let fittingSize = CGSize(width: width, height: fittingHeight)
-			let height = fitting(fittingSize).height
-			let frame = self.makeFrame(middleCenter: middleCenter, width: width, height: height)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let middleCenter = self.middleCenter.evaluated(from: parameter)
+		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+		return self.makeFrame(middleCenter: middleCenter, width: width, height: height)
 		
 	}
 	

@@ -12,8 +12,8 @@ public struct MiddleRightHeightDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleRight: CGRect.Point
+	let middleRight: LayoutElement.Point
 	
-	let height: CGRect.Float
+	let height: LayoutElement.Length
 	
 }

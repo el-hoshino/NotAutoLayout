@@ -12,9 +12,9 @@ public struct MiddleLeftWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleLeft: CGRect.Point
+	let middleLeft: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Length
 	
 }
 
@@ -34,30 +34,31 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 	
 }
 
-extension MiddleLeftWidthDidSetLayoutMaker {
-	
-	public func setHeight(to height: CGFloat) -> LayoutEditor {
-		
-		return self.setHeight(by: { _ in height })
-		
-	}
-	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let middleLeft = self.middleLeft.evaluated(from: parameter)
-			let width = self.width.evaluated(from: parameter)
-			let height = height(parameter)
-			let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
+//extension MiddleLeftWidthDidSetLayoutMaker {
+//	
+//	public func setHeight(to height: CGFloat) -> LayoutEditor {
+//		
+//		return self.setHeight(by: { _ in height })
+//		
+//	}
+//	
+//	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+//		
+//		let layout = Layout(frame: { (parameter) -> CGRect in
+//			let middleLeft = self.middleLeft.evaluated(from: parameter)
+//			let width = self.width.evaluated(from: parameter)
+//			let height = height(parameter)
+//			let frame = self.makeFrame(middleLeft: middleLeft, width: width, height: height)
+//			
+//			return frame
+//			
+//		})
+//        
+//        let editor = LayoutEditor(layout)
+//		
+//		return editor
+//		
+//	}
+//	
+//}
+

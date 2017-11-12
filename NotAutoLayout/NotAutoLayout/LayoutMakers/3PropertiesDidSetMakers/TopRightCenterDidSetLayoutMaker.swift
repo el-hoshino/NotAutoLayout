@@ -12,8 +12,8 @@ public struct TopRightCenterDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let topRight: CGRect.Point
+	let topRight: LayoutElement.Point
 	
-	let center: CGRect.Float
+	let center: LayoutElement.Line
 	
 }

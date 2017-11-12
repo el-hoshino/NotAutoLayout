@@ -12,9 +12,9 @@ public struct LeftBottomDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Line
 	
-	let bottom: CGRect.Float
+	let bottom: LayoutElement.Line
 	
 }
 
@@ -36,49 +36,16 @@ extension LeftBottomDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension LeftBottomDidSetLayoutMaker {
+extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let left = self.left.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(left: left, bottom: bottom, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, parameter) -> CGRect in
-			
-			let left = self.left.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(left: left, bottom: bottom, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let left = self.left.evaluated(from: parameter)
+		let bottom = self.bottom.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
+		return self.makeFrame(left: left, bottom: bottom, size: size)
 		
 	}
 	
@@ -86,60 +53,32 @@ extension LeftBottomDidSetLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension LeftBottomDidSetLayoutMaker {
+extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> LeftBottomWidthDidSetLayoutMaker {
-		
-		let width = CGRect.Float.constant(width)
-		
-		let maker = LeftBottomWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                             left: self.left,
-		                                             bottom: self.bottom,
-		                                             width: width)
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = LeftBottomWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftBottomWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> LeftBottomWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(width)
-		
-		let maker = LeftBottomWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                             left: self.left,
-		                                             bottom: self.bottom,
-		                                             width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 bottom: self.bottom,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension LeftBottomDidSetLayoutMaker {
+extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> LeftBottomHeightDidSetLayoutMaker {
-		
-		let height = CGRect.Float.constant(height)
-		
-		let maker = LeftBottomHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.left,
-		                                              bottom: self.bottom,
-		                                              height: height)
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = LeftBottomHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftBottomHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> LeftBottomHeightDidSetLayoutMaker {
 		
-		let height = CGRect.Float.closure(height)
-		
-		let maker = LeftBottomHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                              left: self.left,
-		                                              bottom: self.bottom,
-		                                              height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 bottom: self.bottom,
+					 height: height)
 		
 	}
 	

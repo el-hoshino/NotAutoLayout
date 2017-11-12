@@ -12,8 +12,8 @@ public struct BottomLeftWidthDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let bottomLeft: CGRect.Point
+	let bottomLeft: LayoutElement.Point
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Length
 	
 }

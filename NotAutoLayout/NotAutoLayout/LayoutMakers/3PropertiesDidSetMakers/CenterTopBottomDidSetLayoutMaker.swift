@@ -12,42 +12,44 @@ public struct CenterTopBottomDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let center: CGRect.Float
+	let center: LayoutElement.Line
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Line
 	
-	let bottom: CGRect.Float
+	let bottom: LayoutElement.Line
 	
 }
 
 extension CenterTopBottomDidSetLayoutMaker {
 	
-	public func setWidth(to width: CGFloat) -> LayoutEditor {
+	private func makeFrame(center: CGFloat, top: CGFloat, bottom: CGFloat, width: CGFloat) -> CGRect {
 		
-		return self.setWidth(by: { _ in width })
+		let x = center - width.half
+		let y = top
+		let height = bottom - top
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
 		
 	}
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+}
+
+extension CenterTopBottomDidSetLayoutMaker: LayoutMakerCanSetWidthToMakeLayoutEditorType {
+	
+	public typealias WillSetWidthMaker = LayoutEditor
+	
+	public func makeFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+		let top = self.top.evaluated(from: parameter)
+		let bottom = self.bottom.evaluated(from: parameter)
+		let height = bottom - top
+		let center = self.center.evaluated(from: parameter)
+		let width = width.evaluated(from: parameter, theOtherAxis: .height(height), fittingCalculation: fittingCalculation)
+		let x = center - width.half
+		let y = top
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let top = self.top.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let height = bottom - top
-			let center = self.center.evaluated(from: parameter)
-			let width = width(parameter)
-			let x = center - width.half
-			let y = top
-			let frame = CGRect(x: x, y: y, width: width, height: height)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
+		return frame
 	}
 	
 }

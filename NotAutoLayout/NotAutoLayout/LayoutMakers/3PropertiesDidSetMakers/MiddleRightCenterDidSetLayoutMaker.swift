@@ -12,8 +12,8 @@ public struct MiddleRightCenterDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleRight: CGRect.Point
+	let middleRight: LayoutElement.Point
 	
-	let center: CGRect.Float
+	let center: LayoutElement.Line
 	
 }

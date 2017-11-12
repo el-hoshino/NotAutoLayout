@@ -64,9 +64,9 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Float {
+	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Line {
 		
-		let reference = CGRect.Float.closure { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Line.closure { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset
@@ -86,9 +86,9 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Float {
+	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Line {
 		
-		let reference = CGRect.Float.closure { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Line.closure { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset
@@ -108,9 +108,9 @@ extension UIView {
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect.Point {
+	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Point {
 		
-		let reference = CGRect.Point.closure { [unowned self] (_) -> CGPoint in
+		let reference = LayoutElement.Point.closure { [unowned self] (_) -> CGPoint in
 			
 			guard let referenceView = referenceView() else {
 				return CGPoint.zero + offset

@@ -12,9 +12,9 @@ public struct RightMiddleDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let right: CGRect.Float
+	let right: LayoutElement.Line
 	
-	let middle: CGRect.Float
+	let middle: LayoutElement.Line
 	
 }
 
@@ -37,49 +37,16 @@ extension RightMiddleDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension RightMiddleDidSetLayoutMaker {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let right = self.right.evaluated(from: parameter)
-			let middle = self.middle.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(right: right, middle: middle, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, parameter) -> CGRect in
-			
-			let right = self.right.evaluated(from: parameter)
-			let middle = self.middle.evaluated(from: parameter)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(right: right, middle: middle, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let right = self.right.evaluated(from: parameter)
+		let middle = self.middle.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
+		return self.makeFrame(right: right, middle: middle, size: size)
 		
 	}
 	
@@ -87,74 +54,16 @@ extension RightMiddleDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Bottom
-extension RightMiddleDidSetLayoutMaker {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
-	public func setBottom(to bottom: CGFloat) -> RightMiddleBottomDidSetLayoutMaker {
-		
-		let bottom = CGRect.Float.constant(bottom)
-		
-		let maker = RightMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               bottom: bottom)
-		return maker
-		
-	}
+	public typealias WillSetBottomMaker = RightMiddleBottomDidSetLayoutMaker
 	
-	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightMiddleBottomDidSetLayoutMaker {
+	public func setBottom(_ bottom: LayoutElement.Line) -> RightMiddleBottomDidSetLayoutMaker {
 		
-		let bottom = CGRect.Float.closure(bottom)
-		
-		let maker = RightMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               bottom: bottom)
-		
-		return maker
-		
-	}
-	
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> RightMiddleBottomDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> RightMiddleBottomDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> RightMiddleBottomDidSetLayoutMaker {
-		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = RightMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               bottom: bottom)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> RightMiddleBottomDidSetLayoutMaker {
-		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = RightMiddleBottomDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               bottom: bottom)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 right: self.right,
+					 middle: self.middle,
+					 bottom: bottom)
 		
 	}
 	
@@ -162,60 +71,32 @@ extension RightMiddleDidSetLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension RightMiddleDidSetLayoutMaker {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> RightMiddleWidthDidSetLayoutMaker {
-		
-		let width = CGRect.Float.constant(width)
-		
-		let maker = RightMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                              right: self.right,
-		                                              middle: self.middle,
-		                                              width: width)
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = RightMiddleWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightMiddleWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> RightMiddleWidthDidSetLayoutMaker {
 		
-		let width = CGRect.Float.closure(width)
-		
-		let maker = RightMiddleWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                              right: self.right,
-		                                              middle: self.middle,
-		                                              width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 right: self.right,
+					 middle: self.middle,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension RightMiddleDidSetLayoutMaker {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> RightMiddleHeightDidSetLayoutMaker {
-		
-		let height = CGRect.Float.constant(height)
-		
-		let maker = RightMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               height: height)
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = RightMiddleHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> RightMiddleHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> RightMiddleHeightDidSetLayoutMaker {
 		
-		let height = CGRect.Float.closure(height)
-		
-		let maker = RightMiddleHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                               right: self.right,
-		                                               middle: self.middle,
-		                                               height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 right: self.right,
+					 middle: self.middle,
+					 height: height)
 		
 	}
 	

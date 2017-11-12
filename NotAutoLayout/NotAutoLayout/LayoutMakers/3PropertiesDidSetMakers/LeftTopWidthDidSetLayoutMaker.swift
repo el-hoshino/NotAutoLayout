@@ -12,36 +12,26 @@ public struct LeftTopWidthDidSetLayoutMaker {
 		
 	public unowned let parentView: UIView
 	
-	let left: CGRect.Float
+	let left: LayoutElement.Line
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Line
 	
-	let width: CGRect.Float
+	let width: LayoutElement.Length
 	
 }
 
-extension LeftTopWidthDidSetLayoutMaker {
+extension LeftTopWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
 	
-	public func setHeight(to height: CGFloat) -> LayoutEditor {
-		
-		return self.setHeight(by: { _ in height })
-		
-	}
+	public typealias WillSetHeightMaker = LayoutEditor
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let width = self.width.evaluated(from: parameter)
-			let height = height(parameter)
-			let x = self.left.evaluated(from: parameter)
-			let y = self.top.evaluated(from: parameter)
-			let frame = CGRect(x: x, y: y, width: width, height: height)
-			return frame
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
+		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+		let x = self.left.evaluated(from: parameter)
+		let y = self.top.evaluated(from: parameter)
+		return CGRect(x: x, y: y, width: width, height: height)
 		
 	}
 }
+

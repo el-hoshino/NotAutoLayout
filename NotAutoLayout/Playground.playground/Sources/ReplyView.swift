@@ -79,14 +79,14 @@ extension ReplyView {
 	
 	private func placeReplyView() {
 		
-		self.nal.layout(self.replyView) { $0
+		self.nal.layout(self.replyView, by: { $0
 			.pinMiddleCenter(to: $0.parentView, s: .middleCenter)
 			.setWidth(by: { $0.boundWidth - (self.margin * 2) })
 			.fitHeight()
 			.addingProcess(by: { (replyView, frame, _) in
 				replyView.layer.cornerRadius = frame.height / 2
 			})
-		}
+		})
 		
 	}
 	

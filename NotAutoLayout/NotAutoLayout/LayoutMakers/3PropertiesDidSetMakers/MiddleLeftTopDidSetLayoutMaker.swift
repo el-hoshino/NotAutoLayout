@@ -12,8 +12,8 @@ public struct MiddleLeftTopDidSetLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let middleLeft: CGRect.Point
+	let middleLeft: LayoutElement.Point
 	
-	let top: CGRect.Float
+	let top: LayoutElement.Line
 	
 }
