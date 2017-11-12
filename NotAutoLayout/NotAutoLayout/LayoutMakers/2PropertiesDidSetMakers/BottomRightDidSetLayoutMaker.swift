@@ -113,81 +113,14 @@ extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetMiddleLeftToMakeLayoutE
 }
 
 // MARK: MiddleCenter
-extension BottomRightDidSetLayoutMaker {
+extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetMiddleCenterToMakeLayoutEditorType {
 	
-	public func setMiddleCenter(to middleCenter: CGPoint) -> LayoutEditor {
-		
-		return self.setMiddleCenter(by: { _ in middleCenter })
-		
-	}
+	public typealias WillSetMiddleCenterMaker = LayoutEditor
 	
-	public func setMiddleCenter(by middleCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let bottomRight = self.bottomRight.evaluated(from: parameter)
-			let middleCenter = middleCenter(parameter)
-			let frame = self.makeFrame(bottomRight: bottomRight, middleCenter: middleCenter)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let bottomRight = self.bottomRight.evaluated(from: boundSize)
-			let middleCenter = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false).evaluated(from: boundSize)
-			let frame = self.makeFrame(bottomRight: bottomRight, middleCenter: middleCenter)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutEditor {
-		
-		let layout = Layout(frame: { [unowned parentView] (boundSize) -> CGRect in
-			let bottomRight = self.bottomRight.evaluated(from: boundSize)
-			let middleCenter = parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea).evaluated(from: boundSize)
-			let frame = self.makeFrame(bottomRight: bottomRight, middleCenter: middleCenter)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
+	public func makeFrame(middleCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+		let bottomRight = self.bottomRight.evaluated(from: parameter)
+		let middleCenter = middleCenter.evaluated(from: parameter)
+		return self.makeFrame(bottomRight: bottomRight, middleCenter: middleCenter)
 	}
 	
 }

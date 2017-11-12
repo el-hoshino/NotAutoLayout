@@ -126,134 +126,28 @@ extension InitialLayoutMaker: LayoutMakerCanSetMiddleLeftType {
 }
 
 // MARK: MiddleCenter
-extension InitialLayoutMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetMiddleCenterType {
 	
-	public func setMiddleCenter(to middleCenter: CGPoint) -> MiddleCenterDidSetLayoutMaker {
-		
-		let middleCenter = LayoutElement.Point.constant(middleCenter)
-		
-		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                          middleCenter: middleCenter)
-		
-		return maker
-		
-	}
+	public typealias WillSetMiddleCenterMaker = MiddleCenterDidSetLayoutMaker
 	
-	public func setMiddleCenter(by middleCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> MiddleCenterDidSetLayoutMaker {
+	public func setMiddleCenter(_ middleCenter: LayoutElement.Point) -> MiddleCenterDidSetLayoutMaker {
 		
-		let middleCenter = LayoutElement.Point.closure(middleCenter)
-		
-		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                          middleCenter: middleCenter)
-		
-		return maker
-		
-	}
-	
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleCenterDidSetLayoutMaker {
-		
-		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                          middleCenter: middleCenter)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleCenterDidSetLayoutMaker {
-		
-		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = MiddleCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                          middleCenter: middleCenter)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleCenter: middleCenter)
 		
 	}
 	
 }
 
 // MARK: MiddleRight
-extension InitialLayoutMaker {
+extension InitialLayoutMaker: LayoutMakerCanSetMiddleRightType {
 	
-	public func setMiddleRight(to middleRight: CGPoint) -> MiddleRightDidSetLayoutMaker {
-		
-		let middleRight = LayoutElement.Point.constant(middleRight)
-		
-		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
-		                                         middleRight: middleRight)
-		
-		return maker
-		
-	}
+	public typealias WillSetMiddleRightMaker = MiddleRightDidSetLayoutMaker
 	
-	public func setMiddleRight(by middleRight: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> MiddleRightDidSetLayoutMaker {
+	public func setMiddleRight(_ middleRight: LayoutElement.Point) -> MiddleRightDidSetLayoutMaker {
 		
-		let middleRight = LayoutElement.Point.closure(middleRight)
-		
-		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
-		                                         middleRight: middleRight)
-		
-		return maker
-		
-	}
-	
-	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> MiddleRightDidSetLayoutMaker {
-		
-		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
-		                                         middleRight: middleRight)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleRightDidSetLayoutMaker {
-		
-		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = MiddleRightDidSetLayoutMaker(parentView: self.parentView,
-		                                         middleRight: middleRight)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleRight: middleRight)
 		
 	}
 	
