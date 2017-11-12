@@ -77,3 +77,25 @@ extension LayoutMakerCanSetTopCenterType {
 	}
 	
 }
+
+public protocol LayoutMakerCanSetTopCenterToMakeLayoutEditorType: LayoutMakerCanSetTopCenterType where WillSetTopCenterMaker == LayoutEditor {
+	
+	func makeFrame(topCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	
+}
+
+extension LayoutMakerCanSetTopCenterToMakeLayoutEditorType {
+	
+	public func setTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
+		
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			return self.makeFrame(topCenter: topCenter, evaluatedFrom: parameter)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}

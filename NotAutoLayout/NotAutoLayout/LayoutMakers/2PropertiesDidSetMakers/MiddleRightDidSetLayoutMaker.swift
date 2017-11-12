@@ -74,43 +74,27 @@ extension MiddleRightDidSetLayoutMaker {
 
 // MARK: - Set A Point -
 // MARK: TopLeft
-extension MiddleRightDidSetLayoutMaker: LayoutMakerCanSetTopLeftType {
+extension MiddleRightDidSetLayoutMaker: LayoutMakerCanSetTopLeftToMakeLayoutEditorType {
 	
 	public typealias WillSetTopLeftMaker = LayoutEditor
 	
-	public func setTopLeft(_ topLeft: LayoutElement.Point) -> MiddleRightDidSetLayoutMaker.WillSetTopLeftMaker {
-		
-		let layout = Layout { (parameter) -> CGRect in
-			let middleRight = self.middleRight.evaluated(from: parameter)
-			let topLeft = topLeft.evaluated(from: parameter)
-			return self.makeFrame(middleRight: middleRight, topLeft: topLeft)
-		}
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
+	public func makeFrame(topLeft: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+		let middleRight = self.middleRight.evaluated(from: parameter)
+		let topLeft = topLeft.evaluated(from: parameter)
+		return self.makeFrame(middleRight: middleRight, topLeft: topLeft)
 	}
 	
 }
 
 // MARK: TopCenter
-extension MiddleRightDidSetLayoutMaker: LayoutMakerCanSetTopCenterType {
+extension MiddleRightDidSetLayoutMaker: LayoutMakerCanSetTopCenterToMakeLayoutEditorType {
 	
 	public typealias WillSetTopCenterMaker = LayoutEditor
 	
-	public func setTopCenter(_ topCenter: LayoutElement.Point) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let middleRight = self.middleRight.evaluated(from: parameter)
-			let topCenter = topCenter.evaluated(from: parameter)
-			return self.makeFrame(middleRight: middleRight, topCenter: topCenter)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
+	public func makeFrame(topCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+		let middleRight = self.middleRight.evaluated(from: parameter)
+		let topCenter = topCenter.evaluated(from: parameter)
+		return self.makeFrame(middleRight: middleRight, topCenter: topCenter)
 	}
 	
 }

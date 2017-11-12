@@ -77,3 +77,25 @@ extension LayoutMakerCanSetTopLeftType {
 	}
 	
 }
+
+public protocol LayoutMakerCanSetTopLeftToMakeLayoutEditorType: LayoutMakerCanSetTopLeftType where WillSetTopLeftMaker == LayoutEditor {
+	
+	func makeFrame(topLeft: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	
+}
+
+extension LayoutMakerCanSetTopLeftToMakeLayoutEditorType {
+	
+	public func setTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
+		
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			return self.makeFrame(topLeft: topLeft, evaluatedFrom: parameter)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
