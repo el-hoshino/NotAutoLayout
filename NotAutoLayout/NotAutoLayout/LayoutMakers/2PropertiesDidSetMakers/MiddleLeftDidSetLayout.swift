@@ -174,142 +174,30 @@ extension MiddleLeftDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Center
-extension MiddleLeftDidSetLayoutMaker {
+extension MiddleLeftDidSetLayoutMaker: LayoutMakerCanSetCenterType {
 	
-	public func setCenter(to center: CGFloat) -> MiddleLeftCenterDidSetLayoutMaker {
-		
-		let center = LayoutElement.Float.constant(center)
-		
-		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                              middleLeft: self.middleLeft,
-		                                              center: center)
-		
-		return maker
-		
-	}
+	public typealias WillSetCenterMaker = MiddleLeftCenterDidSetLayoutMaker
 	
-	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftCenterDidSetLayoutMaker {
+	public func setCenter(_ center: LayoutElement.Float) -> MiddleLeftCenterDidSetLayoutMaker {
 		
-		let center = LayoutElement.Float.closure(center)
-		
-		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                              middleLeft: self.middleLeft,
-		                                              center: center)
-		
-		return maker
-		
-	}
-	
-	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> MiddleLeftCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleLeftCenterDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> MiddleLeftCenterDidSetLayoutMaker {
-		
-		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                              middleLeft: self.middleLeft,
-		                                              center: center)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleLeftCenterDidSetLayoutMaker {
-		
-		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = MiddleLeftCenterDidSetLayoutMaker(parentView: self.parentView,
-		                                              middleLeft: self.middleLeft,
-		                                              center: center)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleLeft: self.middleLeft,
+					 center: center)
 		
 	}
 	
 }
 
 // MARK: Right
-extension MiddleLeftDidSetLayoutMaker {
+extension MiddleLeftDidSetLayoutMaker: LayoutMakerCanSetRightType {
 	
-	public func setRight(to right: CGFloat) -> MiddleLeftRightDidSetLayoutMaker {
-		
-		let right = LayoutElement.Float.constant(right)
-		
-		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
-		                                             middleLeft: self.middleLeft,
-		                                             right: right)
-		
-		return maker
-		
-	}
+	public typealias WillSetRightMaker = MiddleLeftRightDidSetLayoutMaker
 	
-	public func setRight(by right: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleLeftRightDidSetLayoutMaker {
+	public func setRight(_ right: LayoutElement.Float) -> MiddleLeftRightDidSetLayoutMaker {
 		
-		let right = LayoutElement.Float.closure(right)
-		
-		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
-		                                             middleLeft: self.middleLeft,
-		                                             right: right)
-		
-		return maker
-		
-	}
-	
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> MiddleLeftRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleLeftRightDidSetLayoutMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> MiddleLeftRightDidSetLayoutMaker {
-		
-		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
-		                                             middleLeft: self.middleLeft,
-		                                             right: right)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> MiddleLeftRightDidSetLayoutMaker {
-		
-		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = MiddleLeftRightDidSetLayoutMaker(parentView: self.parentView,
-		                                             middleLeft: self.middleLeft,
-		                                             right: right)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleLeft: self.middleLeft,
+					 right: right)
 		
 	}
 	

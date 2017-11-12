@@ -171,6 +171,8 @@
 		79FD2CDE1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDD1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift */; };
 		79FD2CE01FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */; };
 		79FD2CE21FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */; };
+		79FD2CE41FB8621800E6661C /* LayoutMakerCanSetCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE31FB8621800E6661C /* LayoutMakerCanSetCenterType.swift */; };
+		79FD2CE61FB8646000E6661C /* LayoutMakerCanSetRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE51FB8646000E6661C /* LayoutMakerCanSetRightType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +353,8 @@
 		79FD2CDD1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomLeftType.swift; sourceTree = "<group>"; };
 		79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomCenterType.swift; sourceTree = "<group>"; };
 		79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomRightType.swift; sourceTree = "<group>"; };
+		79FD2CE31FB8621800E6661C /* LayoutMakerCanSetCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetCenterType.swift; sourceTree = "<group>"; };
+		79FD2CE51FB8646000E6661C /* LayoutMakerCanSetRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetRightType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -669,6 +673,8 @@
 				79FD2CDF1FB85F4B00E6661C /* LayoutMakerCanSetBottomCenterType.swift */,
 				79FD2CE11FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift */,
 				79C6C1821FB83DA500E32C54 /* LayoutMakerCanSetLeftType.swift */,
+				79FD2CE31FB8621800E6661C /* LayoutMakerCanSetCenterType.swift */,
+				79FD2CE51FB8646000E6661C /* LayoutMakerCanSetRightType.swift */,
 			);
 			path = LayoutElement;
 			sourceTree = "<group>";
@@ -946,6 +952,8 @@
 				79D8DD9A1EF93E9900B74593 /* TopCenterDidSetLayoutMaker.swift in Sources */,
 				79D8DE181EF9506F00B74593 /* TopRightMiddleDidSetLayoutMaker.swift in Sources */,
 				1630073B1F0F380C00012C18 /* BottomLeftRightDidSetLayoutMaker.swift in Sources */,
+				79FD2CE61FB8646000E6661C /* LayoutMakerCanSetRightType.swift in Sources */,
+				79FD2CE41FB8621800E6661C /* LayoutMakerCanSetCenterType.swift in Sources */,
 				164EA0C31EF3DAE300C0BB8F /* LeftDidSetLayoutMaker.swift in Sources */,
 				164DB2541EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */,
 			);

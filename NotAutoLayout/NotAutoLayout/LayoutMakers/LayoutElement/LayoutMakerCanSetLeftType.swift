@@ -77,3 +77,25 @@ extension LayoutMakerCanSetLeftType {
 	}
 	
 }
+
+public protocol LayoutMakerCanSetLeftToMakeLayoutEditorType: LayoutMakerCanSetLeftType where WillSetLeftMaker == LayoutEditor {
+	
+	func makeFrame(left: LayoutElement.Float, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	
+}
+
+extension LayoutMakerCanSetLeftToMakeLayoutEditorType {
+	
+	public func setLeft(_ left: LayoutElement.Float) -> WillSetLeftMaker {
+		
+		let layout = Layout(frame: { (parameter) -> CGRect in
+			return self.makeFrame(left: left, evaluatedFrom: parameter)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
