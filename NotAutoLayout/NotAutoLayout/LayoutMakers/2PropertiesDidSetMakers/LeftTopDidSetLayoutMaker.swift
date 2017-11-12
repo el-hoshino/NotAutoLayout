@@ -35,49 +35,16 @@ extension LeftTopDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension LeftTopDidSetLayoutMaker {
+extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let left = self.left.evaluated(from: parameter)
-			let top = self.top.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(left: left, top: top, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, parameter) -> CGRect in
-			
-			let left = self.left.evaluated(from: parameter)
-			let top = self.top.evaluated(from: parameter)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(left: left, top: top, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let left = self.left.evaluated(from: parameter)
+		let top = self.top.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(left: left, top: top, size: size)
 		
 	}
 	
@@ -118,60 +85,32 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension LeftTopDidSetLayoutMaker {
+extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> LeftTopWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                          left: self.left,
-		                                          top: self.top,
-		                                          width: width)
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = LeftTopWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> LeftTopWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = LeftTopWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                          left: self.left,
-		                                          top: self.top,
-		                                          width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 top: self.top,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension LeftTopDidSetLayoutMaker {
+extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> LeftTopHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = LeftTopHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           height: height)
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = LeftTopHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LeftTopHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> LeftTopHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = LeftTopHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                           left: self.left,
-		                                           top: self.top,
-		                                           height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 left: self.left,
+					 top: self.top,
+					 height: height)
 		
 	}
 	

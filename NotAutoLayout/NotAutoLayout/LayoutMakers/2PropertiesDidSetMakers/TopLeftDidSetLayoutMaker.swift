@@ -125,47 +125,15 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetBottomRightToMakeLayoutEdit
 }
 // MARK: - Set A Size -
 // MARK: Size
-extension TopLeftDidSetLayoutMaker {
+extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let topLeft = self.topLeft.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(topLeft: topLeft, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let topLeft = self.topLeft.evaluated(from: boundSize)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(topLeft: topLeft, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let topLeft = self.topLeft.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(topLeft: topLeft, size: size)
 		
 	}
 	
@@ -234,58 +202,30 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension TopLeftDidSetLayoutMaker {
+extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> TopLeftWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = TopLeftWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                          topLeft: self.topLeft,
-		                                          width: width)
-		
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = TopLeftWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopLeftWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> TopLeftWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = TopLeftWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                          topLeft: self.topLeft,
-		                                          width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topLeft: self.topLeft,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension TopLeftDidSetLayoutMaker {
+extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> TopLeftHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = TopLeftHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                           topLeft: self.topLeft,
-		                                           height: height)
-		
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = TopLeftHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopLeftHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> TopLeftHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = TopLeftHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                           topLeft: self.topLeft,
-		                                           height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topLeft: self.topLeft,
+					 height: height)
 		
 	}
 	

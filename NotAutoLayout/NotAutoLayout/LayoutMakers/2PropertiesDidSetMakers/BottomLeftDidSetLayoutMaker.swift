@@ -128,47 +128,15 @@ extension BottomLeftDidSetLayoutMaker: LayoutMakerCanSetMiddleRightToMakeLayoutE
 
 // MARK: - Set A Size -
 // MARK: Size
-extension BottomLeftDidSetLayoutMaker {
+extension BottomLeftDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let bottomLeft = self.bottomLeft.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(bottomLeft: bottomLeft, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let bottomLeft = self.bottomLeft.evaluated(from: boundSize)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(bottomLeft: bottomLeft, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let bottomLeft = self.bottomLeft.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(bottomLeft: bottomLeft, size: size)
 		
 	}
 	
@@ -237,58 +205,30 @@ extension BottomLeftDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension BottomLeftDidSetLayoutMaker {
+extension BottomLeftDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> BottomLeftWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = BottomLeftWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                             bottomLeft: self.bottomLeft,
-		                                             width: width)
-		
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = BottomLeftWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> BottomLeftWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> BottomLeftWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = BottomLeftWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                             bottomLeft: self.bottomLeft,
-		                                             width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 bottomLeft: self.bottomLeft,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension BottomLeftDidSetLayoutMaker {
+extension BottomLeftDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> BottomLeftHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = BottomLeftHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                              bottomLeft: self.bottomLeft,
-		                                              height: height)
-		
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = BottomLeftHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> BottomLeftHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> BottomLeftHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = BottomLeftHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                              bottomLeft: self.bottomLeft,
-		                                              height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 bottomLeft: self.bottomLeft,
+					 height: height)
 		
 	}
 	

@@ -14,59 +14,40 @@ public struct LayoutElement {
 
 extension LayoutElement {
 	
-	public struct Line {
+	public enum Line {
 		
-		fileprivate let value: (LayoutControlParameter) -> CGFloat
-		
-		static func constant(_ value: CGFloat) -> Line {
-			return Line(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Line {
-			return Line(value: value)
-		}
+		case constant(CGFloat)
+		case closure((LayoutControlParameter) -> CGFloat)
 		
 	}
 	
-	public struct Point {
+	public enum Point {
 		
-		fileprivate let value: (LayoutControlParameter) -> CGPoint
-		
-		static func constant(_ value: CGPoint) -> Point {
-			return Point(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGPoint) -> Point {
-			return Point(value: value)
-		}
+		case constant(CGPoint)
+		case closure((LayoutControlParameter) -> CGPoint)
 		
 	}
 	
-	public struct Size {
+	public enum Length {
 		
-		fileprivate let value: (LayoutControlParameter) -> CGSize
-		
-		static func constant(_ value: CGSize) -> Size {
-			return Size(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGSize) -> Size {
-			return Size(value: value)
-		}
+		case constant(CGFloat)
+		case closure((LayoutControlParameter) -> CGFloat)
+		case fits(CGFloat)
 		
 	}
 	
-	public struct Rect {
+	public enum Size {
 		
-		fileprivate let value: (LayoutControlParameter) -> CGRect
+		case constant(CGSize)
+		case closure((LayoutControlParameter) -> CGSize)
+		case fits(CGSize)
 		
-		static func constant(_ value: CGRect) -> Rect {
-			return Rect(value: { _ in value })
-		}
+	}
+	
+	public enum Rect {
 		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGRect) -> Rect {
-			return Rect(value: value)
-		}
+		case constant(CGRect)
+		case closure((LayoutControlParameter) -> CGRect)
 		
 	}
 	
@@ -76,7 +57,13 @@ extension LayoutElement.Line {
 	
 	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
 		
-		return self.value(parameter)
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .closure(let calculation):
+			return calculation(parameter)
+		}
 		
 	}
 	
@@ -86,7 +73,55 @@ extension LayoutElement.Point {
 	
 	func evaluated(from parameter: LayoutControlParameter) -> CGPoint {
 		
-		return self.value(parameter)
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .closure(let calculation):
+			return calculation(parameter)
+		}
+		
+	}
+	
+}
+
+extension LayoutElement.Length {
+	
+	enum Axis {
+		
+		case width(CGFloat)
+		case height(CGFloat)
+		
+		func fittedTheOtherLength(from parameter: LayoutControlParameter, theOtherAxisFittingLength: CGFloat) -> CGFloat {
+			
+			switch self {
+			case .width(let width):
+				let fittingSize = CGSize(width: width, height: theOtherAxisFittingLength)
+				let fittedSize = parameter.fittingSizeCalculation(fittingSize)
+				return fittedSize.height
+				
+			case .height(let height):
+				let fittingSize = CGSize(width: theOtherAxisFittingLength, height: height)
+				let fittedSize = parameter.fittingSizeCalculation(fittingSize)
+				return fittedSize.width
+			}
+			
+		}
+		
+	}
+	
+	func evaluated(from parameter: LayoutControlParameter, theOtherAxis: Axis) -> CGFloat {
+		
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .closure(let calculation):
+			return calculation(parameter)
+			
+		case .fits(let fitting):
+			return theOtherAxis.fittedTheOtherLength(from: parameter, theOtherAxisFittingLength: fitting)
+		}
 		
 	}
 	
@@ -96,7 +131,16 @@ extension LayoutElement.Size {
 	
 	func evaluated(from parameter: LayoutControlParameter) -> CGSize {
 		
-		return self.value(parameter)
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .closure(let calculation):
+			return calculation(parameter)
+			
+		case .fits(let fitting):
+			return parameter.fittingSizeCalculation(fitting)
+		}
 		
 	}
 	
@@ -106,7 +150,13 @@ extension LayoutElement.Rect {
 	
 	func evaluated(from parameter: LayoutControlParameter) -> CGRect {
 		
-		return self.value(parameter)
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .closure(let calculation):
+			return calculation(parameter)
+		}
 		
 	}
 	

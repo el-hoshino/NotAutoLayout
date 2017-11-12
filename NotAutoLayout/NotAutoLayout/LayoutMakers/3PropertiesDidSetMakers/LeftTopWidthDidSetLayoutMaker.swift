@@ -16,32 +16,33 @@ public struct LeftTopWidthDidSetLayoutMaker {
 	
 	let top: LayoutElement.Line
 	
-	let width: LayoutElement.Line
+	let width: LayoutElement.Length
 	
 }
 
-extension LeftTopWidthDidSetLayoutMaker {
-	
-	public func setHeight(to height: CGFloat) -> LayoutEditor {
-		
-		return self.setHeight(by: { _ in height })
-		
-	}
-	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let width = self.width.evaluated(from: parameter)
-			let height = height(parameter)
-			let x = self.left.evaluated(from: parameter)
-			let y = self.top.evaluated(from: parameter)
-			let frame = CGRect(x: x, y: y, width: width, height: height)
-			return frame
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-}
+//extension LeftTopWidthDidSetLayoutMaker {
+//	
+//	public func setHeight(to height: CGFloat) -> LayoutEditor {
+//		
+//		return self.setHeight(by: { _ in height })
+//		
+//	}
+//	
+//	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+//		
+//		let layout = Layout(frame: { (parameter) -> CGRect in
+//			let width = self.width.evaluated(from: parameter)
+//			let height = height(parameter)
+//			let x = self.left.evaluated(from: parameter)
+//			let y = self.top.evaluated(from: parameter)
+//			let frame = CGRect(x: x, y: y, width: width, height: height)
+//			return frame
+//		})
+//        
+//        let editor = LayoutEditor(layout)
+//		
+//		return editor
+//		
+//	}
+//}
+

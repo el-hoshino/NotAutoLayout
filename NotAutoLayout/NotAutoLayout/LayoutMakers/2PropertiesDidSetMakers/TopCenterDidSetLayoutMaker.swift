@@ -127,47 +127,15 @@ extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetBottomRightToMakeLayoutEd
 
 // MARK: - Set A Size -
 // MARK: Size
-extension TopCenterDidSetLayoutMaker {
+extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let topCenter = self.topCenter.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(topCenter: topCenter, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let topCenter = self.topCenter.evaluated(from: boundSize)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(topCenter: topCenter, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let topCenter = self.topCenter.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(topCenter: topCenter, size: size)
 		
 	}
 	
@@ -236,58 +204,30 @@ extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension TopCenterDidSetLayoutMaker {
+extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> TopCenterWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                            topCenter: self.topCenter,
-		                                            width: width)
-		
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = TopCenterWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopCenterWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> TopCenterWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = TopCenterWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                            topCenter: self.topCenter,
-		                                            width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topCenter: self.topCenter,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension TopCenterDidSetLayoutMaker {
+extension TopCenterDidSetLayoutMaker: LayoutMakerCanSetHeightType {
+
+	public typealias WillSetHeightMaker = TopCenterHeightDidSetLayoutMaker
 	
-	public func setHeight(to height: CGFloat) -> TopCenterHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> TopCenterHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = TopCenterHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                             topCenter: self.topCenter,
-		                                             height: height)
-		
-		return maker
-		
-	}
-	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> TopCenterHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = TopCenterHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                             topCenter: self.topCenter,
-		                                             height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 topCenter: self.topCenter,
+					 height: height)
 		
 	}
 	

@@ -16,6 +16,6 @@ public struct RightTopWidthDidSetLayoutMaker {
 	
 	let top: LayoutElement.Line
 	
-	let width: LayoutElement.Line
+	let width: LayoutElement.Length
 	
 }

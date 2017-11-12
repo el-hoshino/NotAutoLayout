@@ -14,6 +14,6 @@ public struct MiddleRightHeightDidSetLayoutMaker {
 	
 	let middleRight: LayoutElement.Point
 	
-	let height: LayoutElement.Line
+	let height: LayoutElement.Length
 	
 }

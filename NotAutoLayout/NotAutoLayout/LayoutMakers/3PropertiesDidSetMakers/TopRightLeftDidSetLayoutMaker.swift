@@ -58,52 +58,17 @@ extension TopRightLeftDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEdit
 	
 }
 
-extension TopRightLeftDidSetLayoutMaker {
+extension TopRightLeftDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
 	
-	public func setHeight(to height: CGFloat) -> LayoutEditor {
-		
-		return self.setHeight(by: { _ in height })
-		
-	}
+	public typealias WillSetHeightMaker = LayoutEditor
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let topRight = self.topRight.evaluated(from: parameter)
-			let left = self.left.evaluated(from: parameter)
-			let height = height(parameter)
-			let frame = self.makeFrame(topRight: topRight, left: left, height: height)
-
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let topRight = self.topRight.evaluated(from: boundSize)
-			let left = self.left.evaluated(from: boundSize)
-			let x = left
-			let y = topRight.y
-			let width = topRight.y - left
-			let fittingSize = CGSize(width: width, height: fittingHeight)
-			let height = fitting(fittingSize).height
-			let frame = CGRect(x: x, y: y, width: width, height: height)
-			
-			return frame
-			
-		})
-        
-        let editor = LayoutEditor(layout)
-		
-		return editor
+		let topRight = self.topRight.evaluated(from: parameter)
+		let left = self.left.evaluated(from: parameter)
+		let width = topRight.x - left
+		let height = height.evaluated(from: parameter, theOtherAxis: .width(width))
+		return self.makeFrame(topRight: topRight, left: left, height: height)
 		
 	}
 	

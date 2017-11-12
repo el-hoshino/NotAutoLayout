@@ -14,6 +14,6 @@ public struct TopCenterHeightDidSetLayoutMaker {
 	
 	let topCenter: LayoutElement.Point
 	
-	let height: LayoutElement.Line
+	let height: LayoutElement.Length
 	
 }

@@ -176,6 +176,9 @@
 		79FD2CE81FB8663900E6661C /* LayoutMakerCanSetTopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE71FB8663900E6661C /* LayoutMakerCanSetTopType.swift */; };
 		79FD2CEA1FB868BE00E6661C /* LayoutMakerCanSetMiddleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CE91FB868BE00E6661C /* LayoutMakerCanSetMiddleType.swift */; };
 		79FD2CEC1FB86BDF00E6661C /* LayoutMakerCanSetBottomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CEB1FB86BDF00E6661C /* LayoutMakerCanSetBottomType.swift */; };
+		79FD2CF01FB8750D00E6661C /* LayoutMakerCanSetWidthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CEF1FB8750D00E6661C /* LayoutMakerCanSetWidthType.swift */; };
+		79FD2CF21FB878B600E6661C /* LayoutMakerCanSetHeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF11FB878B600E6661C /* LayoutMakerCanSetHeightType.swift */; };
+		79FD2CF41FB8A4EC00E6661C /* LayoutMakerCanSetSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF31FB8A4EC00E6661C /* LayoutMakerCanSetSizeType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +364,9 @@
 		79FD2CE71FB8663900E6661C /* LayoutMakerCanSetTopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetTopType.swift; sourceTree = "<group>"; };
 		79FD2CE91FB868BE00E6661C /* LayoutMakerCanSetMiddleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetMiddleType.swift; sourceTree = "<group>"; };
 		79FD2CEB1FB86BDF00E6661C /* LayoutMakerCanSetBottomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetBottomType.swift; sourceTree = "<group>"; };
+		79FD2CEF1FB8750D00E6661C /* LayoutMakerCanSetWidthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetWidthType.swift; sourceTree = "<group>"; };
+		79FD2CF11FB878B600E6661C /* LayoutMakerCanSetHeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetHeightType.swift; sourceTree = "<group>"; };
+		79FD2CF31FB8A4EC00E6661C /* LayoutMakerCanSetSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanSetSizeType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,6 +690,9 @@
 				79FD2CE71FB8663900E6661C /* LayoutMakerCanSetTopType.swift */,
 				79FD2CE91FB868BE00E6661C /* LayoutMakerCanSetMiddleType.swift */,
 				79FD2CEB1FB86BDF00E6661C /* LayoutMakerCanSetBottomType.swift */,
+				79FD2CEF1FB8750D00E6661C /* LayoutMakerCanSetWidthType.swift */,
+				79FD2CF11FB878B600E6661C /* LayoutMakerCanSetHeightType.swift */,
+				79FD2CF31FB8A4EC00E6661C /* LayoutMakerCanSetSizeType.swift */,
 			);
 			path = LayoutElement;
 			sourceTree = "<group>";
@@ -895,6 +904,7 @@
 				79D8DDFA1EF94D2B00B74593 /* RightMiddleBottomDidSetLayoutMaker.swift in Sources */,
 				163007441F0F380C00012C18 /* BottomCenterWidthDidSetLayoutMaker.swift in Sources */,
 				163007291F0F380C00012C18 /* MiddleLeftRightDidSetLayoutMaker.swift in Sources */,
+				79FD2CF41FB8A4EC00E6661C /* LayoutMakerCanSetSizeType.swift in Sources */,
 				1630074A1F0F380C00012C18 /* BottomRightWidthDidSetLayoutMaker.swift in Sources */,
 				164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */,
 				79D8DE101EF94FB700B74593 /* TopCenterWidthDidSetLayoutMaker.swift in Sources */,
@@ -909,6 +919,7 @@
 				1630072D1F0F380C00012C18 /* MiddleLeftHeightDidSetLayoutMaker.swift in Sources */,
 				79D8DD901EF93E0200B74593 /* RightMiddleDidSetLayoutMaker.swift in Sources */,
 				79D8DDFE1EF94DF900B74593 /* TopLeftBottomDidSetLayoutMaker.swift in Sources */,
+				79FD2CF01FB8750D00E6661C /* LayoutMakerCanSetWidthType.swift in Sources */,
 				79D8DDB01EF9408C00B74593 /* BottomRightDidSetLayoutMaker.swift in Sources */,
 				160F724F1F14B65100E314E1 /* LayoutIndividualAdditionalEvaluations.swift in Sources */,
 				163007461F0F380C00012C18 /* BottomRightLeftDidSetLayoutMaker.swift in Sources */,
@@ -922,6 +933,7 @@
 				164EA0CF1EF3DAE300C0BB8F /* MatricalLayout.swift in Sources */,
 				79FD2CDE1FB85E1C00E6661C /* LayoutMakerCanSetBottomLeftType.swift in Sources */,
 				79D8DDB61EF944ED00B74593 /* LeftCenterMiddleDidSetLayoutMaker.swift in Sources */,
+				79FD2CF21FB878B600E6661C /* LayoutMakerCanSetHeightType.swift in Sources */,
 				79D8DD7C1EF935F300B74593 /* LeftBottomDidSetLayoutMaker.swift in Sources */,
 				79FD2CE21FB860C500E6661C /* LayoutMakerCanSetBottomRightType.swift in Sources */,
 				164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */,

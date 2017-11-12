@@ -16,6 +16,6 @@ public struct LeftBottomWidthDidSetLayoutMaker {
 	
 	let bottom: LayoutElement.Line
 	
-	let width: LayoutElement.Line
+	let width: LayoutElement.Length
 	
 }

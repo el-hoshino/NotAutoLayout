@@ -37,49 +37,16 @@ extension CenterBottomDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension CenterBottomDidSetLayoutMaker {
+extension CenterBottomDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			
-			let center = self.center.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(center: center, bottom: bottom, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, parameter) -> CGRect in
-			
-			let center = self.center.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(center: center, bottom: bottom, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let center = self.center.evaluated(from: parameter)
+		let bottom = self.bottom.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(center: center, bottom: bottom, size: size)
 		
 	}
 	
@@ -87,60 +54,32 @@ extension CenterBottomDidSetLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension CenterBottomDidSetLayoutMaker {
+extension CenterBottomDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> CenterBottomWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = CenterBottomWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                               center: self.center,
-		                                               bottom: self.bottom,
-		                                               width: width)
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = CenterBottomWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterBottomWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> CenterBottomWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = CenterBottomWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                               center: self.center,
-		                                               bottom: self.bottom,
-		                                               width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 center: self.center,
+					 bottom: self.bottom,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension CenterBottomDidSetLayoutMaker {
+extension CenterBottomDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> CenterBottomHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = CenterBottomHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                                center: self.center,
-		                                                bottom: self.bottom,
-		                                                height: height)
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = CenterBottomHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> CenterBottomHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> CenterBottomHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = CenterBottomHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                                center: self.center,
-		                                                bottom: self.bottom,
-		                                                height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 center: self.center,
+					 bottom: self.bottom,
+					 height: height)
 		
 	}
 	

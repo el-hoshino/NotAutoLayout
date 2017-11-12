@@ -129,46 +129,15 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetBottomRightToMakeLayou
 
 // MARK: - Set A Size -
 // MARK: Size
-extension MiddleCenterDidSetLayoutMaker {
+extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let middleCenter = self.middleCenter.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let middleCenter = self.middleCenter.evaluated(from: boundSize)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(middleCenter: middleCenter, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let middleCenter = self.middleCenter.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(middleCenter: middleCenter, size: size)
 		
 	}
 	
@@ -237,58 +206,30 @@ extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension MiddleCenterDidSetLayoutMaker {
+extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                               middleCenter: self.middleCenter,
-		                                               width: width)
-		
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = MiddleCenterWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleCenterWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> MiddleCenterWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = MiddleCenterWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                               middleCenter: self.middleCenter,
-		                                               width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleCenter: self.middleCenter,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension MiddleCenterDidSetLayoutMaker {
+extension MiddleCenterDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> MiddleCenterHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = MiddleCenterHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                                middleCenter: self.middleCenter,
-		                                                height: height)
-		
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = MiddleCenterHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> MiddleCenterHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> MiddleCenterHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = MiddleCenterHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                                middleCenter: self.middleCenter,
-		                                                height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 middleCenter: self.middleCenter,
+					 height: height)
 		
 	}
 	

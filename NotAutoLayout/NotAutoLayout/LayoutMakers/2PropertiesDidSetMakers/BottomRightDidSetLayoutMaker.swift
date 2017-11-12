@@ -127,46 +127,15 @@ extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetMiddleCenterToMakeLayou
 
 // MARK: - Set A Size -
 // MARK: Size
-extension BottomRightDidSetLayoutMaker {
+extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(to size: CGSize) -> LayoutEditor {
-		
-		return self.setSize(by: { _ in size })
-		
-	}
+	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> LayoutEditor {
+	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let bottomRight = self.bottomRight.evaluated(from: parameter)
-			let size = size(parameter)
-			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutEditor {
-		
-		let layout = Layout(frame: { (fitting, boundSize) -> CGRect in
-			
-			let bottomRight = self.bottomRight.evaluated(from: boundSize)
-			let size = fitting(fittingSize)
-			let frame = self.makeFrame(bottomRight: bottomRight, size: size)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let bottomRight = self.bottomRight.evaluated(from: parameter)
+		let size = size.evaluated(from: parameter)
+		return self.makeFrame(bottomRight: bottomRight, size: size)
 		
 	}
 	
@@ -235,58 +204,30 @@ extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension BottomRightDidSetLayoutMaker {
+extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
-	public func setWidth(to width: CGFloat) -> BottomRightWidthDidSetLayoutMaker {
-		
-		let width = LayoutElement.Line.constant(width)
-		
-		let maker = BottomRightWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                              bottomRight: self.bottomRight,
-		                                              width: width)
-		
-		return maker
-		
-	}
+	public typealias WillSetWidthMaker = BottomRightWidthDidSetLayoutMaker
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> BottomRightWidthDidSetLayoutMaker {
+	public func setWidth(_ width: LayoutElement.Length) -> BottomRightWidthDidSetLayoutMaker {
 		
-		let width = LayoutElement.Line.closure(width)
-		
-		let maker = BottomRightWidthDidSetLayoutMaker(parentView: self.parentView,
-		                                              bottomRight: self.bottomRight,
-		                                              width: width)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 bottomRight: self.bottomRight,
+					 width: width)
 		
 	}
 	
 }
 
 // MARK: Height
-extension BottomRightDidSetLayoutMaker {
+extension BottomRightDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
-	public func setHeight(to height: CGFloat) -> BottomRightHeightDidSetLayoutMaker {
-		
-		let height = LayoutElement.Line.constant(height)
-		
-		let maker = BottomRightHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                               bottomRight: self.bottomRight,
-		                                               height: height)
-		
-		return maker
-		
-	}
+	public typealias WillSetHeightMaker = BottomRightHeightDidSetLayoutMaker
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> BottomRightHeightDidSetLayoutMaker {
+	public func setHeight(_ height: LayoutElement.Length) -> BottomRightHeightDidSetLayoutMaker {
 		
-		let height = LayoutElement.Line.closure(height)
-		
-		let maker = BottomRightHeightDidSetLayoutMaker(parentView: self.parentView,
-		                                               bottomRight: self.bottomRight,
-		                                               height: height)
-		
-		return maker
+		return .init(parentView: self.parentView,
+					 bottomRight: self.bottomRight,
+					 height: height)
 		
 	}
 	

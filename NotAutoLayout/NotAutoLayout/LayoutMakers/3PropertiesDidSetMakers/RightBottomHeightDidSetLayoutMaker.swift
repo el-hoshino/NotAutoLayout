@@ -16,6 +16,6 @@ public struct RightBottomHeightDidSetLayoutMaker {
 	
 	let bottom: LayoutElement.Line
 	
-	let height: LayoutElement.Line
+	let height: LayoutElement.Length
 	
 }

@@ -33,29 +33,17 @@ extension TopCenterBottomDidSetLayoutMaker {
 	
 }
 
-extension TopCenterBottomDidSetLayoutMaker {
+extension TopCenterBottomDidSetLayoutMaker: LayoutMakerCanSetWidthToMakeLayoutEditorType {
 	
-	public func setWidth(to width: CGFloat) -> LayoutEditor {
-		
-		return self.setWidth(by: { _ in width })
-		
-	}
+	public typealias WillSetWidthMaker = LayoutEditor
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
+	public func makeFrame(width: LayoutElement.Length, parameter: LayoutControlParameter) -> CGRect {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			let topCenter = self.topCenter.evaluated(from: parameter)
-			let bottom = self.bottom.evaluated(from: parameter)
-			let width = width(parameter)
-			let frame = self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
-			
-			return frame
-			
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		let topCenter = self.topCenter.evaluated(from: parameter)
+		let bottom = self.bottom.evaluated(from: parameter)
+		let height = bottom - topCenter.y
+		let width = width.evaluated(from: parameter, theOtherAxis: .height(height))
+		return self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
 		
 	}
 	

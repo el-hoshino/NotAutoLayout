@@ -37,16 +37,6 @@ extension InitialLayoutMaker {
 		
 	}
 	
-	public func makeFrame(_ frame: @escaping (_ fittedSize: (_ fittingSize: CGSize) -> CGSize, _ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
 }
 
 // MARK: - Set A Frame -
