@@ -19,3 +19,11 @@ extension CGSize {
 	}
 	
 }
+
+extension CGSize {
+	
+	var ratio: CGFloat {
+		return self.width / self.height
+	}
+	
+}
