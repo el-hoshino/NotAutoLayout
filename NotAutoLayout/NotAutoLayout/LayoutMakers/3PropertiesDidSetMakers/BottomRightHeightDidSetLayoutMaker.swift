@@ -1,5 +1,5 @@
 //
-//  BottomRightHeightDidSetLayoutMaker.swift
+//  DidStoreBottomRightHeightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct BottomRightHeightDidSetLayoutMaker {
+public struct DidStoreBottomRightHeightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

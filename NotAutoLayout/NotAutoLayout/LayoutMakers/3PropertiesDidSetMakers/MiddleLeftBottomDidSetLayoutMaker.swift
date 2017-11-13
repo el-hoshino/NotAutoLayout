@@ -1,5 +1,5 @@
 //
-//  MiddleLeftBottomDidSetLayoutMaker.swift
+//  DidStoreMiddleLeftBottomLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MiddleLeftBottomDidSetLayoutMaker {
+public struct DidStoreMiddleLeftBottomLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

@@ -1,5 +1,5 @@
 //
-//  LeftPointTopPointWidthDidSetLayoutMaker.swift
+//  DidStoreLeftPointTopPointWidthLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/06/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LeftTopWidthDidSetLayoutMaker {
+public struct DidStoreLeftTopWidthLayoutMaker {
 		
 	public unowned let parentView: UIView
 	
@@ -20,7 +20,7 @@ public struct LeftTopWidthDidSetLayoutMaker {
 	
 }
 
-extension LeftTopWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreLeftTopWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

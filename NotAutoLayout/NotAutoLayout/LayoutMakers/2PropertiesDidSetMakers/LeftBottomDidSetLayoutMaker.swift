@@ -1,5 +1,5 @@
 //
-//  LeftBottomDidSetLayoutMaker.swift
+//  DidStoreLeftBottomLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LeftBottomDidSetLayoutMaker {
+public struct DidStoreLeftBottomLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -19,7 +19,7 @@ public struct LeftBottomDidSetLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension LeftBottomDidSetLayoutMaker {
+extension DidStoreLeftBottomLayoutMaker {
 	
 	private func makeFrame(left: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -36,7 +36,7 @@ extension LeftBottomDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension LeftBottomDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
+extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -53,11 +53,11 @@ extension LeftBottomDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameTyp
 
 // MARK: - Set A Length -
 // MARK: Width
-extension LeftBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
+extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreWidthType {
 	
-	public typealias WillSetWidthMaker = LeftBottomWidthDidSetLayoutMaker
+	public typealias WillSetWidthMaker = DidStoreLeftBottomWidthLayoutMaker
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> LeftBottomWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreLeftBottomWidthLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -69,11 +69,11 @@ extension LeftBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
 }
 
 // MARK: Height
-extension LeftBottomDidSetLayoutMaker: LayoutMakerCanStoreHeightType {
+extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreHeightType {
 	
-	public typealias WillSetHeightMaker = LeftBottomHeightDidSetLayoutMaker
+	public typealias WillSetHeightMaker = DidStoreLeftBottomHeightLayoutMaker
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> LeftBottomHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreLeftBottomHeightLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

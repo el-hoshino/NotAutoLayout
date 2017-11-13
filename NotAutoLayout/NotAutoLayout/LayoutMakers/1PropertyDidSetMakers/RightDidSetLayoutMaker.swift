@@ -1,5 +1,5 @@
 //
-//  RightDidSetLayoutMaker.swift
+//  DidStoreRightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct RightDidSetLayoutMaker {
+public struct DidStoreRightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -18,11 +18,11 @@ public struct RightDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Top
-extension RightDidSetLayoutMaker: LayoutMakerCanStoreTopType {
+extension DidStoreRightLayoutMaker: LayoutMakerCanStoreTopType {
 	
-	public typealias WillSetTopMaker = RightTopDidSetLayoutMaker
+	public typealias WillSetTopMaker = DidStoreRightTopLayoutMaker
 	
-	public func storeTop(_ top: LayoutElement.Line) -> RightTopDidSetLayoutMaker {
+	public func storeTop(_ top: LayoutElement.Line) -> DidStoreRightTopLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,
@@ -33,11 +33,11 @@ extension RightDidSetLayoutMaker: LayoutMakerCanStoreTopType {
 }
 
 // MARK: Middle
-extension RightDidSetLayoutMaker: LayoutMakerCanStoreMiddleType {
+extension DidStoreRightLayoutMaker: LayoutMakerCanStoreMiddleType {
 	
-	public typealias WillSetMiddleMaker = RightMiddleDidSetLayoutMaker
+	public typealias WillSetMiddleMaker = DidStoreRightMiddleLayoutMaker
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> RightMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreRightMiddleLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,
@@ -48,11 +48,11 @@ extension RightDidSetLayoutMaker: LayoutMakerCanStoreMiddleType {
 }
 
 // MARK: Bottom
-extension RightDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
+extension DidStoreRightLayoutMaker: LayoutMakerCanStoreBottomType {
 	
-	public typealias WillSetBottomMaker = RightBottomDidSetLayoutMaker
+	public typealias WillSetBottomMaker = DidStoreRightBottomLayoutMaker
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> RightBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreRightBottomLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: self.right,

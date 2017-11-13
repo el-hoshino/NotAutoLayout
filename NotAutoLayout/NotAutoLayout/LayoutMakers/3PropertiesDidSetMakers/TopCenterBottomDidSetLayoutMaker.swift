@@ -1,5 +1,5 @@
 //
-//  TopCenterBottomDidSetLayoutMaker.swift
+//  DidStoreTopCenterBottomLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TopCenterBottomDidSetLayoutMaker {
+public struct DidStoreTopCenterBottomLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -18,7 +18,7 @@ public struct TopCenterBottomDidSetLayoutMaker {
 	
 }
 
-extension TopCenterBottomDidSetLayoutMaker {
+extension DidStoreTopCenterBottomLayoutMaker {
 	
 	private func makeFrame(topCenter: CGPoint, bottom: CGFloat, width: CGFloat) -> CGRect {
 		
@@ -33,7 +33,7 @@ extension TopCenterBottomDidSetLayoutMaker {
 	
 }
 
-extension TopCenterBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreTopCenterBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	

@@ -1,5 +1,5 @@
 //
-//  CenterBottomDidSetLayoutMaker.swift
+//  DidStoreCenterBottomLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CenterBottomDidSetLayoutMaker {
+public struct DidStoreCenterBottomLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -19,7 +19,7 @@ public struct CenterBottomDidSetLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension CenterBottomDidSetLayoutMaker {
+extension DidStoreCenterBottomLayoutMaker {
 	
 	private func makeFrame(center: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -37,7 +37,7 @@ extension CenterBottomDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension CenterBottomDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
+extension DidStoreCenterBottomLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -54,11 +54,11 @@ extension CenterBottomDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameT
 
 // MARK: - Set A Length -
 // MARK: Width
-extension CenterBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
+extension DidStoreCenterBottomLayoutMaker: LayoutMakerCanStoreWidthType {
 	
-	public typealias WillSetWidthMaker = CenterBottomWidthDidSetLayoutMaker
+	public typealias WillSetWidthMaker = DidStoreCenterBottomWidthLayoutMaker
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> CenterBottomWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreCenterBottomWidthLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -70,11 +70,11 @@ extension CenterBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
 }
 
 // MARK: Height
-extension CenterBottomDidSetLayoutMaker: LayoutMakerCanStoreHeightType {
+extension DidStoreCenterBottomLayoutMaker: LayoutMakerCanStoreHeightType {
 	
-	public typealias WillSetHeightMaker = CenterBottomHeightDidSetLayoutMaker
+	public typealias WillSetHeightMaker = DidStoreCenterBottomHeightLayoutMaker
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> CenterBottomHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreCenterBottomHeightLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,

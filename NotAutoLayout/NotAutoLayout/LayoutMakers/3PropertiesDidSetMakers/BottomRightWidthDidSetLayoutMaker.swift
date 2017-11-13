@@ -1,5 +1,5 @@
 //
-//  BottomRightWidthDidSetLayoutMaker.swift
+//  DidStoreBottomRightWidthLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct BottomRightWidthDidSetLayoutMaker {
+public struct DidStoreBottomRightWidthLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

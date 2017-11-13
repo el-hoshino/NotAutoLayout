@@ -1,5 +1,5 @@
 //
-//  TopLeftRightDidSetLayoutMaker.swift
+//  DidStoreTopLeftRightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TopLeftRightDidSetLayoutMaker {
+public struct DidStoreTopLeftRightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -18,7 +18,7 @@ public struct TopLeftRightDidSetLayoutMaker {
 	
 }
 
-extension TopLeftRightDidSetLayoutMaker {
+extension DidStoreTopLeftRightLayoutMaker {
 	
 	private func makeFrame(topLeft: CGPoint, right: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -33,7 +33,7 @@ extension TopLeftRightDidSetLayoutMaker {
 	
 }
 
-extension TopLeftRightDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreTopLeftRightLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

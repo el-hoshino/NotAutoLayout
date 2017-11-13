@@ -1,5 +1,5 @@
 //
-//  TopRightWidthDidSetLayoutMaker.swift
+//  DidStoreTopRightWidthLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TopRightWidthDidSetLayoutMaker {
+public struct DidStoreTopRightWidthLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

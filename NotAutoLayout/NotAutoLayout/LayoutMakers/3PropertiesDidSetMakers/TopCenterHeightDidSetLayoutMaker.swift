@@ -1,5 +1,5 @@
 //
-//  TopCenterHeightDidSetLayoutMaker.swift
+//  DidStoreTopCenterHeightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct TopCenterHeightDidSetLayoutMaker {
+public struct DidStoreTopCenterHeightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

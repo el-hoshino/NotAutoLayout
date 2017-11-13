@@ -1,5 +1,5 @@
 //
-//  CenterMiddleDidSetLayoutMaker.swift
+//  DidStoreCenterMiddleLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CenterMiddleDidSetLayoutMaker {
+public struct DidStoreCenterMiddleLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -19,7 +19,7 @@ public struct CenterMiddleDidSetLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension CenterMiddleDidSetLayoutMaker {
+extension DidStoreCenterMiddleLayoutMaker {
 	
 	private func makeFrame(center: CGFloat, middle: CGFloat, size: CGSize) -> CGRect {
 		
@@ -37,7 +37,7 @@ extension CenterMiddleDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
+extension DidStoreCenterMiddleLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -54,11 +54,11 @@ extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameT
 
 // MARK: - Set A Line -
 // MARK: Bottom
-extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
+extension DidStoreCenterMiddleLayoutMaker: LayoutMakerCanStoreBottomType {
 	
-	public typealias WillSetBottomMaker = CenterMiddleBottomDidSetLayoutMaker
+	public typealias WillSetBottomMaker = DidStoreCenterMiddleBottomLayoutMaker
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> CenterMiddleBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreCenterMiddleBottomLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -71,11 +71,11 @@ extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
+extension DidStoreCenterMiddleLayoutMaker: LayoutMakerCanStoreWidthType {
 	
-	public typealias WillSetWidthMaker = CenterMiddleWidthDidSetLayoutMaker
+	public typealias WillSetWidthMaker = DidStoreCenterMiddleWidthLayoutMaker
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> CenterMiddleWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreCenterMiddleWidthLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -87,11 +87,11 @@ extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
 }
 
 // MARK: Height
-extension CenterMiddleDidSetLayoutMaker: LayoutMakerCanStoreHeightType {
+extension DidStoreCenterMiddleLayoutMaker: LayoutMakerCanStoreHeightType {
 	
-	public typealias WillSetHeightMaker = CenterMiddleHeightDidSetLayoutMaker
+	public typealias WillSetHeightMaker = DidStoreCenterMiddleHeightLayoutMaker
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> CenterMiddleHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreCenterMiddleHeightLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,

@@ -1,5 +1,5 @@
 //
-//  LeftRightDidSetLayoutMaker.swift
+//  DidStoreLeftRightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LeftRightDidSetLayoutMaker {
+public struct DidStoreLeftRightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -20,11 +20,11 @@ public struct LeftRightDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Top
-extension LeftRightDidSetLayoutMaker: LayoutMakerCanStoreTopType {
+extension DidStoreLeftRightLayoutMaker: LayoutMakerCanStoreTopType {
 	
-	public typealias WillSetTopMaker = LeftRightTopDidSetLayoutMaker
+	public typealias WillSetTopMaker = DidStoreLeftRightTopLayoutMaker
 	
-	public func storeTop(_ top: LayoutElement.Line) -> LeftRightTopDidSetLayoutMaker {
+	public func storeTop(_ top: LayoutElement.Line) -> DidStoreLeftRightTopLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -36,11 +36,11 @@ extension LeftRightDidSetLayoutMaker: LayoutMakerCanStoreTopType {
 }
 
 // MARK: Middle
-extension LeftRightDidSetLayoutMaker: LayoutMakerCanStoreMiddleType {
+extension DidStoreLeftRightLayoutMaker: LayoutMakerCanStoreMiddleType {
 	
-	public typealias WillSetMiddleMaker = LeftRightMiddleDidSetLayoutMaker
+	public typealias WillSetMiddleMaker = DidStoreLeftRightMiddleLayoutMaker
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> LeftRightMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreLeftRightMiddleLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -52,11 +52,11 @@ extension LeftRightDidSetLayoutMaker: LayoutMakerCanStoreMiddleType {
 }
 
 // MARK: Bottom
-extension LeftRightDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
+extension DidStoreLeftRightLayoutMaker: LayoutMakerCanStoreBottomType {
 	
-	public typealias WillSetBottomMaker = LeftRightBottomDidSetLayoutMaker
+	public typealias WillSetBottomMaker = DidStoreLeftRightBottomLayoutMaker
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> LeftRightBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreLeftRightBottomLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

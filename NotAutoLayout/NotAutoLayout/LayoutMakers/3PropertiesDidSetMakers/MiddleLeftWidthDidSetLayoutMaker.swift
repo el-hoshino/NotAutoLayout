@@ -1,5 +1,5 @@
 //
-//  MiddleLeftWidthDidSetLayoutMaker.swift
+//  DidStoreMiddleLeftWidthLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MiddleLeftWidthDidSetLayoutMaker {
+public struct DidStoreMiddleLeftWidthLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -18,7 +18,7 @@ public struct MiddleLeftWidthDidSetLayoutMaker {
 	
 }
 
-extension MiddleLeftWidthDidSetLayoutMaker {
+extension DidStoreMiddleLeftWidthLayoutMaker {
 	
 	private func makeFrame(middleLeft: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -34,7 +34,7 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 	
 }
 
-extension MiddleLeftWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreMiddleLeftWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
     
     public typealias WillSetHeightMaker = LayoutEditor
     

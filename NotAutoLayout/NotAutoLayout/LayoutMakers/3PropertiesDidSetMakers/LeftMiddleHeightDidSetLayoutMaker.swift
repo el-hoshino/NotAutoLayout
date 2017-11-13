@@ -1,5 +1,5 @@
 //
-//  LeftMiddleHeightDidSetLayoutMaker.swift
+//  DidStoreLeftMiddleHeightLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LeftMiddleHeightDidSetLayoutMaker {
+public struct DidStoreLeftMiddleHeightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	

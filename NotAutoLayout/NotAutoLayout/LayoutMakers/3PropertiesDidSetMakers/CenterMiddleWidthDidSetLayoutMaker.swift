@@ -1,5 +1,5 @@
 //
-//  CenterMiddleWidthDidSetLayoutMaker.swift
+//  DidStoreCenterMiddleWidthLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct CenterMiddleWidthDidSetLayoutMaker {
+public struct DidStoreCenterMiddleWidthLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
@@ -20,7 +20,7 @@ public struct CenterMiddleWidthDidSetLayoutMaker {
 	
 }
 
-extension CenterMiddleWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreCenterMiddleWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
     
     public typealias WillSetHeightMaker = LayoutEditor
     

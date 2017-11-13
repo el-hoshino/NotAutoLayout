@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LeftMiddleWidthDidSetLayoutMaker {
+public struct DidStoreLeftMiddleWidthLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
