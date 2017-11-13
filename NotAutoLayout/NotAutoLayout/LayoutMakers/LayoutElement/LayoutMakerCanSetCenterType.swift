@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetCenterType.swift
+//  LayoutMakerCanStoreCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetCenterType: LayoutMakerType {
+public protocol LayoutMakerCanStoreCenterType: LayoutMakerType {
 	
 	associatedtype WillSetCenterMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetCenterType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetCenterType {
+extension LayoutMakerCanStoreCenterType {
 	
 	public func setCenter(to center: CGFloat) -> WillSetCenterMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetCenterType {
 	
 }
 
-public protocol LayoutMakerCanSetCenterToMakeLayoutEditorType: LayoutMakerCanSetCenterType where WillSetCenterMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreCenterToEvaluateFrameType: LayoutMakerCanStoreCenterType where WillSetCenterMaker == LayoutEditor {
 	
 	func evaluateFrame(center: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetCenterToMakeLayoutEditorType {
+extension LayoutMakerCanStoreCenterToEvaluateFrameType {
 	
 	public func storeCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker {
 		

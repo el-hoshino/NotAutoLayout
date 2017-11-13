@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetSizeType.swift
+//  LayoutMakerCanStoreSizeType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetSizeType: LayoutMakerType {
+public protocol LayoutMakerCanStoreSizeType: LayoutMakerType {
 	
 	associatedtype WillSetSizeMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetSizeType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetSizeType {
+extension LayoutMakerCanStoreSizeType {
 	
 	public func setSize(to size: CGSize) -> WillSetSizeMaker {
 		
@@ -50,13 +50,13 @@ extension LayoutMakerCanSetSizeType {
 	
 }
 
-public protocol LayoutMakerCanSetSizeToMakeLayoutEditorType: LayoutMakerCanSetSizeType where WillSetSizeMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreSizeToEvaluateFrameType: LayoutMakerCanStoreSizeType where WillSetSizeMaker == LayoutEditor {
 	
 	func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetSizeToMakeLayoutEditorType {
+extension LayoutMakerCanStoreSizeToEvaluateFrameType {
 	
 	public func storeSize(_ size: LayoutElement.Size) -> WillSetSizeMaker {
 		

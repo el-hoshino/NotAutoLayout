@@ -20,7 +20,7 @@ public struct CenterRightDidSetLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Top
-extension CenterRightDidSetLayoutMaker: LayoutMakerCanSetTopType {
+extension CenterRightDidSetLayoutMaker: LayoutMakerCanStoreTopType {
 	
 	public typealias WillSetTopMaker = CenterRightTopDidSetLayoutMaker
 	
@@ -36,7 +36,7 @@ extension CenterRightDidSetLayoutMaker: LayoutMakerCanSetTopType {
 }
 
 // MARK: Middle
-extension CenterRightDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
+extension CenterRightDidSetLayoutMaker: LayoutMakerCanStoreMiddleType {
 	
 	public typealias WillSetMiddleMaker = CenterRightMiddleDidSetLayoutMaker
 	
@@ -52,7 +52,7 @@ extension CenterRightDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 }
 
 // MARK: Bottom
-extension CenterRightDidSetLayoutMaker: LayoutMakerCanSetBottomType {
+extension CenterRightDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
 	
 	public typealias WillSetBottomMaker = CenterRightBottomDidSetLayoutMaker
 	

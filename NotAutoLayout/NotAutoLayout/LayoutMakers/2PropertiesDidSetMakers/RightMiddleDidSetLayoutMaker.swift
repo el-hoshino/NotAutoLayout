@@ -37,7 +37,7 @@ extension RightMiddleDidSetLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -54,7 +54,7 @@ extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorT
 
 // MARK: - Set A Line -
 // MARK: Bottom
-extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanStoreBottomType {
 	
 	public typealias WillSetBottomMaker = RightMiddleBottomDidSetLayoutMaker
 	
@@ -71,7 +71,7 @@ extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetWidthType {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanStoreWidthType {
 	
 	public typealias WillSetWidthMaker = RightMiddleWidthDidSetLayoutMaker
 	
@@ -87,7 +87,7 @@ extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 }
 
 // MARK: Height
-extension RightMiddleDidSetLayoutMaker: LayoutMakerCanSetHeightType {
+extension RightMiddleDidSetLayoutMaker: LayoutMakerCanStoreHeightType {
 	
 	public typealias WillSetHeightMaker = RightMiddleHeightDidSetLayoutMaker
 	

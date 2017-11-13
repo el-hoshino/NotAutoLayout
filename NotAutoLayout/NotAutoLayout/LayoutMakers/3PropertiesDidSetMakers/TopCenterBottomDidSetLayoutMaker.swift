@@ -33,7 +33,7 @@ extension TopCenterBottomDidSetLayoutMaker {
 	
 }
 
-extension TopCenterBottomDidSetLayoutMaker: LayoutMakerCanSetWidthToMakeLayoutEditorType {
+extension TopCenterBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	

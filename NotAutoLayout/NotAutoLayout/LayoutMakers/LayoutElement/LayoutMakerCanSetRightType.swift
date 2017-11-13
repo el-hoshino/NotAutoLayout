@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetRightType.swift
+//  LayoutMakerCanStoreRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetRightType: LayoutMakerType {
+public protocol LayoutMakerCanStoreRightType: LayoutMakerType {
 	
 	associatedtype WillSetRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetRightType {
+extension LayoutMakerCanStoreRightType {
 	
 	public func setRight(to right: CGFloat) -> WillSetRightMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetRightType {
 	
 }
 
-public protocol LayoutMakerCanSetRightToMakeLayoutEditorType: LayoutMakerCanSetRightType where WillSetRightMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreRightToEvaluateFrameType: LayoutMakerCanStoreRightType where WillSetRightMaker == LayoutEditor {
 	
 	func evaluateFrame(right: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetRightToMakeLayoutEditorType {
+extension LayoutMakerCanStoreRightToEvaluateFrameType {
 	
 	public func storeRight(_ right: LayoutElement.Line) -> WillSetRightMaker {
 		

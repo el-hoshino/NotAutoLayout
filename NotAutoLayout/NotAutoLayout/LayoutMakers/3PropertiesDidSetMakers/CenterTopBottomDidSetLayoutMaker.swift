@@ -35,7 +35,7 @@ extension CenterTopBottomDidSetLayoutMaker {
 	
 }
 
-extension CenterTopBottomDidSetLayoutMaker: LayoutMakerCanSetWidthToMakeLayoutEditorType {
+extension CenterTopBottomDidSetLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	

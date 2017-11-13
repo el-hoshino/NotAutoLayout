@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetBottomCenterType.swift
+//  LayoutMakerCanStoreBottomCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetBottomCenterType: LayoutMakerType {
+public protocol LayoutMakerCanStoreBottomCenterType: LayoutMakerType {
 	
 	associatedtype WillSetBottomCenterMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetBottomCenterType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetBottomCenterType {
+extension LayoutMakerCanStoreBottomCenterType {
 	
 	public func setBottomCenter(to bottomCenter: CGPoint) -> WillSetBottomCenterMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetBottomCenterType {
 	
 }
 
-public protocol LayoutMakerCanSetBottomCenterToMakeLayoutEditorType: LayoutMakerCanSetBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreBottomCenterToEvaluateFrameType: LayoutMakerCanStoreBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
 	
 	func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetBottomCenterToMakeLayoutEditorType {
+extension LayoutMakerCanStoreBottomCenterToEvaluateFrameType {
 	
 	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterMaker {
 		

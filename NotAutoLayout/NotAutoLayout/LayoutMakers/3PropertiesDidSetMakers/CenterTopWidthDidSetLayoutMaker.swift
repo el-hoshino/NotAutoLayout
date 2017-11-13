@@ -20,7 +20,7 @@ public struct CenterTopWidthDidSetLayoutMaker {
 	
 }
 
-extension CenterTopWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+extension CenterTopWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 
     public typealias WillSetHeightMaker = LayoutEditor
     

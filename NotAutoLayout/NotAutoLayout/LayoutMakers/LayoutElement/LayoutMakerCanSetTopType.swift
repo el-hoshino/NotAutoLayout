@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetTopType.swift
+//  LayoutMakerCanStoreTopType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetTopType: LayoutMakerType {
+public protocol LayoutMakerCanStoreTopType: LayoutMakerType {
 	
 	associatedtype WillSetTopMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetTopType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetTopType {
+extension LayoutMakerCanStoreTopType {
 	
 	public func setTop(to top: CGFloat) -> WillSetTopMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetTopType {
 	
 }
 
-public protocol LayoutMakerCanSetTopToMakeLayoutEditorType: LayoutMakerCanSetTopType where WillSetTopMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreTopToEvaluateFrameType: LayoutMakerCanStoreTopType where WillSetTopMaker == LayoutEditor {
 	
 	func evaluateFrame(top: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetTopToMakeLayoutEditorType {
+extension LayoutMakerCanStoreTopToEvaluateFrameType {
 	
 	public func storeTop(_ top: LayoutElement.Line) -> WillSetTopMaker {
 		

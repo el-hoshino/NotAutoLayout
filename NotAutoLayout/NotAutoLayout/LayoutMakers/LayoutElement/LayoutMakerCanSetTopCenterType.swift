@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetTopCenterType.swift
+//  LayoutMakerCanStoreTopCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetTopCenterType: LayoutMakerType {
+public protocol LayoutMakerCanStoreTopCenterType: LayoutMakerType {
 	
 	associatedtype WillSetTopCenterMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetTopCenterType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetTopCenterType {
+extension LayoutMakerCanStoreTopCenterType {
 	
 	public func setTopCenter(to topCenter: CGPoint) -> WillSetTopCenterMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetTopCenterType {
 	
 }
 
-public protocol LayoutMakerCanSetTopCenterToMakeLayoutEditorType: LayoutMakerCanSetTopCenterType where WillSetTopCenterMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreTopCenterToEvaluateFrameType: LayoutMakerCanStoreTopCenterType where WillSetTopCenterMaker == LayoutEditor {
 	
 	func evaluateFrame(topCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetTopCenterToMakeLayoutEditorType {
+extension LayoutMakerCanStoreTopCenterToEvaluateFrameType {
 	
 	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
 		

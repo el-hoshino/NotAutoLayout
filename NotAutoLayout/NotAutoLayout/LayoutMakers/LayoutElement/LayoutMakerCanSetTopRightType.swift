@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetTopRightType.swift
+//  LayoutMakerCanStoreTopRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetTopRightType: LayoutMakerType {
+public protocol LayoutMakerCanStoreTopRightType: LayoutMakerType {
 	
 	associatedtype WillSetTopRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetTopRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetTopRightType {
+extension LayoutMakerCanStoreTopRightType {
 	
 	public func setTopRight(to topRight: CGPoint) -> WillSetTopRightMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetTopRightType {
 	
 }
 
-public protocol LayoutMakerCanSetTopRightToMakeLayoutEditorType: LayoutMakerCanSetTopRightType where WillSetTopRightMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreTopRightToEvaluateFrameType: LayoutMakerCanStoreTopRightType where WillSetTopRightMaker == LayoutEditor {
 	
 	func evaluateFrame(topRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetTopRightToMakeLayoutEditorType {
+extension LayoutMakerCanStoreTopRightToEvaluateFrameType {
 	
 	public func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker {
 		

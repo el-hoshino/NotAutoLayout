@@ -34,7 +34,7 @@ extension MiddleLeftWidthDidSetLayoutMaker {
 	
 }
 
-extension MiddleLeftWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+extension MiddleLeftWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
     
     public typealias WillSetHeightMaker = LayoutEditor
     

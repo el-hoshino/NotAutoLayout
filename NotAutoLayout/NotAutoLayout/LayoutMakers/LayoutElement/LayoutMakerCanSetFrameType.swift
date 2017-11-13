@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetFrameType.swift
+//  LayoutMakerCanStoreFrameType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetFrameType: LayoutMakerType {
+public protocol LayoutMakerCanStoreFrameType: LayoutMakerType {
 	
 	associatedtype WillSetFrameMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetFrameType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetFrameType {
+extension LayoutMakerCanStoreFrameType {
     
     public func makeFrame(_ frame: CGRect) -> WillSetFrameMaker {
         
@@ -40,7 +40,7 @@ extension LayoutMakerCanSetFrameType {
     
 }
 
-extension LayoutMakerCanSetFrameType {
+extension LayoutMakerCanStoreFrameType {
     
     public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> WillSetFrameMaker {
         
@@ -65,13 +65,13 @@ extension LayoutMakerCanSetFrameType {
     
 }
 
-public protocol LayoutMakerCanSetFrameToMakeLayoutEditorType: LayoutMakerCanSetFrameType where WillSetFrameMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreFrameToEvaluateFrameType: LayoutMakerCanStoreFrameType where WillSetFrameMaker == LayoutEditor {
     
     func evaluateFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect
     
 }
 
-extension LayoutMakerCanSetFrameToMakeLayoutEditorType {
+extension LayoutMakerCanStoreFrameToEvaluateFrameType {
 	
     public func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
         

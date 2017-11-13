@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetWidthType.swift
+//  LayoutMakerCanStoreWidthType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetWidthType: LayoutMakerType {
+public protocol LayoutMakerCanStoreWidthType: LayoutMakerType {
 	
 	associatedtype WillSetWidthMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetWidthType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetWidthType {
+extension LayoutMakerCanStoreWidthType {
 	
 	public func setWidth(to width: CGFloat) -> WillSetWidthMaker {
 		
@@ -50,13 +50,13 @@ extension LayoutMakerCanSetWidthType {
 	
 }
 
-public protocol LayoutMakerCanSetWidthToMakeLayoutEditorType: LayoutMakerCanSetWidthType where WillSetWidthMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreWidthToEvaluateFrameType: LayoutMakerCanStoreWidthType where WillSetWidthMaker == LayoutEditor {
 	
 	func evaluateFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetWidthToMakeLayoutEditorType {
+extension LayoutMakerCanStoreWidthToEvaluateFrameType {
 
 	public func storeWidth(_ width: LayoutElement.Length) -> WillSetWidthMaker {
 		

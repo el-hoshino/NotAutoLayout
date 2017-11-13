@@ -47,7 +47,7 @@ extension LeftRightTopDidSetLayoutMaker {
 	
 }
 
-extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEditorType {
+extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
 	
 	public typealias WillSetBottomMaker = LayoutEditor
 	
@@ -61,7 +61,7 @@ extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetBottomToMakeLayoutEdit
 	
 }
 
-extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+extension LeftRightTopDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

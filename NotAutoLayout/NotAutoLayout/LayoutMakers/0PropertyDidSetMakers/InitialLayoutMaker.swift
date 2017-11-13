@@ -15,7 +15,7 @@ public struct InitialLayoutMaker {
 }
 
 // MARK: - Set A Frame -
-extension InitialLayoutMaker: LayoutMakerCanSetFrameToMakeLayoutEditorType {
+extension InitialLayoutMaker: LayoutMakerCanStoreFrameToEvaluateFrameType {
 	
 	public typealias WillSetFrameMaker = LayoutEditor
 	
@@ -31,7 +31,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetFrameToMakeLayoutEditorType {
 
 // MARK: - Set A Point -
 // MARK: TopLeft
-extension InitialLayoutMaker: LayoutMakerCanSetTopLeftType {
+extension InitialLayoutMaker: LayoutMakerCanStoreTopLeftType {
 	
 	public typealias WillSetTopLeftMaker = TopLeftDidSetLayoutMaker
 	
@@ -45,7 +45,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetTopLeftType {
 }
 
 // MARK: TopCenter
-extension InitialLayoutMaker: LayoutMakerCanSetTopCenterType {
+extension InitialLayoutMaker: LayoutMakerCanStoreTopCenterType {
 	
 	public typealias WillSetTopCenterMaker = TopCenterDidSetLayoutMaker
 	
@@ -59,7 +59,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetTopCenterType {
 }
 
 // MARK: TopRight
-extension InitialLayoutMaker: LayoutMakerCanSetTopRightType {
+extension InitialLayoutMaker: LayoutMakerCanStoreTopRightType {
 	
 	public typealias WillSetTopRightMaker = TopRightDidSetLayoutMaker
 	
@@ -73,7 +73,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetTopRightType {
 }
 
 // MARK: MiddleLeft
-extension InitialLayoutMaker: LayoutMakerCanSetMiddleLeftType {
+extension InitialLayoutMaker: LayoutMakerCanStoreMiddleLeftType {
 	
 	public typealias WillSetMiddleLeftMaker = MiddleLeftDidSetLayoutMaker
 	
@@ -87,7 +87,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetMiddleLeftType {
 }
 
 // MARK: MiddleCenter
-extension InitialLayoutMaker: LayoutMakerCanSetMiddleCenterType {
+extension InitialLayoutMaker: LayoutMakerCanStoreMiddleCenterType {
 	
 	public typealias WillSetMiddleCenterMaker = MiddleCenterDidSetLayoutMaker
 	
@@ -101,7 +101,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetMiddleCenterType {
 }
 
 // MARK: MiddleRight
-extension InitialLayoutMaker: LayoutMakerCanSetMiddleRightType {
+extension InitialLayoutMaker: LayoutMakerCanStoreMiddleRightType {
 	
 	public typealias WillSetMiddleRightMaker = MiddleRightDidSetLayoutMaker
 	
@@ -115,7 +115,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetMiddleRightType {
 }
 
 // MARK: BottomLeft
-extension InitialLayoutMaker: LayoutMakerCanSetBottomLeftType {
+extension InitialLayoutMaker: LayoutMakerCanStoreBottomLeftType {
 	
 	public typealias WillSetBottomLeftMaker = BottomLeftDidSetLayoutMaker
 	
@@ -129,7 +129,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetBottomLeftType {
 }
 
 // MARK: BottomCenter
-extension InitialLayoutMaker: LayoutMakerCanSetBottomCenterType {
+extension InitialLayoutMaker: LayoutMakerCanStoreBottomCenterType {
 	
 	public typealias WillSetBottomCenterMaker = BottomCenterDidSetLayoutMaker
 	
@@ -143,7 +143,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetBottomCenterType {
 }
 
 // MARK: BottomRight
-extension InitialLayoutMaker: LayoutMakerCanSetBottomRightType {
+extension InitialLayoutMaker: LayoutMakerCanStoreBottomRightType {
 	
 	public typealias WillSetBottomRightMaker = BottomRightDidSetLayoutMaker
 	
@@ -158,7 +158,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetBottomRightType {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension InitialLayoutMaker: LayoutMakerCanSetLeftType {
+extension InitialLayoutMaker: LayoutMakerCanStoreLeftType {
 	
 	public typealias WillSetLeftMaker = LeftDidSetLayoutMaker
 	
@@ -172,7 +172,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetLeftType {
 }
 
 // MARK: Center
-extension InitialLayoutMaker: LayoutMakerCanSetCenterType {
+extension InitialLayoutMaker: LayoutMakerCanStoreCenterType {
 	
 	public typealias WillSetCenterMaker = CenterDidSetLayoutMaker
 	
@@ -186,7 +186,7 @@ extension InitialLayoutMaker: LayoutMakerCanSetCenterType {
 }
 
 // MARK: Right
-extension InitialLayoutMaker: LayoutMakerCanSetRightType {
+extension InitialLayoutMaker: LayoutMakerCanStoreRightType {
 	
 	public typealias WillSetRightMaker = RightDidSetLayoutMaker
 	

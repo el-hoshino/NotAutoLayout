@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetBottomLeftType.swift
+//  LayoutMakerCanStoreBottomLeftType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetBottomLeftType: LayoutMakerType {
+public protocol LayoutMakerCanStoreBottomLeftType: LayoutMakerType {
 	
 	associatedtype WillSetBottomLeftMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetBottomLeftType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetBottomLeftType {
+extension LayoutMakerCanStoreBottomLeftType {
 	
 	public func setBottomLeft(to bottomLeft: CGPoint) -> WillSetBottomLeftMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetBottomLeftType {
 	
 }
 
-public protocol LayoutMakerCanSetBottomLeftToMakeLayoutEditorType: LayoutMakerCanSetBottomLeftType where WillSetBottomLeftMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreBottomLeftToEvaluateFrameType: LayoutMakerCanStoreBottomLeftType where WillSetBottomLeftMaker == LayoutEditor {
 	
 	func evaluateFrame(bottomLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetBottomLeftToMakeLayoutEditorType {
+extension LayoutMakerCanStoreBottomLeftToEvaluateFrameType {
 	
 	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker {
 		

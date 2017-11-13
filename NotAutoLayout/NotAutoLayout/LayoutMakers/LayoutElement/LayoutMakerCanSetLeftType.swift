@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetLeftType.swift
+//  LayoutMakerCanStoreLeftType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetLeftType: LayoutMakerType {
+public protocol LayoutMakerCanStoreLeftType: LayoutMakerType {
 	
 	associatedtype WillSetLeftMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetLeftType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetLeftType {
+extension LayoutMakerCanStoreLeftType {
 	
 	public func setLeft(to left: CGFloat) -> WillSetLeftMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetLeftType {
 	
 }
 
-public protocol LayoutMakerCanSetLeftToMakeLayoutEditorType: LayoutMakerCanSetLeftType where WillSetLeftMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreLeftToEvaluateFrameType: LayoutMakerCanStoreLeftType where WillSetLeftMaker == LayoutEditor {
 	
 	func evaluateFrame(left: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetLeftToMakeLayoutEditorType {
+extension LayoutMakerCanStoreLeftToEvaluateFrameType {
 	
 	public func storeLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker {
 		

@@ -20,7 +20,7 @@ public struct LeftTopWidthDidSetLayoutMaker {
 	
 }
 
-extension LeftTopWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+extension LeftTopWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

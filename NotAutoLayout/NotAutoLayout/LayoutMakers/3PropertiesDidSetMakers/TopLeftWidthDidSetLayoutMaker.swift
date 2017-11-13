@@ -33,7 +33,7 @@ extension TopLeftWidthDidSetLayoutMaker {
 	
 }
 
-extension TopLeftWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+extension TopLeftWidthDidSetLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

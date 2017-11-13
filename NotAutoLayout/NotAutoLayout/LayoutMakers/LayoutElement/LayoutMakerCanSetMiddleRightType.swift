@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanSetMiddleRightType.swift
+//  LayoutMakerCanStoreMiddleRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanSetMiddleRightType: LayoutMakerType {
+public protocol LayoutMakerCanStoreMiddleRightType: LayoutMakerType {
 	
 	associatedtype WillSetMiddleRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanSetMiddleRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanSetMiddleRightType {
+extension LayoutMakerCanStoreMiddleRightType {
 	
 	public func setMiddleRight(to middleRight: CGPoint) -> WillSetMiddleRightMaker {
 		
@@ -78,13 +78,13 @@ extension LayoutMakerCanSetMiddleRightType {
 	
 }
 
-public protocol LayoutMakerCanSetMiddleRightToMakeLayoutEditorType: LayoutMakerCanSetMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
+public protocol LayoutMakerCanStoreMiddleRightToEvaluateFrameType: LayoutMakerCanStoreMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
 	
 	func evaluateFrame(middleRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
-extension LayoutMakerCanSetMiddleRightToMakeLayoutEditorType {
+extension LayoutMakerCanStoreMiddleRightToEvaluateFrameType {
 	
 	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker {
 		
