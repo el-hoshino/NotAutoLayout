@@ -28,7 +28,7 @@ extension DidStoreCenterTopWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluate
         
         let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
-        let x = self.center.evaluated(from: parameter) - width.half
+        let x = self.center.evaluated(from: parameter) - width.halved
         let y = self.top.evaluated(from: parameter)
         return CGRect(x: x, y: y, width: width, height: height)
         

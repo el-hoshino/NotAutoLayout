@@ -23,8 +23,8 @@ extension DidStoreCenterMiddleLayoutMaker {
 	
 	private func makeFrame(center: CGFloat, middle: CGFloat, size: CGSize) -> CGRect {
 		
-		let left = center - size.width.half
-		let top = middle - size.height.half
+		let left = center - size.width.halved
+		let top = middle - size.height.halved
 		let origin = CGPoint(x: left, y: top)
 		let size = size
 		let frame = CGRect(origin: origin, size: size)
