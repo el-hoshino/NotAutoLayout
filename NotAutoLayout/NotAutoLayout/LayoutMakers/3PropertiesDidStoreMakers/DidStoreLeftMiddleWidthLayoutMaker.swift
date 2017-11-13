@@ -1,5 +1,5 @@
 //
-//  LeftMiddleWidthDidSetLayout.swift
+//  LeftMiddleWidthDidSetLayoutMaker.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
