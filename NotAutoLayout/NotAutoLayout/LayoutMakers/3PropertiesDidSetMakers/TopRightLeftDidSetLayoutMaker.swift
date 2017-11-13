@@ -67,7 +67,7 @@ extension TopRightLeftDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEdit
 		let topRight = self.topRight.evaluated(from: parameter)
 		let left = self.left.evaluated(from: parameter)
 		let width = topRight.x - left
-		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+		let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
 		return self.makeFrame(topRight: topRight, left: left, height: height)
 		
 	}

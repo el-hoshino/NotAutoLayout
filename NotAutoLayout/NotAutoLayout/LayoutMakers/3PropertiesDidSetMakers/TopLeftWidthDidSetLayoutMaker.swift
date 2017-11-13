@@ -40,8 +40,8 @@ extension TopLeftWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEdit
 	public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let topLeft = self.topLeft.evaluated(from: parameter)
-		let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
-		let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+		let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
 		return self.makeFrame(topLeft: topLeft, width: width, height: height)
 		
 	}

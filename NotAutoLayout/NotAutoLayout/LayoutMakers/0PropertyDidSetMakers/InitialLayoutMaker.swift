@@ -14,47 +14,18 @@ public struct InitialLayoutMaker {
 	
 }
 
-// MARK: - Custom Frame
-extension InitialLayoutMaker {
-	
-	public func makeFrame(_ frame: CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-	public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> LayoutEditor {
-		
-		let layout = Layout(frame: frame)
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
-
 // MARK: - Set A Frame -
-extension InitialLayoutMaker: LayoutMakerCanSetFrameType {
+extension InitialLayoutMaker: LayoutMakerCanSetFrameToMakeLayoutEditorType {
 	
 	public typealias WillSetFrameMaker = LayoutEditor
 	
-	public func setFrame(_ frame: LayoutElement.Rect) -> LayoutEditor {
-		
-		let layout = Layout { (parameter) -> CGRect in
-			return frame.evaluated(from: parameter)
-		}
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
+    public func makeFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect {
+        
+        let frame = frame.evaluated(from: parameter)
+        
+        return frame
+        
+    }
 	
 }
 

@@ -16,32 +16,73 @@ public protocol LayoutMakerCanSetFrameType: LayoutMakerType {
 	
 }
 
-// MARK: - On Parent
 extension LayoutMakerCanSetFrameType {
+    
+    public func makeFrame(_ frame: CGRect) -> WillSetFrameMaker {
+        
+        let frame = LayoutElement.Rect.constant(frame)
+        
+        let maker = self.setFrame(frame)
+        
+        return maker
+        
+    }
+    
+    public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> WillSetFrameMaker {
+        
+        let frame = LayoutElement.Rect.closure(frame)
+        
+        let maker = self.setFrame(frame)
+        
+        return maker
+        
+    }
+    
+}
+
+extension LayoutMakerCanSetFrameType {
+    
+    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> WillSetFrameMaker {
+        
+        let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin().inside(insets) })
+        
+        let maker = setFrame(frame)
+        
+        return maker
+        
+    }
+    
+    @available(iOS 11.0, *)
+    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetFrameMaker {
+        
+        let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets) })
+        
+        let maker = setFrame(frame)
+        
+        return maker
+
+    }
+    
+}
+
+public protocol LayoutMakerCanSetFrameToMakeLayoutEditorType: LayoutMakerCanSetFrameType where WillSetFrameMaker == LayoutEditor {
+    
+    func makeFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect
+    
+}
+
+extension LayoutMakerCanSetFrameToMakeLayoutEditorType {
 	
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> WillSetFrameMaker {
-		
-		let frame = LayoutElement.Rect.closure { (parameter) -> CGRect in
-			parameter.boundsWithZeroOrigin().inside(insets)
-		}
-		
-		let maker = self.setFrame(frame)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetFrameMaker {
-		
-		let frame = LayoutElement.Rect.closure { (parameter) -> CGRect in
-			return parameter.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets)
-		}
-		
-		let maker = self.setFrame(frame)
-		
-		return maker
-		
-	}
-	
+    public func setFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
+        
+        let layout = Layout(frame: { (parameter) -> CGRect in
+            return self.makeFrame(frame: frame, parameter: parameter)
+        })
+        
+        let editor = LayoutEditor(layout)
+        
+        return editor
+        
+    }
+    
 }
