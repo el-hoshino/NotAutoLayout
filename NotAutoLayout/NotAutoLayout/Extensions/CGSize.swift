@@ -26,4 +26,56 @@ extension CGSize {
 		return self.width / self.height
 	}
 	
+	static func makeSize(usingHeightIn canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
+		
+		guard ratio.isFinite else {
+			return CGSize(width: canvasSize.width, height: 0)
+		}
+		
+		let height = canvasSize.height
+		let width = height * ratio
+		let size = CGSize(width: width, height: height)
+		
+		return size
+		
+	}
+	
+	static func makeSize(usingWidthIn canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
+		
+		guard ratio.isNonZero else {
+			return CGSize(width: 0, height: canvasSize.height)
+		}
+		
+		let width = canvasSize.width
+		let height = width / ratio
+		let size = CGSize(width: width, height: height)
+		
+		return size
+		
+	}
+	
+	static func aspectFitSize(in canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
+		
+		switch ratio > canvasSize.ratio {
+		case true:
+			return makeSize(usingWidthIn: canvasSize, with: ratio)
+			
+		case false:
+			return makeSize(usingHeightIn: canvasSize, with: ratio)
+		}
+		
+	}
+	
+	static func aspectFillSize(in canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
+		
+		switch ratio < canvasSize.ratio {
+		case true:
+			return makeSize(usingWidthIn: canvasSize, with: ratio)
+			
+		case false:
+			return makeSize(usingHeightIn: canvasSize, with: ratio)
+		}
+		
+	}
+	
 }
