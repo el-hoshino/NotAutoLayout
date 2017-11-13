@@ -44,7 +44,7 @@ extension CenterTopBottomDidSetLayoutMaker: LayoutMakerCanSetWidthToMakeLayoutEd
 		let bottom = self.bottom.evaluated(from: parameter)
 		let height = bottom - top
 		let center = self.center.evaluated(from: parameter)
-		let width = width.evaluated(from: parameter, theOtherAxis: .height(height), fittingCalculation: fittingCalculation)
+		let width = width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(height))
 		let x = center - width.half
 		let y = top
 		let frame = CGRect(x: x, y: y, width: width, height: height)

@@ -110,7 +110,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameter: LayoutControlParameter, theOtherAxis: Axis, fittingCalculation: (CGSize) -> CGSize) -> CGFloat {
+	func evaluated(from parameter: LayoutControlParameter, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -119,8 +119,8 @@ extension LayoutElement.Length {
 		case .closure(let calculation):
 			return calculation(parameter)
 			
-		case .fits(let fitting):
-			return theOtherAxis.fittedTheOtherLength(fittingCalculation: fittingCalculation, fittingLength: fitting)
+		case .fits(let fittingLength):
+			return oppositeAxis.fittedTheOtherLength(fittingCalculation: fittingCalculation, fittingLength: fittingLength)
 		}
 		
 	}
@@ -138,8 +138,8 @@ extension LayoutElement.Size {
 		case .closure(let calculation):
 			return calculation(parameter)
 			
-		case .fits(let fitting):
-			return fittingCalculation(fitting)
+		case .fits(let fittingSize):
+			return fittingCalculation(fittingSize)
 		}
 		
 	}
