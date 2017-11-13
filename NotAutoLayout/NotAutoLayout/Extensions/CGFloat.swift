@@ -19,3 +19,11 @@ extension CGFloat {
 	}
 	
 }
+
+extension CGFloat {
+	
+	var isNonZero: Bool {
+		return self.isZero == false
+	}
+	
+}

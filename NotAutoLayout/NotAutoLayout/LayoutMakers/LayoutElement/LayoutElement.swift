@@ -38,9 +38,74 @@ extension LayoutElement {
 	
 	public enum Size {
 		
+		public enum AspectSizing {
+			
+			case fit(CGFloat?)
+			case fill(CGFloat?)
+			
+			@available(iOS 11.0, *)
+			case safeAreaFit(CGFloat?, safeAreaOnly: Bool)
+			
+			@available(iOS 11.0, *)
+			case safeAreaFill(CGFloat?, safeAreaOnly: Bool)
+			
+			var ratio: CGFloat? {
+				switch self {
+				case .fit(let ratio):
+					return ratio
+					
+				case .fill(let ratio):
+					return ratio
+					
+				case .safeAreaFit(let ratio, safeAreaOnly: _):
+					return ratio
+					
+				case .safeAreaFill(let ratio, safeAreaOnly: _):
+					return ratio
+				}
+				
+			}
+			
+			var safeAreaOnly: Bool {
+				switch self {
+				case .fit, .fill:
+					return false
+					
+				case .safeAreaFit(_, safeAreaOnly: let safeAreaOnly):
+					return safeAreaOnly
+					
+				case .safeAreaFill(_, safeAreaOnly: let safeAreaOnly):
+					return safeAreaOnly
+				}
+				
+			}
+			
+			var isFit: Bool {
+				switch self {
+				case .fit, .safeAreaFit:
+					return true
+					
+				case .fill, .safeAreaFill:
+					return false
+				}
+			}
+			
+			var isFill: Bool {
+				switch self {
+				case .fit, .safeAreaFit:
+					return false
+					
+				case .fill, .safeAreaFill:
+					return true
+				}
+			}
+			
+		}
+		
 		case constant(CGSize)
 		case closure((LayoutControlParameter) -> CGSize)
 		case fits(CGSize)
+		case aspect(AspectSizing)
 		
 	}
 	
@@ -136,10 +201,13 @@ extension LayoutElement.Size {
 			return value
 			
 		case .closure(let calculation):
-			return calculation(parameter)
+			return parameter.evaluateSize(from: calculation)
 			
 		case .fits(let fittingSize):
 			return fittingCalculation(fittingSize)
+			
+		case .aspect(let aspect):
+			return parameter.evaluateSize(from: aspect, defaultRatio: fittingCalculation(.zero).ratio)
 		}
 		
 	}

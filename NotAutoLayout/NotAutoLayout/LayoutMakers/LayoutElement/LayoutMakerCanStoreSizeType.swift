@@ -48,6 +48,48 @@ extension LayoutMakerCanStoreSizeType {
 		
 	}
 	
+	public func aspectFit(ratio: CGFloat? = nil) -> WillSetSizeMaker {
+		
+		let size = LayoutElement.Size.aspect(.fit(ratio))
+		
+		let maker = self.storeSize(size)
+		
+		return maker
+		
+	}
+	
+	public func aspectFill(ratio: CGFloat? = nil) -> WillSetSizeMaker {
+		
+		let size = LayoutElement.Size.aspect(.fill(ratio))
+		
+		let maker = self.storeSize(size)
+		
+		return maker
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func aspectFit(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeMaker {
+		
+		let size = LayoutElement.Size.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
+		
+		let maker = self.storeSize(size)
+		
+		return maker
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func aspectFill(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeMaker {
+		
+		let size = LayoutElement.Size.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
+		
+		let maker = self.storeSize(size)
+		
+		return maker
+		
+	}
+	
 }
 
 public protocol LayoutMakerCanStoreSizeToEvaluateFrameType: LayoutMakerCanStoreSizeType where WillSetSizeMaker == LayoutEditor {
