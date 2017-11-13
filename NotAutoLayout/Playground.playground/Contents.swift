@@ -61,3 +61,7 @@ view.nal.setupSubview(replyView) { $0
 }
 
 view.setNeedsLayout()
+
+print(summaryView.frame)
+print(contentsView.frame)
+print(replyView.frame)

@@ -41,7 +41,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 	public func layout(_ view: UIView, with layout: Layout) {
 		
-		let frame = layout.evaluatedFrame(for: view, with: self.layoutControlParameter)
+		let frame = layout.evaluatedFrame(for: view, with: self.layoutControlParameter, fittingCalculation: { view.sizeThatFits($0) })
 		self.layout(view, with: frame)
 		
 	}
@@ -49,7 +49,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	public func layout(_ views: [UIView], with layout: SequentialLayout) {
 		
 		views.forEachPair { (previousView, view) in
-			let frame = layout.evaluatedFrame(for: view, after: previousView, with: self.layoutControlParameter)
+			let frame = layout.evaluatedFrame(for: view, after: previousView, with: self.layoutControlParameter, fittingCalculation: { view.sizeThatFits($0) })
 			self.layout(view, with: frame)
 		}
 		

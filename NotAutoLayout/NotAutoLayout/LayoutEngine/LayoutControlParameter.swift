@@ -29,7 +29,8 @@ extension LayoutControlParameter {
 			}
 		}()
 		
-		let parameter = LayoutControlParameter(boundSize: boundSize, safeAreaInsets: safeAreaInsets)
+		let parameter = LayoutControlParameter(boundSize: boundSize,
+											   safeAreaInsets: safeAreaInsets)
 		
 		return parameter
 		
