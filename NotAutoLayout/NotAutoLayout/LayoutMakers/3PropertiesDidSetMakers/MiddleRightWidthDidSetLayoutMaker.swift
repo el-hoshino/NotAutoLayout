@@ -34,31 +34,17 @@ extension MiddleRightWidthDidSetLayoutMaker {
 	
 }
 
-//extension MiddleRightWidthDidSetLayoutMaker {
-//	
-//	public func setHeight(to height: CGFloat) -> LayoutEditor {
-//		
-//		return self.setHeight(by: { _ in height })
-//		
-//	}
-//	
-//	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-//		
-//		let layout = Layout(frame: { (parameter) -> CGRect in
-//			let middleRight = self.middleRight.evaluated(from: parameter)
-//			let width = self.width.evaluated(from: parameter)
-//			let height = height(parameter)
-//			let frame = self.makeFrame(middleRight: middleRight, width: width, height: height)
-//			
-//			return frame
-//			
-//		})
-//        
-//        let editor = LayoutEditor(layout)
-//		
-//		return editor
-//		
-//	}
-//	
-//}
-
+extension MiddleRightWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
+    
+    public typealias WillSetHeightMaker = LayoutEditor
+    
+    public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+        
+        let middleRight = self.middleRight.evaluated(from: parameter)
+        let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
+        let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+        return self.makeFrame(middleRight: middleRight, width: width, height: height)
+        
+    }
+    
+}

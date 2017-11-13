@@ -20,34 +20,18 @@ public struct CenterTopWidthDidSetLayoutMaker {
 	
 }
 
-//extension CenterTopWidthDidSetLayoutMaker {
-//
-//	public func setHeight(to height: CGFloat) -> LayoutEditor {
-//
-//		return self.setHeight(by: { _ in height })
-//
-//	}
-//
-//	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> LayoutEditor {
-//
-//		let layout = Layout(frame: { (parameter) -> CGRect in
-//			let height = height(parameter)
-//			let width = self.width.evaluated(from: parameter)
-//			let x = self.center.evaluated(from: parameter) - width.half
-//			let y = self.top.evaluated(from: parameter)
-//			let frame = CGRect(x: x,
-//			                   y: y,
-//			                   width: width,
-//			                   height: height)
-//			return frame
-//
-//		})
-//
-//		let editor = LayoutEditor(layout)
-//
-//		return editor
-//
-//	}
-//
-//}
+extension CenterTopWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEditorType {
 
+    public typealias WillSetHeightMaker = LayoutEditor
+    
+    public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+        
+        let width = self.width.evaluated(from: parameter, theOtherAxis: .height(0), fittingCalculation: fittingCalculation)
+        let height = height.evaluated(from: parameter, theOtherAxis: .width(width), fittingCalculation: fittingCalculation)
+        let x = self.center.evaluated(from: parameter) - width.half
+        let y = self.top.evaluated(from: parameter)
+        return CGRect(x: x, y: y, width: width, height: height)
+        
+    }
+
+}
