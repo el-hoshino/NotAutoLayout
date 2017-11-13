@@ -22,7 +22,7 @@ extension DidStoreMiddleRightLayoutMaker {
 	private func makeFrame(middleRight: CGPoint, topLeft: CGPoint) -> CGRect {
 		
 		let width = middleRight.x - topLeft.x
-		let height = (middleRight.y - topLeft.y) * 2
+		let height = (middleRight.y - topLeft.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleRight: middleRight, size: size)
@@ -31,8 +31,8 @@ extension DidStoreMiddleRightLayoutMaker {
 	
 	private func makeFrame(middleRight: CGPoint, topCenter: CGPoint) -> CGRect {
 		
-		let width = (middleRight.x - topCenter.x) * 2
-		let height = (middleRight.y - topCenter.y) * 2
+		let width = (middleRight.x - topCenter.x).doubled
+		let height = (middleRight.y - topCenter.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleRight: middleRight, size: size)
@@ -42,7 +42,7 @@ extension DidStoreMiddleRightLayoutMaker {
 	private func makeFrame(middleRight: CGPoint, bottomLeft: CGPoint) -> CGRect {
 		
 		let width = middleRight.x - bottomLeft.x
-		let height = (bottomLeft.y - middleRight.y) * 2
+		let height = (bottomLeft.y - middleRight.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleRight: middleRight, size: size)
@@ -51,8 +51,8 @@ extension DidStoreMiddleRightLayoutMaker {
 	
 	private func makeFrame(middleRight: CGPoint, bottomCenter: CGPoint) -> CGRect {
 		
-		let width = (middleRight.x - bottomCenter.x) * 2
-		let height = (bottomCenter.y - middleRight.y) * 2
+		let width = (middleRight.x - bottomCenter.x).doubled
+		let height = (bottomCenter.y - middleRight.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleRight: middleRight, size: size)
@@ -62,7 +62,7 @@ extension DidStoreMiddleRightLayoutMaker {
 	private func makeFrame(middleRight: CGPoint, size: CGSize) -> CGRect {
 		
 		let x = middleRight.x - size.width
-		let y = middleRight.y - size.height.half
+		let y = middleRight.y - size.height.halved
 		let origin = CGPoint(x: x, y: y)
 		let frame = CGRect(origin: origin, size: size)
 		

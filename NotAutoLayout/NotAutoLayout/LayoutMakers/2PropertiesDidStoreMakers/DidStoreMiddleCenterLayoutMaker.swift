@@ -21,8 +21,8 @@ extension DidStoreMiddleCenterLayoutMaker {
 	
 	private func makeFrame(middleCenter: CGPoint, topLeft: CGPoint) -> CGRect {
 		
-		let width = (middleCenter.x - topLeft.x) * 2
-		let height = (middleCenter.y - topLeft.y) * 2
+		let width = (middleCenter.x - topLeft.x).doubled
+		let height = (middleCenter.y - topLeft.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleCenter: middleCenter, size: size)
@@ -31,8 +31,8 @@ extension DidStoreMiddleCenterLayoutMaker {
 	
 	private func makeFrame(middleCenter: CGPoint, topRight: CGPoint) -> CGRect {
 		
-		let width = (topRight.x - middleCenter.x) * 2
-		let height = (middleCenter.y - topRight.y) * 2
+		let width = (topRight.x - middleCenter.x).doubled
+		let height = (middleCenter.y - topRight.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleCenter: middleCenter, size: size)
@@ -41,8 +41,8 @@ extension DidStoreMiddleCenterLayoutMaker {
 	
 	private func makeFrame(middleCenter: CGPoint, bottomLeft: CGPoint) -> CGRect {
 		
-		let width = (middleCenter.x - bottomLeft.x) * 2
-		let height = (bottomLeft.y - middleCenter.y) * 2
+		let width = (middleCenter.x - bottomLeft.x).doubled
+		let height = (bottomLeft.y - middleCenter.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleCenter: middleCenter, size: size)
@@ -51,8 +51,8 @@ extension DidStoreMiddleCenterLayoutMaker {
 	
 	private func makeFrame(middleCenter: CGPoint, bottomRight: CGPoint) -> CGRect {
 		
-		let width = (bottomRight.x - middleCenter.x) * 2
-		let height = (bottomRight.y - middleCenter.y) * 2
+		let width = (bottomRight.x - middleCenter.x).doubled
+		let height = (bottomRight.y - middleCenter.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(middleCenter: middleCenter, size: size)
@@ -61,8 +61,8 @@ extension DidStoreMiddleCenterLayoutMaker {
 	
 	private func makeFrame(middleCenter: CGPoint, size: CGSize) -> CGRect {
 		
-		let x = middleCenter.x - size.width.half
-		let y = middleCenter.y - size.height.half
+		let x = middleCenter.x - size.width.halved
+		let y = middleCenter.y - size.height.halved
 		let origin = CGPoint(x: x, y: y)
 		let frame = CGRect(origin: origin, size: size)
 		

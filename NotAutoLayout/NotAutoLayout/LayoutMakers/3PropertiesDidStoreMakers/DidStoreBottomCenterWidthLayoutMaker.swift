@@ -22,7 +22,7 @@ extension DidStoreBottomCenterWidthLayoutMaker {
 	
 	private func makeFrame(bottomCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
-		let frame = CGRect(x: bottomCenter.x - width.half,
+		let frame = CGRect(x: bottomCenter.x - width.halved,
 		                   y: bottomCenter.y - height,
 		                   width: width,
 		                   height: height)

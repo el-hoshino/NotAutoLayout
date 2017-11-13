@@ -10,16 +10,12 @@ import Foundation
 
 extension CGFloat {
 	
-	var zero: CGFloat {
-		return 0
-	}
-	
-	var half: CGFloat {
+	var halved: CGFloat {
 		return self / 2
 	}
 	
-	var full: CGFloat {
-		return self
+	var doubled: CGFloat {
+		return self * 2
 	}
 	
 }
