@@ -31,7 +31,7 @@ extension DidStoreBottomRightLayoutMaker {
 	
 	private func makeFrame(bottomRight: CGPoint, topCenter: CGPoint) -> CGRect {
 		
-		let width = (bottomRight.x - topCenter.x) * 2
+		let width = (bottomRight.x - topCenter.x).doubled
 		let height = bottomRight.y - topCenter.y
 		let size = CGSize(width: width, height: height)
 		
@@ -42,7 +42,7 @@ extension DidStoreBottomRightLayoutMaker {
 	private func makeFrame(bottomRight: CGPoint, middleLeft: CGPoint) -> CGRect {
 		
 		let width = bottomRight.x - middleLeft.x
-		let height = (bottomRight.y - middleLeft.y) * 2
+		let height = (bottomRight.y - middleLeft.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(bottomRight: bottomRight, size: size)
@@ -51,8 +51,8 @@ extension DidStoreBottomRightLayoutMaker {
 	
 	private func makeFrame(bottomRight: CGPoint, middleCenter: CGPoint) -> CGRect {
 		
-		let width = (bottomRight.x - middleCenter.x) * 2
-		let height = (bottomRight.y - middleCenter.y) * 2
+		let width = (bottomRight.x - middleCenter.x).doubled
+		let height = (bottomRight.y - middleCenter.y).doubled
 		let size = CGSize(width: width, height: height)
 		
 		return self.makeFrame(bottomRight: bottomRight, size: size)

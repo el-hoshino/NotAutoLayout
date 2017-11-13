@@ -24,7 +24,7 @@ extension DidStoreCenterTopBottomLayoutMaker {
 	
 	private func makeFrame(center: CGFloat, top: CGFloat, bottom: CGFloat, width: CGFloat) -> CGRect {
 		
-		let x = center - width.half
+		let x = center - width.halved
 		let y = top
 		let height = bottom - top
 		let frame = CGRect(x: x, y: y, width: width, height: height)
@@ -45,7 +45,7 @@ extension DidStoreCenterTopBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluate
 		let height = bottom - top
 		let center = self.center.evaluated(from: parameter)
 		let width = width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(height))
-		let x = center - width.half
+		let x = center - width.halved
 		let y = top
 		let frame = CGRect(x: x, y: y, width: width, height: height)
 		

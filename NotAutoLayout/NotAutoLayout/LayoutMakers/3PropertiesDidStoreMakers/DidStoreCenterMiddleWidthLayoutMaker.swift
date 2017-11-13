@@ -28,8 +28,8 @@ extension DidStoreCenterMiddleWidthLayoutMaker: LayoutMakerCanStoreHeightToEvalu
         
         let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
-        let x = self.center.evaluated(from: parameter) - width.half
-        let y = self.middle.evaluated(from: parameter) - height.half
+        let x = self.center.evaluated(from: parameter) - width.halved
+        let y = self.middle.evaluated(from: parameter) - height.halved
         return CGRect(x: x, y: y, width: width, height: height)
         
     }

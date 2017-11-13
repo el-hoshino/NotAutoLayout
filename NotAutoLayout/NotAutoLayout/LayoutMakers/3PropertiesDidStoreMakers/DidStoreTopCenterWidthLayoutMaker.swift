@@ -22,7 +22,7 @@ extension DidStoreTopCenterWidthLayoutMaker {
 	
 	private func makeFrame(topCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
-		let frame = CGRect(x: topCenter.x - width.half,
+		let frame = CGRect(x: topCenter.x - width.halved,
 		                   y: topCenter.y,
 		                   width: width,
 		                   height: height)
