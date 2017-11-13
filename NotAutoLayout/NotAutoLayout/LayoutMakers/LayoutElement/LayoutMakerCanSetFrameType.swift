@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetFrameType: LayoutMakerType {
 	
 	associatedtype WillSetFrameMaker
 	
-	func setFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker
+	func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetFrameType {
         
         let frame = LayoutElement.Rect.constant(frame)
         
-        let maker = self.setFrame(frame)
+        let maker = self.storeFrame(frame)
         
         return maker
         
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetFrameType {
         
         let frame = LayoutElement.Rect.closure(frame)
         
-        let maker = self.setFrame(frame)
+        let maker = self.storeFrame(frame)
         
         return maker
         
@@ -46,7 +46,7 @@ extension LayoutMakerCanSetFrameType {
         
         let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin().inside(insets) })
         
-        let maker = setFrame(frame)
+        let maker = storeFrame(frame)
         
         return maker
         
@@ -57,7 +57,7 @@ extension LayoutMakerCanSetFrameType {
         
         let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets) })
         
-        let maker = setFrame(frame)
+        let maker = storeFrame(frame)
         
         return maker
 
@@ -67,16 +67,16 @@ extension LayoutMakerCanSetFrameType {
 
 public protocol LayoutMakerCanSetFrameToMakeLayoutEditorType: LayoutMakerCanSetFrameType where WillSetFrameMaker == LayoutEditor {
     
-    func makeFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect
+    func evaluateFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect
     
 }
 
 extension LayoutMakerCanSetFrameToMakeLayoutEditorType {
 	
-    public func setFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
+    public func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
         
         let layout = Layout(frame: { (parameter) -> CGRect in
-            return self.makeFrame(frame: frame, parameter: parameter)
+            return self.evaluateFrame(frame: frame, parameter: parameter)
         })
         
         let editor = LayoutEditor(layout)

@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetTopLeftType: LayoutMakerType {
 	
 	associatedtype WillSetTopLeftMaker
 	
-	func setTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker
+	func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetTopLeftType {
 		
 		let topLeft = LayoutElement.Point.constant(topLeft)
 		
-		let maker = self.setTopLeft(topLeft)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetTopLeftType {
 		
 		let topLeft = LayoutElement.Point.closure(topLeft)
 		
-		let maker = self.setTopLeft(topLeft)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetTopLeftType {
 		
 		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setTopLeft(topLeft)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetTopLeftType {
 		
 		let topLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setTopLeft(topLeft)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetTopLeftType {
 
 public protocol LayoutMakerCanSetTopLeftToMakeLayoutEditorType: LayoutMakerCanSetTopLeftType where WillSetTopLeftMaker == LayoutEditor {
 	
-	func makeFrame(topLeft: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(topLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetTopLeftToMakeLayoutEditorType {
 	
-	public func setTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
+	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(topLeft: topLeft, evaluatedFrom: parameter)
+			return self.evaluateFrame(topLeft: topLeft, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

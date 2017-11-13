@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetCenterType: LayoutMakerType {
 	
 	associatedtype WillSetCenterMaker
 	
-	func setCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker
+	func storeCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetCenterType {
 		
 		let center = LayoutElement.Line.constant(center)
 		
-		let maker = self.setCenter(center)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetCenterType {
 		
 		let center = LayoutElement.Line.closure(center)
 		
-		let maker = self.setCenter(center)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetCenterType {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setCenter(center)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetCenterType {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setCenter(center)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetCenterType {
 
 public protocol LayoutMakerCanSetCenterToMakeLayoutEditorType: LayoutMakerCanSetCenterType where WillSetCenterMaker == LayoutEditor {
 	
-	func makeFrame(center: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(center: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetCenterToMakeLayoutEditorType {
 	
-	public func setCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker {
+	public func storeCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(center: center, evaluatedFrom: parameter)
+			return self.evaluateFrame(center: center, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetMiddleCenterType: LayoutMakerType {
 	
 	associatedtype WillSetMiddleCenterMaker
 	
-	func setMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker
+	func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetMiddleCenterType {
 		
 		let middleCenter = LayoutElement.Point.constant(middleCenter)
 		
-		let maker = self.setMiddleCenter(middleCenter)
+		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetMiddleCenterType {
 		
 		let middleCenter = LayoutElement.Point.closure(middleCenter)
 		
-		let maker = self.setMiddleCenter(middleCenter)
+		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetMiddleCenterType {
 		
 		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setMiddleCenter(middleCenter)
+		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetMiddleCenterType {
 		
 		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setMiddleCenter(middleCenter)
+		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetMiddleCenterType {
 
 public protocol LayoutMakerCanSetMiddleCenterToMakeLayoutEditorType: LayoutMakerCanSetMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
 	
-	func makeFrame(middleCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(middleCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetMiddleCenterToMakeLayoutEditorType {
 	
-	public func setMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(middleCenter: middleCenter, evaluatedFrom: parameter)
+			return self.evaluateFrame(middleCenter: middleCenter, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

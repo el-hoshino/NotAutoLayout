@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetBottomRightType: LayoutMakerType {
 	
 	associatedtype WillSetBottomRightMaker
 	
-	func setBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker
+	func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetBottomRightType {
 		
 		let bottomRight = LayoutElement.Point.constant(bottomRight)
 		
-		let maker = self.setBottomRight(bottomRight)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetBottomRightType {
 		
 		let bottomRight = LayoutElement.Point.closure(bottomRight)
 		
-		let maker = self.setBottomRight(bottomRight)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetBottomRightType {
 		
 		let bottomRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setBottomRight(bottomRight)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetBottomRightType {
 		
 		let bottomRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setBottomRight(bottomRight)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetBottomRightType {
 
 public protocol LayoutMakerCanSetBottomRightToMakeLayoutEditorType: LayoutMakerCanSetBottomRightType where WillSetBottomRightMaker == LayoutEditor {
 	
-	func makeFrame(bottomRight: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(bottomRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetBottomRightToMakeLayoutEditorType {
 	
-	public func setBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker {
+	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(bottomRight: bottomRight, evaluatedFrom: parameter)
+			return self.evaluateFrame(bottomRight: bottomRight, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

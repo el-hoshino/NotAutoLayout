@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetMiddleRightType: LayoutMakerType {
 	
 	associatedtype WillSetMiddleRightMaker
 	
-	func setMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker
+	func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetMiddleRightType {
 		
 		let middleRight = LayoutElement.Point.constant(middleRight)
 		
-		let maker = self.setMiddleRight(middleRight)
+		let maker = self.storeMiddleRight(middleRight)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetMiddleRightType {
 		
 		let middleRight = LayoutElement.Point.closure(middleRight)
 		
-		let maker = self.setMiddleRight(middleRight)
+		let maker = self.storeMiddleRight(middleRight)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetMiddleRightType {
 		
 		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setMiddleRight(middleRight)
+		let maker = self.storeMiddleRight(middleRight)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetMiddleRightType {
 		
 		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setMiddleRight(middleRight)
+		let maker = self.storeMiddleRight(middleRight)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetMiddleRightType {
 
 public protocol LayoutMakerCanSetMiddleRightToMakeLayoutEditorType: LayoutMakerCanSetMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
 	
-	func makeFrame(middleRight: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(middleRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetMiddleRightToMakeLayoutEditorType {
 	
-	public func setMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker {
+	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(middleRight: middleRight, evaluatedFrom: parameter)
+			return self.evaluateFrame(middleRight: middleRight, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

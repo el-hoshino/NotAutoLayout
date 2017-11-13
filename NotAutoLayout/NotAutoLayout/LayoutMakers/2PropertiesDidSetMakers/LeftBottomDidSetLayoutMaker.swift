@@ -40,7 +40,7 @@ extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorTy
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameter)
 		let bottom = self.bottom.evaluated(from: parameter)
@@ -57,7 +57,7 @@ extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
 	public typealias WillSetWidthMaker = LeftBottomWidthDidSetLayoutMaker
 	
-	public func setWidth(_ width: LayoutElement.Length) -> LeftBottomWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> LeftBottomWidthDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -73,7 +73,7 @@ extension LeftBottomDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
 	public typealias WillSetHeightMaker = LeftBottomHeightDidSetLayoutMaker
 	
-	public func setHeight(_ height: LayoutElement.Length) -> LeftBottomHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> LeftBottomHeightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

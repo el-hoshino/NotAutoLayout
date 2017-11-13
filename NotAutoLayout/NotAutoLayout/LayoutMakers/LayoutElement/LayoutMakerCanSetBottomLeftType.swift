@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetBottomLeftType: LayoutMakerType {
 	
 	associatedtype WillSetBottomLeftMaker
 	
-	func setBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker
+	func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetBottomLeftType {
 		
 		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
 		
-		let maker = self.setBottomLeft(bottomLeft)
+		let maker = self.storeBottomLeft(bottomLeft)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetBottomLeftType {
 		
 		let bottomLeft = LayoutElement.Point.closure(bottomLeft)
 		
-		let maker = self.setBottomLeft(bottomLeft)
+		let maker = self.storeBottomLeft(bottomLeft)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetBottomLeftType {
 		
 		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setBottomLeft(bottomLeft)
+		let maker = self.storeBottomLeft(bottomLeft)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetBottomLeftType {
 		
 		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setBottomLeft(bottomLeft)
+		let maker = self.storeBottomLeft(bottomLeft)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetBottomLeftType {
 
 public protocol LayoutMakerCanSetBottomLeftToMakeLayoutEditorType: LayoutMakerCanSetBottomLeftType where WillSetBottomLeftMaker == LayoutEditor {
 	
-	func makeFrame(bottomLeft: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(bottomLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetBottomLeftToMakeLayoutEditorType {
 	
-	public func setBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(bottomLeft: bottomLeft, evaluatedFrom: parameter)
+			return self.evaluateFrame(bottomLeft: bottomLeft, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

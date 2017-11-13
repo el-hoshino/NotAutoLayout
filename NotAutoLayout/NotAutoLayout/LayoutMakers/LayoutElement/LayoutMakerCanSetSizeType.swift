@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetSizeType: LayoutMakerType {
 	
 	associatedtype WillSetSizeMaker
 	
-	func setSize(_ size: LayoutElement.Size) -> WillSetSizeMaker
+	func storeSize(_ size: LayoutElement.Size) -> WillSetSizeMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetSizeType {
 		
 		let size = LayoutElement.Size.constant(size)
 		
-		let maker = self.setSize(size)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetSizeType {
 		
 		let size = LayoutElement.Size.closure(size)
 		
-		let maker = self.setSize(size)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -42,7 +42,7 @@ extension LayoutMakerCanSetSizeType {
 		
 		let size = LayoutElement.Size.fits(fittingSize)
 		
-		let maker = self.setSize(size)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -52,16 +52,16 @@ extension LayoutMakerCanSetSizeType {
 
 public protocol LayoutMakerCanSetSizeToMakeLayoutEditorType: LayoutMakerCanSetSizeType where WillSetSizeMaker == LayoutEditor {
 	
-	func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetSizeToMakeLayoutEditorType {
 	
-	public func setSize(_ size: LayoutElement.Size) -> WillSetSizeMaker {
+	public func storeSize(_ size: LayoutElement.Size) -> WillSetSizeMaker {
 		
 		let layout = Layout(frame: { (parameter, fitting) -> CGRect in
-			return self.makeFrame(size: size, parameter: parameter, fittingCalculation: fitting)
+			return self.evaluateFrame(size: size, parameter: parameter, fittingCalculation: fitting)
 		})
 		
 		let editor = LayoutEditor(layout)

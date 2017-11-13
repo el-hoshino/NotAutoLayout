@@ -40,7 +40,7 @@ extension CenterTopDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorTyp
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let center = self.center.evaluated(from: parameter)
 		let top = self.top.evaluated(from: parameter)
@@ -57,7 +57,7 @@ extension CenterTopDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = CenterTopMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Line) -> CenterTopMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> CenterTopMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -73,7 +73,7 @@ extension CenterTopDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = CenterTopBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Line) -> CenterTopBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> CenterTopBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -90,7 +90,7 @@ extension CenterTopDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
 	public typealias WillSetWidthMaker = CenterTopWidthDidSetLayoutMaker
 	
-	public func setWidth(_ width: LayoutElement.Length) -> CenterTopWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> CenterTopWidthDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -106,7 +106,7 @@ extension CenterTopDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
 	public typealias WillSetHeightMaker = CenterTopHeightDidSetLayoutMaker
 	
-	public func setHeight(_ height: LayoutElement.Length) -> CenterTopHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> CenterTopHeightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,

@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetTopRightType: LayoutMakerType {
 	
 	associatedtype WillSetTopRightMaker
 	
-	func setTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker
+	func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetTopRightType {
 		
 		let topRight = LayoutElement.Point.constant(topRight)
 		
-		let maker = self.setTopRight(topRight)
+		let maker = self.storeTopRight(topRight)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetTopRightType {
 		
 		let topRight = LayoutElement.Point.closure(topRight)
 		
-		let maker = self.setTopRight(topRight)
+		let maker = self.storeTopRight(topRight)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetTopRightType {
 		
 		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setTopRight(topRight)
+		let maker = self.storeTopRight(topRight)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetTopRightType {
 		
 		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setTopRight(topRight)
+		let maker = self.storeTopRight(topRight)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetTopRightType {
 
 public protocol LayoutMakerCanSetTopRightToMakeLayoutEditorType: LayoutMakerCanSetTopRightType where WillSetTopRightMaker == LayoutEditor {
 	
-	func makeFrame(topRight: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(topRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetTopRightToMakeLayoutEditorType {
 	
-	public func setTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker {
+	public func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(topRight: topRight, evaluatedFrom: parameter)
+			return self.evaluateFrame(topRight: topRight, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

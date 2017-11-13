@@ -77,7 +77,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetMiddleCenterToMakeLayoutEdi
 	
 	public typealias WillSetMiddleCenterMaker = LayoutEditor
 	
-	public func makeFrame(middleCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(middleCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
 		let topLeft = self.topLeft.evaluated(from: parameter)
 		let middleCenter = middleCenter.evaluated(from: parameter)
 		return self.makeFrame(topLeft: topLeft, middleCenter: middleCenter)
@@ -90,7 +90,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetMiddleRightToMakeLayoutEdit
 	
 	public typealias WillSetMiddleRightMaker = LayoutEditor
 	
-	public func makeFrame(middleRight: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(middleRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
 		let topLeft = self.topLeft.evaluated(from: parameter)
 		let middleRight = middleRight.evaluated(from: parameter)
 		return self.makeFrame(topLeft: topLeft, middleRight: middleRight)
@@ -103,7 +103,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetBottomCenterToMakeLayoutEdi
 	
 	public typealias WillSetBottomCenterMaker = LayoutEditor
 	
-	public func makeFrame(bottomCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
 		let topLeft = self.topLeft.evaluated(from: parameter)
 		let bottomCenter = bottomCenter.evaluated(from: parameter)
 		return self.makeFrame(topLeft: topLeft, bottomCenter: bottomCenter)
@@ -116,7 +116,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetBottomRightToMakeLayoutEdit
 	
 	public typealias WillSetBottomRightMaker = LayoutEditor
 	
-	public func makeFrame(bottomRight: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(bottomRight: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
 		let topLeft = self.topLeft.evaluated(from: parameter)
 		let bottomRight = bottomRight.evaluated(from: parameter)
 		return self.makeFrame(topLeft: topLeft, bottomRight: bottomRight)
@@ -129,7 +129,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType 
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let topLeft = self.topLeft.evaluated(from: parameter)
 		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
@@ -145,7 +145,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetCenterType {
 	
 	public typealias WillSetCenterMaker = TopLeftCenterDidSetLayoutMaker
 	
-	public func setCenter(_ center: LayoutElement.Line) -> TopLeftCenterDidSetLayoutMaker {
+	public func storeCenter(_ center: LayoutElement.Line) -> TopLeftCenterDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,
@@ -160,7 +160,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetRightType {
 	
 	public typealias WillSetRightMaker = TopLeftRightDidSetLayoutMaker
 	
-	public func setRight(_ right: LayoutElement.Line) -> TopLeftRightDidSetLayoutMaker {
+	public func storeRight(_ right: LayoutElement.Line) -> TopLeftRightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,
@@ -175,7 +175,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = TopLeftMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Line) -> TopLeftMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> TopLeftMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,
@@ -190,7 +190,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = TopLeftBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Line) -> TopLeftBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> TopLeftBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,
@@ -206,7 +206,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
 	public typealias WillSetWidthMaker = TopLeftWidthDidSetLayoutMaker
 	
-	public func setWidth(_ width: LayoutElement.Length) -> TopLeftWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> TopLeftWidthDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,
@@ -221,7 +221,7 @@ extension TopLeftDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
 	public typealias WillSetHeightMaker = TopLeftHeightDidSetLayoutMaker
 	
-	public func setHeight(_ height: LayoutElement.Length) -> TopLeftHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> TopLeftHeightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 topLeft: self.topLeft,

@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetHeightType: LayoutMakerType {
 	
 	associatedtype WillSetHeightMaker
 	
-	func setHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker
+	func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetHeightType {
 		
 		let height = LayoutElement.Length.constant(height)
 		
-		let maker = self.setHeight(height)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetHeightType {
 		
 		let height = LayoutElement.Length.closure(height)
 		
-		let maker = self.setHeight(height)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -42,7 +42,7 @@ extension LayoutMakerCanSetHeightType {
 		
 		let height = LayoutElement.Length.fits(fittingHeight)
 		
-		let maker = self.setHeight(height)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -52,16 +52,16 @@ extension LayoutMakerCanSetHeightType {
 
 public protocol LayoutMakerCanSetHeightToMakeLayoutEditorType: LayoutMakerCanSetHeightType where WillSetHeightMaker == LayoutEditor {
 	
-	func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetHeightToMakeLayoutEditorType {
 	
-	public func setHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker {
 		
 		let layout = Layout(frame: { (parameter, fitting) -> CGRect in
-			return self.makeFrame(height: height, parameter: parameter, fittingCalculation: fitting)
+			return self.evaluateFrame(height: height, parameter: parameter, fittingCalculation: fitting)
 		})
 		
 		let editor = LayoutEditor(layout)

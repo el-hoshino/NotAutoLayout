@@ -39,7 +39,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetSizeToMakeLayoutEditorType 
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func makeFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameter)
 		let top = self.top.evaluated(from: parameter)
@@ -56,7 +56,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = LeftTopMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Line) -> LeftTopMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> LeftTopMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -72,7 +72,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = LeftTopBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Line) -> LeftTopBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> LeftTopBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -89,7 +89,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetWidthType {
 	
 	public typealias WillSetWidthMaker = LeftTopWidthDidSetLayoutMaker
 	
-	public func setWidth(_ width: LayoutElement.Length) -> LeftTopWidthDidSetLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> LeftTopWidthDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,
@@ -105,7 +105,7 @@ extension LeftTopDidSetLayoutMaker: LayoutMakerCanSetHeightType {
 	
 	public typealias WillSetHeightMaker = LeftTopHeightDidSetLayoutMaker
 	
-	public func setHeight(_ height: LayoutElement.Length) -> LeftTopHeightDidSetLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> LeftTopHeightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: self.left,

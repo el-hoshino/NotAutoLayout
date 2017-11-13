@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetTopCenterType: LayoutMakerType {
 	
 	associatedtype WillSetTopCenterMaker
 	
-	func setTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker
+	func storeTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetTopCenterType {
 		
 		let topCenter = LayoutElement.Point.constant(topCenter)
 		
-		let maker = self.setTopCenter(topCenter)
+		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetTopCenterType {
 		
 		let topCenter = LayoutElement.Point.closure(topCenter)
 		
-		let maker = self.setTopCenter(topCenter)
+		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetTopCenterType {
 		
 		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setTopCenter(topCenter)
+		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetTopCenterType {
 		
 		let topCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setTopCenter(topCenter)
+		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetTopCenterType {
 
 public protocol LayoutMakerCanSetTopCenterToMakeLayoutEditorType: LayoutMakerCanSetTopCenterType where WillSetTopCenterMaker == LayoutEditor {
 	
-	func makeFrame(topCenter: LayoutElement.Point, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(topCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetTopCenterToMakeLayoutEditorType {
 	
-	public func setTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
+	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(topCenter: topCenter, evaluatedFrom: parameter)
+			return self.evaluateFrame(topCenter: topCenter, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

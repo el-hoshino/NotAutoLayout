@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetTopType: LayoutMakerType {
 	
 	associatedtype WillSetTopMaker
 	
-	func setTop(_ top: LayoutElement.Line) -> WillSetTopMaker
+	func storeTop(_ top: LayoutElement.Line) -> WillSetTopMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetTopType {
 		
 		let top = LayoutElement.Line.constant(top)
 		
-		let maker = self.setTop(top)
+		let maker = self.storeTop(top)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetTopType {
 		
 		let top = LayoutElement.Line.closure(top)
 		
-		let maker = self.setTop(top)
+		let maker = self.storeTop(top)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetTopType {
 		
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setTop(top)
+		let maker = self.storeTop(top)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetTopType {
 		
 		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setTop(top)
+		let maker = self.storeTop(top)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetTopType {
 
 public protocol LayoutMakerCanSetTopToMakeLayoutEditorType: LayoutMakerCanSetTopType where WillSetTopMaker == LayoutEditor {
 	
-	func makeFrame(top: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(top: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetTopToMakeLayoutEditorType {
 	
-	public func setTop(_ top: LayoutElement.Line) -> WillSetTopMaker {
+	public func storeTop(_ top: LayoutElement.Line) -> WillSetTopMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(top: top, evaluatedFrom: parameter)
+			return self.evaluateFrame(top: top, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

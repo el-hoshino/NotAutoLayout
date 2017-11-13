@@ -24,7 +24,7 @@ extension CenterTopWidthDidSetLayoutMaker: LayoutMakerCanSetHeightToMakeLayoutEd
 
     public typealias WillSetHeightMaker = LayoutEditor
     
-    public func makeFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
         
         let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))

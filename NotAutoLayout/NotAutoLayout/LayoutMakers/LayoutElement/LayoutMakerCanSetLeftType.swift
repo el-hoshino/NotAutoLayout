@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetLeftType: LayoutMakerType {
 	
 	associatedtype WillSetLeftMaker
 	
-	func setLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker
+	func storeLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetLeftType {
 		
 		let left = LayoutElement.Line.constant(left)
 		
-		let maker = self.setLeft(left)
+		let maker = self.storeLeft(left)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetLeftType {
 		
 		let left = LayoutElement.Line.closure(left)
 		
-		let maker = self.setLeft(left)
+		let maker = self.storeLeft(left)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetLeftType {
 		
 		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setLeft(left)
+		let maker = self.storeLeft(left)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetLeftType {
 		
 		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setLeft(left)
+		let maker = self.storeLeft(left)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetLeftType {
 
 public protocol LayoutMakerCanSetLeftToMakeLayoutEditorType: LayoutMakerCanSetLeftType where WillSetLeftMaker == LayoutEditor {
 	
-	func makeFrame(left: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(left: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetLeftToMakeLayoutEditorType {
 	
-	public func setLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker {
+	public func storeLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(left: left, evaluatedFrom: parameter)
+			return self.evaluateFrame(left: left, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

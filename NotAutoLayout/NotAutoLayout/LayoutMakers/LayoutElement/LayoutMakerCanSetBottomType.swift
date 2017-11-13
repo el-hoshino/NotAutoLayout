@@ -12,7 +12,7 @@ public protocol LayoutMakerCanSetBottomType: LayoutMakerType {
 	
 	associatedtype WillSetBottomMaker
 	
-	func setBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker
+	func storeBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker
 	
 }
 
@@ -22,7 +22,7 @@ extension LayoutMakerCanSetBottomType {
 		
 		let bottom = LayoutElement.Line.constant(bottom)
 		
-		let maker = self.setBottom(bottom)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -32,7 +32,7 @@ extension LayoutMakerCanSetBottomType {
 		
 		let bottom = LayoutElement.Line.closure(bottom)
 		
-		let maker = self.setBottom(bottom)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -59,7 +59,7 @@ extension LayoutMakerCanSetBottomType {
 		
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
-		let maker = self.setBottom(bottom)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -70,7 +70,7 @@ extension LayoutMakerCanSetBottomType {
 		
 		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		
-		let maker = self.setBottom(bottom)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -80,16 +80,16 @@ extension LayoutMakerCanSetBottomType {
 
 public protocol LayoutMakerCanSetBottomToMakeLayoutEditorType: LayoutMakerCanSetBottomType where WillSetBottomMaker == LayoutEditor {
 	
-	func makeFrame(bottom: LayoutElement.Line, evaluatedFrom parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(bottom: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
 	
 }
 
 extension LayoutMakerCanSetBottomToMakeLayoutEditorType {
 	
-	public func setBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker {
 		
 		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.makeFrame(bottom: bottom, evaluatedFrom: parameter)
+			return self.evaluateFrame(bottom: bottom, parameter: parameter)
 		})
 		
 		let editor = LayoutEditor(layout)

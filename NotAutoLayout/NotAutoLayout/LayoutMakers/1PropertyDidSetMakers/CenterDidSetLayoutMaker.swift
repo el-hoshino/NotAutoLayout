@@ -22,7 +22,7 @@ extension CenterDidSetLayoutMaker: LayoutMakerCanSetRightType {
 	
 	public typealias WillSetRightMaker = CenterRightDidSetLayoutMaker
 	
-	public func setRight(_ right: LayoutElement.Line) -> CenterRightDidSetLayoutMaker {
+	public func storeRight(_ right: LayoutElement.Line) -> CenterRightDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -37,7 +37,7 @@ extension CenterDidSetLayoutMaker: LayoutMakerCanSetTopType {
 	
 	public typealias WillSetTopMaker = CenterTopDidSetLayoutMaker
 	
-	public func setTop(_ top: LayoutElement.Line) -> CenterTopDidSetLayoutMaker {
+	public func storeTop(_ top: LayoutElement.Line) -> CenterTopDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -52,7 +52,7 @@ extension CenterDidSetLayoutMaker: LayoutMakerCanSetMiddleType {
 	
 	public typealias WillSetMiddleMaker = CenterMiddleDidSetLayoutMaker
 	
-	public func setMiddle(_ middle: LayoutElement.Line) -> CenterMiddleDidSetLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> CenterMiddleDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -67,7 +67,7 @@ extension CenterDidSetLayoutMaker: LayoutMakerCanSetBottomType {
 	
 	public typealias WillSetBottomMaker = CenterBottomDidSetLayoutMaker
 	
-	public func setBottom(_ bottom: LayoutElement.Line) -> CenterBottomDidSetLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> CenterBottomDidSetLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
