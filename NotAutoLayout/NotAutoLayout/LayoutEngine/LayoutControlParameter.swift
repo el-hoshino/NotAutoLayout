@@ -139,14 +139,10 @@ extension LayoutControlParameter {
 		
 		let targetRatio = aspect.ratio ?? defaultRatio
 		
-		guard targetRatio.isFinite else {
+		guard targetRatio.isNaN == false,
+			canvasSize.ratio.isNaN == false
+		else {
 			return canvasSize
-		}
-		
-		if aspect.isFill {
-			guard canvasSize.ratio.isFinite else {
-				return canvasSize
-			}
 		}
 		
 		switch aspect {
