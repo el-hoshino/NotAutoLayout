@@ -29,7 +29,7 @@ extension CGSize {
 	static func makeSize(usingHeightIn canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
 		
 		guard ratio.isFinite else {
-			return CGSize(width: canvasSize.width, height: 0)
+			return CGSize(width: .greatestFiniteMagnitude, height: canvasSize.height)
 		}
 		
 		let height = canvasSize.height
@@ -43,7 +43,7 @@ extension CGSize {
 	static func makeSize(usingWidthIn canvasSize: CGSize, with ratio: CGFloat) -> CGSize {
 		
 		guard ratio.isNonZero else {
-			return CGSize(width: 0, height: canvasSize.height)
+			return CGSize(width: canvasSize.width, height: .greatestFiniteMagnitude)
 		}
 		
 		let width = canvasSize.width
