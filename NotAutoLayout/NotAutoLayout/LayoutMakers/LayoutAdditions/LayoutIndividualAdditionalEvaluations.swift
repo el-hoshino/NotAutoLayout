@@ -302,28 +302,28 @@ extension Layout {
 extension Layout {
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingWidth(to width: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBasePoint) -> Layout {
+	public func expandingWidth(to width: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingWidth(to: width, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBasePoint) -> Layout {
+	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingWidth(to: width, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingWidth(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBasePoint) -> Layout {
+	public func expandingWidth(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingWidth(by: diff, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBasePoint) -> Layout {
+	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingWidth(by: diff, from: reference) }
 		
@@ -334,28 +334,28 @@ extension Layout {
 extension Layout {
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingHeight(to height: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBasePoint) -> Layout {
+	public func expandingHeight(to height: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingHeight(to: height, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBasePoint) -> Layout {
+	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingHeight(to: height, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingHeight(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBasePoint) -> Layout {
+	public func expandingHeight(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingHeight(by: diff, from: reference) }
 		
 	}
 	
 	@available(*, introduced: 2.0, deprecated: 2.1, message: "Chaining methods in Layout are moved into LayoutEditor. Please use Layout.editing method to use these chaining methods.")
-	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBasePoint) -> Layout {
+	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBaseLine) -> Layout {
 		
 		return self.editing { $0.expandingHeight(by: diff, from: reference) }
 		

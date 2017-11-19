@@ -29,7 +29,8 @@ extension LayoutControlParameter {
 			}
 		}()
 		
-		let parameter = LayoutControlParameter(boundSize: boundSize, safeAreaInsets: safeAreaInsets)
+		let parameter = LayoutControlParameter(boundSize: boundSize,
+											   safeAreaInsets: safeAreaInsets)
 		
 		return parameter
 		
@@ -110,6 +111,46 @@ extension LayoutControlParameter {
 			
 		case false:
 			return boundsWithZeroOrigin
+		}
+		
+	}
+	
+}
+
+extension LayoutControlParameter {
+	
+	func evaluateSize(from calculation: (LayoutControlParameter) -> CGSize) -> CGSize {
+		
+		return calculation(self)
+		
+	}
+	
+	func evaluateSize(from aspect: LayoutElement.Size.AspectSizing, defaultRatio: CGFloat) -> CGSize {
+		
+		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
+			switch safeAreaOnly {
+			case true:
+				return self.safeSize
+				
+			case false:
+				return self.boundSize
+			}
+		}(aspect.safeAreaOnly)
+		
+		let targetRatio = aspect.ratio ?? defaultRatio
+		
+		guard targetRatio.isNaN == false,
+			canvasSize.ratio.isNaN == false
+		else {
+			return canvasSize
+		}
+		
+		switch aspect {
+		case .fit, .safeAreaFit:
+			return CGSize.aspectFitSize(in: canvasSize, with: targetRatio)
+			
+		case .fill, .safeAreaFill:
+			return CGSize.aspectFillSize(in: canvasSize, with: targetRatio)
 		}
 		
 	}
