@@ -313,27 +313,27 @@ extension LayoutEditor {
 
 extension LayoutEditor {
 	
-	public func expandingWidth(to width: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBasePoint) -> LayoutEditor {
+	public func expandingWidth(to width: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> LayoutEditor {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthTo(width, from: reference)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBasePoint) -> LayoutEditor {
+	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBaseLine) -> LayoutEditor {
 		
 		return self.expandingWidth(to: { _, _ in width }, from: reference)
 		
 	}
 	
-	public func expandingWidth(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBasePoint) -> LayoutEditor {
+	public func expandingWidth(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> LayoutEditor {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthBy(diff, from: reference)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBasePoint) -> LayoutEditor {
+	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBaseLine) -> LayoutEditor {
 		
 		return self.expandingWidth(by: { _, _ in diff }, from: reference)
 		
@@ -343,27 +343,27 @@ extension LayoutEditor {
 
 extension LayoutEditor {
 	
-	public func expandingHeight(to height: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBasePoint) -> LayoutEditor {
+	public func expandingHeight(to height: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBaseLine) -> LayoutEditor {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightTo(height, from: reference)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBasePoint) -> LayoutEditor {
+	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBaseLine) -> LayoutEditor {
 		
 		return self.expandingHeight(to: { _, _ in height }, from: reference)
 		
 	}
 	
-	public func expandingHeight(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBasePoint) -> LayoutEditor {
+	public func expandingHeight(by diff: @escaping AdditionalFloatEvaluation, from reference: CGRect.VerticalBaseLine) -> LayoutEditor {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightBy(diff, from: reference)
 		return self.addingAdditionalEvaluation(evaluation)
 		
 	}
 	
-	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBasePoint) -> LayoutEditor {
+	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBaseLine) -> LayoutEditor {
 		
 		return self.expandingHeight(by: { _, _ in diff }, from: reference)
 		

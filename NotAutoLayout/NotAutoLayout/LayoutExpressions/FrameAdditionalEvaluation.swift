@@ -40,11 +40,11 @@ enum FrameAdditionalEvaluation {
 	case pinchBottomTo(FloatEvaluation)
 	case pinchBottomBy(FloatEvaluation)
 	
-	case expandWidthTo(FloatEvaluation, from: CGRect.HorizontalBasePoint)
-	case expandWidthBy(FloatEvaluation, from: CGRect.HorizontalBasePoint)
+	case expandWidthTo(FloatEvaluation, from: CGRect.HorizontalBaseLine)
+	case expandWidthBy(FloatEvaluation, from: CGRect.HorizontalBaseLine)
 	
-	case expandHeightTo(FloatEvaluation, from: CGRect.VerticalBasePoint)
-	case expandHeightBy(FloatEvaluation, from: CGRect.VerticalBasePoint)
+	case expandHeightTo(FloatEvaluation, from: CGRect.VerticalBaseLine)
+	case expandHeightBy(FloatEvaluation, from: CGRect.VerticalBaseLine)
 	
 	case expandSizeTo(SizeEvaluation, from: CGRect.PlaneBasePoint)
 	case expandSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)

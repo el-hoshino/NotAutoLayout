@@ -75,7 +75,7 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	func evaluatedFrame(for view: UIView, after previousView: UIView?, with parameter: LayoutControlParameter) -> CGRect {
+	func evaluatedFrame(for view: UIView, after previousView: UIView?, with parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		if let previousView = previousView {
 			var frame = previousView.nal.identityFrame
@@ -87,7 +87,7 @@ extension SequentialLayout {
 			return frame
 			
 		} else {
-			let firstFrame = self.firstLayout.evaluatedFrame(for: view, with: parameter)
+			let firstFrame = self.firstLayout.evaluatedFrame(for: view, with: parameter, fittingCalculation: fittingCalculation)
 			
 			return firstFrame
 			

@@ -10,13 +10,19 @@ import Foundation
 
 extension CGRect {
 	
-	public struct HorizontalBasePoint {
+	@available(*, introduced: 2.0, deprecated: 2.2, renamed: "HorizontalBaseLine")
+	public typealias HorizontalBasePoint = HorizontalBaseLine
+	
+	public struct HorizontalBaseLine {
 		
 		var value: CGFloat
 		
 	}
 	
-	public struct VerticalBasePoint {
+	@available(*, introduced: 2.0, deprecated: 2.2, renamed: "VerticalBaseLine")
+	public typealias VerticalBasePoint = VerticalBaseLine
+	
+	public struct VerticalBaseLine {
 		
 		var value: CGFloat
 		
@@ -30,15 +36,15 @@ extension CGRect {
 	
 }
 
-extension CGRect.HorizontalBasePoint {
+extension CGRect.HorizontalBaseLine {
 	
-	public static let left		= CGRect.HorizontalBasePoint(value: 0)
-	public static let center	= CGRect.HorizontalBasePoint(value: 0.5)
-	public static let right		= CGRect.HorizontalBasePoint(value: 1)
+	public static let left		= CGRect.HorizontalBaseLine(value: 0)
+	public static let center	= CGRect.HorizontalBaseLine(value: 0.5)
+	public static let right		= CGRect.HorizontalBaseLine(value: 1)
 	
 }
 
-extension CGRect.HorizontalBasePoint {
+extension CGRect.HorizontalBaseLine {
 	
 	func value(in frame: CGRect) -> CGFloat {
 		return frame.width * self.value + frame.x
@@ -46,7 +52,7 @@ extension CGRect.HorizontalBasePoint {
 	
 }
 
-extension CGRect.HorizontalBasePoint: ExpressibleByFloatLiteral {
+extension CGRect.HorizontalBaseLine: ExpressibleByFloatLiteral {
 	
 	public init(floatLiteral value: Double) {
 		self.value = CGFloat(value)
@@ -54,15 +60,15 @@ extension CGRect.HorizontalBasePoint: ExpressibleByFloatLiteral {
 	
 }
 
-extension CGRect.VerticalBasePoint {
+extension CGRect.VerticalBaseLine {
 	
-	public static let top		= CGRect.VerticalBasePoint(value: 0)
-	public static let middle	= CGRect.VerticalBasePoint(value: 0.5)
-	public static let bottom	= CGRect.VerticalBasePoint(value: 1)
+	public static let top		= CGRect.VerticalBaseLine(value: 0)
+	public static let middle	= CGRect.VerticalBaseLine(value: 0.5)
+	public static let bottom	= CGRect.VerticalBaseLine(value: 1)
 	
 }
 
-extension CGRect.VerticalBasePoint {
+extension CGRect.VerticalBaseLine {
 	
 	func value(in frame: CGRect) -> CGFloat {
 		return frame.height * self.value + frame.y
@@ -70,7 +76,7 @@ extension CGRect.VerticalBasePoint {
 	
 }
 
-extension CGRect.VerticalBasePoint: ExpressibleByFloatLiteral {
+extension CGRect.VerticalBaseLine: ExpressibleByFloatLiteral {
 	
 	public init(floatLiteral value: Double) {
 		self.value = CGFloat(value)
@@ -115,7 +121,7 @@ extension CGRect.PlaneBasePoint {
 	
 }
 
-extension CGRect.HorizontalBasePoint {
+extension CGRect.HorizontalBaseLine {
 	
 	func originOffset(from widthDiff: CGFloat) -> CGFloat {
 		
@@ -125,7 +131,7 @@ extension CGRect.HorizontalBasePoint {
 	
 }
 
-extension CGRect.VerticalBasePoint {
+extension CGRect.VerticalBaseLine {
 	
 	func originOffset(from heightDiff: CGFloat) -> CGFloat {
 		
@@ -149,106 +155,6 @@ extension CGRect.PlaneBasePoint {
 
 extension CGRect {
 	
-	struct Float {
-		
-		fileprivate let value: (LayoutControlParameter) -> CGFloat
-		
-		static func constant(_ value: CGFloat) -> Float {
-			return Float(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGFloat) -> Float {
-			return Float(value: value)
-		}
-		
-	}
-	
-	struct Point {
-		
-		fileprivate let value: (LayoutControlParameter) -> CGPoint
-		
-		static func constant(_ value: CGPoint) -> Point {
-			return Point(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGPoint) -> Point {
-			return Point(value: value)
-		}
-		
-	}
-	
-	struct Size {
-		
-		fileprivate let value: (LayoutControlParameter) -> CGSize
-		
-		static func constant(_ value: CGSize) -> Size {
-			return Size(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGSize) -> Size {
-			return Size(value: value)
-		}
-		
-	}
-	
-	struct Rect {
-		
-		fileprivate let value: (LayoutControlParameter) -> CGRect
-		
-		static func constant(_ value: CGRect) -> Rect {
-			return Rect(value: { _ in value })
-		}
-		
-		static func closure(_ value: @escaping (LayoutControlParameter) -> CGRect) -> Rect {
-			return Rect(value: value)
-		}
-		
-	}
-	
-}
-
-extension CGRect.Float {
-	
-	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
-		
-		return self.value(parameter)
-		
-	}
-	
-}
-
-extension CGRect.Point {
-	
-	func evaluated(from parameter: LayoutControlParameter) -> CGPoint {
-		
-		return self.value(parameter)
-
-	}
-	
-}
-
-extension CGRect.Size {
-	
-	func evaluated(from parameter: LayoutControlParameter) -> CGSize {
-		
-		return self.value(parameter)
-
-	}
-	
-}
-
-extension CGRect.Rect {
-	
-	func evaluated(from parameter: LayoutControlParameter) -> CGRect {
-		
-		return self.value(parameter)
-
-	}
-	
-}
-
-extension CGRect {
-	
 	func inside(_ insets: UIEdgeInsets) -> CGRect {
 		
 		let x = self.origin.x + insets.left
@@ -262,7 +168,6 @@ extension CGRect {
 	}
 	
 }
-
 extension CGRect {
 	
 	var x: CGFloat{
@@ -425,7 +330,7 @@ extension CGRect {
 		self.size.height += heightDiff
 	}
 	
-	mutating func expandWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBasePoint) {
+	mutating func expandWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBaseLine) {
 		
 		let widthDiff = widthGoal - self.width
 		self.size.width = widthGoal
@@ -433,14 +338,14 @@ extension CGRect {
 		
 	}
 	
-	mutating func expandWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBasePoint) {
+	mutating func expandWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBaseLine) {
 		
 		self.size.width += widthDiff
 		self.origin.x += baseline.originOffset(from: widthDiff)
 		
 	}
 	
-	mutating func expandHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBasePoint) {
+	mutating func expandHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBaseLine) {
 		
 		let heightDiff = heightGoal - self.height
 		self.size.height = heightGoal
@@ -448,7 +353,7 @@ extension CGRect {
 		
 	}
 	
-	mutating func expandHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBasePoint) {
+	mutating func expandHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBaseLine) {
 		
 		self.size.height += heightDiff
 		self.origin.y += baseline.originOffset(from: heightDiff)
@@ -576,25 +481,25 @@ extension CGRect {
 		return frame
 	}
 	
-	func expandingWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+	func expandingWidth(to widthGoal: CGFloat, from baseline: CGRect.HorizontalBaseLine) -> CGRect {
 		var frame = self
 		frame.expandWidth(to: widthGoal, from: baseline)
 		return frame
 	}
 	
-	func expandingWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBasePoint) -> CGRect {
+	func expandingWidth(by widthDiff: CGFloat, from baseline: CGRect.HorizontalBaseLine) -> CGRect {
 		var frame = self
 		frame.expandWidth(by: widthDiff, from: baseline)
 		return frame
 	}
 	
-	func expandingHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+	func expandingHeight(to heightGoal: CGFloat, from baseline: CGRect.VerticalBaseLine) -> CGRect {
 		var frame = self
 		frame.expandHeight(to: heightGoal, from: baseline)
 		return frame
 	}
 	
-	func expandingHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBasePoint) -> CGRect {
+	func expandingHeight(by heightDiff: CGFloat, from baseline: CGRect.VerticalBaseLine) -> CGRect {
 		var frame = self
 		frame.expandHeight(by: heightDiff, from: baseline)
 		return frame

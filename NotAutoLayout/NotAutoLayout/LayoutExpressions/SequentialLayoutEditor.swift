@@ -110,14 +110,14 @@ extension SequentialLayoutEditor {
 
 extension SequentialLayoutEditor {
 	
-	public func expandingWidth(by diff: @escaping RestFrameFloatEvaluation, from reference: CGRect.HorizontalBasePoint) -> SequentialLayoutEditor {
+	public func expandingWidth(by diff: @escaping RestFrameFloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> SequentialLayoutEditor {
 		
 		let evaluation = SequentialRestFrameEvaluation.expandingWidthBy(diff, from: reference)
 		return self.addingRestFrameEvaluation(evaluation)
 		
 	}
 	
-	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBasePoint) -> SequentialLayoutEditor {
+	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBaseLine) -> SequentialLayoutEditor {
 		
 		return self.expandingWidth(by: { _, _ in diff }, from: reference)
 		
@@ -147,14 +147,14 @@ extension SequentialLayoutEditor {
 		
 	}
 	
-	public func expandingHeight(by diff: @escaping RestFrameFloatEvaluation, from reference: CGRect.VerticalBasePoint) -> SequentialLayoutEditor {
+	public func expandingHeight(by diff: @escaping RestFrameFloatEvaluation, from reference: CGRect.VerticalBaseLine) -> SequentialLayoutEditor {
 		
 		let evaluation = SequentialRestFrameEvaluation.expandingHeightBy(diff, from: reference)
 		return self.addingRestFrameEvaluation(evaluation)
 		
 	}
 	
-	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBasePoint) -> SequentialLayoutEditor {
+	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBaseLine) -> SequentialLayoutEditor {
 		
 		return self.expandingHeight(by: { _, _ in diff }, from: reference)
 		

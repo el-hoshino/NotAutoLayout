@@ -132,11 +132,11 @@ extension ProfileSummaryView {
 	
 	private func placeMainTitleView() {
 		
-		self.nal.layout(self.mainTitleLabel) { $0
+		self.nal.layout(self.mainTitleLabel, by: { $0
 			.pinTopRight(to: $0.parentView, s: .topRight)
 			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
 			.pinBottom(to: $0.parentView, s: .middle)
-		}
+		})
 		
 	}
 	
