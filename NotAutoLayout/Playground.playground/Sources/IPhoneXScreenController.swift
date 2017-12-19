@@ -35,7 +35,7 @@ extension IPhoneXScreenController {
 extension IPhoneXScreenController {
 	
 	private func initialize() {
-		self.additionalSafeAreaInsets = .init(top: 44, left: 0, bottom: 0, right: 34)
+		self.additionalSafeAreaInsets = .init(top: 44, left: 0, bottom: 34, right: 0)
 	}
 	
 }
