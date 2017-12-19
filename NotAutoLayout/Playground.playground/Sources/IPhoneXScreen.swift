@@ -47,6 +47,12 @@ extension IPhoneXScreen {
 		super.addSubview(self.notch)
 	}
 	
+	public override func insertSubview(_ view: UIView, belowSubview siblingSubview: UIView) {
+		super.insertSubview(view, belowSubview: siblingSubview)
+		assertNotch(with: view)
+		super.addSubview(self.notch)
+	}
+	
 	public override func insertSubview(_ view: UIView, at index: Int) {
 		super.insertSubview(view, at: index)
 		assertNotch(with: view)
