@@ -80,7 +80,7 @@ extension IPhoneXScreen {
 	private func setupNotch() {
 		
 		self.notch.sizeToFit()
-		self.addSubview(self.notch)
+		super.addSubview(self.notch)
 		
 	}
 	
