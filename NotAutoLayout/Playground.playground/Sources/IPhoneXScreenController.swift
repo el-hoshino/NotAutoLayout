@@ -1,6 +1,6 @@
 import UIKit
 
-class IPhoneXScreenController: UIViewController {
+public final class IPhoneXScreenController: UIViewController {
 	
 	private lazy var iPhoneXScreen: IPhoneXScreen = {
 		let screen = IPhoneXScreen()
@@ -8,21 +8,25 @@ class IPhoneXScreenController: UIViewController {
 		return screen
 	}()
 	
-	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+	public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 		self.initialize()
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		self.initialize()
+	}
+	
+	public convenience init() {
+		self.init(nibName: nil, bundle: nil)
 	}
 	
 }
 
 extension IPhoneXScreenController {
 	
-	override func loadView() {
+	public override func loadView() {
 		self.view = self.iPhoneXScreen
 	}
 	
