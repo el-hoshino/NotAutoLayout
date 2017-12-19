@@ -18,7 +18,15 @@ public final class IPhoneXScreen: UIView {
 		self.init(frame: .zero)
 	}
 	
-	open override func layoutSubviews() {
+}
+
+extension IPhoneXScreen {
+	
+	public override func sizeThatFits(_ size: CGSize) -> CGSize {
+		return CGSize(width: 375, height: 812)
+	}
+	
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		self.nal.layout(self.notch) { $0
@@ -27,41 +35,30 @@ public final class IPhoneXScreen: UIView {
 		}
 	}
 	
-	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		return CGSize(width: 375, height: 812)
-	}
-	
 	public override func addSubview(_ view: UIView) {
 		super.addSubview(view)
-		
-		guard (view == self.notch) == false else {
-			return
-		}
-		
-		self.addSubview(self.notch)
-		
+		assertNotch(with: view)
+		super.addSubview(self.notch)
 	}
 	
 	public override func insertSubview(_ view: UIView, aboveSubview siblingSubview: UIView) {
 		super.insertSubview(view, aboveSubview: siblingSubview)
-		
-		guard (view == self.notch) == false else {
-			return
-		}
-		
-		self.addSubview(self.notch)
-		
+		assertNotch(with: view)
+		super.addSubview(self.notch)
 	}
 	
 	public override func insertSubview(_ view: UIView, at index: Int) {
 		super.insertSubview(view, at: index)
-		
-		guard (view == self.notch) == false else {
-			return
-		}
-		
-		self.addSubview(self.notch)
-		
+		assertNotch(with: view)
+		super.addSubview(self.notch)
+	}
+	
+}
+
+extension IPhoneXScreen {
+	
+	private func assertNotch(with view: UIView) {
+		assert((view == self.notch) == false)
 	}
 	
 	private func setupVisual() {
@@ -70,6 +67,7 @@ public final class IPhoneXScreen: UIView {
 		self.contentScaleFactor = 3
 		
 		self.layer.cornerRadius = 40
+		self.clipsToBounds = true
 		
 	}
 	
