@@ -17,27 +17,41 @@ public protocol LayoutMakerCanStoreFrameType: LayoutMakerType {
 }
 
 extension LayoutMakerCanStoreFrameType {
-    
+	
+	@available(iOS, deprecated, message: "Use `setFrame(to frame: CGRect)` instead.")
     public func makeFrame(_ frame: CGRect) -> WillSetFrameMaker {
-        
-        let frame = LayoutElement.Rect.constant(frame)
-        
-        let maker = self.storeFrame(frame)
-        
-        return maker
-        
+		return self.setFrame(to: frame)
     }
-    
+	
+	@available(iOS, deprecated, message: "Use `setFrame(by frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect)` instead.")
     public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> WillSetFrameMaker {
-        
-        let frame = LayoutElement.Rect.closure(frame)
-        
-        let maker = self.storeFrame(frame)
-        
-        return maker
-        
+		return self.setFrame(by: frame)
     }
     
+}
+
+extension LayoutMakerCanStoreFrameType {
+	
+	public func setFrame(to frame: CGRect) -> WillSetFrameMaker {
+		
+		let frame = LayoutElement.Rect.constant(frame)
+		
+		let maker = self.storeFrame(frame)
+		
+		return maker
+		
+	}
+	
+	public func setFrame(by frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> WillSetFrameMaker {
+		
+		let frame = LayoutElement.Rect.closure(frame)
+		
+		let maker = self.storeFrame(frame)
+		
+		return maker
+		
+	}
+	
 }
 
 extension LayoutMakerCanStoreFrameType {
