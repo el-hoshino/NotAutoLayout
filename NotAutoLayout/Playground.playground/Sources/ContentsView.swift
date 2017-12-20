@@ -1,14 +1,14 @@
 import UIKit
 import NotAutoLayout
 
+private let margin: CGFloat = 10
+
 public class ContentsView: UIView {
 	
 	private let contentsLabel: UILabel
 	private let timeStampView: UILabel
 	
 	private let dateFormatter: DateFormatter
-	
-	private let margin: CGFloat = 10
 	
 	public var contents: String? {
 		get {
@@ -52,11 +52,11 @@ public class ContentsView: UIView {
 	
 	public override func sizeThatFits(_ size: CGSize) -> CGSize {
 		
-		let fittingSize = CGSize(width: size.width, height: 0)
+		let fittingSize = CGSize(width: size.width - (margin * 2), height: 0)
 		let contentsLabelFittedSize = self.contentsLabel.sizeThatFits(fittingSize)
 		let timeStampViewFittedSize = self.timeStampView.sizeThatFits(fittingSize)
 		let fittedWidth = max(contentsLabelFittedSize.width, timeStampViewFittedSize.width)
-		let fittedHeight = contentsLabelFittedSize.height + timeStampViewFittedSize.height + self.margin
+		let fittedHeight = contentsLabelFittedSize.height + timeStampViewFittedSize.height + (margin * 3)
 		
 		return CGSize(width: fittedWidth, height: fittedHeight)
 		
@@ -107,8 +107,9 @@ extension ContentsView {
 	private func placeContentsLabel() {
 		
 		self.nal.layout(self.contentsLabel, by: { $0
-			.pinTopLeft(to: $0.parentView, s: .topLeft)
-			.setWidth(by: { $0.boundWidth })
+			.setLeft(by: { $0.safeLeft + margin })
+			.setRight(by: { $0.safeRight - margin })
+			.setTop(by: { $0.safeTop + margin })
 			.fitHeight()
 		})
 		
@@ -118,9 +119,9 @@ extension ContentsView {
 		
 		self.nal.layout(self.timeStampView) { $0
 			.pinTopLeft(to: self.contentsLabel, s: .bottomLeft)
-			.setWidth(by: { $0.boundWidth })
+			.pinRight(to: self.contentsLabel, s: .right)
 			.fitHeight()
-			.movingY(by: self.margin)
+			.movingY(by: margin)
 		}
 		
 	}

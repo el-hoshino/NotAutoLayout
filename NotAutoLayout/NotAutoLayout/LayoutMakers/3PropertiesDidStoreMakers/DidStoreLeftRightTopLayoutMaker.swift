@@ -54,7 +54,7 @@ extension DidStoreLeftRightTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFr
 	public func evaluateFrame(bottom: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect {
 		let left = self.left.evaluated(from: parameter)
 		let right = self.right.evaluated(from: parameter)
-		let top = self.right.evaluated(from: parameter)
+		let top = self.top.evaluated(from: parameter)
 		let bottom = bottom.evaluated(from: parameter)
 		return self.makeFrame(left: left, right: right, top: top, bottom: bottom)
 	}

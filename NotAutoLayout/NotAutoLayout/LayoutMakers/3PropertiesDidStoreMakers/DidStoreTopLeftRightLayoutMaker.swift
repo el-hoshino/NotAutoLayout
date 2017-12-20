@@ -48,3 +48,19 @@ extension DidStoreTopLeftRightLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFr
 	}
 	
 }
+
+extension DidStoreTopLeftRightLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
+	
+	public typealias WillSetBottomMaker = LayoutEditor
+	
+	public func evaluateFrame(bottom: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect {
+		
+		let topLeft = self.topLeft.evaluated(from: parameter)
+		let right = self.right.evaluated(from: parameter)
+		let bottom = bottom.evaluated(from: parameter)
+		let height = bottom - topLeft.y
+		return self.makeFrame(topLeft: topLeft, right: right, height: height)
+		
+	}
+	
+}

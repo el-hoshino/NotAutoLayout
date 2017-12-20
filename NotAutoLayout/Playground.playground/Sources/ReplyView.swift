@@ -1,14 +1,14 @@
 import UIKit
 import NotAutoLayout
 
+private let margin: CGFloat = 10
+private let padding: CGFloat = 5
+
 public class ReplyView: UIView {
 	
 	private let replyView: UITextView
 	
 	private let replyPlaceholderText = "Reply to me!"
-	
-	private let margin: CGFloat = 10
-	private let padding: CGFloat = 5
 	
 	public var contents: String? {
 		get {
@@ -37,18 +37,6 @@ public class ReplyView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		
-		let replyFittingWidth = size.width - (self.margin * 2)
-		let replyFittingSize = CGSize(width: replyFittingWidth, height: 0)
-		let replyFittedSize = self.replyView.sizeThatFits(replyFittingSize)
-		let fittedWidth = replyFittedSize.width + (self.margin * 2)
-		let fittedHeight = replyFittedSize.height + (self.margin * 2)
-		
-		return CGSize(width: fittedWidth, height: fittedHeight)
-		
-	}
-	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		self.placeReplyView()
@@ -64,7 +52,7 @@ extension ReplyView {
 		view.isEditable = false
 		view.isSelectable = false
 		view.clipsToBounds = true
-		view.textContainerInset = UIEdgeInsets(top: self.padding, left: self.padding, bottom: self.padding, right: self.padding)
+		view.textContainerInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
 		view.font = .systemFont(ofSize: UIFont.systemFontSize)
 		view.textColor = .darkGray
 		view.backgroundColor = UIColor(red: 224.0 / 255.0, green: 231.0 / 255.0, blue: 236.0 / 255.0, alpha: 1)
@@ -80,9 +68,8 @@ extension ReplyView {
 	private func placeReplyView() {
 		
 		self.nal.layout(self.replyView, by: { $0
-			.pinMiddleCenter(to: $0.parentView, s: .middleCenter)
-			.setWidth(by: { $0.boundWidth - (self.margin * 2) })
-			.fitHeight()
+			.setFrame(by: { $0.safeFrame })
+			.expandingWidth(by: -margin * 2, from: .center)
 			.addingProcess(by: { (replyView, frame, _) in
 				replyView.layer.cornerRadius = frame.height / 2
 			})

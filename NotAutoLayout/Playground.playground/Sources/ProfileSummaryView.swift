@@ -1,14 +1,13 @@
 import UIKit
 import NotAutoLayout
 
+private let margin: CGFloat = 10
+
 public class ProfileSummaryView: UIView {
 	
 	private let avatarView: UIImageView
 	private let mainTitleLabel: UILabel
 	private let subTitleLabel: UILabel
-	
-	private let avatarSize: CGSize = .init(width: 50, height: 50)
-	private let margin: CGFloat = 10
 	
 	public var avatar: UIImage? {
 		get {
@@ -59,21 +58,6 @@ public class ProfileSummaryView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		
-		let widthExcludeLabel = self.avatarSize.width + self.margin
-		let labelWidth = size.width - widthExcludeLabel
-		let labelFittingSize = CGSize(width: labelWidth, height: 0)
-		let mainFittedSize = self.mainTitleLabel.sizeThatFits(labelFittingSize)
-		let subFittedSize = self.subTitleLabel.sizeThatFits(labelFittingSize)
-		let labelMaxWidth = max(mainFittedSize.width, subFittedSize.width)
-		let fittedWidth = labelMaxWidth + widthExcludeLabel
-		let fittedHeight = self.avatarSize.height
-		
-		return CGSize(width: fittedWidth, height: fittedHeight)
-		
-	}
-	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		self.placeAvatarView()
@@ -121,8 +105,9 @@ extension ProfileSummaryView {
 	private func placeAvatarView() {
 		
 		self.nal.layout(self.avatarView) { $0
-			.pinMiddleLeft(to: $0.parentView, s: .middleLeft)
-			.setSize(to: self.avatarSize)
+			.setTopLeft(by: { $0.safeTopLeft })
+			.setSize(by: { let length = min($0.safeWidth, $0.safeHeight); return .init(width: length, height: length) })
+			.movingX(by: margin)
 			.addingProcess(by: { (view, frame, _) in
 				view.layer.cornerRadius = min(frame.width, frame.height) / 2
 			})
@@ -133,9 +118,10 @@ extension ProfileSummaryView {
 	private func placeMainTitleView() {
 		
 		self.nal.layout(self.mainTitleLabel, by: { $0
-			.pinTopRight(to: $0.parentView, s: .topRight)
-			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-			.pinBottom(to: $0.parentView, s: .middle)
+			.pinTopLeft(to: self.avatarView, s: .topRight)
+			.setRight(by: { $0.safeRight - margin })
+			.setBottom(by: { $0.safeMiddle })
+			.pinchingLeft(by: margin)
 		})
 		
 	}
@@ -143,9 +129,9 @@ extension ProfileSummaryView {
 	private func placeSubTitleView() {
 		
 		self.nal.layout(self.subTitleLabel) { $0
-			.pinTopRight(to: $0.parentView, s: .middleRight)
-			.pinLeft(to: self.avatarView, s: .right, offsetBy: self.margin)
-			.pinBottom(to: $0.parentView, s: 0.75)
+			.pinTopLeft(to: self.mainTitleLabel, s: .bottomLeft)
+			.pinRight(to: self.mainTitleLabel, s: .right)
+			.setBottom(by: { $0.safeTop + ($0.safeBottom - $0.safeTop) * 0.75 })
 		}
 		
 	}
