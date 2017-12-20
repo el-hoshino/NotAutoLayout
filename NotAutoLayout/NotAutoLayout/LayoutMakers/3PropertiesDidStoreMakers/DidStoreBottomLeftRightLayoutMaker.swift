@@ -17,3 +17,32 @@ public struct DidStoreBottomLeftRightLayoutMaker {
 	let right: LayoutElement.Line
 	
 }
+
+extension DidStoreBottomLeftRightLayoutMaker {
+	
+	private func makeFrame(bottomLeft: CGPoint, right: CGFloat, top: CGFloat) -> CGRect {
+		
+		let x = bottomLeft.x
+		let y = top
+		let width = right - x
+		let height = bottomLeft.y - y
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+extension DidStoreBottomLeftRightLayoutMaker: LayoutMakerCanStoreTopToEvaluateFrameType {
+	
+	public typealias WillSetTopMaker = LayoutEditor
+	
+	public func evaluateFrame(top: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect {
+		let bottomLeft = self.bottomLeft.evaluated(from: parameter)
+		let right = self.right.evaluated(from: parameter)
+		let top = top.evaluated(from: parameter)
+		return self.makeFrame(bottomLeft: bottomLeft, right: right, top: top)
+	}
+	
+}

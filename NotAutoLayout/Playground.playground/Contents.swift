@@ -2,18 +2,18 @@
 import PlaygroundSupport
 import NotAutoLayout
 
-let view = LayoutInfoStoredView(frame: .init(x: 0, y: 0, width: 320, height: 568))
-view.backgroundColor = .white
-PlaygroundPage.current.liveView = view
+let controller = IPhoneXScreenController()
+PlaygroundPage.current.liveView = controller.view
 
-view.nal.makeSequentialLayout { $0
-	.makeFirstLayout(by: { $0
-		.makeFrame(.zero)
-	})
-	.setRestFrames(by: { $0
-		.movingX(by: 10)
-	})
+let appView = LayoutInfoStoredView()
+appView.backgroundColor = .white
+controller.view.addSubview(appView)
+
+controller.view.nal.layout(appView) { $0
+	.stickOnParent()
 }
+
+
 
 let margin: CGSize = .init(width: 10, height: 10)
 let summaryView = ProfileSummaryView()
@@ -32,16 +32,16 @@ contentsView.contents = """
 	"""
 contentsView.timeStamp = Date()
 
-view.nal.setupSubview(summaryView) { $0
+appView.nal.setupSubview(summaryView) { $0
 	.makeDefaultLayout { $0
-		.pinLeft(to: $0.parentView, s: .left, offsetBy: margin.width)
-		.pinRight(to: $0.parentView, s: .right, offsetBy: -margin.width)
-		.pinTop(to: $0.parentView, s: .top, offsetBy: margin.height)
-		.fitHeight()
+		.setLeft(by: { $0.boundLeft })
+		.setRight(by: { $0.boundRight })
+		.setTop(by: { $0.boundTop })
+		.setHeight(by: { $0.safeTop + 50 })
 	}
 	.addToParent()
 }
-view.nal.setupSubview(contentsView) { $0
+appView.nal.setupSubview(contentsView) { $0
 	.makeDefaultLayout({ $0
 		.pinTopLeft(to: summaryView, s: .bottomLeft)
 		.pinRight(to: summaryView, s: .right)
@@ -51,17 +51,13 @@ view.nal.setupSubview(contentsView) { $0
 	.setDefaultOrder(to: 1)
 	.addToParent()
 }
-view.nal.setupSubview(replyView) { $0
+appView.nal.setupSubview(replyView) { $0
 	.makeDefaultLayout({ $0
-		.pinBottomCenter(to: $0.parentView, s: .bottomCenter)
-		.setWidth(by: { $0.boundWidth - (margin.width * 2) })
-		.fitHeight()
+		.setBottomLeft(by: { $0.boundBottomLeft })
+		.setRight(by: { $0.boundRight })
+		.setTop(by: { $0.safeBottom - 30 })
 	})
 	.addToParent()
 }
 
-view.setNeedsLayout()
-
-print(summaryView.frame)
-print(contentsView.frame)
-print(replyView.frame)
+appView.setNeedsLayout()
