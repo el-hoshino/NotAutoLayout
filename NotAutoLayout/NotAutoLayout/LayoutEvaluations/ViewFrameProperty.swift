@@ -57,11 +57,11 @@ extension ViewFrameProperty {
 	}
 	
 	public var boundCenter: CGFloat {
-		return (self.boundRight - self.boundLeft) / 2
+		return self.boundLeft + (self.boundWidth / 2)
 	}
 	
 	public var boundRight: CGFloat {
-		return self.boundWidth
+		return self.boundLeft + self.boundWidth
 	}
 	
 	public var boundTop: CGFloat {
@@ -69,11 +69,11 @@ extension ViewFrameProperty {
 	}
 	
 	public var boundMiddle: CGFloat {
-		return (self.boundBottom - self.boundTop) / 2
+		return self.boundTop + (self.boundHeight / 2)
 	}
 	
 	public var boundBottom: CGFloat {
-		return self.boundHeight
+		return self.boundTop + self.boundHeight
 	}
 	
 }
@@ -188,7 +188,7 @@ extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeRight: CGFloat {
-		return self.boundRight - self.safeAreaInsets.right
+		return self.safeLeft + self.safeWidth
 	}
 	
 	@available(iOS 11.0, *)
@@ -203,7 +203,7 @@ extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeBottom: CGFloat {
-		return self.boundBottom - self.safeAreaInsets.bottom
+		return self.safeTop + self.safeHeight
 	}
 	
 }
