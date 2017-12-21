@@ -57,11 +57,11 @@ extension ViewFrameProperty {
 	}
 	
 	public var boundCenter: CGFloat {
-		return (self.boundRight - self.boundLeft) / 2
+		return self.boundLeft + (self.boundWidth / 2)
 	}
 	
 	public var boundRight: CGFloat {
-		return self.boundWidth
+		return self.boundLeft + self.boundWidth
 	}
 	
 	public var boundTop: CGFloat {
@@ -69,11 +69,19 @@ extension ViewFrameProperty {
 	}
 	
 	public var boundMiddle: CGFloat {
-		return (self.boundBottom - self.boundTop) / 2
+		return self.boundTop + (self.boundHeight / 2)
 	}
 	
 	public var boundBottom: CGFloat {
-		return self.boundHeight
+		return self.boundTop + self.boundHeight
+	}
+	
+	public func boundHorizontal(at relativePosition: CGFloat) -> CGFloat {
+		return self.boundLeft + (self.boundWidth * relativePosition)
+	}
+	
+	public func boundVertical(at relativePosition: CGFloat) -> CGFloat {
+		return self.boundTop + (self.boundHeight * relativePosition)
 	}
 	
 }
@@ -114,6 +122,12 @@ extension ViewFrameProperty {
 	
 	public var boundBottomRight: CGPoint {
 		return .init(x: self.boundRight, y: self.boundBottom)
+	}
+	
+	public func boundPoint(at relativePoint: CGPoint) -> CGPoint {
+		let x = self.boundLeft + (self.boundWidth * relativePoint.x)
+		let y = self.boundTop + (self.boundHeight * relativePoint.y)
+		return .init(x: x, y: y)
 	}
 	
 }
@@ -188,7 +202,7 @@ extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeRight: CGFloat {
-		return self.boundRight - self.safeAreaInsets.right
+		return self.safeLeft + self.safeWidth
 	}
 	
 	@available(iOS 11.0, *)
@@ -203,7 +217,17 @@ extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeBottom: CGFloat {
-		return self.boundBottom - self.safeAreaInsets.bottom
+		return self.safeTop + self.safeHeight
+	}
+	
+	@available(iOS 11.0, *)
+	public func safeHorizontal(at relativePosition: CGFloat) -> CGFloat {
+		return self.safeLeft + (self.safeWidth * relativePosition)
+	}
+	
+	@available(iOS 11.0, *)
+	public func safeVertical(at relativePosition: CGFloat) -> CGFloat {
+		return self.safeTop + (self.safeHeight * relativePosition)
 	}
 	
 }
@@ -253,6 +277,13 @@ extension ViewFrameProperty {
 	@available(iOS 11.0, *)
 	public var safeBottomRight: CGPoint {
 		return .init(x: self.safeRight, y: self.safeBottom)
+	}
+	
+	@available(iOS 11.0, *)
+	public func safePoint(at relativePoint: CGPoint) -> CGPoint {
+		let x = self.safeLeft + (self.safeWidth * relativePoint.x)
+		let y = self.safeTop + (self.safeHeight * relativePoint.y)
+		return .init(x: x, y: y)
 	}
 	
 }
