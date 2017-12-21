@@ -40,11 +40,11 @@ extension DidStoreCenterTopLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameTy
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let center = self.center.evaluated(from: parameter)
-		let top = self.top.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
+		let center = self.center.evaluated(from: property)
+		let top = self.top.evaluated(from: property)
+		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
 		return self.makeFrame(center: center, top: top, size: size)
 		
 	}

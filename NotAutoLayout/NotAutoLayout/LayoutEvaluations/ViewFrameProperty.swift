@@ -29,10 +29,10 @@ extension ViewFrameProperty {
 			}
 		}()
 		
-		let parameter = ViewFrameProperty(boundSize: boundSize,
+		let property = ViewFrameProperty(boundSize: boundSize,
 											   safeAreaInsets: safeAreaInsets)
 		
-		return parameter
+		return property
 		
 	}
 	

@@ -41,11 +41,11 @@ extension DidStoreRightMiddleLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrame
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let right = self.right.evaluated(from: parameter)
-		let middle = self.middle.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
+		let right = self.right.evaluated(from: property)
+		let middle = self.middle.evaluated(from: property)
+		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
 		return self.makeFrame(right: right, middle: middle, size: size)
 		
 	}

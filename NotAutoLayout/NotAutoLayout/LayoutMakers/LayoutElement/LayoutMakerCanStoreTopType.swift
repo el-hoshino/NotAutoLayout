@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreTopType {
 		
 	}
 	
-	public func setTop(by top: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetTopMaker {
+	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetTopMaker {
 		
 		let top = LayoutElement.Line.closure(top)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreTopType {
 
 public protocol LayoutMakerCanStoreTopToEvaluateFrameType: LayoutMakerCanStoreTopType where WillSetTopMaker == LayoutEditor {
 	
-	func evaluateFrame(top: LayoutElement.Line, parameter: ViewFrameProperty) -> CGRect
+	func evaluateFrame(top: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
 	
 }
 
@@ -88,8 +88,8 @@ extension LayoutMakerCanStoreTopToEvaluateFrameType {
 	
 	public func storeTop(_ top: LayoutElement.Line) -> WillSetTopMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.evaluateFrame(top: top, parameter: parameter)
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(top: top, property: property)
 		})
 		
 		let editor = LayoutEditor(layout)

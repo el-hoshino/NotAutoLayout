@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreTopRightType {
 		
 	}
 	
-	public func setTopRight(by topRight: @escaping (_ parameter: ViewFrameProperty) -> CGPoint) -> WillSetTopRightMaker {
+	public func setTopRight(by topRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetTopRightMaker {
 		
 		let topRight = LayoutElement.Point.closure(topRight)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreTopRightType {
 
 public protocol LayoutMakerCanStoreTopRightToEvaluateFrameType: LayoutMakerCanStoreTopRightType where WillSetTopRightMaker == LayoutEditor {
 	
-	func evaluateFrame(topRight: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect
+	func evaluateFrame(topRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
@@ -88,8 +88,8 @@ extension LayoutMakerCanStoreTopRightToEvaluateFrameType {
 	
 	public func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker {
 		
-		let layout = Layout(frame: { (parameter) -> CGRect in
-			return self.evaluateFrame(topRight: topRight, parameter: parameter)
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(topRight: topRight, property: property)
 		})
 		
 		let editor = LayoutEditor(layout)

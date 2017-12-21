@@ -120,14 +120,14 @@ extension LayoutElement {
 
 extension LayoutElement.Line {
 	
-	func evaluated(from parameter: ViewFrameProperty) -> CGFloat {
+	func evaluated(from property: ViewFrameProperty) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
 		case .closure(let calculation):
-			return calculation(parameter)
+			return calculation(property)
 		}
 		
 	}
@@ -136,14 +136,14 @@ extension LayoutElement.Line {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from parameter: ViewFrameProperty) -> CGPoint {
+	func evaluated(from property: ViewFrameProperty) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
 		case .closure(let calculation):
-			return calculation(parameter)
+			return calculation(property)
 		}
 		
 	}
@@ -175,14 +175,14 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameter: ViewFrameProperty, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from property: ViewFrameProperty, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
 		case .closure(let calculation):
-			return calculation(parameter)
+			return calculation(property)
 			
 		case .fits(let fittingLength):
 			return oppositeAxis.fittedTheOtherLength(fittingCalculation: fittingCalculation, fittingLength: fittingLength)
@@ -194,20 +194,20 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
+	func evaluated(from property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
 		case .closure(let calculation):
-			return parameter.evaluateSize(from: calculation)
+			return property.evaluateSize(from: calculation)
 			
 		case .fits(let fittingSize):
 			return fittingCalculation(fittingSize)
 			
 		case .aspect(let aspect):
-			return parameter.evaluateSize(from: aspect, defaultRatio: fittingCalculation(.zero).ratio)
+			return property.evaluateSize(from: aspect, defaultRatio: fittingCalculation(.zero).ratio)
 		}
 		
 	}
@@ -216,14 +216,14 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from parameter: ViewFrameProperty) -> CGRect {
+	func evaluated(from property: ViewFrameProperty) -> CGRect {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
 		case .closure(let calculation):
-			return calculation(parameter)
+			return calculation(property)
 		}
 		
 	}
