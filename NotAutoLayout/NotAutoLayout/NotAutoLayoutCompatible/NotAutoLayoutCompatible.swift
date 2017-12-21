@@ -18,13 +18,6 @@ public protocol NotAutoLayoutCompatible: class {
 	
 }
 
-public struct NotAutoLayoutContainer<Containee> {
-	
-	///
-	public let body: Containee
-	
-}
-
 extension NotAutoLayoutCompatible where Self: UIView {
 	
 	///

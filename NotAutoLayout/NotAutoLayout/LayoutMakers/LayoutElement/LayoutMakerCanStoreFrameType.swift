@@ -23,8 +23,8 @@ extension LayoutMakerCanStoreFrameType {
 		return self.setFrame(to: frame)
     }
 	
-	@available(iOS, deprecated, message: "Use `setFrame(by frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect)` instead.")
-    public func makeFrame(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> WillSetFrameMaker {
+	@available(iOS, deprecated, message: "Use `setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect)` instead.")
+    public func makeFrame(_ frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> WillSetFrameMaker {
 		return self.setFrame(by: frame)
     }
     
@@ -42,7 +42,7 @@ extension LayoutMakerCanStoreFrameType {
 		
 	}
 	
-	public func setFrame(by frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) -> WillSetFrameMaker {
+	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> WillSetFrameMaker {
 		
 		let frame = LayoutElement.Rect.closure(frame)
 		
@@ -81,7 +81,7 @@ extension LayoutMakerCanStoreFrameType {
 
 public protocol LayoutMakerCanStoreFrameToEvaluateFrameType: LayoutMakerCanStoreFrameType where WillSetFrameMaker == LayoutEditor {
     
-    func evaluateFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect
+    func evaluateFrame(frame: LayoutElement.Rect, property: ViewFrameProperty) -> CGRect
     
 }
 
@@ -89,8 +89,8 @@ extension LayoutMakerCanStoreFrameToEvaluateFrameType {
 	
     public func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
         
-        let layout = Layout(frame: { (parameter) -> CGRect in
-            return self.evaluateFrame(frame: frame, parameter: parameter)
+        let layout = Layout(frame: { (property) -> CGRect in
+            return self.evaluateFrame(frame: frame, property: property)
         })
         
         let editor = LayoutEditor(layout)

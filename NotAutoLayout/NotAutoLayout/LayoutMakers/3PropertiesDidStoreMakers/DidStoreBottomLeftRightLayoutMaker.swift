@@ -38,10 +38,10 @@ extension DidStoreBottomLeftRightLayoutMaker: LayoutMakerCanStoreTopToEvaluateFr
 	
 	public typealias WillSetTopMaker = LayoutEditor
 	
-	public func evaluateFrame(top: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect {
-		let bottomLeft = self.bottomLeft.evaluated(from: parameter)
-		let right = self.right.evaluated(from: parameter)
-		let top = top.evaluated(from: parameter)
+	public func evaluateFrame(top: LayoutElement.Line, property: ViewFrameProperty) -> CGRect {
+		let bottomLeft = self.bottomLeft.evaluated(from: property)
+		let right = self.right.evaluated(from: property)
+		let top = top.evaluated(from: property)
 		return self.makeFrame(bottomLeft: bottomLeft, right: right, top: top)
 	}
 	

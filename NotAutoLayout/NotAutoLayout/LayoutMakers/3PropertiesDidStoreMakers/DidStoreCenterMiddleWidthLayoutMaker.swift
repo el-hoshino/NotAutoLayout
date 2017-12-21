@@ -24,12 +24,12 @@ extension DidStoreCenterMiddleWidthLayoutMaker: LayoutMakerCanStoreHeightToEvalu
     
     public typealias WillSetHeightMaker = LayoutEditor
     
-    public func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
         
-        let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
-        let x = self.center.evaluated(from: parameter) - width.halved
-        let y = self.middle.evaluated(from: parameter) - height.halved
+        let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
+        let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+        let x = self.center.evaluated(from: property) - width.halved
+        let y = self.middle.evaluated(from: property) - height.halved
         return CGRect(x: x, y: y, width: width, height: height)
         
     }

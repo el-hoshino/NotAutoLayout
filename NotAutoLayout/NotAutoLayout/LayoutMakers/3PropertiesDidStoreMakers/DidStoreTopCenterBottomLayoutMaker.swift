@@ -37,12 +37,12 @@ extension DidStoreTopCenterBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluate
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let topCenter = self.topCenter.evaluated(from: parameter)
-		let bottom = self.bottom.evaluated(from: parameter)
+		let topCenter = self.topCenter.evaluated(from: property)
+		let bottom = self.bottom.evaluated(from: property)
 		let height = bottom - topCenter.y
-		let width = width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(height))
+		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
 		return self.makeFrame(topCenter: topCenter, bottom: bottom, width: width)
 		
 	}
