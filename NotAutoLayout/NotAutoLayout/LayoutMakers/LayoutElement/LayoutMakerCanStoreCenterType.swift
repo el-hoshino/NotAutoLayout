@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreCenterType {
 		
 	}
 	
-	public func setCenter(by center: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetCenterMaker {
+	public func setCenter(by center: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetCenterMaker {
 		
 		let center = LayoutElement.Line.closure(center)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreCenterType {
 
 public protocol LayoutMakerCanStoreCenterToEvaluateFrameType: LayoutMakerCanStoreCenterType where WillSetCenterMaker == LayoutEditor {
 	
-	func evaluateFrame(center: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(center: LayoutElement.Line, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

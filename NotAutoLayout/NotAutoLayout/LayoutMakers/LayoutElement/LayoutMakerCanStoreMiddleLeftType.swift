@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreMiddleLeftType {
 		
 	}
 	
-	public func setMiddleLeft(by middleLeft: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> WillSetMiddleLeftMaker {
+	public func setMiddleLeft(by middleLeft: @escaping (_ parameter: ViewFrameProperty) -> CGPoint) -> WillSetMiddleLeftMaker {
 		
 		let middleLeft = LayoutElement.Point.closure(middleLeft)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreMiddleLeftType {
 
 public protocol LayoutMakerCanStoreMiddleLeftToEvaluateFrameType: LayoutMakerCanStoreMiddleLeftType where WillSetMiddleLeftMaker == LayoutEditor {
 	
-	func evaluateFrame(middleLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(middleLeft: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

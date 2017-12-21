@@ -78,7 +78,7 @@ extension DidStoreMiddleRightLayoutMaker: LayoutMakerCanStoreTopLeftToEvaluateFr
 	
 	public typealias WillSetTopLeftMaker = LayoutEditor
 	
-	public func evaluateFrame(topLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(topLeft: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect {
 		let middleRight = self.middleRight.evaluated(from: parameter)
 		let topLeft = topLeft.evaluated(from: parameter)
 		return self.makeFrame(middleRight: middleRight, topLeft: topLeft)
@@ -91,7 +91,7 @@ extension DidStoreMiddleRightLayoutMaker: LayoutMakerCanStoreTopCenterToEvaluate
 	
 	public typealias WillSetTopCenterMaker = LayoutEditor
 	
-	public func evaluateFrame(topCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(topCenter: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect {
 		let middleRight = self.middleRight.evaluated(from: parameter)
 		let topCenter = topCenter.evaluated(from: parameter)
 		return self.makeFrame(middleRight: middleRight, topCenter: topCenter)
@@ -104,7 +104,7 @@ extension DidStoreMiddleRightLayoutMaker: LayoutMakerCanStoreBottomLeftToEvaluat
 	
 	public typealias WillSetBottomLeftMaker = LayoutEditor
 	
-	public func evaluateFrame(bottomLeft: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(bottomLeft: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect {
 		let middleRight = self.middleRight.evaluated(from: parameter)
 		let bottomLeft = bottomLeft.evaluated(from: parameter)
 		return self.makeFrame(middleRight: middleRight, bottomLeft: bottomLeft)
@@ -117,7 +117,7 @@ extension DidStoreMiddleRightLayoutMaker: LayoutMakerCanStoreBottomCenterToEvalu
 	
 	public typealias WillSetBottomCenterMaker = LayoutEditor
 	
-	public func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect {
+	public func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect {
 		let middleRight = self.middleRight.evaluated(from: parameter)
 		let bottomCenter = bottomCenter.evaluated(from: parameter)
 		return self.makeFrame(middleRight: middleRight, bottomCenter: bottomCenter)
@@ -131,7 +131,7 @@ extension DidStoreMiddleRightLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrame
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let middleRight = self.middleRight.evaluated(from: parameter)
 		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)

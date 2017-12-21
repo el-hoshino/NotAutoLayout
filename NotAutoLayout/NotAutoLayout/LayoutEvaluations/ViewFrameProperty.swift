@@ -1,5 +1,5 @@
 //
-//  LayoutControlParameter.swift
+//  ViewFrameProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/09/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LayoutControlParameter {
+public struct ViewFrameProperty {
 	
 	public let boundSize: CGSize
 	
@@ -16,9 +16,9 @@ public struct LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
-	static func initialize(from view: UIView) -> LayoutControlParameter {
+	static func initialize(from view: UIView) -> ViewFrameProperty {
 		
 		let boundSize = view.bounds.size
 		let safeAreaInsets: UIEdgeInsets = {
@@ -29,7 +29,7 @@ extension LayoutControlParameter {
 			}
 		}()
 		
-		let parameter = LayoutControlParameter(boundSize: boundSize,
+		let parameter = ViewFrameProperty(boundSize: boundSize,
 											   safeAreaInsets: safeAreaInsets)
 		
 		return parameter
@@ -38,7 +38,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundWidth: CGFloat {
 		return self.boundSize.width
@@ -50,7 +50,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundLeft: CGFloat {
 		return 0
@@ -78,7 +78,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundTopLeft: CGPoint {
 		return .init(x: self.boundLeft, y: self.boundTop)
@@ -118,7 +118,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundFrame: CGRect {
 		return .init(origin: .zero, size: self.boundSize)
@@ -126,7 +126,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var topSafeAreaInset: CGFloat {
@@ -150,7 +150,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeWidth: CGFloat {
@@ -174,7 +174,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeLeft: CGFloat {
@@ -208,7 +208,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeTopLeft: CGPoint {
@@ -257,7 +257,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeFrame: CGRect {
@@ -266,7 +266,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS, renamed: "boundFrame")
 	public func boundsWithZeroOrigin() -> CGRect {
@@ -294,9 +294,9 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
-	func evaluateSize(from calculation: (LayoutControlParameter) -> CGSize) -> CGSize {
+	func evaluateSize(from calculation: (ViewFrameProperty) -> CGSize) -> CGSize {
 		
 		return calculation(self)
 		

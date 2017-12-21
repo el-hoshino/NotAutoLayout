@@ -38,7 +38,7 @@ extension DidStoreMiddleRightWidthLayoutMaker: LayoutMakerCanStoreHeightToEvalua
     
     public typealias WillSetHeightMaker = LayoutEditor
     
-    public func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
         
         let middleRight = self.middleRight.evaluated(from: parameter)
         let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))

@@ -39,7 +39,7 @@ extension DidStoreCenterTopBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluate
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		let top = self.top.evaluated(from: parameter)
 		let bottom = self.bottom.evaluated(from: parameter)
 		let height = bottom - top

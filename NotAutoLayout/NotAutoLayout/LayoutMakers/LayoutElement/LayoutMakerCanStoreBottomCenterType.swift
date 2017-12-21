@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreBottomCenterType {
 		
 	}
 	
-	public func setBottomCenter(by bottomCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> WillSetBottomCenterMaker {
+	public func setBottomCenter(by bottomCenter: @escaping (_ parameter: ViewFrameProperty) -> CGPoint) -> WillSetBottomCenterMaker {
 		
 		let bottomCenter = LayoutElement.Point.closure(bottomCenter)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreBottomCenterType {
 
 public protocol LayoutMakerCanStoreBottomCenterToEvaluateFrameType: LayoutMakerCanStoreBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
 	
-	func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(bottomCenter: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

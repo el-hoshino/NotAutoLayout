@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreMiddleType {
 		
 	}
 	
-	public func setMiddle(by middle: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetMiddleMaker {
+	public func setMiddle(by middle: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetMiddleMaker {
 		
 		let middle = LayoutElement.Line.closure(middle)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreMiddleType {
 
 public protocol LayoutMakerCanStoreMiddleToEvaluateFrameType: LayoutMakerCanStoreMiddleType where WillSetMiddleMaker == LayoutEditor {
 	
-	func evaluateFrame(middle: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(middle: LayoutElement.Line, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

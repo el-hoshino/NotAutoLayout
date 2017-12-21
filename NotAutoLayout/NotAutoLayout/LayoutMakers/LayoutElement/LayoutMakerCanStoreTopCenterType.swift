@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreTopCenterType {
 		
 	}
 	
-	public func setTopCenter(by topCenter: @escaping (_ parameter: LayoutControlParameter) -> CGPoint) -> WillSetTopCenterMaker {
+	public func setTopCenter(by topCenter: @escaping (_ parameter: ViewFrameProperty) -> CGPoint) -> WillSetTopCenterMaker {
 		
 		let topCenter = LayoutElement.Point.closure(topCenter)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreTopCenterType {
 
 public protocol LayoutMakerCanStoreTopCenterToEvaluateFrameType: LayoutMakerCanStoreTopCenterType where WillSetTopCenterMaker == LayoutEditor {
 	
-	func evaluateFrame(topCenter: LayoutElement.Point, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(topCenter: LayoutElement.Point, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

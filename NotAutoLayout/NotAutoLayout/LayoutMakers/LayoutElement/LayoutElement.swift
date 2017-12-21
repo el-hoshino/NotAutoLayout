@@ -17,21 +17,21 @@ extension LayoutElement {
 	public enum Line {
 		
 		case constant(CGFloat)
-		case closure((LayoutControlParameter) -> CGFloat)
+		case closure((ViewFrameProperty) -> CGFloat)
 		
 	}
 	
 	public enum Point {
 		
 		case constant(CGPoint)
-		case closure((LayoutControlParameter) -> CGPoint)
+		case closure((ViewFrameProperty) -> CGPoint)
 		
 	}
 	
 	public enum Length {
 		
 		case constant(CGFloat)
-		case closure((LayoutControlParameter) -> CGFloat)
+		case closure((ViewFrameProperty) -> CGFloat)
 		case fits(CGFloat)
 		
 	}
@@ -103,7 +103,7 @@ extension LayoutElement {
 		}
 		
 		case constant(CGSize)
-		case closure((LayoutControlParameter) -> CGSize)
+		case closure((ViewFrameProperty) -> CGSize)
 		case fits(CGSize)
 		case aspect(AspectSizing)
 		
@@ -112,7 +112,7 @@ extension LayoutElement {
 	public enum Rect {
 		
 		case constant(CGRect)
-		case closure((LayoutControlParameter) -> CGRect)
+		case closure((ViewFrameProperty) -> CGRect)
 		
 	}
 	
@@ -120,7 +120,7 @@ extension LayoutElement {
 
 extension LayoutElement.Line {
 	
-	func evaluated(from parameter: LayoutControlParameter) -> CGFloat {
+	func evaluated(from parameter: ViewFrameProperty) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -136,7 +136,7 @@ extension LayoutElement.Line {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from parameter: LayoutControlParameter) -> CGPoint {
+	func evaluated(from parameter: ViewFrameProperty) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
@@ -175,7 +175,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameter: LayoutControlParameter, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from parameter: ViewFrameProperty, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -194,7 +194,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
+	func evaluated(from parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -216,7 +216,7 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from parameter: LayoutControlParameter) -> CGRect {
+	func evaluated(from parameter: ViewFrameProperty) -> CGRect {
 		
 		switch self {
 		case .constant(let value):

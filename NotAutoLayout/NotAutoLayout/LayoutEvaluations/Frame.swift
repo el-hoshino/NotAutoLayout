@@ -10,7 +10,7 @@ import Foundation
 
 struct Frame {
 	
-	private let evaluation: (_ parameter: LayoutControlParameter, _ fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	private let evaluation: (_ parameter: ViewFrameProperty, _ fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
@@ -20,11 +20,11 @@ extension Frame {
 		self.evaluation = { _, _ in frame }
 	}
 	
-	init(_ frame: @escaping (_ parameter: LayoutControlParameter) -> CGRect) {
+	init(_ frame: @escaping (_ parameter: ViewFrameProperty) -> CGRect) {
 		self.evaluation = { parameter, _ in frame(parameter) }
 	}
 	
-	init(_ frame: @escaping (_ parameter: LayoutControlParameter, _ fitting: (CGSize) -> CGSize) -> CGRect) {
+	init(_ frame: @escaping (_ parameter: ViewFrameProperty, _ fitting: (CGSize) -> CGSize) -> CGRect) {
 		self.evaluation = { parameter, fitting in frame(parameter, fitting) }
 	}
 	
@@ -32,7 +32,7 @@ extension Frame {
 
 extension Frame {
 	
-	func evaluated(from parameter: LayoutControlParameter, fitting: (CGSize) -> CGSize) -> CGRect {
+	func evaluated(from parameter: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect {
 		
 		return self.evaluation(parameter, fitting)
 		

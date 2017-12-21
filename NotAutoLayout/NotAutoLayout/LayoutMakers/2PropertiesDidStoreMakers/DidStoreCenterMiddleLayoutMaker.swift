@@ -41,7 +41,7 @@ extension DidStoreCenterMiddleLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFram
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
 		let center = self.center.evaluated(from: parameter)
 		let middle = self.middle.evaluated(from: parameter)

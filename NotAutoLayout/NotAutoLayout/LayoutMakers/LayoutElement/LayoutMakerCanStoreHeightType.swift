@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreHeightType {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetHeightMaker {
+	public func setHeight(by height: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetHeightMaker {
 		
 		let height = LayoutElement.Length.closure(height)
 		
@@ -52,7 +52,7 @@ extension LayoutMakerCanStoreHeightType {
 
 public protocol LayoutMakerCanStoreHeightToEvaluateFrameType: LayoutMakerCanStoreHeightType where WillSetHeightMaker == LayoutEditor {
 	
-	func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 

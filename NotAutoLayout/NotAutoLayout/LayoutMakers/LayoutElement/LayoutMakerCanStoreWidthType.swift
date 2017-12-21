@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreWidthType {
 		
 	}
 	
-	public func setWidth(by width: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetWidthMaker {
+	public func setWidth(by width: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetWidthMaker {
 		
 		let width = LayoutElement.Length.closure(width)
 		
@@ -52,7 +52,7 @@ extension LayoutMakerCanStoreWidthType {
 
 public protocol LayoutMakerCanStoreWidthToEvaluateFrameType: LayoutMakerCanStoreWidthType where WillSetWidthMaker == LayoutEditor {
 	
-	func evaluateFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(width: LayoutElement.Length, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 

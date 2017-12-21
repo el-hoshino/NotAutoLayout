@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreSizeType {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ parameter: LayoutControlParameter) -> CGSize) -> WillSetSizeMaker {
+	public func setSize(by size: @escaping (_ parameter: ViewFrameProperty) -> CGSize) -> WillSetSizeMaker {
 		
 		let size = LayoutElement.Size.closure(size)
 		
@@ -94,7 +94,7 @@ extension LayoutMakerCanStoreSizeType {
 
 public protocol LayoutMakerCanStoreSizeToEvaluateFrameType: LayoutMakerCanStoreSizeType where WillSetSizeMaker == LayoutEditor {
 	
-	func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(size: LayoutElement.Size, parameter: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 

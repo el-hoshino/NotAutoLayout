@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreRightType {
 		
 	}
 	
-	public func setRight(by right: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetRightMaker {
+	public func setRight(by right: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetRightMaker {
 		
 		let right = LayoutElement.Line.closure(right)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreRightType {
 
 public protocol LayoutMakerCanStoreRightToEvaluateFrameType: LayoutMakerCanStoreRightType where WillSetRightMaker == LayoutEditor {
 	
-	func evaluateFrame(right: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(right: LayoutElement.Line, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

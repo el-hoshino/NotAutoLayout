@@ -10,11 +10,11 @@ import Foundation
 
 enum FrameAdditionalEvaluation {
 	
-	typealias FloatEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGFloat
-	typealias PointEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGPoint
-	typealias SizeEvaluation = (_ frame: CGRect, _ parameter: LayoutControlParameter) -> CGSize
+	typealias FloatEvaluation = (_ frame: CGRect, _ parameter: ViewFrameProperty) -> CGFloat
+	typealias PointEvaluation = (_ frame: CGRect, _ parameter: ViewFrameProperty) -> CGPoint
+	typealias SizeEvaluation = (_ frame: CGRect, _ parameter: ViewFrameProperty) -> CGSize
 	
-	typealias Process = (_ view: UIView, _ frame: CGRect, _ layourProperty: LayoutControlParameter) -> Void
+	typealias Process = (_ view: UIView, _ frame: CGRect, _ layourProperty: ViewFrameProperty) -> Void
 	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
@@ -55,7 +55,7 @@ enum FrameAdditionalEvaluation {
 
 extension FrameAdditionalEvaluation {
 	
-	func evaluated(for view: UIView, from frame: CGRect, with parameter: LayoutControlParameter) -> CGRect {
+	func evaluated(for view: UIView, from frame: CGRect, with parameter: ViewFrameProperty) -> CGRect {
 		
 		var frame = frame
 		

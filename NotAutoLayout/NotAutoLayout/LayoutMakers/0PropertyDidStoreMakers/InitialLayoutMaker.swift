@@ -19,7 +19,7 @@ extension InitialLayoutMaker: LayoutMakerCanStoreFrameToEvaluateFrameType {
 	
 	public typealias WillSetFrameMaker = LayoutEditor
 	
-    public func evaluateFrame(frame: LayoutElement.Rect, parameter: LayoutControlParameter) -> CGRect {
+    public func evaluateFrame(frame: LayoutElement.Rect, parameter: ViewFrameProperty) -> CGRect {
         
         let frame = frame.evaluated(from: parameter)
         

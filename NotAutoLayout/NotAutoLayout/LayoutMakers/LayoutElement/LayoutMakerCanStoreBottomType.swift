@@ -28,7 +28,7 @@ extension LayoutMakerCanStoreBottomType {
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ parameter: LayoutControlParameter) -> CGFloat) -> WillSetBottomMaker {
+	public func setBottom(by bottom: @escaping (_ parameter: ViewFrameProperty) -> CGFloat) -> WillSetBottomMaker {
 		
 		let bottom = LayoutElement.Line.closure(bottom)
 		
@@ -80,7 +80,7 @@ extension LayoutMakerCanStoreBottomType {
 
 public protocol LayoutMakerCanStoreBottomToEvaluateFrameType: LayoutMakerCanStoreBottomType where WillSetBottomMaker == LayoutEditor {
 	
-	func evaluateFrame(bottom: LayoutElement.Line, parameter: LayoutControlParameter) -> CGRect
+	func evaluateFrame(bottom: LayoutElement.Line, parameter: ViewFrameProperty) -> CGRect
 	
 }
 

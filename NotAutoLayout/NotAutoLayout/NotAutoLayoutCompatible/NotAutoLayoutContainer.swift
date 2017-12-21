@@ -8,6 +8,13 @@
 
 import UIKit
 
+public struct NotAutoLayoutContainer<Containee> {
+	
+	///
+	public let body: Containee
+	
+}
+
 extension NotAutoLayoutContainer where Containee: UIView {
 	
 	typealias Hash = Int
@@ -20,18 +27,23 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public var layoutControlParameter: LayoutControlParameter {
-		return LayoutControlParameter.initialize(from: self.body)
+	@available(*, renamed: "viewFrameProperty")
+	public var layoutControlParameter: ViewFrameProperty {
+		return self.viewFrameProperty
+	}
+	
+	public var viewFrameProperty: ViewFrameProperty {
+		return ViewFrameProperty.initialize(from: self.body)
 	}
 	
 	/// The bound size.
 	public var boundSize: CGSize {
-		return self.layoutControlParameter.boundSize
+		return self.viewFrameProperty.boundSize
 	}
 	
 	@available(iOS 11.0, *)
 	public var safeAreaInsets: UIEdgeInsets {
-		return self.layoutControlParameter.safeAreaInsets
+		return self.viewFrameProperty.safeAreaInsets
 	}
 	
 }
