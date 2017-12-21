@@ -607,6 +607,7 @@
 				164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */,
 				164EA0AA1EF3DA5100C0BB8F /* LayoutInfoStoredView.swift */,
 				1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */,
+				794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */,
 			);
 			path = LayoutInfoStorable;
 			sourceTree = "<group>";
@@ -617,14 +618,6 @@
 				160F724E1F14B65100E314E1 /* LayoutIndividualAdditionalEvaluations.swift */,
 			);
 			path = LayoutAdditions;
-			sourceTree = "<group>";
-		};
-		794B59041EF43C8100E25BD0 /* SubviewSetupWizard */ = {
-			isa = PBXGroup;
-			children = (
-				794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */,
-			);
-			path = SubviewSetupWizard;
 			sourceTree = "<group>";
 		};
 		798378811E4CB2B100D3E1C2 = {
@@ -652,7 +645,6 @@
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
 				164EA0A21EF3DA4900C0BB8F /* Extensions */,
 				165FE29F1EF28448006DF788 /* LayoutMakers */,
-				794B59041EF43C8100E25BD0 /* SubviewSetupWizard */,
 				164EA0A61EF3DA5100C0BB8F /* LayoutEngine */,
 				164EA09C1EF3D98B00C0BB8F /* LayoutExpressions */,
 				168667AF1F7912FD00AD774E /* LayoutInfoStorable */,
