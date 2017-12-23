@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreBottomRightType {
 	
 	public func setBottomRight(by bottomRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomRightMaker {
 		
-		let bottomRight = LayoutElement.Point.closure(bottomRight)
+		let bottomRight = LayoutElement.Point.byParent(bottomRight)
 		
 		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
 	}
+	
+	public func pinBottomRight(to referenceView: UIView?, with bottomRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomRightMaker {
+		
+		return self.pinBottomRight(by: { [weak referenceView] in referenceView }, with: bottomRight)
+		
+	}
+	
+	public func pinBottomRight(by referenceView: @escaping () -> UIView?, with bottomRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomRightMaker {
+		
+		let bottomRight = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomRight)
+		
+		let maker = self.storeBottomRight(bottomRight)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreBottomRightToEvaluateFrameType: LayoutMakerCanStoreBottomRightType where WillSetBottomRightMaker == LayoutEditor {
+	
+	func evaluateFrame(bottomRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreBottomRightToEvaluateFrameType {
+	
+	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(bottomRight: bottomRight, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreBottomRightType {
 	
 	public func pinBottomRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomRightMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreBottomRightType {
 		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreBottomRightToEvaluateFrameType: LayoutMakerCanStoreBottomRightType where WillSetBottomRightMaker == LayoutEditor {
-	
-	func evaluateFrame(bottomRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreBottomRightToEvaluateFrameType {
-	
-	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(bottomRight: bottomRight, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

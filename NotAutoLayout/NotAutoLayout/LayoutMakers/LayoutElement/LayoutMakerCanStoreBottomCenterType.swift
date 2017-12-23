@@ -30,13 +30,55 @@ extension LayoutMakerCanStoreBottomCenterType {
 	
 	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomCenterMaker {
 		
-		let bottomCenter = LayoutElement.Point.closure(bottomCenter)
+		let bottomCenter = LayoutElement.Point.byParent(bottomCenter)
 		
 		let maker = self.storeBottomCenter(bottomCenter)
 		
 		return maker
 		
 	}
+	
+	public func pinBottomCenter(to referenceView: UIView?, with bottomCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomCenterMaker {
+		
+		return self.pinBottomCenter(by: { [weak referenceView] in referenceView }, with: bottomCenter)
+		
+	}
+	
+	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, with bottomCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomCenterMaker {
+		
+		let bottomCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomCenter)
+		
+		let maker = self.storeBottomCenter(bottomCenter)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreBottomCenterToEvaluateFrameType: LayoutMakerCanStoreBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
+	
+	func evaluateFrame(bottomCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreBottomCenterToEvaluateFrameType {
+	
+	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(bottomCenter: bottomCenter, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+extension LayoutMakerCanStoreBottomCenterType {
 	
 	public func pinBottomCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomCenterMaker {
 		
@@ -73,28 +115,6 @@ extension LayoutMakerCanStoreBottomCenterType {
 		let maker = self.storeBottomCenter(bottomCenter)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreBottomCenterToEvaluateFrameType: LayoutMakerCanStoreBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
-	
-	func evaluateFrame(bottomCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreBottomCenterToEvaluateFrameType {
-	
-	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(bottomCenter: bottomCenter, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

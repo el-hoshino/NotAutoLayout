@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreMiddleLeftType {
 	
 	public func setMiddleLeft(by middleLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleLeftMaker {
 		
-		let middleLeft = LayoutElement.Point.closure(middleLeft)
+		let middleLeft = LayoutElement.Point.byParent(middleLeft)
 		
 		let maker = self.storeMiddleLeft(middleLeft)
 		
 		return maker
 		
 	}
+	
+	public func pinMiddleLeft(to referenceView: UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftMaker {
+		
+		return self.pinMiddleLeft(by: { [weak referenceView] in referenceView }, with: middleLeft)
+		
+	}
+	
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftMaker {
+		
+		let middleLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, middleLeft)
+		
+		let maker = self.storeMiddleLeft(middleLeft)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreMiddleLeftToEvaluateFrameType: LayoutMakerCanStoreMiddleLeftType where WillSetMiddleLeftMaker == LayoutEditor {
+	
+	func evaluateFrame(middleLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreMiddleLeftToEvaluateFrameType {
+	
+	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(middleLeft: middleLeft, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreMiddleLeftType {
 	
 	public func pinMiddleLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleLeftMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreMiddleLeftType {
 		let maker = self.storeMiddleLeft(middleLeft)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreMiddleLeftToEvaluateFrameType: LayoutMakerCanStoreMiddleLeftType where WillSetMiddleLeftMaker == LayoutEditor {
-	
-	func evaluateFrame(middleLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreMiddleLeftToEvaluateFrameType {
-	
-	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(middleLeft: middleLeft, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

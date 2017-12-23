@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreTopLeftType {
 	
 	public func setTopLeft(by topLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetTopLeftMaker {
 		
-		let topLeft = LayoutElement.Point.closure(topLeft)
+		let topLeft = LayoutElement.Point.byParent(topLeft)
 		
 		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
 	}
+	
+	public func pinTopLeft(to referenceView: UIView?, with topLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopLeftMaker {
+		
+		return self.pinTopLeft(by: { [weak referenceView] in referenceView }, with: topLeft)
+		
+	}
+	
+	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopLeftMaker {
+		
+		let topLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, topLeft)
+		
+		let maker = self.storeTopLeft(topLeft)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreTopLeftToEvaluateFrameType: LayoutMakerCanStoreTopLeftType where WillSetTopLeftMaker == LayoutEditor {
+	
+	func evaluateFrame(topLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreTopLeftToEvaluateFrameType {
+	
+	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(topLeft: topLeft, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreTopLeftType {
 	
 	public func pinTopLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopLeftMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreTopLeftType {
 		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreTopLeftToEvaluateFrameType: LayoutMakerCanStoreTopLeftType where WillSetTopLeftMaker == LayoutEditor {
-	
-	func evaluateFrame(topLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreTopLeftToEvaluateFrameType {
-	
-	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(topLeft: topLeft, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

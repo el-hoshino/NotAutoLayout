@@ -14,24 +14,34 @@ public struct LayoutElement {
 
 extension LayoutElement {
 	
-	public enum Line {
+	public enum Horizontal {
 		
 		case constant(CGFloat)
-		case closure((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat)
+		
+	}
+	
+	public enum Vertical {
+		
+		case constant(CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat)
 		
 	}
 	
 	public enum Point {
 		
 		case constant(CGPoint)
-		case closure((ViewFrameProperty) -> CGPoint)
+		case byParent((ViewFrameProperty) -> CGPoint)
+		case byReference(referenceGetter: () -> UIView?,(ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint)
 		
 	}
 	
 	public enum Length {
 		
 		case constant(CGFloat)
-		case closure((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
 		case fits(CGFloat)
 		
 	}
@@ -103,7 +113,7 @@ extension LayoutElement {
 		}
 		
 		case constant(CGSize)
-		case closure((ViewFrameProperty) -> CGSize)
+		case byParent((ViewFrameProperty) -> CGSize)
 		case fits(CGSize)
 		case aspect(AspectSizing)
 		
@@ -112,22 +122,44 @@ extension LayoutElement {
 	public enum Rect {
 		
 		case constant(CGRect)
-		case closure((ViewFrameProperty) -> CGRect)
+		case byParent((ViewFrameProperty) -> CGRect)
 		
 	}
 	
 }
 
-extension LayoutElement.Line {
+extension LayoutElement.Horizontal {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGFloat {
+	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
-		case .closure(let calculation):
+		case .byParent(let calculation):
 			return calculation(property)
+			
+		case .byReference(referenceGetter: let reference, let calculation):
+			return calculation(.horizontal(parentView: parent, referenceView: reference))
+		}
+		
+	}
+	
+}
+
+extension LayoutElement.Vertical {
+	
+	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGFloat {
+		
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .byParent(let calculation):
+			return calculation(property)
+			
+		case .byReference(referenceGetter: let reference, let calculation):
+			return calculation(.vertical(parentView: parent, referenceView: reference))
 		}
 		
 	}
@@ -136,14 +168,17 @@ extension LayoutElement.Line {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGPoint {
+	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
 			return value
 			
-		case .closure(let calculation):
+		case .byParent(let calculation):
 			return calculation(property)
+			
+		case .byReference(referenceGetter: let reference, let calculation):
+			return calculation(.point(parentView: parent, referenceView: reference))
 		}
 		
 	}
@@ -181,7 +216,7 @@ extension LayoutElement.Length {
 		case .constant(let value):
 			return value
 			
-		case .closure(let calculation):
+		case .byParent(let calculation):
 			return calculation(property)
 			
 		case .fits(let fittingLength):
@@ -200,7 +235,7 @@ extension LayoutElement.Size {
 		case .constant(let value):
 			return value
 			
-		case .closure(let calculation):
+		case .byParent(let calculation):
 			return property.evaluateSize(from: calculation)
 			
 		case .fits(let fittingSize):
@@ -222,7 +257,7 @@ extension LayoutElement.Rect {
 		case .constant(let value):
 			return value
 			
-		case .closure(let calculation):
+		case .byParent(let calculation):
 			return calculation(property)
 		}
 		

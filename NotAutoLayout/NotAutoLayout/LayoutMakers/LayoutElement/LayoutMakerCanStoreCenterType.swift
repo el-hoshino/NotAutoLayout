@@ -12,7 +12,7 @@ public protocol LayoutMakerCanStoreCenterType: LayoutMakerType {
 	
 	associatedtype WillSetCenterMaker
 	
-	func storeCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker
+	func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanStoreCenterType {
 	
 	public func setCenter(to center: CGFloat) -> WillSetCenterMaker {
 		
-		let center = LayoutElement.Line.constant(center)
+		let center = LayoutElement.Horizontal.constant(center)
 		
 		let maker = self.storeCenter(center)
 		
@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreCenterType {
 	
 	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetCenterMaker {
 		
-		let center = LayoutElement.Line.closure(center)
+		let center = LayoutElement.Horizontal.byParent(center)
 		
 		let maker = self.storeCenter(center)
 		
 		return maker
 		
 	}
+	
+	public func pinCenter(to referenceView: UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterMaker {
+		
+		return self.pinCenter(by: { [weak referenceView] in referenceView }, with: center)
+		
+	}
+	
+	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterMaker {
+		
+		let center = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, center)
+		
+		let maker = self.storeCenter(center)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreCenterToEvaluateFrameType: LayoutMakerCanStoreCenterType where WillSetCenterMaker == LayoutEditor {
+	
+	func evaluateFrame(center: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreCenterToEvaluateFrameType {
+	
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(center: center, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreCenterType {
 	
 	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetCenterMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreCenterType {
 		let maker = self.storeCenter(center)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreCenterToEvaluateFrameType: LayoutMakerCanStoreCenterType where WillSetCenterMaker == LayoutEditor {
-	
-	func evaluateFrame(center: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreCenterToEvaluateFrameType {
-	
-	public func storeCenter(_ center: LayoutElement.Line) -> WillSetCenterMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(center: center, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

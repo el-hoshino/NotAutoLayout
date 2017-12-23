@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreTopCenterType {
 	
 	public func setTopCenter(by topCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetTopCenterMaker {
 		
-		let topCenter = LayoutElement.Point.closure(topCenter)
+		let topCenter = LayoutElement.Point.byParent(topCenter)
 		
 		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
 		
 	}
+	
+	public func pinTopCenter(to referenceView: UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopCenterMaker {
+		
+		return self.pinTopCenter(by: { [weak referenceView] in referenceView }, with: topCenter)
+		
+	}
+	
+	public func pinTopCenter(by referenceView: @escaping () -> UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopCenterMaker {
+		
+		let topCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, topCenter)
+		
+		let maker = self.storeTopCenter(topCenter)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreTopCenterToEvaluateFrameType: LayoutMakerCanStoreTopCenterType where WillSetTopCenterMaker == LayoutEditor {
+	
+	func evaluateFrame(topCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreTopCenterToEvaluateFrameType {
+	
+	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(topCenter: topCenter, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreTopCenterType {
 	
 	public func pinTopCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopCenterMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreTopCenterType {
 		let maker = self.storeTopCenter(topCenter)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreTopCenterToEvaluateFrameType: LayoutMakerCanStoreTopCenterType where WillSetTopCenterMaker == LayoutEditor {
-	
-	func evaluateFrame(topCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreTopCenterToEvaluateFrameType {
-	
-	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> WillSetTopCenterMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(topCenter: topCenter, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

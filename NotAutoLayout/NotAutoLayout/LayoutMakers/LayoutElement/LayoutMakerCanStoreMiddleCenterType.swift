@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreMiddleCenterType {
 	
 	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleCenterMaker {
 		
-		let middleCenter = LayoutElement.Point.closure(middleCenter)
+		let middleCenter = LayoutElement.Point.byParent(middleCenter)
 		
 		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
 		
 	}
+	
+	public func pinMiddleCenter(to referenceView: UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleCenterMaker {
+		
+		return self.pinMiddleCenter(by: { [weak referenceView] in referenceView }, with: middleCenter)
+		
+	}
+	
+	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleCenterMaker {
+		
+		let middleCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, middleCenter)
+		
+		let maker = self.storeMiddleCenter(middleCenter)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreMiddleCenterToEvaluateFrameType: LayoutMakerCanStoreMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
+	
+	func evaluateFrame(middleCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreMiddleCenterToEvaluateFrameType {
+	
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(middleCenter: middleCenter, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(* , deprecated)
+extension LayoutMakerCanStoreMiddleCenterType {
 	
 	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleCenterMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreMiddleCenterType {
 		let maker = self.storeMiddleCenter(middleCenter)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreMiddleCenterToEvaluateFrameType: LayoutMakerCanStoreMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
-	
-	func evaluateFrame(middleCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreMiddleCenterToEvaluateFrameType {
-	
-	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(middleCenter: middleCenter, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	

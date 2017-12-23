@@ -156,13 +156,13 @@ extension InitialLayoutMaker: LayoutMakerCanStoreBottomRightType {
 	
 }
 
-// MARK: - Set A Line -
+// MARK: - Set Horizontal -
 // MARK: Left
 extension InitialLayoutMaker: LayoutMakerCanStoreLeftType {
 	
 	public typealias WillSetLeftMaker = DidStoreLeftLayoutMaker
 	
-	public func storeLeft(_ left: LayoutElement.Line) -> DidStoreLeftLayoutMaker {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> DidStoreLeftLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 left: left)
@@ -176,7 +176,7 @@ extension InitialLayoutMaker: LayoutMakerCanStoreCenterType {
 	
 	public typealias WillSetCenterMaker = DidStoreCenterLayoutMaker
 	
-	public func storeCenter(_ center: LayoutElement.Line) -> DidStoreCenterLayoutMaker {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> DidStoreCenterLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 center: center)
@@ -190,7 +190,7 @@ extension InitialLayoutMaker: LayoutMakerCanStoreRightType {
 	
 	public typealias WillSetRightMaker = DidStoreRightLayoutMaker
 	
-	public func storeRight(_ right: LayoutElement.Line) -> DidStoreRightLayoutMaker {
+	public func storeRight(_ right: LayoutElement.Horizontal) -> DidStoreRightLayoutMaker {
 		
 		return .init(parentView: self.parentView,
 					 right: right)

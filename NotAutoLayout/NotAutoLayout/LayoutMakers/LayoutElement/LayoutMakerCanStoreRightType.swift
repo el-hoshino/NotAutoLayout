@@ -12,7 +12,7 @@ public protocol LayoutMakerCanStoreRightType: LayoutMakerType {
 	
 	associatedtype WillSetRightMaker
 	
-	func storeRight(_ right: LayoutElement.Line) -> WillSetRightMaker
+	func storeRight(_ right: LayoutElement.Horizontal) -> WillSetRightMaker
 	
 }
 
@@ -20,7 +20,7 @@ extension LayoutMakerCanStoreRightType {
 	
 	public func setRight(to right: CGFloat) -> WillSetRightMaker {
 		
-		let right = LayoutElement.Line.constant(right)
+		let right = LayoutElement.Horizontal.constant(right)
 		
 		let maker = self.storeRight(right)
 		
@@ -30,13 +30,56 @@ extension LayoutMakerCanStoreRightType {
 	
 	public func setRight(by right: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetRightMaker {
 		
-		let right = LayoutElement.Line.closure(right)
+		let right = LayoutElement.Horizontal.byParent(right)
 		
 		let maker = self.storeRight(right)
 		
 		return maker
 		
 	}
+	
+	public func pinRight(to referenceView: UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetRightMaker {
+		
+		return self.pinRight(by: { [weak referenceView] in referenceView }, with: right)
+		
+	}
+	
+	public func pinRight(by referenceView: @escaping () -> UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetRightMaker {
+		
+		let right = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, right)
+		
+		let maker = self.storeRight(right)
+		
+		return maker
+		
+	}
+	
+}
+
+public protocol LayoutMakerCanStoreRightToEvaluateFrameType: LayoutMakerCanStoreRightType where WillSetRightMaker == LayoutEditor {
+	
+	func evaluateFrame(right: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
+	
+}
+
+extension LayoutMakerCanStoreRightToEvaluateFrameType {
+	
+	public func storeRight(_ right: LayoutElement.Horizontal) -> WillSetRightMaker {
+		
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(right: right, property: property)
+		})
+		
+		let editor = LayoutEditor(layout)
+		
+		return editor
+		
+	}
+	
+}
+
+@available(*, deprecated)
+extension LayoutMakerCanStoreRightType {
 	
 	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetRightMaker {
 		
@@ -73,28 +116,6 @@ extension LayoutMakerCanStoreRightType {
 		let maker = self.storeRight(right)
 		
 		return maker
-		
-	}
-	
-}
-
-public protocol LayoutMakerCanStoreRightToEvaluateFrameType: LayoutMakerCanStoreRightType where WillSetRightMaker == LayoutEditor {
-	
-	func evaluateFrame(right: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
-	
-}
-
-extension LayoutMakerCanStoreRightToEvaluateFrameType {
-	
-	public func storeRight(_ right: LayoutElement.Line) -> WillSetRightMaker {
-		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(right: right, property: property)
-		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
 		
 	}
 	
