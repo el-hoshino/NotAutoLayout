@@ -98,13 +98,13 @@ public struct ViewPinProperty<Property> {
 
 extension ViewPinProperty {
 	
-	static func horizontal(parentView: UIView, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Horizontal> {
+	static func horizontal(parentView: UIView?, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Horizontal> {
 		
 		return horizontal(parentView: parentView, referenceView: { [weak referenceView] in referenceView })
 		
 	}
 	
-	static func horizontal(parentView: UIView, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Horizontal> {
+	static func horizontal(parentView: UIView?, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Horizontal> {
 		
 		let property = ViewPinPropertyType.Horizontal(parentView: parentView, referenceView: referenceView)
 		let pinProperty = ViewPinProperty<ViewPinPropertyType.Horizontal>(property: property)
@@ -117,13 +117,13 @@ extension ViewPinProperty {
 
 extension ViewPinProperty {
 	
-	static func vertical(parentView: UIView, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Vertical> {
+	static func vertical(parentView: UIView?, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Vertical> {
 		
 		return vertical(parentView: parentView, referenceView: { [weak referenceView] in referenceView })
 		
 	}
 	
-	static func vertical(parentView: UIView, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Vertical> {
+	static func vertical(parentView: UIView?, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Vertical> {
 		
 		let property = ViewPinPropertyType.Vertical(parentView: parentView, referenceView: referenceView)
 		let pinProperty = ViewPinProperty<ViewPinPropertyType.Vertical>(property: property)
@@ -136,13 +136,13 @@ extension ViewPinProperty {
 
 extension ViewPinProperty {
 	
-	static func point(parentView: UIView, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Point> {
+	static func point(parentView: UIView?, referenceView: UIView?) -> ViewPinProperty<ViewPinPropertyType.Point> {
 		
 		return point(parentView: parentView, referenceView: { [weak referenceView] in referenceView })
 		
 	}
 	
-	static func point(parentView: UIView, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Point> {
+	static func point(parentView: UIView?, referenceView: @escaping () -> UIView?) -> ViewPinProperty<ViewPinPropertyType.Point> {
 		
 		let property = ViewPinPropertyType.Point(parentView: parentView, referenceView: referenceView)
 		let pinProperty = ViewPinProperty<ViewPinPropertyType.Point>(property: property)

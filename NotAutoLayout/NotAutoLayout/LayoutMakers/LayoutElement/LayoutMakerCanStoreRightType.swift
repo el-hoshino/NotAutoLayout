@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreRightType.swift
+//  LayoutPropertyCanStoreRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreRightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreRightType {
+extension LayoutPropertyCanStoreRightType {
 	
 	public func setRight(to right: CGFloat) -> WillSetRightMaker {
 		
@@ -56,13 +56,13 @@ extension LayoutMakerCanStoreRightType {
 	
 }
 
-public protocol LayoutMakerCanStoreRightToEvaluateFrameType: LayoutMakerCanStoreRightType where WillSetRightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType where WillSetRightMaker == LayoutEditor {
 	
 	func evaluateFrame(right: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreRightToEvaluateFrameType {
 	
 	public func storeRight(_ right: LayoutElement.Horizontal) -> WillSetRightMaker {
 		
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreRightToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreRightType {
+extension LayoutPropertyCanStoreRightType {
 	
 	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetRightMaker {
 		

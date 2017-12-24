@@ -52,7 +52,7 @@ extension DidStoreTopLeftRightLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Middle
-extension DidStoreTopLeftRightLayoutMaker: LayoutMakerCanStoreMiddleToEvaluateFrameType {
+extension DidStoreTopLeftRightLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetMiddleMaker = LayoutEditor
 	

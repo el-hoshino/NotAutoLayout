@@ -14,7 +14,7 @@ public struct DidStoreTopCenterBottomLayoutMaker {
 	
 	let topCenter: LayoutElement.Point
 	
-	let bottom: LayoutElement.Line
+	let bottom: LayoutElement.Vertical
 	
 }
 
@@ -36,7 +36,7 @@ extension DidStoreTopCenterBottomLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreTopCenterBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreTopCenterBottomLayoutMaker: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	

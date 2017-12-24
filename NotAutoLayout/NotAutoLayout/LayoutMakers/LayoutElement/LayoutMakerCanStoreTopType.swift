@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreTopType.swift
+//  LayoutPropertyCanStoreTopType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreTopType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreTopType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreTopType {
+extension LayoutPropertyCanStoreTopType {
 	
 	public func setTop(to top: CGFloat) -> WillSetTopMaker {
 		
@@ -56,13 +56,13 @@ extension LayoutMakerCanStoreTopType {
 	
 }
 
-public protocol LayoutMakerCanStoreTopToEvaluateFrameType: LayoutMakerCanStoreTopType where WillSetTopMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanStoreTopType where WillSetTopMaker == LayoutEditor {
 	
 	func evaluateFrame(top: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreTopToEvaluateFrameType {
+extension LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
 	public func storeTop(_ top: LayoutElement.Vertical) -> WillSetTopMaker {
 		
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreTopToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreTopType {
+extension LayoutPropertyCanStoreTopType {
 	
 	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetTopMaker {
 		

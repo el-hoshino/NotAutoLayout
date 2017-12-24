@@ -130,7 +130,7 @@ extension LayoutElement {
 
 extension LayoutElement.Horizontal {
 	
-	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGFloat {
+	func evaluated(from property: ViewFrameProperty) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -140,7 +140,7 @@ extension LayoutElement.Horizontal {
 			return calculation(property)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.horizontal(parentView: parent, referenceView: reference))
+			return calculation(.horizontal(parentView: property.parentView, referenceView: reference))
 		}
 		
 	}
@@ -149,7 +149,7 @@ extension LayoutElement.Horizontal {
 
 extension LayoutElement.Vertical {
 	
-	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGFloat {
+	func evaluated(from property: ViewFrameProperty) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -159,7 +159,7 @@ extension LayoutElement.Vertical {
 			return calculation(property)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: parent, referenceView: reference))
+			return calculation(.vertical(parentView: property.parentView, referenceView: reference))
 		}
 		
 	}
@@ -168,7 +168,7 @@ extension LayoutElement.Vertical {
 
 extension LayoutElement.Point {
 	
-	func evaluated(under parent: UIView, with property: ViewFrameProperty) -> CGPoint {
+	func evaluated(from property: ViewFrameProperty) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
@@ -178,7 +178,7 @@ extension LayoutElement.Point {
 			return calculation(property)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.point(parentView: parent, referenceView: reference))
+			return calculation(.point(parentView: property.parentView, referenceView: reference))
 		}
 		
 	}

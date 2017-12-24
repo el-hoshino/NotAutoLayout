@@ -37,19 +37,18 @@ extension DidStoreCenterMiddleWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreCenterMiddleWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
-	
-	public typealias WillSetHeightMaker = LayoutEditor
-	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
-		
-		let center = self.center.evaluated(from: property)
-		let middle = self.middle.evaluated(from: property)
-		let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
-		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
-		
-		return self.makeFrame(center: center, middle: middle, width: width, height: height)
-		
-	}
-	
+extension DidStoreCenterMiddleWidthLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
+    
+    public typealias WillSetHeightMaker = LayoutEditor
+    
+    public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+        
+        let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
+        let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+        let x = self.center.evaluated(from: property) - width.halved
+        let y = self.middle.evaluated(from: property) - height.halved
+        return CGRect(x: x, y: y, width: width, height: height)
+        
+    }
+    
 }

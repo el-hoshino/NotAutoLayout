@@ -32,12 +32,7 @@ extension Layout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (_ property: ViewFrameProperty) -> CGRect) {
-		self.basicFrameEvaluation = Frame(frame)
-		self.additionalEvaluations = []
-	}
-	
-	init(frame: @escaping (_ property: ViewFrameProperty, _ fitting: (CGSize) -> CGSize) -> CGRect) {
+	init(frame: @escaping Frame.FrameCalculation) {
 		self.basicFrameEvaluation = Frame(frame)
 		self.additionalEvaluations = []
 	}
@@ -84,12 +79,12 @@ extension Layout {
 
 extension Layout {
 	
-	func evaluatedFrame(for view: UIView, with property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	func evaluatedFrame(from property: ViewFrameProperty) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.evaluated(from: property, fitting: fittingCalculation)
+		var frame = self.basicFrameEvaluation.evaluated(from: property)
 		
 		for evaluation in self.additionalEvaluations {
-			frame = evaluation.evaluated(for: view, from: frame, with: property)
+			frame = evaluation.evaluated(from: frame, with: property)
 		}
 		
 		return frame

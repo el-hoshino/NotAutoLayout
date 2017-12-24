@@ -35,7 +35,7 @@ extension DidStoreMiddleCenterWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreMiddleCenterWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreMiddleCenterWidthLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
 	

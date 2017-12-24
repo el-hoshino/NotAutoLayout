@@ -8,8 +8,14 @@
 
 import Foundation
 
-public protocol LayoutMakerType {
+public struct LayoutMaker<Property> {
 	
-	var parentView: UIView { get }
+	unowned let parentView: UIView
+	
+	let didSetProperty: Property
+	
+}
+
+public protocol LayoutMakerPropertyType {
 	
 }

@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleRightType.swift
+//  LayoutPropertyCanStoreMiddleRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleRightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetMiddleRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreMiddleRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreMiddleRightType {
+extension LayoutPropertyCanStoreMiddleRightType {
 	
 	public func setMiddleRight(to middleRight: CGPoint) -> WillSetMiddleRightMaker {
 		
@@ -56,20 +56,20 @@ extension LayoutMakerCanStoreMiddleRightType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleRightToEvaluateFrameType: LayoutMakerCanStoreMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleRightToEvaluateFrameType: LayoutPropertyCanStoreMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
 	
-	func evaluateFrame(middleRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(middleRight: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
 	
 	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(middleRight: middleRight, property: property)
+		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
+			return self.evaluateFrame(middleRight: middleRight, parentView: parentView, property: property, fitting: fitting)
 		})
-		
+
 		let editor = LayoutEditor(layout)
 		
 		return editor
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreMiddleRightToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreMiddleRightType {
+extension LayoutPropertyCanStoreMiddleRightType {
 	
 	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleRightMaker {
 		

@@ -12,9 +12,9 @@ public struct DidStoreRightMiddleHeightLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let right: LayoutElement.Line
+	let right: LayoutElement.Horizontal
 	
-	let middle: LayoutElement.Line
+	let middle: LayoutElement.Vertical
 	
 	let height: LayoutElement.Length
 	

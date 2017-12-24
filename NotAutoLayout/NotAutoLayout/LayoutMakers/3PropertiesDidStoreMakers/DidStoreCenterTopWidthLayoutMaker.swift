@@ -35,8 +35,8 @@ extension DidStoreCenterTopWidthLayoutMaker {
 	
 }
 
-extension DidStoreCenterTopWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
-
+extension DidStoreCenterTopWidthLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
+	
     public typealias WillSetHeightMaker = LayoutEditor
     
     public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {

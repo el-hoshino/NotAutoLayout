@@ -10,29 +10,27 @@ import Foundation
 
 public struct ViewFrameProperty {
 	
-	public let boundSize: CGSize
+	private(set) weak var parentView: UIView?
 	
-	public let safeAreaInsets: UIEdgeInsets
+	private(set) weak var currentView: UIView?
 	
 }
 
 extension ViewFrameProperty {
 	
-	static func initialize(from view: UIView) -> ViewFrameProperty {
+	public var boundSize: CGSize {
 		
-		let boundSize = view.bounds.size
-		let safeAreaInsets: UIEdgeInsets = {
-			if #available(iOS 11.0, *) {
-				return view.safeAreaInsets
-			} else {
-				return .zero
-			}
-		}()
+		return self.parentView?.bounds.size ?? .zero
 		
-		let property = ViewFrameProperty(boundSize: boundSize,
-											   safeAreaInsets: safeAreaInsets)
+	}
+	
+	public var safeAreaInsets: UIEdgeInsets {
 		
-		return property
+		if #available(iOS 11.0, *), let insets = self.parentView?.safeAreaInsets {
+			return insets
+		} else {
+			return .zero
+		}
 		
 	}
 	

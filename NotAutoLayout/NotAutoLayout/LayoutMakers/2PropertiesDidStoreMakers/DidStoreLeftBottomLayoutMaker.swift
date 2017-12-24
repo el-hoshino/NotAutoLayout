@@ -36,7 +36,7 @@ extension DidStoreLeftBottomLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
+extension DidStoreLeftBottomLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -53,7 +53,7 @@ extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameT
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreWidthType {
+extension DidStoreLeftBottomLayoutMaker: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthMaker = DidStoreLeftBottomWidthLayoutMaker
 	
@@ -69,7 +69,7 @@ extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreLeftBottomLayoutMaker: LayoutMakerCanStoreHeightType {
+extension DidStoreLeftBottomLayoutMaker: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightMaker = DidStoreLeftBottomHeightLayoutMaker
 	

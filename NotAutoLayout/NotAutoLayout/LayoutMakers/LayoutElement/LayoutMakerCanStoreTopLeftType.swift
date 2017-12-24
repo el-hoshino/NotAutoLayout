@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreTopLeftType.swift
+//  LayoutPropertyCanStoreTopLeftType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreTopLeftType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreTopLeftType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopLeftMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreTopLeftType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreTopLeftType {
+extension LayoutPropertyCanStoreTopLeftType {
 	
 	public func setTopLeft(to topLeft: CGPoint) -> WillSetTopLeftMaker {
 		
@@ -56,18 +56,18 @@ extension LayoutMakerCanStoreTopLeftType {
 	
 }
 
-public protocol LayoutMakerCanStoreTopLeftToEvaluateFrameType: LayoutMakerCanStoreTopLeftType where WillSetTopLeftMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreTopLeftToEvaluateFrameType: LayoutPropertyCanStoreTopLeftType where WillSetTopLeftMaker == LayoutEditor {
 	
-	func evaluateFrame(topLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(topLeft: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreTopLeftToEvaluateFrameType {
+extension LayoutPropertyCanStoreTopLeftToEvaluateFrameType {
 	
 	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftMaker {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(topLeft: topLeft, property: property)
+		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
+			return self.evaluateFrame(topLeft: topLeft, parentView: parentView, property: property, fitting: fitting)
 		})
 		
 		let editor = LayoutEditor(layout)
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreTopLeftToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreTopLeftType {
+extension LayoutPropertyCanStoreTopLeftType {
 	
 	public func pinTopLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopLeftMaker {
 		

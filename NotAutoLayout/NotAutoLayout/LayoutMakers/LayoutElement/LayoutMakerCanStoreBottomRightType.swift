@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreBottomRightType.swift
+//  LayoutPropertyCanStoreBottomRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreBottomRightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreBottomRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetBottomRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreBottomRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreBottomRightType {
+extension LayoutPropertyCanStoreBottomRightType {
 	
 	public func setBottomRight(to bottomRight: CGPoint) -> WillSetBottomRightMaker {
 		
@@ -56,20 +56,20 @@ extension LayoutMakerCanStoreBottomRightType {
 	
 }
 
-public protocol LayoutMakerCanStoreBottomRightToEvaluateFrameType: LayoutMakerCanStoreBottomRightType where WillSetBottomRightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomRightToEvaluateFrameType: LayoutPropertyCanStoreBottomRightType where WillSetBottomRightMaker == LayoutEditor {
 	
-	func evaluateFrame(bottomRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(bottomRight: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreBottomRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreBottomRightToEvaluateFrameType {
 	
 	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightMaker {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(bottomRight: bottomRight, property: property)
+		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
+			return self.evaluateFrame(bottomRight: bottomRight, parentView: parentView, property: property, fitting: fitting)
 		})
-		
+
 		let editor = LayoutEditor(layout)
 		
 		return editor
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreBottomRightToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreBottomRightType {
+extension LayoutPropertyCanStoreBottomRightType {
 	
 	public func pinBottomRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomRightMaker {
 		

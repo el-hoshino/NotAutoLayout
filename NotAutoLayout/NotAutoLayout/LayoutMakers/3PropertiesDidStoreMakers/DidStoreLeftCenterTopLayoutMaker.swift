@@ -12,11 +12,11 @@ public struct DidStoreLeftCenterTopLayoutMaker {
 	
 	public unowned let parentView: UIView
 	
-	let left: LayoutElement.Line
+	let left: LayoutElement.Horizontal
 	
-	let center: LayoutElement.Line
+	let center: LayoutElement.Horizontal
 	
-	let top: LayoutElement.Line
+	let top: LayoutElement.Horizontal
 	
 }
 

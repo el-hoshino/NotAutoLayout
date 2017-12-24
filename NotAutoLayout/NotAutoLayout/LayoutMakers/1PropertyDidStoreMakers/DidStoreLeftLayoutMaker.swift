@@ -8,17 +8,23 @@
 
 import Foundation
 
+public struct DidStoreLeftLayoutProperty {
+	
+	let left: LayoutElement.Horizontal
+	
+}
+
 public struct DidStoreLeftLayoutMaker {
 	
 	public unowned let parentView: UIView
 		
-	let left: LayoutElement.Line
+	let left: LayoutElement.Horizontal
 	
 }
 
 // MARK: - Set A Line -
 // MARK: Center
-extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreCenterType {
+extension DidStoreLeftLayoutMaker: LayoutPropertyCanStoreCenterType {
 	
 	public typealias WillSetCenterMaker = DidStoreLeftCenterLayoutMaker
 	
@@ -33,7 +39,7 @@ extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreCenterType {
 }
 
 // MARK: Right
-extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreRightType {
+extension DidStoreLeftLayoutMaker: LayoutPropertyCanStoreRightType {
 	
 	public typealias WillSetRightMaker = DidStoreLeftRightLayoutMaker
 	
@@ -48,7 +54,7 @@ extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreRightType {
 }
 
 // MARK: Top
-extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreTopType {
+extension DidStoreLeftLayoutMaker: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopMaker = DidStoreLeftTopLayoutMaker
 	
@@ -63,7 +69,7 @@ extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreTopType {
 }
 
 // MARK: Middle
-extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreMiddleType {
+extension DidStoreLeftLayoutMaker: LayoutPropertyCanStoreMiddleType {
 	
 	public typealias WillSetMiddleMaker = DidStoreLeftMiddleLayoutMaker
 	
@@ -78,7 +84,7 @@ extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreMiddleType {
 }
 
 // MARK: Bottom
-extension DidStoreLeftLayoutMaker: LayoutMakerCanStoreBottomType {
+extension DidStoreLeftLayoutMaker: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomMaker = DidStoreLeftBottomLayoutMaker
 	

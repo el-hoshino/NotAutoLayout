@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreBottomType.swift
+//  LayoutPropertyCanStoreBottomType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreBottomType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreBottomType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetBottomMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreBottomType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreBottomType {
+extension LayoutPropertyCanStoreBottomType {
 	
 	public func setBottom(to bottom: CGFloat) -> WillSetBottomMaker {
 		
@@ -56,13 +56,13 @@ extension LayoutMakerCanStoreBottomType {
 	
 }
 
-public protocol LayoutMakerCanStoreBottomToEvaluateFrameType: LayoutMakerCanStoreBottomType where WillSetBottomMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomToEvaluateFrameType: LayoutPropertyCanStoreBottomType where WillSetBottomMaker == LayoutEditor {
 	
 	func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreBottomToEvaluateFrameType {
+extension LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
 	public func storeBottom(_ bottom: LayoutElement.Vertical) -> WillSetBottomMaker {
 		
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreBottomToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreBottomType {
+extension LayoutPropertyCanStoreBottomType {
 	
 	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetBottomMaker {
 		

@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleType.swift
+//  LayoutPropertyCanStoreMiddleType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetMiddleMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreMiddleType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreMiddleType {
+extension LayoutPropertyCanStoreMiddleType {
 	
 	public func setMiddle(to middle: CGFloat) -> WillSetMiddleMaker {
 		
@@ -56,13 +56,13 @@ extension LayoutMakerCanStoreMiddleType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleToEvaluateFrameType: LayoutMakerCanStoreMiddleType where WillSetMiddleMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleToEvaluateFrameType: LayoutPropertyCanStoreMiddleType where WillSetMiddleMaker == LayoutEditor {
 	
 	func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
 	public func storeMiddle(_ middle: LayoutElement.Vertical) -> WillSetMiddleMaker {
 		
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreMiddleToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreMiddleType {
+extension LayoutPropertyCanStoreMiddleType {
 	
 	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetMiddleMaker {
 		

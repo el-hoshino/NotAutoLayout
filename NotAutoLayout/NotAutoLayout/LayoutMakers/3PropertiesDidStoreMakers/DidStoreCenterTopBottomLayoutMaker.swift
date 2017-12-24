@@ -38,7 +38,7 @@ extension DidStoreCenterTopBottomLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreCenterTopBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreCenterTopBottomLayoutMaker: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	

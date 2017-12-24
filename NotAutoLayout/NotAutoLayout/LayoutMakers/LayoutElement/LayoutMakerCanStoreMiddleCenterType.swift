@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleCenterType.swift
+//  LayoutPropertyCanStoreMiddleCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleCenterType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleCenterType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetMiddleCenterMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreMiddleCenterType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreMiddleCenterType {
+extension LayoutPropertyCanStoreMiddleCenterType {
 	
 	public func setMiddleCenter(to middleCenter: CGPoint) -> WillSetMiddleCenterMaker {
 		
@@ -56,20 +56,20 @@ extension LayoutMakerCanStoreMiddleCenterType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleCenterToEvaluateFrameType: LayoutMakerCanStoreMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPropertyCanStoreMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
 	
-	func evaluateFrame(middleCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(middleCenter: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleCenterToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
 	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(middleCenter: middleCenter, property: property)
+		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
+			return self.evaluateFrame(middleCenter: middleCenter, parentView: parentView, property: property, fitting: fitting)
 		})
-		
+
 		let editor = LayoutEditor(layout)
 		
 		return editor
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreMiddleCenterToEvaluateFrameType {
 }
 
 @available(* , deprecated)
-extension LayoutMakerCanStoreMiddleCenterType {
+extension LayoutPropertyCanStoreMiddleCenterType {
 	
 	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleCenterMaker {
 		

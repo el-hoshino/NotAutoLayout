@@ -14,7 +14,7 @@ public struct DidStoreBottomLeftRightLayoutMaker {
 	
 	let bottomLeft: LayoutElement.Point
 	
-	let right: LayoutElement.Line
+	let right: LayoutElement.Horizontal
 	
 }
 
@@ -52,12 +52,11 @@ extension DidStoreBottomLeftRightLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Top
-extension DidStoreBottomLeftRightLayoutMaker: LayoutMakerCanStoreTopToEvaluateFrameType {
+extension DidStoreBottomLeftRightLayoutMaker: LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
 	public typealias WillSetTopMaker = LayoutEditor
 	
-	public func evaluateFrame(top: LayoutElement.Line, property: ViewFrameProperty) -> CGRect {
-		
+	public func evaluateFrame(top: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect {
 		let bottomLeft = self.bottomLeft.evaluated(from: property)
 		let right = self.right.evaluated(from: property)
 		let top = top.evaluated(from: property)

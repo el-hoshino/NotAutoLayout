@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreTopRightType.swift
+//  LayoutPropertyCanStoreTopRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreTopRightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreTopRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopRightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreTopRightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreTopRightType {
+extension LayoutPropertyCanStoreTopRightType {
 	
 	public func setTopRight(to topRight: CGPoint) -> WillSetTopRightMaker {
 		
@@ -56,20 +56,20 @@ extension LayoutMakerCanStoreTopRightType {
 	
 }
 
-public protocol LayoutMakerCanStoreTopRightToEvaluateFrameType: LayoutMakerCanStoreTopRightType where WillSetTopRightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreTopRightToEvaluateFrameType: LayoutPropertyCanStoreTopRightType where WillSetTopRightMaker == LayoutEditor {
 	
-	func evaluateFrame(topRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(topRight: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreTopRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreTopRightToEvaluateFrameType {
 	
 	public func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightMaker {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(topRight: topRight, property: property)
+		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
+			return self.evaluateFrame(topRight: topRight, parentView: parentView, property: property, fitting: fitting)
 		})
-		
+
 		let editor = LayoutEditor(layout)
 		
 		return editor
@@ -79,7 +79,7 @@ extension LayoutMakerCanStoreTopRightToEvaluateFrameType {
 }
 
 @available(*, deprecated)
-extension LayoutMakerCanStoreTopRightType {
+extension LayoutPropertyCanStoreTopRightType {
 	
 	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopRightMaker {
 		

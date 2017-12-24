@@ -35,8 +35,8 @@ extension DidStoreMiddleLeftWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreMiddleLeftWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
-    
+extension DidStoreMiddleLeftWidthLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
+	
     public typealias WillSetHeightMaker = LayoutEditor
     
     public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {

@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreHeightType.swift
+//  LayoutPropertyCanStoreHeightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreHeightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetHeightMaker
 	
@@ -16,7 +16,7 @@ public protocol LayoutMakerCanStoreHeightType: LayoutMakerType {
 	
 }
 
-extension LayoutMakerCanStoreHeightType {
+extension LayoutPropertyCanStoreHeightType {
 	
 	public func setHeight(to height: CGFloat) -> WillSetHeightMaker {
 		
@@ -50,13 +50,13 @@ extension LayoutMakerCanStoreHeightType {
 	
 }
 
-public protocol LayoutMakerCanStoreHeightToEvaluateFrameType: LayoutMakerCanStoreHeightType where WillSetHeightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType where WillSetHeightMaker == LayoutEditor {
 	
 	func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker {
 		

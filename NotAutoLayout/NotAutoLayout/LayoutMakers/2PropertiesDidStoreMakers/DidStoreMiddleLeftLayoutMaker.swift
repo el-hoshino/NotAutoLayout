@@ -74,7 +74,7 @@ extension DidStoreMiddleLeftLayoutMaker {
 
 // MARK: - Set A Point -
 // MARK: TopCenter
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopCenterToEvaluateFrameType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreTopCenterToEvaluateFrameType {
 	
 	public typealias WillSetTopCenterMaker = LayoutEditor
 	
@@ -87,7 +87,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopCenterToEvaluateF
 }
 
 // MARK: TopRight
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopRightToEvaluateFrameType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreTopRightToEvaluateFrameType {
 	
 	public typealias WillSetTopRightMaker = LayoutEditor
 	
@@ -100,7 +100,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopRightToEvaluateFr
 }
 
 // MARK: BottomCenter
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomCenterToEvaluateFrameType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
 	public typealias WillSetBottomCenterMaker = LayoutEditor
 	
@@ -113,7 +113,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomCenterToEvalua
 }
 
 // MARK: BottomRight
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomRightToEvaluateFrameType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreBottomRightToEvaluateFrameType {
 	
 	public typealias WillSetBottomRightMaker = LayoutEditor
 	
@@ -127,7 +127,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomRightToEvaluat
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
@@ -143,7 +143,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFrameT
 
 // MARK: - Set A Line -
 // MARK: Center
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreCenterType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreCenterType {
 	
 	public typealias WillSetCenterMaker = DidStoreMiddleLeftCenterLayoutMaker
 	
@@ -158,7 +158,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreCenterType {
 }
 
 // MARK: Right
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreRightType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreRightType {
 	
 	public typealias WillSetRightMaker = DidStoreMiddleLeftRightLayoutMaker
 	
@@ -173,7 +173,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreRightType {
 }
 
 // MARK: Top
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopMaker = DidStoreMiddleLeftTopLayoutMaker
 	
@@ -188,7 +188,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreTopType {
 }
 
 // MARK: Bottom
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomMaker = DidStoreMiddleLeftBottomLayoutMaker
 	
@@ -204,7 +204,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreWidthType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthMaker = DidStoreMiddleLeftWidthLayoutMaker
 	
@@ -219,7 +219,7 @@ extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreMiddleLeftLayoutMaker: LayoutMakerCanStoreHeightType {
+extension DidStoreMiddleLeftLayoutMaker: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightMaker = DidStoreMiddleLeftHeightLayoutMaker
 	
