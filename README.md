@@ -130,5 +130,12 @@ Waiting to be filled ...
 - [ ] Sequencial layout is not implemented yet.
 - [ ] Matrical layout is not implemented yet.
 
+## Golas for oncoming version 3.0
+NotAutoLayout v3.0 will be released along with Swift 4.1 (that means probably on 1st or 2nd quarter in 2018), which may contain some break changes to the current API. One of the biggest changes is `pinXxx` API. Currently it's made like `pinLeft(to: someView, s: .right, offsetBy: 10, safeAreaOnly: true)`, which is very long and not very user friendly. In v3.0, it'll be changed to something like `pinLeft(to: someView, at: { $0.safeRight + 10 })`, which much shorter, as well as much easier to read.
+
+Also, currently in v2.x, sequencial and matrical layouts are not implemented yet. Hopefully they'll be implemented in v3.0, or at least 3.1.
+
+For details about version 3.0.0, please take a look at [3.0.0 Milestone](https://github.com/el-hoshino/NotAutoLayout/milestone/5).
+
 ## License
 NotAutoLayout is released under the Apache license. See LICENSE for details.
