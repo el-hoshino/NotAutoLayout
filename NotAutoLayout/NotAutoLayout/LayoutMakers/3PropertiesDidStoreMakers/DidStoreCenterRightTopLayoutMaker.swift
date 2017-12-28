@@ -71,7 +71,7 @@ extension DidStoreCenterRightTopLayoutMaker: LayoutMakerCanStoreMiddleToEvaluate
 	
 }
 
-//MARK: Bottom
+// MARK: Bottom
 extension DidStoreCenterRightTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
 	
 	public typealias WillSetBottomMaker = LayoutEditor

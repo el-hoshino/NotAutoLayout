@@ -71,7 +71,7 @@ extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreMiddleToEvaluateF
 	
 }
 
-//MARK: Bottom
+// MARK: Bottom
 extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
 	
 	public typealias WillSetBottomMaker = LayoutEditor
@@ -101,9 +101,9 @@ extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreHeightToEvaluateF
 		let center = self.center.evaluated(from: property)
 		let top = self.top.evaluated(from: property)
 		let width = (center - left).doubled
-		let bottom = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
 		
-		return self.makeFrame(left: left, center: center, top: top, bottom: bottom)
+		return self.makeFrame(left: left, center: center, top: top, height: height)
 		
 	}
 	
