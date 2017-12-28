@@ -26,14 +26,14 @@ class NotAutoLayoutTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 		let parent = UIView()
 		let child = UIView()
-		let layout = parent.nal.makeLayout { maker in maker
+		
+		parent.nal.layout(child) { $0
 			.setLeft(to: 10)
 			.setTop(to: 10)
 			.setWidth(to: 100)
 			.setHeight(to: 100)
 		}
 		
-		parent.nal.layout(child, with: layout)
 		let result = child.frame
 		let expected = CGRect(x: 10, y: 10, width: 100, height: 100)
 		XCTAssertEqual(result, expected)
@@ -44,17 +44,17 @@ class NotAutoLayoutTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
-			let view = LayoutInfoStoredView()
+			let parent = LayoutInfoStoredView()
 			let child = UIView()
 			
-			let layout = view.nal.makeLayout { maker in maker
-				.pinLeft(to: view, s: .left, offsetBy: 10)
+			let layout = parent.nal.makeLayout { $0
+				.pinLeft(to: parent, s: .left, offsetBy: 10)
 				.setTop(to: 10)
 				.setWidth(to: 100)
 				.setHeight(to: 100)
 			}
 			
-			view.nal.setupSubview(child) { (wizard) in wizard
+			parent.nal.setupSubview(child) { (wizard) in wizard
 				.addToParent()
 				.setDefaultLayout(to: layout)
 			}

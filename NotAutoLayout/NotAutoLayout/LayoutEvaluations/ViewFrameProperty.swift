@@ -1,5 +1,5 @@
 //
-//  LayoutControlParameter.swift
+//  ViewFrameProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/09/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LayoutControlParameter {
+public struct ViewFrameProperty {
 	
 	public let boundSize: CGSize
 	
@@ -16,9 +16,9 @@ public struct LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
-	static func initialize(from view: UIView) -> LayoutControlParameter {
+	static func initialize(from view: UIView) -> ViewFrameProperty {
 		
 		let boundSize = view.bounds.size
 		let safeAreaInsets: UIEdgeInsets = {
@@ -29,16 +29,16 @@ extension LayoutControlParameter {
 			}
 		}()
 		
-		let parameter = LayoutControlParameter(boundSize: boundSize,
+		let property = ViewFrameProperty(boundSize: boundSize,
 											   safeAreaInsets: safeAreaInsets)
 		
-		return parameter
+		return property
 		
 	}
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundWidth: CGFloat {
 		return self.boundSize.width
@@ -50,18 +50,18 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundLeft: CGFloat {
 		return 0
 	}
 	
 	public var boundCenter: CGFloat {
-		return (self.boundRight - self.boundLeft) / 2
+		return self.boundLeft + (self.boundWidth / 2)
 	}
 	
 	public var boundRight: CGFloat {
-		return self.boundWidth
+		return self.boundLeft + self.boundWidth
 	}
 	
 	public var boundTop: CGFloat {
@@ -69,16 +69,24 @@ extension LayoutControlParameter {
 	}
 	
 	public var boundMiddle: CGFloat {
-		return (self.boundBottom - self.boundTop) / 2
+		return self.boundTop + (self.boundHeight / 2)
 	}
 	
 	public var boundBottom: CGFloat {
-		return self.boundHeight
+		return self.boundTop + self.boundHeight
+	}
+	
+	public func boundHorizontal(at relativePosition: CGFloat) -> CGFloat {
+		return self.boundLeft + (self.boundWidth * relativePosition)
+	}
+	
+	public func boundVertical(at relativePosition: CGFloat) -> CGFloat {
+		return self.boundTop + (self.boundHeight * relativePosition)
 	}
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundTopLeft: CGPoint {
 		return .init(x: self.boundLeft, y: self.boundTop)
@@ -116,9 +124,15 @@ extension LayoutControlParameter {
 		return .init(x: self.boundRight, y: self.boundBottom)
 	}
 	
+	public func boundPoint(at relativePoint: CGPoint) -> CGPoint {
+		let x = self.boundLeft + (self.boundWidth * relativePoint.x)
+		let y = self.boundTop + (self.boundHeight * relativePoint.y)
+		return .init(x: x, y: y)
+	}
+	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	public var boundFrame: CGRect {
 		return .init(origin: .zero, size: self.boundSize)
@@ -126,7 +140,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var topSafeAreaInset: CGFloat {
@@ -150,7 +164,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeWidth: CGFloat {
@@ -174,7 +188,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeLeft: CGFloat {
@@ -188,7 +202,7 @@ extension LayoutControlParameter {
 	
 	@available(iOS 11.0, *)
 	public var safeRight: CGFloat {
-		return self.boundRight - self.safeAreaInsets.right
+		return self.safeLeft + self.safeWidth
 	}
 	
 	@available(iOS 11.0, *)
@@ -203,12 +217,22 @@ extension LayoutControlParameter {
 	
 	@available(iOS 11.0, *)
 	public var safeBottom: CGFloat {
-		return self.boundBottom - self.safeAreaInsets.bottom
+		return self.safeTop + self.safeHeight
+	}
+	
+	@available(iOS 11.0, *)
+	public func safeHorizontal(at relativePosition: CGFloat) -> CGFloat {
+		return self.safeLeft + (self.safeWidth * relativePosition)
+	}
+	
+	@available(iOS 11.0, *)
+	public func safeVertical(at relativePosition: CGFloat) -> CGFloat {
+		return self.safeTop + (self.safeHeight * relativePosition)
 	}
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeTopLeft: CGPoint {
@@ -255,9 +279,16 @@ extension LayoutControlParameter {
 		return .init(x: self.safeRight, y: self.safeBottom)
 	}
 	
+	@available(iOS 11.0, *)
+	public func safePoint(at relativePoint: CGPoint) -> CGPoint {
+		let x = self.safeLeft + (self.safeWidth * relativePoint.x)
+		let y = self.safeTop + (self.safeHeight * relativePoint.y)
+		return .init(x: x, y: y)
+	}
+	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS 11.0, *)
 	public var safeFrame: CGRect {
@@ -266,7 +297,7 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
 	@available(iOS, renamed: "boundFrame")
 	public func boundsWithZeroOrigin() -> CGRect {
@@ -294,9 +325,9 @@ extension LayoutControlParameter {
 	
 }
 
-extension LayoutControlParameter {
+extension ViewFrameProperty {
 	
-	func evaluateSize(from calculation: (LayoutControlParameter) -> CGSize) -> CGSize {
+	func evaluateSize(from calculation: (ViewFrameProperty) -> CGSize) -> CGSize {
 		
 		return calculation(self)
 		

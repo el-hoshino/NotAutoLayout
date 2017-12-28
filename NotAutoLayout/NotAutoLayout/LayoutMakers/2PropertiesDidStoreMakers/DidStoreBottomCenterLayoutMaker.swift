@@ -87,10 +87,10 @@ extension DidStoreBottomCenterLayoutMaker: LayoutMakerCanStoreSizeToEvaluateFram
 	
 	public typealias WillSetSizeMaker = LayoutEditor
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
-		let bottomCenter = self.bottomCenter.evaluated(from: parameter)
-		let size = size.evaluated(from: parameter, fittingCalculation: fittingCalculation)
+		let bottomCenter = self.bottomCenter.evaluated(from: property)
+		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
 		return self.makeFrame(bottomCenter: bottomCenter, size: size)
 		
 	}

@@ -19,3 +19,37 @@ public struct DidStoreLeftBottomHeightLayoutMaker {
 	let height: LayoutElement.Length
 	
 }
+
+// MARK: - Make Frame
+extension DidStoreLeftBottomHeightLayoutMaker {
+	
+	private func makeFrame(left: CGFloat, bottom: CGFloat, height: CGFloat, width: CGFloat) -> CGRect {
+		
+		let x = left
+		let y = bottom - height
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+// MARK: - Set A Length -
+// MARK: Width
+extension DidStoreLeftBottomHeightLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+	
+	public typealias WillSetWidthMaker = LayoutEditor
+	
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+		
+		let left = self.left.evaluated(from: property)
+		let bottom = self.bottom.evaluated(from: property)
+		let height = self.height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(0))
+		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
+		
+		return self.makeFrame(left: left, bottom: bottom, height: height, width: width)
+		
+	}
+	
+}
