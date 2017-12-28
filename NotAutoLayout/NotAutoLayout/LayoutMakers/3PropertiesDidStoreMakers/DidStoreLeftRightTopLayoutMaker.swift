@@ -20,6 +20,7 @@ public struct DidStoreLeftRightTopLayoutMaker {
 	
 }
 
+// MARK: - Make Frame
 extension DidStoreLeftRightTopLayoutMaker {
 	
 	private func makeFrame(left: CGFloat, right: CGFloat, top: CGFloat, bottom: CGFloat) -> CGRect {
@@ -47,6 +48,8 @@ extension DidStoreLeftRightTopLayoutMaker {
 	
 }
 
+// MARK: - Set A Line -
+//MARK: Bottom
 extension DidStoreLeftRightTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
 	
 	public typealias WillSetBottomMaker = LayoutEditor
@@ -61,6 +64,8 @@ extension DidStoreLeftRightTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFr
 	
 }
 
+// MARK: - Set A Length -
+// MARK: Height
 extension DidStoreLeftRightTopLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
 	
 	public typealias WillSetHeightMaker = LayoutEditor
