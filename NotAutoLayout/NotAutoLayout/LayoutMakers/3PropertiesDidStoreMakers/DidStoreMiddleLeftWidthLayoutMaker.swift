@@ -18,15 +18,14 @@ public struct DidStoreMiddleLeftWidthLayoutMaker {
 	
 }
 
+// MARK: - Make Frame
 extension DidStoreMiddleLeftWidthLayoutMaker {
 	
 	private func makeFrame(middleLeft: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
 		let x = middleLeft.x
 		let y = middleLeft.y - height.halved
-		let size = CGSize(width: width, height: height)
-		let origin = CGPoint(x: x, y: y)
-		let frame = CGRect(origin: origin, size: size)
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -34,6 +33,8 @@ extension DidStoreMiddleLeftWidthLayoutMaker {
 	
 }
 
+// MARK: - Set A Length -
+// MARK: Height
 extension DidStoreMiddleLeftWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
     
     public typealias WillSetHeightMaker = LayoutEditor
@@ -43,6 +44,7 @@ extension DidStoreMiddleLeftWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluat
         let middleLeft = self.middleLeft.evaluated(from: property)
         let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		
         return self.makeFrame(middleLeft: middleLeft, width: width, height: height)
         
     }
