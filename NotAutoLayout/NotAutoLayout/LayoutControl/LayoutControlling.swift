@@ -41,23 +41,8 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 	public func layout(_ view: UIView, with layout: Layout) {
 		
-		let frame = layout.evaluatedFrame(for: view, with: self.layoutControlParameter, fittingCalculation: { view.sizeThatFits($0) })
+		let frame = layout.evaluatedFrame(for: view, with: self.viewFrameProperty, fittingCalculation: { view.sizeThatFits($0) })
 		self.layout(view, with: frame)
-		
-	}
-	
-	public func layout(_ views: [UIView], with layout: SequentialLayout) {
-		
-		views.forEachPair { (previousView, view) in
-			let frame = layout.evaluatedFrame(for: view, after: previousView, with: self.layoutControlParameter, fittingCalculation: { view.sizeThatFits($0) })
-			self.layout(view, with: frame)
-		}
-		
-	}
-	
-	public func layout(_ views: [UIView], by numberOfColumnsInRow: @autoclosure () -> Int, with layout: MatricalLayout) {
-		
-		fatalError("Not implemented yet")
 		
 	}
 	
@@ -82,13 +67,6 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		
 		let maker = InitialLayoutMaker(parentView: self.body)
 		return making(maker).layout
-		
-	}
-	
-	public func makeSequentialLayout(_ making: (InitialSequentialLayoutMaker) -> SequentialLayout) -> SequentialLayout {
-		
-		let maker = InitialSequentialLayoutMaker(parentView: self.body)
-		return making(maker)
 		
 	}
 	

@@ -18,15 +18,14 @@ public struct DidStoreMiddleRightWidthLayoutMaker {
 	
 }
 
+// MARK: - Make Frame
 extension DidStoreMiddleRightWidthLayoutMaker {
 	
 	private func makeFrame(middleRight: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
 		let x = middleRight.x - width
 		let y = middleRight.y - height.halved
-		let size = CGSize(width: width, height: height)
-		let origin = CGPoint(x: x, y: y)
-		let frame = CGRect(origin: origin, size: size)
+		let frame = CGRect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -34,15 +33,18 @@ extension DidStoreMiddleRightWidthLayoutMaker {
 	
 }
 
+// MARK: - Set A Length -
+// MARK: Height
 extension DidStoreMiddleRightWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
     
     public typealias WillSetHeightMaker = LayoutEditor
     
-    public func evaluateFrame(height: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
         
-        let middleRight = self.middleRight.evaluated(from: parameter)
-        let width = self.width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+        let middleRight = self.middleRight.evaluated(from: property)
+        let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
+        let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		
         return self.makeFrame(middleRight: middleRight, width: width, height: height)
         
     }

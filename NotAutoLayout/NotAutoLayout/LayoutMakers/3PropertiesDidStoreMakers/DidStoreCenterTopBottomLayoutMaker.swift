@@ -20,6 +20,7 @@ public struct DidStoreCenterTopBottomLayoutMaker {
 	
 }
 
+// MARK: - Make Frame
 extension DidStoreCenterTopBottomLayoutMaker {
 	
 	private func makeFrame(center: CGFloat, top: CGFloat, bottom: CGFloat, width: CGFloat) -> CGRect {
@@ -35,21 +36,21 @@ extension DidStoreCenterTopBottomLayoutMaker {
 	
 }
 
+// MARK: - Set A Length -
+// MARK: Width
 extension DidStoreCenterTopBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
 	
 	public typealias WillSetWidthMaker = LayoutEditor
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameter: LayoutControlParameter, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
-		let top = self.top.evaluated(from: parameter)
-		let bottom = self.bottom.evaluated(from: parameter)
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+		let center = self.center.evaluated(from: property)
+		let top = self.top.evaluated(from: property)
+		let bottom = self.bottom.evaluated(from: property)
 		let height = bottom - top
-		let center = self.center.evaluated(from: parameter)
-		let width = width.evaluated(from: parameter, fitting: fittingCalculation, withTheOtherAxis: .height(height))
-		let x = center - width.halved
-		let y = top
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
 		
-		return frame
+		return self.makeFrame(center: center, top: top, bottom: bottom, width: width)
+		
 	}
 	
 }

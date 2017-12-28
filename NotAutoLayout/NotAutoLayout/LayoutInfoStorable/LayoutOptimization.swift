@@ -15,6 +15,6 @@ import Foundation
 /// - matrix: Stores the previous subview in column, the previous subview in row and the column size, which may be helpful for matrical layout.
 public enum LayoutOptimization {
 	case none
-	case sequence(sequentialLayout: SequentialLayout)
-	case matrix(matricalLayout: MatricalLayout, columnsPerRow: Int)
+//	case sequence(sequentialLayout: SequentialLayout)
+//	case matrix(matricalLayout: MatricalLayout, columnsPerRow: Int)
 }
