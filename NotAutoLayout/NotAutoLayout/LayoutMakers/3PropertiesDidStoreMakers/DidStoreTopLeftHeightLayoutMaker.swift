@@ -17,3 +17,36 @@ public struct DidStoreTopLeftHeightLayoutMaker {
 	let height: LayoutElement.Length
 	
 }
+
+// MARK: - Make Frame
+extension DidStoreTopLeftHeightLayoutMaker {
+	
+	private func makeFrame(topLeft: CGPoint, height: CGFloat, width: CGFloat) -> CGRect {
+		
+		let x = topLeft.x
+		let y = topLeft.y
+		let frame = CGRect(x: x, y: y, width: width, height: height)
+		
+		return frame
+		
+	}
+	
+}
+
+// MARK: - Set A Length -
+// MARK: Width
+extension DidStoreTopLeftHeightLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+	
+	public typealias WillSetWidthMaker = LayoutEditor
+	
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+		
+		let topLeft = self.topLeft.evaluated(from: property)
+		let height = self.height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(0))
+		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
+		
+		return self.makeFrame(topLeft: topLeft, height: height, width: width)
+		
+	}
+	
+}
