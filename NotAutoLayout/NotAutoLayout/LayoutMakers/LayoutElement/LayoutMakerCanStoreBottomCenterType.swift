@@ -58,7 +58,7 @@ extension LayoutPropertyCanStoreBottomCenterType {
 
 public protocol LayoutPropertyCanStoreBottomCenterToEvaluateFrameType: LayoutPropertyCanStoreBottomCenterType where WillSetBottomCenterProperty == LayoutEditor {
 	
-	func evaluateFrame(bottomCenter: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(bottomCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
@@ -66,8 +66,8 @@ extension LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
 	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterProperty {
 		
-		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
-			return self.evaluateFrame(bottomCenter: bottomCenter, parentView: parentView, property: property, fitting: fitting)
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(bottomCenter: bottomCenter, property: property)
 		})
 
 		let editor = LayoutEditor(layout)

@@ -12,43 +12,40 @@ public protocol LayoutPropertyCanStoreTopRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopRightProperty
 	
-	func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightProperty
+	func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopRightProperty>
 	
 }
 
-extension LayoutPropertyCanStoreTopRightType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreTopRightType {
 	
-	public func setTopRight(to topRight: CGPoint) -> WillSetTopRightProperty {
+	public func setTopRight(to topRight: CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		let topRight = LayoutElement.Point.constant(topRight)
-		
-		let maker = self.storeTopRight(topRight)
+		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setTopRight(by topRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetTopRightProperty {
+	public func setTopRight(by topRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		let topRight = LayoutElement.Point.byParent(topRight)
-		
-		let maker = self.storeTopRight(topRight)
+		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinTopRight(to referenceView: UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopRightProperty {
+	public func pinTopRight(to referenceView: UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		return self.pinTopRight(by: { [weak referenceView] in referenceView }, with: topRight)
 		
 	}
 	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetTopRightProperty {
+	public func pinTopRight(by referenceView: @escaping () -> UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		let topRight = LayoutElement.Point.byReference(referenceGetter: referenceView, topRight)
-		
-		let maker = self.storeTopRight(topRight)
+		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
 		
 		return maker
 		
@@ -56,64 +53,20 @@ extension LayoutPropertyCanStoreTopRightType {
 	
 }
 
-public protocol LayoutPropertyCanStoreTopRightToEvaluateFrameType: LayoutPropertyCanStoreTopRightType where WillSetTopRightProperty == LayoutEditor {
+public protocol LayoutPropertyCanStoreTopRightToEvaluateFrameType: LayoutPropertyCanStoreTopRightType {
 	
-	func evaluateFrame(topRight: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(topRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreTopRightToEvaluateFrameType {
 	
-	public func storeTopRight(_ topRight: LayoutElement.Point) -> WillSetTopRightProperty {
+	public func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<DidStoreAllRequiredLayoutProperty> {
 		
-		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
-			return self.evaluateFrame(topRight: topRight, parentView: parentView, property: property, fitting: fitting)
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(topRight: topRight, property: property)
 		})
-
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
-
-@available(*, deprecated)
-extension LayoutPropertyCanStoreTopRightType {
-	
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopRightProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetTopRightProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTopRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetTopRightProperty {
-		
-		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeTopRight(topRight)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetTopRightProperty {
-		
-		let topRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = self.storeTopRight(topRight)
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
 		return maker
 		

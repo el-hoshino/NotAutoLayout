@@ -46,8 +46,7 @@ extension InitialLayoutProperty: LayoutPropertyCanStoreTopCenterType {
 	
 	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> DidStoreTopCenterLayoutProperty {
 		
-		return .init(parentView: self.parentView,
-					 topCenter: topCenter)
+		return .init(topCenter: topCenter)
 		
 	}
 	
@@ -159,8 +158,7 @@ extension InitialLayoutProperty: LayoutPropertyCanStoreLeftType {
 	
 	public func storeLeft(_ left: LayoutElement.Horizontal) -> DidStoreLeftLayoutProperty {
 		
-		return .init(parentView: self.parentView,
-					 left: left)
+		return .init(left: left)
 		
 	}
 	
@@ -173,8 +171,7 @@ extension InitialLayoutProperty: LayoutPropertyCanStoreCenterType {
 	
 	public func storeCenter(_ center: LayoutElement.Horizontal) -> DidStoreCenterLayoutProperty {
 		
-		return .init(parentView: self.parentView,
-					 center: center)
+		return .init(center: center)
 		
 	}
 	
@@ -187,8 +184,7 @@ extension InitialLayoutProperty: LayoutPropertyCanStoreRightType {
 	
 	public func storeRight(_ right: LayoutElement.Horizontal) -> DidStoreRightLayoutProperty {
 		
-		return .init(parentView: self.parentView,
-					 right: right)
+		return .init(right: right)
 		
 	}
 	
