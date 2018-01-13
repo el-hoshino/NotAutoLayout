@@ -1,5 +1,5 @@
 //
-//  DidStoreCenterBottomLayoutMaker.swift
+//  DidStoreCenterBottomLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,18 +8,16 @@
 
 import Foundation
 
-public struct DidStoreCenterBottomLayoutMaker {
+public struct DidStoreCenterBottomLayoutProperty {
 	
-	public unowned let parentView: UIView
+	let center: LayoutElement.Horizontal
 	
-	let center: LayoutElement.Line
-	
-	let bottom: LayoutElement.Line
+	let bottom: LayoutElement.Vertical
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreCenterBottomLayoutMaker {
+extension DidStoreCenterBottomLayoutProperty {
 	
 	private func makeFrame(center: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -37,9 +35,9 @@ extension DidStoreCenterBottomLayoutMaker {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreCenterBottomLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateFrameType {
+extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public typealias WillSetSizeMaker = LayoutEditor
+	public typealias WillSetSizeProperty = LayoutEditor
 	
 	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
@@ -54,11 +52,11 @@ extension DidStoreCenterBottomLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateF
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreCenterBottomLayoutMaker: LayoutPropertyCanStoreWidthType {
+extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthMaker = DidStoreCenterBottomWidthLayoutMaker
+	public typealias WillSetWidthProperty = DidStoreCenterBottomWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreCenterBottomWidthLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreCenterBottomWidthLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,
@@ -70,11 +68,11 @@ extension DidStoreCenterBottomLayoutMaker: LayoutPropertyCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreCenterBottomLayoutMaker: LayoutPropertyCanStoreHeightType {
+extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightMaker = DidStoreCenterBottomHeightLayoutMaker
+	public typealias WillSetHeightProperty = DidStoreCenterBottomHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreCenterBottomHeightLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreCenterBottomHeightLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 center: self.center,

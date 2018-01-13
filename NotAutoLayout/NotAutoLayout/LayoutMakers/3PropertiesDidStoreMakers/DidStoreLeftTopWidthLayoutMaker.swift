@@ -1,5 +1,5 @@
 //
-//  DidStoreLeftPointTopPointWidthLayoutMaker.swift
+//  DidStoreLeftPointTopPointWidthLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/06/15.
@@ -8,20 +8,18 @@
 
 import Foundation
 
-public struct DidStoreLeftTopWidthLayoutMaker {
-		
-	public unowned let parentView: UIView
+public struct DidStoreLeftTopWidthLayoutProperty {
 	
-	let left: LayoutElement.Line
+	let left: LayoutElement.Horizontal
 	
-	let top: LayoutElement.Line
+	let top: LayoutElement.Vertical
 	
 	let width: LayoutElement.Length
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftTopWidthLayoutMaker {
+extension DidStoreLeftTopWidthLayoutProperty {
 	
 	private func makeFrame(left: CGFloat, top: CGFloat, width: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -37,9 +35,9 @@ extension DidStoreLeftTopWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreLeftTopWidthLayoutMaker: LayoutPropertyCanStoreHeightToEvaluateFrameType {
+extension DidStoreLeftTopWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
+	public typealias WillSetHeightProperty = LayoutEditor
 	
 	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

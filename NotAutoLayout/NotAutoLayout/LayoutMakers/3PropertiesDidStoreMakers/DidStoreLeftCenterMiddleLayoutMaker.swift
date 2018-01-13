@@ -1,5 +1,5 @@
 //
-//  DidStoreLeftCenterMiddleLayoutMaker.swift
+//  DidStoreLeftCenterMiddleLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,20 +8,18 @@
 
 import Foundation
 
-public struct DidStoreLeftCenterMiddleLayoutMaker {
+public struct DidStoreLeftCenterMiddleLayoutProperty {
 	
-	public unowned let parentView: UIView
+	let left: LayoutElement.Horizontal
 	
-	let left: LayoutElement.Line
+	let center: LayoutElement.Horizontal
 	
-	let center: LayoutElement.Line
-	
-	let middle: LayoutElement.Line
+	let middle: LayoutElement.Vertical
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftCenterMiddleLayoutMaker {
+extension DidStoreLeftCenterMiddleLayoutProperty {
 	
 	private func makeFrame(left: CGFloat, center: CGFloat, middle: CGFloat, bottom: CGFloat) -> CGRect {
 		
@@ -46,11 +44,11 @@ extension DidStoreLeftCenterMiddleLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Bottom
-extension DidStoreLeftCenterMiddleLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
+extension DidStoreLeftCenterMiddleLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public typealias WillSetBottomMaker = LayoutEditor
+	public typealias WillSetBottomProperty = LayoutEditor
 	
-	public func evaluateFrame(bottom: LayoutElement.Line, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let center = self.center.evaluated(from: property)
@@ -65,9 +63,9 @@ extension DidStoreLeftCenterMiddleLayoutMaker: LayoutMakerCanStoreBottomToEvalua
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreLeftCenterMiddleLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreLeftCenterMiddleLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
+	public typealias WillSetHeightProperty = LayoutEditor
 	
 	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

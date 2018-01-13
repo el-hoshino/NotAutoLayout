@@ -1,5 +1,5 @@
 //
-//  DidStoreMiddleRightTopLayoutMaker.swift
+//  DidStoreMiddleRightTopLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,18 +8,16 @@
 
 import Foundation
 
-public struct DidStoreMiddleRightTopLayoutMaker {
-	
-	public unowned let parentView: UIView
+public struct DidStoreMiddleRightTopLayoutProperty {
 	
 	let middleRight: LayoutElement.Point
 	
-	let top: LayoutElement.Line
+	let top: LayoutElement.Vertical
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreMiddleRightTopLayoutMaker {
+extension DidStoreMiddleRightTopLayoutProperty {
 	
 	private func makeFrame(middleRight: CGPoint, top: CGFloat, width: CGFloat) -> CGRect {
 		
@@ -36,9 +34,9 @@ extension DidStoreMiddleRightTopLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreMiddleRightTopLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreMiddleRightTopLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public typealias WillSetWidthMaker = LayoutEditor
+	public typealias WillSetWidthProperty = LayoutEditor
 	
 	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

@@ -1,5 +1,5 @@
 //
-//  DidStoreTopCenterHeightLayoutMaker.swift
+//  DidStoreTopCenterHeightLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-public struct DidStoreTopCenterHeightLayoutMaker {
-	
-	public unowned let parentView: UIView
+public struct DidStoreTopCenterHeightLayoutProperty {
 	
 	let topCenter: LayoutElement.Point
 	
@@ -19,7 +17,7 @@ public struct DidStoreTopCenterHeightLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension DidStoreTopCenterHeightLayoutMaker {
+extension DidStoreTopCenterHeightLayoutProperty {
 	
 	private func makeFrame(topCenter: CGPoint, height: CGFloat, width: CGFloat) -> CGRect {
 		
@@ -35,9 +33,9 @@ extension DidStoreTopCenterHeightLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreTopCenterHeightLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreTopCenterHeightLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public typealias WillSetWidthMaker = LayoutEditor
+	public typealias WillSetWidthProperty = LayoutEditor
 	
 	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

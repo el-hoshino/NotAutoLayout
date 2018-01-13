@@ -10,15 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreSizeType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetSizeMaker
+	associatedtype WillSetSizeProperty
 	
-	func storeSize(_ size: LayoutElement.Size) -> WillSetSizeMaker
+	func storeSize(_ size: LayoutElement.Size) -> WillSetSizeProperty
 	
 }
 
 extension LayoutPropertyCanStoreSizeType {
 	
-	public func setSize(to size: CGSize) -> WillSetSizeMaker {
+	public func setSize(to size: CGSize) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.constant(size)
 		
@@ -28,7 +28,7 @@ extension LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ property: ViewFrameProperty) -> CGSize) -> WillSetSizeMaker {
+	public func setSize(by size: @escaping (_ property: ViewFrameProperty) -> CGSize) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.closure(size)
 		
@@ -38,7 +38,7 @@ extension LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func fitSize(by fittingSize: CGSize = .zero) -> WillSetSizeMaker {
+	public func fitSize(by fittingSize: CGSize = .zero) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.fits(fittingSize)
 		
@@ -48,7 +48,7 @@ extension LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func aspectFit(ratio: CGFloat? = nil) -> WillSetSizeMaker {
+	public func aspectFit(ratio: CGFloat? = nil) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.aspect(.fit(ratio))
 		
@@ -58,7 +58,7 @@ extension LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func aspectFill(ratio: CGFloat? = nil) -> WillSetSizeMaker {
+	public func aspectFill(ratio: CGFloat? = nil) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.aspect(.fill(ratio))
 		
@@ -69,7 +69,7 @@ extension LayoutPropertyCanStoreSizeType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func aspectFit(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeMaker {
+	public func aspectFit(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
 		
@@ -80,7 +80,7 @@ extension LayoutPropertyCanStoreSizeType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func aspectFill(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeMaker {
+	public func aspectFill(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetSizeProperty {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
 		
@@ -92,7 +92,7 @@ extension LayoutPropertyCanStoreSizeType {
 	
 }
 
-public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCanStoreSizeType where WillSetSizeMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCanStoreSizeType where WillSetSizeProperty == LayoutEditor {
 	
 	func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
@@ -100,7 +100,7 @@ public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCan
 
 extension LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func storeSize(_ size: LayoutElement.Size) -> WillSetSizeMaker {
+	public func storeSize(_ size: LayoutElement.Size) -> WillSetSizeProperty {
 		
 		let layout = Layout(frame: { (property, fitting) -> CGRect in
 			return self.evaluateFrame(size: size, property: property, fittingCalculation: fitting)

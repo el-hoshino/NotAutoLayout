@@ -1,5 +1,5 @@
 //
-//  LeftBottomWidthDidSetLayoutMaker.swift
+//  LeftBottomWidthDidSetLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,20 +8,18 @@
 
 import Foundation
 
-public struct DidStoreLeftBottomWidthLayoutMaker {
+public struct DidStoreLeftBottomWidthLayoutProperty {
 	
-	public unowned let parentView: UIView
+	let left: LayoutElement.Horizontal
 	
-	let left: LayoutElement.Line
-	
-	let bottom: LayoutElement.Line
+	let bottom: LayoutElement.Vertical
 	
 	let width: LayoutElement.Length
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftBottomWidthLayoutMaker {
+extension DidStoreLeftBottomWidthLayoutProperty {
 	
 	private func makeFrame(left: CGFloat, bottom: CGFloat, width: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -37,9 +35,9 @@ extension DidStoreLeftBottomWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreLeftBottomWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreLeftBottomWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
+	public typealias WillSetHeightProperty = LayoutEditor
 	
 	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

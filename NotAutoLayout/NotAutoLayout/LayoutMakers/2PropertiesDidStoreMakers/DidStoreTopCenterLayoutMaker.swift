@@ -1,5 +1,5 @@
 //
-//  DidStoreTopCenterLayoutMaker.swift
+//  DidStoreTopCenterLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,16 +8,14 @@
 
 import Foundation
 
-public struct DidStoreTopCenterLayoutMaker {
-	
-	public unowned let parentView: UIView
-	
+public struct DidStoreTopCenterLayoutProperty {
+		
 	let topCenter: LayoutElement.Point
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreTopCenterLayoutMaker {
+extension DidStoreTopCenterLayoutProperty {
 	
 	private func makeFrame(topCenter: CGPoint, middleLeft: CGPoint) -> CGRect {
 		
@@ -74,9 +72,9 @@ extension DidStoreTopCenterLayoutMaker {
 
 // MARK: - Set A Point -
 // MARK: MiddleLeft
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType {
 	
-	public typealias WillSetMiddleLeftMaker = LayoutEditor
+	public typealias WillSetMiddleLeftProperty = LayoutEditor
 	
 	public func evaluateFrame(middleLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect {
 		let topCenter = self.topCenter.evaluated(from: property)
@@ -87,9 +85,9 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleLeftToEvalua
 }
 
 // MARK: MiddleRight
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
 	
-	public typealias WillSetMiddleRightMaker = LayoutEditor
+	public typealias WillSetMiddleRightProperty = LayoutEditor
 	
 	public func evaluateFrame(middleRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect {
 		let topCenter = self.topCenter.evaluated(from: property)
@@ -100,9 +98,9 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleRightToEvalu
 }
 
 // MARK: BottomLeft
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public typealias WillSetBottomLeftMaker = LayoutEditor
+	public typealias WillSetBottomLeftProperty = LayoutEditor
 	
 	public func evaluateFrame(bottomLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect {
 		let topCenter = self.topCenter.evaluated(from: property)
@@ -113,9 +111,9 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomLeftToEvalua
 }
 
 // MARK: BottomRight
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomRightToEvaluateFrameType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreBottomRightToEvaluateFrameType {
 	
-	public typealias WillSetBottomRightMaker = LayoutEditor
+	public typealias WillSetBottomRightProperty = LayoutEditor
 	
 	public func evaluateFrame(bottomRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect {
 		let topCenter = self.topCenter.evaluated(from: property)
@@ -127,9 +125,9 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomRightToEvalu
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateFrameType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public typealias WillSetSizeMaker = LayoutEditor
+	public typealias WillSetSizeProperty = LayoutEditor
 	
 	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
@@ -143,11 +141,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreSizeToEvaluateFram
 
 // MARK: - Set A Line -
 // MARK: Left
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreLeftType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftMaker = DidStoreTopCenterLeftLayoutMaker
+	public typealias WillSetLeftProperty = DidStoreTopCenterLeftLayoutProperty
 	
-	public func storeLeft(_ left: LayoutElement.Line) -> DidStoreTopCenterLeftLayoutMaker {
+	public func storeLeft(_ left: LayoutElement.Line) -> DidStoreTopCenterLeftLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,
@@ -158,11 +156,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreLeftType {
 }
 
 // MARK: Right
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreRightType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreRightType {
 	
-	public typealias WillSetRightMaker = DidStoreTopCenterRightLayoutMaker
+	public typealias WillSetRightProperty = DidStoreTopCenterRightLayoutProperty
 	
-	public func storeRight(_ right: LayoutElement.Line) -> DidStoreTopCenterRightLayoutMaker {
+	public func storeRight(_ right: LayoutElement.Line) -> DidStoreTopCenterRightLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,
@@ -173,11 +171,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreRightType {
 }
 
 // MARK: Middle
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleMaker = DidStoreTopCenterMiddleLayoutMaker
+	public typealias WillSetMiddleProperty = DidStoreTopCenterMiddleLayoutProperty
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreTopCenterMiddleLayoutMaker {
+	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreTopCenterMiddleLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,
@@ -188,11 +186,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreMiddleType {
 }
 
 // MARK: Bottom
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomMaker = DidStoreTopCenterBottomLayoutMaker
+	public typealias WillSetBottomProperty = DidStoreTopCenterBottomLayoutProperty
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreTopCenterBottomLayoutMaker {
+	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreTopCenterBottomLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,
@@ -204,11 +202,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreWidthType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthMaker = DidStoreTopCenterWidthLayoutMaker
+	public typealias WillSetWidthProperty = DidStoreTopCenterWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreTopCenterWidthLayoutMaker {
+	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreTopCenterWidthLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,
@@ -219,11 +217,11 @@ extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreTopCenterLayoutMaker: LayoutPropertyCanStoreHeightType {
+extension DidStoreTopCenterLayoutProperty: LayoutPropertyCanStoreHeightType {
 
-	public typealias WillSetHeightMaker = DidStoreTopCenterHeightLayoutMaker
+	public typealias WillSetHeightProperty = DidStoreTopCenterHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreTopCenterHeightLayoutMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreTopCenterHeightLayoutProperty {
 		
 		return .init(parentView: self.parentView,
 					 topCenter: self.topCenter,

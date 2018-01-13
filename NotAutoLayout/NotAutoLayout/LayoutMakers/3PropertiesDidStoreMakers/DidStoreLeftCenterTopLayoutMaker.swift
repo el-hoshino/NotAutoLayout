@@ -1,5 +1,5 @@
 //
-//  DidStoreLeftCenterTopLayoutMaker.swift
+//  DidStoreLeftCenterTopLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,20 +8,18 @@
 
 import Foundation
 
-public struct DidStoreLeftCenterTopLayoutMaker {
-	
-	public unowned let parentView: UIView
+public struct DidStoreLeftCenterTopLayoutProperty {
 	
 	let left: LayoutElement.Horizontal
 	
 	let center: LayoutElement.Horizontal
 	
-	let top: LayoutElement.Horizontal
+	let top: LayoutElement.Vertical
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftCenterTopLayoutMaker {
+extension DidStoreLeftCenterTopLayoutProperty {
 	
 	private func makeFrame(left: CGFloat, center: CGFloat, top: CGFloat, middle: CGFloat) -> CGRect {
 		
@@ -54,11 +52,11 @@ extension DidStoreLeftCenterTopLayoutMaker {
 
 // MARK: - Set A Line -
 // MARK: Middle
-extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreMiddleToEvaluateFrameType {
+extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public typealias WillSetMiddleMaker = LayoutEditor
+	public typealias WillSetMiddleProperty = LayoutEditor
 	
-	public func evaluateFrame(middle: LayoutElement.Line, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let center = self.center.evaluated(from: property)
@@ -72,11 +70,11 @@ extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreMiddleToEvaluateF
 }
 
 // MARK: Bottom
-extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateFrameType {
+extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public typealias WillSetBottomMaker = LayoutEditor
+	public typealias WillSetBottomProperty = LayoutEditor
 	
-	public func evaluateFrame(bottom: LayoutElement.Line, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let center = self.center.evaluated(from: property)
@@ -91,9 +89,9 @@ extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreBottomToEvaluateF
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreLeftCenterTopLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
+	public typealias WillSetHeightProperty = LayoutEditor
 	
 	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		

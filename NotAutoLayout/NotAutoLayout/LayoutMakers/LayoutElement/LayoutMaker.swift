@@ -1,5 +1,5 @@
 //
-//  LayoutMaker.swift
+//  LayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LayoutMaker<Property> {
+public struct LayoutProperty<Property> {
 	
 	unowned let parentView: UIView
 	

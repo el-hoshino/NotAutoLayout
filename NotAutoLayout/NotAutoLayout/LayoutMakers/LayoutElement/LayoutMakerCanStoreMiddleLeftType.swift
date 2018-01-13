@@ -10,15 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreMiddleLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleLeftMaker
+	associatedtype WillSetMiddleLeftProperty
 	
-	func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftMaker
+	func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftProperty
 	
 }
 
 extension LayoutPropertyCanStoreMiddleLeftType {
 	
-	public func setMiddleLeft(to middleLeft: CGPoint) -> WillSetMiddleLeftMaker {
+	public func setMiddleLeft(to middleLeft: CGPoint) -> WillSetMiddleLeftProperty {
 		
 		let middleLeft = LayoutElement.Point.constant(middleLeft)
 		
@@ -28,7 +28,7 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 		
 	}
 	
-	public func setMiddleLeft(by middleLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleLeftMaker {
+	public func setMiddleLeft(by middleLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleLeftProperty {
 		
 		let middleLeft = LayoutElement.Point.byParent(middleLeft)
 		
@@ -38,13 +38,13 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 		
 	}
 	
-	public func pinMiddleLeft(to referenceView: UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(to referenceView: UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftProperty {
 		
 		return self.pinMiddleLeft(by: { [weak referenceView] in referenceView }, with: middleLeft)
 		
 	}
 	
-	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetMiddleLeftProperty {
 		
 		let middleLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, middleLeft)
 		
@@ -56,7 +56,7 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 	
 }
 
-public protocol LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType: LayoutPropertyCanStoreMiddleLeftType where WillSetMiddleLeftMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType: LayoutPropertyCanStoreMiddleLeftType where WillSetMiddleLeftProperty == LayoutEditor {
 	
 	func evaluateFrame(middleLeft: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
@@ -64,7 +64,7 @@ public protocol LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType: LayoutPrope
 
 extension LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType {
 	
-	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftMaker {
+	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> WillSetMiddleLeftProperty {
 		
 		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
 			return self.evaluateFrame(middleLeft: middleLeft, parentView: parentView, property: property, fitting: fitting)
@@ -81,7 +81,7 @@ extension LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType {
 @available(*, deprecated)
 extension LayoutPropertyCanStoreMiddleLeftType {
 	
-	public func pinMiddleLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleLeftProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -90,7 +90,7 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinMiddleLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleLeftProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -98,7 +98,7 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 		
 	}
 	
-	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleLeftProperty {
 		
 		let middleLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
@@ -109,7 +109,7 @@ extension LayoutPropertyCanStoreMiddleLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleLeftMaker {
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleLeftProperty {
 		
 		let middleLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		

@@ -10,15 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreBottomLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetBottomLeftMaker
+	associatedtype WillSetBottomLeftProperty
 	
-	func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker
+	func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftProperty
 	
 }
 
 extension LayoutPropertyCanStoreBottomLeftType {
 	
-	public func setBottomLeft(to bottomLeft: CGPoint) -> WillSetBottomLeftMaker {
+	public func setBottomLeft(to bottomLeft: CGPoint) -> WillSetBottomLeftProperty {
 		
 		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
 		
@@ -28,7 +28,7 @@ extension LayoutPropertyCanStoreBottomLeftType {
 		
 	}
 	
-	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomLeftMaker {
+	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomLeftProperty {
 		
 		let bottomLeft = LayoutElement.Point.byParent(bottomLeft)
 		
@@ -38,13 +38,13 @@ extension LayoutPropertyCanStoreBottomLeftType {
 		
 	}
 	
-	public func pinBottomLeft(to referenceView: UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(to referenceView: UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomLeftProperty {
 		
 		return self.pinBottomLeft(by: { [weak referenceView] in referenceView }, with: bottomLeft)
 		
 	}
 	
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> WillSetBottomLeftProperty {
 		
 		let bottomLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomLeft)
 		
@@ -56,7 +56,7 @@ extension LayoutPropertyCanStoreBottomLeftType {
 	
 }
 
-public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType where WillSetBottomLeftMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType where WillSetBottomLeftProperty == LayoutEditor {
 	
 	func evaluateFrame(bottomLeft: LayoutElement.Point, parentView: UIView, property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect
 	
@@ -64,7 +64,7 @@ public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPrope
 
 extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftProperty {
 		
 		let layout = Layout(frame: { (parentView, property, fitting) -> CGRect in
 			return self.evaluateFrame(bottomLeft: bottomLeft, parentView: parentView, property: property, fitting: fitting)
@@ -81,7 +81,7 @@ extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 @available(*, deprecated)
 extension LayoutPropertyCanStoreBottomLeftType {
 	
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -90,7 +90,7 @@ extension LayoutPropertyCanStoreBottomLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -98,7 +98,7 @@ extension LayoutPropertyCanStoreBottomLeftType {
 		
 	}
 	
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftProperty {
 		
 		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
@@ -109,7 +109,7 @@ extension LayoutPropertyCanStoreBottomLeftType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftProperty {
 		
 		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		

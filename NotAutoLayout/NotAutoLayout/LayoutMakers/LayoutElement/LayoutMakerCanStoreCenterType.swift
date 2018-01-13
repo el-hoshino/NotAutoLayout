@@ -10,15 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreCenterType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetCenterMaker
+	associatedtype WillSetCenterProperty
 	
-	func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterMaker
+	func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterProperty
 	
 }
 
 extension LayoutPropertyCanStoreCenterType {
 	
-	public func setCenter(to center: CGFloat) -> WillSetCenterMaker {
+	public func setCenter(to center: CGFloat) -> WillSetCenterProperty {
 		
 		let center = LayoutElement.Horizontal.constant(center)
 		
@@ -28,7 +28,7 @@ extension LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetCenterMaker {
+	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetCenterProperty {
 		
 		let center = LayoutElement.Horizontal.byParent(center)
 		
@@ -38,13 +38,13 @@ extension LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func pinCenter(to referenceView: UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterMaker {
+	public func pinCenter(to referenceView: UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterProperty {
 		
 		return self.pinCenter(by: { [weak referenceView] in referenceView }, with: center)
 		
 	}
 	
-	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterMaker {
+	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetCenterProperty {
 		
 		let center = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, center)
 		
@@ -56,7 +56,7 @@ extension LayoutPropertyCanStoreCenterType {
 	
 }
 
-public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyCanStoreCenterType where WillSetCenterMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyCanStoreCenterType where WillSetCenterProperty == LayoutEditor {
 	
 	func evaluateFrame(center: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
 	
@@ -64,7 +64,7 @@ public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterMaker {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterProperty {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(center: center, property: property)
@@ -81,7 +81,7 @@ extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 @available(*, deprecated)
 extension LayoutPropertyCanStoreCenterType {
 	
-	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetCenterMaker {
+	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetCenterProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -90,7 +90,7 @@ extension LayoutPropertyCanStoreCenterType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetCenterMaker {
+	public func pinCenter(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetCenterProperty {
 		
 		let referenceView = { [weak referenceView] in referenceView }
 		
@@ -98,7 +98,7 @@ extension LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetCenterMaker {
+	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetCenterProperty {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
 		
@@ -109,7 +109,7 @@ extension LayoutPropertyCanStoreCenterType {
 	}
 	
 	@available(iOS 11.0, *)
-	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetCenterMaker {
+	public func pinCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetCenterProperty {
 		
 		let center = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
 		

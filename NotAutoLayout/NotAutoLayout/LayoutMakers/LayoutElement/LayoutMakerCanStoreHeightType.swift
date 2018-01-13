@@ -10,15 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetHeightMaker
+	associatedtype WillSetHeightProperty
 	
-	func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker
+	func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightProperty
 	
 }
 
 extension LayoutPropertyCanStoreHeightType {
 	
-	public func setHeight(to height: CGFloat) -> WillSetHeightMaker {
+	public func setHeight(to height: CGFloat) -> WillSetHeightProperty {
 		
 		let height = LayoutElement.Length.constant(height)
 		
@@ -28,7 +28,7 @@ extension LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetHeightMaker {
+	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetHeightProperty {
 		
 		let height = LayoutElement.Length.closure(height)
 		
@@ -38,7 +38,7 @@ extension LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> WillSetHeightMaker {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> WillSetHeightProperty {
 		
 		let height = LayoutElement.Length.fits(fittingHeight)
 		
@@ -50,7 +50,7 @@ extension LayoutPropertyCanStoreHeightType {
 	
 }
 
-public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType where WillSetHeightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType where WillSetHeightProperty == LayoutEditor {
 	
 	func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
 	
@@ -58,7 +58,7 @@ public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightMaker {
+	public func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightProperty {
 		
 		let layout = Layout(frame: { (property, fitting) -> CGRect in
 			return self.evaluateFrame(height: height, property: property, fittingCalculation: fitting)

@@ -1,5 +1,5 @@
 //
-//  DidStoreBottomLeftWidthLayoutMaker.swift
+//  DidStoreBottomLeftWidthLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-public struct DidStoreBottomLeftWidthLayoutMaker {
-	
-	public unowned let parentView: UIView
+public struct DidStoreBottomLeftWidthLayoutProperty {
 	
 	let bottomLeft: LayoutElement.Point
 	
@@ -19,7 +17,7 @@ public struct DidStoreBottomLeftWidthLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension DidStoreBottomLeftWidthLayoutMaker {
+extension DidStoreBottomLeftWidthLayoutProperty {
 	
 	private func makeFrame(bottomLeft: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -35,9 +33,9 @@ extension DidStoreBottomLeftWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreBottomLeftWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreBottomLeftWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
+	public typealias WillSetHeightProperty = LayoutEditor
 	
 	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
 		
