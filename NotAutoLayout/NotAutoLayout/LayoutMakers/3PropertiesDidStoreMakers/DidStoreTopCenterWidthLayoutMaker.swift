@@ -34,14 +34,13 @@ extension DidStoreTopCenterWidthLayoutProperty {
 // MARK: - Set A Length -
 // MARK: Height
 extension DidStoreTopCenterWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
-    
-    public typealias WillSetHeightProperty = LayoutEditor
-    
-    public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	
+    public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
         
         let topCenter = self.topCenter.evaluated(from: property)
-        let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+        let width = self.width.evaluated(from: property, withTheOtherAxis: .height(0))
+        let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
+		
         return self.makeFrame(topCenter: topCenter, width: width, height: height)
         
     }

@@ -35,13 +35,11 @@ extension DidStoreTopLeftHeightLayoutProperty {
 // MARK: Width
 extension DidStoreTopLeftHeightLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public typealias WillSetWidthProperty = LayoutEditor
-	
-	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let topLeft = self.topLeft.evaluated(from: property)
-		let height = self.height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(0))
-		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
+		let height = self.height.evaluated(from: property, withTheOtherAxis: .width(0))
+		let width = width.evaluated(from: property, withTheOtherAxis: .height(height))
 		
 		return self.makeFrame(topLeft: topLeft, height: height, width: width)
 		

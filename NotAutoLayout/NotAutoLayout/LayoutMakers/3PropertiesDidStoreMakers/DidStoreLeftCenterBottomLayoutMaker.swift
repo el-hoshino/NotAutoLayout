@@ -38,15 +38,13 @@ extension DidStoreLeftCenterBottomLayoutProperty {
 // MARK: Height
 extension DidStoreLeftCenterBottomLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightProperty = LayoutEditor
-	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let center = self.center.evaluated(from: property)
 		let bottom = self.bottom.evaluated(from: property)
 		let width = (center - left).doubled
-		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(left: left, center: center, bottom: bottom, height: height)
 		

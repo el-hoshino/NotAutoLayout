@@ -52,8 +52,6 @@ extension DidStoreMiddleLeftCenterLayoutProperty {
 // MARK: Top
 extension DidStoreMiddleLeftCenterLayoutProperty: LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public typealias WillSetTopProperty = LayoutEditor
-	
 	public func evaluateFrame(top: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: property)
@@ -68,8 +66,6 @@ extension DidStoreMiddleLeftCenterLayoutProperty: LayoutPropertyCanStoreTopToEva
 
 // MARK: Bottom
 extension DidStoreMiddleLeftCenterLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
-	
-	public typealias WillSetBottomProperty = LayoutEditor
 	
 	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
 		
@@ -87,14 +83,12 @@ extension DidStoreMiddleLeftCenterLayoutProperty: LayoutPropertyCanStoreBottomTo
 // MARK: Height
 extension DidStoreMiddleLeftCenterLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightProperty = LayoutEditor
-	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: property)
 		let center = self.center.evaluated(from: property)
 		let width = (center - middleLeft.x).doubled
-		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(middleLeft: middleLeft, center: center, height: height)
 		

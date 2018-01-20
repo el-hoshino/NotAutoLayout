@@ -210,7 +210,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from property: ViewFrameProperty, fitting fittingCalculation: (CGSize) -> CGSize, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from property: ViewFrameProperty, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -220,7 +220,7 @@ extension LayoutElement.Length {
 			return calculation(property)
 			
 		case .fits(let fittingLength):
-			return oppositeAxis.fittedTheOtherLength(fittingCalculation: fittingCalculation, fittingLength: fittingLength)
+			return oppositeAxis.fittedTheOtherLength(fittingCalculation: property.sizeThatFits, fittingLength: fittingLength)
 		}
 		
 	}

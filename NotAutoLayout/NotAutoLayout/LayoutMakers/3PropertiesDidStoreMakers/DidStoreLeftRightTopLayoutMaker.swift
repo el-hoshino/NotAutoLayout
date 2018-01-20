@@ -62,14 +62,15 @@ extension DidStoreLeftRightTopLayoutProperty {
 // MARK: Middle
 extension DidStoreLeftRightTopLayoutProperty: LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public typealias WillSetMiddleProperty = LayoutEditor
-	
 	public func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+		
 		let left = self.left.evaluated(from: property)
 		let right = self.right.evaluated(from: property)
 		let top = self.top.evaluated(from: property)
 		let middle = middle.evaluated(from: property)
+		
 		return self.makeFrame(left: left, right: right, top: top, middle: middle)
+		
 	}
 	
 }
@@ -77,14 +78,15 @@ extension DidStoreLeftRightTopLayoutProperty: LayoutPropertyCanStoreMiddleToEval
 // MARK: Bottom
 extension DidStoreLeftRightTopLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public typealias WillSetBottomProperty = LayoutEditor
-	
 	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+		
 		let left = self.left.evaluated(from: property)
 		let right = self.right.evaluated(from: property)
 		let top = self.top.evaluated(from: property)
 		let bottom = bottom.evaluated(from: property)
+		
 		return self.makeFrame(left: left, right: right, top: top, bottom: bottom)
+		
 	}
 	
 }
@@ -93,15 +95,14 @@ extension DidStoreLeftRightTopLayoutProperty: LayoutPropertyCanStoreBottomToEval
 // MARK: Height
 extension DidStoreLeftRightTopLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightProperty = LayoutEditor
-	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let right = self.right.evaluated(from: property)
 		let top = self.top.evaluated(from: property)
 		let width = right - left
-		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
+		
 		return self.makeFrame(left: left, right: right, top: top, height: height)
 		
 	}
