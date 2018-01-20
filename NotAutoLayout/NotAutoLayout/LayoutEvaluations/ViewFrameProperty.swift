@@ -325,13 +325,29 @@ extension ViewFrameProperty {
 
 extension ViewFrameProperty {
 	
+	func sizeThatFits(_ fittingSize: CGSize) -> CGSize {
+		
+		guard let currentView = self.currentView else {
+			return .zero
+		}
+		
+		let fittedSize = currentView.sizeThatFits(fittingSize)
+		
+		return fittedSize
+		
+	}
+	
+}
+
+extension ViewFrameProperty {
+	
 	func evaluateSize(from calculation: (ViewFrameProperty) -> CGSize) -> CGSize {
 		
 		return calculation(self)
 		
 	}
 	
-	func evaluateSize(from aspect: LayoutElement.Size.AspectSizing, defaultRatio: CGFloat) -> CGSize {
+	func evaluateSize(from aspect: LayoutElement.Size.AspectSizing) -> CGSize {
 		
 		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
 			switch safeAreaOnly {
@@ -347,7 +363,9 @@ extension ViewFrameProperty {
 			}
 		}(aspect.safeAreaOnly)
 		
-		let targetRatio = aspect.ratio ?? defaultRatio
+		let targetRatio = aspect.ratio ?? { (targetView: UIView?) in
+			return targetView?.sizeThatFits(.zero).ratio
+		}(self.currentView) ?? 1
 		
 		guard targetRatio.isNaN == false,
 			canvasSize.ratio.isNaN == false

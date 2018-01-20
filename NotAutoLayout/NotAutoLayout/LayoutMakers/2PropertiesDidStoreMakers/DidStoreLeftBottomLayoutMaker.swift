@@ -36,13 +36,12 @@ extension DidStoreLeftBottomLayoutProperty {
 // MARK: Size
 extension DidStoreLeftBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public typealias WillSetSizeProperty = LayoutEditor
-	
-	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let bottom = self.bottom.evaluated(from: property)
-		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
+		let size = size.evaluated(from: property)
+		
 		return self.makeFrame(left: left, bottom: bottom, size: size)
 		
 	}
@@ -55,12 +54,15 @@ extension DidStoreLeftBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreLeftBottomWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreLeftBottomWidthLayoutProperty {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreLeftBottomLayoutProperty>) -> LayoutMaker<DidStoreLeftBottomWidthLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 left: self.left,
-					 bottom: self.bottom,
-					 width: width)
+		let leftBottomWidth = DidStoreLeftBottomWidthLayoutProperty(left: self.left,
+																	bottom: self.bottom,
+																	width: width)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: leftBottomWidth)
+		
+		return maker
 		
 	}
 	
@@ -71,12 +73,15 @@ extension DidStoreLeftBottomLayoutProperty: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreLeftBottomHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreLeftBottomHeightLayoutProperty {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreLeftBottomLayoutProperty>) -> LayoutMaker<DidStoreLeftBottomHeightLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 left: self.left,
-					 bottom: self.bottom,
-					 height: height)
+		let leftBottomHeight = DidStoreLeftBottomHeightLayoutProperty(left: self.left,
+																	  bottom: self.bottom,
+																	  height: height)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: leftBottomHeight)
+		
+		return maker
 		
 	}
 	

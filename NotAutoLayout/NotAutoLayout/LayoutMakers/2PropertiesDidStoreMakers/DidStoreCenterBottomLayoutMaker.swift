@@ -37,13 +37,12 @@ extension DidStoreCenterBottomLayoutProperty {
 // MARK: Size
 extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public typealias WillSetSizeProperty = LayoutEditor
-	
-	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty) -> CGRect {
 		
 		let center = self.center.evaluated(from: property)
 		let bottom = self.bottom.evaluated(from: property)
-		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
+		let size = size.evaluated(from: property)
+		
 		return self.makeFrame(center: center, bottom: bottom, size: size)
 		
 	}
@@ -56,12 +55,15 @@ extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreCenterBottomWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreCenterBottomWidthLayoutProperty {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreCenterBottomLayoutProperty>) -> LayoutMaker<DidStoreCenterBottomWidthLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 center: self.center,
-					 bottom: self.bottom,
-					 width: width)
+		let centerBottomWidth = DidStoreCenterBottomWidthLayoutProperty(center: self.center,
+																		bottom: self.bottom,
+																		width: width)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: centerBottomWidth)
+		
+		return maker
 		
 	}
 	
@@ -72,12 +74,15 @@ extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreCenterBottomHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreCenterBottomHeightLayoutProperty {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreCenterBottomLayoutProperty>) -> LayoutMaker<DidStoreCenterBottomHeightLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 center: self.center,
-					 bottom: self.bottom,
-					 height: height)
+		let centerBottomHeight = DidStoreCenterBottomHeightLayoutProperty(center: self.center,
+																		  bottom: self.bottom,
+																		  height: height)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: centerBottomHeight)
+		
+		return maker
 		
 	}
 	

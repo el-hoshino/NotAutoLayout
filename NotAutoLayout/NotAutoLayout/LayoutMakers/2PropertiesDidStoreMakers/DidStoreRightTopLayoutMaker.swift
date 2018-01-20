@@ -36,13 +36,12 @@ extension DidStoreRightTopLayoutProperty {
 // MARK: Size
 extension DidStoreRightTopLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public typealias WillSetSizeProperty = LayoutEditor
-	
-	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty) -> CGRect {
 		
 		let right = self.right.evaluated(from: property)
 		let top = self.top.evaluated(from: property)
-		let size = size.evaluated(from: property, fittingCalculation: fittingCalculation)
+		let size = size.evaluated(from: property)
+		
 		return self.makeFrame(right: right, top: top, size: size)
 		
 	}
@@ -55,12 +54,15 @@ extension DidStoreRightTopLayoutProperty: LayoutPropertyCanStoreMiddleType {
 	
 	public typealias WillSetMiddleProperty = DidStoreRightTopMiddleLayoutProperty
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreRightTopMiddleLayoutProperty {
+	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreRightTopLayoutProperty>) -> LayoutMaker<DidStoreRightTopMiddleLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 right: self.right,
-					 top: self.top,
-					 middle: middle)
+		let rightTopMiddle = DidStoreRightTopMiddleLayoutProperty(right: self.right,
+																  top: self.top,
+																  middle: middle)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: rightTopMiddle)
+		
+		return maker
 		
 	}
 	
@@ -71,12 +73,15 @@ extension DidStoreRightTopLayoutProperty: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = DidStoreRightTopBottomLayoutProperty
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreRightTopBottomLayoutProperty {
+	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreRightTopLayoutProperty>) -> LayoutMaker<DidStoreRightTopBottomLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 right: self.right,
-					 top: self.top,
-					 bottom: bottom)
+		let rightTopBottom = DidStoreRightTopBottomLayoutProperty(right: self.right,
+																  top: self.top,
+																  bottom: bottom)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: rightTopBottom)
+		
+		return maker
 		
 	}
 	
@@ -88,12 +93,15 @@ extension DidStoreRightTopLayoutProperty: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreRightTopWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length) -> DidStoreRightTopWidthLayoutProperty {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreRightTopLayoutProperty>) -> LayoutMaker<DidStoreRightTopWidthLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 right: self.right,
-					 top: self.top,
-					 width: width)
+		let rightTopWidth = DidStoreRightTopWidthLayoutProperty(right: self.right,
+																top: self.top,
+																width: width)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: rightTopWidth)
+		
+		return maker
 		
 	}
 	
@@ -104,12 +112,15 @@ extension DidStoreRightTopLayoutProperty: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreRightTopHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> DidStoreRightTopHeightLayoutProperty {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreRightTopLayoutProperty>) -> LayoutMaker<DidStoreRightTopHeightLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 right: self.right,
-					 top: self.top,
-					 height: height)
+		let rightTopHeight = DidStoreRightTopHeightLayoutProperty(right: self.right,
+																  top: self.top,
+																  height: height)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: rightTopHeight)
+		
+		return maker
 		
 	}
 	

@@ -22,12 +22,15 @@ extension DidStoreLeftRightLayoutProperty: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopProperty = DidStoreLeftRightTopLayoutProperty
 	
-	public func storeTop(_ top: LayoutElement.Line) -> DidStoreLeftRightTopLayoutProperty {
+	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreLeftRightLayoutProperty>) -> LayoutMaker<DidStoreLeftRightTopLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 left: self.left,
-					 right: self.right,
-					 top: top)
+		let leftRightTop = DidStoreLeftRightTopLayoutProperty(left: self.left,
+															  right: self.right,
+															  top: top)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: leftRightTop)
+		
+		return maker
 		
 	}
 	
@@ -38,12 +41,15 @@ extension DidStoreLeftRightLayoutProperty: LayoutPropertyCanStoreMiddleType {
 	
 	public typealias WillSetMiddleProperty = DidStoreLeftRightMiddleLayoutProperty
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> DidStoreLeftRightMiddleLayoutProperty {
+	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreLeftRightLayoutProperty>) -> LayoutMaker<DidStoreLeftRightMiddleLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 left: self.left,
-					 right: self.right,
-					 middle: middle)
+		let leftRightMiddle = DidStoreLeftRightMiddleLayoutProperty(left: self.left,
+																	right: self.right,
+																	middle: middle)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: leftRightMiddle)
+		
+		return maker
 		
 	}
 	
@@ -54,14 +60,16 @@ extension DidStoreLeftRightLayoutProperty: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = DidStoreLeftRightBottomLayoutProperty
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> DidStoreLeftRightBottomLayoutProperty {
+	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreLeftRightLayoutProperty>) -> LayoutMaker<DidStoreLeftRightBottomLayoutProperty> {
 		
-		return .init(parentView: self.parentView,
-					 left: self.left,
-					 right: self.right,
-					 bottom: bottom)
+		let leftRightBottom = DidStoreLeftRightBottomLayoutProperty(left: self.left,
+																	right: self.right,
+																	bottom: bottom)
+		let maker = LayoutMaker(parentView: maker.parentView,
+								didSetProperty: leftRightBottom)
+		
+		return maker
 		
 	}
 	
 }
-

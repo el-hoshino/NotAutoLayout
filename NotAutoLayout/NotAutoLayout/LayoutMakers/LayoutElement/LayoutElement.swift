@@ -229,7 +229,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGSize {
+	func evaluated(from property: ViewFrameProperty) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -239,10 +239,10 @@ extension LayoutElement.Size {
 			return property.evaluateSize(from: calculation)
 			
 		case .fits(let fittingSize):
-			return fittingCalculation(fittingSize)
+			return property.sizeThatFits(fittingSize)
 			
 		case .aspect(let aspect):
-			return property.evaluateSize(from: aspect, defaultRatio: fittingCalculation(.zero).ratio)
+			return property.evaluateSize(from: aspect)
 		}
 		
 	}
