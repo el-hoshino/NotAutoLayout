@@ -12,43 +12,40 @@ public protocol LayoutPropertyCanStoreRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetRightProperty
 	
-	func storeRight(_ right: LayoutElement.Horizontal) -> WillSetRightProperty
+	func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetRightProperty>
 	
 }
 
-extension LayoutPropertyCanStoreRightType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 	
-	public func setRight(to right: CGFloat) -> WillSetRightProperty {
+	public func setRight(to right: CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.constant(right)
-		
-		let maker = self.storeRight(right)
+		let maker = self.didSetProperty.storeRight(right, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setRight(by right: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetRightProperty {
+	public func setRight(by right: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.byParent(right)
-		
-		let maker = self.storeRight(right)
+		let maker = self.didSetProperty.storeRight(right, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinRight(to referenceView: UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetRightProperty {
+	public func pinRight(to referenceView: UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		return self.pinRight(by: { [weak referenceView] in referenceView }, with: right)
 		
 	}
 	
-	public func pinRight(by referenceView: @escaping () -> UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> WillSetRightProperty {
+	public func pinRight(by referenceView: @escaping () -> UIView?, with right: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, right)
-		
-		let maker = self.storeRight(right)
+		let maker = self.didSetProperty.storeRight(right, to: self)
 		
 		return maker
 		
@@ -56,7 +53,7 @@ extension LayoutPropertyCanStoreRightType {
 	
 }
 
-public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType where WillSetRightProperty == LayoutEditor {
+public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType {
 	
 	func evaluateFrame(right: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
 	
@@ -64,56 +61,12 @@ public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreRightToEvaluateFrameType {
 	
-	public func storeRight(_ right: LayoutElement.Horizontal) -> WillSetRightProperty {
+	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<DidStoreAllRequiredLayoutProperty> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(right: right, property: property)
 		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
-
-@available(*, deprecated)
-extension LayoutPropertyCanStoreRightType {
-	
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetRightProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinRight(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetRightProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetRightProperty {
-		
-		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeRight(right)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetRightProperty {
-		
-		let right = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = self.storeRight(right)
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
 		return maker
 		

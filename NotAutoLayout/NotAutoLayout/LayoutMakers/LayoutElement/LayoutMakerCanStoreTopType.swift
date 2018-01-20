@@ -12,43 +12,40 @@ public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopProperty
 	
-	func storeTop(_ top: LayoutElement.Vertical) -> WillSetTopProperty
+	func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopProperty>
 	
 }
 
-extension LayoutPropertyCanStoreTopType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 	
-	public func setTop(to top: CGFloat) -> WillSetTopProperty {
+	public func setTop(to top: CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.constant(top)
-		
-		let maker = self.storeTop(top)
+		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetTopProperty {
+	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byParent(top)
-		
-		let maker = self.storeTop(top)
+		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> WillSetTopProperty {
+	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		return self.pinTop(by: { [weak referenceView] in referenceView }, with: top)
 		
 	}
 	
-	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> WillSetTopProperty {
+	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byReference(referenceGetter: referenceView, top)
-		
-		let maker = self.storeTop(top)
+		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
 		
@@ -56,7 +53,7 @@ extension LayoutPropertyCanStoreTopType {
 	
 }
 
-public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanStoreTopType where WillSetTopProperty == LayoutEditor {
+public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanStoreTopType {
 	
 	func evaluateFrame(top: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
@@ -64,56 +61,12 @@ public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanS
 
 extension LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func storeTop(_ top: LayoutElement.Vertical) -> WillSetTopProperty {
+	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<DidStoreAllRequiredLayoutProperty> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(top: top, property: property)
 		})
-		
-		let editor = LayoutEditor(layout)
-		
-		return editor
-		
-	}
-	
-}
-
-@available(*, deprecated)
-extension LayoutPropertyCanStoreTopType {
-	
-	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetTopProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTop(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTop(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetTopProperty {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinTop(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetTopProperty {
-		
-		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeTop(top)
-		
-		return maker
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinTop(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetTopProperty {
-		
-		let top = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-		let maker = self.storeTop(top)
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
 		return maker
 		

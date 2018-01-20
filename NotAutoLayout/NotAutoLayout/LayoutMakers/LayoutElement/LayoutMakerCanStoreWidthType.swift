@@ -12,37 +12,34 @@ public protocol LayoutPropertyCanStoreWidthType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetWidthProperty
 	
-	func storeWidth(_ width: LayoutElement.Length) -> WillSetWidthProperty
+	func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetWidthProperty>
 	
 }
 
-extension LayoutPropertyCanStoreWidthType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
 	
-	public func setWidth(to width: CGFloat) -> WillSetWidthProperty {
+	public func setWidth(to width: CGFloat) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.constant(width)
-		
-		let maker = self.storeWidth(width)
-		
-		return maker
-		
-	}
-	
-	public func setWidth(by width: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetWidthProperty {
-		
-		let width = LayoutElement.Length.closure(width)
-		
-		let maker = self.storeWidth(width)
+		let maker = self.didSetProperty.storeWidth(width, to: self)
 		
 		return maker
 		
 	}
 	
-	public func fitWidth(by fittingWidth: CGFloat = 0) -> WillSetWidthProperty {
+	public func setWidth(by width: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetWidthProperty> {
+		
+		let width = LayoutElement.Length.byParent(width)
+		let maker = self.didSetProperty.storeWidth(width, to: self)
+		
+		return maker
+		
+	}
+	
+	public func fitWidth(by fittingWidth: CGFloat = 0) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.fits(fittingWidth)
-		
-		let maker = self.storeWidth(width)
+		let maker = self.didSetProperty.storeWidth(width, to: self)
 		
 		return maker
 		
@@ -50,24 +47,23 @@ extension LayoutPropertyCanStoreWidthType {
 	
 }
 
-public protocol LayoutPropertyCanStoreWidthToEvaluateFrameType: LayoutPropertyCanStoreWidthType where WillSetWidthProperty == LayoutEditor {
+public protocol LayoutPropertyCanStoreWidthToEvaluateFrameType: LayoutPropertyCanStoreWidthType {
 	
-	func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreWidthToEvaluateFrameType {
 
-	public func storeWidth(_ width: LayoutElement.Length) -> WillSetWidthProperty {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<DidStoreAllRequiredLayoutProperty> {
 		
-		let layout = Layout(frame: { (property, fitting) -> CGRect in
-			return self.evaluateFrame(width: width, property: property, fittingCalculation: fitting)
+		let layout = Layout(frame: { (property) -> CGRect in
+			return self.evaluateFrame(width: width, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-
-		return editor
-
+		return maker
+		
 	}
 
 }
