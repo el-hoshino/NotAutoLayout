@@ -69,7 +69,7 @@ public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
-	public typealias WillSetFrameProperty = DidStoreAllRequiredLayoutProperty
+	public typealias WillSetFrameProperty = Layout
 	
 	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty> {
         

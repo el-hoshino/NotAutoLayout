@@ -19,5 +19,3 @@ public struct LayoutMaker<Property> {
 public protocol LayoutMakerPropertyType {
 	
 }
-
-public typealias DidStoreAllRequiredLayoutProperty = Layout
