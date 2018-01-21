@@ -67,6 +67,9 @@ extension ReplyView {
 	
 	private func placeReplyView() {
 		
+		self.nal.layout(self.replyView) { $0
+			.setFrame(by: { $0.safeFrame })
+		}
 		self.nal.layout(self.replyView, by: { $0
 			.setFrame(by: { $0.safeFrame })
 			.expandingWidth(by: -margin * 2, from: .center)

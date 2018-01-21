@@ -118,8 +118,8 @@ extension ContentsView {
 	private func placeTimeStampView() {
 		
 		self.nal.layout(self.timeStampView) { $0
-			.pinTopLeft(to: self.contentsLabel, s: .bottomLeft)
-			.pinRight(to: self.contentsLabel, s: .right)
+			.pinTopLeft(to: self.contentsLabel, with: { $0.bottomLeft })
+			.pinRight(to: self.contentsLabel, with: { $0.right })
 			.fitHeight()
 			.movingY(by: margin)
 		}

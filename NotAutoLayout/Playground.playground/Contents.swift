@@ -43,8 +43,8 @@ appView.nal.setupSubview(summaryView) { $0
 }
 appView.nal.setupSubview(contentsView) { $0
 	.makeDefaultLayout({ $0
-		.pinTopLeft(to: summaryView, s: .bottomLeft)
-		.pinRight(to: summaryView, s: .right)
+		.pinTopLeft(to: summaryView, with: { $0.bottomLeft })
+		.pinRight(to: summaryView, with: { $0.right })
 		.fitHeight()
 		.movingY(by: margin.height)
 	})
