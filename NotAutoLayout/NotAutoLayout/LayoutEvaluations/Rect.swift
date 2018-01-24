@@ -46,7 +46,7 @@ extension Rect {
 	
 	func pointGeometry(x: CGFloat, y: CGFloat) -> CGPoint {
 		let x = self.horizontalGeometry(at: x)
-		let y = self.verticalGeometry(at: x)
+		let y = self.verticalGeometry(at: y)
 		return .init(x: x, y: y)
 	}
 	
