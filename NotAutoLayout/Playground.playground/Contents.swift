@@ -2,6 +2,17 @@
 import PlaygroundSupport
 import NotAutoLayout
 
+let parent = UIView()
+let child = UIView()
+
+parent.nal.layout(child) { $0
+    .setLeft(to: 10)
+    .setTop(to: 10)
+    .setWidth(to: 100)
+    .setHeight(to: 100)
+}
+
+/*
 let controller = IPhoneXScreenController()
 PlaygroundPage.current.liveView = controller.view
 
@@ -61,3 +72,4 @@ appView.nal.setupSubview(replyView) { $0
 }
 
 appView.setNeedsLayout()
+*/
