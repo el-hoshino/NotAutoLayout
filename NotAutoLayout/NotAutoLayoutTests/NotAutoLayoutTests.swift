@@ -48,7 +48,7 @@ class NotAutoLayoutTests: XCTestCase {
 			let child = UIView()
 			
 			let layout = parent.nal.makeLayout { $0
-				.pinLeft(to: parent, s: .left, offsetBy: 10)
+                .pinLeft(to: parent) { $0.left + 10 }
 				.setTop(to: 10)
 				.setWidth(to: 100)
 				.setHeight(to: 100)
