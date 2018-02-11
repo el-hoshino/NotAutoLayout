@@ -420,7 +420,7 @@
 			path = LayoutControl;
 			sourceTree = "<group>";
 		};
-		165FE29F1EF28448006DF788 /* LayoutMakers */ = {
+		165FE29F1EF28448006DF788 /* IndividualLayout */ = {
 			isa = PBXGroup;
 			children = (
 				79C6C1811FB83D8900E32C54 /* LayoutElement */,
@@ -430,7 +430,7 @@
 				165FE2AC1EF289F4006DF788 /* 3PropertiesDidStoreMakers */,
 				16A5A5A21EF39F8E007ACB1C /* AllPropertiesDidStoreMakers */,
 			);
-			path = LayoutMakers;
+			path = IndividualLayout;
 			sourceTree = "<group>";
 		};
 		165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreMakers */ = {
@@ -626,7 +626,7 @@
 				164EA0A21EF3DA4900C0BB8F /* Extensions */,
 				798C6EAB1FEBF98F00D2A370 /* NotAutoLayoutCompatible */,
 				164EA09C1EF3D98B00C0BB8F /* LayoutEvaluations */,
-				165FE29F1EF28448006DF788 /* LayoutMakers */,
+				165FE29F1EF28448006DF788 /* IndividualLayout */,
 				164EA0A61EF3DA5100C0BB8F /* LayoutControl */,
 				168667AF1F7912FD00AD774E /* LayoutInfoStorable */,
 			);
