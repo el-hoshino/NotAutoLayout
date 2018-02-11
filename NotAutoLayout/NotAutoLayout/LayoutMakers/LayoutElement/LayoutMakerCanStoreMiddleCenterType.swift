@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleCenterType.swift
+//  LayoutPropertyCanStoreMiddleCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleCenterType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleCenterType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleCenterMaker
+	associatedtype WillSetMiddleCenterProperty
 	
-	func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker
+	func storeMiddleCenter(_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleCenterProperty>
 	
 }
 
-extension LayoutMakerCanStoreMiddleCenterType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 	
-	public func setMiddleCenter(to middleCenter: CGPoint) -> WillSetMiddleCenterMaker {
+	public func setMiddleCenter(to middleCenter: CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
 		let middleCenter = LayoutElement.Point.constant(middleCenter)
-		
-		let maker = self.storeMiddleCenter(middleCenter)
-		
-		return maker
-		
-	}
-	
-	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleCenterMaker {
-		
-		let middleCenter = LayoutElement.Point.closure(middleCenter)
-		
-		let maker = self.storeMiddleCenter(middleCenter)
+		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleCenterMaker {
+	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleCenterMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleCenterMaker {
-		
-		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeMiddleCenter(middleCenter)
+		let middleCenter = LayoutElement.Point.byParent(middleCenter)
+		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleCenterMaker {
+	public func pinMiddleCenter(to referenceView: UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
-		let middleCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinMiddleCenter(by: { [weak referenceView] in referenceView }, with: middleCenter)
 		
-		let maker = self.storeMiddleCenter(middleCenter)
+	}
+	
+	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
+		
+		let middleCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, middleCenter)
+		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreMiddleCenterType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleCenterToEvaluateFrameType: LayoutMakerCanStoreMiddleCenterType where WillSetMiddleCenterMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPropertyCanStoreMiddleCenterType {
 	
 	func evaluateFrame(middleCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleCenterToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
-	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> WillSetMiddleCenterMaker {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(middleCenter: middleCenter, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

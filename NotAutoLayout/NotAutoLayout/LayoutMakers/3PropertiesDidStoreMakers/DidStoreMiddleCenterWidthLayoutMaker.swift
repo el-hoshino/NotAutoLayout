@@ -1,5 +1,5 @@
 //
-//  DidStoreMiddleCenterWidthLayoutMaker.swift
+//  DidStoreMiddleCenterWidthLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,9 +8,7 @@
 
 import Foundation
 
-public struct DidStoreMiddleCenterWidthLayoutMaker {
-	
-	public unowned let parentView: UIView
+public struct DidStoreMiddleCenterWidthLayoutProperty {
 	
 	let middleCenter: LayoutElement.Point
 	
@@ -19,7 +17,7 @@ public struct DidStoreMiddleCenterWidthLayoutMaker {
 }
 
 // MARK: - Make Frame
-extension DidStoreMiddleCenterWidthLayoutMaker {
+extension DidStoreMiddleCenterWidthLayoutProperty {
 	
 	private func makeFrame(middleCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
 		
@@ -35,15 +33,13 @@ extension DidStoreMiddleCenterWidthLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Height
-extension DidStoreMiddleCenterWidthLayoutMaker: LayoutMakerCanStoreHeightToEvaluateFrameType {
+extension DidStoreMiddleCenterWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public typealias WillSetHeightMaker = LayoutEditor
-	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let middleCenter = self.middleCenter.evaluated(from: property)
-		let width = self.width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(0))
-		let height = height.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .width(width))
+		let width = self.width.evaluated(from: property, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(middleCenter: middleCenter, width: width, height: height)
 		

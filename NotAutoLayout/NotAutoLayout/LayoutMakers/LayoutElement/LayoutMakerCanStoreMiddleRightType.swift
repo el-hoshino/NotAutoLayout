@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleRightType.swift
+//  LayoutPropertyCanStoreMiddleRightType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleRightType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleRightType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleRightMaker
+	associatedtype WillSetMiddleRightProperty
 	
-	func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker
+	func storeMiddleRight(_ middleRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleRightProperty>
 	
 }
 
-extension LayoutMakerCanStoreMiddleRightType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleRightType {
 	
-	public func setMiddleRight(to middleRight: CGPoint) -> WillSetMiddleRightMaker {
+	public func setMiddleRight(to middleRight: CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
 		let middleRight = LayoutElement.Point.constant(middleRight)
-		
-		let maker = self.storeMiddleRight(middleRight)
-		
-		return maker
-		
-	}
-	
-	public func setMiddleRight(by middleRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetMiddleRightMaker {
-		
-		let middleRight = LayoutElement.Point.closure(middleRight)
-		
-		let maker = self.storeMiddleRight(middleRight)
+		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleRightMaker {
+	public func setMiddleRight(by middleRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddleRight(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleRightMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddleRight(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetMiddleRightMaker {
-		
-		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeMiddleRight(middleRight)
+		let middleRight = LayoutElement.Point.byParent(middleRight)
+		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleRightMaker {
+	public func pinMiddleRight(to referenceView: UIView?, with middleRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
-		let middleRight = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinMiddleRight(by: { [weak referenceView] in referenceView }, with: middleRight)
 		
-		let maker = self.storeMiddleRight(middleRight)
+	}
+	
+	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, with middleRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
+		
+		let middleRight = LayoutElement.Point.byReference(referenceGetter: referenceView, middleRight)
+		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreMiddleRightType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleRightToEvaluateFrameType: LayoutMakerCanStoreMiddleRightType where WillSetMiddleRightMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleRightToEvaluateFrameType: LayoutPropertyCanStoreMiddleRightType {
 	
 	func evaluateFrame(middleRight: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
 	
-	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> WillSetMiddleRightMaker {
+	public func storeMiddleRight(_ middleRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(middleRight: middleRight, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

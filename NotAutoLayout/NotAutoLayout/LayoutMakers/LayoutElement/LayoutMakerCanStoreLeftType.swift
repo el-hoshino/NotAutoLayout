@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreLeftType.swift
+//  LayoutPropertyCanStoreLeftType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreLeftType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetLeftMaker
+	associatedtype WillSetLeftProperty
 	
-	func storeLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker
+	func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetLeftProperty>
 	
 }
 
-extension LayoutMakerCanStoreLeftType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 	
-	public func setLeft(to left: CGFloat) -> WillSetLeftMaker {
+	public func setLeft(to left: CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
-		let left = LayoutElement.Line.constant(left)
-		
-		let maker = self.storeLeft(left)
+		let left = LayoutElement.Horizontal.constant(left)
+		let maker = self.didSetProperty.storeLeft(left, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setLeft(by left: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetLeftMaker {
+	public func setLeft(by left: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
-		let left = LayoutElement.Line.closure(left)
-		
-		let maker = self.storeLeft(left)
-		
-		return maker
-		
-	}
-	
-	public func pinLeft(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetLeftMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinLeft(to referenceView: UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetLeftMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	public func pinLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetLeftMaker {
-		
-		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeLeft(left)
+		let left = LayoutElement.Horizontal.byParent(left)
+		let maker = self.didSetProperty.storeLeft(left, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.HorizontalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetLeftMaker {
+	public func pinLeft(to referenceView: UIView?, with left: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
-		let left = self.parentView.horizontalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinLeft(by: { [weak referenceView] in referenceView }, with: left)
 		
-		let maker = self.storeLeft(left)
+	}
+	
+	public func pinLeft(by referenceView: @escaping () -> UIView?, with left: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+		
+		let left = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, left)
+		let maker = self.didSetProperty.storeLeft(left, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreLeftType {
 	
 }
 
-public protocol LayoutMakerCanStoreLeftToEvaluateFrameType: LayoutMakerCanStoreLeftType where WillSetLeftMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreLeftToEvaluateFrameType: LayoutPropertyCanStoreLeftType {
 	
-	func evaluateFrame(left: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(left: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreLeftToEvaluateFrameType {
+extension LayoutPropertyCanStoreLeftToEvaluateFrameType {
 	
-	public func storeLeft(_ left: LayoutElement.Line) -> WillSetLeftMaker {
+	func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(left: left, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreBottomCenterType.swift
+//  LayoutPropertyCanStoreBottomCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreBottomCenterType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreBottomCenterType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetBottomCenterMaker
+	associatedtype WillSetBottomCenterProperty
 	
-	func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterMaker
+	func storeBottomCenter(_ bottomCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomCenterProperty>
 	
 }
 
-extension LayoutMakerCanStoreBottomCenterType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 	
-	public func setBottomCenter(to bottomCenter: CGPoint) -> WillSetBottomCenterMaker {
+	public func setBottomCenter(to bottomCenter: CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		let bottomCenter = LayoutElement.Point.constant(bottomCenter)
-		
-		let maker = self.storeBottomCenter(bottomCenter)
-		
-		return maker
-		
-	}
-	
-	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomCenterMaker {
-		
-		let bottomCenter = LayoutElement.Point.closure(bottomCenter)
-		
-		let maker = self.storeBottomCenter(bottomCenter)
+		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinBottomCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomCenterMaker {
+	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottomCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottomCenter(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomCenterMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottomCenter(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomCenterMaker {
-		
-		let bottomCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeBottomCenter(bottomCenter)
+		let bottomCenter = LayoutElement.Point.byParent(bottomCenter)
+		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomCenterMaker {
+	public func pinBottomCenter(to referenceView: UIView?, with bottomCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
-		let bottomCenter = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinBottomCenter(by: { [weak referenceView] in referenceView }, with: bottomCenter)
 		
-		let maker = self.storeBottomCenter(bottomCenter)
+	}
+	
+	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, with bottomCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+		
+		let bottomCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomCenter)
+		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreBottomCenterType {
 	
 }
 
-public protocol LayoutMakerCanStoreBottomCenterToEvaluateFrameType: LayoutMakerCanStoreBottomCenterType where WillSetBottomCenterMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomCenterToEvaluateFrameType: LayoutPropertyCanStoreBottomCenterType {
 	
 	func evaluateFrame(bottomCenter: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreBottomCenterToEvaluateFrameType {
+extension LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
-	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> WillSetBottomCenterMaker {
+	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(bottomCenter: bottomCenter, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

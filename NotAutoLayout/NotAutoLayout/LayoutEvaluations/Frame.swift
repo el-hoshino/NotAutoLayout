@@ -10,31 +10,28 @@ import Foundation
 
 struct Frame {
 	
-	private let evaluation: (_ property: ViewFrameProperty, _ fittingCalculation: (CGSize) -> CGSize) -> CGRect
+	typealias FrameCalculation = (_ property: ViewFrameProperty) -> CGRect
+	private let evaluation: FrameCalculation
 	
 }
 
 extension Frame {
 	
 	init(_ frame: CGRect) {
-		self.evaluation = { _, _ in frame }
+		self.evaluation = { _ in frame }
 	}
 	
-	init(_ frame: @escaping (_ property: ViewFrameProperty) -> CGRect) {
-		self.evaluation = { property, _ in frame(property) }
-	}
-	
-	init(_ frame: @escaping (_ property: ViewFrameProperty, _ fitting: (CGSize) -> CGSize) -> CGRect) {
-		self.evaluation = { property, fitting in frame(property, fitting) }
+	init(_ frame: @escaping FrameCalculation) {
+		self.evaluation = frame
 	}
 	
 }
 
 extension Frame {
 	
-	func evaluated(from property: ViewFrameProperty, fitting: (CGSize) -> CGSize) -> CGRect {
+	func evaluated(from property: ViewFrameProperty) -> CGRect {
 		
-		return self.evaluation(property, fitting)
+		return self.evaluation(property)
 		
 	}
 	

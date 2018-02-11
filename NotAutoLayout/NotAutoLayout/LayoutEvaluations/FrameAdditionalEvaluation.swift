@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum FrameAdditionalEvaluation {
+public enum FrameAdditionalEvaluation {
 	
-	typealias FloatEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGFloat
-	typealias PointEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGPoint
-	typealias SizeEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGSize
+	public typealias FloatEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGFloat
+	public typealias PointEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGPoint
+	public typealias SizeEvaluation = (_ frame: CGRect, _ property: ViewFrameProperty) -> CGSize
 	
-	typealias Process = (_ view: UIView, _ frame: CGRect, _ layourProperty: ViewFrameProperty) -> Void
+	public typealias Process = (_ view: UIView, _ frame: CGRect, _ layourProperty: ViewFrameProperty) -> Void
 	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
@@ -55,7 +55,7 @@ enum FrameAdditionalEvaluation {
 
 extension FrameAdditionalEvaluation {
 	
-	func evaluated(for view: UIView, from frame: CGRect, with property: ViewFrameProperty) -> CGRect {
+	func evaluated(from frame: CGRect, with property: ViewFrameProperty) -> CGRect {
 		
 		var frame = frame
 		
@@ -153,6 +153,7 @@ extension FrameAdditionalEvaluation {
 			frame.expandSize(to: sizeGoal, from: basepoint)
 			
 		case .addotionalProcess(let process):
+			let view = property.currentView ?? { assertionFailure("Failed to get current view"); return UIView() }()
 			process(view, frame, property)
 		}
 		

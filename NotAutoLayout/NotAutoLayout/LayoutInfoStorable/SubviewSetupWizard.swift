@@ -144,19 +144,19 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func makeDefaultLayout(_ making: (InitialLayoutMaker) -> LayoutEditor) -> SubviewSetupWizard {
+	public func makeDefaultLayout(_ making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) -> SubviewSetupWizard {
 		
-		let maker = InitialLayoutMaker(parentView: self.parentView)
-		let layout = making(maker).layout
+		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: InitialLayoutProperty())
+		let layout = making(maker).didSetProperty
 		
 		return self.setDefaultLayout(to: layout)
 		
 	}
 	
-	public func makeLayout(for condition: ConditionEnum, making: (InitialLayoutMaker) -> LayoutEditor) -> SubviewSetupWizard {
+	public func makeLayout(for condition: ConditionEnum, making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) -> SubviewSetupWizard {
 		
-		let maker = InitialLayoutMaker(parentView: self.parentView)
-		let layout = making(maker).layout
+		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: InitialLayoutProperty())
+		let layout = making(maker).didSetProperty
 		
 		return self.setLayout(for: condition, to: layout)
 		

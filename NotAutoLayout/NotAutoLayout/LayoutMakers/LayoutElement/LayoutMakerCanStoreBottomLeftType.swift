@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreBottomLeftType.swift
+//  LayoutPropertyCanStoreBottomLeftType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreBottomLeftType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreBottomLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetBottomLeftMaker
+	associatedtype WillSetBottomLeftProperty
 	
-	func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker
+	func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomLeftProperty>
 	
 }
 
-extension LayoutMakerCanStoreBottomLeftType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 	
-	public func setBottomLeft(to bottomLeft: CGPoint) -> WillSetBottomLeftMaker {
+	public func setBottomLeft(to bottomLeft: CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
 		
 		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
-		
-		let maker = self.storeBottomLeft(bottomLeft)
-		
-		return maker
-		
-	}
-	
-	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> WillSetBottomLeftMaker {
-		
-		let bottomLeft = LayoutElement.Point.closure(bottomLeft)
-		
-		let maker = self.storeBottomLeft(bottomLeft)
+		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftMaker {
+	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
 		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottomLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottomLeft(to referenceView: UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottomLeft(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-		
-	}
-	
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false) -> WillSetBottomLeftMaker {
-		
-		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeBottomLeft(bottomLeft)
+		let bottomLeft = LayoutElement.Point.byParent(bottomLeft)
+		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, s reference: CGRect.PlaneBasePoint, offsetBy offset: CGVector = .zero, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomLeftMaker {
+	public func pinBottomLeft(to referenceView: UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
 		
-		let bottomLeft = self.parentView.pointReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinBottomLeft(by: { [weak referenceView] in referenceView }, with: bottomLeft)
 		
-		let maker = self.storeBottomLeft(bottomLeft)
+	}
+	
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
+		
+		let bottomLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomLeft)
+		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreBottomLeftType {
 	
 }
 
-public protocol LayoutMakerCanStoreBottomLeftToEvaluateFrameType: LayoutMakerCanStoreBottomLeftType where WillSetBottomLeftMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType {
 	
 	func evaluateFrame(bottomLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreBottomLeftToEvaluateFrameType {
+extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> WillSetBottomLeftMaker {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(bottomLeft: bottomLeft, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

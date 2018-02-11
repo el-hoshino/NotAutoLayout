@@ -1,5 +1,5 @@
 //
-//  DidStoreLeftMiddleBottomLayoutMaker.swift
+//  DidStoreLeftMiddleBottomLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,20 +8,18 @@
 
 import Foundation
 
-public struct DidStoreLeftMiddleBottomLayoutMaker {
+public struct DidStoreLeftMiddleBottomLayoutProperty {
 	
-	public unowned let parentView: UIView
+	let left: LayoutElement.Horizontal
 	
-	let left: LayoutElement.Line
+	let middle: LayoutElement.Vertical
 	
-	let middle: LayoutElement.Line
-	
-	let bottom: LayoutElement.Line
+	let bottom: LayoutElement.Vertical
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftMiddleBottomLayoutMaker {
+extension DidStoreLeftMiddleBottomLayoutProperty {
 	
 	private func makeFrame(left: CGFloat, middle: CGFloat, bottom: CGFloat, width: CGFloat) -> CGRect {
 		
@@ -38,17 +36,15 @@ extension DidStoreLeftMiddleBottomLayoutMaker {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreLeftMiddleBottomLayoutMaker: LayoutMakerCanStoreWidthToEvaluateFrameType {
+extension DidStoreLeftMiddleBottomLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public typealias WillSetWidthMaker = LayoutEditor
-	
-	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
 		
 		let left = self.left.evaluated(from: property)
 		let middle = self.middle.evaluated(from: property)
 		let bottom = self.bottom.evaluated(from: property)
 		let height = (bottom - middle).doubled
-		let width = width.evaluated(from: property, fitting: fittingCalculation, withTheOtherAxis: .height(height))
+		let width = width.evaluated(from: property, withTheOtherAxis: .height(height))
 		
 		return self.makeFrame(left: left, middle: middle, bottom: bottom, width: width)
 		

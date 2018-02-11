@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreFrameType.swift
+//  LayoutPropertyCanStoreFrameType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,45 +8,29 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreFrameType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetFrameMaker
+	associatedtype WillSetFrameProperty
 	
-	func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker
+	func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty>
 	
 }
 
-extension LayoutMakerCanStoreFrameType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
-	@available(iOS, deprecated, message: "Use `setFrame(to frame: CGRect)` instead.")
-    public func makeFrame(_ frame: CGRect) -> WillSetFrameMaker {
-		return self.setFrame(to: frame)
-    }
-	
-	@available(iOS, deprecated, message: "Use `setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect)` instead.")
-    public func makeFrame(_ frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> WillSetFrameMaker {
-		return self.setFrame(by: frame)
-    }
-    
-}
-
-extension LayoutMakerCanStoreFrameType {
-	
-	public func setFrame(to frame: CGRect) -> WillSetFrameMaker {
+	public func setFrame(to frame: CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.constant(frame)
-		
-		let maker = self.storeFrame(frame)
+		let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> WillSetFrameMaker {
+	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
-		let frame = LayoutElement.Rect.closure(frame)
-		
-		let maker = self.storeFrame(frame)
+		let frame = LayoutElement.Rect.byParent(frame)
+		let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
 		
@@ -54,24 +38,22 @@ extension LayoutMakerCanStoreFrameType {
 	
 }
 
-extension LayoutMakerCanStoreFrameType {
-    
-    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> WillSetFrameMaker {
+extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
+	
+    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin().inside(insets) })
-        
-        let maker = storeFrame(frame)
-        
-        return maker
+        let frame = LayoutElement.Rect.byParent({ $0.boundsWithZeroOrigin().inside(insets) })
+        let maker = self.didSetProperty.storeFrame(frame, to: self)
+		
+		return maker
         
     }
     
     @available(iOS 11.0, *)
-    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetFrameMaker {
+    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.closure({ $0.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets) })
-        
-        let maker = storeFrame(frame)
+        let frame = LayoutElement.Rect.byParent({ $0.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets) })
+        let maker = self.didSetProperty.storeFrame(frame, to: self)
         
         return maker
 
@@ -79,23 +61,24 @@ extension LayoutMakerCanStoreFrameType {
     
 }
 
-public protocol LayoutMakerCanStoreFrameToEvaluateFrameType: LayoutMakerCanStoreFrameType where WillSetFrameMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCanStoreFrameType {
     
     func evaluateFrame(frame: LayoutElement.Rect, property: ViewFrameProperty) -> CGRect
     
 }
 
-extension LayoutMakerCanStoreFrameToEvaluateFrameType {
+extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
-    public func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameMaker {
+	public typealias WillSetFrameProperty = Layout
+	
+	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty> {
         
         let layout = Layout(frame: { (property) -> CGRect in
             return self.evaluateFrame(frame: frame, property: property)
         })
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
         
-        let editor = LayoutEditor(layout)
-        
-        return editor
+        return maker
         
     }
     

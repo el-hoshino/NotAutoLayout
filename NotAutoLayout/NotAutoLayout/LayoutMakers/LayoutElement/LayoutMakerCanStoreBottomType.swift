@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreBottomType.swift
+//  LayoutPropertyCanStoreBottomType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreBottomType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreBottomType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetBottomMaker
+	associatedtype WillSetBottomProperty
 	
-	func storeBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker
+	func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomProperty>
 	
 }
 
-extension LayoutMakerCanStoreBottomType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 	
-	public func setBottom(to bottom: CGFloat) -> WillSetBottomMaker {
+	public func setBottom(to bottom: CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
-		let bottom = LayoutElement.Line.constant(bottom)
-		
-		let maker = self.storeBottom(bottom)
+		let bottom = LayoutElement.Vertical.constant(bottom)
+		let maker = self.didSetProperty.storeBottom(bottom, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetBottomMaker {
+	public func setBottom(by bottom: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
-		let bottom = LayoutElement.Line.closure(bottom)
-		
-		let maker = self.storeBottom(bottom)
-		
-		return maker
-		
-	}
-	
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetBottomMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinBottom(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinBottom(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetBottomMaker {
-		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeBottom(bottom)
+		let bottom = LayoutElement.Vertical.byParent(bottom)
+		let maker = self.didSetProperty.storeBottom(bottom, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinBottom(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetBottomMaker {
+	public func pinBottom(to referenceView: UIView?, with bottom: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
-		let bottom = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinBottom(by: { [weak referenceView] in referenceView }, with: bottom)
 		
-		let maker = self.storeBottom(bottom)
+	}
+	
+	public func pinBottom(by referenceView: @escaping () -> UIView?, with bottom: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
+		
+		let bottom = LayoutElement.Vertical.byReference(referenceGetter: referenceView, bottom)
+		let maker = self.didSetProperty.storeBottom(bottom, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreBottomType {
 	
 }
 
-public protocol LayoutMakerCanStoreBottomToEvaluateFrameType: LayoutMakerCanStoreBottomType where WillSetBottomMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreBottomToEvaluateFrameType: LayoutPropertyCanStoreBottomType {
 	
-	func evaluateFrame(bottom: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreBottomToEvaluateFrameType {
+extension LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func storeBottom(_ bottom: LayoutElement.Line) -> WillSetBottomMaker {
+	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(bottom: bottom, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

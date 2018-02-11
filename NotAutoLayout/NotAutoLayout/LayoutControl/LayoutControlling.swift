@@ -41,7 +41,8 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 	public func layout(_ view: UIView, with layout: Layout) {
 		
-		let frame = layout.evaluatedFrame(for: view, with: self.viewFrameProperty, fittingCalculation: { view.sizeThatFits($0) })
+		let frame = layout.evaluatedFrame(from: self.viewFrameProperty(forChild: view))
+		
 		self.layout(view, with: frame)
 		
 	}
@@ -50,10 +51,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> LayoutEditor) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) {
 		
-		let maker = InitialLayoutMaker(parentView: self.body)
-		let layout = making(maker).layout
+		let layout = self.makeLayout(making)
 		
 		self.layout(subview, with: layout)
 		
@@ -63,10 +63,12 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeLayout(_ making: (InitialLayoutMaker) -> LayoutEditor) -> Layout {
+	public func makeLayout(_ making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) -> Layout {
 		
-		let maker = InitialLayoutMaker(parentView: self.body)
-		return making(maker).layout
+		let maker = LayoutMaker(parentView: self.body, didSetProperty: InitialLayoutProperty())
+		let layout = making(maker).didSetProperty
+		
+		return layout
 		
 	}
 	

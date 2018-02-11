@@ -1,5 +1,5 @@
 //
-//  LayoutMakerCanStoreMiddleType.swift
+//  LayoutPropertyCanStoreMiddleType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,69 +8,44 @@
 
 import Foundation
 
-public protocol LayoutMakerCanStoreMiddleType: LayoutMakerType {
+public protocol LayoutPropertyCanStoreMiddleType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleMaker
+	associatedtype WillSetMiddleProperty
 	
-	func storeMiddle(_ middle: LayoutElement.Line) -> WillSetMiddleMaker
+	func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleProperty>
 	
 }
 
-extension LayoutMakerCanStoreMiddleType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 	
-	public func setMiddle(to middle: CGFloat) -> WillSetMiddleMaker {
+	public func setMiddle(to middle: CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
 		
-		let middle = LayoutElement.Line.constant(middle)
-		
-		let maker = self.storeMiddle(middle)
+		let middle = LayoutElement.Vertical.constant(middle)
+		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> WillSetMiddleMaker {
+	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
 		
-		let middle = LayoutElement.Line.closure(middle)
-		
-		let maker = self.storeMiddle(middle)
-		
-		return maker
-		
-	}
-	
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetMiddleMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddle(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public func pinMiddle(to referenceView: UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleMaker {
-		
-		let referenceView = { [weak referenceView] in referenceView }
-		
-		return self.pinMiddle(by: referenceView, s: reference, offsetBy: offset, ignoresTransform: ignoresTransform)
-		
-	}
-	
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false) -> WillSetMiddleMaker {
-		
-		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: false)
-		
-		let maker = self.storeMiddle(middle)
+		let middle = LayoutElement.Vertical.byParent(middle)
+		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
 		
 	}
 	
-	@available(iOS 11.0, *)
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, s reference: CGRect.VerticalBaseLine, offsetBy offset: CGFloat = 0, ignoresTransform: Bool = false, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> WillSetMiddleMaker {
+	public func pinMiddle(to referenceView: UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
 		
-		let middle = self.parentView.verticalReference(reference, of: referenceView, offsetBy: offset, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
+		return self.pinMiddle(by: { [weak referenceView] in referenceView }, with: middle)
 		
-		let maker = self.storeMiddle(middle)
+	}
+	
+	public func pinMiddle(by referenceView: @escaping () -> UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
+		
+		let middle = LayoutElement.Vertical.byReference(referenceGetter: referenceView, middle)
+		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
 		
@@ -78,23 +53,22 @@ extension LayoutMakerCanStoreMiddleType {
 	
 }
 
-public protocol LayoutMakerCanStoreMiddleToEvaluateFrameType: LayoutMakerCanStoreMiddleType where WillSetMiddleMaker == LayoutEditor {
+public protocol LayoutPropertyCanStoreMiddleToEvaluateFrameType: LayoutPropertyCanStoreMiddleType {
 	
-	func evaluateFrame(middle: LayoutElement.Line, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
 	
 }
 
-extension LayoutMakerCanStoreMiddleToEvaluateFrameType {
+extension LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public func storeMiddle(_ middle: LayoutElement.Line) -> WillSetMiddleMaker {
+	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
 		let layout = Layout(frame: { (property) -> CGRect in
 			return self.evaluateFrame(middle: middle, property: property)
 		})
+		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		let editor = LayoutEditor(layout)
-		
-		return editor
+		return maker
 		
 	}
 	

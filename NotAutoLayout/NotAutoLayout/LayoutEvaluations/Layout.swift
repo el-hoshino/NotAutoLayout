@@ -10,9 +10,6 @@ import Foundation
 
 public struct Layout {
 	
-	@available(*, introduced: 2.0, deprecated: 2.1, renamed: "Layout", message: "Layout.Individual has been renamed to Layout, in addition sequential layout and matrical layout will have their own type names in future release, too.")
-	public typealias Individual = Layout
-	
 	private var basicFrameEvaluation: Frame
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
@@ -32,12 +29,7 @@ extension Layout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (_ property: ViewFrameProperty) -> CGRect) {
-		self.basicFrameEvaluation = Frame(frame)
-		self.additionalEvaluations = []
-	}
-	
-	init(frame: @escaping (_ property: ViewFrameProperty, _ fitting: (CGSize) -> CGSize) -> CGRect) {
+	init(frame: @escaping Frame.FrameCalculation) {
 		self.basicFrameEvaluation = Frame(frame)
 		self.additionalEvaluations = []
 	}
@@ -49,19 +41,6 @@ extension Layout {
 	
 	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
 		return self.additionalEvaluations
-	}
-	
-}
-
-extension Layout {
-	
-	public func editing(_ editing: (LayoutEditor) -> LayoutEditor) -> Layout {
-		
-		let editor = LayoutEditor(self)
-		let result = editing(editor).layout
-		
-		return result
-		
 	}
 	
 }
@@ -84,12 +63,12 @@ extension Layout {
 
 extension Layout {
 	
-	func evaluatedFrame(for view: UIView, with property: ViewFrameProperty, fittingCalculation: (CGSize) -> CGSize) -> CGRect {
+	func evaluatedFrame(from property: ViewFrameProperty) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.evaluated(from: property, fitting: fittingCalculation)
+		var frame = self.basicFrameEvaluation.evaluated(from: property)
 		
 		for evaluation in self.additionalEvaluations {
-			frame = evaluation.evaluated(for: view, from: frame, with: property)
+			frame = evaluation.evaluated(from: frame, with: property)
 		}
 		
 		return frame
