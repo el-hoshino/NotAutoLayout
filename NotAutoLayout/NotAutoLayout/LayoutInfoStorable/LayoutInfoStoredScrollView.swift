@@ -14,8 +14,6 @@ open class LayoutInfoStoredScrollView: UIScrollView, LayoutInfoStorable {
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
 	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
 	
-	open var layoutOptimization: LayoutOptimization = .none
-	
 	open func getDefaultCondition() -> ConditionEnum {
 		return DefaultCondition.default
 	}

@@ -32,10 +32,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 		let subviews = self.getSubviews(sortedByOrder: true)
 		
-		switch self.body.layoutOptimization {
-		case .none:
-			self.layoutNormally(subviews: subviews)
-		}
+		self.layoutNormally(subviews: subviews)
 		
 	}
 	

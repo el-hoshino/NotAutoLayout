@@ -20,10 +20,6 @@ public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	/// The property to store the zIndex information for subviews.
 	var zIndexInfo: [ConditionEnum.RawValue: ZIndexInfo] { get set }
 	
-	/// LayoutOptimization property that is used for some specific layout.
-	var layoutOptimization: LayoutOptimization { get }
-	
-	
 	///
 	func getDefaultCondition() -> ConditionEnum
 	
