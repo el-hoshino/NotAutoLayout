@@ -21,10 +21,7 @@ public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	var zIndexInfo: [ConditionEnum.RawValue: ZIndexInfo] { get set }
 	
 	///
-	func getDefaultCondition() -> ConditionEnum
-	
-	///
-	func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum?
+	var conditionGetter: ((_ boundSize: CGSize) -> ConditionEnum)? { get }
 	
 }
 

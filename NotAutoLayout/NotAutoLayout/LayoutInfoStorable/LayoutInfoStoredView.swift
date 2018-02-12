@@ -14,14 +14,8 @@ open class LayoutInfoStoredView: UIView, LayoutInfoStorable {
 	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
 	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
-		
-	open func getDefaultCondition() -> ConditionEnum {
-		return DefaultCondition.default
-	}
 	
-	open func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum? {
-		return nil
-	}
+	public var conditionGetter: ((CGSize) -> ConditionEnum)? = { _ in DefaultCondition.default }
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
