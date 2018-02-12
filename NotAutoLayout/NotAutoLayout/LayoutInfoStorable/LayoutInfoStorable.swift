@@ -25,7 +25,7 @@ public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	
 }
 
-// MARK: - Default implement for override-able methods
+// MARK: - Layout condition getters
 extension LayoutInfoStorable {
 	
 	public func getDefaultCondition() -> ConditionEnum {
@@ -33,7 +33,7 @@ extension LayoutInfoStorable {
 	}
 	
 	public func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum? {
-		return nil
+		return self.conditionGetter?(boundSize)
 	}
 	
 }

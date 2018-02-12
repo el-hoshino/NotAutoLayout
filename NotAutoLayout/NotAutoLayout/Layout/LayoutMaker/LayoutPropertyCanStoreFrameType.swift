@@ -42,7 +42,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
     public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.byParent({ $0.boundsWithZeroOrigin().inside(insets) })
+        let frame = LayoutElement.Rect.byParent({ $0.boundFrame.inside(insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
@@ -50,9 +50,9 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
     }
     
     @available(iOS 11.0, *)
-    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetFrameProperty> {
+    public func stickOnParentSafeArea(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.byParent({ $0.boundsWithZeroOrigin(safeAreaOnly: shouldOnlyIncludeSafeArea).inside(insets) })
+        let frame = LayoutElement.Rect.byParent({ $0.safeFrame.inside(insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
         
         return maker

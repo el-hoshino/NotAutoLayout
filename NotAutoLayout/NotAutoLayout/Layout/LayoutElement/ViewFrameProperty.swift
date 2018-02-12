@@ -24,13 +24,14 @@ extension ViewFrameProperty {
 		
 	}
 	
+	@available(iOS 11.0, *)
 	public var safeAreaInsets: UIEdgeInsets {
 		
-		if #available(iOS 11.0, *), let insets = self.parentView?.safeAreaInsets {
-			return insets
-		} else {
+		guard let insets = self.parentView?.safeAreaInsets else {
 			return .zero
 		}
+		
+		return insets
 		
 	}
 	
@@ -291,34 +292,6 @@ extension ViewFrameProperty {
 	@available(iOS 11.0, *)
 	public var safeFrame: CGRect {
 		return .init(origin: self.safeOrigin, size: self.safeSize)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS, renamed: "boundFrame")
-	public func boundsWithZeroOrigin() -> CGRect {
-		
-		let boundsWithZeroOrigin = CGRect(origin: .zero, size: self.boundSize)
-		
-		return boundsWithZeroOrigin
-		
-	}
-	
-	@available(iOS, renamed: "safeFrame")
-	public func boundsWithZeroOrigin(safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
-		
-		let boundsWithZeroOrigin = CGRect(origin: .zero, size: self.boundSize)
-		
-		switch shouldOnlyIncludeSafeArea {
-		case true:
-			return boundsWithZeroOrigin.inside(self.safeAreaInsets)
-			
-		case false:
-			return boundsWithZeroOrigin
-		}
-		
 	}
 	
 }
