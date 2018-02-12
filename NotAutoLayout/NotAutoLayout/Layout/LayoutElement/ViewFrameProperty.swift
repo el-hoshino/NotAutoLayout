@@ -12,8 +12,6 @@ public struct ViewFrameProperty {
 	
 	private(set) weak var parentView: UIView?
 	
-	private(set) weak var currentView: UIView?
-	
 }
 
 extension ViewFrameProperty {
@@ -298,13 +296,9 @@ extension ViewFrameProperty {
 
 extension ViewFrameProperty {
 	
-	func sizeThatFits(_ fittingSize: CGSize) -> CGSize {
+	func size(for view: UIView, thatFits fittingSize: CGSize) -> CGSize {
 		
-		guard let currentView = self.currentView else {
-			return .zero
-		}
-		
-		let fittedSize = currentView.sizeThatFits(fittingSize)
+		let fittedSize = view.sizeThatFits(fittingSize)
 		
 		return fittedSize
 		
@@ -320,7 +314,7 @@ extension ViewFrameProperty {
 		
 	}
 	
-	func evaluateSize(from aspect: LayoutElement.Size.AspectSizing) -> CGSize {
+	func evaluateSize(for view: UIView, from aspect: LayoutElement.Size.AspectSizing) -> CGSize {
 		
 		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
 			switch safeAreaOnly {
@@ -338,7 +332,7 @@ extension ViewFrameProperty {
 		
 		let targetRatio = aspect.ratio ?? { (targetView: UIView?) in
 			return targetView?.sizeThatFits(.zero).ratio
-		}(self.currentView) ?? 1
+		}(view) ?? 1
 		
 		guard targetRatio.isNaN == false,
 			canvasSize.ratio.isNaN == false
