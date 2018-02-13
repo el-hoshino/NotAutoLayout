@@ -130,17 +130,17 @@ extension LayoutElement {
 
 extension LayoutElement.Horizontal {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGFloat {
+	var evaluation: (Frame.Parameters) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return calculation(property)
+			return { parameters in calculation(parameters.property) }
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.horizontal(parentView: property.parentView, referenceView: reference))
+			return { (parameters) in calculation(.horizontal(parentView: parameters.property.parentView, referenceView: reference)) }
 		}
 		
 	}
@@ -149,17 +149,17 @@ extension LayoutElement.Horizontal {
 
 extension LayoutElement.Vertical {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGFloat {
+	var evaluation: (Frame.Parameters) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return calculation(property)
+			return { parameters in calculation(parameters.property) }
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: property.parentView, referenceView: reference))
+			return { parameters in calculation(.vertical(parentView: parameters.property.parentView, referenceView: reference)) }
 		}
 		
 	}
@@ -168,17 +168,17 @@ extension LayoutElement.Vertical {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGPoint {
+	var evaluation: (Frame.Parameters) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return calculation(property)
+			return { parameters in calculation(parameters.property) }
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.point(parentView: property.parentView, referenceView: reference))
+			return { parameters in calculation(.point(parentView: parameters.property.parentView, referenceView: reference)) }
 		}
 		
 	}
@@ -210,17 +210,17 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from property: ViewFrameProperty, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluation(withTheOtherAxis oppositeAxis: Axis) -> (Frame.Parameters) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return calculation(property)
+			return { parameters in calculation(parameters.property) }
 			
-		case .fits(let fittingLength):
-			return oppositeAxis.fittedTheOtherLength(fittingCalculation: property.sizeThatFits, fittingLength: fittingLength)
+		case .fits(let fittingValue):
+			return { parameters in oppositeAxis.fittedTheOtherLength(fittingCalculation: parameters.targetView.sizeThatFits, fittingLength: fittingValue) }
 		}
 		
 	}
@@ -229,20 +229,20 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGSize {
+	var evaluation: (Frame.Parameters) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return property.evaluateSize(from: calculation)
+			return { parameters in calculation(parameters.property) }
 			
 		case .fits(let fittingSize):
-			return property.sizeThatFits(fittingSize)
+			return { parameters in parameters.targetView.sizeThatFits(fittingSize) }
 			
 		case .aspect(let aspect):
-			return property.evaluateSize(from: aspect)
+			return { parameters in parameters.property.evaluateSize(for: parameters.targetView, from: aspect) }
 		}
 		
 	}
@@ -251,14 +251,14 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from property: ViewFrameProperty) -> CGRect {
+	var evaluation: (Frame.Parameters) -> CGRect {
 		
 		switch self {
 		case .constant(let value):
-			return value
+			return { _ in value }
 			
 		case .byParent(let calculation):
-			return calculation(property)
+			return { parameters in calculation(parameters.property) }
 		}
 		
 	}

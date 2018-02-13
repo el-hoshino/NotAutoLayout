@@ -10,7 +10,9 @@ import Foundation
 
 struct Frame {
 	
-	typealias FrameCalculation = (_ targetView: UIView, _ targetOrder: Int, _ property: ViewFrameProperty) -> CGRect
+	typealias Parameters = (targetView: UIView, targetOrder: Int, property: ViewFrameProperty)
+	typealias FrameCalculation = (Parameters) -> CGRect
+	
 	private let evaluation: FrameCalculation
 	
 }
@@ -18,7 +20,7 @@ struct Frame {
 extension Frame {
 	
 	init(_ frame: CGRect) {
-		self.evaluation = { _, _, _ in frame }
+		self.evaluation = { _ in frame }
 	}
 	
 	init(_ frame: @escaping FrameCalculation) {
@@ -31,7 +33,7 @@ extension Frame {
 	
 	func evaluated(for targetView: UIView, at targetOrder: Int, from property: ViewFrameProperty) -> CGRect {
 		
-		return self.evaluation(targetView, targetOrder, property)
+		return self.evaluation((targetView, targetOrder, property))
 		
 	}
 	
