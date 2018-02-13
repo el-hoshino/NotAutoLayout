@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 
 public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType {
 	
-	func evaluateFrame(right: LayoutElement.Horizontal, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(right: LayoutElement.Horizontal, parameters: CalculationParameters) -> CGRect
 	
 }
 
@@ -63,8 +63,8 @@ extension LayoutPropertyCanStoreRightToEvaluateFrameType {
 	
 	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(right: right, property: property)
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(right: right, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

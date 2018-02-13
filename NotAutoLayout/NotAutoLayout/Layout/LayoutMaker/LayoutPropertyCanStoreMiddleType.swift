@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 
 public protocol LayoutPropertyCanStoreMiddleToEvaluateFrameType: LayoutPropertyCanStoreMiddleType {
 	
-	func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(middle: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect
 	
 }
 
@@ -63,8 +63,8 @@ extension LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
 	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(middle: middle, property: property)
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(middle: middle, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

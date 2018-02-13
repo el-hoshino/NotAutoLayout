@@ -10,9 +10,6 @@ import Foundation
 
 struct Frame {
 	
-	typealias Parameters = (targetView: UIView, targetOrder: Int, property: ViewFrameProperty)
-	typealias FrameCalculation = (Parameters) -> CGRect
-	
 	private let evaluation: FrameCalculation
 	
 }

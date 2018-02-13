@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 
 public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType {
 	
-	func evaluateFrame(bottomLeft: LayoutElement.Point, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: CalculationParameters) -> CGRect
 	
 }
 
@@ -63,8 +63,8 @@ extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
 	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(bottomLeft: bottomLeft, property: property)
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(bottomLeft: bottomLeft, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

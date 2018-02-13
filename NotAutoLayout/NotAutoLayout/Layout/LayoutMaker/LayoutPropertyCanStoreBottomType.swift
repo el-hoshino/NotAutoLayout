@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 
 public protocol LayoutPropertyCanStoreBottomToEvaluateFrameType: LayoutPropertyCanStoreBottomType {
 	
-	func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(bottom: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect
 	
 }
 
@@ -63,8 +63,8 @@ extension LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
 	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(bottom: bottom, property: property)
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(bottom: bottom, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

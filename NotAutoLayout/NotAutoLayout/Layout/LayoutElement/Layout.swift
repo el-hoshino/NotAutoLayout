@@ -25,15 +25,19 @@ extension Layout {
 extension Layout {
 	
 	init(frame: CGRect) {
-		self.basicFrameEvaluation = Frame(frame)
+		self.basicFrameEvaluation = Frame({ _ in frame })
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping Frame.FrameCalculation) {
+	init(frame: Frame) {
+		self.basicFrameEvaluation = frame
+		self.additionalEvaluations = []
+	}
+	
+	init(frame: @escaping (CalculationParameters) -> CGRect) {
 		self.basicFrameEvaluation = Frame(frame)
 		self.additionalEvaluations = []
 	}
-
 	
 }
 
@@ -63,9 +67,9 @@ extension Layout {
 
 extension Layout {
 	
-	func evaluatedFrame(from property: ViewFrameProperty) -> CGRect {
+	func evaluatedFrame(for targetView: UIView, at targetOrder: Int, from property: ViewFrameProperty) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.evaluated(from: property)
+		var frame = self.basicFrameEvaluation.evaluated(for: targetView, at: targetOrder, from: property)
 		
 		for evaluation in self.additionalEvaluations {
 			frame = evaluation.evaluated(from: frame, with: property)

@@ -49,7 +49,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 
 public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType {
 	
-	func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect
 	
 }
 
@@ -57,8 +57,8 @@ extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
 		
-		let layout = Layout(frame: { (property) -> CGRect in
-			return self.evaluateFrame(height: height, property: property)
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(height: height, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

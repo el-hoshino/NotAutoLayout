@@ -63,7 +63,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 
 public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCanStoreFrameType {
     
-    func evaluateFrame(frame: LayoutElement.Rect, property: ViewFrameProperty) -> CGRect
+    func evaluateFrame(frame: LayoutElement.Rect, parameters: CalculationParameters) -> CGRect
     
 }
 
@@ -72,10 +72,10 @@ extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	public typealias WillSetFrameProperty = Layout
 	
 	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty> {
-        
-        let layout = Layout(frame: { (property) -> CGRect in
-            return self.evaluateFrame(frame: frame, property: property)
-        })
+		
+		let layout = Layout(frame: { (parameters) -> CGRect in
+			return self.evaluateFrame(frame: frame, parameters: parameters)
+		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
         
         return maker
