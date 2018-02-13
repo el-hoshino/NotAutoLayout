@@ -37,12 +37,12 @@ extension DidStoreRightMiddleWidthLayoutProperty {
 // MARK: Height
 extension DidStoreRightMiddleWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
 		
-		let right = self.right.evaluated(from: property)
-		let middle = self.middle.evaluated(from: property)
-		let width = self.width.evaluated(from: property, withTheOtherAxis: .height(0))
-		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
+		let right = self.right.evaluated(from: parameters)
+		let middle = self.middle.evaluated(from: parameters)
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(right: right, middle: middle, width: width, height: height)
 		

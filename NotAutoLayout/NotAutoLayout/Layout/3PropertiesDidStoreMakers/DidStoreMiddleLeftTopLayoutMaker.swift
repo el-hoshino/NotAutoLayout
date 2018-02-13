@@ -36,12 +36,12 @@ extension DidStoreMiddleLeftTopLayoutProperty {
 // MARK: Width
 extension DidStoreMiddleLeftTopLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public func evaluateFrame(width: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
 		
-		let middleLeft = self.middleLeft.evaluated(from: property)
-		let top = self.top.evaluated(from: property)
+		let middleLeft = self.middleLeft.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
 		let height = (middleLeft.y - top).doubled
-		let width = width.evaluated(from: property, withTheOtherAxis: .height(height))
+		let width = width.evaluated(from: parameters, withTheOtherAxis: .height(height))
 		
 		return self.makeFrame(middleLeft: middleLeft, top: top, width: width)
 		

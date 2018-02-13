@@ -52,11 +52,11 @@ extension DidStoreTopRightCenterLayoutProperty {
 // MARK: Middle
 extension DidStoreTopRightCenterLayoutProperty: LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(middle: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect {
 		
-		let topRight = self.topRight.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
-		let middle = middle.evaluated(from: property)
+		let topRight = self.topRight.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
+		let middle = middle.evaluated(from: parameters)
 		
 		return self.makeFrame(topRight: topRight, center: center, middle: middle)
 		
@@ -67,11 +67,11 @@ extension DidStoreTopRightCenterLayoutProperty: LayoutPropertyCanStoreMiddleToEv
 // MARK: Bottom
 extension DidStoreTopRightCenterLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect {
 		
-		let topRight = self.topRight.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
-		let bottom = bottom.evaluated(from: property)
+		let topRight = self.topRight.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
+		let bottom = bottom.evaluated(from: parameters)
 		
 		return self.makeFrame(topRight: topRight, center: center, bottom: bottom)
 		
@@ -83,12 +83,12 @@ extension DidStoreTopRightCenterLayoutProperty: LayoutPropertyCanStoreBottomToEv
 // MARK: Height
 extension DidStoreTopRightCenterLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
 		
-		let topRight = self.topRight.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
+		let topRight = self.topRight.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
 		let width = (topRight.x - center).doubled
-		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(topRight: topRight, center: center, height: height)
 		

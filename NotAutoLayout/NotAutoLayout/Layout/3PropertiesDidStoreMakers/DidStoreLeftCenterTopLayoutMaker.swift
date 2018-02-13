@@ -54,12 +54,12 @@ extension DidStoreLeftCenterTopLayoutProperty {
 // MARK: Middle
 extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public func evaluateFrame(middle: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(middle: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect {
 		
-		let left = self.left.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
-		let top = self.top.evaluated(from: property)
-		let middle = middle.evaluated(from: property)
+		let left = self.left.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
+		let middle = middle.evaluated(from: parameters)
 		
 		return self.makeFrame(left: left, center: center, top: top, middle: middle)
 		
@@ -70,12 +70,12 @@ extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreMiddleToEva
 // MARK: Bottom
 extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect {
 		
-		let left = self.left.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
-		let top = self.top.evaluated(from: property)
-		let bottom = bottom.evaluated(from: property)
+		let left = self.left.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
+		let bottom = bottom.evaluated(from: parameters)
 		
 		return self.makeFrame(left: left, center: center, top: top, bottom: bottom)
 		
@@ -87,13 +87,13 @@ extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreBottomToEva
 // MARK: Height
 extension DidStoreLeftCenterTopLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
 		
-		let left = self.left.evaluated(from: property)
-		let center = self.center.evaluated(from: property)
-		let top = self.top.evaluated(from: property)
+		let left = self.left.evaluated(from: parameters)
+		let center = self.center.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
 		let width = (center - left).doubled
-		let height = height.evaluated(from: property, withTheOtherAxis: .width(width))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(left: left, center: center, top: top, height: height)
 		

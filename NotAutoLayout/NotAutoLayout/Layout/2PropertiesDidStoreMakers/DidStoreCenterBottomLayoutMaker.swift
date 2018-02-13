@@ -37,11 +37,11 @@ extension DidStoreCenterBottomLayoutProperty {
 // MARK: Size
 extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, property: ViewFrameProperty) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: CalculationParameters) -> CGRect {
 		
-		let center = self.center.evaluated(from: property)
-		let bottom = self.bottom.evaluated(from: property)
-		let size = size.evaluated(from: property)
+		let center = self.center.evaluated(from: parameters)
+		let bottom = self.bottom.evaluated(from: parameters)
+		let size = size.evaluated(from: parameters)
 		
 		return self.makeFrame(center: center, bottom: bottom, size: size)
 		
