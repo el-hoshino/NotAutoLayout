@@ -28,9 +28,9 @@ extension Frame {
 
 extension Frame {
 	
-	func evaluated(for targetView: UIView, at targetOrder: Int, from property: ViewFrameProperty) -> CGRect {
+	func evaluated(from parameters: CalculationParameters) -> CGRect {
 		
-		return self.evaluation((targetView, targetOrder, property))
+		return self.evaluation(parameters)
 		
 	}
 	

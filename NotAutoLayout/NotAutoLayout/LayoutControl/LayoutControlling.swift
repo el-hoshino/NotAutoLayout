@@ -41,7 +41,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 	public func layout(_ view: UIView, with layout: Layout) {
 		
-		let frame = layout.evaluatedFrame(from: self.viewFrameProperty(forChild: view))
+		let frame = layout.evaluatedFrame(for: view, at: nil, from: self.viewFrameProperty)
 		
 		self.layout(view, with: frame)
 		

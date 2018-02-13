@@ -67,12 +67,14 @@ extension Layout {
 
 extension Layout {
 	
-	func evaluatedFrame(for targetView: UIView, at targetOrder: Int, from property: ViewFrameProperty) -> CGRect {
+	func evaluatedFrame(for targetView: UIView, at targetOrder: Int?, from property: ViewFrameProperty) -> CGRect {
 		
-		var frame = self.basicFrameEvaluation.evaluated(for: targetView, at: targetOrder, from: property)
+		let parameters: CalculationParameters = (targetView, targetOrder, property)
+		
+		var frame = self.basicFrameEvaluation.evaluated(from: parameters)
 		
 		for evaluation in self.additionalEvaluations {
-			frame = evaluation.evaluated(from: frame, with: property)
+			frame = evaluation.evaluated(from: frame, with: parameters)
 		}
 		
 		return frame

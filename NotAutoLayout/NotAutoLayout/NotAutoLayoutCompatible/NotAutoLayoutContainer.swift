@@ -28,11 +28,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 extension NotAutoLayoutContainer where Containee: UIView {
 	
 	public var viewFrameProperty: ViewFrameProperty {
-		return ViewFrameProperty(parentView: self.body, currentView: nil)
-	}
-	
-	public func viewFrameProperty(forChild childView: UIView?) -> ViewFrameProperty {
-		return ViewFrameProperty(parentView: self.body, currentView: childView)
+		return ViewFrameProperty(parentView: self.body)
 	}
 	
 	/// The bound size.
