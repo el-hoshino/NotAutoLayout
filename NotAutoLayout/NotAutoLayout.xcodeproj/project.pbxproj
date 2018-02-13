@@ -382,13 +382,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		164EA09C1EF3D98B00C0BB8F /* LayoutEvaluations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LayoutEvaluations;
-			sourceTree = "<group>";
-		};
 		164EA0A21EF3DA4900C0BB8F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,13 +408,11 @@
 		165FE29F1EF28448006DF788 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				79C6C1811FB83D8900E32C54 /* LayoutElement */,
-				7971FAB4203161BC00B63CBC /* LayoutMaker */,
-				165FE2AA1EF289F4006DF788 /* 0PropertyDidStoreProperty */,
-				165FE2AE1EF289F4006DF788 /* 1PropertyDidStoreProperties */,
-				165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreMakers */,
-				165FE2AC1EF289F4006DF788 /* 3PropertiesDidStoreMakers */,
-				16A5A5A21EF39F8E007ACB1C /* AllPropertiesDidStoreMakers */,
+				164EA09E1EF3D98B00C0BB8F /* Layout.swift */,
+				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
+				16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */,
+				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
+				16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -607,6 +598,19 @@
 		7971FAB4203161BC00B63CBC /* LayoutMaker */ = {
 			isa = PBXGroup;
 			children = (
+				7971FAB920332D4A00B63CBC /* MakerBasics */,
+				165FE2AA1EF289F4006DF788 /* 0PropertyDidStoreProperty */,
+				165FE2AE1EF289F4006DF788 /* 1PropertyDidStoreProperties */,
+				165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreMakers */,
+				165FE2AC1EF289F4006DF788 /* 3PropertiesDidStoreMakers */,
+				16A5A5A21EF39F8E007ACB1C /* AllPropertiesDidStoreMakers */,
+			);
+			path = LayoutMaker;
+			sourceTree = "<group>";
+		};
+		7971FAB920332D4A00B63CBC /* MakerBasics */ = {
+			isa = PBXGroup;
+			children = (
 				79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */,
 				79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */,
 				79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */,
@@ -629,7 +633,7 @@
 				79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */,
 				164319EE1F79FD8E003FA7DA /* LayoutPropertyCanAddAdditionalEvaluationType.swift */,
 			);
-			path = LayoutMaker;
+			path = MakerBasics;
 			sourceTree = "<group>";
 		};
 		798378811E4CB2B100D3E1C2 = {
@@ -658,8 +662,8 @@
 				7971FAB3203160FA00B63CBC /* Types */,
 				164EA0A21EF3DA4900C0BB8F /* Extensions */,
 				798C6EAB1FEBF98F00D2A370 /* NotAutoLayoutCompatible */,
-				164EA09C1EF3D98B00C0BB8F /* LayoutEvaluations */,
 				165FE29F1EF28448006DF788 /* Layout */,
+				7971FAB4203161BC00B63CBC /* LayoutMaker */,
 				164EA0A61EF3DA5100C0BB8F /* LayoutControl */,
 				168667AF1F7912FD00AD774E /* LayoutInfoStorable */,
 			);
@@ -682,18 +686,6 @@
 				164EA0AD1EF3DA5100C0BB8F /* NotAutoLayoutContainer.swift */,
 			);
 			path = NotAutoLayoutCompatible;
-			sourceTree = "<group>";
-		};
-		79C6C1811FB83D8900E32C54 /* LayoutElement */ = {
-			isa = PBXGroup;
-			children = (
-				164EA09E1EF3D98B00C0BB8F /* Layout.swift */,
-				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
-				16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */,
-				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
-				16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */,
-			);
-			path = LayoutElement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
