@@ -130,7 +130,7 @@ extension LayoutElement {
 
 extension LayoutElement.Horizontal {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -149,7 +149,7 @@ extension LayoutElement.Horizontal {
 
 extension LayoutElement.Vertical {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -168,7 +168,7 @@ extension LayoutElement.Vertical {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGPoint {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
@@ -210,7 +210,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameters: CalculationParameters, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -229,7 +229,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGSize {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -251,7 +251,7 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		switch self {
 		case .constant(let value):

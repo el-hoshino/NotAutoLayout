@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 
 public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanStoreTopType {
 	
-	func evaluateFrame(top: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect
+	func evaluateFrame(top: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 

@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 
 public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType {
 	
-	func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: CalculationParameters) -> CGRect
+	func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 

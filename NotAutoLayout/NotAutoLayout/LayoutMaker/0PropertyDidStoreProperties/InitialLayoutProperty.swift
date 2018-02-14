@@ -15,7 +15,7 @@ public struct InitialLayoutProperty: LayoutMakerPropertyType {
 // MARK: - Set A Frame -
 extension InitialLayoutProperty: LayoutPropertyCanStoreFrameToEvaluateFrameType {
 		
-    public func evaluateFrame(frame: LayoutElement.Rect, parameters: CalculationParameters) -> CGRect {
+    public func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> CGRect {
         
         let frame = frame.evaluated(from: parameters)
         

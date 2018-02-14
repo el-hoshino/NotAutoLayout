@@ -38,7 +38,7 @@ extension DidStoreLeftCenterBottomLayoutProperty {
 // MARK: Height
 extension DidStoreLeftCenterBottomLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)

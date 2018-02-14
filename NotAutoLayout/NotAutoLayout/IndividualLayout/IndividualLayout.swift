@@ -34,7 +34,7 @@ extension IndividualLayout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (CalculationParameters) -> CGRect) {
+	init(frame: @escaping (IndividualFrameCalculationParameters) -> CGRect) {
 		self.basicFrameEvaluation = IndividualFrame(frame)
 		self.additionalEvaluations = []
 	}
@@ -69,7 +69,7 @@ extension IndividualLayout {
 	
 	func evaluatedFrame(for targetView: UIView, from property: ViewFrameProperty) -> CGRect {
 		
-		let parameters: CalculationParameters = (targetView, property)
+		let parameters: IndividualFrameCalculationParameters = (targetView, property)
 		
 		var frame = self.basicFrameEvaluation.evaluated(from: parameters)
 		

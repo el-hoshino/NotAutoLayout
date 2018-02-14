@@ -38,7 +38,7 @@ extension DidStoreCenterTopMiddleLayoutProperty {
 // MARK: Width
 extension DidStoreCenterTopMiddleLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

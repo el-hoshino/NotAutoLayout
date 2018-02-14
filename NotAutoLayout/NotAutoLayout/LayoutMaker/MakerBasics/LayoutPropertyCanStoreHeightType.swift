@@ -49,7 +49,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 
 public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType {
 	
-	func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 

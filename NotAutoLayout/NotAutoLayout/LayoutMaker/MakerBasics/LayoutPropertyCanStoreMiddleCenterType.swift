@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 
 public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPropertyCanStoreMiddleCenterType {
 	
-	func evaluateFrame(middleCenter: LayoutElement.Point, parameters: CalculationParameters) -> CGRect
+	func evaluateFrame(middleCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 

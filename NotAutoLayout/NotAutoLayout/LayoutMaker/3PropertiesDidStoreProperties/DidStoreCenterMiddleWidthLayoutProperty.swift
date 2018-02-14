@@ -37,7 +37,7 @@ extension DidStoreCenterMiddleWidthLayoutProperty {
 // MARK: Height
 extension DidStoreCenterMiddleWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
         
         let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))

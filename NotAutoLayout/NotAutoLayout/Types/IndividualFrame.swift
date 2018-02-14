@@ -28,7 +28,7 @@ extension IndividualFrame {
 
 extension IndividualFrame {
 	
-	func evaluated(from parameters: CalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		return self.evaluation(parameters)
 		

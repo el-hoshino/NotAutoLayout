@@ -35,7 +35,7 @@ extension DidStoreLeftTopLayoutProperty {
 // MARK: Size
 extension DidStoreLeftTopLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

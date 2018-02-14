@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 
 public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType {
 	
-	func evaluateFrame(right: LayoutElement.Horizontal, parameters: CalculationParameters) -> CGRect
+	func evaluateFrame(right: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 

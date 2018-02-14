@@ -35,7 +35,7 @@ extension DidStoreBottomCenterWidthLayoutProperty {
 // MARK: Height
 extension DidStoreBottomCenterWidthLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let bottomCenter = self.bottomCenter.evaluated(from: parameters)
 		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))

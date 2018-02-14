@@ -46,7 +46,7 @@ extension DidStoreLeftCenterMiddleLayoutProperty {
 // MARK: Bottom
 extension DidStoreLeftCenterMiddleLayoutProperty: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)
@@ -63,7 +63,7 @@ extension DidStoreLeftCenterMiddleLayoutProperty: LayoutPropertyCanStoreBottomTo
 // MARK: Height
 extension DidStoreLeftCenterMiddleLayoutProperty: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)

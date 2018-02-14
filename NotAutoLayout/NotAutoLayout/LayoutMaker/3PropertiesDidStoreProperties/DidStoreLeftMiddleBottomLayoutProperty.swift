@@ -38,7 +38,7 @@ extension DidStoreLeftMiddleBottomLayoutProperty {
 // MARK: Width
 extension DidStoreLeftMiddleBottomLayoutProperty: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameters: CalculationParameters) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)
