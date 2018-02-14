@@ -12,6 +12,6 @@ public typealias IndividualFrameCalculationParameters = (targetView: UIView, pro
 
 public typealias IndividualFrameCalculation = (IndividualFrameCalculationParameters) -> CGRect
 
-public typealias SequencialFrameCalculationParameters = (targetViews: [UIView], property: ViewFrameProperty)
+public typealias SequentialFrameCalculationParameters = (targetViews: [UIView], property: ViewFrameProperty)
 
-public typealias SequencialFrameCalculation = (SequencialFrameCalculationParameters) -> [CGRect]
+public typealias SequentialFrameCalculation = (SequentialFrameCalculationParameters) -> [CGRect]

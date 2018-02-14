@@ -75,6 +75,8 @@
 		7971FAB82032FA8500B63CBC /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FAB72032FA8500B63CBC /* Typealias.swift */; };
 		7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */; };
 		7971FABD20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABC20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift */; };
+		7971FABF20346A0100B63CBC /* SequentialLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABE20346A0100B63CBC /* SequentialLayout.swift */; };
+		7971FAC120346AAB00B63CBC /* SequentialFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FAC020346AAB00B63CBC /* SequentialFrame.swift */; };
 		798378951E4CB2B200D3E1C2 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */; };
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -221,6 +223,8 @@
 		7971FAB72032FA8500B63CBC /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopCenterType.swift; sourceTree = "<group>"; };
 		7971FABC20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopRightType.swift; sourceTree = "<group>"; };
+		7971FABE20346A0100B63CBC /* SequentialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialLayout.swift; sourceTree = "<group>"; };
+		7971FAC020346AAB00B63CBC /* SequentialFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialFrame.swift; sourceTree = "<group>"; };
 		7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotAutoLayout.h; sourceTree = "<group>"; };
 		7983788F1E4CB2B100D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */,
+				7971FABE20346A0100B63CBC /* SequentialLayout.swift */,
 				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
 				16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */,
 				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
@@ -590,6 +595,7 @@
 				79CDD00E1FED79CC00A6D168 /* Rect.swift */,
 				164EA0A71EF3DA5100C0BB8F /* Bounds.swift */,
 				164319F01F7A1903003FA7DA /* IndividualFrame.swift */,
+				7971FAC020346AAB00B63CBC /* SequentialFrame.swift */,
 				7971FAB72032FA8500B63CBC /* Typealias.swift */,
 			);
 			path = Types;
@@ -824,6 +830,7 @@
 				1630073C1F0F380C00012C18 /* DidStoreBottomLeftTopLayoutProperty.swift in Sources */,
 				79D8DDCA1EF9487400B74593 /* DidStoreLeftBottomHeightLayoutProperty.swift in Sources */,
 				164EA0CE1EF3DAE300C0BB8F /* IndividualLayout.swift in Sources */,
+				7971FAC120346AAB00B63CBC /* SequentialFrame.swift in Sources */,
 				1630073F1F0F380C00012C18 /* DidStoreBottomLeftHeightLayoutProperty.swift in Sources */,
 				164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */,
 				79FD2CEC1FB86BDF00E6661C /* LayoutPropertyCanStoreBottomType.swift in Sources */,
@@ -864,6 +871,7 @@
 				79D8DDFC1EF94DC700B74593 /* DidStoreTopLeftMiddleLayoutProperty.swift in Sources */,
 				164EA0CA1EF3DAE300C0BB8F /* LayoutInfoStorable.swift in Sources */,
 				79D8DDB81EF9450C00B74593 /* DidStoreLeftCenterBottomLayoutProperty.swift in Sources */,
+				7971FABF20346A0100B63CBC /* SequentialLayout.swift in Sources */,
 				79D8DE1E1EF950B500B74593 /* DidStoreTopRightHeightLayoutProperty.swift in Sources */,
 				1670CDD91F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift in Sources */,
 				1630072B1F0F380C00012C18 /* DidStoreMiddleLeftBottomLayoutProperty.swift in Sources */,
