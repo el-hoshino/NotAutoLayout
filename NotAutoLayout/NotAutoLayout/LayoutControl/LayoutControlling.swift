@@ -73,3 +73,17 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	}
 	
 }
+
+extension NotAutoLayoutContainer where Containee: UIView {
+	
+	public func layout(_ subviews: [UIView], with layout: SequentialLayout) {
+		
+		let frames = layout.evaluatedFrame(for: subviews, from: self.viewFrameProperty)
+		
+		for (subview, frame) in zip(subviews, frames) {
+			self.layout(subview, with: frame)
+		}
+		
+	}
+	
+}
