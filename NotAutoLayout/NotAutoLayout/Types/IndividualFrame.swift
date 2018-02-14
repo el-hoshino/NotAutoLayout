@@ -10,7 +10,7 @@ import Foundation
 
 struct IndividualFrame {
 	
-	private let evaluation: FrameCalculation
+	private let evaluation: IndividualFrameCalculation
 	
 }
 
@@ -20,7 +20,7 @@ extension IndividualFrame {
 		self.evaluation = { _ in frame }
 	}
 	
-	init(_ frame: @escaping FrameCalculation) {
+	init(_ frame: @escaping IndividualFrameCalculation) {
 		self.evaluation = frame
 	}
 	

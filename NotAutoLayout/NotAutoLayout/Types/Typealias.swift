@@ -10,4 +10,4 @@ import Foundation
 
 public typealias IndividualFrameCalculationParameters = (targetView: UIView, property: ViewFrameProperty)
 
-public typealias FrameCalculation = (IndividualFrameCalculationParameters) -> CGRect
+public typealias IndividualFrameCalculation = (IndividualFrameCalculationParameters) -> CGRect
