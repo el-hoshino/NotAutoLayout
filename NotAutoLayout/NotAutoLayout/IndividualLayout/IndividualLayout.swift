@@ -10,7 +10,7 @@ import Foundation
 
 public struct IndividualLayout {
 	
-	private var basicFrameEvaluation: Frame
+	private var basicFrameEvaluation: IndividualFrame
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
 	
@@ -25,17 +25,17 @@ extension IndividualLayout {
 extension IndividualLayout {
 	
 	init(frame: CGRect) {
-		self.basicFrameEvaluation = Frame({ _ in frame })
+		self.basicFrameEvaluation = IndividualFrame({ _ in frame })
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: Frame) {
+	init(frame: IndividualFrame) {
 		self.basicFrameEvaluation = frame
 		self.additionalEvaluations = []
 	}
 	
 	init(frame: @escaping (CalculationParameters) -> CGRect) {
-		self.basicFrameEvaluation = Frame(frame)
+		self.basicFrameEvaluation = IndividualFrame(frame)
 		self.additionalEvaluations = []
 	}
 	

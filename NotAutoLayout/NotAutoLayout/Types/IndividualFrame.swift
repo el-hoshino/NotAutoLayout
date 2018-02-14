@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct Frame {
+struct IndividualFrame {
 	
 	private let evaluation: FrameCalculation
 	
 }
 
-extension Frame {
+extension IndividualFrame {
 	
 	init(_ frame: CGRect) {
 		self.evaluation = { _ in frame }
@@ -26,7 +26,7 @@ extension Frame {
 	
 }
 
-extension Frame {
+extension IndividualFrame {
 	
 	func evaluated(from parameters: CalculationParameters) -> CGRect {
 		
