@@ -11,3 +11,7 @@ import Foundation
 public typealias IndividualFrameCalculationParameters = (targetView: UIView, property: ViewFrameProperty)
 
 public typealias IndividualFrameCalculation = (IndividualFrameCalculationParameters) -> CGRect
+
+public typealias SequencialFrameCalculationParameters = (targetViews: [UIView], property: ViewFrameProperty)
+
+public typealias SequencialFrameCalculation = (SequencialFrameCalculationParameters) -> [CGRect]
