@@ -13,7 +13,7 @@ public struct SubviewSetupWizard<ParentView> {
 	private let parentView: ParentView
 	private let setteeView: UIView
 	
-	typealias ConditionLayout = [ConditionEnum.RawValue: () -> Layout]
+	typealias ConditionLayout = [ConditionEnum.RawValue: () -> IndividualLayout]
 	typealias ConditionOrder = [ConditionEnum.RawValue: () -> Int]
 	typealias ConditionZIndex = [ConditionEnum.RawValue: () -> Int]
 	
@@ -115,7 +115,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 
 extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
-	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> Layout) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> IndividualLayout) -> SubviewSetupWizard {
 		
 		var wizard = self
 		wizard.layouts[condition.rawValue] = layout
@@ -123,28 +123,28 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func setLayout(for condition: ConditionEnum, to layout: Layout) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, to layout: IndividualLayout) -> SubviewSetupWizard {
 		
 		let layout = { layout }
 		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
-	public func setDefaultLayout(by layout: @escaping () -> Layout) -> SubviewSetupWizard {
+	public func setDefaultLayout(by layout: @escaping () -> IndividualLayout) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
-	public func setDefaultLayout(to layout: Layout) -> SubviewSetupWizard {
+	public func setDefaultLayout(to layout: IndividualLayout) -> SubviewSetupWizard {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setLayout(for: condition, to: layout)
 		
 	}
 	
-	public func setDefaultLayout(_ making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) -> SubviewSetupWizard {
+	public func setDefaultLayout(_ making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<IndividualLayout>) -> SubviewSetupWizard {
 		
 		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: InitialLayoutProperty())
 		let layout = making(maker).didSetProperty
@@ -153,7 +153,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func setLayout(for condition: ConditionEnum, making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<Layout>) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<IndividualLayout>) -> SubviewSetupWizard {
 		
 		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: InitialLayoutProperty())
 		let layout = making(maker).didSetProperty

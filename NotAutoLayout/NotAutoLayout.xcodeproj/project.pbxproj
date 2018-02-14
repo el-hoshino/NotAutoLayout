@@ -66,7 +66,7 @@
 		164EA0CA1EF3DAE300C0BB8F /* LayoutInfoStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A91EF3DA5100C0BB8F /* LayoutInfoStorable.swift */; };
 		164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0AD1EF3DA5100C0BB8F /* NotAutoLayoutContainer.swift */; };
 		164EA0CC1EF3DAE300C0BB8F /* LayoutInfoStoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0AA1EF3DA5100C0BB8F /* LayoutInfoStoredView.swift */; };
-		164EA0CE1EF3DAE300C0BB8F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09E1EF3D98B00C0BB8F /* Layout.swift */; };
+		164EA0CE1EF3DAE300C0BB8F /* IndividualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */; };
 		16685B4D1F669A7F0089FF30 /* LayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16685B4C1F669A7F0089FF30 /* LayoutControlling.swift */; };
 		166C41571F6945330060C3E6 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166C41561F6945330060C3E6 /* UIEdgeInsets.swift */; };
 		1670CDD91F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */; };
@@ -197,7 +197,7 @@
 		164319F01F7A1903003FA7DA /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		164DB24F1EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableLayoutControlling.swift; sourceTree = "<group>"; };
 		164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableOtherPublicAPIs.swift; sourceTree = "<group>"; };
-		164EA09E1EF3D98B00C0BB8F /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualLayout.swift; sourceTree = "<group>"; };
 		164EA0A31EF3DA4900C0BB8F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		164EA0A41EF3DA4900C0BB8F /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
@@ -405,16 +405,16 @@
 			path = LayoutControl;
 			sourceTree = "<group>";
 		};
-		165FE29F1EF28448006DF788 /* Layout */ = {
+		165FE29F1EF28448006DF788 /* IndividualLayout */ = {
 			isa = PBXGroup;
 			children = (
-				164EA09E1EF3D98B00C0BB8F /* Layout.swift */,
+				164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */,
 				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
 				16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */,
 				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
 				16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */,
 			);
-			path = Layout;
+			path = IndividualLayout;
 			sourceTree = "<group>";
 		};
 		165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreProperties */ = {
@@ -662,7 +662,7 @@
 				7971FAB3203160FA00B63CBC /* Types */,
 				164EA0A21EF3DA4900C0BB8F /* Extensions */,
 				798C6EAB1FEBF98F00D2A370 /* NotAutoLayoutCompatible */,
-				165FE29F1EF28448006DF788 /* Layout */,
+				165FE29F1EF28448006DF788 /* IndividualLayout */,
 				7971FAB4203161BC00B63CBC /* LayoutMaker */,
 				164EA0A61EF3DA5100C0BB8F /* LayoutControl */,
 				168667AF1F7912FD00AD774E /* LayoutInfoStorable */,
@@ -823,7 +823,7 @@
 				79FD2CEA1FB868BE00E6661C /* LayoutPropertyCanStoreMiddleType.swift in Sources */,
 				1630073C1F0F380C00012C18 /* DidStoreBottomLeftTopLayoutProperty.swift in Sources */,
 				79D8DDCA1EF9487400B74593 /* DidStoreLeftBottomHeightLayoutProperty.swift in Sources */,
-				164EA0CE1EF3DAE300C0BB8F /* Layout.swift in Sources */,
+				164EA0CE1EF3DAE300C0BB8F /* IndividualLayout.swift in Sources */,
 				1630073F1F0F380C00012C18 /* DidStoreBottomLeftHeightLayoutProperty.swift in Sources */,
 				164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */,
 				79FD2CEC1FB86BDF00E6661C /* LayoutPropertyCanStoreBottomType.swift in Sources */,

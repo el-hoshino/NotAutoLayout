@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Layout {
+public struct IndividualLayout {
 	
 	private var basicFrameEvaluation: Frame
 	
@@ -16,13 +16,13 @@ public struct Layout {
 	
 }
 
-extension Layout {
+extension IndividualLayout {
 	
-	static let dummy: Layout = Layout(frame: .zero)
+	static let dummy: IndividualLayout = IndividualLayout(frame: .zero)
 	
 }
 
-extension Layout {
+extension IndividualLayout {
 	
 	init(frame: CGRect) {
 		self.basicFrameEvaluation = Frame({ _ in frame })
@@ -41,7 +41,7 @@ extension Layout {
 	
 }
 
-extension Layout {
+extension IndividualLayout {
 	
 	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
 		return self.additionalEvaluations
@@ -49,7 +49,7 @@ extension Layout {
 	
 }
 
-extension Layout {
+extension IndividualLayout {
 	
 	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
 		
@@ -65,7 +65,7 @@ extension Layout {
 	
 }
 
-extension Layout {
+extension IndividualLayout {
 	
 	func evaluatedFrame(for targetView: UIView, from property: ViewFrameProperty) -> CGRect {
 		

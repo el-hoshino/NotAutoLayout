@@ -55,9 +55,9 @@ public protocol LayoutPropertyCanStoreWidthToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreWidthToEvaluateFrameType {
 
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(width: width, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

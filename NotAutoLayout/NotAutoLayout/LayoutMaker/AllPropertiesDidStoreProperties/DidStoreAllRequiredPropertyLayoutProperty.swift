@@ -8,11 +8,11 @@
 
 import Foundation
 
-typealias DidStoreAllRequiredPropertyLayoutMaker = Layout
+typealias DidStoreAllRequiredPropertyLayoutMaker = IndividualLayout
 
 extension DidStoreAllRequiredPropertyLayoutMaker: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<Layout>) -> LayoutMaker<Layout> {
+	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<IndividualLayout>) -> LayoutMaker<IndividualLayout> {
 		
 		var property = self
 		property.addAdditionalEvaluation(evaluation)

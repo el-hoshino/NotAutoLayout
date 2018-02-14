@@ -69,11 +69,11 @@ public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
-	public typealias WillSetFrameProperty = Layout
+	public typealias WillSetFrameProperty = IndividualLayout
 	
 	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(frame: frame, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

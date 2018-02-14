@@ -61,9 +61,9 @@ public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPro
 
 extension LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
-	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(middleCenter: middleCenter, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

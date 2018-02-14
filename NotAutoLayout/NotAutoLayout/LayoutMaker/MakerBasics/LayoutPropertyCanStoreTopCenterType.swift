@@ -61,9 +61,9 @@ public protocol LayoutPropertyCanStoreTopRightToEvaluateFrameType: LayoutPropert
 
 extension LayoutPropertyCanStoreTopRightToEvaluateFrameType {
 	
-	public func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
+	public func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(topRight: topRight, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

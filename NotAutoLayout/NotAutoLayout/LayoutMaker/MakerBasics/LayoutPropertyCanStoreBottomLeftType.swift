@@ -61,9 +61,9 @@ public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPrope
 
 extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(bottomLeft: bottomLeft, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

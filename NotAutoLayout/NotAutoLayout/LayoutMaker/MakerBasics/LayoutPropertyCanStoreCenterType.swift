@@ -61,9 +61,9 @@ public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<Layout> {
+	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = Layout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(center: center, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
