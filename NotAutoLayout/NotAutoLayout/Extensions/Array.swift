@@ -104,3 +104,19 @@ extension Array {
 	}
 	
 }
+
+extension Array where Element: Numeric {
+	
+	func sum(ofFirst n: Int) -> Element {
+		
+		let n = Swift.min(n, self.count)
+		let droppingN = self.count - n
+		let droppedArray = self.dropLast(droppingN)
+		
+		let sum = droppedArray.reduce(0, (+))
+		
+		return sum
+		
+	}
+	
+}

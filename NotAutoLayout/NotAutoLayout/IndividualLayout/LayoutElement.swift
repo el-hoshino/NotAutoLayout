@@ -126,6 +126,28 @@ extension LayoutElement {
 		
 	}
 	
+	public enum Insets {
+		
+		case constant(CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
+		case equalsToMargin
+		
+	}
+	
+	public enum HorizontalMargin {
+		
+		case constant(CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
+		
+	}
+	
+	public enum VerticalMargin {
+		
+		case constant(CGFloat)
+		case byParent((ViewFrameProperty) -> CGFloat)
+		
+	}
+	
 }
 
 extension LayoutElement.Horizontal {
@@ -157,6 +179,21 @@ extension LayoutElement.Vertical {
 			
 		case .byParent(let calculation):
 			return calculation(parameters.property)
+			
+		case .byReference(referenceGetter: let reference, let calculation):
+			return calculation(.vertical(parentView: parameters.property.parentView, referenceView: reference))
+		}
+		
+	}
+	
+	func evaluated(from parameters: SequentialFrameCalculationParameters) -> CGFloat {
+		
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .byParent(let calcuation):
+			return calcuation(parameters.property)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
 			return calculation(.vertical(parentView: parameters.property.parentView, referenceView: reference))
@@ -247,6 +284,24 @@ extension LayoutElement.Size {
 		
 	}
 	
+	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [CGSize] {
+		
+		switch self {
+		case .constant(let value):
+			return parameters.targetViews.map({ _ in value })
+			
+		case .byParent(let calculation):
+			return parameters.targetViews.map({ _ in calculation(parameters.property) })
+			
+		case .fits(let fittingSize):
+			return parameters.targetViews.map({ $0.sizeThatFits(fittingSize) })
+			
+		case .aspect(let aspect):
+			return parameters.targetViews.map({ parameters.property.evaluateSize(for: $0, from: aspect) })
+		}
+		
+	}
+	
 }
 
 extension LayoutElement.Rect {
@@ -259,6 +314,25 @@ extension LayoutElement.Rect {
 			
 		case .byParent(let calculation):
 			return calculation(parameters.property)
+		}
+		
+	}
+	
+}
+
+extension LayoutElement.Insets {
+	
+	func evaluated(from parameters: SequentialFrameCalculationParameters, totalWidth: CGFloat, viewWidths: [CGFloat]) -> CGFloat {
+		
+		switch self {
+		case .constant(let value):
+			return value
+			
+		case .byParent(let calculation):
+			return calculation(parameters.property)
+			
+		case .equalsToMargin:
+			return (totalWidth - viewWidths.reduce(0, (+))) / CGFloat(viewWidths.count + 1)
 		}
 		
 	}
