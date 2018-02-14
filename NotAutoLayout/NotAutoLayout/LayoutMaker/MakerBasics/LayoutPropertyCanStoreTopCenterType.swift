@@ -1,5 +1,5 @@
 //
-//  LayoutPropertyCanStoreTopRightType.swift
+//  LayoutPropertyCanStoreTopCenterType.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/11/12.
@@ -8,44 +8,44 @@
 
 import Foundation
 
-public protocol LayoutPropertyCanStoreTopRightType: LayoutMakerPropertyType {
+public protocol LayoutPropertyCanStoreTopCenterType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetTopRightProperty
+	associatedtype WillSetTopCenterProperty
 	
-	func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopRightProperty>
+	func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopCenterProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreTopRightType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreTopCenterType {
 	
-	public func setTopRight(to topRight: CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func setTopCenter(to topCenter: CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
 		
-		let topRight = LayoutElement.Point.constant(topRight)
-		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
+		let topCenter = LayoutElement.Point.constant(topCenter)
+		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setTopRight(by topRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func setTopCenter(by topCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
 		
-		let topRight = LayoutElement.Point.byParent(topRight)
-		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
+		let topCenter = LayoutElement.Point.byParent(topCenter)
+		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	public func pinTopRight(to referenceView: UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func pinTopCenter(to referenceView: UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
 		
-		return self.pinTopRight(by: { [weak referenceView] in referenceView }, with: topRight)
+		return self.pinTopCenter(by: { [weak referenceView] in referenceView }, with: topCenter)
 		
 	}
 	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func pinTopCenter(by referenceView: @escaping () -> UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
 		
-		let topRight = LayoutElement.Point.byReference(referenceGetter: referenceView, topRight)
-		let maker = self.didSetProperty.storeTopRight(topRight, to: self)
+		let topCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, topCenter)
+		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
 		
 		return maker
 		
@@ -53,18 +53,18 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopRightType {
 	
 }
 
-public protocol LayoutPropertyCanStoreTopRightToEvaluateFrameType: LayoutPropertyCanStoreTopRightType {
+public protocol LayoutPropertyCanStoreTopCenterToEvaluateFrameType: LayoutPropertyCanStoreTopCenterType {
 	
-	func evaluateFrame(topRight: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(topCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
 	
 }
 
-extension LayoutPropertyCanStoreTopRightToEvaluateFrameType {
+extension LayoutPropertyCanStoreTopCenterToEvaluateFrameType {
 	
-	public func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
-			return self.evaluateFrame(topRight: topRight, parameters: parameters)
+			return self.evaluateFrame(topCenter: topCenter, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		

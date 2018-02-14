@@ -73,6 +73,8 @@
 		16BA72221F692E7800A3D4CE /* ViewFrameProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */; };
 		794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */; };
 		7971FAB82032FA8500B63CBC /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FAB72032FA8500B63CBC /* Typealias.swift */; };
+		7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */; };
+		7971FABD20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABC20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift */; };
 		798378951E4CB2B200D3E1C2 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */; };
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -160,8 +162,6 @@
 		79D8DE1E1EF950B500B74593 /* DidStoreTopRightHeightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1D1EF950B500B74593 /* DidStoreTopRightHeightLayoutProperty.swift */; };
 		79FD2CD01FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */; };
 		79FD2CD21FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */; };
-		79FD2CD41FB84E4F00E6661C /* LayoutMakerCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD31FB84E4F00E6661C /* LayoutMakerCanStoreTopCenterType.swift */; };
-		79FD2CD61FB8511700E6661C /* LayoutPropertyCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD51FB8511700E6661C /* LayoutPropertyCanStoreTopCenterType.swift */; };
 		79FD2CD81FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */; };
 		79FD2CDA1FB85B5000E6661C /* LayoutPropertyCanStoreMiddleCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD91FB85B5000E6661C /* LayoutPropertyCanStoreMiddleCenterType.swift */; };
 		79FD2CDC1FB85CC700E6661C /* LayoutPropertyCanStoreMiddleRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CDB1FB85CC700E6661C /* LayoutPropertyCanStoreMiddleRightType.swift */; };
@@ -219,6 +219,8 @@
 		16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFrameProperty.swift; sourceTree = "<group>"; };
 		794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewSetupWizard.swift; sourceTree = "<group>"; };
 		7971FAB72032FA8500B63CBC /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopCenterType.swift; sourceTree = "<group>"; };
+		7971FABC20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopRightType.swift; sourceTree = "<group>"; };
 		7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotAutoLayout.h; sourceTree = "<group>"; };
 		7983788F1E4CB2B100D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -345,8 +347,6 @@
 		79D8DE681EF9564400B74593 /* DidStoreBottomRightTopLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreBottomRightTopLayoutProperty.swift; sourceTree = "<group>"; };
 		79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreFrameType.swift; sourceTree = "<group>"; };
 		79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopLeftType.swift; sourceTree = "<group>"; };
-		79FD2CD31FB84E4F00E6661C /* LayoutMakerCanStoreTopCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMakerCanStoreTopCenterType.swift; sourceTree = "<group>"; };
-		79FD2CD51FB8511700E6661C /* LayoutPropertyCanStoreTopCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopCenterType.swift; sourceTree = "<group>"; };
 		79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleLeftType.swift; sourceTree = "<group>"; };
 		79FD2CD91FB85B5000E6661C /* LayoutPropertyCanStoreMiddleCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleCenterType.swift; sourceTree = "<group>"; };
 		79FD2CDB1FB85CC700E6661C /* LayoutPropertyCanStoreMiddleRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleRightType.swift; sourceTree = "<group>"; };
@@ -614,8 +614,8 @@
 				79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */,
 				79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */,
 				79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */,
-				79FD2CD31FB84E4F00E6661C /* LayoutMakerCanStoreTopCenterType.swift */,
-				79FD2CD51FB8511700E6661C /* LayoutPropertyCanStoreTopCenterType.swift */,
+				7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */,
+				7971FABC20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift */,
 				79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */,
 				79FD2CD91FB85B5000E6661C /* LayoutPropertyCanStoreMiddleCenterType.swift */,
 				79FD2CDB1FB85CC700E6661C /* LayoutPropertyCanStoreMiddleRightType.swift */,
@@ -810,9 +810,9 @@
 				79D8DDD21EF94A0C00B74593 /* DidStoreCenterTopWidthLayoutProperty.swift in Sources */,
 				79FD2CE01FB85F4B00E6661C /* LayoutPropertyCanStoreBottomCenterType.swift in Sources */,
 				79D8DE0A1EF94F7100B74593 /* DidStoreTopCenterRightLayoutProperty.swift in Sources */,
-				79FD2CD41FB84E4F00E6661C /* LayoutMakerCanStoreTopCenterType.swift in Sources */,
 				79D8DD861EF93D7600B74593 /* DidStoreCenterMiddleLayoutProperty.swift in Sources */,
 				160CCA0C1F0DFF0000783D73 /* UIView.swift in Sources */,
+				7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */,
 				79D8DD841EF93D5400B74593 /* DidStoreCenterTopLayoutProperty.swift in Sources */,
 				79D8DD921EF93E1700B74593 /* DidStoreRightBottomLayoutProperty.swift in Sources */,
 				79D8DDE01EF94B2D00B74593 /* DidStoreRightTopHeightLayoutProperty.swift in Sources */,
@@ -850,6 +850,7 @@
 				16BA72221F692E7800A3D4CE /* ViewFrameProperty.swift in Sources */,
 				79C6C1851FB83DEF00E32C54 /* LayoutElement.swift in Sources */,
 				79D8DDE81EF94BAB00B74593 /* DidStoreRightBottomHeightLayoutProperty.swift in Sources */,
+				7971FABD20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift in Sources */,
 				79D8DE1A1EF9508600B74593 /* DidStoreTopRightBottomLayoutProperty.swift in Sources */,
 				7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */,
 				163007401F0F380C00012C18 /* DidStoreBottomCenterLeftLayoutProperty.swift in Sources */,
@@ -928,7 +929,6 @@
 				79FD2CE21FB860C500E6661C /* LayoutPropertyCanStoreBottomRightType.swift in Sources */,
 				164EA0CB1EF3DAE300C0BB8F /* NotAutoLayoutContainer.swift in Sources */,
 				794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */,
-				79FD2CD61FB8511700E6661C /* LayoutPropertyCanStoreTopCenterType.swift in Sources */,
 				79D8DDEA1EF94BFC00B74593 /* DidStoreLeftTopMiddleLayoutProperty.swift in Sources */,
 				79D8DDCE1EF949BC00B74593 /* DidStoreCenterRightMiddleLayoutProperty.swift in Sources */,
 				79D8DDBC1EF9456900B74593 /* DidStoreLeftRightTopLayoutProperty.swift in Sources */,
