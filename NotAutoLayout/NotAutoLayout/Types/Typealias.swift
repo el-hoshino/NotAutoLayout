@@ -8,6 +8,6 @@
 
 import Foundation
 
-public typealias CalculationParameters = (targetView: UIView, targetOrder: Int?, property: ViewFrameProperty)
+public typealias CalculationParameters = (targetView: UIView, property: ViewFrameProperty)
 
 public typealias FrameCalculation = (CalculationParameters) -> CGRect
