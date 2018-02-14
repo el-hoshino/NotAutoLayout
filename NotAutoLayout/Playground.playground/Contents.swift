@@ -61,3 +61,18 @@ appView.nal.setupSubview(replyView) { $0
 }
 
 appView.setNeedsLayout()
+
+
+let imageViews = (0 ..< 3).map { (_) -> UIImageView in
+	let image = #imageLiteral(resourceName: "avatar.png")
+	let view = UIImageView(image: image)
+	appView.addSubview(view)
+	return view
+}
+
+
+appView.nal.layout(imageViews) { $0
+	.setMiddle(by: { $0.boundMiddle })
+	.fitSize()
+	.setHorizontalInsetsEqualingToMargin()
+}
