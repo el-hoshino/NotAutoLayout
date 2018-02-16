@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreMiddleCenterType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetMiddleCenterProperty: LayoutMakerPropertyType
 	
-	func storeMiddleCenter <ParentView> (_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetMiddleCenterProperty>
+	func storeMiddleCenter(_ middleCenter: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetMiddleCenterProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType, Property._ParentView == ParentView {
 	
 	public func setMiddleCenter(to middleCenter: CGPoint) -> LayoutMaker<ParentView, Property.WillSetMiddleCenterProperty> {
 		
-		let middleCenter = LayoutElement.Point.constant(middleCenter)
+		let middleCenter = LayoutElement.Point<ParentView>.constant(middleCenter)
 		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetMiddleCenterProperty> {
+	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetMiddleCenterProperty> {
 		
-		let middleCenter = LayoutElement.Point.byParent(middleCenter)
+		let middleCenter = LayoutElement.Point<ParentView>.byParent(middleCenter)
 		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
@@ -44,7 +46,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 	
 	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetMiddleCenterProperty> {
 		
-		let middleCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, middleCenter)
+		let middleCenter = LayoutElement.Point<ParentView>.byReference(referenceGetter: referenceView, middleCenter)
 		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)
 		
 		return maker
@@ -55,15 +57,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 
 public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPropertyCanStoreMiddleCenterType {
 	
-	func evaluateFrame(middleCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(middleCenter: LayoutElement.Point<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
-	public func storeMiddleCenter <ParentView> (_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(middleCenter: middleCenter, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

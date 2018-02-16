@@ -10,9 +10,11 @@ import Foundation
 
 public protocol LayoutPropertyCanAddAdditionalEvaluationType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillAddAdditionalEvaluationProperty: LayoutMakerPropertyType
 	
-	func addEvaluation <ParentView> (_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillAddAdditionalEvaluationProperty>
+	func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillAddAdditionalEvaluationProperty>
 	
 }
 
@@ -24,7 +26,7 @@ public protocol LayoutPropertyCanAddAdditionalEvaluationType: LayoutMakerPropert
 //
 //}
 
-extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
+extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType, Property._ParentView == ParentView {
 	
 	public func movingLeft(to left: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<ParentView, Property.WillAddAdditionalEvaluationProperty> {
 		
@@ -409,7 +411,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
+extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType, Property._ParentView == ParentView {
 	
 	public func addingProcess(by process: @escaping FrameAdditionalEvaluation.Process) -> LayoutMaker<ParentView, Property.WillAddAdditionalEvaluationProperty> {
 		

@@ -10,24 +10,26 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetFrameProperty: LayoutMakerPropertyType
 	
-	func storeFrame <ParentView> (_ frame: LayoutElement.Rect, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetFrameProperty>
+	func storeFrame(_ frame: LayoutElement.Rect<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetFrameProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType, Property._ParentView == ParentView {
 	
 	public func setFrame(to frame: CGRect) -> LayoutMaker<ParentView, Property.WillSetFrameProperty> {
 		
-		let frame = LayoutElement.Rect.constant(frame)
+		let frame = LayoutElement.Rect<ParentView>.constant(frame)
 		let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> LayoutMaker<ParentView, Property.WillSetFrameProperty> {
+	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGRect) -> LayoutMaker<ParentView, Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent(frame)
 		let maker = self.didSetProperty.storeFrame(frame, to: self)
@@ -38,11 +40,11 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType, Property._ParentView == ParentView {
 	
     public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<ParentView, Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.byParent({ $0.boundFrame.inside(insets) })
+        let frame = LayoutElement.Rect<ParentView>.byParent({ $0.boundFrame.inside(insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
@@ -52,7 +54,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
     @available(iOS 11.0, *)
     public func stickOnParentSafeArea(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<ParentView, Property.WillSetFrameProperty> {
         
-        let frame = LayoutElement.Rect.byParent({ $0.safeFrame.inside(insets) })
+        let frame = LayoutElement.Rect<ParentView>.byParent({ $0.safeFrame.inside(insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
         
         return maker
@@ -63,17 +65,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 
 public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCanStoreFrameType {
     
-    func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> CGRect
+    func evaluateFrame(frame: LayoutElement.Rect<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
     
 }
 
 extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
-	public typealias WillSetFrameProperty = IndividualLayout
-	
-	public func storeFrame <ParentView> (_ frame: LayoutElement.Rect, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetFrameProperty> {
+	public func storeFrame(_ frame: LayoutElement.Rect<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(frame: frame, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

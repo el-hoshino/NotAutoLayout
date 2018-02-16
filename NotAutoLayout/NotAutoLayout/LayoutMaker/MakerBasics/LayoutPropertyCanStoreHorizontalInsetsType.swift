@@ -10,13 +10,15 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreHorizontalInsetsType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetHorizontalInsetsType: LayoutMakerPropertyType
 	
-	func storeHorizontalInsets <ParentView> (_ horizontalInsets: LayoutElement.Insets<ParentView>, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetHorizontalInsetsType>
+	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetHorizontalInsetsType>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType, Property._ParentView == ParentView {
 	
 	public func setHorizontalInsetsEqualingToMargin() -> LayoutMaker<ParentView, Property.WillSetHorizontalInsetsType> {
 		
@@ -31,15 +33,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType
 
 public protocol LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType: LayoutPropertyCanStoreHorizontalInsetsType {
 	
-	func evaluateFrames <ParentView> (horizontalInsets: LayoutElement.Insets<ParentView>, parameters: SequentialFrameCalculationParameters<ParentView>) -> [CGRect]
+	func evaluateFrames(horizontalInsets: LayoutElement.Insets<_ParentView>, parameters: SequentialFrameCalculationParameters<_ParentView>) -> [CGRect]
 	
 }
 
 extension LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
-	public func storeHorizontalInsets <ParentView> (_ horizontalInsets: LayoutElement.Insets<ParentView>, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, SequentialLayout<ParentView>> {
+	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, SequentialLayout<_ParentView>> {
 		
-		let layout = SequentialLayout<ParentView>(frame: { (parameters) -> [CGRect] in
+		let layout = SequentialLayout<_ParentView>(frame: { (parameters) -> [CGRect] in
 			return self.evaluateFrames(horizontalInsets: horizontalInsets, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

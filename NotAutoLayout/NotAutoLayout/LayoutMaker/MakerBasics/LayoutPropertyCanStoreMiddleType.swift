@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreMiddleType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetMiddleProperty: LayoutMakerPropertyType
 	
-	func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetMiddleProperty>
+	func storeMiddle(_ middle: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetMiddleProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType, Property._ParentView == ParentView {
 	
 	public func setMiddle(to middle: CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
-		let middle = LayoutElement.Vertical.constant(middle)
+		let middle = LayoutElement.Vertical<ParentView>.constant(middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
+	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
-		let middle = LayoutElement.Vertical.byParent(middle)
+		let middle = LayoutElement.Vertical<ParentView>.byParent(middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
@@ -44,7 +46,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 	
 	public func pinMiddle(by referenceView: @escaping () -> UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
-		let middle = LayoutElement.Vertical.byReference(referenceGetter: referenceView, middle)
+		let middle = LayoutElement.Vertical<ParentView>.byReference(referenceGetter: referenceView, middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
 		
 		return maker
@@ -55,15 +57,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 
 public protocol LayoutPropertyCanStoreMiddleToEvaluateFrameType: LayoutPropertyCanStoreMiddleType {
 	
-	func evaluateFrame(middle: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(middle: LayoutElement.Vertical<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(middle: middle, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

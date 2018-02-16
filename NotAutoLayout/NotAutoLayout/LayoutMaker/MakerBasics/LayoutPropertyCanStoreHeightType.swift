@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetHeightProperty: LayoutMakerPropertyType
 	
-	func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetHeightProperty>
+	func storeHeight(_ height: LayoutElement.Length<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetHeightProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType, Property._ParentView == ParentView {
 	
 	public func setHeight(to height: CGFloat) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
-		let height = LayoutElement.Length.constant(height)
+		let height = LayoutElement.Length<ParentView>.constant(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
+	public func setHeight(by height: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
-		let height = LayoutElement.Length.byParent(height)
+		let height = LayoutElement.Length<ParentView>.byParent(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
 		
 		return maker
@@ -38,7 +40,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	
 	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
-		let height = LayoutElement.Length.fits(fittingHeight)
+		let height = LayoutElement.Length<ParentView>.fits(fittingHeight)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
 		
 		return maker
@@ -49,15 +51,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 
 public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType {
 	
-	func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeHeight(_ height: LayoutElement.Length<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(height: height, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

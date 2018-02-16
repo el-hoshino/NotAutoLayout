@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetTopProperty: LayoutMakerPropertyType
 	
-	func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetTopProperty>
+	func storeTop(_ top: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetTopProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreTopType, Property._ParentView == ParentView {
 	
 	public func setTop(to top: CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
-		let top = LayoutElement.Vertical.constant(top)
+		let top = LayoutElement.Vertical<ParentView>.constant(top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
+	public func setTop(by top: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
-		let top = LayoutElement.Vertical.byParent(top)
+		let top = LayoutElement.Vertical<ParentView>.byParent(top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
@@ -44,7 +46,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 	
 	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
-		let top = LayoutElement.Vertical.byReference(referenceGetter: referenceView, top)
+		let top = LayoutElement.Vertical<ParentView>.byReference(referenceGetter: referenceView, top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
 		
 		return maker
@@ -55,15 +57,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 
 public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanStoreTopType {
 	
-	func evaluateFrame(top: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(top: LayoutElement.Vertical<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeTop(_ top: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(top: top, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

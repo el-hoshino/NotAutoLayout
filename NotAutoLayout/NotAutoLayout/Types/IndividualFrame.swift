@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct IndividualFrame {
+struct IndividualFrame<ParentView: UIView> {
 	
-	private let evaluation: IndividualFrameCalculation
+	private let evaluation: IndividualFrameCalculation<ParentView>
 	
 }
 
@@ -20,7 +20,7 @@ extension IndividualFrame {
 		self.evaluation = { _ in frame }
 	}
 	
-	init(_ frame: @escaping IndividualFrameCalculation) {
+	init<ParentView>(_ frame: @escaping IndividualFrameCalculation<ParentView>) {
 		self.evaluation = frame
 	}
 	
@@ -28,7 +28,7 @@ extension IndividualFrame {
 
 extension IndividualFrame {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		return self.evaluation(parameters)
 		

@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreBottomLeftType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetBottomLeftProperty: LayoutMakerPropertyType
 	
-	func storeBottomLeft <ParentView> (_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetBottomLeftProperty>
+	func storeBottomLeft(_ bottomLeft: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetBottomLeftProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType, Property._ParentView == ParentView {
 	
 	public func setBottomLeft(to bottomLeft: CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
-		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
+		let bottomLeft = LayoutElement.Point<ParentView>.constant(bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
+	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
-		let bottomLeft = LayoutElement.Point.byParent(bottomLeft)
+		let bottomLeft = LayoutElement.Point<ParentView>.byParent(bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
@@ -44,7 +46,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 	
 	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
-		let bottomLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomLeft)
+		let bottomLeft = LayoutElement.Point<ParentView>.byReference(referenceGetter: referenceView, bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
 		
 		return maker
@@ -55,15 +57,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 
 public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPropertyCanStoreBottomLeftType {
 	
-	func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(bottomLeft: LayoutElement.Point<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func storeBottomLeft <ParentView> (_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(bottomLeft: bottomLeft, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

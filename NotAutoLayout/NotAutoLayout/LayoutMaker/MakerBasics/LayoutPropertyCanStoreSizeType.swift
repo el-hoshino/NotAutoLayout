@@ -10,26 +10,28 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreSizeType: LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 	associatedtype WillSetSizeProperty: LayoutMakerPropertyType
 	
-	func storeSize <ParentView> (_ size: LayoutElement.Size, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetSizeProperty>
+	func storeSize(_ size: LayoutElement.Size<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetSizeProperty>
 	
 }
 
-extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
+extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType, Property._ParentView == ParentView {
 	
 	public func setSize(to size: CGSize) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.constant(size)
+		let size = LayoutElement.Size<ParentView>.constant(size)
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
 		
 	}
 	
-	public func setSize(by size: @escaping (_ property: ViewFrameProperty) -> CGSize) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
+	public func setSize(by size: @escaping (_ property: ViewFrameProperty<ParentView>) -> CGSize) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.byParent(size)
+		let size = LayoutElement.Size<ParentView>.byParent(size)
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -38,7 +40,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	
 	public func fitSize(by fittingSize: CGSize = .zero) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.fits(fittingSize)
+		let size = LayoutElement.Size<ParentView>.fits(fittingSize)
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -47,7 +49,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	
 	public func aspectFit(ratio: CGFloat? = nil) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.fit(ratio))
+		let size = LayoutElement.Size<ParentView>.aspect(.fit(ratio))
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -56,7 +58,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	
 	public func aspectFill(ratio: CGFloat? = nil) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.fill(ratio))
+		let size = LayoutElement.Size<ParentView>.aspect(.fill(ratio))
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -66,7 +68,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	@available(iOS 11.0, *)
 	public func aspectFit(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
+		let size = LayoutElement.Size<ParentView>.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -76,7 +78,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	@available(iOS 11.0, *)
 	public func aspectFill(ratio: CGFloat? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<ParentView, Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
+		let size = LayoutElement.Size<ParentView>.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
 		let maker = self.didSetProperty.storeSize(size, to: self)
 		
 		return maker
@@ -87,15 +89,15 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 
 public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCanStoreSizeType {
 	
-	func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(size: LayoutElement.Size<_ParentView>, parameters: IndividualFrameCalculationParameters<_ParentView>) -> CGRect
 	
 }
 
 extension LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func storeSize <ParentView> (_ size: LayoutElement.Size, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func storeSize(_ size: LayoutElement.Size<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, IndividualLayout<_ParentView>> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout<_ParentView>(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(size: size, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

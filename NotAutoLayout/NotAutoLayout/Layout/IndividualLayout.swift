@@ -10,15 +10,9 @@ import Foundation
 
 public struct IndividualLayout<ParentView: UIView>: LayoutMakerPropertyType {
 	
-	private var basicFrameEvaluation: IndividualFrame
+	private var basicFrameEvaluation: IndividualFrame<ParentView>
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
-	
-}
-
-extension IndividualLayout {
-	
-	static let dummy: IndividualLayout<ParentView> = IndividualLayout<ParentView>(frame: .zero)
 	
 }
 
@@ -29,12 +23,12 @@ extension IndividualLayout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: IndividualFrame) {
+	init(frame: IndividualFrame<ParentView>) {
 		self.basicFrameEvaluation = frame
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (IndividualFrameCalculationParameters) -> CGRect) {
+	init<ParentView>(frame: @escaping (IndividualFrameCalculationParameters<ParentView>) -> CGRect) {
 		self.basicFrameEvaluation = IndividualFrame(frame)
 		self.additionalEvaluations = []
 	}
