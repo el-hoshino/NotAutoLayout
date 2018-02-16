@@ -59,7 +59,7 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = IndividualProperty.CenterMiddleBottom
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleBottom> {
+	public func storeBottom <ParentView> (_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.CenterMiddle>) -> LayoutMaker<ParentView, IndividualProperty.CenterMiddleBottom> {
 		
 		let centerMiddleBottom = IndividualProperty.CenterMiddleBottom(center: self.center,
 																		  middle: self.middle,
@@ -79,7 +79,7 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = IndividualProperty.CenterMiddleWidth
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleWidth> {
+	public func storeWidth <ParentView> (_ width: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.CenterMiddle>) -> LayoutMaker<ParentView, IndividualProperty.CenterMiddleWidth> {
 		
 		let centerMiddleWidth = IndividualProperty.CenterMiddleWidth(center: self.center,
 																		middle: self.middle,
@@ -98,7 +98,7 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = IndividualProperty.CenterMiddleHeight
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleHeight> {
+	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.CenterMiddle>) -> LayoutMaker<ParentView, IndividualProperty.CenterMiddleHeight> {
 		
 		let centerMiddleHeight = IndividualProperty.CenterMiddleHeight(center: self.center,
 																		  middle: self.middle,

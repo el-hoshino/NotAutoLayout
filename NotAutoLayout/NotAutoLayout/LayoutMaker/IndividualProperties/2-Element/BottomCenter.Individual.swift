@@ -152,7 +152,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreLeftType {
 	
 	public typealias WillSetLeftProperty = IndividualProperty.BottomCenterLeft
 	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterLeft> {
+	public func storeLeft <ParentView> (_ left: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterLeft> {
 		
 		let bottomCenterLeft = IndividualProperty.BottomCenterLeft(bottomCenter: self.bottomCenter,
 																	  left: left)
@@ -170,7 +170,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreRightType {
 	
 	public typealias WillSetRightProperty = IndividualProperty.BottomCenterRight
 	
-	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterRight> {
+	public func storeRight <ParentView> (_ right: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterRight> {
 		
 		let bottomCenterRight = IndividualProperty.BottomCenterRight(bottomCenter: self.bottomCenter,
 																		right: right)
@@ -188,7 +188,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopProperty = IndividualProperty.BottomCenterTop
 	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterTop> {
+	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterTop> {
 		
 		let bottomCenterTop = IndividualProperty.BottomCenterTop(bottomCenter: self.bottomCenter,
 																	top: top)
@@ -206,7 +206,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreMiddleType {
 	
 	public typealias WillSetMiddleProperty = IndividualProperty.BottomCenterMiddle
 	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterMiddle> {
+	public func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterMiddle> {
 		
 		let bottomCenterMiddle = IndividualProperty.BottomCenterMiddle(bottomCenter: self.bottomCenter,
 																		  middle: middle)
@@ -225,7 +225,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = IndividualProperty.BottomCenterWidth
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterWidth> {
+	public func storeWidth <ParentView> (_ width: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterWidth> {
 		
 		let bottomCenterWidth = IndividualProperty.BottomCenterWidth(bottomCenter: self.bottomCenter,
 																		width: width)
@@ -243,7 +243,7 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = IndividualProperty.BottomCenterHeight
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterHeight> {
+	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.BottomCenter>) -> LayoutMaker<ParentView, IndividualProperty.BottomCenterHeight> {
 		
 		let bottomCenterHeight = IndividualProperty.BottomCenterHeight(bottomCenter: self.bottomCenter,
 																		  height: height)

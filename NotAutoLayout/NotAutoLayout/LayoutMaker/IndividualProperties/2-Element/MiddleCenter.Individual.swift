@@ -152,7 +152,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreLeftType {
 	
 	public typealias WillSetLeftProperty = IndividualProperty.MiddleCenterLeft
 	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterLeft> {
+	public func storeLeft <ParentView> (_ left: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterLeft> {
 		
 		let middleCenterLeft = IndividualProperty.MiddleCenterLeft(middleCenter: self.middleCenter,
 																	  left: left)
@@ -170,7 +170,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreRightType {
 	
 	public typealias WillSetRightProperty = IndividualProperty.MiddleCenterRight
 	
-	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterRight> {
+	public func storeRight <ParentView> (_ right: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterRight> {
 		
 		let middleCenterRight = IndividualProperty.MiddleCenterRight(middleCenter: self.middleCenter,
 																		right: right)
@@ -188,7 +188,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopProperty = IndividualProperty.MiddleCenterTop
 	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterTop> {
+	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterTop> {
 		
 		let middleCenterTop = IndividualProperty.MiddleCenterTop(middleCenter: self.middleCenter,
 																	top: top)
@@ -206,7 +206,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = IndividualProperty.MiddleCenterBottom
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterBottom> {
+	public func storeBottom <ParentView> (_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterBottom> {
 		
 		let middleCenterBottom = IndividualProperty.MiddleCenterBottom(middleCenter: self.middleCenter,
 																		  bottom: bottom)
@@ -225,7 +225,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = IndividualProperty.MiddleCenterWidth
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterWidth> {
+	public func storeWidth <ParentView> (_ width: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterWidth> {
 		
 		let middleCenterWidth = IndividualProperty.MiddleCenterWidth(middleCenter: self.middleCenter,
 																		width: width)
@@ -243,7 +243,7 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = IndividualProperty.MiddleCenterHeight
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterHeight> {
+	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.MiddleCenter>) -> LayoutMaker<ParentView, IndividualProperty.MiddleCenterHeight> {
 		
 		let middleCenterHeight = IndividualProperty.MiddleCenterHeight(middleCenter: self.middleCenter,
 																		  height: height)

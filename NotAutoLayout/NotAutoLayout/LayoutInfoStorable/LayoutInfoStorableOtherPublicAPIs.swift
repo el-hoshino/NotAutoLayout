@@ -297,7 +297,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	public func setLayout(for subview: UIView, making: (_ maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>) {
+	public func setLayout(for subview: UIView, making: (_ maker: LayoutMaker<Containee, IndividualProperty.Initial>) -> LayoutMaker<Containee, IndividualLayout>) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(making)

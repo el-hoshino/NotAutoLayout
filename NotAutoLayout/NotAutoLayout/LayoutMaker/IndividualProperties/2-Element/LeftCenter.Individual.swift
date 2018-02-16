@@ -26,7 +26,7 @@ extension IndividualProperty.LeftCenter: LayoutPropertyCanStoreTopType {
 	
 	public typealias WillSetTopProperty = IndividualProperty.LeftCenterTop
 	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftCenter>) -> LayoutMaker<IndividualProperty.LeftCenterTop> {
+	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.LeftCenter>) -> LayoutMaker<ParentView, IndividualProperty.LeftCenterTop> {
 		
 		let leftCenterTop = IndividualProperty.LeftCenterTop(left: self.left,
 																center: self.center,
@@ -45,7 +45,7 @@ extension IndividualProperty.LeftCenter: LayoutPropertyCanStoreMiddleType {
 	
 	public typealias WillSetMiddleProperty = IndividualProperty.LeftCenterMiddle
 	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftCenter>) -> LayoutMaker<IndividualProperty.LeftCenterMiddle> {
+	public func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.LeftCenter>) -> LayoutMaker<ParentView, IndividualProperty.LeftCenterMiddle> {
 		
 		let leftCenterMiddle = IndividualProperty.LeftCenterMiddle(left: self.left,
 																	  center: self.center,
@@ -64,7 +64,7 @@ extension IndividualProperty.LeftCenter: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = IndividualProperty.LeftCenterBottom
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftCenter>) -> LayoutMaker<IndividualProperty.LeftCenterBottom> {
+	public func storeBottom <ParentView> (_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.LeftCenter>) -> LayoutMaker<ParentView, IndividualProperty.LeftCenterBottom> {
 		
 		let leftCenterBottom = IndividualProperty.LeftCenterBottom(left: self.left,
 																	  center: self.center,
