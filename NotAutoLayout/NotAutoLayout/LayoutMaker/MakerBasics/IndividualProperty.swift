@@ -9,10 +9,6 @@
 import Foundation
 
 
-public protocol LayoutMakerPropertyType {
-	
-}
-
-public struct LayoutProperty {
+public struct IndividualProperty {
 	
 }

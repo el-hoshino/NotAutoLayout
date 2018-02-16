@@ -16,3 +16,7 @@ public struct LayoutMaker<Property: LayoutMakerPropertyType> {
 	let didSetProperty: Property
 	
 }
+
+public protocol LayoutMakerPropertyType {
+	
+}
