@@ -1,5 +1,5 @@
 //
-//  LayoutProperty.Initial.swift
+//  Initial.Individual.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/06/15.
