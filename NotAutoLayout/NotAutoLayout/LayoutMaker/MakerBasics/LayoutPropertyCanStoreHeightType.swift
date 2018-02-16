@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetHeightProperty: LayoutMakerPropertyType
 	
-	func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetHeightProperty>
+	func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetHeightProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	
-	public func setHeight(to height: CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func setHeight(to height: CGFloat) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.constant(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.byParent(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -36,7 +36,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutMaker<ParentView, Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.fits(fittingHeight)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -55,7 +55,7 @@ public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(height: height, parameters: parameters)

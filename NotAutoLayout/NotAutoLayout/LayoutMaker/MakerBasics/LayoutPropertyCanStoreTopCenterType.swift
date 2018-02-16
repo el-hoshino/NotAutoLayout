@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreTopCenterType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopCenterProperty: LayoutMakerPropertyType
 	
-	func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopCenterProperty>
+	func storeTopCenter <ParentView> (_ topCenter: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetTopCenterProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreTopCenterType {
 	
-	public func setTopCenter(to topCenter: CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
+	public func setTopCenter(to topCenter: CGPoint) -> LayoutMaker<ParentView, Property.WillSetTopCenterProperty> {
 		
 		let topCenter = LayoutElement.Point.constant(topCenter)
 		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopCenterType {
 		
 	}
 	
-	public func setTopCenter(by topCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
+	public func setTopCenter(by topCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetTopCenterProperty> {
 		
 		let topCenter = LayoutElement.Point.byParent(topCenter)
 		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopCenterType {
 		
 	}
 	
-	public func pinTopCenter(to referenceView: UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
+	public func pinTopCenter(to referenceView: UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetTopCenterProperty> {
 		
 		return self.pinTopCenter(by: { [weak referenceView] in referenceView }, with: topCenter)
 		
 	}
 	
-	public func pinTopCenter(by referenceView: @escaping () -> UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
+	public func pinTopCenter(by referenceView: @escaping () -> UIView?, with topCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetTopCenterProperty> {
 		
 		let topCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, topCenter)
 		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)
@@ -61,7 +61,7 @@ public protocol LayoutPropertyCanStoreTopCenterToEvaluateFrameType: LayoutProper
 
 extension LayoutPropertyCanStoreTopCenterToEvaluateFrameType {
 	
-	public func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeTopCenter <ParentView> (_ topCenter: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(topCenter: topCenter, parameters: parameters)

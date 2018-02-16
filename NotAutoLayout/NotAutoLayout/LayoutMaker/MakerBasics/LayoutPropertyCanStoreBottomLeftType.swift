@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreBottomLeftType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetBottomLeftProperty: LayoutMakerPropertyType
 	
-	func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomLeftProperty>
+	func storeBottomLeft <ParentView> (_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetBottomLeftProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 	
-	public func setBottomLeft(to bottomLeft: CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
+	public func setBottomLeft(to bottomLeft: CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
 		let bottomLeft = LayoutElement.Point.constant(bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 		
 	}
 	
-	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
+	public func setBottomLeft(by bottomLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
 		let bottomLeft = LayoutElement.Point.byParent(bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomLeftType {
 		
 	}
 	
-	public func pinBottomLeft(to referenceView: UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
+	public func pinBottomLeft(to referenceView: UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
 		return self.pinBottomLeft(by: { [weak referenceView] in referenceView }, with: bottomLeft)
 		
 	}
 	
-	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetBottomLeftProperty> {
+	public func pinBottomLeft(by referenceView: @escaping () -> UIView?, with bottomLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<ParentView, Property.WillSetBottomLeftProperty> {
 		
 		let bottomLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomLeft)
 		let maker = self.didSetProperty.storeBottomLeft(bottomLeft, to: self)
@@ -61,7 +61,7 @@ public protocol LayoutPropertyCanStoreBottomLeftToEvaluateFrameType: LayoutPrope
 
 extension LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeBottomLeft <ParentView> (_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(bottomLeft: bottomLeft, parameters: parameters)

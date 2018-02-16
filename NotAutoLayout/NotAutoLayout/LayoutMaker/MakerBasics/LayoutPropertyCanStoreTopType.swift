@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopProperty: LayoutMakerPropertyType
 	
-	func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopProperty>
+	func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetTopProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 	
-	public func setTop(to top: CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func setTop(to top: CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.constant(top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 		
 	}
 	
-	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byParent(top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 		
 	}
 	
-	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
 		return self.pinTop(by: { [weak referenceView] in referenceView }, with: top)
 		
 	}
 	
-	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byReference(referenceGetter: referenceView, top)
 		let maker = self.didSetProperty.storeTop(top, to: self)
@@ -61,7 +61,7 @@ public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanS
 
 extension LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(top: top, parameters: parameters)

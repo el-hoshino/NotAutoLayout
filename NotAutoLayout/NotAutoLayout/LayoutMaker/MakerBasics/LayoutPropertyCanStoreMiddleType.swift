@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreMiddleType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetMiddleProperty: LayoutMakerPropertyType
 	
-	func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleProperty>
+	func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetMiddleProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 	
-	public func setMiddle(to middle: CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
+	public func setMiddle(to middle: CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
 		let middle = LayoutElement.Vertical.constant(middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 		
 	}
 	
-	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
+	public func setMiddle(by middle: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
 		let middle = LayoutElement.Vertical.byParent(middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleType {
 		
 	}
 	
-	public func pinMiddle(to referenceView: UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
+	public func pinMiddle(to referenceView: UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
 		return self.pinMiddle(by: { [weak referenceView] in referenceView }, with: middle)
 		
 	}
 	
-	public func pinMiddle(by referenceView: @escaping () -> UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetMiddleProperty> {
+	public func pinMiddle(by referenceView: @escaping () -> UIView?, with middle: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetMiddleProperty> {
 		
 		let middle = LayoutElement.Vertical.byReference(referenceGetter: referenceView, middle)
 		let maker = self.didSetProperty.storeMiddle(middle, to: self)
@@ -61,7 +61,7 @@ public protocol LayoutPropertyCanStoreMiddleToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreMiddleToEvaluateFrameType {
 	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(middle: middle, parameters: parameters)

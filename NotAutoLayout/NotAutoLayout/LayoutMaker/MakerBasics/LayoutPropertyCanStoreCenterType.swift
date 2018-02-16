@@ -12,13 +12,13 @@ public protocol LayoutPropertyCanStoreCenterType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetCenterProperty: LayoutMakerPropertyType
 	
-	func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetCenterProperty>
+	func storeCenter <ParentView> (_ center: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, WillSetCenterProperty>
 	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 	
-	public func setCenter(to center: CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
+	public func setCenter(to center: CGFloat) -> LayoutMaker<ParentView, Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.constant(center)
 		let maker = self.didSetProperty.storeCenter(center, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
+	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.byParent(center)
 		let maker = self.didSetProperty.storeCenter(center, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func pinCenter(to referenceView: UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
+	public func pinCenter(to referenceView: UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetCenterProperty> {
 		
 		return self.pinCenter(by: { [weak referenceView] in referenceView }, with: center)
 		
 	}
 	
-	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
+	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<ParentView, Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, center)
 		let maker = self.didSetProperty.storeCenter(center, to: self)
@@ -61,7 +61,7 @@ public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeCenter <ParentView> (_ center: LayoutElement.Horizontal, to maker: LayoutMaker<ParentView, Self>) -> LayoutMaker<ParentView, IndividualLayout> {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
 			return self.evaluateFrame(center: center, parameters: parameters)
