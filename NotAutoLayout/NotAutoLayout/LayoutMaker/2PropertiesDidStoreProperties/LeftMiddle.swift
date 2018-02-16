@@ -1,5 +1,5 @@
 //
-//  DidStoreLeftMiddleLayoutProperty.swift
+//  IndividualProperty.LeftMiddle.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,16 +8,20 @@
 
 import Foundation
 
-public struct DidStoreLeftMiddleLayoutProperty {
+extension IndividualProperty {
 	
-	let left: LayoutElement.Horizontal
-	
-	let middle: LayoutElement.Vertical
+	public struct LeftMiddle {
+		
+		let left: LayoutElement.Horizontal
+		
+		let middle: LayoutElement.Vertical
+		
+	}
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreLeftMiddleLayoutProperty {
+extension IndividualProperty.LeftMiddle {
 	
 	private func makeFrame(left: CGFloat, middle: CGFloat, size: CGSize) -> CGRect {
 		
@@ -34,7 +38,7 @@ extension DidStoreLeftMiddleLayoutProperty {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
+extension IndividualProperty.LeftMiddle: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
 	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
@@ -50,11 +54,11 @@ extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreSizeToEvaluate
 
 // MARK: - Set A Line -
 // MARK: Bottom
-extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreBottomType {
+extension IndividualProperty.LeftMiddle: LayoutPropertyCanStoreBottomType {
 	
 	public typealias WillSetBottomProperty = DidStoreLeftMiddleBottomLayoutProperty
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<DidStoreLeftMiddleLayoutProperty>) -> LayoutMaker<DidStoreLeftMiddleBottomLayoutProperty> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftMiddle>) -> LayoutMaker<DidStoreLeftMiddleBottomLayoutProperty> {
 		
 		let leftMiddleBottom = DidStoreLeftMiddleBottomLayoutProperty(left: self.left,
 																	  middle: self.middle,
@@ -70,11 +74,11 @@ extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreBottomType {
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreWidthType {
+extension IndividualProperty.LeftMiddle: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreLeftMiddleWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreLeftMiddleLayoutProperty>) -> LayoutMaker<DidStoreLeftMiddleWidthLayoutProperty> {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.LeftMiddle>) -> LayoutMaker<DidStoreLeftMiddleWidthLayoutProperty> {
 		
 		let leftMiddleWidth = DidStoreLeftMiddleWidthLayoutProperty(left: self.left,
 																	middle: self.middle,
@@ -89,11 +93,11 @@ extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreLeftMiddleLayoutProperty: LayoutPropertyCanStoreHeightType {
+extension IndividualProperty.LeftMiddle: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreLeftMiddleHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreLeftMiddleLayoutProperty>) -> LayoutMaker<DidStoreLeftMiddleHeightLayoutProperty> {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.LeftMiddle>) -> LayoutMaker<DidStoreLeftMiddleHeightLayoutProperty> {
 		
 		let leftMiddleHeight = DidStoreLeftMiddleHeightLayoutProperty(left: self.left,
 																	  middle: self.middle,

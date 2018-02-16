@@ -96,7 +96,7 @@
 		79D8DD6E1EF9343D00B74593 /* Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD6D1EF9343D00B74593 /* Center.swift */; };
 		79D8DD761EF934DD00B74593 /* LeftCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD751EF934DD00B74593 /* LeftCenter.swift */; };
 		79D8DD781EF9352500B74593 /* LeftRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD771EF9352500B74593 /* LeftRight.swift */; };
-		79D8DD7A1EF935D100B74593 /* DidStoreLeftMiddleLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD791EF935D100B74593 /* DidStoreLeftMiddleLayoutProperty.swift */; };
+		79D8DD7A1EF935D100B74593 /* LeftMiddle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD791EF935D100B74593 /* LeftMiddle.swift */; };
 		79D8DD7C1EF935F300B74593 /* DidStoreLeftBottomLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD7B1EF935F300B74593 /* DidStoreLeftBottomLayoutProperty.swift */; };
 		79D8DD821EF9369C00B74593 /* DidStoreCenterRightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD811EF9369C00B74593 /* DidStoreCenterRightLayoutProperty.swift */; };
 		79D8DD841EF93D5400B74593 /* DidStoreCenterTopLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD831EF93D5400B74593 /* DidStoreCenterTopLayoutProperty.swift */; };
@@ -252,7 +252,7 @@
 		79D8DD6D1EF9343D00B74593 /* Center.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.swift; sourceTree = "<group>"; };
 		79D8DD751EF934DD00B74593 /* LeftCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCenter.swift; sourceTree = "<group>"; };
 		79D8DD771EF9352500B74593 /* LeftRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRight.swift; sourceTree = "<group>"; };
-		79D8DD791EF935D100B74593 /* DidStoreLeftMiddleLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreLeftMiddleLayoutProperty.swift; sourceTree = "<group>"; };
+		79D8DD791EF935D100B74593 /* LeftMiddle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMiddle.swift; sourceTree = "<group>"; };
 		79D8DD7B1EF935F300B74593 /* DidStoreLeftBottomLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreLeftBottomLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DD811EF9369C00B74593 /* DidStoreCenterRightLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreCenterRightLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DD831EF93D5400B74593 /* DidStoreCenterTopLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreCenterTopLayoutProperty.swift; sourceTree = "<group>"; };
@@ -438,7 +438,7 @@
 				79D8DD751EF934DD00B74593 /* LeftCenter.swift */,
 				79D8DD771EF9352500B74593 /* LeftRight.swift */,
 				165FE2A91EF289F4006DF788 /* LeftTop.swift */,
-				79D8DD791EF935D100B74593 /* DidStoreLeftMiddleLayoutProperty.swift */,
+				79D8DD791EF935D100B74593 /* LeftMiddle.swift */,
 				79D8DD7B1EF935F300B74593 /* DidStoreLeftBottomLayoutProperty.swift */,
 				79D8DD811EF9369C00B74593 /* DidStoreCenterRightLayoutProperty.swift */,
 				79D8DD831EF93D5400B74593 /* DidStoreCenterTopLayoutProperty.swift */,
@@ -990,7 +990,7 @@
 				7971FAD2203481C700B63CBC /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */,
 				79D8DDC61EF947EB00B74593 /* DidStoreLeftMiddleHeightLayoutProperty.swift in Sources */,
 				79D8DDF81EF94D0D00B74593 /* DidStoreRightTopBottomLayoutProperty.swift in Sources */,
-				79D8DD7A1EF935D100B74593 /* DidStoreLeftMiddleLayoutProperty.swift in Sources */,
+				79D8DD7A1EF935D100B74593 /* LeftMiddle.swift in Sources */,
 				79D8DDA61EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift in Sources */,
 				79D8DD981EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift in Sources */,
 				79D8DE161EF9505000B74593 /* DidStoreTopRightCenterLayoutProperty.swift in Sources */,
