@@ -50,11 +50,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 // MARK: TopCenter
 extension IndividualProperty.Initial: LayoutPropertyCanStoreTopCenterType {
 	
-	public typealias WillSetTopCenterProperty = DidStoreTopCenterLayoutProperty
+	public typealias WillSetTopCenterProperty = IndividualProperty.TopCenter
 	
-	public func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<DidStoreTopCenterLayoutProperty> {
+	public func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.TopCenter> {
 		
-		let topCenter = DidStoreTopCenterLayoutProperty(topCenter: topCenter)
+		let topCenter = IndividualProperty.TopCenter(topCenter: topCenter)
 		let maker = LayoutMaker(parentView: maker.parentView,
 								didSetProperty: topCenter)
 		

@@ -106,7 +106,7 @@
 		79D8DD901EF93E0200B74593 /* RightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */; };
 		79D8DD921EF93E1700B74593 /* RightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */; };
 		79D8DD981EF93E7500B74593 /* TopLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */; };
-		79D8DD9A1EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */; };
+		79D8DD9A1EF93E9900B74593 /* TopCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */; };
 		79D8DD9C1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */; };
 		79D8DDA21EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */; };
 		79D8DDA41EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */; };
@@ -262,7 +262,7 @@
 		79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddle.Individual.swift; sourceTree = "<group>"; };
 		79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottom.Individual.swift; sourceTree = "<group>"; };
 		79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeft.Individual.swift; sourceTree = "<group>"; };
-		79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopCenterLayoutProperty.swift; sourceTree = "<group>"; };
+		79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenter.Individual.swift; sourceTree = "<group>"; };
 		79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopRightLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleLeftLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleCenterLayoutProperty.swift; sourceTree = "<group>"; };
@@ -448,7 +448,7 @@
 				79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */,
 				79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */,
 				79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */,
-				79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */,
+				79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */,
 				79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */,
 				79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */,
 				79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */,
@@ -1013,7 +1013,7 @@
 				79FD2CD01FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift in Sources */,
 				164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */,
 				79D8DDC21EF9473900B74593 /* DidStoreLeftTopHeightLayoutProperty.swift in Sources */,
-				79D8DD9A1EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift in Sources */,
+				79D8DD9A1EF93E9900B74593 /* TopCenter.Individual.swift in Sources */,
 				79D8DE181EF9506F00B74593 /* DidStoreTopRightMiddleLayoutProperty.swift in Sources */,
 				1630073B1F0F380C00012C18 /* DidStoreBottomLeftRightLayoutProperty.swift in Sources */,
 				79FD2CE61FB8646000E6661C /* LayoutPropertyCanStoreRightType.swift in Sources */,
