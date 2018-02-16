@@ -1,5 +1,5 @@
 //
-//  DidStoreCenterBottomLayoutProperty.swift
+//  CenterBottom.Individual.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,16 +8,20 @@
 
 import Foundation
 
-public struct DidStoreCenterBottomLayoutProperty {
+extension IndividualProperty {
 	
-	let center: LayoutElement.Horizontal
-	
-	let bottom: LayoutElement.Vertical
+	public struct CenterBottom {
+		
+		let center: LayoutElement.Horizontal
+		
+		let bottom: LayoutElement.Vertical
+		
+	}
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreCenterBottomLayoutProperty {
+extension IndividualProperty.CenterBottom {
 	
 	private func makeFrame(center: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -35,7 +39,7 @@ extension DidStoreCenterBottomLayoutProperty {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
+extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
 	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
@@ -51,11 +55,11 @@ extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvalua
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
+extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreCenterBottomWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreCenterBottomLayoutProperty>) -> LayoutMaker<DidStoreCenterBottomWidthLayoutProperty> {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterBottom>) -> LayoutMaker<DidStoreCenterBottomWidthLayoutProperty> {
 		
 		let centerBottomWidth = DidStoreCenterBottomWidthLayoutProperty(center: self.center,
 																		bottom: self.bottom,
@@ -70,11 +74,11 @@ extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreCenterBottomLayoutProperty: LayoutPropertyCanStoreHeightType {
+extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreCenterBottomHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreCenterBottomLayoutProperty>) -> LayoutMaker<DidStoreCenterBottomHeightLayoutProperty> {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterBottom>) -> LayoutMaker<DidStoreCenterBottomHeightLayoutProperty> {
 		
 		let centerBottomHeight = DidStoreCenterBottomHeightLayoutProperty(center: self.center,
 																		  bottom: self.bottom,
