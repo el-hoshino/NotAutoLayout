@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreMiddleType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleProperty
+	associatedtype WillSetMiddleProperty: LayoutMakerPropertyType
 	
 	func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleProperty>
 	

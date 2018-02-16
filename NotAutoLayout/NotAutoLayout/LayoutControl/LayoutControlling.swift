@@ -51,7 +51,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<IndividualLayout>) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>) {
 		
 		let layout = self.makeLayout(making)
 		
@@ -63,9 +63,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeLayout(_ making: (LayoutMaker<InitialLayoutProperty>) -> LayoutMaker<IndividualLayout>) -> IndividualLayout {
+	public func makeLayout(_ making: (LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>) -> IndividualLayout {
 		
-		let maker = LayoutMaker(parentView: self.body, didSetProperty: InitialLayoutProperty())
+		let maker = LayoutMaker(parentView: self.body, didSetProperty: IndividualProperty.Initial())
 		let layout = making(maker).didSetProperty
 		
 		return layout
@@ -76,9 +76,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeSequentialLayout(_ making: (LayoutMaker<InitialSequentialLayoutProperty>) -> LayoutMaker<SequentialLayout>) -> SequentialLayout {
+	public func makeSequentialLayout(_ making: (LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialLayout>) -> SequentialLayout {
 		
-		let maker = LayoutMaker(parentView: self.body, didSetProperty: InitialSequentialLayoutProperty())
+		let maker = LayoutMaker(parentView: self.body, didSetProperty: SequentialProperty.Initial())
 		let layout = making(maker).didSetProperty
 		
 		return layout
@@ -103,7 +103,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<InitialSequentialLayoutProperty>) -> LayoutMaker<SequentialLayout>) {
+	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialLayout>) {
 		
 		let layout = self.makeSequentialLayout(making)
 		

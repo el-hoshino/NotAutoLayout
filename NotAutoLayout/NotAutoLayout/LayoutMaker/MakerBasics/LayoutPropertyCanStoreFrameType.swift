@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetFrameProperty
+	associatedtype WillSetFrameProperty: LayoutMakerPropertyType
 	
 	func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty>
 	

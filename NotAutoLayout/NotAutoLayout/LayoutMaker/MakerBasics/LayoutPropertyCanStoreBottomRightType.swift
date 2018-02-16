@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreBottomRightType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetBottomRightProperty
+	associatedtype WillSetBottomRightProperty: LayoutMakerPropertyType
 	
 	func storeBottomRight(_ bottomRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomRightProperty>
 	

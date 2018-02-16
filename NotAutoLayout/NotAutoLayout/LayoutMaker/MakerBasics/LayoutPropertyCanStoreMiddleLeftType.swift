@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreMiddleLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetMiddleLeftProperty
+	associatedtype WillSetMiddleLeftProperty: LayoutMakerPropertyType
 	
 	func storeMiddleLeft(_ middleLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetMiddleLeftProperty>
 	
