@@ -56,11 +56,11 @@ extension IndividualProperty.RightTop: LayoutPropertyCanStoreSizeToEvaluateFrame
 // MARK: Middle
 extension IndividualProperty.RightTop: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = DidStoreRightTopMiddleLayoutProperty
+	public typealias WillSetMiddleProperty = IndividualProperty.RightTopMiddle
 	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<DidStoreRightTopMiddleLayoutProperty> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<IndividualProperty.RightTopMiddle> {
 		
-		let rightTopMiddle = DidStoreRightTopMiddleLayoutProperty(right: self.right,
+		let rightTopMiddle = IndividualProperty.RightTopMiddle(right: self.right,
 																  top: self.top,
 																  middle: middle)
 		let maker = LayoutMaker(parentView: maker.parentView,
@@ -75,11 +75,11 @@ extension IndividualProperty.RightTop: LayoutPropertyCanStoreMiddleType {
 // MARK: Bottom
 extension IndividualProperty.RightTop: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = DidStoreRightTopBottomLayoutProperty
+	public typealias WillSetBottomProperty = IndividualProperty.RightTopBottom
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<DidStoreRightTopBottomLayoutProperty> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<IndividualProperty.RightTopBottom> {
 		
-		let rightTopBottom = DidStoreRightTopBottomLayoutProperty(right: self.right,
+		let rightTopBottom = IndividualProperty.RightTopBottom(right: self.right,
 																  top: self.top,
 																  bottom: bottom)
 		let maker = LayoutMaker(parentView: maker.parentView,
@@ -95,11 +95,11 @@ extension IndividualProperty.RightTop: LayoutPropertyCanStoreBottomType {
 // MARK: Width
 extension IndividualProperty.RightTop: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = DidStoreRightTopWidthLayoutProperty
+	public typealias WillSetWidthProperty = IndividualProperty.RightTopWidth
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<DidStoreRightTopWidthLayoutProperty> {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<IndividualProperty.RightTopWidth> {
 		
-		let rightTopWidth = DidStoreRightTopWidthLayoutProperty(right: self.right,
+		let rightTopWidth = IndividualProperty.RightTopWidth(right: self.right,
 																top: self.top,
 																width: width)
 		let maker = LayoutMaker(parentView: maker.parentView,
@@ -114,11 +114,11 @@ extension IndividualProperty.RightTop: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.RightTop: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = DidStoreRightTopHeightLayoutProperty
+	public typealias WillSetHeightProperty = IndividualProperty.RightTopHeight
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<DidStoreRightTopHeightLayoutProperty> {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<IndividualProperty.RightTopHeight> {
 		
-		let rightTopHeight = DidStoreRightTopHeightLayoutProperty(right: self.right,
+		let rightTopHeight = IndividualProperty.RightTopHeight(right: self.right,
 																  top: self.top,
 																  height: height)
 		let maker = LayoutMaker(parentView: maker.parentView,
