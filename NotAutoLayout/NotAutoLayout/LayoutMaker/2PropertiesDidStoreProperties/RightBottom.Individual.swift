@@ -1,5 +1,5 @@
 //
-//  DidStoreRightBottomLayoutProperty.swift
+//  RightBottom.Individual.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
@@ -8,16 +8,20 @@
 
 import Foundation
 
-public struct DidStoreRightBottomLayoutProperty {
+extension IndividualProperty {
 	
-	let right: LayoutElement.Horizontal
-	
-	let bottom: LayoutElement.Vertical
+	public struct RightBottom {
+		
+		let right: LayoutElement.Horizontal
+		
+		let bottom: LayoutElement.Vertical
+		
+	}
 	
 }
 
 // MARK: - Make Frame
-extension DidStoreRightBottomLayoutProperty {
+extension IndividualProperty.RightBottom {
 	
 	private func makeFrame(right: CGFloat, bottom: CGFloat, size: CGSize) -> CGRect {
 		
@@ -35,7 +39,7 @@ extension DidStoreRightBottomLayoutProperty {
 
 // MARK: - Set A Size -
 // MARK: Size
-extension DidStoreRightBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluateFrameType {
+extension IndividualProperty.RightBottom: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
 	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
 		
@@ -51,11 +55,11 @@ extension DidStoreRightBottomLayoutProperty: LayoutPropertyCanStoreSizeToEvaluat
 
 // MARK: - Set A Length -
 // MARK: Width
-extension DidStoreRightBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
+extension IndividualProperty.RightBottom: LayoutPropertyCanStoreWidthType {
 	
 	public typealias WillSetWidthProperty = DidStoreRightBottomWidthLayoutProperty
 	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<DidStoreRightBottomLayoutProperty>) -> LayoutMaker<DidStoreRightBottomWidthLayoutProperty> {
+	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightBottom>) -> LayoutMaker<DidStoreRightBottomWidthLayoutProperty> {
 		
 		let rightBottomWidth = DidStoreRightBottomWidthLayoutProperty(right: self.right,
 																	  bottom: self.bottom,
@@ -70,11 +74,11 @@ extension DidStoreRightBottomLayoutProperty: LayoutPropertyCanStoreWidthType {
 }
 
 // MARK: Height
-extension DidStoreRightBottomLayoutProperty: LayoutPropertyCanStoreHeightType {
+extension IndividualProperty.RightBottom: LayoutPropertyCanStoreHeightType {
 	
 	public typealias WillSetHeightProperty = DidStoreRightBottomHeightLayoutProperty
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<DidStoreRightBottomLayoutProperty>) -> LayoutMaker<DidStoreRightBottomHeightLayoutProperty> {
+	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightBottom>) -> LayoutMaker<DidStoreRightBottomHeightLayoutProperty> {
 		
 		let rightBottomHeight = DidStoreRightBottomHeightLayoutProperty(right: self.right,
 																		bottom: self.bottom,
