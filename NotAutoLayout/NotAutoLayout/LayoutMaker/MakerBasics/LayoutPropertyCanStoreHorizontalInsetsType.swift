@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreHorizontalInsetsType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetHorizontalInsetsType
+	associatedtype WillSetHorizontalInsetsType: LayoutMakerPropertyType
 	
 	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetHorizontalInsetsType>
 	

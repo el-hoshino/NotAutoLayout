@@ -8,9 +8,9 @@
 
 import Foundation
 
-public protocol LayoutPropertyCanAddAdditionalEvaluationType {
+public protocol LayoutPropertyCanAddAdditionalEvaluationType: LayoutMakerPropertyType {
 	
-	associatedtype WillAddAdditionalEvaluationProperty
+	associatedtype WillAddAdditionalEvaluationProperty: LayoutMakerPropertyType
 	
 	func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<Self>) -> LayoutMaker<WillAddAdditionalEvaluationProperty>
 	

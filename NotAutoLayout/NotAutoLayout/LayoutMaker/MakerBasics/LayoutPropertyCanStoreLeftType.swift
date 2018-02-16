@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetLeftProperty
+	associatedtype WillSetLeftProperty: LayoutMakerPropertyType
 	
 	func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetLeftProperty>
 	

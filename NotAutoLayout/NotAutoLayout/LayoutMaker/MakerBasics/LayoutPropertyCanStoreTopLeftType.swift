@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreTopLeftType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetTopLeftProperty
+	associatedtype WillSetTopLeftProperty: LayoutMakerPropertyType
 	
 	func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopLeftProperty>
 	

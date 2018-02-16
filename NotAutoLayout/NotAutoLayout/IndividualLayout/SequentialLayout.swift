@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SequentialLayout {
+public struct SequentialLayout: LayoutMakerPropertyType {
 	
 	private var basicFrameEvaluation: SequentialFrame
 	

@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetHeightProperty
+	associatedtype WillSetHeightProperty: LayoutMakerPropertyType
 	
 	func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetHeightProperty>
 	

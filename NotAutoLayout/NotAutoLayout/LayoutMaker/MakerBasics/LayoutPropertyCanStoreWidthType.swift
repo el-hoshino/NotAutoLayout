@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutPropertyCanStoreWidthType: LayoutMakerPropertyType {
 	
-	associatedtype WillSetWidthProperty
+	associatedtype WillSetWidthProperty: LayoutMakerPropertyType
 	
 	func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetWidthProperty>
 	
