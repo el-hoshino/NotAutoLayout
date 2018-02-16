@@ -107,7 +107,7 @@
 		79D8DD921EF93E1700B74593 /* RightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */; };
 		79D8DD981EF93E7500B74593 /* TopLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */; };
 		79D8DD9A1EF93E9900B74593 /* TopCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */; };
-		79D8DD9C1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */; };
+		79D8DD9C1EF93EB300B74593 /* TopRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD9B1EF93EB300B74593 /* TopRight.Individual.swift */; };
 		79D8DDA21EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */; };
 		79D8DDA41EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */; };
 		79D8DDA61EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA51EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift */; };
@@ -263,7 +263,7 @@
 		79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottom.Individual.swift; sourceTree = "<group>"; };
 		79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeft.Individual.swift; sourceTree = "<group>"; };
 		79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenter.Individual.swift; sourceTree = "<group>"; };
-		79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopRightLayoutProperty.swift; sourceTree = "<group>"; };
+		79D8DD9B1EF93EB300B74593 /* TopRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRight.Individual.swift; sourceTree = "<group>"; };
 		79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleLeftLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleCenterLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DDA51EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleRightLayoutProperty.swift; sourceTree = "<group>"; };
@@ -449,7 +449,7 @@
 				79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */,
 				79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */,
 				79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */,
-				79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */,
+				79D8DD9B1EF93EB300B74593 /* TopRight.Individual.swift */,
 				79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */,
 				79D8DDA31EF93FDF00B74593 /* DidStoreMiddleCenterLayoutProperty.swift */,
 				79D8DDA51EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift */,
@@ -888,7 +888,7 @@
 				163007331F0F380C00012C18 /* DidStoreMiddleCenterHeightLayoutProperty.swift in Sources */,
 				79D8DDAE1EF9406E00B74593 /* DidStoreBottomCenterLayoutProperty.swift in Sources */,
 				164EA0BF1EF3DAE300C0BB8F /* CGRect.swift in Sources */,
-				79D8DD9C1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift in Sources */,
+				79D8DD9C1EF93EB300B74593 /* TopRight.Individual.swift in Sources */,
 				1630072A1F0F380C00012C18 /* DidStoreMiddleLeftTopLayoutProperty.swift in Sources */,
 				79D8DDEE1EF94C5B00B74593 /* DidStoreLeftMiddleBottomLayoutProperty.swift in Sources */,
 				79D8DD761EF934DD00B74593 /* LeftCenter.Individual.swift in Sources */,
