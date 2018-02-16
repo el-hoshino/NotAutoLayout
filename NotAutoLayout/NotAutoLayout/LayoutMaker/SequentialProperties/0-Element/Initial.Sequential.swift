@@ -10,7 +10,7 @@ import Foundation
 
 extension SequentialProperty {
 	
-	public struct Initial: LayoutMakerPropertyType {
+	public struct Initial {
 		
 	}
 	

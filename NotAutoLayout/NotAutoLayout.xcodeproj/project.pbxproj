@@ -432,7 +432,7 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreProperties */ = {
+		165FE2A81EF289F4006DF788 /* 2-Element */ = {
 			isa = PBXGroup;
 			children = (
 				79D8DD751EF934DD00B74593 /* LeftCenter.Individual.swift */,
@@ -457,18 +457,18 @@
 				79D8DDAD1EF9406E00B74593 /* BottomCenter.Individual.swift */,
 				79D8DDAF1EF9408C00B74593 /* BottomRight.Individual.swift */,
 			);
-			path = 2PropertiesDidStoreProperties;
+			path = "2-Element";
 			sourceTree = "<group>";
 		};
-		165FE2AA1EF289F4006DF788 /* 0PropertyDidStoreProperties */ = {
+		165FE2AA1EF289F4006DF788 /* 0-Element */ = {
 			isa = PBXGroup;
 			children = (
 				165FE2AB1EF289F4006DF788 /* Initial.Individual.swift */,
 			);
-			path = 0PropertyDidStoreProperties;
+			path = "0-Element";
 			sourceTree = "<group>";
 		};
-		165FE2AC1EF289F4006DF788 /* 3PropertiesDidStoreProperties */ = {
+		165FE2AC1EF289F4006DF788 /* 3-Element */ = {
 			isa = PBXGroup;
 			children = (
 				79D8DDB31EF9432C00B74593 /* LeftCenterTop.Individual.swift */,
@@ -562,17 +562,17 @@
 				79D8DE5C1EF9564300B74593 /* BottomRightWidth.Individual.swift */,
 				79D8DE5D1EF9564300B74593 /* BottomRightHeight.Individual.swift */,
 			);
-			path = 3PropertiesDidStoreProperties;
+			path = "3-Element";
 			sourceTree = "<group>";
 		};
-		165FE2AE1EF289F4006DF788 /* 1PropertyDidStoreProperties */ = {
+		165FE2AE1EF289F4006DF788 /* 1-Element */ = {
 			isa = PBXGroup;
 			children = (
 				165FE2AF1EF289F4006DF788 /* Left.Individual.swift */,
 				79D8DD6D1EF9343D00B74593 /* Center.Individual.swift */,
 				79D8DD691EF933FF00B74593 /* Right.Individual.swift */,
 			);
-			path = 1PropertyDidStoreProperties;
+			path = "1-Element";
 			sourceTree = "<group>";
 		};
 		168667AF1F7912FD00AD774E /* LayoutInfoStorable */ = {
@@ -590,12 +590,12 @@
 			path = LayoutInfoStorable;
 			sourceTree = "<group>";
 		};
-		16A5A5A21EF39F8E007ACB1C /* AllPropertiesDidStoreProperties */ = {
+		16A5A5A21EF39F8E007ACB1C /* All-Element */ = {
 			isa = PBXGroup;
 			children = (
 				7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */,
 			);
-			path = AllPropertiesDidStoreProperties;
+			path = "All-Element";
 			sourceTree = "<group>";
 		};
 		7971FAB3203160FA00B63CBC /* Types */ = {
@@ -615,14 +615,8 @@
 			isa = PBXGroup;
 			children = (
 				7971FAB920332D4A00B63CBC /* MakerBasics */,
-				165FE2AA1EF289F4006DF788 /* 0PropertyDidStoreProperties */,
-				165FE2AE1EF289F4006DF788 /* 1PropertyDidStoreProperties */,
-				165FE2A81EF289F4006DF788 /* 2PropertiesDidStoreProperties */,
-				165FE2AC1EF289F4006DF788 /* 3PropertiesDidStoreProperties */,
-				16A5A5A21EF39F8E007ACB1C /* AllPropertiesDidStoreProperties */,
-				7971FAC2203470BC00B63CBC /* 0PropertyDidStoreSequentialProperties */,
-				7971FACB20347D1500B63CBC /* 1PropertyDidStoreSequentialProperties */,
-				7971FACE20347E1300B63CBC /* 3PropertiesDidStoreSequentialProperties */,
+				799559372036A8B300DE492D /* IndividualProperties */,
+				799559382036A8CF00DE492D /* SequentialProperties */,
 			);
 			path = LayoutMaker;
 			sourceTree = "<group>";
@@ -657,28 +651,28 @@
 			path = MakerBasics;
 			sourceTree = "<group>";
 		};
-		7971FAC2203470BC00B63CBC /* 0PropertyDidStoreSequentialProperties */ = {
+		7971FAC2203470BC00B63CBC /* 0-Element */ = {
 			isa = PBXGroup;
 			children = (
 				7971FAC32034710800B63CBC /* Initial.Sequential.swift */,
 			);
-			path = 0PropertyDidStoreSequentialProperties;
+			path = "0-Element";
 			sourceTree = "<group>";
 		};
-		7971FACB20347D1500B63CBC /* 1PropertyDidStoreSequentialProperties */ = {
+		7971FACB20347D1500B63CBC /* 1-Element */ = {
 			isa = PBXGroup;
 			children = (
 				7971FACC20347D3900B63CBC /* Middle.Sequential.swift */,
 			);
-			path = 1PropertyDidStoreSequentialProperties;
+			path = "1-Element";
 			sourceTree = "<group>";
 		};
-		7971FACE20347E1300B63CBC /* 3PropertiesDidStoreSequentialProperties */ = {
+		7971FACE20347E1300B63CBC /* 3-Element */ = {
 			isa = PBXGroup;
 			children = (
 				7971FACF20347E2D00B63CBC /* MiddleSize.Sequential.swift */,
 			);
-			path = 3PropertiesDidStoreSequentialProperties;
+			path = "3-Element";
 			sourceTree = "<group>";
 		};
 		798378811E4CB2B100D3E1C2 = {
@@ -731,6 +725,28 @@
 				164EA0AD1EF3DA5100C0BB8F /* NotAutoLayoutContainer.swift */,
 			);
 			path = NotAutoLayoutCompatible;
+			sourceTree = "<group>";
+		};
+		799559372036A8B300DE492D /* IndividualProperties */ = {
+			isa = PBXGroup;
+			children = (
+				165FE2AA1EF289F4006DF788 /* 0-Element */,
+				165FE2AE1EF289F4006DF788 /* 1-Element */,
+				165FE2A81EF289F4006DF788 /* 2-Element */,
+				165FE2AC1EF289F4006DF788 /* 3-Element */,
+				16A5A5A21EF39F8E007ACB1C /* All-Element */,
+			);
+			path = IndividualProperties;
+			sourceTree = "<group>";
+		};
+		799559382036A8CF00DE492D /* SequentialProperties */ = {
+			isa = PBXGroup;
+			children = (
+				7971FAC2203470BC00B63CBC /* 0-Element */,
+				7971FACB20347D1500B63CBC /* 1-Element */,
+				7971FACE20347E1300B63CBC /* 3-Element */,
+			);
+			path = SequentialProperties;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -10,7 +10,7 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct LeftTop: LayoutMakerPropertyType {
+	public struct LeftTop {
 		
 		let left: LayoutElement.Horizontal
 		

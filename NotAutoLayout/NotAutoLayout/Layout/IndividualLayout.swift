@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct IndividualLayout {
+public struct IndividualLayout: LayoutMakerPropertyType {
 	
 	private var basicFrameEvaluation: IndividualFrame
 	
