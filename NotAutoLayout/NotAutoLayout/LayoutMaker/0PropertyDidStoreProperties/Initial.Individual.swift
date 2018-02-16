@@ -33,11 +33,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreFrameToEvaluateFrame
 // MARK: TopLeft
 extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 	
-	public typealias WillSetTopLeftProperty = DidStoreTopLeftLayoutProperty
+	public typealias WillSetTopLeftProperty = IndividualProperty.TopLeft
 	
-	public func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<DidStoreTopLeftLayoutProperty> {
+	public func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.TopLeft> {
 		
-		let topLeft = DidStoreTopLeftLayoutProperty(topLeft: topLeft)
+		let topLeft = IndividualProperty.TopLeft(topLeft: topLeft)
 		let maker = LayoutMaker(parentView: maker.parentView,
 								didSetProperty: topLeft)
 		

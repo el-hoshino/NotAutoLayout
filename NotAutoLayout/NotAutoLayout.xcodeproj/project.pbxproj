@@ -105,7 +105,7 @@
 		79D8DD8E1EF93DE400B74593 /* RightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD8D1EF93DE400B74593 /* RightTop.Individual.swift */; };
 		79D8DD901EF93E0200B74593 /* RightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */; };
 		79D8DD921EF93E1700B74593 /* RightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */; };
-		79D8DD981EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD971EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift */; };
+		79D8DD981EF93E7500B74593 /* TopLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */; };
 		79D8DD9A1EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */; };
 		79D8DD9C1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */; };
 		79D8DDA21EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */; };
@@ -261,7 +261,7 @@
 		79D8DD8D1EF93DE400B74593 /* RightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTop.Individual.swift; sourceTree = "<group>"; };
 		79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddle.Individual.swift; sourceTree = "<group>"; };
 		79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottom.Individual.swift; sourceTree = "<group>"; };
-		79D8DD971EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopLeftLayoutProperty.swift; sourceTree = "<group>"; };
+		79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeft.Individual.swift; sourceTree = "<group>"; };
 		79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopCenterLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreTopRightLayoutProperty.swift; sourceTree = "<group>"; };
 		79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreMiddleLeftLayoutProperty.swift; sourceTree = "<group>"; };
@@ -447,7 +447,7 @@
 				79D8DD8D1EF93DE400B74593 /* RightTop.Individual.swift */,
 				79D8DD8F1EF93E0200B74593 /* RightMiddle.Individual.swift */,
 				79D8DD911EF93E1700B74593 /* RightBottom.Individual.swift */,
-				79D8DD971EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift */,
+				79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */,
 				79D8DD991EF93E9900B74593 /* DidStoreTopCenterLayoutProperty.swift */,
 				79D8DD9B1EF93EB300B74593 /* DidStoreTopRightLayoutProperty.swift */,
 				79D8DDA11EF93FC700B74593 /* DidStoreMiddleLeftLayoutProperty.swift */,
@@ -992,7 +992,7 @@
 				79D8DDF81EF94D0D00B74593 /* DidStoreRightTopBottomLayoutProperty.swift in Sources */,
 				79D8DD7A1EF935D100B74593 /* LeftMiddle.Individual.swift in Sources */,
 				79D8DDA61EF93FFC00B74593 /* DidStoreMiddleRightLayoutProperty.swift in Sources */,
-				79D8DD981EF93E7500B74593 /* DidStoreTopLeftLayoutProperty.swift in Sources */,
+				79D8DD981EF93E7500B74593 /* TopLeft.Individual.swift in Sources */,
 				79D8DE161EF9505000B74593 /* DidStoreTopRightCenterLayoutProperty.swift in Sources */,
 				164EA0C81EF3DAE300C0BB8F /* ViewInfo.swift in Sources */,
 				79D8DDDA1EF94A9B00B74593 /* DidStoreCenterBottomWidthLayoutProperty.swift in Sources */,
