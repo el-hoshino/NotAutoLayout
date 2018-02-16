@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func getCurrentCondition() -> ConditionEnum {
 		return self.body.getCondition(underCurrentBoundSize: self.boundSize) ?? self.body.getDefaultCondition()
@@ -16,7 +16,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func getCurrentLayoutInfo() -> LayoutInfo<Containee>? {
 		
@@ -50,7 +50,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func getCurrentOrderInfo() -> OrderInfo? {
 		
@@ -84,7 +84,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func getCurrentZIndexInfo() -> ZIndexInfo? {
 		
@@ -118,7 +118,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func layout(_ subview: UIView) {
 		
@@ -130,7 +130,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	/// Gets an array of subviews which have linked layout information.
 	///
@@ -178,7 +178,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	/// Gets a CGRect that represents the whole frame combined with all the subviews which have linked layout information, which may be useful in some situations like to setup contentSize in UIScrollView.
 	///
@@ -224,7 +224,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	private func getSubviewsSortedByZIndex() -> [UIView] {
 		
@@ -269,7 +269,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func setupSubview(_ subview: UIView, setup: (SubviewSetupWizard<Containee>) -> SubviewSetupWizard<Containee>) {
 		
@@ -282,7 +282,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func addSubview(_ subview: UIView, withDefaultLayout layout: IndividualLayout<Containee>) {
 		
@@ -295,7 +295,7 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable, Containee.ParentView == Containee {
 	
 	public func setLayout(for subview: UIView, making: (_ maker: LayoutMaker<Containee, IndividualProperty.Initial<Containee>>) -> LayoutMaker<Containee, IndividualLayout<Containee>>) {
 		

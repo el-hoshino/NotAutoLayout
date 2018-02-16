@@ -42,7 +42,7 @@ public struct SubviewSetupWizard<ParentView: UIView> {
 	
 }
 
-extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable, ParentView.ParentView == ParentView {
 	
 	private func setupLayouts() {
 		

@@ -314,7 +314,7 @@ extension ViewFrameProperty {
 		
 	}
 	
-	func evaluateSize <ParentView: UIView> (for view: UIView, from aspect: LayoutElement.Size<ParentView>.AspectSizing) -> CGSize {
+	func evaluateSize <ParentView> (for view: UIView, from aspect: LayoutElement.Size<ParentView>.AspectSizing) -> CGSize {
 		
 		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
 			switch safeAreaOnly {

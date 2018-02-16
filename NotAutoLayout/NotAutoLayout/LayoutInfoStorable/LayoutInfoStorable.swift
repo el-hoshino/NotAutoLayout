@@ -8,11 +8,14 @@
 
 import UIKit
 
+
 /// Fundamental class-only protocol that handles the layout.
 public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	
+	associatedtype ParentView: UIView
+	
 	/// The property to store the layout information for subviews.
-	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo<Self>] { get set }
+	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo<ParentView>] { get set }
 	
 	/// The property to store the layout order information for subviews.
 	var orderInfo: [ConditionEnum.RawValue: OrderInfo] { get set }
@@ -52,40 +55,40 @@ extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee>, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee.ParentView>, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout<Containee>, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout<Containee.ParentView>, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee>, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee.ParentView>, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout<Containee>, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout<Containee.ParentView>, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout<Containee>, for subview: UIView) {
+	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout<Containee.ParentView>, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: IndividualLayout<Containee>, for subview: UIView) {
+	func setDefaultLayout(_ layout: IndividualLayout<Containee.ParentView>, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
