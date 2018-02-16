@@ -22,6 +22,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.LeftRightBottom: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.LeftRightBottom {
 	
@@ -42,7 +48,7 @@ extension IndividualProperty.LeftRightBottom {
 // MARK: Height
 extension IndividualProperty.LeftRightBottom: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)

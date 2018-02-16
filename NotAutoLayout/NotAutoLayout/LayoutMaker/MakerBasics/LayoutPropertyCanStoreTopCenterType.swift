@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreTopCenterType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetTopCenterProperty: LayoutMakerPropertyType
 	
 	func storeTopCenter(_ topCenter: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetTopCenterProperty>

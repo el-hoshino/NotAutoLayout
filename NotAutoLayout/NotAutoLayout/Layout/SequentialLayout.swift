@@ -8,11 +8,17 @@
 
 import Foundation
 
-public struct SequentialLayout<ParentView: UIView>: LayoutMakerPropertyType {
+public struct SequentialLayout<ParentView: UIView> {
 	
 	private var basicFrameEvaluation: SequentialFrame<ParentView>
 	
-	private var additionalEvaluations: [FrameAdditionalEvaluation]
+	private var additionalEvaluations: [FrameAdditionalEvaluation<ParentView>]
+	
+}
+
+extension SequentialLayout: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
 	
 }
 
@@ -32,7 +38,7 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
+	var frameAdditionalEvaluations: [FrameAdditionalEvaluation<ParentView>] {
 		return self.additionalEvaluations
 	}
 	
@@ -40,13 +46,13 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
+	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation<ParentView>) {
 		
 		self.additionalEvaluations.append(evaluation)
 		
 	}
 	
-	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) {
+	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation<ParentView>]) {
 		
 		self.additionalEvaluations = evaluations
 		

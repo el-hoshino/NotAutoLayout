@@ -20,6 +20,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.MiddleLeftRight: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.MiddleLeftRight {
 	
@@ -56,7 +62,7 @@ extension IndividualProperty.MiddleLeftRight {
 // MARK: Top
 extension IndividualProperty.MiddleLeftRight: LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func evaluateFrame(top: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(top: LayoutElement.Vertical<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
@@ -71,7 +77,7 @@ extension IndividualProperty.MiddleLeftRight: LayoutPropertyCanStoreTopToEvaluat
 // MARK: Bottom
 extension IndividualProperty.MiddleLeftRight: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
@@ -87,7 +93,7 @@ extension IndividualProperty.MiddleLeftRight: LayoutPropertyCanStoreBottomToEval
 // MARK: Height
 extension IndividualProperty.MiddleLeftRight: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)

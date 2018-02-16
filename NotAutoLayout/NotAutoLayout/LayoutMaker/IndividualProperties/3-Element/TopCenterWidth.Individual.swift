@@ -20,6 +20,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.TopCenterWidth: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.TopCenterWidth {
 	
@@ -39,7 +45,7 @@ extension IndividualProperty.TopCenterWidth {
 // MARK: Height
 extension IndividualProperty.TopCenterWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
         
         let topCenter = self.topCenter.evaluated(from: parameters)
         let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))

@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct SubviewSetupWizard<ParentView> {
+public struct SubviewSetupWizard<ParentView: UIView> {
 	
 	private let parentView: ParentView
 	private let setteeView: UIView
 	
-	typealias ConditionLayout = [ConditionEnum.RawValue: () -> IndividualLayout]
+	typealias ConditionLayout = [ConditionEnum.RawValue: () -> IndividualLayout<ParentView>]
 	typealias ConditionOrder = [ConditionEnum.RawValue: () -> Int]
 	typealias ConditionZIndex = [ConditionEnum.RawValue: () -> Int]
 	
@@ -42,7 +42,7 @@ public struct SubviewSetupWizard<ParentView> {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
 	
 	private func setupLayouts() {
 		
@@ -113,9 +113,9 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
 	
-	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> IndividualLayout) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, by layout: @escaping () -> IndividualLayout<ParentView>) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.layouts[condition.rawValue] = layout
@@ -123,39 +123,39 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func setLayout(for condition: ConditionEnum, to layout: IndividualLayout) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, to layout: IndividualLayout<ParentView>) -> SubviewSetupWizard<ParentView> {
 		
 		let layout = { layout }
 		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
-	public func setDefaultLayout(by layout: @escaping () -> IndividualLayout) -> SubviewSetupWizard {
+	public func setDefaultLayout(by layout: @escaping () -> IndividualLayout<ParentView>) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setLayout(for: condition, by: layout)
 		
 	}
 	
-	public func setDefaultLayout(to layout: IndividualLayout) -> SubviewSetupWizard {
+	public func setDefaultLayout(to layout: IndividualLayout<ParentView>) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setLayout(for: condition, to: layout)
 		
 	}
 	
-	public func setDefaultLayout(_ making: (LayoutMaker<ParentView, IndividualProperty.Initial>) -> LayoutMaker<ParentView, IndividualLayout>) -> SubviewSetupWizard {
+	public func setDefaultLayout(_ making: (LayoutMaker<ParentView, IndividualProperty.Initial<ParentView>>) -> LayoutMaker<ParentView, IndividualLayout<ParentView>>) -> SubviewSetupWizard<ParentView> {
 		
-		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: IndividualProperty.Initial())
+		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: IndividualProperty.Initial<ParentView>())
 		let layout = making(maker).didSetProperty
 		
 		return self.setDefaultLayout(to: layout)
 		
 	}
 	
-	public func setLayout(for condition: ConditionEnum, making: (LayoutMaker<ParentView, IndividualProperty.Initial>) -> LayoutMaker<ParentView, IndividualLayout>) -> SubviewSetupWizard {
+	public func setLayout(for condition: ConditionEnum, making: (LayoutMaker<ParentView, IndividualProperty.Initial<ParentView>>) -> LayoutMaker<ParentView, IndividualLayout<ParentView>>) -> SubviewSetupWizard<ParentView> {
 		
-		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: IndividualProperty.Initial())
+		let maker = LayoutMaker(parentView: self.parentView, didSetProperty: IndividualProperty.Initial<ParentView>())
 		let layout = making(maker).didSetProperty
 		
 		return self.setLayout(for: condition, to: layout)
@@ -164,9 +164,9 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
 	
-	public func setOrder(for condition: ConditionEnum, by order: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setOrder(for condition: ConditionEnum, by order: @escaping () -> Int) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.orders[condition.rawValue] = order
@@ -174,21 +174,21 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func setOrder(for condition: ConditionEnum, to order: Int) -> SubviewSetupWizard {
+	public func setOrder(for condition: ConditionEnum, to order: Int) -> SubviewSetupWizard<ParentView> {
 		
 		let order = { order }
 		return self.setOrder(for: condition, by: order)
 		
 	}
 	
-	public func setDefaultOrder(by order: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultOrder(by order: @escaping () -> Int) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setOrder(for: condition, by: order)
 		
 	}
 	
-	public func setDefaultOrder(to order: Int) -> SubviewSetupWizard {
+	public func setDefaultOrder(to order: Int) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setOrder(for: condition, to: order)
@@ -197,9 +197,9 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
 	
-	public func setZIndex(for condition: ConditionEnum, by zIndex: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setZIndex(for condition: ConditionEnum, by zIndex: @escaping () -> Int) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.zIndices[condition.rawValue] = zIndex
@@ -207,21 +207,21 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func setZIndex(for condition: ConditionEnum, to zIndex: Int) -> SubviewSetupWizard {
+	public func setZIndex(for condition: ConditionEnum, to zIndex: Int) -> SubviewSetupWizard<ParentView> {
 		
 		let zIndex = { zIndex }
 		return self.setZIndex(for: condition, by: zIndex)
 		
 	}
 	
-	public func setDefaultZIndex(by zIndex: @escaping () -> Int) -> SubviewSetupWizard {
+	public func setDefaultZIndex(by zIndex: @escaping () -> Int) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setZIndex(for: condition, by: zIndex)
 		
 	}
 	
-	public func setDefaultZIndex(to zIndex: Int) -> SubviewSetupWizard {
+	public func setDefaultZIndex(to zIndex: Int) -> SubviewSetupWizard<ParentView> {
 		
 		let condition = self.parentView.getDefaultCondition()
 		return self.setZIndex(for: condition, to: zIndex)
@@ -230,9 +230,9 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 	
 }
 
-extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
+extension SubviewSetupWizard where ParentView: LayoutInfoStorable {
 	
-	public func addToParent() -> SubviewSetupWizard {
+	public func addToParent() -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .add
@@ -240,7 +240,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(at index: Int) -> SubviewSetupWizard {
+	public func insertToParent(at index: Int) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertAt({ index })
@@ -248,7 +248,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(at index: @escaping () -> Int?) -> SubviewSetupWizard {
+	public func insertToParent(at index: @escaping () -> Int?) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertAt(index)
@@ -256,7 +256,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(above view: UIView) -> SubviewSetupWizard {
+	public func insertToParent(above view: UIView) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertAbove({ [weak view] in view })
@@ -264,7 +264,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(above view: @escaping () -> UIView?) -> SubviewSetupWizard {
+	public func insertToParent(above view: @escaping () -> UIView?) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertAbove(view)
@@ -272,7 +272,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(below view: UIView) -> SubviewSetupWizard {
+	public func insertToParent(below view: UIView) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertBelow({ [weak view] in view })
@@ -280,7 +280,7 @@ extension SubviewSetupWizard where ParentView: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func insertToParent(below view: @escaping () -> UIView?) -> SubviewSetupWizard {
+	public func insertToParent(below view: @escaping () -> UIView?) -> SubviewSetupWizard<ParentView> {
 		
 		var wizard = self
 		wizard.addingMethod = .insertBelow(view)

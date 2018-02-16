@@ -20,6 +20,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.MiddleLeftTop: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.MiddleLeftTop {
 	
@@ -40,7 +46,7 @@ extension IndividualProperty.MiddleLeftTop {
 // MARK: Width
 extension IndividualProperty.MiddleLeftTop: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleLeft = self.middleLeft.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

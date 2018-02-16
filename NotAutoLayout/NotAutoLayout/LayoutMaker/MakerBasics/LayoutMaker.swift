@@ -19,4 +19,6 @@ public struct LayoutMaker<ParentView: UIView, Property: LayoutMakerPropertyType>
 
 public protocol LayoutMakerPropertyType {
 	
+	associatedtype _ParentView: UIView
+	
 }

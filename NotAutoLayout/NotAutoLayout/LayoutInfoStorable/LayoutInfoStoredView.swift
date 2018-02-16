@@ -11,7 +11,9 @@ import UIKit
 /// The very basic `UIView` that conforms `LayoutInfoStorable` protocol, to layout subviews.
 open class LayoutInfoStoredView: UIView, LayoutInfoStorable {
 	
-	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
+	public typealias ParentView = LayoutInfoStoredView
+	
+	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo<ParentView>] = [:]
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
 	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
 	

@@ -20,7 +20,7 @@ extension IndividualFrame {
 		self.evaluation = { _ in frame }
 	}
 	
-	init<ParentView>(_ frame: @escaping IndividualFrameCalculation<ParentView>) {
+	init(_ frame: @escaping IndividualFrameCalculation<ParentView>) {
 		self.evaluation = frame
 	}
 	

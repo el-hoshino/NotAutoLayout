@@ -18,10 +18,16 @@ extension SequentialProperty {
 	
 }
 
+extension SequentialProperty.Middle: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Set A Size -
 extension SequentialProperty.Middle: LayoutPropertyCanStoreSizeType {
 	
-	public typealias WillSetSizeProperty = SequentialProperty.MiddleSize
+	public typealias WillSetSizeProperty = SequentialProperty.MiddleSize<ParentView>
 	
 	public func storeSize(_ size: LayoutElement.Size<ParentView>, to maker: LayoutMaker<ParentView, SequentialProperty.Middle<ParentView>>) -> LayoutMaker<ParentView, SequentialProperty.MiddleSize<ParentView>> {
 		

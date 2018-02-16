@@ -20,6 +20,12 @@ extension SequentialProperty {
 	
 }
 
+extension SequentialProperty.MiddleSize: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frames
 extension SequentialProperty.MiddleSize {
 	

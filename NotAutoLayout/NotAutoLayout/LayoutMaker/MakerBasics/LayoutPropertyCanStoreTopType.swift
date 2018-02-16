@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetTopProperty: LayoutMakerPropertyType
 	
 	func storeTop(_ top: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetTopProperty>

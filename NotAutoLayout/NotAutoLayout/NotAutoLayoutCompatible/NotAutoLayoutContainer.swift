@@ -8,14 +8,14 @@
 
 import UIKit
 
-public struct NotAutoLayoutContainer<Containee> {
+public struct NotAutoLayoutContainer<Containee: UIView> {
 	
 	///
 	public let body: Containee
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
 	typealias Hash = Int
 	
@@ -25,9 +25,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public var viewFrameProperty: ViewFrameProperty {
+	public var viewFrameProperty: ViewFrameProperty<Containee> {
 		return ViewFrameProperty(parentView: self.body)
 	}
 	
@@ -43,7 +43,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
 	public var identityFrame: CGRect {
 		

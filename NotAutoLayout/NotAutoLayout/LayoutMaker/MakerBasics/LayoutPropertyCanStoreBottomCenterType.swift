@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreBottomCenterType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetBottomCenterProperty: LayoutMakerPropertyType
 	
 	func storeBottomCenter(_ bottomCenter: LayoutElement.Point<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetBottomCenterProperty>

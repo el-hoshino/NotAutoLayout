@@ -18,13 +18,19 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.Right {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Set A Line -
 // MARK: Top
 extension IndividualProperty.Right: LayoutPropertyCanStoreTopType {
 	
-	public typealias WillSetTopProperty = IndividualProperty.RightTop
+	public typealias WillSetTopProperty = IndividualProperty.RightTop<ParentView>
 	
-	public func storeTop <ParentView> (_ top: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.Right>) -> LayoutMaker<ParentView, IndividualProperty.RightTop> {
+	public func storeTop(_ top: LayoutElement.Vertical<ParentView>, to maker: LayoutMaker<ParentView, IndividualProperty.Right<ParentView>>) -> LayoutMaker<ParentView, IndividualProperty.RightTop<ParentView>> {
 		
 		let rightTop = IndividualProperty.RightTop(right: self.right,
 													  top: top)
@@ -40,9 +46,9 @@ extension IndividualProperty.Right: LayoutPropertyCanStoreTopType {
 // MARK: Middle
 extension IndividualProperty.Right: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = IndividualProperty.RightMiddle
+	public typealias WillSetMiddleProperty = IndividualProperty.RightMiddle<ParentView>
 	
-	public func storeMiddle <ParentView> (_ middle: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.Right>) -> LayoutMaker<ParentView, IndividualProperty.RightMiddle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical<ParentView>, to maker: LayoutMaker<ParentView, IndividualProperty.Right<ParentView>>) -> LayoutMaker<ParentView, IndividualProperty.RightMiddle<ParentView>> {
 		
 		let rightMiddle = IndividualProperty.RightMiddle(right: self.right,
 															middle: middle)
@@ -58,9 +64,9 @@ extension IndividualProperty.Right: LayoutPropertyCanStoreMiddleType {
 // MARK: Bottom
 extension IndividualProperty.Right: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.RightBottom
+	public typealias WillSetBottomProperty = IndividualProperty.RightBottom<ParentView>
 	
-	public func storeBottom <ParentView> (_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<ParentView, IndividualProperty.Right>) -> LayoutMaker<ParentView, IndividualProperty.RightBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical<ParentView>, to maker: LayoutMaker<ParentView, IndividualProperty.Right<ParentView>>) -> LayoutMaker<ParentView, IndividualProperty.RightBottom<ParentView>> {
 		
 		let rightBottom = IndividualProperty.RightBottom(right: self.right,
 															bottom: bottom)

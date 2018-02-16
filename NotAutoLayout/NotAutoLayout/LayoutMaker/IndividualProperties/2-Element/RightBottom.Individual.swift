@@ -20,6 +20,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.RightBottom: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.RightBottom {
 	
@@ -41,7 +47,7 @@ extension IndividualProperty.RightBottom {
 // MARK: Size
 extension IndividualProperty.RightBottom: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let right = self.right.evaluated(from: parameters)
 		let bottom = self.bottom.evaluated(from: parameters)
@@ -57,9 +63,9 @@ extension IndividualProperty.RightBottom: LayoutPropertyCanStoreSizeToEvaluateFr
 // MARK: Width
 extension IndividualProperty.RightBottom: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = IndividualProperty.RightBottomWidth
+	public typealias WillSetWidthProperty = IndividualProperty.RightBottomWidth<ParentView>
 	
-	public func storeWidth <ParentView> (_ width: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.RightBottom>) -> LayoutMaker<ParentView, IndividualProperty.RightBottomWidth> {
+	public func storeWidth(_ width: LayoutElement.Length<ParentView>, to maker: LayoutMaker<ParentView, IndividualProperty.RightBottom<ParentView>>) -> LayoutMaker<ParentView, IndividualProperty.RightBottomWidth<ParentView>> {
 		
 		let rightBottomWidth = IndividualProperty.RightBottomWidth(right: self.right,
 																	  bottom: self.bottom,
@@ -76,9 +82,9 @@ extension IndividualProperty.RightBottom: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.RightBottom: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.RightBottomHeight
+	public typealias WillSetHeightProperty = IndividualProperty.RightBottomHeight<ParentView>
 	
-	public func storeHeight <ParentView> (_ height: LayoutElement.Length, to maker: LayoutMaker<ParentView, IndividualProperty.RightBottom>) -> LayoutMaker<ParentView, IndividualProperty.RightBottomHeight> {
+	public func storeHeight(_ height: LayoutElement.Length<ParentView>, to maker: LayoutMaker<ParentView, IndividualProperty.RightBottom<ParentView>>) -> LayoutMaker<ParentView, IndividualProperty.RightBottomHeight<ParentView>> {
 		
 		let rightBottomHeight = IndividualProperty.RightBottomHeight(right: self.right,
 																		bottom: self.bottom,

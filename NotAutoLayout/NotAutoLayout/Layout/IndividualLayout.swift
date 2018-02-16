@@ -8,11 +8,17 @@
 
 import Foundation
 
-public struct IndividualLayout<ParentView: UIView>: LayoutMakerPropertyType {
+public struct IndividualLayout<ParentView: UIView> {
 	
 	private var basicFrameEvaluation: IndividualFrame<ParentView>
 	
-	private var additionalEvaluations: [FrameAdditionalEvaluation]
+	private var additionalEvaluations: [FrameAdditionalEvaluation<ParentView>]
+	
+}
+
+extension IndividualLayout: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
 	
 }
 
@@ -28,7 +34,7 @@ extension IndividualLayout {
 		self.additionalEvaluations = []
 	}
 	
-	init<ParentView>(frame: @escaping (IndividualFrameCalculationParameters<ParentView>) -> CGRect) {
+	init(frame: @escaping (IndividualFrameCalculationParameters<ParentView>) -> CGRect) {
 		self.basicFrameEvaluation = IndividualFrame(frame)
 		self.additionalEvaluations = []
 	}
@@ -37,7 +43,7 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
+	var frameAdditionalEvaluations: [FrameAdditionalEvaluation<ParentView>] {
 		return self.additionalEvaluations
 	}
 	
@@ -45,13 +51,13 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
+	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation<ParentView>) {
 		
 		self.additionalEvaluations.append(evaluation)
 		
 	}
 	
-	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation]) {
+	mutating func setAdditionalEvaluations(_ evaluations: [FrameAdditionalEvaluation<ParentView>]) {
 		
 		self.additionalEvaluations = evaluations
 		
@@ -61,7 +67,7 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	func evaluatedFrame(for targetView: UIView, from property: ViewFrameProperty) -> CGRect {
+	func evaluatedFrame(for targetView: UIView, from property: ViewFrameProperty<ParentView>) -> CGRect {
 		
 		let parameters: IndividualFrameCalculationParameters = (targetView, property)
 		

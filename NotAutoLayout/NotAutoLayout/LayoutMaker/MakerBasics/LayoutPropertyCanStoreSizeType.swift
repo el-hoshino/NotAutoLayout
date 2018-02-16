@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreSizeType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetSizeProperty: LayoutMakerPropertyType
 	
 	func storeSize(_ size: LayoutElement.Size<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetSizeProperty>

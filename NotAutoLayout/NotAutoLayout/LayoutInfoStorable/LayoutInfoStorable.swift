@@ -12,7 +12,7 @@ import UIKit
 public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	
 	/// The property to store the layout information for subviews.
-	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] { get set }
+	var layoutInfo: [ConditionEnum.RawValue: LayoutInfo<Self>] { get set }
 	
 	/// The property to store the layout order information for subviews.
 	var orderInfo: [ConditionEnum.RawValue: OrderInfo] { get set }
@@ -39,9 +39,9 @@ extension LayoutInfoStorable {
 }
 
 // MARK: - Internal APIs: Layout
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
-	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> IndividualLayout? {
+	func getLayout(for view: UIView, from layoutInfo: LayoutInfo<Containee>?, or alternativeLayoutInfo: LayoutInfo<Containee>? = nil) -> IndividualLayout<Containee>? {
 		
 		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout
@@ -50,42 +50,42 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee>, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout<Containee>, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout<Containee>, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout<Containee>, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout, for subview: UIView) {
+	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout<Containee>, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: IndividualLayout, for subview: UIView) {
+	func setDefaultLayout(_ layout: IndividualLayout<Containee>, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
@@ -95,7 +95,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 }
 
 // MARK: - Internal APIs: Order
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 	func appendLayoutOrder(_ order: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
@@ -140,7 +140,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 }
 
 // MARK: - Internal APIs: ZIndex
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 	func appendZIndex(_ zIndex: @escaping () -> Int, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
@@ -185,15 +185,15 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 }
 
 // MARK: - Internal APIs: ViewInfo Retrieving
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	func layout(in layoutInfo: LayoutInfo) -> IndividualLayout? {
+	func layout(in layoutInfo: LayoutInfo<Containee>) -> IndividualLayout<Containee>? {
 		return layoutInfo[self.hash]
 	}
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
 	func order(in orderInfo: OrderInfo) -> Int? {
 		return orderInfo[self.hash]
@@ -201,7 +201,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
 	func zIndex(in zIndexInfo: ZIndexInfo) -> Int? {
 		return zIndexInfo[self.hash]

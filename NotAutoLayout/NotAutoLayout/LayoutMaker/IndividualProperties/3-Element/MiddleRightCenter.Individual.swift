@@ -20,6 +20,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.MiddleRightCenter: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.MiddleRightCenter {
 	
@@ -56,7 +62,7 @@ extension IndividualProperty.MiddleRightCenter {
 // MARK: Top
 extension IndividualProperty.MiddleRightCenter: LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func evaluateFrame(top: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(top: LayoutElement.Vertical<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleRight = self.middleRight.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)
@@ -71,7 +77,7 @@ extension IndividualProperty.MiddleRightCenter: LayoutPropertyCanStoreTopToEvalu
 // MARK: Bottom
 extension IndividualProperty.MiddleRightCenter: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleRight = self.middleRight.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)
@@ -87,7 +93,7 @@ extension IndividualProperty.MiddleRightCenter: LayoutPropertyCanStoreBottomToEv
 // MARK: Height
 extension IndividualProperty.MiddleRightCenter: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		let middleRight = self.middleRight.evaluated(from: parameters)
 		let center = self.center.evaluated(from: parameters)

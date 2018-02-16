@@ -152,7 +152,7 @@ extension LayoutElement {
 
 extension LayoutElement.Horizontal {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -171,7 +171,7 @@ extension LayoutElement.Horizontal {
 
 extension LayoutElement.Vertical {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -186,7 +186,7 @@ extension LayoutElement.Vertical {
 		
 	}
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: SequentialFrameCalculationParameters<ParentView>) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -205,7 +205,7 @@ extension LayoutElement.Vertical {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGPoint {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGPoint {
 		
 		switch self {
 		case .constant(let value):
@@ -247,7 +247,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):
@@ -266,7 +266,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGSize {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGSize {
 		
 		switch self {
 		case .constant(let value):
@@ -284,7 +284,7 @@ extension LayoutElement.Size {
 		
 	}
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [CGSize] {
+	func evaluated(from parameters: SequentialFrameCalculationParameters<ParentView>) -> [CGSize] {
 		
 		switch self {
 		case .constant(let value):
@@ -306,7 +306,7 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		switch self {
 		case .constant(let value):
@@ -322,7 +322,7 @@ extension LayoutElement.Rect {
 
 extension LayoutElement.Insets {
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters, totalWidth: CGFloat, viewWidths: [CGFloat]) -> CGFloat {
+	func evaluated(from parameters: SequentialFrameCalculationParameters<ParentView>, totalWidth: CGFloat, viewWidths: [CGFloat]) -> CGFloat {
 		
 		switch self {
 		case .constant(let value):

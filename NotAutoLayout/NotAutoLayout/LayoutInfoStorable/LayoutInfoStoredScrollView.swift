@@ -10,7 +10,9 @@ import Foundation
 
 open class LayoutInfoStoredScrollView: UIScrollView, LayoutInfoStorable {
 	
-	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
+	public typealias ParentView = LayoutInfoStoredScrollView
+	
+	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo<ParentView>] = [:]
 	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
 	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
 	

@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreHorizontalInsetsType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetHorizontalInsetsType: LayoutMakerPropertyType
 	
 	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetHorizontalInsetsType>

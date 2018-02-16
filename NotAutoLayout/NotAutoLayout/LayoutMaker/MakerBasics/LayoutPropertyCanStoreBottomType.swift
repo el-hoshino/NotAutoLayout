@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreBottomType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetBottomProperty: LayoutMakerPropertyType
 	
 	func storeBottom(_ bottom: LayoutElement.Vertical<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetBottomProperty>

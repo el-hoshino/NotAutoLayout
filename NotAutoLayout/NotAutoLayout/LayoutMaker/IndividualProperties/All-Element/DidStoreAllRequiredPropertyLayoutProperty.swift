@@ -12,7 +12,7 @@ typealias DidStoreAllRequiredPropertyLayoutMaker = IndividualLayout
 
 extension DidStoreAllRequiredPropertyLayoutMaker: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func addEvaluation <ParentView> (_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<ParentView, IndividualLayout>) -> LayoutMaker<ParentView, IndividualLayout> {
+	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation<ParentView>, to maker: LayoutMaker<ParentView, IndividualLayout<ParentView>>) -> LayoutMaker<ParentView, IndividualLayout<ParentView>> {
 		
 		var property = self
 		property.addAdditionalEvaluation(evaluation)

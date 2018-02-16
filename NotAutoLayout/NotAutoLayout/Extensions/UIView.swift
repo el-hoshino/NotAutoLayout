@@ -64,9 +64,9 @@ extension UIView {
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Horizontal {
+	func horizontalReference <ParentView> (_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Horizontal<ParentView> {
 		
-		let reference = LayoutElement.Horizontal.byParent { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Horizontal<ParentView>.byParent { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset
@@ -86,9 +86,9 @@ extension UIView {
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Vertical {
+	func verticalReference <ParentView> (_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Vertical<ParentView> {
 		
-		let reference = LayoutElement.Vertical.byParent { [unowned self] (_) -> CGFloat in
+		let reference = LayoutElement.Vertical<ParentView>.byParent { [unowned self] (_) -> CGFloat in
 			
 			guard let referenceView = referenceView() else {
 				return offset
@@ -108,9 +108,9 @@ extension UIView {
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Point {
+	func pointReference <ParentView> (_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Point<ParentView> {
 		
-		let reference = LayoutElement.Point.byParent { [unowned self] (_) -> CGPoint in
+		let reference = LayoutElement.Point<ParentView>.byParent { [unowned self] (_) -> CGPoint in
 			
 			guard let referenceView = referenceView() else {
 				return CGPoint.zero + offset

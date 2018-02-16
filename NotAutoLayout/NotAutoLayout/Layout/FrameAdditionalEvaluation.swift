@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum FrameAdditionalEvaluation {
+public enum FrameAdditionalEvaluation<ParentView: UIView> {
 	
-	public typealias FloatEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGFloat
-	public typealias PointEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGPoint
-	public typealias SizeEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGSize
+	public typealias FloatEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters<ParentView>) -> CGFloat
+	public typealias PointEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters<ParentView>) -> CGPoint
+	public typealias SizeEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters<ParentView>) -> CGSize
 	
-	public typealias Process = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> Void
+	public typealias Process = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters<ParentView>) -> Void
 	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
@@ -55,7 +55,7 @@ public enum FrameAdditionalEvaluation {
 
 extension FrameAdditionalEvaluation {
 	
-	func evaluated(from frame: CGRect, with parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from frame: CGRect, with parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
 		
 		var frame = frame
 		

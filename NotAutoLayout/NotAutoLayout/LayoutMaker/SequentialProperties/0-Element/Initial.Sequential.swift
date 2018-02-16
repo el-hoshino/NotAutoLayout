@@ -16,10 +16,16 @@ extension SequentialProperty {
 	
 }
 
+extension SequentialProperty.Initial: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Set A Point -
 extension SequentialProperty.Initial: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = SequentialProperty.Middle
+	public typealias WillSetMiddleProperty = SequentialProperty.Middle<ParentView>
 	
 	public func storeMiddle(_ middle: LayoutElement.Vertical<ParentView>, to maker: LayoutMaker<ParentView, SequentialProperty.Initial<ParentView>>) -> LayoutMaker<ParentView, SequentialProperty.Middle<ParentView>> {
 		

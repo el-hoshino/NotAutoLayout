@@ -22,6 +22,12 @@ extension IndividualProperty {
 	
 }
 
+extension IndividualProperty.CenterMiddleWidth: LayoutMakerPropertyType {
+	
+	public typealias _ParentView = ParentView
+	
+}
+
 // MARK: - Make Frame
 extension IndividualProperty.CenterMiddleWidth {
 	
@@ -41,7 +47,7 @@ extension IndividualProperty.CenterMiddleWidth {
 // MARK: Height
 extension IndividualProperty.CenterMiddleWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length<ParentView>, parameters: IndividualFrameCalculationParameters<ParentView>) -> CGRect {
         
         let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
         let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))

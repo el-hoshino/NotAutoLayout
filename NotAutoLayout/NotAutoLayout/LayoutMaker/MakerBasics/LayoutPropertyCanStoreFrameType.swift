@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetFrameProperty: LayoutMakerPropertyType
 	
 	func storeFrame(_ frame: LayoutElement.Rect<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetFrameProperty>

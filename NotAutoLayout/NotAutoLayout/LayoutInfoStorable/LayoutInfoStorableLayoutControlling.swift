@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 	private func layoutNormally(subviews: [UIView]) {
 		
@@ -25,7 +25,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
+extension NotAutoLayoutContainer where Containee: LayoutInfoStorable {
 	
 	/// Layout all the subviews which have linked layout information. If you conform your own `UIView` to `LayoutInfoStorable` protocol, call this method inside `layoutSubviews()` method.
 	public func layoutSubviews() {

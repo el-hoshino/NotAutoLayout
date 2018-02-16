@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
 	/// Layout a `view` with a specific `frame`.
 	///
@@ -37,9 +37,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func layout(_ view: UIView, with layout: IndividualLayout) {
+	public func layout(_ view: UIView, with layout: IndividualLayout<Containee>) {
 		
 		let frame = layout.evaluatedFrame(for: view, from: self.viewFrameProperty)
 		
@@ -49,9 +49,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<Containee, IndividualProperty.Initial>) -> LayoutMaker<Containee, IndividualLayout>) {
+	public func layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<Containee, IndividualProperty.Initial<Containee>>) -> LayoutMaker<Containee, IndividualLayout<Containee>>) {
 		
 		let layout = self.makeLayout(making)
 		
@@ -61,11 +61,11 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func makeLayout(_ making: (LayoutMaker<Containee, IndividualProperty.Initial>) -> LayoutMaker<Containee, IndividualLayout>) -> IndividualLayout {
+	public func makeLayout(_ making: (LayoutMaker<Containee, IndividualProperty.Initial<Containee>>) -> LayoutMaker<Containee, IndividualLayout<Containee>>) -> IndividualLayout<Containee> {
 		
-		let maker = LayoutMaker(parentView: self.body, didSetProperty: IndividualProperty.Initial())
+		let maker = LayoutMaker(parentView: self.body, didSetProperty: IndividualProperty.Initial<Containee>())
 		let layout = making(maker).didSetProperty
 		
 		return layout
@@ -74,11 +74,11 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func makeSequentialLayout(_ making: (LayoutMaker<Containee, SequentialProperty.Initial>) -> LayoutMaker<Containee, SequentialLayout>) -> SequentialLayout {
+	public func makeSequentialLayout(_ making: (LayoutMaker<Containee, SequentialProperty.Initial<Containee>>) -> LayoutMaker<Containee, SequentialLayout<Containee>>) -> SequentialLayout<Containee> {
 		
-		let maker = LayoutMaker(parentView: self.body, didSetProperty: SequentialProperty.Initial())
+		let maker = LayoutMaker(parentView: self.body, didSetProperty: SequentialProperty.Initial<Containee>())
 		let layout = making(maker).didSetProperty
 		
 		return layout
@@ -87,9 +87,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func layout(_ subviews: [UIView], with layout: SequentialLayout) {
+	public func layout(_ subviews: [UIView], with layout: SequentialLayout<Containee>) {
 		
 		let frames = layout.evaluatedFrame(for: subviews, from: self.viewFrameProperty)
 		
@@ -101,9 +101,9 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	
 }
 
-extension NotAutoLayoutContainer where Containee: UIView {
+extension NotAutoLayoutContainer {
 	
-	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<Containee, SequentialProperty.Initial>) -> LayoutMaker<Containee, SequentialLayout>) {
+	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<Containee, SequentialProperty.Initial<Containee>>) -> LayoutMaker<Containee, SequentialLayout<Containee>>) {
 		
 		let layout = self.makeSequentialLayout(making)
 		

@@ -9,9 +9,7 @@
 import Foundation
 
 public protocol LayoutPropertyCanStoreRightType: LayoutMakerPropertyType {
-	
-	associatedtype _ParentView: UIView
-	
+		
 	associatedtype WillSetRightProperty: LayoutMakerPropertyType
 	
 	func storeRight(_ right: LayoutElement.Horizontal<_ParentView>, to maker: LayoutMaker<_ParentView, Self>) -> LayoutMaker<_ParentView, WillSetRightProperty>
