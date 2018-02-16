@@ -12,3 +12,7 @@ import Foundation
 public struct IndividualProperty {
 	
 }
+
+public struct SequentialProperty {
+	
+}
