@@ -23,7 +23,7 @@ extension SequentialProperty.Middle: LayoutPropertyCanStoreSizeType {
 	
 	public typealias WillSetSizeProperty = SequentialProperty.MiddleSize
 	
-	public func storeSize <ParentView> (_ size: LayoutElement.Size, to maker: LayoutMaker<ParentView, SequentialProperty.Middle>) -> LayoutMaker<ParentView, SequentialProperty.MiddleSize> {
+	public func storeSize(_ size: LayoutElement.Size<ParentView>, to maker: LayoutMaker<ParentView, SequentialProperty.Middle<ParentView>>) -> LayoutMaker<ParentView, SequentialProperty.MiddleSize<ParentView>> {
 		
 		let centerSize = SequentialProperty.MiddleSize(middle: self.middle,
 													   subviewSize: size)

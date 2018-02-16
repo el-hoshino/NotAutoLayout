@@ -10,7 +10,7 @@ import Foundation
 
 public struct SequentialLayout<ParentView: UIView>: LayoutMakerPropertyType {
 	
-	private var basicFrameEvaluation: SequentialFrame
+	private var basicFrameEvaluation: SequentialFrame<ParentView>
 	
 	private var additionalEvaluations: [FrameAdditionalEvaluation]
 	
@@ -18,12 +18,12 @@ public struct SequentialLayout<ParentView: UIView>: LayoutMakerPropertyType {
 
 extension SequentialLayout {
 	
-	init(frame: SequentialFrame) {
+	init(frame: SequentialFrame<ParentView>) {
 		self.basicFrameEvaluation = frame
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (SequentialFrameCalculationParameters) -> [CGRect]) {
+	init(frame: @escaping (SequentialFrameCalculationParameters<ParentView>) -> [CGRect]) {
 		self.basicFrameEvaluation = SequentialFrame(frame)
 		self.additionalEvaluations = []
 	}
@@ -56,9 +56,9 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	func evaluatedFrame(for targetViews: [UIView], from property: ViewFrameProperty) -> [CGRect] {
+	func evaluatedFrame(for targetViews: [UIView], from property: ViewFrameProperty<ParentView>) -> [CGRect] {
 		
-		let parameters: SequentialFrameCalculationParameters = (targetViews, property)
+		let parameters: SequentialFrameCalculationParameters<ParentView> = (targetViews, property)
 		
 		let frames = self.basicFrameEvaluation.evaluated(from: parameters)
 		

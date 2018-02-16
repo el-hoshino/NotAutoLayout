@@ -45,7 +45,7 @@ extension SequentialProperty.MiddleSize {
 
 extension SequentialProperty.MiddleSize: LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
-	public func evaluateFrames(horizontalInsets: LayoutElement.Insets, parameters: SequentialFrameCalculationParameters) -> [CGRect] {
+	public func evaluateFrames(horizontalInsets: LayoutElement.Insets<ParentView>, parameters: SequentialFrameCalculationParameters<ParentView>) -> [CGRect] {
 		
 		let middle = self.middle.evaluated(from: parameters)
 		let subviewSizes = self.subviewSize.evaluated(from: parameters)

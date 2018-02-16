@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct SequentialFrame {
+struct SequentialFrame<ParentView: UIView> {
 	
-	private let evaluation: SequentialFrameCalculation
+	private let evaluation: SequentialFrameCalculation<ParentView>
 	
 }
 
 extension SequentialFrame {
 	
-	init(_ frame: @escaping SequentialFrameCalculation) {
+	init(_ frame: @escaping SequentialFrameCalculation<ParentView>) {
 		self.evaluation = frame
 	}
 	
@@ -24,7 +24,7 @@ extension SequentialFrame {
 
 extension SequentialFrame {
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [CGRect] {
+	func evaluated(from parameters: SequentialFrameCalculationParameters<ParentView>) -> [CGRect] {
 		
 		return self.evaluation(parameters)
 		
