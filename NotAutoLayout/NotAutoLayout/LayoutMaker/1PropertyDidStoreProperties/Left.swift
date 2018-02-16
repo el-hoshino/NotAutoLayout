@@ -22,11 +22,11 @@ extension IndividualProperty {
 // MARK: Center
 extension IndividualProperty.Left: LayoutPropertyCanStoreCenterType {
 	
-	public typealias WillSetCenterProperty = DidStoreLeftCenterLayoutProperty
+	public typealias WillSetCenterProperty = IndividualProperty.LeftCenter
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.Left>) -> LayoutMaker<DidStoreLeftCenterLayoutProperty> {
+	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.Left>) -> LayoutMaker<IndividualProperty.LeftCenter> {
 		
-		let leftCenter = DidStoreLeftCenterLayoutProperty(left: self.left,
+		let leftCenter = IndividualProperty.LeftCenter(left: self.left,
 													  center: center)
 		let maker = LayoutMaker(parentView: maker.parentView,
 								didSetProperty: leftCenter)
