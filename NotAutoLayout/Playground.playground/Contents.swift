@@ -72,7 +72,7 @@ let imageViews = (0 ..< 3).map { (_) -> UIImageView in
 
 
 appView.nal.layout(imageViews) { $0
-	.setMiddle(by: { $0.boundMiddle })
+	.setMiddle(by: { $0.safeMiddle })
 	.fitSize()
 	.setHorizontalInsetsEqualingToMargin()
 }

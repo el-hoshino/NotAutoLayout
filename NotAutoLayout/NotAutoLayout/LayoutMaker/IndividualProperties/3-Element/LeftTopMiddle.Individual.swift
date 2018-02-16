@@ -10,13 +10,13 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct LeftTopMiddle {
+	public struct LeftTopMiddle<ParentView: UIView> {
 		
-		let left: LayoutElement.Horizontal
+		let left: LayoutElement.Horizontal<ParentView>
 		
-		let top: LayoutElement.Vertical
+		let top: LayoutElement.Vertical<ParentView>
 		
-		let middle: LayoutElement.Vertical
+		let middle: LayoutElement.Vertical<ParentView>
 		
 	}
 	

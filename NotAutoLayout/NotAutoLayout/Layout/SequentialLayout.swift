@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SequentialLayout: LayoutMakerPropertyType {
+public struct SequentialLayout<ParentView: UIView>: LayoutMakerPropertyType {
 	
 	private var basicFrameEvaluation: SequentialFrame
 	

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct IndividualLayout: LayoutMakerPropertyType {
+public struct IndividualLayout<ParentView: UIView>: LayoutMakerPropertyType {
 	
 	private var basicFrameEvaluation: IndividualFrame
 	
@@ -18,7 +18,7 @@ public struct IndividualLayout: LayoutMakerPropertyType {
 
 extension IndividualLayout {
 	
-	static let dummy: IndividualLayout = IndividualLayout(frame: .zero)
+	static let dummy: IndividualLayout<ParentView> = IndividualLayout<ParentView>(frame: .zero)
 	
 }
 

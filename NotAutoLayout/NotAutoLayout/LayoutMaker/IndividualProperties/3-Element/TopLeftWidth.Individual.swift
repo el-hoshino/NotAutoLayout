@@ -10,11 +10,11 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct TopLeftWidth {
+	public struct TopLeftWidth<ParentView: UIView> {
 		
-		let topLeft: LayoutElement.Point
+		let topLeft: LayoutElement.Point<ParentView>
 		
-		let width: LayoutElement.Length
+		let width: LayoutElement.Length<ParentView>
 		
 	}
 	

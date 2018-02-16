@@ -10,13 +10,13 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct CenterTopWidth {
+	public struct CenterTopWidth<ParentView: UIView> {
 		
-		let center: LayoutElement.Horizontal
+		let center: LayoutElement.Horizontal<ParentView>
 		
-		let top: LayoutElement.Vertical
+		let top: LayoutElement.Vertical<ParentView>
 		
-		let width: LayoutElement.Length
+		let width: LayoutElement.Length<ParentView>
 		
 	}
 	

@@ -10,9 +10,9 @@ import Foundation
 
 extension SequentialProperty {
 	
-	public struct Middle {
+	public struct Middle<ParentView: UIView> {
 		
-		let middle: LayoutElement.Vertical
+		let middle: LayoutElement.Vertical<ParentView>
 		
 	}
 	

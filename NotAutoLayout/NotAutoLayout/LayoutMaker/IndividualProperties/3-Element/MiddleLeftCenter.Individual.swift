@@ -10,11 +10,11 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct MiddleLeftCenter {
+	public struct MiddleLeftCenter<ParentView: UIView> {
 		
-		let middleLeft: LayoutElement.Point
+		let middleLeft: LayoutElement.Point<ParentView>
 		
-		let center: LayoutElement.Horizontal
+		let center: LayoutElement.Horizontal<ParentView>
 		
 	}
 	

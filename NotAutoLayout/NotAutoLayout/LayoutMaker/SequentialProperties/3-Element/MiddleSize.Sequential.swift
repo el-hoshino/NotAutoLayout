@@ -10,11 +10,11 @@ import Foundation
 
 extension SequentialProperty {
 	
-	public struct MiddleSize {
+	public struct MiddleSize<ParentView: UIView> {
 		
-		let middle: LayoutElement.Vertical
+		let middle: LayoutElement.Vertical<ParentView>
 		
-		let subviewSize: LayoutElement.Size
+		let subviewSize: LayoutElement.Size<ParentView>
 		
 	}
 	

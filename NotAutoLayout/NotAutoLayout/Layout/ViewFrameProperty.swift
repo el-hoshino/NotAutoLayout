@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct ViewFrameProperty {
+public struct ViewFrameProperty<ParentView: UIView> {
 	
-	private(set) weak var parentView: UIView?
+	private(set) weak var parentView: ParentView?
 	
 }
 
@@ -314,7 +314,7 @@ extension ViewFrameProperty {
 		
 	}
 	
-	func evaluateSize(for view: UIView, from aspect: LayoutElement.Size.AspectSizing) -> CGSize {
+	func evaluateSize <ParentView: UIView> (for view: UIView, from aspect: LayoutElement.Size<ParentView>.AspectSizing) -> CGSize {
 		
 		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
 			switch safeAreaOnly {

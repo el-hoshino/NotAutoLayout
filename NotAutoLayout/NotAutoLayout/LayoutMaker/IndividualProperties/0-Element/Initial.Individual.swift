@@ -10,7 +10,7 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct Initial {
+	public struct Initial<ParentView: UIView> {
 		
 	}
 	

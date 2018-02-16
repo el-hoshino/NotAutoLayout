@@ -14,39 +14,39 @@ public struct LayoutElement {
 
 extension LayoutElement {
 	
-	public enum Horizontal {
+	public enum Horizontal<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat)
 		
 	}
 	
-	public enum Vertical {
+	public enum Vertical<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat)
 		
 	}
 	
-	public enum Point {
+	public enum Point<ParentView: UIView> {
 		
 		case constant(CGPoint)
-		case byParent((ViewFrameProperty) -> CGPoint)
+		case byParent((ViewFrameProperty<ParentView>) -> CGPoint)
 		case byReference(referenceGetter: () -> UIView?,(ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint)
 		
 	}
 	
-	public enum Length {
+	public enum Length<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		case fits(CGFloat)
 		
 	}
 	
-	public enum Size {
+	public enum Size<ParentView: UIView> {
 		
 		public enum AspectSizing {
 			
@@ -113,38 +113,38 @@ extension LayoutElement {
 		}
 		
 		case constant(CGSize)
-		case byParent((ViewFrameProperty) -> CGSize)
+		case byParent((ViewFrameProperty<ParentView>) -> CGSize)
 		case fits(CGSize)
 		case aspect(AspectSizing)
 		
 	}
 	
-	public enum Rect {
+	public enum Rect<ParentView: UIView> {
 		
 		case constant(CGRect)
-		case byParent((ViewFrameProperty) -> CGRect)
+		case byParent((ViewFrameProperty<ParentView>) -> CGRect)
 		
 	}
 	
-	public enum Insets {
+	public enum Insets<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		case equalsToMargin
 		
 	}
 	
-	public enum HorizontalMargin {
+	public enum HorizontalMargin<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		
 	}
 	
-	public enum VerticalMargin {
+	public enum VerticalMargin<ParentView: UIView> {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewFrameProperty<ParentView>) -> CGFloat)
 		
 	}
 	
