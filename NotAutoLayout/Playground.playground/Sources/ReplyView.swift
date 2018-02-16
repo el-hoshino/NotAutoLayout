@@ -73,8 +73,8 @@ extension ReplyView {
 		self.nal.layout(self.replyView, by: { $0
 			.setFrame(by: { $0.safeFrame })
 			.expandingWidth(by: -margin * 2, from: .center)
-			.addingProcess(by: { (replyView, frame, _) in
-				replyView.layer.cornerRadius = frame.height / 2
+			.addingProcess(by: { (frame, parameters) in
+				parameters.targetView.layer.cornerRadius = frame.height / 2
 			})
 		})
 		

@@ -108,8 +108,8 @@ extension ProfileSummaryView {
 			.setTopLeft(by: { $0.safeTopLeft })
 			.setSize(by: { let length = min($0.safeWidth, $0.safeHeight); return .init(width: length, height: length) })
 			.movingX(by: margin)
-			.addingProcess(by: { (view, frame, _) in
-				view.layer.cornerRadius = min(frame.width, frame.height) / 2
+			.addingProcess(by: { (frame, parameters) in
+				parameters.targetView.layer.cornerRadius = min(frame.width, frame.height) / 2
 			})
 		}
 		

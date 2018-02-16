@@ -10,17 +10,11 @@ import Foundation
 
 extension CGRect {
 	
-	@available(*, introduced: 2.0, deprecated: 2.2, renamed: "HorizontalBaseLine")
-	public typealias HorizontalBasePoint = HorizontalBaseLine
-	
 	public struct HorizontalBaseLine {
 		
 		var value: CGFloat
 		
 	}
-	
-	@available(*, introduced: 2.0, deprecated: 2.2, renamed: "VerticalBaseLine")
-	public typealias VerticalBasePoint = VerticalBaseLine
 	
 	public struct VerticalBaseLine {
 		

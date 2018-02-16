@@ -92,3 +92,31 @@ extension Array {
 	}
 	
 }
+
+extension Array {
+	
+	mutating func mutatingForEach(_ body: (inout Element) throws -> Void) rethrows {
+		
+		for index in self.indices {
+			try body(&self[index])
+		}
+		
+	}
+	
+}
+
+extension Array where Element: Numeric {
+	
+	func sum(ofFirst n: Int) -> Element {
+		
+		let n = Swift.min(n, self.count)
+		let droppingN = self.count - n
+		let droppedArray = self.dropLast(droppingN)
+		
+		let sum = droppedArray.reduce(0, (+))
+		
+		return sum
+		
+	}
+	
+}

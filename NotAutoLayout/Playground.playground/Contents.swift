@@ -33,7 +33,7 @@ contentsView.contents = """
 contentsView.timeStamp = Date()
 
 appView.nal.setupSubview(summaryView) { $0
-	.makeDefaultLayout { $0
+	.setDefaultLayout { $0
 		.setLeft(by: { $0.boundLeft })
 		.setRight(by: { $0.boundRight })
 		.setTop(by: { $0.boundTop })
@@ -42,7 +42,7 @@ appView.nal.setupSubview(summaryView) { $0
 	.addToParent()
 }
 appView.nal.setupSubview(contentsView) { $0
-	.makeDefaultLayout({ $0
+	.setDefaultLayout({ $0
 		.pinTopLeft(to: summaryView, with: { $0.bottomLeft })
 		.pinRight(to: summaryView, with: { $0.right })
 		.fitHeight()
@@ -52,7 +52,7 @@ appView.nal.setupSubview(contentsView) { $0
 	.addToParent()
 }
 appView.nal.setupSubview(replyView) { $0
-	.makeDefaultLayout({ $0
+	.setDefaultLayout({ $0
 		.setBottomLeft(by: { $0.boundBottomLeft })
 		.setRight(by: { $0.boundRight })
 		.setTop(by: { $0.safeBottom - 30 })
@@ -61,3 +61,18 @@ appView.nal.setupSubview(replyView) { $0
 }
 
 appView.setNeedsLayout()
+
+
+let imageViews = (0 ..< 3).map { (_) -> UIImageView in
+	let image = #imageLiteral(resourceName: "avatar.png")
+	let view = UIImageView(image: image)
+	appView.addSubview(view)
+	return view
+}
+
+
+appView.nal.layout(imageViews) { $0
+	.setMiddle(by: { $0.boundMiddle })
+	.fitSize()
+	.setHorizontalInsetsEqualingToMargin()
+}
