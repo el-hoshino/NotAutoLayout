@@ -31,16 +31,6 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		return ViewLayoutGuides(parentView: self.body)
 	}
 	
-	/// The bound size.
-	public var boundsGuide: LayoutGuide {
-		return self.viewFrameProperty.boundsGuide
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeAreaGuide: LayoutGuide {
-		return self.viewFrameProperty.safeAreaGuide
-	}
-	
 }
 
 extension NotAutoLayoutContainer where Containee: UIView {

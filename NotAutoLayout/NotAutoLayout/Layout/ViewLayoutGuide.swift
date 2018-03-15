@@ -1,5 +1,5 @@
 //
-//  LayoutGuide.swift
+//  ViewLayoutGuide.swift
 //  NotAutoLayout
 //
 //  Created by 史 翔新 on 2018/03/15.
@@ -8,25 +8,29 @@
 
 import Foundation
 
-public struct LayoutGuide {
-    
-    let uiLayoutDirection: UIUserInterfaceLayoutDirection
-    let rect: Rect
-    
-    static let empty: LayoutGuide = .init(uiLayoutDirection: .leftToRight,
-                                          rect: .zero)
-    
+extension ViewLayoutGuides {
+	
+	public struct Guide {
+		
+		let uiLayoutDirection: UIUserInterfaceLayoutDirection
+		let rect: Rect
+		
+		static let empty: ViewLayoutGuides.Guide = .init(uiLayoutDirection: .leftToRight,
+														 rect: .zero)
+		
+	}
+	
 }
 
-extension LayoutGuide: LayoutGuideRepresentable {
+extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
     
-    public var layoutGuide: LayoutGuide {
+    public var layoutGuide: ViewLayoutGuides.Guide {
         return self
     }
     
 }
 
-extension LayoutGuide {
+extension ViewLayoutGuides.Guide {
     
     public var left: CGFloat {
         return self.rect.left
@@ -50,7 +54,7 @@ extension LayoutGuide {
     
 }
 
-extension LayoutGuide {
+extension ViewLayoutGuides.Guide {
     
     public var top: CGFloat {
         return self.rect.top
@@ -74,7 +78,7 @@ extension LayoutGuide {
     
 }
 
-extension LayoutGuide {
+extension ViewLayoutGuides.Guide {
     
     public var topLeft: CGPoint {
         return self.rect.topLeft
@@ -124,7 +128,7 @@ extension LayoutGuide {
     
 }
 
-extension LayoutGuide {
+extension ViewLayoutGuides.Guide {
     
     public var frame: CGRect {
         return self.rect.frame
@@ -136,7 +140,7 @@ extension LayoutGuide {
     
 }
 
-extension LayoutGuide {
+extension ViewLayoutGuides.Guide {
     
     public var leading: CGFloat {
         switch self.uiLayoutDirection {

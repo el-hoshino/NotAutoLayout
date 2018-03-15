@@ -22,13 +22,13 @@ public struct ViewLayoutGuides {
 
 extension ViewLayoutGuides {
 	
-	private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> LayoutGuide {
+	private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> Guide {
 		
 		guard let direction = direction, let rect = rect else {
 			return .empty
 		}
 		
-		let guide = LayoutGuide.init(uiLayoutDirection: direction, rect: rect)
+		let guide = Guide.init(uiLayoutDirection: direction, rect: rect)
 		
 		return guide
 		
@@ -38,7 +38,7 @@ extension ViewLayoutGuides {
 
 extension ViewLayoutGuides: LayoutGuideRepresentable {
     
-    public var layoutGuide: LayoutGuide {
+    public var layoutGuide: Guide {
         return self.boundsGuide
     }
     
@@ -46,20 +46,20 @@ extension ViewLayoutGuides: LayoutGuideRepresentable {
 
 extension ViewLayoutGuides {
     
-    public var boundsGuide: LayoutGuide {
+    public var boundsGuide: Guide {
         return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.boundsRect)
     }
     
-    public var layoutMarginsGuide: LayoutGuide {
+    public var layoutMarginsGuide: Guide {
         return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.layoutMarginsRect)
     }
     
-    public var readableGuide: LayoutGuide {
+    public var readableGuide: Guide {
         return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.readableRect)
     }
     
     @available(iOS 11.0, *)
-    public var safeAreaGuide: LayoutGuide {
+    public var safeAreaGuide: Guide {
         return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.safeAreaRect)
     }
     

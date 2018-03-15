@@ -11,7 +11,7 @@ import Foundation
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
 	public func getCurrentCondition() -> ConditionEnum {
-		return self.body.getCondition(underCurrentBoundSize: self.boundsGuide.size) ?? self.body.getDefaultCondition()
+		return self.body.getCondition(underCurrentBoundSize: self.viewFrameProperty.size) ?? self.body.getDefaultCondition()
 	}
 	
 }

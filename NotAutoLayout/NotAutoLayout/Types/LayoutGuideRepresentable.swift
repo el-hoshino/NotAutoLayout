@@ -10,7 +10,7 @@ import Foundation
 
 public protocol LayoutGuideRepresentable {
     
-    var layoutGuide: LayoutGuide { get }
+    var layoutGuide: ViewLayoutGuides.Guide { get }
     
     var left: CGFloat { get }
     
