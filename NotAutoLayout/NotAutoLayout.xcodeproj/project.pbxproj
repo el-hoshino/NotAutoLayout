@@ -183,6 +183,8 @@
 		79FD2CF21FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */; };
 		79FD2CF41FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */; };
 		BFBD2253205A5C3C00B9C459 /* LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* LayoutGuide.swift */; };
+		BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2254205A6EE200B9C459 /* LazyBox.swift */; };
+		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,6 +377,8 @@
 		79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreHeightType.swift; sourceTree = "<group>"; };
 		79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreSizeType.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* LayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuide.swift; sourceTree = "<group>"; };
+		BFBD2254205A6EE200B9C459 /* LazyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyBox.swift; sourceTree = "<group>"; };
+		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -600,10 +604,12 @@
 		7971FAB3203160FA00B63CBC /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				BFBD2254205A6EE200B9C459 /* LazyBox.swift */,
 				79CDD00C1FED797300A6D168 /* Span.swift */,
 				79CDD00E1FED79CC00A6D168 /* Rect.swift */,
 				164EA0A71EF3DA5100C0BB8F /* Bounds.swift */,
 				BFBD2252205A5C3C00B9C459 /* LayoutGuide.swift */,
+				BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */,
 				164319F01F7A1903003FA7DA /* IndividualFrame.swift */,
 				7971FAC020346AAB00B63CBC /* SequentialFrame.swift */,
 				7971FAB72032FA8500B63CBC /* Typealias.swift */,
@@ -878,6 +884,7 @@
 				79D8DD921EF93E1700B74593 /* RightBottom.Individual.swift in Sources */,
 				79D8DDE01EF94B2D00B74593 /* RightTopHeight.Individual.swift in Sources */,
 				163007321F0F380C00012C18 /* MiddleCenterWidth.Individual.swift in Sources */,
+				BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */,
 				79D8DDDE1EF94AFF00B74593 /* RightTopWidth.Individual.swift in Sources */,
 				163007431F0F380C00012C18 /* BottomCenterMiddle.Individual.swift in Sources */,
 				79D8DD781EF9352500B74593 /* LeftRight.Individual.swift in Sources */,
@@ -898,6 +905,7 @@
 				79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */,
 				163007281F0F380C00012C18 /* MiddleLeftCenter.Individual.swift in Sources */,
 				164EA0C21EF3DAE300C0BB8F /* Initial.Individual.swift in Sources */,
+				BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */,
 				79D8DD6A1EF933FF00B74593 /* Right.Individual.swift in Sources */,
 				79D8DDE21EF94B5200B74593 /* RightMiddleWidth.Individual.swift in Sources */,
 				163007331F0F380C00012C18 /* MiddleCenterHeight.Individual.swift in Sources */,
