@@ -25,7 +25,7 @@ extension UIView {
 		switch targetView {
 		case self:
 			if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
-				return self.boundsWithZeroOrigin.inside(self.safeAreaInsets)
+                return self.boundsWithZeroOrigin.frame(inside: self.safeAreaInsets)
 			} else {
 				return self.boundsWithZeroOrigin
 			}
@@ -41,7 +41,7 @@ extension UIView {
 			
 			let safeAreaFrame: CGRect = {
 				if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
-					return checkingFrame.inside(self.safeAreaInsets)
+                    return checkingFrame.frame(inside: self.safeAreaInsets)
 				} else {
 					return checkingFrame
 				}
