@@ -8,57 +8,31 @@
 
 import Foundation
 
-private enum SafeAreaGuideBox {
-    case none
-    @available(iOS 11.0, *) case some(LazyBox<LayoutGuide>)
-}
-
-private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> LayoutGuide {
-    
-    guard let direction = direction, let rect = rect else {
-        return .empty
-    }
-    
-    let guide = LayoutGuide.init(uiLayoutDirection: direction, rect: rect)
-    
-    return guide
-    
-}
-
 public struct ViewFrameProperty {
 	
 	private(set) weak var parentView: UIView?
-    
-    private let boundsGuideBox: LazyBox<LayoutGuide>
-    private let layoutMarginsGuideBox: LazyBox<LayoutGuide>
-    private let readableGuideBox: LazyBox<LayoutGuide>
-    private let safeAreaGuideBox: SafeAreaGuideBox
     
     init(parentView: UIView) {
         
         self.parentView = parentView
         
-        self.boundsGuideBox = .init { [weak parentView] in
-            makeGuide(direction: parentView?.currentDirection, rect: parentView?.boundsRect)
-        }
-        
-        self.layoutMarginsGuideBox = .init { [weak parentView] in
-            makeGuide(direction: parentView?.currentDirection, rect: parentView?.layoutMarginsRect)
-        }
-        
-        self.readableGuideBox = .init { [weak parentView] in
-            makeGuide(direction: parentView?.currentDirection, rect: parentView?.readableRect)
-        }
-        
-        self.safeAreaGuideBox = {
-            if #available(iOS 11.0, *) {
-                return .some(.init { [weak parentView] in makeGuide(direction: parentView?.currentDirection, rect: parentView?.safeAreaRect) })
-            } else {
-                return .none
-            }
-        }()
-        
     }
+	
+}
+
+extension ViewFrameProperty {
+	
+	private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> LayoutGuide {
+		
+		guard let direction = direction, let rect = rect else {
+			return .empty
+		}
+		
+		let guide = LayoutGuide.init(uiLayoutDirection: direction, rect: rect)
+		
+		return guide
+		
+	}
 	
 }
 
@@ -73,23 +47,20 @@ extension ViewFrameProperty: LayoutGuideRepresentable {
 extension ViewFrameProperty {
     
     public var boundsGuide: LayoutGuide {
-        return self.boundsGuideBox.value
+        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.boundsRect)
     }
     
     public var layoutMarginsGuide: LayoutGuide {
-        return self.layoutMarginsGuideBox.value
+        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.layoutMarginsRect)
     }
     
     public var readableGuide: LayoutGuide {
-        return self.readableGuideBox.value
+        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.readableRect)
     }
     
     @available(iOS 11.0, *)
     public var safeAreaGuide: LayoutGuide {
-        guard case .some(let guide) = self.safeAreaGuideBox else {
-            preconditionFailure("safeAreaGuide should be able to access on iOS over 11.0")
-        }
-        return guide.value
+        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.safeAreaRect)
     }
     
 }
