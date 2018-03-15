@@ -27,7 +27,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public var viewFrameProperty: ViewLayoutGuides {
+	public var layoutGuides: ViewLayoutGuides {
 		return ViewLayoutGuides(parentView: self.body)
 	}
 	
