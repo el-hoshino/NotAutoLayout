@@ -84,8 +84,10 @@
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */; };
-		798C6EAD1FEC0A4A00D2A370 /* ViewPinProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */; };
+		798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */; };
 		799559362036874A00DE492D /* LayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799559352036874A00DE492D /* LayoutProperty.swift */; };
+		79AA8DB8205AB9B600D72D13 /* ViewPinGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */; };
+		79AA8DBA205AC6AF00D72D13 /* PinGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */; };
 		79C6C1831FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1821FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift */; };
 		79C6C1851FB83DEF00E32C54 /* LayoutElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */; };
 		79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */; };
@@ -242,8 +244,10 @@
 		798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutTests.swift; sourceTree = "<group>"; };
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreAllRequiredPropertyLayoutProperty.swift; sourceTree = "<group>"; };
-		798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinProperty.swift; sourceTree = "<group>"; };
+		798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuides.swift; sourceTree = "<group>"; };
 		799559352036874A00DE492D /* LayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProperty.swift; sourceTree = "<group>"; };
+		79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuide.swift; sourceTree = "<group>"; };
+		79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinGuideRepresentable.swift; sourceTree = "<group>"; };
 		79C6C1821FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreLeftType.swift; sourceTree = "<group>"; };
 		79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElement.swift; sourceTree = "<group>"; };
 		79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMaker.swift; sourceTree = "<group>"; };
@@ -430,7 +434,8 @@
 				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
 				16BA72211F692E7800A3D4CE /* ViewLayoutGuides.swift */,
 				BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */,
-				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
+				798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */,
+				79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */,
 				16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */,
 			);
 			path = Layout;
@@ -610,6 +615,7 @@
 				79CDD00E1FED79CC00A6D168 /* Rect.swift */,
 				164EA0A71EF3DA5100C0BB8F /* Bounds.swift */,
 				BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */,
+				79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */,
 				164319F01F7A1903003FA7DA /* IndividualFrame.swift */,
 				7971FAC020346AAB00B63CBC /* SequentialFrame.swift */,
 				7971FAB72032FA8500B63CBC /* Typealias.swift */,
@@ -983,7 +989,7 @@
 				1630072F1F0F380C00012C18 /* MiddleCenterRight.Individual.swift in Sources */,
 				163007471F0F380C00012C18 /* BottomRightCenter.Individual.swift in Sources */,
 				1630072D1F0F380C00012C18 /* MiddleLeftHeight.Individual.swift in Sources */,
-				798C6EAD1FEC0A4A00D2A370 /* ViewPinProperty.swift in Sources */,
+				798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */,
 				79D8DD901EF93E0200B74593 /* RightMiddle.Individual.swift in Sources */,
 				79D8DDFE1EF94DF900B74593 /* TopLeftBottom.Individual.swift in Sources */,
 				79FD2CF01FB8750D00E6661C /* LayoutPropertyCanStoreWidthType.swift in Sources */,
@@ -1010,6 +1016,7 @@
 				163007411F0F380C00012C18 /* BottomCenterRight.Individual.swift in Sources */,
 				79D8DE121EF94FD000B74593 /* TopCenterHeight.Individual.swift in Sources */,
 				79D8DE041EF94ECF00B74593 /* TopLeftCenter.Individual.swift in Sources */,
+				79AA8DB8205AB9B600D72D13 /* ViewPinGuide.swift in Sources */,
 				79D8DDF21EF94CA500B74593 /* CenterTopBottom.Individual.swift in Sources */,
 				7971FAD2203481C700B63CBC /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */,
 				79D8DDC61EF947EB00B74593 /* LeftMiddleHeight.Individual.swift in Sources */,
@@ -1027,6 +1034,7 @@
 				79D8DDD81EF94A7D00B74593 /* CenterMiddleHeight.Individual.swift in Sources */,
 				79D8DDD61EF94A6700B74593 /* CenterMiddleWidth.Individual.swift in Sources */,
 				79D8DE001EF94E4800B74593 /* TopLeftWidth.Individual.swift in Sources */,
+				79AA8DBA205AC6AF00D72D13 /* PinGuideRepresentable.swift in Sources */,
 				79D8DE0C1EF94F8C00B74593 /* TopCenterMiddle.Individual.swift in Sources */,
 				163007351F0F380C00012C18 /* MiddleRightCenter.Individual.swift in Sources */,
 				79D8DDD01EF949D600B74593 /* CenterRightBottom.Individual.swift in Sources */,

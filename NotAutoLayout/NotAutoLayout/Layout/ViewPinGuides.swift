@@ -1,5 +1,5 @@
 //
-//  ViewPinProperty.swift
+//  ViewPinGuides.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/12/22.
@@ -7,6 +7,12 @@
 //
 
 import Foundation
+
+public struct ViewPinGuides {
+	
+	
+	
+}
 
 public protocol ViewPinHorizontalProperty {
 	var span: Span { get }

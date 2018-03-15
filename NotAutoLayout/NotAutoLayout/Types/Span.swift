@@ -48,6 +48,14 @@ extension Span {
 
 extension Span {
 	
+	var half: CGFloat {
+		return self.geometry(at: 0.5)
+	}
+	
+	var end: CGFloat {
+		return self.geometry(at: 1)
+	}
+	
 	func geometry(at coordinate: CGFloat) -> CGFloat {
 		return self.start + (self.width * coordinate)
 	}
