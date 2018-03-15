@@ -34,10 +34,10 @@ contentsView.timeStamp = Date()
 
 appView.nal.setupSubview(summaryView) { $0
 	.setDefaultLayout { $0
-		.setLeft(by: { $0.boundLeft })
-		.setRight(by: { $0.boundRight })
-		.setTop(by: { $0.boundTop })
-		.setHeight(by: { $0.safeTop + 50 })
+		.setLeft(by: { $0.left })
+		.setRight(by: { $0.right })
+		.setTop(by: { $0.top })
+		.setHeight(by: { $0.safeAreaGuide.top + 50 })
 	}
 	.addToParent()
 }
@@ -53,9 +53,9 @@ appView.nal.setupSubview(contentsView) { $0
 }
 appView.nal.setupSubview(replyView) { $0
 	.setDefaultLayout({ $0
-		.setBottomLeft(by: { $0.boundBottomLeft })
-		.setRight(by: { $0.boundRight })
-		.setTop(by: { $0.safeBottom - 30 })
+		.setBottomLeft(by: { $0.bottomLeft })
+		.setRight(by: { $0.right })
+		.setTop(by: { $0.safeAreaGuide.bottom - 30 })
 	})
 	.addToParent()
 }
@@ -72,7 +72,7 @@ let imageViews = (0 ..< 3).map { (_) -> UIImageView in
 
 
 appView.nal.layout(imageViews) { $0
-	.setMiddle(by: { $0.boundMiddle })
+	.setMiddle(by: { $0.middle })
 	.fitSize()
 	.setHorizontalInsetsEqualingToMargin()
 }

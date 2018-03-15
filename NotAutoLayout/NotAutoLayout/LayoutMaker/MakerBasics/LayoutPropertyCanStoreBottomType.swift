@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 		
 	}
 	
-	public func setBottom(by bottom: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
+	public func setBottom(by bottom: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		let bottom = LayoutElement.Vertical.byParent(bottom)
 		let maker = self.didSetProperty.storeBottom(bottom, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 		
 	}
 	
-	public func pinBottom(to referenceView: UIView?, with bottom: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
+	public func pinBottom(to referenceView: UIView?, with bottom: @escaping (ViewPinGuides.Vertical) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		return self.pinBottom(by: { [weak referenceView] in referenceView }, with: bottom)
 		
 	}
 	
-	public func pinBottom(by referenceView: @escaping () -> UIView?, with bottom: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
+	public func pinBottom(by referenceView: @escaping () -> UIView?, with bottom: @escaping (ViewPinGuides.Vertical) -> CGFloat) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		let bottom = LayoutElement.Vertical.byReference(referenceGetter: referenceView, bottom)
 		let maker = self.didSetProperty.storeBottom(bottom, to: self)

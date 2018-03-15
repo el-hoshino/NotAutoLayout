@@ -149,15 +149,9 @@ extension CGRect.PlaneBasePoint {
 
 extension CGRect {
 	
-	func inside(_ insets: UIEdgeInsets) -> CGRect {
-		
-		let x = self.origin.x + insets.left
-		let y = self.origin.y + insets.top
-		let width = self.width - insets.width
-		let height = self.height - insets.height
-		let frame = CGRect(x: x, y: y, width: width, height: height)
-		
-		return frame
+	func frame(inside insets: UIEdgeInsets) -> CGRect {
+        
+        return UIEdgeInsetsInsetRect(self, insets)
 		
 	}
 	
@@ -511,4 +505,26 @@ extension CGRect {
 		return frame
 	}
 
+}
+
+extension CGRect {
+	
+	func convertedBy(targetView: UIView?, superView: UIView?) -> Rect {
+		
+		guard let targetView = targetView,
+			let superView = superView
+		else {
+			return .zero
+		}
+		
+		if targetView === superView {
+			return Rect(from: self)
+			
+		} else {
+			let frame = superView.convert(self, to: targetView)
+			return Rect(from: frame)
+		}
+		
+	}
+	
 }

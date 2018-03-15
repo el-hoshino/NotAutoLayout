@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func setSize(by size: @escaping (_ property: ViewFrameProperty) -> CGSize) -> LayoutMaker<Property.WillSetSizeProperty> {
+	public func setSize(by size: @escaping (_ property: ViewLayoutGuides) -> CGSize) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.byParent(size)
 		let maker = self.didSetProperty.storeSize(size, to: self)

@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func setHeight(by height: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.byParent(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)

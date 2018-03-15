@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		160CCA081F0CC57300783D73 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160CCA071F0CC57300783D73 /* CGFloat.swift */; };
-		160CCA0C1F0DFF0000783D73 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160CCA0B1F0DFF0000783D73 /* UIView.swift */; };
 		162B95F91F0C9C6800960B51 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95F81F0C9C6800960B51 /* Calculations.swift */; };
 		162B95FF1F0CA40800960B51 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95FE1F0CA40800960B51 /* CGSize.swift */; };
 		163007281F0F380C00012C18 /* MiddleLeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE501EF9556400B74593 /* MiddleLeftCenter.Individual.swift */; };
@@ -70,7 +69,7 @@
 		16685B4D1F669A7F0089FF30 /* LayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16685B4C1F669A7F0089FF30 /* LayoutControlling.swift */; };
 		166C41571F6945330060C3E6 /* UIEdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166C41561F6945330060C3E6 /* UIEdgeInsets.swift */; };
 		1670CDD91F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */; };
-		16BA72221F692E7800A3D4CE /* ViewFrameProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */; };
+		16BA72221F692E7800A3D4CE /* ViewLayoutGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA72211F692E7800A3D4CE /* ViewLayoutGuides.swift */; };
 		794B59061EF43C9100E25BD0 /* SubviewSetupWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */; };
 		7971FAB82032FA8500B63CBC /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FAB72032FA8500B63CBC /* Typealias.swift */; };
 		7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */; };
@@ -85,8 +84,11 @@
 		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */; };
-		798C6EAD1FEC0A4A00D2A370 /* ViewPinProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */; };
+		798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */; };
+		7994E2CA205AD5E8001AA4F6 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994E2C9205AD5E8001AA4F6 /* UIView.swift */; };
 		799559362036874A00DE492D /* LayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799559352036874A00DE492D /* LayoutProperty.swift */; };
+		79AA8DB8205AB9B600D72D13 /* ViewPinGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */; };
+		79AA8DBA205AC6AF00D72D13 /* PinGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */; };
 		79C6C1831FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1821FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift */; };
 		79C6C1851FB83DEF00E32C54 /* LayoutElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */; };
 		79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */; };
@@ -183,6 +185,9 @@
 		79FD2CF01FB8750D00E6661C /* LayoutPropertyCanStoreWidthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CEF1FB8750D00E6661C /* LayoutPropertyCanStoreWidthType.swift */; };
 		79FD2CF21FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */; };
 		79FD2CF41FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */; };
+		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
+		BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2254205A6EE200B9C459 /* LazyBox.swift */; };
+		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,7 +202,6 @@
 
 /* Begin PBXFileReference section */
 		160CCA071F0CC57300783D73 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
-		160CCA0B1F0DFF0000783D73 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		162B95F81F0C9C6800960B51 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		162B95FE1F0CA40800960B51 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		164319EE1F79FD8E003FA7DA /* LayoutPropertyCanAddAdditionalEvaluationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanAddAdditionalEvaluationType.swift; sourceTree = "<group>"; };
@@ -223,7 +227,7 @@
 		166C41561F6945330060C3E6 /* UIEdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEdgeInsets.swift; sourceTree = "<group>"; };
 		1670CDD81F18DDD000E0ADE9 /* LayoutInfoStoredScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStoredScrollView.swift; sourceTree = "<group>"; };
 		16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameAdditionalEvaluation.swift; sourceTree = "<group>"; };
-		16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFrameProperty.swift; sourceTree = "<group>"; };
+		16BA72211F692E7800A3D4CE /* ViewLayoutGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuides.swift; sourceTree = "<group>"; };
 		794B59051EF43C9100E25BD0 /* SubviewSetupWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewSetupWizard.swift; sourceTree = "<group>"; };
 		7971FAB72032FA8500B63CBC /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		7971FABA20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopCenterType.swift; sourceTree = "<group>"; };
@@ -241,8 +245,11 @@
 		798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutTests.swift; sourceTree = "<group>"; };
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreAllRequiredPropertyLayoutProperty.swift; sourceTree = "<group>"; };
-		798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinProperty.swift; sourceTree = "<group>"; };
+		798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuides.swift; sourceTree = "<group>"; };
+		7994E2C9205AD5E8001AA4F6 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		799559352036874A00DE492D /* LayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProperty.swift; sourceTree = "<group>"; };
+		79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuide.swift; sourceTree = "<group>"; };
+		79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinGuideRepresentable.swift; sourceTree = "<group>"; };
 		79C6C1821FB83DA500E32C54 /* LayoutPropertyCanStoreLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreLeftType.swift; sourceTree = "<group>"; };
 		79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElement.swift; sourceTree = "<group>"; };
 		79C6C1861FB83FA100E32C54 /* LayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMaker.swift; sourceTree = "<group>"; };
@@ -375,6 +382,9 @@
 		79FD2CEF1FB8750D00E6661C /* LayoutPropertyCanStoreWidthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreWidthType.swift; sourceTree = "<group>"; };
 		79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreHeightType.swift; sourceTree = "<group>"; };
 		79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreSizeType.swift; sourceTree = "<group>"; };
+		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
+		BFBD2254205A6EE200B9C459 /* LazyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyBox.swift; sourceTree = "<group>"; };
+		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,8 +414,8 @@
 				160CCA071F0CC57300783D73 /* CGFloat.swift */,
 				162B95FE1F0CA40800960B51 /* CGSize.swift */,
 				164EA0A41EF3DA4900C0BB8F /* CGRect.swift */,
+				7994E2C9205AD5E8001AA4F6 /* UIView.swift */,
 				166C41561F6945330060C3E6 /* UIEdgeInsets.swift */,
-				160CCA0B1F0DFF0000783D73 /* UIView.swift */,
 				162B95F81F0C9C6800960B51 /* Calculations.swift */,
 			);
 			path = Extensions;
@@ -425,8 +435,10 @@
 				164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */,
 				7971FABE20346A0100B63CBC /* SequentialLayout.swift */,
 				79C6C1841FB83DEF00E32C54 /* LayoutElement.swift */,
-				16BA72211F692E7800A3D4CE /* ViewFrameProperty.swift */,
-				798C6EAC1FEC0A4A00D2A370 /* ViewPinProperty.swift */,
+				16BA72211F692E7800A3D4CE /* ViewLayoutGuides.swift */,
+				BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */,
+				798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */,
+				79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */,
 				16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */,
 			);
 			path = Layout;
@@ -601,9 +613,12 @@
 		7971FAB3203160FA00B63CBC /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				BFBD2254205A6EE200B9C459 /* LazyBox.swift */,
 				79CDD00C1FED797300A6D168 /* Span.swift */,
 				79CDD00E1FED79CC00A6D168 /* Rect.swift */,
 				164EA0A71EF3DA5100C0BB8F /* Bounds.swift */,
+				BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */,
+				79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */,
 				164319F01F7A1903003FA7DA /* IndividualFrame.swift */,
 				7971FAC020346AAB00B63CBC /* SequentialFrame.swift */,
 				7971FAB72032FA8500B63CBC /* Typealias.swift */,
@@ -873,12 +888,12 @@
 				79FD2CE01FB85F4B00E6661C /* LayoutPropertyCanStoreBottomCenterType.swift in Sources */,
 				79D8DE0A1EF94F7100B74593 /* TopCenterRight.Individual.swift in Sources */,
 				79D8DD861EF93D7600B74593 /* CenterMiddle.Individual.swift in Sources */,
-				160CCA0C1F0DFF0000783D73 /* UIView.swift in Sources */,
 				7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */,
 				79D8DD841EF93D5400B74593 /* CenterTop.Individual.swift in Sources */,
 				79D8DD921EF93E1700B74593 /* RightBottom.Individual.swift in Sources */,
 				79D8DDE01EF94B2D00B74593 /* RightTopHeight.Individual.swift in Sources */,
 				163007321F0F380C00012C18 /* MiddleCenterWidth.Individual.swift in Sources */,
+				BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */,
 				79D8DDDE1EF94AFF00B74593 /* RightTopWidth.Individual.swift in Sources */,
 				163007431F0F380C00012C18 /* BottomCenterMiddle.Individual.swift in Sources */,
 				79D8DD781EF9352500B74593 /* LeftRight.Individual.swift in Sources */,
@@ -899,6 +914,7 @@
 				79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */,
 				163007281F0F380C00012C18 /* MiddleLeftCenter.Individual.swift in Sources */,
 				164EA0C21EF3DAE300C0BB8F /* Initial.Individual.swift in Sources */,
+				BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */,
 				79D8DD6A1EF933FF00B74593 /* Right.Individual.swift in Sources */,
 				79D8DDE21EF94B5200B74593 /* RightMiddleWidth.Individual.swift in Sources */,
 				163007331F0F380C00012C18 /* MiddleCenterHeight.Individual.swift in Sources */,
@@ -911,7 +927,6 @@
 				164319EF1F79FD8E003FA7DA /* LayoutPropertyCanAddAdditionalEvaluationType.swift in Sources */,
 				79D8DD881EF93D8F00B74593 /* CenterBottom.Individual.swift in Sources */,
 				79D8DDF01EF94C8600B74593 /* CenterTopMiddle.Individual.swift in Sources */,
-				16BA72221F692E7800A3D4CE /* ViewFrameProperty.swift in Sources */,
 				79C6C1851FB83DEF00E32C54 /* LayoutElement.swift in Sources */,
 				79D8DDE81EF94BAB00B74593 /* RightBottomHeight.Individual.swift in Sources */,
 				7971FABD20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift in Sources */,
@@ -953,6 +968,9 @@
 				163007381F0F380C00012C18 /* MiddleRightWidth.Individual.swift in Sources */,
 				7971FAC42034710800B63CBC /* Initial.Sequential.swift in Sources */,
 				79CDD00D1FED797300A6D168 /* Span.swift in Sources */,
+				7994E2CA205AD5E8001AA4F6 /* UIView.swift in Sources */,
+				16BA72221F692E7800A3D4CE /* ViewLayoutGuides.swift in Sources */,
+				BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */,
 				163007451F0F380C00012C18 /* BottomCenterHeight.Individual.swift in Sources */,
 				799559362036874A00DE492D /* LayoutProperty.swift in Sources */,
 				1630072C1F0F380C00012C18 /* MiddleLeftWidth.Individual.swift in Sources */,
@@ -975,7 +993,7 @@
 				1630072F1F0F380C00012C18 /* MiddleCenterRight.Individual.swift in Sources */,
 				163007471F0F380C00012C18 /* BottomRightCenter.Individual.swift in Sources */,
 				1630072D1F0F380C00012C18 /* MiddleLeftHeight.Individual.swift in Sources */,
-				798C6EAD1FEC0A4A00D2A370 /* ViewPinProperty.swift in Sources */,
+				798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */,
 				79D8DD901EF93E0200B74593 /* RightMiddle.Individual.swift in Sources */,
 				79D8DDFE1EF94DF900B74593 /* TopLeftBottom.Individual.swift in Sources */,
 				79FD2CF01FB8750D00E6661C /* LayoutPropertyCanStoreWidthType.swift in Sources */,
@@ -1002,6 +1020,7 @@
 				163007411F0F380C00012C18 /* BottomCenterRight.Individual.swift in Sources */,
 				79D8DE121EF94FD000B74593 /* TopCenterHeight.Individual.swift in Sources */,
 				79D8DE041EF94ECF00B74593 /* TopLeftCenter.Individual.swift in Sources */,
+				79AA8DB8205AB9B600D72D13 /* ViewPinGuide.swift in Sources */,
 				79D8DDF21EF94CA500B74593 /* CenterTopBottom.Individual.swift in Sources */,
 				7971FAD2203481C700B63CBC /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */,
 				79D8DDC61EF947EB00B74593 /* LeftMiddleHeight.Individual.swift in Sources */,
@@ -1019,6 +1038,7 @@
 				79D8DDD81EF94A7D00B74593 /* CenterMiddleHeight.Individual.swift in Sources */,
 				79D8DDD61EF94A6700B74593 /* CenterMiddleWidth.Individual.swift in Sources */,
 				79D8DE001EF94E4800B74593 /* TopLeftWidth.Individual.swift in Sources */,
+				79AA8DBA205AC6AF00D72D13 /* PinGuideRepresentable.swift in Sources */,
 				79D8DE0C1EF94F8C00B74593 /* TopCenterMiddle.Individual.swift in Sources */,
 				163007351F0F380C00012C18 /* MiddleRightCenter.Individual.swift in Sources */,
 				79D8DDD01EF949D600B74593 /* CenterRightBottom.Individual.swift in Sources */,
@@ -1181,7 +1201,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1203,7 +1223,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";

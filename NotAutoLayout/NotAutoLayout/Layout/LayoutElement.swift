@@ -17,31 +17,31 @@ extension LayoutElement {
 	public enum Horizontal {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Horizontal) -> CGFloat)
 		
 	}
 	
 	public enum Vertical {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Vertical) -> CGFloat)
 		
 	}
 	
 	public enum Point {
 		
 		case constant(CGPoint)
-		case byParent((ViewFrameProperty) -> CGPoint)
-		case byReference(referenceGetter: () -> UIView?,(ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint)
+		case byParent((ViewLayoutGuides) -> CGPoint)
+		case byReference(referenceGetter: () -> UIView?,(ViewPinGuides.Point) -> CGPoint)
 		
 	}
 	
 	public enum Length {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case fits(CGFloat)
 		
 	}
@@ -113,7 +113,7 @@ extension LayoutElement {
 		}
 		
 		case constant(CGSize)
-		case byParent((ViewFrameProperty) -> CGSize)
+		case byParent((ViewLayoutGuides) -> CGSize)
 		case fits(CGSize)
 		case aspect(AspectSizing)
 		
@@ -122,14 +122,14 @@ extension LayoutElement {
 	public enum Rect {
 		
 		case constant(CGRect)
-		case byParent((ViewFrameProperty) -> CGRect)
+		case byParent((ViewLayoutGuides) -> CGRect)
 		
 	}
 	
 	public enum Insets {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case equalsToMargin
 		
 	}
@@ -137,14 +137,14 @@ extension LayoutElement {
 	public enum HorizontalMargin {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		
 	}
 	
 	public enum VerticalMargin {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		
 	}
 	
@@ -159,10 +159,10 @@ extension LayoutElement.Horizontal {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.horizontal(parentView: parameters.property.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -178,10 +178,10 @@ extension LayoutElement.Vertical {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: parameters.property.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -193,10 +193,10 @@ extension LayoutElement.Vertical {
 			return value
 			
 		case .byParent(let calcuation):
-			return calcuation(parameters.property)
+			return calcuation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: parameters.property.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -212,10 +212,10 @@ extension LayoutElement.Point {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.point(parentView: parameters.property.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -254,7 +254,7 @@ extension LayoutElement.Length {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .fits(let fittingValue):
 			return oppositeAxis.fittedTheOtherLength(fittingCalculation: parameters.targetView.sizeThatFits, fittingLength: fittingValue)
@@ -273,13 +273,13 @@ extension LayoutElement.Size {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .fits(let fittingSize):
 			return parameters.targetView.sizeThatFits(fittingSize)
 			
 		case .aspect(let aspect):
-			return parameters.property.evaluateSize(for: parameters.targetView, from: aspect)
+			return parameters.guides.evaluateSize(for: parameters.targetView, from: aspect)
 		}
 		
 	}
@@ -291,13 +291,13 @@ extension LayoutElement.Size {
 			return parameters.targetViews.map({ _ in value })
 			
 		case .byParent(let calculation):
-			return parameters.targetViews.map({ _ in calculation(parameters.property) })
+			return parameters.targetViews.map({ _ in calculation(parameters.guides) })
 			
 		case .fits(let fittingSize):
 			return parameters.targetViews.map({ $0.sizeThatFits(fittingSize) })
 			
 		case .aspect(let aspect):
-			return parameters.targetViews.map({ parameters.property.evaluateSize(for: $0, from: aspect) })
+			return parameters.targetViews.map({ parameters.guides.evaluateSize(for: $0, from: aspect) })
 		}
 		
 	}
@@ -313,7 +313,7 @@ extension LayoutElement.Rect {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 		}
 		
 	}
@@ -329,7 +329,7 @@ extension LayoutElement.Insets {
 			return value
 			
 		case .byParent(let calculation):
-			return calculation(parameters.property)
+			return calculation(parameters.guides)
 			
 		case .equalsToMargin:
 			return (totalWidth - viewWidths.reduce(0, (+))) / CGFloat(viewWidths.count + 1)

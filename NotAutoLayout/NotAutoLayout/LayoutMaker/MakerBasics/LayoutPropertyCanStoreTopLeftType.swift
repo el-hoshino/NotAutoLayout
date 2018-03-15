@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 		
 	}
 	
-	public func setTopLeft(by topLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func setTopLeft(by topLeft: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byParent(topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 		
 	}
 	
-	public func pinTopLeft(to referenceView: UIView?, with topLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func pinTopLeft(to referenceView: UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		return self.pinTopLeft(by: { [weak referenceView] in referenceView }, with: topLeft)
 		
 	}
 	
-	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)

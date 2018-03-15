@@ -2,131 +2,82 @@
 //  UIView.swift
 //  NotAutoLayout
 //
-//  Created by 史　翔新 on 2017/07/06.
-//  Copyright © 2017年 史翔新. All rights reserved.
+//  Created by 史翔新 on 2018/03/16.
+//  Copyright © 2018年 史翔新. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIView {
 	
-	private var boundsWithZeroOrigin: CGRect {
+	var currentDirection: UIUserInterfaceLayoutDirection {
 		
-		let origin = CGPoint.zero
-		let size = self.bounds.size
-		let frame = CGRect(origin: origin, size: size)
-		
-		return frame
+		if #available(iOS 10.0, *) {
+			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute, relativeTo: self.effectiveUserInterfaceLayoutDirection)
+			
+		} else {
+			return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute)
+		}
 		
 	}
 	
-	private func frame(in targetView: UIView, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> CGRect {
-		
-		switch targetView {
-		case self:
-			if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
-				return self.boundsWithZeroOrigin.inside(self.safeAreaInsets)
-			} else {
-				return self.boundsWithZeroOrigin
-			}
-			
-		default:
-			let checkingFrame: CGRect = {
-				if shouldIgnoreTransform {
-					return self.nal.identityFrame
-				} else {
-					return self.frame
-				}
-			}()
-			
-			let safeAreaFrame: CGRect = {
-				if shouldOnlyIncludeSafeArea, #available(iOS 11.0, *) {
-					return checkingFrame.inside(self.safeAreaInsets)
-				} else {
-					return checkingFrame
-				}
-			}()
-			
-			let convertedFrame: CGRect = {
-				if let superview = self.superview {
-					return superview.convert(safeAreaFrame, to: targetView)
-				} else {
-					return safeAreaFrame
-				}
-			}()
-			
-			return convertedFrame
-		}
-		
+	var boundsRect: Rect {
+		return Rect(from: self.bounds)
+	}
+	
+	var layoutMarginsRect: Rect {
+		let frame = self.bounds.frame(inside: self.layoutMargins)
+		return Rect(from: frame)
+	}
+	
+	var readableRect: Rect {
+		// FIXME: Get this property without Auto Layout UILayoutGuide
+		let frame = self.readableContentGuide.layoutFrame
+		return Rect(from: frame)
+	}
+	
+	@available(iOS 11.0, *)
+	var safeAreaRect: Rect {
+		let frame = self.bounds.frame(inside: self.safeAreaInsets)
+		return Rect(from: frame)
 	}
 	
 }
 
 extension UIView {
 	
-	func horizontalReference(_ reference: CGRect.HorizontalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform shouldIgnoreTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Horizontal {
+	func frame(in targetView: UIView?, ignoresTransform shouldIgnoreTransform: Bool) -> Rect {
 		
-		let reference = LayoutElement.Horizontal.byParent { [unowned self] (_) -> CGFloat in
-			
-			guard let referenceView = referenceView() else {
-				return offset
-			}
-			
-			let frame = referenceView.frame(in: self, ignoresTransform: shouldIgnoreTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-			
-			let reference = reference.value(in: frame)
-			
-			let result = reference + offset
-			
-			return result
-			
-		}
+		let checkingFrame = self.nal.frame(thatIgnoresTransform: shouldIgnoreTransform)
 		
-		return reference
+		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
 		
 	}
 	
-	func verticalReference(_ reference: CGRect.VerticalBaseLine, of referenceView: @escaping () -> UIView?, offsetBy offset: CGFloat, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Vertical {
+	func layoutMarginsFrame(in targetView: UIView?) -> Rect {
 		
-		let reference = LayoutElement.Vertical.byParent { [unowned self] (_) -> CGFloat in
-			
-			guard let referenceView = referenceView() else {
-				return offset
-			}
-			
-			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-			
-			let reference = reference.value(in: frame)
-			
-			let result = reference + offset
-			
-			return result
-			
-		}
+		let checkingFrame = self.nal.identityFrame.frame(inside: self.layoutMargins)
 		
-		return reference
+		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
 		
 	}
 	
-	func pointReference(_ reference: CGRect.PlaneBasePoint, of referenceView: @escaping () -> UIView?, offsetBy offset: CGVector, ignoresTransform: Bool, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutElement.Point {
+	func readableFrame(in targetView: UIView?) -> Rect {
 		
-		let reference = LayoutElement.Point.byParent { [unowned self] (_) -> CGPoint in
-			
-			guard let referenceView = referenceView() else {
-				return CGPoint.zero + offset
-			}
-			
-			let frame = referenceView.frame(in: self, ignoresTransform: ignoresTransform, safeAreaOnly: shouldOnlyIncludeSafeArea)
-			
-			let reference = reference.value(in: frame)
-			
-			let result = reference + offset
-			
-			return result
-			
-		}
+		// FIXME: Get this property without Auto Layout UILayoutGuide
+		let checkingFrame = CGRect(origin: self.nal.identityFrame.origin,
+								   size: self.readableRect.size)
 		
-		return reference
+		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
+		
+	}
+	
+	@available(iOS 11.0, *)
+	func safeAreaFrame(in targetView: UIView?) -> Rect {
+		
+		let checkingFrame = self.nal.identityFrame.frame(inside: self.safeAreaInsets)
+		
+		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
 		
 	}
 	
