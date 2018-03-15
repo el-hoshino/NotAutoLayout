@@ -13,7 +13,11 @@ private enum SafeAreaGuideBox {
     @available(iOS 11.0, *) case some(LazyBox<LayoutGuide>)
 }
 
-private func makeGuide(direction: UIUserInterfaceLayoutDirection, rect: Rect) -> LayoutGuide {
+private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> LayoutGuide {
+    
+    guard let direction = direction, let rect = rect else {
+        return .empty
+    }
     
     let guide = LayoutGuide.init(uiLayoutDirection: direction, rect: rect)
     
@@ -34,21 +38,21 @@ public struct ViewFrameProperty {
         
         self.parentView = parentView
         
-        self.boundsGuideBox = .init { [parentView] in
-            makeGuide(direction: parentView.currentDirection, rect: parentView.boundsRect)
+        self.boundsGuideBox = .init { [weak parentView] in
+            makeGuide(direction: parentView?.currentDirection, rect: parentView?.boundsRect)
         }
         
-        self.layoutMarginsGuideBox = .init { [parentView] in
-            makeGuide(direction: parentView.currentDirection, rect: parentView.layoutMarginsRect)
+        self.layoutMarginsGuideBox = .init { [weak parentView] in
+            makeGuide(direction: parentView?.currentDirection, rect: parentView?.layoutMarginsRect)
         }
         
-        self.readableGuideBox = .init { [parentView] in
-            makeGuide(direction: parentView.currentDirection, rect: parentView.readableRect)
+        self.readableGuideBox = .init { [weak parentView] in
+            makeGuide(direction: parentView?.currentDirection, rect: parentView?.readableRect)
         }
         
         self.safeAreaGuideBox = {
             if #available(iOS 11.0, *) {
-                return .some(.init { [parentView] in makeGuide(direction: parentView.currentDirection, rect: parentView.safeAreaRect) })
+                return .some(.init { [weak parentView] in makeGuide(direction: parentView?.currentDirection, rect: parentView?.safeAreaRect) })
             } else {
                 return .none
             }
