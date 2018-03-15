@@ -127,3 +127,75 @@ extension VerticalPinGuideRepresentable {
 	}
 	
 }
+
+extension PointPinGuideRepresentable {
+	
+	public var topLeft: CGPoint {
+		return self.pinGuide.topLeft
+	}
+	
+	public var topCenter: CGPoint {
+		return self.pinGuide.topCenter
+	}
+	
+	public var topRight: CGPoint {
+		return self.pinGuide.topRight
+	}
+	
+	public var middleLeft: CGPoint {
+		return self.pinGuide.middleLeft
+	}
+	
+	public var middleCenter: CGPoint {
+		return self.pinGuide.middleCenter
+	}
+	
+	public var middleRight: CGPoint {
+		return self.pinGuide.middleRight
+	}
+	
+	public var bottomLeft: CGPoint {
+		return self.pinGuide.bottomLeft
+	}
+	
+	public var bottomCenter: CGPoint {
+		return self.pinGuide.bottomCenter
+	}
+	
+	public var bottomRight: CGPoint {
+		return self.pinGuide.bottomRight
+	}
+	
+	public func point(at relativePosition: CGPoint) -> CGPoint {
+		return self.pinGuide.point(at: relativePosition)
+	}
+	
+	public func pointAt(x: CGFloat, y: CGFloat) -> CGPoint {
+		return self.pinGuide.pointAt(x: x, y: y)
+	}
+	
+	public var topLeading: CGPoint {
+		return self.pinGuide.topLeading
+	}
+	
+	public var topTrailing: CGPoint {
+		return self.pinGuide.topTrailing
+	}
+	
+	public var midddleLeading: CGPoint {
+		return self.pinGuide.midddleLeading
+	}
+	
+	public var middleTrailing: CGPoint {
+		return self.pinGuide.middleTrailing
+	}
+	
+	public var bottomLeading: CGPoint {
+		return self.pinGuide.bottomLeading
+	}
+	
+	public var bottomTrailing: CGPoint {
+		return self.pinGuide.bottomTrailing
+	}
+	
+}

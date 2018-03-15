@@ -58,6 +58,14 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
+extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
+	
+	public var pinGuide: ViewPinGuides.Horizontal.Guide {
+		return self.frameGuide
+	}
+	
+}
+
 extension ViewPinGuides.Horizontal {
 	
 	public var frameGuide: Guide {
@@ -129,6 +137,14 @@ extension ViewPinGuides.Vertical {
 	
 }
 
+extension ViewPinGuides.Vertical: VerticalPinGuideRepresentable {
+	
+	public var pinGuide: ViewPinGuides.Vertical.Guide {
+		return self.frameGuide
+	}
+	
+}
+
 extension ViewPinGuides.Vertical {
 	
 	public var frameGuide: Guide {
@@ -196,6 +212,14 @@ extension ViewPinGuides.Point {
 		
 		return guide
 		
+	}
+	
+}
+
+extension ViewPinGuides.Point: PointPinGuideRepresentable {
+	
+	public var pinGuide: ViewPinGuides.Point.Guide {
+		return self.frameGuide
 	}
 	
 }
