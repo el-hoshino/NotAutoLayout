@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 		
 	}
 	
-	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
+	public func setMiddleCenter(by middleCenter: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
 		let middleCenter = LayoutElement.Point.byParent(middleCenter)
 		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)

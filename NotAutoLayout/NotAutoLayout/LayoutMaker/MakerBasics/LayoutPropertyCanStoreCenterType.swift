@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 		
 	}
 	
-	public func setCenter(by center: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
+	public func setCenter(by center: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.byParent(center)
 		let maker = self.didSetProperty.storeCenter(center, to: self)

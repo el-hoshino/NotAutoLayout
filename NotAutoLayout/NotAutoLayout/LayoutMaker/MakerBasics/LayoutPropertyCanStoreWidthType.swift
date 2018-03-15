@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
 		
 	}
 	
-	public func setWidth(by width: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetWidthProperty> {
+	public func setWidth(by width: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.byParent(width)
 		let maker = self.didSetProperty.storeWidth(width, to: self)

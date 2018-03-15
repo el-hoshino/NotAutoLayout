@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomRightType {
 		
 	}
 	
-	public func setBottomRight(by bottomRight: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetBottomRightProperty> {
+	public func setBottomRight(by bottomRight: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetBottomRightProperty> {
 		
 		let bottomRight = LayoutElement.Point.byParent(bottomRight)
 		let maker = self.didSetProperty.storeBottomRight(bottomRight, to: self)

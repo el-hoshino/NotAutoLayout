@@ -27,8 +27,8 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public var viewFrameProperty: ViewFrameProperty {
-		return ViewFrameProperty(parentView: self.body)
+	public var viewFrameProperty: ViewLayoutGuides {
+		return ViewLayoutGuides(parentView: self.body)
 	}
 	
 	/// The bound size.

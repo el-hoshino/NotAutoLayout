@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 		
 	}
 	
-	public func setFrame(by frame: @escaping (_ property: ViewFrameProperty) -> CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
+	public func setFrame(by frame: @escaping (_ property: ViewLayoutGuides) -> CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent(frame)
 		let maker = self.didSetProperty.storeFrame(frame, to: self)

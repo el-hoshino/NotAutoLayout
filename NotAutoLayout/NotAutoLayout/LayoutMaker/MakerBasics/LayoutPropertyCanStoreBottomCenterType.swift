@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 		
 	}
 	
-	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		let bottomCenter = LayoutElement.Point.byParent(bottomCenter)
 		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)

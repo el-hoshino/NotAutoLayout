@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 		
 	}
 	
-	public func setRight(by right: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
+	public func setRight(by right: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.byParent(right)
 		let maker = self.didSetProperty.storeRight(right, to: self)

@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 		
 	}
 	
-	public func setTop(by top: @escaping (_ property: ViewFrameProperty) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func setTop(by top: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byParent(top)
 		let maker = self.didSetProperty.storeTop(top, to: self)

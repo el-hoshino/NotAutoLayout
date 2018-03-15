@@ -56,7 +56,7 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	func evaluatedFrame(for targetViews: [UIView], from property: ViewFrameProperty) -> [CGRect] {
+	func evaluatedFrame(for targetViews: [UIView], from property: ViewLayoutGuides) -> [CGRect] {
 		
 		let parameters: SequentialFrameCalculationParameters = (targetViews, property)
 		

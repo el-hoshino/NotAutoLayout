@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopCenterType {
 		
 	}
 	
-	public func setTopCenter(by topCenter: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
+	public func setTopCenter(by topCenter: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetTopCenterProperty> {
 		
 		let topCenter = LayoutElement.Point.byParent(topCenter)
 		let maker = self.didSetProperty.storeTopCenter(topCenter, to: self)

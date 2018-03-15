@@ -1,5 +1,5 @@
 //
-//  ViewFrameProperty.swift
+//  ViewLayoutGuides.swift
 //  NotAutoLayout
 //
 //  Created by 史　翔新 on 2017/09/13.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct ViewFrameProperty {
+public struct ViewLayoutGuides {
 	
 	private(set) weak var parentView: UIView?
     
@@ -20,7 +20,7 @@ public struct ViewFrameProperty {
 	
 }
 
-extension ViewFrameProperty {
+extension ViewLayoutGuides {
 	
 	private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> LayoutGuide {
 		
@@ -36,7 +36,7 @@ extension ViewFrameProperty {
 	
 }
 
-extension ViewFrameProperty: LayoutGuideRepresentable {
+extension ViewLayoutGuides: LayoutGuideRepresentable {
     
     public var layoutGuide: LayoutGuide {
         return self.boundsGuide
@@ -44,7 +44,7 @@ extension ViewFrameProperty: LayoutGuideRepresentable {
     
 }
 
-extension ViewFrameProperty {
+extension ViewLayoutGuides {
     
     public var boundsGuide: LayoutGuide {
         return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.boundsRect)
@@ -65,7 +65,7 @@ extension ViewFrameProperty {
     
 }
 
-extension ViewFrameProperty {
+extension ViewLayoutGuides {
     
     public var layoutMargins: UIEdgeInsets {
         return self.parentView?.layoutMargins ?? .zero
@@ -78,7 +78,7 @@ extension ViewFrameProperty {
     
 }
 
-extension ViewFrameProperty {
+extension ViewLayoutGuides {
 	
 	func size(for view: UIView, thatFits fittingSize: CGSize) -> CGSize {
 		
@@ -90,9 +90,9 @@ extension ViewFrameProperty {
 	
 }
 
-extension ViewFrameProperty {
+extension ViewLayoutGuides {
 	
-	func evaluateSize(from calculation: (ViewFrameProperty) -> CGSize) -> CGSize {
+	func evaluateSize(from calculation: (ViewLayoutGuides) -> CGSize) -> CGSize {
 		
 		return calculation(self)
 		

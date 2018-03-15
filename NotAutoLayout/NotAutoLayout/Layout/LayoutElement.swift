@@ -17,7 +17,7 @@ extension LayoutElement {
 	public enum Horizontal {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat)
 		
 	}
@@ -25,7 +25,7 @@ extension LayoutElement {
 	public enum Vertical {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat)
 		
 	}
@@ -33,7 +33,7 @@ extension LayoutElement {
 	public enum Point {
 		
 		case constant(CGPoint)
-		case byParent((ViewFrameProperty) -> CGPoint)
+		case byParent((ViewLayoutGuides) -> CGPoint)
 		case byReference(referenceGetter: () -> UIView?,(ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint)
 		
 	}
@@ -41,7 +41,7 @@ extension LayoutElement {
 	public enum Length {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case fits(CGFloat)
 		
 	}
@@ -113,7 +113,7 @@ extension LayoutElement {
 		}
 		
 		case constant(CGSize)
-		case byParent((ViewFrameProperty) -> CGSize)
+		case byParent((ViewLayoutGuides) -> CGSize)
 		case fits(CGSize)
 		case aspect(AspectSizing)
 		
@@ -122,14 +122,14 @@ extension LayoutElement {
 	public enum Rect {
 		
 		case constant(CGRect)
-		case byParent((ViewFrameProperty) -> CGRect)
+		case byParent((ViewLayoutGuides) -> CGRect)
 		
 	}
 	
 	public enum Insets {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		case equalsToMargin
 		
 	}
@@ -137,14 +137,14 @@ extension LayoutElement {
 	public enum HorizontalMargin {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		
 	}
 	
 	public enum VerticalMargin {
 		
 		case constant(CGFloat)
-		case byParent((ViewFrameProperty) -> CGFloat)
+		case byParent((ViewLayoutGuides) -> CGFloat)
 		
 	}
 	

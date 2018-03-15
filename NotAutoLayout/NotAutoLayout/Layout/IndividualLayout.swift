@@ -67,7 +67,7 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	func evaluatedFrame(for targetView: UIView, from property: ViewFrameProperty) -> CGRect {
+	func evaluatedFrame(for targetView: UIView, from property: ViewLayoutGuides) -> CGRect {
 		
 		let parameters: IndividualFrameCalculationParameters = (targetView, property)
 		

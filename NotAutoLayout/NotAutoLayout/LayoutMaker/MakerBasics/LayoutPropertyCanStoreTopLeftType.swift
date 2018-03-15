@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 		
 	}
 	
-	public func setTopLeft(by topLeft: @escaping (_ property: ViewFrameProperty) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func setTopLeft(by topLeft: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byParent(topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
