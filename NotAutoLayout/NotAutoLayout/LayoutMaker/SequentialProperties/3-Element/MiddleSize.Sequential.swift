@@ -49,7 +49,7 @@ extension SequentialProperty.MiddleSize: LayoutPropertyCanStoreHorizontalInsetsT
 		
 		let middle = self.middle.evaluated(from: parameters)
 		let subviewSizes = self.subviewSize.evaluated(from: parameters)
-		let totalWidth = parameters.property.boundWidth
+		let totalWidth = parameters.property.width
 		let insets = horizontalInsets.evaluated(from: parameters, totalWidth: totalWidth, viewWidths: subviewSizes.map({ $0.width }))
 		
 		return self.makeFrames(middle: middle, subviewSizes: subviewSizes, insets: insets)

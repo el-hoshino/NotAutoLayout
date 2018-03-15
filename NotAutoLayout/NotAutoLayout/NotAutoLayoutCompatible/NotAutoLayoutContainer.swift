@@ -32,13 +32,13 @@ extension NotAutoLayoutContainer where Containee: UIView {
 	}
 	
 	/// The bound size.
-	public var boundSize: CGSize {
-		return self.viewFrameProperty.boundSize
+	public var boundsGuide: LayoutGuide {
+		return self.viewFrameProperty.boundsGuide
 	}
 	
 	@available(iOS 11.0, *)
-	public var safeAreaInsets: UIEdgeInsets {
-		return self.viewFrameProperty.safeAreaInsets
+	public var safeAreaGuide: LayoutGuide {
+		return self.viewFrameProperty.safeAreaGuide
 	}
 	
 }
