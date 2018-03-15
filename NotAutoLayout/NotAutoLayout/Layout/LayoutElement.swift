@@ -18,7 +18,7 @@ extension LayoutElement {
 		
 		case constant(CGFloat)
 		case byParent((ViewLayoutGuides) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Horizontal) -> CGFloat)
 		
 	}
 	
@@ -26,7 +26,7 @@ extension LayoutElement {
 		
 		case constant(CGFloat)
 		case byParent((ViewLayoutGuides) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Vertical) -> CGFloat)
 		
 	}
 	
@@ -34,7 +34,7 @@ extension LayoutElement {
 		
 		case constant(CGPoint)
 		case byParent((ViewLayoutGuides) -> CGPoint)
-		case byReference(referenceGetter: () -> UIView?,(ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint)
+		case byReference(referenceGetter: () -> UIView?,(ViewPinGuides.Point) -> CGPoint)
 		
 	}
 	
@@ -162,7 +162,7 @@ extension LayoutElement.Horizontal {
 			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.horizontal(parentView: parameters.guides.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -181,7 +181,7 @@ extension LayoutElement.Vertical {
 			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: parameters.guides.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -196,7 +196,7 @@ extension LayoutElement.Vertical {
 			return calcuation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.vertical(parentView: parameters.guides.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}
@@ -215,7 +215,7 @@ extension LayoutElement.Point {
 			return calculation(parameters.guides)
 			
 		case .byReference(referenceGetter: let reference, let calculation):
-			return calculation(.point(parentView: parameters.guides.parentView, referenceView: reference))
+			return calculation(.init(parentView: parameters.guides.parentView, referenceViewGetter: reference))
 		}
 		
 	}

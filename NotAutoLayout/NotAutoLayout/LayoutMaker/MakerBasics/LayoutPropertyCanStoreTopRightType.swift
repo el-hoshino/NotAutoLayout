@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopRightType {
 		
 	}
 	
-	public func pinTopRight(to referenceView: UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func pinTopRight(to referenceView: UIView?, with topRight: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		return self.pinTopRight(by: { [weak referenceView] in referenceView }, with: topRight)
 		
 	}
 	
-	public func pinTopRight(by referenceView: @escaping () -> UIView?, with topRight: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
+	public func pinTopRight(by referenceView: @escaping () -> UIView?, with topRight: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopRightProperty> {
 		
 		let topRight = LayoutElement.Point.byReference(referenceGetter: referenceView, topRight)
 		let maker = self.didSetProperty.storeTopRight(topRight, to: self)

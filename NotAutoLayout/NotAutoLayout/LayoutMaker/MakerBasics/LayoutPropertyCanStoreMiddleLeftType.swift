@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleLeftType {
 		
 	}
 	
-	public func pinMiddleLeft(to referenceView: UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleLeftProperty> {
+	public func pinMiddleLeft(to referenceView: UIView?, with middleLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleLeftProperty> {
 		
 		return self.pinMiddleLeft(by: { [weak referenceView] in referenceView }, with: middleLeft)
 		
 	}
 	
-	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, with middleLeft: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleLeftProperty> {
+	public func pinMiddleLeft(by referenceView: @escaping () -> UIView?, with middleLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleLeftProperty> {
 		
 		let middleLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, middleLeft)
 		let maker = self.didSetProperty.storeMiddleLeft(middleLeft, to: self)

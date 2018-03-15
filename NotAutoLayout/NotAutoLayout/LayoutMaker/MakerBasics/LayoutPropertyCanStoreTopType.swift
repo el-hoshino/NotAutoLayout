@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopType {
 		
 	}
 	
-	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func pinTop(to referenceView: UIView?, with top: @escaping (ViewPinGuides.Vertical) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		return self.pinTop(by: { [weak referenceView] in referenceView }, with: top)
 		
 	}
 	
-	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinProperty<ViewPinPropertyType.Vertical>) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
+	public func pinTop(by referenceView: @escaping () -> UIView?, with top: @escaping (ViewPinGuides.Vertical) -> CGFloat) -> LayoutMaker<Property.WillSetTopProperty> {
 		
 		let top = LayoutElement.Vertical.byReference(referenceGetter: referenceView, top)
 		let maker = self.didSetProperty.storeTop(top, to: self)

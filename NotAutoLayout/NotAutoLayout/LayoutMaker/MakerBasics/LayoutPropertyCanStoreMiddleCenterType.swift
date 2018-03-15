@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleCenterType {
 		
 	}
 	
-	public func pinMiddleCenter(to referenceView: UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
+	public func pinMiddleCenter(to referenceView: UIView?, with middleCenter: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
 		return self.pinMiddleCenter(by: { [weak referenceView] in referenceView }, with: middleCenter)
 		
 	}
 	
-	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, with middleCenter: @escaping (ViewPinProperty<ViewPinPropertyType.Point>) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
+	public func pinMiddleCenter(by referenceView: @escaping () -> UIView?, with middleCenter: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleCenterProperty> {
 		
 		let middleCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, middleCenter)
 		let maker = self.didSetProperty.storeMiddleCenter(middleCenter, to: self)

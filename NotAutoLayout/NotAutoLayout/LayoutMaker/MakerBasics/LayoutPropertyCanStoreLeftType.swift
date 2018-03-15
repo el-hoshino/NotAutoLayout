@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 		
 	}
 	
-	public func pinLeft(to referenceView: UIView?, with left: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func pinLeft(to referenceView: UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		return self.pinLeft(by: { [weak referenceView] in referenceView }, with: left)
 		
 	}
 	
-	public func pinLeft(by referenceView: @escaping () -> UIView?, with left: @escaping (ViewPinProperty<ViewPinPropertyType.Horizontal>) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func pinLeft(by referenceView: @escaping () -> UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		let left = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, left)
 		let maker = self.didSetProperty.storeLeft(left, to: self)
