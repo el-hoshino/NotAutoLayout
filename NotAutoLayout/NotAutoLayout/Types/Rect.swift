@@ -147,3 +147,15 @@ extension Rect {
     }
     
 }
+
+extension Rect {
+	
+	var horizontalSpan: Span {
+		return Span(start: self.left, width: self.width)
+	}
+	
+	var verticalSpan: Span {
+		return Span(start: self.top, width: self.height)
+	}
+	
+}

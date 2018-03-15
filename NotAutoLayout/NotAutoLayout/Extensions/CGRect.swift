@@ -506,3 +506,25 @@ extension CGRect {
 	}
 
 }
+
+extension CGRect {
+	
+	func convertedBy(targetView: UIView?, superView: UIView?) -> Rect {
+		
+		guard let targetView = targetView,
+			let superView = superView
+		else {
+			return .zero
+		}
+		
+		if targetView === superView {
+			return Rect(from: self)
+			
+		} else {
+			let frame = superView.convert(self, to: targetView)
+			return Rect(from: frame)
+		}
+		
+	}
+	
+}

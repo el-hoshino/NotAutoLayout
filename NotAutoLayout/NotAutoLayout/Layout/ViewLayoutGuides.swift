@@ -135,39 +135,3 @@ extension ViewLayoutGuides {
 	}
 	
 }
-
-private extension UIView {
-    
-    var currentDirection: UIUserInterfaceLayoutDirection {
-        
-        if #available(iOS 10.0, *) {
-            return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute, relativeTo: self.effectiveUserInterfaceLayoutDirection)
-            
-        } else {
-            return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute)
-        }
-        
-    }
-    
-    var boundsRect: Rect {
-        return Rect(from: self.bounds)
-    }
-    
-    var layoutMarginsRect: Rect {
-        let frame = self.bounds.frame(inside: self.layoutMargins)
-        return Rect(from: frame)
-    }
-    
-    var readableRect: Rect {
-        // FIXME: Get this property without Auto Layout UILayoutGuide
-        let frame = self.readableContentGuide.layoutFrame
-        return Rect(from: frame)
-    }
-    
-    @available(iOS 11.0, *)
-    var safeAreaRect: Rect {
-        let frame = self.bounds.frame(inside: self.safeAreaInsets)
-        return Rect(from: frame)
-    }
-    
-}

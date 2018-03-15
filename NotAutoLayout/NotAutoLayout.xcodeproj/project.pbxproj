@@ -85,6 +85,7 @@
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */; };
 		798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */; };
+		7994E2CA205AD5E8001AA4F6 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7994E2C9205AD5E8001AA4F6 /* UIView.swift */; };
 		799559362036874A00DE492D /* LayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799559352036874A00DE492D /* LayoutProperty.swift */; };
 		79AA8DB8205AB9B600D72D13 /* ViewPinGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */; };
 		79AA8DBA205AC6AF00D72D13 /* PinGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */; };
@@ -245,6 +246,7 @@
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreAllRequiredPropertyLayoutProperty.swift; sourceTree = "<group>"; };
 		798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuides.swift; sourceTree = "<group>"; };
+		7994E2C9205AD5E8001AA4F6 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		799559352036874A00DE492D /* LayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutProperty.swift; sourceTree = "<group>"; };
 		79AA8DB7205AB9B600D72D13 /* ViewPinGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuide.swift; sourceTree = "<group>"; };
 		79AA8DB9205AC6AF00D72D13 /* PinGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinGuideRepresentable.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				160CCA071F0CC57300783D73 /* CGFloat.swift */,
 				162B95FE1F0CA40800960B51 /* CGSize.swift */,
 				164EA0A41EF3DA4900C0BB8F /* CGRect.swift */,
+				7994E2C9205AD5E8001AA4F6 /* UIView.swift */,
 				166C41561F6945330060C3E6 /* UIEdgeInsets.swift */,
 				162B95F81F0C9C6800960B51 /* Calculations.swift */,
 			);
@@ -924,7 +927,6 @@
 				164319EF1F79FD8E003FA7DA /* LayoutPropertyCanAddAdditionalEvaluationType.swift in Sources */,
 				79D8DD881EF93D8F00B74593 /* CenterBottom.Individual.swift in Sources */,
 				79D8DDF01EF94C8600B74593 /* CenterTopMiddle.Individual.swift in Sources */,
-				16BA72221F692E7800A3D4CE /* ViewLayoutGuides.swift in Sources */,
 				79C6C1851FB83DEF00E32C54 /* LayoutElement.swift in Sources */,
 				79D8DDE81EF94BAB00B74593 /* RightBottomHeight.Individual.swift in Sources */,
 				7971FABD20345F7400B63CBC /* LayoutPropertyCanStoreTopRightType.swift in Sources */,
@@ -950,7 +952,6 @@
 				1630073D1F0F380C00012C18 /* BottomLeftMiddle.Individual.swift in Sources */,
 				79FD2CDA1FB85B5000E6661C /* LayoutPropertyCanStoreMiddleCenterType.swift in Sources */,
 				163007361F0F380C00012C18 /* MiddleRightTop.Individual.swift in Sources */,
-				BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */,
 				163007311F0F380C00012C18 /* MiddleCenterBottom.Individual.swift in Sources */,
 				164EA0C51EF3DAE300C0BB8F /* LeftTopWidth.Individual.swift in Sources */,
 				16685B4D1F669A7F0089FF30 /* LayoutControlling.swift in Sources */,
@@ -967,6 +968,9 @@
 				163007381F0F380C00012C18 /* MiddleRightWidth.Individual.swift in Sources */,
 				7971FAC42034710800B63CBC /* Initial.Sequential.swift in Sources */,
 				79CDD00D1FED797300A6D168 /* Span.swift in Sources */,
+				7994E2CA205AD5E8001AA4F6 /* UIView.swift in Sources */,
+				16BA72221F692E7800A3D4CE /* ViewLayoutGuides.swift in Sources */,
+				BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */,
 				163007451F0F380C00012C18 /* BottomCenterHeight.Individual.swift in Sources */,
 				799559362036874A00DE492D /* LayoutProperty.swift in Sources */,
 				1630072C1F0F380C00012C18 /* MiddleLeftWidth.Individual.swift in Sources */,
