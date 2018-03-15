@@ -13,12 +13,20 @@ extension ViewPinGuides.Horizontal {
 	
 	public struct Guide {
 		
-		let uiLayoutDirection: UIUserInterfaceLayoutDirection
+		let directionGetter: () -> UIUserInterfaceLayoutDirection?
 		let span: Span
 		
-		static let empty: ViewPinGuides.Horizontal.Guide = .init(uiLayoutDirection: .leftToRight,
+		static let empty: ViewPinGuides.Horizontal.Guide = .init(directionGetter: { nil },
 																 span: .zero)
 		
+	}
+	
+}
+
+extension ViewPinGuides.Horizontal.Guide {
+	
+	var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
 	
 }
@@ -54,7 +62,7 @@ extension ViewPinGuides.Horizontal.Guide {
 extension ViewPinGuides.Horizontal.Guide {
 	
 	public var leading: CGFloat {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.left
 			
@@ -64,7 +72,7 @@ extension ViewPinGuides.Horizontal.Guide {
 	}
 	
 	public var trailing: CGFloat {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.right
 			
@@ -121,12 +129,20 @@ extension ViewPinGuides.Point {
 	
 	public struct Guide {
 		
-		let uiLayoutDirection: UIUserInterfaceLayoutDirection
+		let directionGetter: () -> UIUserInterfaceLayoutDirection?
 		let rect: Rect
 		
-		static let empty: ViewPinGuides.Point.Guide = .init(uiLayoutDirection: .leftToRight,
+		static let empty: ViewPinGuides.Point.Guide = .init(directionGetter: { nil },
 														   rect: .zero)
 		
+	}
+	
+}
+
+extension ViewPinGuides.Point.Guide {
+	
+	var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
 	
 }
@@ -186,7 +202,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var topLeading: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.topLeft
 			
@@ -196,7 +212,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var topTrailing: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.topRight
 			
@@ -206,7 +222,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var midddleLeading: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.middleLeft
 			
@@ -216,7 +232,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var middleTrailing: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.middleRight
 			
@@ -226,7 +242,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var bottomLeading: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.bottomLeft
 			
@@ -236,7 +252,7 @@ extension ViewPinGuides.Point.Guide {
 	}
 	
 	public var bottomTrailing: CGPoint {
-		switch self.uiLayoutDirection {
+		switch self.direction {
 		case .leftToRight:
 			return self.bottomRight
 			

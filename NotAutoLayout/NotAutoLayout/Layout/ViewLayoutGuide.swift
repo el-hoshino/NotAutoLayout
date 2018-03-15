@@ -12,12 +12,20 @@ extension ViewLayoutGuides {
 	
 	public struct Guide {
 		
-		let uiLayoutDirection: UIUserInterfaceLayoutDirection
+		let directionGetter: () -> UIUserInterfaceLayoutDirection?
 		let rect: Rect
 		
-		static let empty: ViewLayoutGuides.Guide = .init(uiLayoutDirection: .leftToRight,
+		static let empty: ViewLayoutGuides.Guide = .init(directionGetter: { nil },
 														 rect: .zero)
 		
+	}
+	
+}
+
+extension ViewLayoutGuides.Guide {
+	
+	var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
 	
 }
@@ -143,7 +151,7 @@ extension ViewLayoutGuides.Guide {
 extension ViewLayoutGuides.Guide {
     
     public var leading: CGFloat {
-        switch self.uiLayoutDirection {
+        switch self.direction {
         case .leftToRight:
             return self.left
             
@@ -153,7 +161,7 @@ extension ViewLayoutGuides.Guide {
     }
     
     public var trailing: CGFloat {
-        switch self.uiLayoutDirection {
+        switch self.direction {
         case .leftToRight:
             return self.right
             

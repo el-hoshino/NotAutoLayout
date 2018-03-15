@@ -22,13 +22,13 @@ public struct ViewLayoutGuides {
 
 extension ViewLayoutGuides {
 	
-	private func makeGuide(direction: UIUserInterfaceLayoutDirection?, rect: Rect?) -> Guide {
+	private func makeGuide(directionGetter: @escaping () -> UIUserInterfaceLayoutDirection?, rect: Rect?) -> Guide {
 		
-		guard let direction = direction, let rect = rect else {
+		guard let rect = rect else {
 			return .empty
 		}
 		
-		let guide = Guide.init(uiLayoutDirection: direction, rect: rect)
+		let guide = Guide(directionGetter: directionGetter, rect: rect)
 		
 		return guide
 		
@@ -47,20 +47,20 @@ extension ViewLayoutGuides: LayoutGuideRepresentable {
 extension ViewLayoutGuides {
     
     public var boundsGuide: Guide {
-        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.boundsRect)
+		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.boundsRect)
     }
     
     public var layoutMarginsGuide: Guide {
-        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.layoutMarginsRect)
+		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.layoutMarginsRect)
     }
     
     public var readableGuide: Guide {
-        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.readableRect)
+		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.readableRect)
     }
     
     @available(iOS 11.0, *)
     public var safeAreaGuide: Guide {
-        return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.safeAreaRect)
+		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.safeAreaRect)
     }
     
 }
