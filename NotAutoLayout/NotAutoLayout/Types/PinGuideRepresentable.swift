@@ -10,7 +10,7 @@ import Foundation
 
 public protocol HorizontalPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.HorizontalGuide { get }
+	var pinGuide: ViewPinGuides.Horizontal.Guide { get }
 	
 	var left: CGFloat { get }
 	
@@ -28,7 +28,7 @@ public protocol HorizontalPinGuideRepresentable {
 
 public protocol VerticalPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.VerticalGuide { get }
+	var pinGuide: ViewPinGuides.Vertical.Guide { get }
 	
 	var top: CGFloat { get }
 	
@@ -42,7 +42,7 @@ public protocol VerticalPinGuideRepresentable {
 
 public protocol PointPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.PointGuide { get }
+	var pinGuide: ViewPinGuides.Point.Guide { get }
 	
 	var topLeft: CGPoint { get }
 	

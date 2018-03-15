@@ -10,7 +10,21 @@ import Foundation
 
 public struct ViewPinGuides {
 	
+}
+
+extension ViewPinGuides {
 	
+	public struct Horizontal {
+		
+	}
+	
+	public struct Vertical {
+		
+	}
+	
+	public struct Point {
+		
+	}
 	
 }
 
