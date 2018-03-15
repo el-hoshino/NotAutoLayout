@@ -8,290 +8,99 @@
 
 import Foundation
 
+private enum SafeAreaGuideBox {
+    case none
+    @available(iOS 11.0, *) case some(LazyBox<LayoutGuide>)
+}
+
+private func makeGuide(direction: UIUserInterfaceLayoutDirection, rect: Rect) -> LayoutGuide {
+    
+    let guide = LayoutGuide.init(uiLayoutDirection: direction, rect: rect)
+    
+    return guide
+    
+}
+
 public struct ViewFrameProperty {
 	
 	private(set) weak var parentView: UIView?
+    
+    private let boundsGuideBox: LazyBox<LayoutGuide>
+    private let layoutMarginsGuideBox: LazyBox<LayoutGuide>
+    private let readableGuideBox: LazyBox<LayoutGuide>
+    private let safeAreaGuideBox: SafeAreaGuideBox
+    
+    init(parentView: UIView) {
+        
+        self.parentView = parentView
+        
+        self.boundsGuideBox = .init { [parentView] in
+            makeGuide(direction: parentView.currentDirection, rect: parentView.boundsRect)
+        }
+        
+        self.layoutMarginsGuideBox = .init { [parentView] in
+            makeGuide(direction: parentView.currentDirection, rect: parentView.layoutMarginsRect)
+        }
+        
+        self.readableGuideBox = .init { [parentView] in
+            makeGuide(direction: parentView.currentDirection, rect: parentView.readableRect)
+        }
+        
+        self.safeAreaGuideBox = {
+            if #available(iOS 11.0, *) {
+                return .some(.init { [parentView] in makeGuide(direction: parentView.currentDirection, rect: parentView.safeAreaRect) })
+            } else {
+                return .none
+            }
+        }()
+        
+    }
 	
 }
 
-extension ViewFrameProperty {
-	
-	public var boundSize: CGSize {
-		
-		return self.parentView?.bounds.size ?? .zero
-		
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeAreaInsets: UIEdgeInsets {
-		
-		guard let insets = self.parentView?.safeAreaInsets else {
-			return .zero
-		}
-		
-		return insets
-		
-	}
-	
+extension ViewFrameProperty: LayoutGuideRepresentable {
+    
+    public var layoutGuide: LayoutGuide {
+        return self.boundsGuide
+    }
+    
 }
 
 extension ViewFrameProperty {
-	
-	public var boundWidth: CGFloat {
-		return self.boundSize.width
-	}
-	
-	public var boundHeight: CGFloat {
-		return self.boundSize.height
-	}
-	
+    
+    var boundsGuide: LayoutGuide {
+        return self.boundsGuideBox.value
+    }
+    
+    var layoutMarginsGuide: LayoutGuide {
+        return self.layoutMarginsGuideBox.value
+    }
+    
+    var readableGuide: LayoutGuide {
+        return self.readableGuideBox.value
+    }
+    
+    @available(iOS 11.0, *)
+    var safeAreaGuide: LayoutGuide {
+        guard case .some(let guide) = self.safeAreaGuideBox else {
+            preconditionFailure("safeAreaGuide should be able to access on iOS over 11.0")
+        }
+        return guide.value
+    }
+    
 }
 
 extension ViewFrameProperty {
-	
-	public var boundLeft: CGFloat {
-		return 0
-	}
-	
-	public var boundCenter: CGFloat {
-		return self.boundLeft + (self.boundWidth / 2)
-	}
-	
-	public var boundRight: CGFloat {
-		return self.boundLeft + self.boundWidth
-	}
-	
-	public var boundTop: CGFloat {
-		return 0
-	}
-	
-	public var boundMiddle: CGFloat {
-		return self.boundTop + (self.boundHeight / 2)
-	}
-	
-	public var boundBottom: CGFloat {
-		return self.boundTop + self.boundHeight
-	}
-	
-	public func boundHorizontal(at relativePosition: CGFloat) -> CGFloat {
-		return self.boundLeft + (self.boundWidth * relativePosition)
-	}
-	
-	public func boundVertical(at relativePosition: CGFloat) -> CGFloat {
-		return self.boundTop + (self.boundHeight * relativePosition)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	public var boundTopLeft: CGPoint {
-		return .init(x: self.boundLeft, y: self.boundTop)
-	}
-	
-	public var boundTopCenter: CGPoint {
-		return .init(x: self.boundCenter, y: self.boundTop)
-	}
-	
-	public var boundTopRight: CGPoint {
-		return .init(x: self.boundRight, y: self.boundTop)
-	}
-	
-	public var boundMiddleLeft: CGPoint {
-		return .init(x: self.boundLeft, y: self.boundMiddle)
-	}
-	
-	public var boundMiddleCenter: CGPoint {
-		return .init(x: self.boundCenter, y: self.boundMiddle)
-	}
-	
-	public var boundMiddleRight: CGPoint {
-		return .init(x: self.boundRight, y: self.boundMiddle)
-	}
-	
-	public var boundBottomLeft: CGPoint {
-		return .init(x: self.boundLeft, y: self.boundBottom)
-	}
-	
-	public var boundBottomCenter: CGPoint {
-		return .init(x: self.boundCenter, y: self.boundBottom)
-	}
-	
-	public var boundBottomRight: CGPoint {
-		return .init(x: self.boundRight, y: self.boundBottom)
-	}
-	
-	public func boundPoint(at relativePoint: CGPoint) -> CGPoint {
-		let x = self.boundLeft + (self.boundWidth * relativePoint.x)
-		let y = self.boundTop + (self.boundHeight * relativePoint.y)
-		return .init(x: x, y: y)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	public var boundFrame: CGRect {
-		return .init(origin: .zero, size: self.boundSize)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS 11.0, *)
-	public var topSafeAreaInset: CGFloat {
-		return self.safeAreaInsets.top
-	}
-	
-	@available(iOS 11.0, *)
-	public var bottomSafeAreaInset: CGFloat {
-		return self.safeAreaInsets.bottom
-	}
-	
-	@available(iOS 11.0, *)
-	public var leftSafeAreaInset: CGFloat {
-		return self.safeAreaInsets.left
-	}
-	
-	@available(iOS 11.0, *)
-	public var rightSafeAreaInset: CGFloat {
-		return self.safeAreaInsets.right
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS 11.0, *)
-	public var safeWidth: CGFloat {
-		return self.boundWidth - self.safeAreaInsets.width
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeHeight: CGFloat {
-		return self.boundHeight - self.safeAreaInsets.height
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeOrigin: CGPoint {
-		return CGPoint(x: self.leftSafeAreaInset, y: self.topSafeAreaInset)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeSize: CGSize {
-		return CGSize(width: self.safeWidth, height: self.safeHeight)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS 11.0, *)
-	public var safeLeft: CGFloat {
-		return self.boundLeft + self.safeAreaInsets.left
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeCenter: CGFloat {
-		return self.safeLeft + (self.safeWidth / 2)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeRight: CGFloat {
-		return self.safeLeft + self.safeWidth
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeTop: CGFloat {
-		return self.boundTop + self.safeAreaInsets.top
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeMiddle: CGFloat {
-		return self.safeTop + (self.safeHeight / 2)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeBottom: CGFloat {
-		return self.safeTop + self.safeHeight
-	}
-	
-	@available(iOS 11.0, *)
-	public func safeHorizontal(at relativePosition: CGFloat) -> CGFloat {
-		return self.safeLeft + (self.safeWidth * relativePosition)
-	}
-	
-	@available(iOS 11.0, *)
-	public func safeVertical(at relativePosition: CGFloat) -> CGFloat {
-		return self.safeTop + (self.safeHeight * relativePosition)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS 11.0, *)
-	public var safeTopLeft: CGPoint {
-		return .init(x: self.safeLeft, y: self.safeTop)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeTopCenter: CGPoint {
-		return .init(x: self.safeCenter, y: self.safeTop)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeTopRight: CGPoint {
-		return .init(x: self.safeRight, y: self.safeTop)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeMiddleLeft: CGPoint {
-		return .init(x: self.safeLeft, y: self.safeMiddle)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeMiddleCenter: CGPoint {
-		return .init(x: self.safeCenter, y: self.safeMiddle)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeMiddleRight: CGPoint {
-		return .init(x: self.safeRight, y: self.safeMiddle)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeBottomLeft: CGPoint {
-		return .init(x: self.safeLeft, y: self.safeBottom)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeBottomCenter: CGPoint {
-		return .init(x: self.safeCenter, y: self.safeBottom)
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeBottomRight: CGPoint {
-		return .init(x: self.safeRight, y: self.safeBottom)
-	}
-	
-	@available(iOS 11.0, *)
-	public func safePoint(at relativePoint: CGPoint) -> CGPoint {
-		let x = self.safeLeft + (self.safeWidth * relativePoint.x)
-		let y = self.safeTop + (self.safeHeight * relativePoint.y)
-		return .init(x: x, y: y)
-	}
-	
-}
-
-extension ViewFrameProperty {
-	
-	@available(iOS 11.0, *)
-	public var safeFrame: CGRect {
-		return .init(origin: self.safeOrigin, size: self.safeSize)
-	}
-	
+    
+    var layoutMargins: UIEdgeInsets {
+        return self.parentView?.layoutMargins ?? .zero
+    }
+    
+    @available(iOS 11.0, *)
+    var safeAreaInsets: UIEdgeInsets {
+        return self.parentView?.safeAreaInsets ?? .zero
+    }
+    
 }
 
 extension ViewFrameProperty {
@@ -320,13 +129,13 @@ extension ViewFrameProperty {
 			switch safeAreaOnly {
 			case true:
 				if #available(iOS 11.0, *) {
-					return self.safeSize
+					return self.safeAreaGuide.size
 				} else {
 					fallthrough
 				}
 				
 			case false:
-				return self.boundSize
+				return self.boundsGuide.size
 			}
 		}(aspect.safeAreaOnly)
 		
@@ -350,4 +159,40 @@ extension ViewFrameProperty {
 		
 	}
 	
+}
+
+private extension UIView {
+    
+    var currentDirection: UIUserInterfaceLayoutDirection {
+        
+        if #available(iOS 10.0, *) {
+            return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute, relativeTo: self.effectiveUserInterfaceLayoutDirection)
+            
+        } else {
+            return UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute)
+        }
+        
+    }
+    
+    var boundsRect: Rect {
+        return Rect(from: self.bounds)
+    }
+    
+    var layoutMarginsRect: Rect {
+        let frame = self.bounds.frame(inside: self.layoutMargins)
+        return Rect(from: frame)
+    }
+    
+    var readableRect: Rect {
+        // FIXME: Get this property without Auto Layout UILayoutGuide
+        let frame = self.readableContentGuide.layoutFrame
+        return Rect(from: frame)
+    }
+    
+    @available(iOS 11.0, *)
+    var safeAreaRect: Rect {
+        let frame = self.bounds.frame(inside: self.safeAreaInsets)
+        return Rect(from: frame)
+    }
+    
 }
