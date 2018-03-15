@@ -72,20 +72,20 @@ extension ViewFrameProperty: LayoutGuideRepresentable {
 
 extension ViewFrameProperty {
     
-    var boundsGuide: LayoutGuide {
+    public var boundsGuide: LayoutGuide {
         return self.boundsGuideBox.value
     }
     
-    var layoutMarginsGuide: LayoutGuide {
+    public var layoutMarginsGuide: LayoutGuide {
         return self.layoutMarginsGuideBox.value
     }
     
-    var readableGuide: LayoutGuide {
+    public var readableGuide: LayoutGuide {
         return self.readableGuideBox.value
     }
     
     @available(iOS 11.0, *)
-    var safeAreaGuide: LayoutGuide {
+    public var safeAreaGuide: LayoutGuide {
         guard case .some(let guide) = self.safeAreaGuideBox else {
             preconditionFailure("safeAreaGuide should be able to access on iOS over 11.0")
         }
@@ -96,12 +96,12 @@ extension ViewFrameProperty {
 
 extension ViewFrameProperty {
     
-    var layoutMargins: UIEdgeInsets {
+    public var layoutMargins: UIEdgeInsets {
         return self.parentView?.layoutMargins ?? .zero
     }
     
     @available(iOS 11.0, *)
-    var safeAreaInsets: UIEdgeInsets {
+    public var safeAreaInsets: UIEdgeInsets {
         return self.parentView?.safeAreaInsets ?? .zero
     }
     
