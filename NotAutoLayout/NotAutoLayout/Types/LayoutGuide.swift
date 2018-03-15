@@ -10,31 +10,41 @@ import Foundation
 
 public struct LayoutGuide {
     
-    private let semanticContentAttribute: UISemanticContentAttribute
-    private let effectiveUserInterfaceLayoutDirection: UIUserInterfaceLayoutDirection
-    private let rect: CGRect
+    let uiLayoutDirection: UIUserInterfaceLayoutDirection
+    let rect: Rect
+    
+    static let empty: LayoutGuide = .init(uiLayoutDirection: .leftToRight,
+                                          rect: .zero)
+    
+}
+
+extension LayoutGuide: LayoutGuideRepresentable {
+    
+    public var layoutGuide: LayoutGuide {
+        return self
+    }
     
 }
 
 extension LayoutGuide {
     
-    var left: CGFloat {
+    public var left: CGFloat {
         return self.rect.left
     }
     
-    var center: CGFloat {
+    public var center: CGFloat {
         return self.rect.center
     }
     
-    var right: CGFloat {
+    public var right: CGFloat {
         return self.rect.right
     }
     
-    var width: CGFloat {
+    public var width: CGFloat {
         return self.rect.width
     }
     
-    func horizontal(at relativePosition: CGFloat) -> CGFloat {
+    public func horizontal(at relativePosition: CGFloat) -> CGFloat {
         return self.left + (self.width * relativePosition)
     }
     
@@ -42,23 +52,23 @@ extension LayoutGuide {
 
 extension LayoutGuide {
     
-    var top: CGFloat {
+    public var top: CGFloat {
         return self.rect.top
     }
     
-    var middle: CGFloat {
+    public var middle: CGFloat {
         return self.rect.middle
     }
     
-    var bottom: CGFloat {
+    public var bottom: CGFloat {
         return self.rect.bottom
     }
     
-    var height: CGFloat {
+    public var height: CGFloat {
         return self.rect.height
     }
     
-    func vertical(at relativePosition: CGFloat) -> CGFloat {
+    public func vertical(at relativePosition: CGFloat) -> CGFloat {
         return self.top + (self.height * relativePosition)
     }
     
@@ -66,50 +76,86 @@ extension LayoutGuide {
 
 extension LayoutGuide {
     
-    var topLeft: CGPoint {
+    public var topLeft: CGPoint {
         return self.rect.topLeft
     }
     
-    var topCenter: CGPoint {
+    public var topCenter: CGPoint {
         return self.rect.topCenter
     }
     
-    var topRight: CGPoint {
+    public var topRight: CGPoint {
         return self.rect.topRight
     }
     
-    var middleLeft: CGPoint {
+    public var middleLeft: CGPoint {
         return self.rect.middleLeft
     }
     
-    var middleCenter: CGPoint {
+    public var middleCenter: CGPoint {
         return self.rect.middleCenter
     }
     
-    var middleRight: CGPoint {
+    public var middleRight: CGPoint {
         return self.rect.middleRight
     }
     
-    var bottomLeft: CGPoint {
+    public var bottomLeft: CGPoint {
         return self.rect.bottomLeft
     }
     
-    var bottomCenter: CGPoint {
+    public var bottomCenter: CGPoint {
         return self.rect.bottomCenter
     }
     
-    var bottomRight: CGPoint {
+    public var bottomRight: CGPoint {
         return self.rect.bottomRight
     }
     
-    var size: CGSize {
+    public var size: CGSize {
         return self.rect.size
     }
     
-    func point(at relativePoint: CGPoint) -> CGPoint {
+    public func point(at relativePoint: CGPoint) -> CGPoint {
         let x = self.horizontal(at: relativePoint.x)
         let y = self.vertical(at: relativePoint.y)
         return .init(x: x, y: y)
+    }
+    
+}
+
+extension LayoutGuide {
+    
+    public var frame: CGRect {
+        return self.rect.frame
+    }
+    
+    public func frame(inside insets: UIEdgeInsets) -> CGRect {
+        return self.rect.frame(inside: insets)
+    }
+    
+}
+
+extension LayoutGuide {
+    
+    public var leading: CGFloat {
+        switch self.uiLayoutDirection {
+        case .leftToRight:
+            return self.left
+            
+        case .rightToLeft:
+            return self.right
+        }
+    }
+    
+    public var trailing: CGFloat {
+        switch self.uiLayoutDirection {
+        case .leftToRight:
+            return self.right
+            
+        case .rightToLeft:
+            return self.left
+        }
     }
     
 }
