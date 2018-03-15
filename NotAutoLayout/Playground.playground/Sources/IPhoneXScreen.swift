@@ -30,7 +30,7 @@ extension IPhoneXScreen {
 		super.layoutSubviews()
 		
 		self.nal.layout(self.notch) { $0
-			.setTopCenter(by: { $0.boundTopCenter })
+			.setTopCenter(by: { $0.topCenter })
 			.fitSize()
 		}
 	}
