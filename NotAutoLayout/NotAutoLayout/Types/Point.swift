@@ -39,6 +39,20 @@ extension Point: CGTypeConvertible {
     
 }
 
+extension Point {
+    
+    public static let coordinateTopLeft: Point      = .init(x: 0.0, y: 0.0)
+    public static let coordinateTopCenter: Point    = .init(x: 0.5, y: 0.0)
+    public static let coordinateTopRight: Point     = .init(x: 1.0, y: 0.0)
+    public static let coordinateMiddleLeft: Point   = .init(x: 0.0, y: 0.5)
+    public static let coordinateMiddleCenter: Point = .init(x: 0.5, y: 0.5)
+    public static let coordinateMiddleRight: Point  = .init(x: 1.0, y: 0.5)
+    public static let coordinateBottomLeft: Point   = .init(x: 0.0, y: 1.0)
+    public static let coordinateBottomCenter: Point = .init(x: 0.5, y: 1.0)
+    public static let coordinateBottomRight: Point  = .init(x: 1.0, y: 1.0)
+    
+}
+
 extension Point: CustomStringConvertible {
     
     public var description: String {
