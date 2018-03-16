@@ -50,19 +50,19 @@ extension Rect: CGTypeConvertible {
 
 extension Rect {
     
-    var left: Float {
+    public var left: Float {
         return self.origin.x
     }
     
-    var center: Float {
+    public var center: Float {
         return self.horizontalGeometry(at: 0.5)
     }
     
-    var right: Float {
+    public var right: Float {
         return self.left + self.width
     }
     
-    var width: Float {
+    public var width: Float {
         return self.size.width
     }
     
@@ -70,19 +70,19 @@ extension Rect {
 
 extension Rect {
     
-    var top: Float {
+    public var top: Float {
         return self.origin.y
     }
     
-    var middle: Float {
+    public var middle: Float {
         return self.verticalGeometry(at: 0.5)
     }
     
-    var bottom: Float {
+    public var bottom: Float {
         return self.top + self.height
     }
     
-    var height: Float {
+    public var height: Float {
         return self.size.height
     }
     
@@ -90,39 +90,39 @@ extension Rect {
 
 extension Rect {
     
-    var topLeft: Point {
+    public var topLeft: Point {
         return .init(x: self.left, y: self.top)
     }
     
-    var topCenter: Point {
+    public var topCenter: Point {
         return .init(x: self.center, y: self.top)
     }
     
-    var topRight: Point {
+    public var topRight: Point {
         return .init(x: self.right, y: self.top)
     }
     
-    var middleLeft: Point {
+    public var middleLeft: Point {
         return .init(x: self.left, y: self.middle)
     }
     
-    var middleCenter: Point {
+    public var middleCenter: Point {
         return .init(x: self.center, y: self.middle)
     }
     
-    var middleRight: Point {
+    public var middleRight: Point {
         return .init(x: self.right, y: self.middle)
     }
     
-    var bottomLeft: Point {
+    public var bottomLeft: Point {
         return .init(x: self.left, y: self.bottom)
     }
     
-    var bottomCenter: Point {
+    public var bottomCenter: Point {
         return .init(x: self.center, y: self.bottom)
     }
     
-    var bottomRight: Point {
+    public var bottomRight: Point {
         return .init(x: self.right, y: self.bottom)
     }
     
@@ -130,11 +130,11 @@ extension Rect {
 
 extension Rect {
     
-    var horizontalSpan: Span {
+    public var horizontalSpan: Span {
         return Span(horizontalFrom: self)
     }
     
-    var verticalSpan: Span {
+    public var verticalSpan: Span {
         return Span(verticalFrom: self)
     }
     
@@ -142,21 +142,21 @@ extension Rect {
 
 extension Rect {
 	
-	func horizontalGeometry(at coordinate: Float) -> Float {
+	public func horizontalGeometry(at coordinate: Float) -> Float {
 		return self.origin.x + (self.size.width * coordinate)
 	}
 	
-	func verticalGeometry(at coordinate: Float) -> Float {
+	public func verticalGeometry(at coordinate: Float) -> Float {
 		return self.origin.y + (self.size.height * coordinate)
 	}
 	
-	func pointGeometry(x: Float, y: Float) -> Point {
+	public func pointGeometry(x: Float, y: Float) -> Point {
 		let x = self.horizontalGeometry(at: x)
 		let y = self.verticalGeometry(at: y)
 		return .init(x: x, y: y)
 	}
 	
-	func pointGeometry(at coordinate: Point) -> Point {
+	public func pointGeometry(at coordinate: Point) -> Point {
 		return self.pointGeometry(x: coordinate.x, y: coordinate.y)
 	}
 	
@@ -186,7 +186,7 @@ extension Rect {
 
 extension Rect {
     
-    func rect(inside insets: Insets) -> Rect {
+    public func rect(inside insets: Insets) -> Rect {
         let frame = UIEdgeInsetsInsetRect(self.cgValue, insets.cgValue)
         return Rect(frame)
     }

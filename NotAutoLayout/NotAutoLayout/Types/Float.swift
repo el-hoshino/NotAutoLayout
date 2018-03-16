@@ -101,6 +101,10 @@ extension Float: SignedNumeric {
     
 }
 
+extension Float: Comparable {
+    
+}
+
 extension Float: Strideable {
     
     public typealias Stride = Float
