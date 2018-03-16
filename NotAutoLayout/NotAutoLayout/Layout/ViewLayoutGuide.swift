@@ -138,6 +138,10 @@ extension ViewLayoutGuides.Guide {
 
 extension ViewLayoutGuides.Guide {
     
+    public var frame: Rect {
+        return self.rect
+    }
+    
     public func frame(inside insets: Insets) -> Rect {
         return self.rect.rect(inside: insets)
     }
