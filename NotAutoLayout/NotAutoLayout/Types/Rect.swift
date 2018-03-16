@@ -10,45 +10,59 @@ import Foundation
 
 public struct Rect {
 	
-	var origin: CGPoint
-	
-	var size: CGSize
-	
-}
-
-extension Rect {
-	
-	init(from cgRect: CGRect) {
-		
-		self.origin = cgRect.origin
-		
-		self.size = cgRect.size
-		
-	}
+    public var origin: Point
+    public var size: Size
+    
+    public init(origin: Point, size: Size) {
+        self.origin = origin
+        self.size = size
+    }
+    
+    public init(x: Float, y: Float, width: Float, height: Float) {
+        self.origin = Point(x: x, y: y)
+        self.size = Size(width: width, height: height)
+    }
 	
 }
 
 extension Rect {
 	
-	static let zero: Rect  = .init(origin: .zero, size: .zero)
+    public static let zero: Rect  = .init(origin: .zero, size: .zero)
+    
+    public static let identity: Rect = .init(origin: .zero, size: .identity)
 	
+}
+
+extension Rect: CGTypeConvertible {
+    
+    public var cgValue: CGRect {
+        return .init(origin: self.origin.cgValue, size: self.size.cgValue)
+    }
+    
+    public init(_ rect: CGRect) {
+        
+        self.origin = Point(rect.origin)
+        self.size = Size(rect.size)
+        
+    }
+    
 }
 
 extension Rect {
     
-    var left: CGFloat {
+    var left: Float {
         return self.origin.x
     }
     
-    var center: CGFloat {
+    var center: Float {
         return self.horizontalGeometry(at: 0.5)
     }
     
-    var right: CGFloat {
+    var right: Float {
         return self.left + self.width
     }
     
-    var width: CGFloat {
+    var width: Float {
         return self.size.width
     }
     
@@ -56,19 +70,19 @@ extension Rect {
 
 extension Rect {
     
-    var top: CGFloat {
+    var top: Float {
         return self.origin.y
     }
     
-    var middle: CGFloat {
+    var middle: Float {
         return self.verticalGeometry(at: 0.5)
     }
     
-    var bottom: CGFloat {
+    var bottom: Float {
         return self.top + self.height
     }
     
-    var height: CGFloat {
+    var height: Float {
         return self.size.height
     }
     
@@ -76,39 +90,39 @@ extension Rect {
 
 extension Rect {
     
-    var topLeft: CGPoint {
+    var topLeft: Point {
         return .init(x: self.left, y: self.top)
     }
     
-    var topCenter: CGPoint {
+    var topCenter: Point {
         return .init(x: self.center, y: self.top)
     }
     
-    var topRight: CGPoint {
+    var topRight: Point {
         return .init(x: self.right, y: self.top)
     }
     
-    var middleLeft: CGPoint {
+    var middleLeft: Point {
         return .init(x: self.left, y: self.middle)
     }
     
-    var middleCenter: CGPoint {
+    var middleCenter: Point {
         return .init(x: self.center, y: self.middle)
     }
     
-    var middleRight: CGPoint {
+    var middleRight: Point {
         return .init(x: self.right, y: self.middle)
     }
     
-    var bottomLeft: CGPoint {
+    var bottomLeft: Point {
         return .init(x: self.left, y: self.bottom)
     }
     
-    var bottomCenter: CGPoint {
+    var bottomCenter: Point {
         return .init(x: self.center, y: self.bottom)
     }
     
-    var bottomRight: CGPoint {
+    var bottomRight: Point {
         return .init(x: self.right, y: self.bottom)
     }
     
@@ -116,21 +130,21 @@ extension Rect {
 
 extension Rect {
 	
-	func horizontalGeometry(at coordinate: CGFloat) -> CGFloat {
+	func horizontalGeometry(at coordinate: Float) -> Float {
 		return self.origin.x + (self.size.width * coordinate)
 	}
 	
-	func verticalGeometry(at coordinate: CGFloat) -> CGFloat {
+	func verticalGeometry(at coordinate: Float) -> Float {
 		return self.origin.y + (self.size.height * coordinate)
 	}
 	
-	func pointGeometry(x: CGFloat, y: CGFloat) -> CGPoint {
+	func pointGeometry(x: Float, y: Float) -> Point {
 		let x = self.horizontalGeometry(at: x)
 		let y = self.verticalGeometry(at: y)
 		return .init(x: x, y: y)
 	}
 	
-	func pointGeometry(at coordinate: CGPoint) -> CGPoint {
+	func pointGeometry(at coordinate: Point) -> Point {
 		return self.pointGeometry(x: coordinate.x, y: coordinate.y)
 	}
 	
@@ -139,7 +153,7 @@ extension Rect {
 extension Rect {
     
     var frame: CGRect {
-        return .init(origin: self.origin, size: self.size)
+        return self.cgValue
     }
     
     func frame(inside insets: UIEdgeInsets) -> CGRect {
@@ -151,11 +165,19 @@ extension Rect {
 extension Rect {
 	
 	var horizontalSpan: Span {
-		return Span(start: self.left, width: self.width)
+		return Span(horizontalFrom: self)
 	}
 	
 	var verticalSpan: Span {
-		return Span(start: self.top, width: self.height)
+		return Span(verticalFrom: self)
 	}
 	
+}
+
+extension Rect: CustomStringConvertible {
+    
+    public var description: String {
+        return "(origin: \(self.origin), size: \(self.size))"
+    }
+    
 }

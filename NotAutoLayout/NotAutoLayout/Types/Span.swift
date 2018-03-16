@@ -10,19 +10,31 @@ import Foundation
 
 public struct Span {
 	
-	var start: CGFloat
-	
-	var width: CGFloat
+	public var start: Float
+	public var length: Float
+    
+    public init(start: Float, length: Float) {
+        self.start = start
+        self.length = length
+    }
 	
 }
 
 extension Span {
 	
-	init(horizontalFrom cgRect: CGRect) {
+	init(horizontalFrom rect: Rect) {
 		
-		self.start = cgRect.x
+		self.start = rect.left
 		
-		self.width = cgRect.width
+		self.length = rect.width
+		
+	}
+	
+	init(verticalFrom rect: Rect) {
+		
+		self.start = rect.top
+		
+		self.length = rect.height
 		
 	}
 	
@@ -30,34 +42,32 @@ extension Span {
 
 extension Span {
 	
-	init(verticalFrom cgRect: CGRect) {
-		
-		self.start = cgRect.y
-		
-		self.width = cgRect.height
-		
-	}
+	public static let zero: Span = .init(start: 0, length: 0)
+    
+    public static let identity: Span = .init(start: 0, length: 1)
 	
 }
 
 extension Span {
 	
-	static let zero: Span = .init(start: 0, width: 0)
-	
-}
-
-extension Span {
-	
-	var half: CGFloat {
+	var half: Float {
 		return self.geometry(at: 0.5)
 	}
 	
-	var end: CGFloat {
+	var end: Float {
 		return self.geometry(at: 1)
 	}
 	
-	func geometry(at coordinate: CGFloat) -> CGFloat {
-		return self.start + (self.width * coordinate)
+	func geometry(at coordinate: Float) -> Float {
+		return self.start + (self.length * coordinate)
 	}
 	
+}
+
+extension Span: CustomStringConvertible {
+    
+    public var description: String {
+        return "(start: \(self.start), length: \(self.length))"
+    }
+    
 }
