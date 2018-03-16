@@ -27,7 +27,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		}
 		
 	}
-	
+    
 	private func layout(_ view: UIView, with bounds: Bounds) {
 		
 		view.bounds.size = bounds.size
@@ -43,7 +43,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		
 		let frame = layout.evaluatedFrame(for: view, from: self.layoutGuides)
 		
-		self.layout(view, with: frame)
+		self.layout(view, with: frame.cgValue)
 		
 	}
 	
@@ -94,7 +94,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		let frames = layout.evaluatedFrame(for: subviews, from: self.layoutGuides)
 		
 		for (subview, frame) in zip(subviews, frames) {
-			self.layout(subview, with: frame)
+			self.layout(subview, with: frame.cgValue)
 		}
 		
 	}

@@ -164,12 +164,31 @@ extension Rect {
 
 extension Rect {
     
-    var frame: CGRect {
-        return self.cgValue
+    func convertedBy(targetView: UIView?, superView: UIView?) -> Rect {
+        
+        guard let targetView = targetView,
+            let superView = superView
+        else {
+            return .zero
+        }
+        
+        if targetView === superView {
+            return self
+            
+        } else {
+            let frame = superView.convert(self.cgValue, to: targetView)
+            return Rect(frame)
+        }
+        
     }
     
-    func frame(inside insets: UIEdgeInsets) -> CGRect {
-        return self.frame.frame(inside: insets)
+}
+
+extension Rect {
+    
+    func rect(inside insets: Insets) -> Rect {
+        let frame = UIEdgeInsetsInsetRect(self.cgValue, insets.cgValue)
+        return Rect(frame)
     }
     
 }

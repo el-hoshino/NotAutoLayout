@@ -22,26 +22,34 @@ extension UIView {
 	}
 	
 	var boundsRect: Rect {
-		return Rect(from: self.bounds)
+		return Rect(self.bounds)
 	}
 	
 	var layoutMarginsRect: Rect {
 		let frame = self.bounds.frame(inside: self.layoutMargins)
-		return Rect(from: frame)
+		return Rect(frame)
 	}
 	
 	var readableRect: Rect {
 		// FIXME: Get this property without Auto Layout UILayoutGuide
 		let frame = self.readableContentGuide.layoutFrame
-		return Rect(from: frame)
+		return Rect(frame)
 	}
 	
 	@available(iOS 11.0, *)
 	var safeAreaRect: Rect {
 		let frame = self.bounds.frame(inside: self.safeAreaInsets)
-		return Rect(from: frame)
+		return Rect(frame)
 	}
 	
+}
+
+extension UIView {
+    
+    func sizeThatFits(_ size: Size) -> Size {
+        return Size(self.sizeThatFits(size.cgValue))
+    }
+    
 }
 
 extension UIView {

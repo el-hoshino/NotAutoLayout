@@ -509,7 +509,7 @@ extension CGRect {
 
 extension CGRect {
 	
-	func convertedBy(targetView: UIView?, superView: UIView?) -> Rect {
+	func convertedBy(targetView: UIView?, superView: UIView?) -> CGRect {
 		
 		guard let targetView = targetView,
 			let superView = superView
@@ -518,11 +518,11 @@ extension CGRect {
 		}
 		
 		if targetView === superView {
-			return Rect(from: self)
+			return self
 			
 		} else {
 			let frame = superView.convert(self, to: targetView)
-			return Rect(from: frame)
+			return frame
 		}
 		
 	}

@@ -61,6 +61,42 @@ extension Size {
     
 }
 
+extension Size {
+    
+    static func aspectFitSize(in canvasSize: Size, with ratio: Float) -> Size {
+        
+        switch ratio > canvasSize.ratio {
+        case true:
+            return makeSize(usingWidthIn: canvasSize, with: ratio)
+            
+        case false:
+            return makeSize(usingHeightIn: canvasSize, with: ratio)
+        }
+        
+    }
+    
+    static func aspectFillSize(in canvasSize: Size, with ratio: Float) -> Size {
+        
+        switch ratio < canvasSize.ratio {
+        case true:
+            return makeSize(usingWidthIn: canvasSize, with: ratio)
+            
+        case false:
+            return makeSize(usingHeightIn: canvasSize, with: ratio)
+        }
+        
+    }
+    
+}
+
+extension Size {
+    
+    var ratio: Float {
+        return self.width / self.height
+    }
+    
+}
+
 extension Size: CustomStringConvertible {
     
     public var description: String {

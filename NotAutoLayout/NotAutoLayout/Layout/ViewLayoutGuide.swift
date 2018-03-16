@@ -40,23 +40,23 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 
 extension ViewLayoutGuides.Guide {
     
-    public var left: CGFloat {
+    public var left: Float {
         return self.rect.left
     }
     
-    public var center: CGFloat {
+    public var center: Float {
         return self.rect.center
     }
     
-    public var right: CGFloat {
+    public var right: Float {
         return self.rect.right
     }
     
-    public var width: CGFloat {
+    public var width: Float {
         return self.rect.width
     }
     
-    public func horizontal(at relativePosition: CGFloat) -> CGFloat {
+    public func horizontal(at relativePosition: Float) -> Float {
         return self.left + (self.width * relativePosition)
     }
     
@@ -64,23 +64,23 @@ extension ViewLayoutGuides.Guide {
 
 extension ViewLayoutGuides.Guide {
     
-    public var top: CGFloat {
+    public var top: Float {
         return self.rect.top
     }
     
-    public var middle: CGFloat {
+    public var middle: Float {
         return self.rect.middle
     }
     
-    public var bottom: CGFloat {
+    public var bottom: Float {
         return self.rect.bottom
     }
     
-    public var height: CGFloat {
+    public var height: Float {
         return self.rect.height
     }
     
-    public func vertical(at relativePosition: CGFloat) -> CGFloat {
+    public func vertical(at relativePosition: Float) -> Float {
         return self.top + (self.height * relativePosition)
     }
     
@@ -88,47 +88,47 @@ extension ViewLayoutGuides.Guide {
 
 extension ViewLayoutGuides.Guide {
     
-    public var topLeft: CGPoint {
+    public var topLeft: Point {
         return self.rect.topLeft
     }
     
-    public var topCenter: CGPoint {
+    public var topCenter: Point {
         return self.rect.topCenter
     }
     
-    public var topRight: CGPoint {
+    public var topRight: Point {
         return self.rect.topRight
     }
     
-    public var middleLeft: CGPoint {
+    public var middleLeft: Point {
         return self.rect.middleLeft
     }
     
-    public var middleCenter: CGPoint {
+    public var middleCenter: Point {
         return self.rect.middleCenter
     }
     
-    public var middleRight: CGPoint {
+    public var middleRight: Point {
         return self.rect.middleRight
     }
     
-    public var bottomLeft: CGPoint {
+    public var bottomLeft: Point {
         return self.rect.bottomLeft
     }
     
-    public var bottomCenter: CGPoint {
+    public var bottomCenter: Point {
         return self.rect.bottomCenter
     }
     
-    public var bottomRight: CGPoint {
+    public var bottomRight: Point {
         return self.rect.bottomRight
     }
     
-    public var size: CGSize {
+    public var size: Size {
         return self.rect.size
     }
     
-    public func point(at relativePoint: CGPoint) -> CGPoint {
+    public func point(at relativePoint: Point) -> Point {
         let x = self.horizontal(at: relativePoint.x)
         let y = self.vertical(at: relativePoint.y)
         return .init(x: x, y: y)
@@ -138,19 +138,15 @@ extension ViewLayoutGuides.Guide {
 
 extension ViewLayoutGuides.Guide {
     
-    public var frame: CGRect {
-        return self.rect.frame
-    }
-    
-    public func frame(inside insets: UIEdgeInsets) -> CGRect {
-        return self.rect.frame(inside: insets)
+    public func frame(inside insets: Insets) -> Rect {
+        return self.rect.rect(inside: insets)
     }
     
 }
 
 extension ViewLayoutGuides.Guide {
     
-    public var leading: CGFloat {
+    public var leading: Float {
         switch self.direction {
         case .leftToRight:
             return self.left
@@ -160,7 +156,7 @@ extension ViewLayoutGuides.Guide {
         }
     }
     
-    public var trailing: CGFloat {
+    public var trailing: Float {
         switch self.direction {
         case .leftToRight:
             return self.right

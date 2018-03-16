@@ -24,7 +24,7 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	init(frame: CGRect) {
+	init(frame: Rect) {
 		self.basicFrameEvaluation = IndividualFrame({ _ in frame })
 		self.additionalEvaluations = []
 	}
@@ -34,7 +34,7 @@ extension IndividualLayout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (IndividualFrameCalculationParameters) -> CGRect) {
+	init(frame: @escaping (IndividualFrameCalculationParameters) -> Rect) {
 		self.basicFrameEvaluation = IndividualFrame(frame)
 		self.additionalEvaluations = []
 	}
@@ -67,7 +67,7 @@ extension IndividualLayout {
 
 extension IndividualLayout {
 	
-	func evaluatedFrame(for targetView: UIView, from guides: ViewLayoutGuides) -> CGRect {
+	func evaluatedFrame(for targetView: UIView, from guides: ViewLayoutGuides) -> Rect {
 		
 		let parameters: IndividualFrameCalculationParameters = (targetView, guides)
 		
