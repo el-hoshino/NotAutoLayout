@@ -10,11 +10,11 @@ import Foundation
 
 public enum FrameAdditionalEvaluation {
 	
-	public typealias FloatEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGFloat
-	public typealias PointEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGPoint
-	public typealias SizeEvaluation = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> CGSize
+	public typealias FloatEvaluation = (_ frame: Rect, _ parameters: IndividualFrameCalculationParameters) -> Float
+	public typealias PointEvaluation = (_ frame: Rect, _ parameters: IndividualFrameCalculationParameters) -> Point
+	public typealias SizeEvaluation = (_ frame: Rect, _ parameters: IndividualFrameCalculationParameters) -> Size
 	
-	public typealias Process = (_ frame: CGRect, _ parameters: IndividualFrameCalculationParameters) -> Void
+	public typealias Process = (_ frame: Rect, _ parameters: IndividualFrameCalculationParameters) -> Void
 	
 	case moveLeftTo(FloatEvaluation)
 	case moveCenterTo(FloatEvaluation)
@@ -40,14 +40,14 @@ public enum FrameAdditionalEvaluation {
 	case pinchBottomTo(FloatEvaluation)
 	case pinchBottomBy(FloatEvaluation)
 	
-	case expandWidthTo(FloatEvaluation, from: CGRect.HorizontalBaseLine)
-	case expandWidthBy(FloatEvaluation, from: CGRect.HorizontalBaseLine)
+	case expandWidthTo(FloatEvaluation, from: Line.Horizontal)
+	case expandWidthBy(FloatEvaluation, from: Line.Horizontal)
 	
-	case expandHeightTo(FloatEvaluation, from: CGRect.VerticalBaseLine)
-	case expandHeightBy(FloatEvaluation, from: CGRect.VerticalBaseLine)
+	case expandHeightTo(FloatEvaluation, from: Line.Vertical)
+	case expandHeightBy(FloatEvaluation, from: Line.Vertical)
 	
-	case expandSizeTo(SizeEvaluation, from: CGRect.PlaneBasePoint)
-	case expandSizeBy(SizeEvaluation, from: CGRect.PlaneBasePoint)
+	case expandSizeTo(SizeEvaluation, from: Point)
+	case expandSizeBy(SizeEvaluation, from: Point)
 	
 	case addotionalProcess(Process)
 	
@@ -55,7 +55,7 @@ public enum FrameAdditionalEvaluation {
 
 extension FrameAdditionalEvaluation {
 	
-	func evaluated(from frame: CGRect, with parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from frame: Rect, with parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		var frame = frame
 		

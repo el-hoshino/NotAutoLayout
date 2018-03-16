@@ -21,53 +21,53 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.TopRight {
 	
-	private func makeFrame(topRight: CGPoint, middleLeft: CGPoint) -> CGRect {
+	private func makeFrame(topRight: Point, middleLeft: Point) -> Rect {
 		
 		let width = topRight.x - middleLeft.x
-		let height = (middleLeft.y - topRight.y).doubled
-		let size = CGSize(width: width, height: height)
+		let height = (middleLeft.y - topRight.y).double
+		let size = Size(width: width, height: height)
 		
 		return self.makeFrame(topRight: topRight, size: size)
 		
 	}
 	
-	private func makeFrame(topRight: CGPoint, middleCenter: CGPoint) -> CGRect {
+	private func makeFrame(topRight: Point, middleCenter: Point) -> Rect {
 		
-		let width = (topRight.x - middleCenter.x).doubled
-		let height = (middleCenter.y - topRight.y).doubled
-		let size = CGSize(width: width, height: height)
+		let width = (topRight.x - middleCenter.x).double
+		let height = (middleCenter.y - topRight.y).double
+		let size = Size(width: width, height: height)
 		
 		return self.makeFrame(topRight: topRight, size: size)
 		
 	}
 	
-	private func makeFrame(topRight: CGPoint, bottomLeft: CGPoint) -> CGRect {
+	private func makeFrame(topRight: Point, bottomLeft: Point) -> Rect {
 		
 		let width = topRight.x - bottomLeft.x
 		let height = bottomLeft.y - topRight.y
-		let size = CGSize(width: width, height: height)
+		let size = Size(width: width, height: height)
 		
 		return self.makeFrame(topRight: topRight, size: size)
 		
 	}
 	
-	private func makeFrame(topRight: CGPoint, bottomCenter: CGPoint) -> CGRect {
+	private func makeFrame(topRight: Point, bottomCenter: Point) -> Rect {
 		
-		let width = (topRight.x - bottomCenter.x).doubled
+		let width = (topRight.x - bottomCenter.x).double
 		let height = bottomCenter.y - topRight.y
-		let size = CGSize(width: width, height: height)
+		let size = Size(width: width, height: height)
 		
 		return self.makeFrame(topRight: topRight, size: size)
 		
 	}
 	
-	private func makeFrame(topRight: CGPoint, size: CGSize) -> CGRect {
+	private func makeFrame(topRight: Point, size: Size) -> Rect {
 		
 		let x = topRight.x - size.width
 		let y = topRight.y
 		let width = size.width
 		let height = size.height
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -79,7 +79,7 @@ extension IndividualProperty.TopRight {
 // MARK: MiddleLeft
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreMiddleLeftToEvaluateFrameType {
 	
-	public func evaluateFrame(middleLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(middleLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let topRight = self.topRight.evaluated(from: parameters)
 		let middleLeft = middleLeft.evaluated(from: parameters)
@@ -93,7 +93,7 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreMiddleLeftToEvaluat
 // MARK: MiddleCenter
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
-	public func evaluateFrame(middleCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(middleCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let topRight = self.topRight.evaluated(from: parameters)
 		let middleCenter = middleCenter.evaluated(from: parameters)
@@ -107,7 +107,7 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreMiddleCenterToEvalu
 // MARK: BottomLeft
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreBottomLeftToEvaluateFrameType {
 	
-	public func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottomLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let topRight = self.topRight.evaluated(from: parameters)
 		let bottomLeft = bottomLeft.evaluated(from: parameters)
@@ -121,7 +121,7 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreBottomLeftToEvaluat
 // MARK: BottomCenter
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
-	public func evaluateFrame(bottomCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottomCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let topRight = self.topRight.evaluated(from: parameters)
 		let bottomCenter = bottomCenter.evaluated(from: parameters)
@@ -136,7 +136,7 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreBottomCenterToEvalu
 // MARK: Size
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let topRight = self.topRight.evaluated(from: parameters)
 		let size = size.evaluated(from: parameters)

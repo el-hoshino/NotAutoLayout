@@ -67,20 +67,20 @@ extension ViewLayoutGuides {
 
 extension ViewLayoutGuides {
     
-    public var layoutMargins: UIEdgeInsets {
-        return self.parentView?.layoutMargins ?? .zero
+    public var layoutMargins: Insets {
+        return (self.parentView?.layoutMargins).map({ Insets($0) }) ?? .zero
     }
     
     @available(iOS 11.0, *)
-    public var safeAreaInsets: UIEdgeInsets {
-        return self.parentView?.safeAreaInsets ?? .zero
+    public var safeAreaInsets: Insets {
+        return (self.parentView?.safeAreaInsets).map({ Insets($0) }) ?? .zero
     }
     
 }
 
 extension ViewLayoutGuides {
 	
-	func size(for view: UIView, thatFits fittingSize: CGSize) -> CGSize {
+	func size(for view: UIView, thatFits fittingSize: Size) -> Size {
 		
 		let fittedSize = view.sizeThatFits(fittingSize)
 		
@@ -92,15 +92,15 @@ extension ViewLayoutGuides {
 
 extension ViewLayoutGuides {
 	
-	func evaluateSize(from calculation: (ViewLayoutGuides) -> CGSize) -> CGSize {
+	func evaluateSize(from calculation: (ViewLayoutGuides) -> Size) -> Size {
 		
 		return calculation(self)
 		
 	}
 	
-	func evaluateSize(for view: UIView, from aspect: LayoutElement.Size.AspectSizing) -> CGSize {
+	func evaluateSize(for view: UIView, from aspect: LayoutElement.Size.AspectSizing) -> Size {
 		
-		let canvasSize = { (safeAreaOnly: Bool) -> CGSize in
+		let canvasSize = { (safeAreaOnly: Bool) -> Size in
 			switch safeAreaOnly {
 			case true:
 				if #available(iOS 11.0, *) {
@@ -126,10 +126,10 @@ extension ViewLayoutGuides {
 		
 		switch aspect {
 		case .fit, .safeAreaFit:
-			return CGSize.aspectFitSize(in: canvasSize, with: targetRatio)
+			return Size.aspectFitSize(in: canvasSize, with: targetRatio)
 			
 		case .fill, .safeAreaFill:
-			return CGSize.aspectFillSize(in: canvasSize, with: targetRatio)
+			return Size.aspectFillSize(in: canvasSize, with: targetRatio)
 		}
 		
 	}

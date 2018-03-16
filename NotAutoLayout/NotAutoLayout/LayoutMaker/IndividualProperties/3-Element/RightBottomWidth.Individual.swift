@@ -25,11 +25,11 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.RightBottomWidth {
 	
-	private func makeFrame(right: CGFloat, bottom: CGFloat, width: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(right: Float, bottom: Float, width: Float, height: Float) -> Rect {
 		
 		let x = right - width
 		let y = bottom - height
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -41,7 +41,7 @@ extension IndividualProperty.RightBottomWidth {
 // MARK: Height
 extension IndividualProperty.RightBottomWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let right = self.right.evaluated(from: parameters)
 		let bottom = self.bottom.evaluated(from: parameters)

@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreBottomCenterType: LayoutMakerPropertyType 
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 	
-	public func setBottomCenter(to bottomCenter: CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+	public func setBottomCenter(to bottomCenter: Point) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		let bottomCenter = LayoutElement.Point.constant(bottomCenter)
 		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 		
 	}
 	
-	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+	public func setBottomCenter(by bottomCenter: @escaping (_ property: ViewLayoutGuides) -> Point) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		let bottomCenter = LayoutElement.Point.byParent(bottomCenter)
 		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 		
 	}
 	
-	public func pinBottomCenter(to referenceView: UIView?, with bottomCenter: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+	public func pinBottomCenter(to referenceView: UIView?, with bottomCenter: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		return self.pinBottomCenter(by: { [weak referenceView] in referenceView }, with: bottomCenter)
 		
 	}
 	
-	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, with bottomCenter: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
+	public func pinBottomCenter(by referenceView: @escaping () -> UIView?, with bottomCenter: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetBottomCenterProperty> {
 		
 		let bottomCenter = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomCenter)
 		let maker = self.didSetProperty.storeBottomCenter(bottomCenter, to: self)
@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomCenterType {
 
 public protocol LayoutPropertyCanStoreBottomCenterToEvaluateFrameType: LayoutPropertyCanStoreBottomCenterType {
 	
-	func evaluateFrame(bottomCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(bottomCenter: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -63,7 +63,7 @@ extension LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
 	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(bottomCenter: bottomCenter, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

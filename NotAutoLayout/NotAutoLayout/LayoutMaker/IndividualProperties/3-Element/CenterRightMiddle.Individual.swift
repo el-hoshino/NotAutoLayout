@@ -25,20 +25,20 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.CenterRightMiddle {
 	
-	private func makeFrame(center: CGFloat, right: CGFloat, middle: CGFloat, bottom: CGFloat) -> CGRect {
+	private func makeFrame(center: Float, right: Float, middle: Float, bottom: Float) -> Rect {
 		
-		let height = (bottom - middle).doubled
+		let height = (bottom - middle).double
 		
 		return self.makeFrame(center: center, right: right, middle: middle, height: height)
 		
 	}
 	
-	private func makeFrame(center: CGFloat, right: CGFloat, middle: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(center: Float, right: Float, middle: Float, height: Float) -> Rect {
 		
-		let width = (right - center).doubled
+		let width = (right - center).double
 		let x = right - width
-		let y = middle - height.halved
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let y = middle - height.half
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -50,7 +50,7 @@ extension IndividualProperty.CenterRightMiddle {
 // MARK: Bottom
 extension IndividualProperty.CenterRightMiddle: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
@@ -67,12 +67,12 @@ extension IndividualProperty.CenterRightMiddle: LayoutPropertyCanStoreBottomToEv
 // MARK: Height
 extension IndividualProperty.CenterRightMiddle: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)
-		let width = (right - center).doubled
+		let width = (right - center).double
 		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(center: center, right: right, middle: middle, height: height)

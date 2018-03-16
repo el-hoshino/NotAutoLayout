@@ -31,7 +31,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType
 
 public protocol LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType: LayoutPropertyCanStoreHorizontalInsetsType {
 	
-	func evaluateFrames(horizontalInsets: LayoutElement.Insets, parameters: SequentialFrameCalculationParameters) -> [CGRect]
+	func evaluateFrames(horizontalInsets: LayoutElement.Insets, parameters: SequentialFrameCalculationParameters) -> [Rect]
 	
 }
 
@@ -39,7 +39,7 @@ extension LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
 	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets, to maker: LayoutMaker<Self>) -> LayoutMaker<SequentialLayout> {
 		
-		let layout = SequentialLayout(frame: { (parameters) -> [CGRect] in
+		let layout = SequentialLayout(frame: { (parameters) -> [Rect] in
 			return self.evaluateFrames(horizontalInsets: horizontalInsets, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

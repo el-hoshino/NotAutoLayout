@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	
-	public func setHeight(to height: CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func setHeight(to height: Float) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.constant(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func setHeight(by height: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func setHeight(by height: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.byParent(height)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -36,7 +36,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 		
 	}
 	
-	public func fitHeight(by fittingHeight: CGFloat = 0) -> LayoutMaker<Property.WillSetHeightProperty> {
+	public func fitHeight(by fittingHeight: Float = 0) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.fits(fittingHeight)
 		let maker = self.didSetProperty.storeHeight(height, to: self)
@@ -49,7 +49,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 
 public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyCanStoreHeightType {
 	
-	func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -57,7 +57,7 @@ extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(height: height, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

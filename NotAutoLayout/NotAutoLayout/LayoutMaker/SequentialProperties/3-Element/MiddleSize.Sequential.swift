@@ -23,15 +23,15 @@ extension SequentialProperty {
 // MARK: - Make Frames
 extension SequentialProperty.MiddleSize {
 	
-	private func makeFrames(middle: CGFloat, subviewSizes: [CGSize], insets: CGFloat) -> [CGRect] {
+	private func makeFrames(middle: Float, subviewSizes: [Size], insets: Float) -> [Rect] {
 		
-		let frames = subviewSizes.indices.map { (index) -> CGRect in
+		let frames = subviewSizes.indices.map { (index) -> Rect in
 			
 			let size = subviewSizes[index]
-			let x = (insets * CGFloat(index + 1)) + subviewSizes.map({ $0.width }).sum(ofFirst: index)
-			let y = middle - size.height.halved
-			let origin = CGPoint(x: x, y: y)
-			let frame = CGRect(origin: origin, size: size)
+			let x = (insets * Float(index + 1)) + subviewSizes.map({ $0.width }).sum(ofFirst: index)
+			let y = middle - size.height.half
+			let origin = Point(x: x, y: y)
+			let frame = Rect(origin: origin, size: size)
 			
 			return frame
 			
@@ -45,7 +45,7 @@ extension SequentialProperty.MiddleSize {
 
 extension SequentialProperty.MiddleSize: LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
-	public func evaluateFrames(horizontalInsets: LayoutElement.Insets, parameters: SequentialFrameCalculationParameters) -> [CGRect] {
+	public func evaluateFrames(horizontalInsets: LayoutElement.Insets, parameters: SequentialFrameCalculationParameters) -> [Rect] {
 		
 		let middle = self.middle.evaluated(from: parameters)
 		let subviewSizes = self.subviewSize.evaluated(from: parameters)

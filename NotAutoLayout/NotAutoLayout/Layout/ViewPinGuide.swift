@@ -41,19 +41,19 @@ extension ViewPinGuides.Horizontal.Guide: HorizontalPinGuideRepresentable {
 
 extension ViewPinGuides.Horizontal.Guide {
 	
-	public var left: CGFloat {
+	public var left: Float {
 		return self.span.start
 	}
 	
-	public var center: CGFloat {
+	public var center: Float {
 		return self.span.half
 	}
 	
-	public var right: CGFloat {
+	public var right: Float {
 		return self.span.end
 	}
 	
-	public func horizontal(at relativePosition: CGFloat) -> CGFloat {
+	public func horizontal(at relativePosition: Float) -> Float {
 		return self.span.geometry(at: relativePosition)
 	}
 	
@@ -61,7 +61,7 @@ extension ViewPinGuides.Horizontal.Guide {
 
 extension ViewPinGuides.Horizontal.Guide {
 	
-	public var leading: CGFloat {
+	public var leading: Float {
 		switch self.direction {
 		case .leftToRight:
 			return self.left
@@ -71,7 +71,7 @@ extension ViewPinGuides.Horizontal.Guide {
 		}
 	}
 	
-	public var trailing: CGFloat {
+	public var trailing: Float {
 		switch self.direction {
 		case .leftToRight:
 			return self.right
@@ -106,19 +106,19 @@ extension ViewPinGuides.Vertical.Guide: VerticalPinGuideRepresentable {
 
 extension ViewPinGuides.Vertical.Guide {
 	
-	public var top: CGFloat {
+	public var top: Float {
 		return self.span.start
 	}
 	
-	public var middle: CGFloat {
+	public var middle: Float {
 		return self.span.half
 	}
 	
-	public var bottom: CGFloat {
+	public var bottom: Float {
 		return self.span.end
 	}
 	
-	public func vertical(at relativePosition: CGFloat) -> CGFloat {
+	public func vertical(at relativePosition: Float) -> Float {
 		return self.span.geometry(at: relativePosition)
 	}
 	
@@ -157,51 +157,51 @@ extension ViewPinGuides.Point.Guide: PointPinGuideRepresentable {
 
 extension ViewPinGuides.Point.Guide {
 	
-	public var topLeft: CGPoint {
+	public var topLeft: Point {
 		return self.rect.topLeft
 	}
 	
-	public var topCenter: CGPoint {
+	public var topCenter: Point {
 		return self.rect.topCenter
 	}
 	
-	public var topRight: CGPoint {
+	public var topRight: Point {
 		return self.rect.topRight
 	}
 	
-	public var middleLeft: CGPoint {
+	public var middleLeft: Point {
 		return self.rect.middleLeft
 	}
 	
-	public var middleCenter: CGPoint {
+	public var middleCenter: Point {
 		return self.rect.middleCenter
 	}
 	
-	public var middleRight: CGPoint {
+	public var middleRight: Point {
 		return self.rect.middleRight
 	}
 	
-	public var bottomLeft: CGPoint {
+	public var bottomLeft: Point {
 		return self.rect.bottomLeft
 	}
 	
-	public var bottomCenter: CGPoint {
+	public var bottomCenter: Point {
 		return self.rect.bottomCenter
 	}
 	
-	public var bottomRight: CGPoint {
+	public var bottomRight: Point {
 		return self.rect.bottomRight
 	}
 	
-	public func point(at relativePosition: CGPoint) -> CGPoint {
+	public func point(at relativePosition: Point) -> Point {
 		return self.rect.pointGeometry(at: relativePosition)
 	}
 	
-	public func pointAt(x: CGFloat, y: CGFloat) -> CGPoint {
+	public func pointAt(x: Float, y: Float) -> Point {
 		return self.rect.pointGeometry(x:x, y:y)
 	}
 	
-	public var topLeading: CGPoint {
+	public var topLeading: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.topLeft
@@ -211,7 +211,7 @@ extension ViewPinGuides.Point.Guide {
 		}
 	}
 	
-	public var topTrailing: CGPoint {
+	public var topTrailing: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.topRight
@@ -221,7 +221,7 @@ extension ViewPinGuides.Point.Guide {
 		}
 	}
 	
-	public var midddleLeading: CGPoint {
+	public var midddleLeading: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.middleLeft
@@ -231,7 +231,7 @@ extension ViewPinGuides.Point.Guide {
 		}
 	}
 	
-	public var middleTrailing: CGPoint {
+	public var middleTrailing: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.middleRight
@@ -241,7 +241,7 @@ extension ViewPinGuides.Point.Guide {
 		}
 	}
 	
-	public var bottomLeading: CGPoint {
+	public var bottomLeading: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.bottomLeft
@@ -251,7 +251,7 @@ extension ViewPinGuides.Point.Guide {
 		}
 	}
 	
-	public var bottomTrailing: CGPoint {
+	public var bottomTrailing: Point {
 		switch self.direction {
 		case .leftToRight:
 			return self.bottomRight

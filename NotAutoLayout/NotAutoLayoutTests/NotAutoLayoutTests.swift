@@ -21,7 +21,7 @@ class NotAutoLayoutTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testAbsoluteFrame() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 		let parent = UIView()
@@ -38,6 +38,23 @@ class NotAutoLayoutTests: XCTestCase {
 		let expected = CGRect(x: 10, y: 10, width: 100, height: 100)
 		XCTAssertEqual(result, expected)
 		
+    }
+    
+    func testRelativeFrame() {
+        
+        let parent = UIView()
+        let child = UIView()
+        
+        parent.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        
+        parent.nal.layout(child) { $0
+            .setFrame(by: { $0.frame })
+        }
+        
+        let result = child.frame
+        let expected = CGRect(x: 0, y: 0, width: 100, height: 100)
+        XCTAssertEqual(result, expected)
+        
     }
     
     func testPerformanceExample() {

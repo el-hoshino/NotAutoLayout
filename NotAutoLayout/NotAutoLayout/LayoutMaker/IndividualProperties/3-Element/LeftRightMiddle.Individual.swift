@@ -25,20 +25,20 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.LeftRightMiddle {
 	
-	private func makeFrame(left: CGFloat, right: CGFloat, middle: CGFloat, bottom: CGFloat) -> CGRect {
+	private func makeFrame(left: Float, right: Float, middle: Float, bottom: Float) -> Rect {
 		
-		let height = (bottom - middle).doubled
+		let height = (bottom - middle).double
 		
 		return self.makeFrame(left: left, right: right, middle: middle, height: height)
 		
 	}
 	
-	private func makeFrame(left: CGFloat, right: CGFloat, middle: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(left: Float, right: Float, middle: Float, height: Float) -> Rect {
 		
 		let x = left
-		let y = middle - height.halved
+		let y = middle - height.half
 		let width = right - left
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -50,7 +50,7 @@ extension IndividualProperty.LeftRightMiddle {
 // MARK: Bottom
 extension IndividualProperty.LeftRightMiddle: LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
@@ -67,7 +67,7 @@ extension IndividualProperty.LeftRightMiddle: LayoutPropertyCanStoreBottomToEval
 // MARK: Height
 extension IndividualProperty.LeftRightMiddle: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)

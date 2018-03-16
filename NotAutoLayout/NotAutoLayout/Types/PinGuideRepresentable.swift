@@ -12,17 +12,17 @@ public protocol HorizontalPinGuideRepresentable {
 	
 	var pinGuide: ViewPinGuides.Horizontal.Guide { get }
 	
-	var left: CGFloat { get }
+	var left: Float { get }
 	
-	var center: CGFloat { get }
+	var center: Float { get }
 	
-	var right: CGFloat { get }
+	var right: Float { get }
 	
-	func horizontal(at relativePosition: CGFloat) -> CGFloat
+	func horizontal(at relativePosition: Float) -> Float
 	
-	var leading: CGFloat { get }
+	var leading: Float { get }
 	
-	var trailing: CGFloat { get }
+	var trailing: Float { get }
 	
 }
 
@@ -30,13 +30,13 @@ public protocol VerticalPinGuideRepresentable {
 	
 	var pinGuide: ViewPinGuides.Vertical.Guide { get }
 	
-	var top: CGFloat { get }
+	var top: Float { get }
 	
-	var middle: CGFloat { get }
+	var middle: Float { get }
 	
-	var bottom: CGFloat { get }
+	var bottom: Float { get }
 	
-	func vertical(at relativePosition: CGFloat) -> CGFloat
+	func vertical(at relativePosition: Float) -> Float
 	
 }
 
@@ -44,65 +44,65 @@ public protocol PointPinGuideRepresentable {
 	
 	var pinGuide: ViewPinGuides.Point.Guide { get }
 	
-	var topLeft: CGPoint { get }
+	var topLeft: Point { get }
 	
-	var topCenter: CGPoint { get }
+	var topCenter: Point { get }
 	
-	var topRight: CGPoint { get }
+	var topRight: Point { get }
 	
-	var middleLeft: CGPoint { get }
+	var middleLeft: Point { get }
 	
-	var middleCenter: CGPoint { get }
+	var middleCenter: Point { get }
 	
-	var middleRight: CGPoint { get }
+	var middleRight: Point { get }
 	
-	var bottomLeft: CGPoint { get }
+	var bottomLeft: Point { get }
 	
-	var bottomCenter: CGPoint { get }
+	var bottomCenter: Point { get }
 	
-	var bottomRight: CGPoint { get }
+	var bottomRight: Point { get }
 	
-	func point(at relativePosition: CGPoint) -> CGPoint
+	func point(at relativePosition: Point) -> Point
 	
-	func pointAt(x: CGFloat, y: CGFloat) -> CGPoint
+	func pointAt(x: Float, y: Float) -> Point
 	
-	var topLeading: CGPoint { get }
+	var topLeading: Point { get }
 	
-	var topTrailing: CGPoint { get }
+	var topTrailing: Point { get }
 	
-	var midddleLeading: CGPoint { get }
+	var midddleLeading: Point { get }
 	
-	var middleTrailing: CGPoint { get }
+	var middleTrailing: Point { get }
 	
-	var bottomLeading: CGPoint { get }
+	var bottomLeading: Point { get }
 	
-	var bottomTrailing: CGPoint { get }
+	var bottomTrailing: Point { get }
 	
 }
 
 extension HorizontalPinGuideRepresentable {
 	
-	public var left: CGFloat {
+	public var left: Float {
 		return self.pinGuide.left
 	}
 	
-	public var center: CGFloat {
+	public var center: Float {
 		return self.pinGuide.center
 	}
 	
-	public var right: CGFloat {
+	public var right: Float {
 		return self.pinGuide.right
 	}
 	
-	public func horizontal(at relativePosition: CGFloat) -> CGFloat {
+	public func horizontal(at relativePosition: Float) -> Float {
 		return self.pinGuide.horizontal(at: relativePosition)
 	}
 	
-	public var leading: CGFloat {
+	public var leading: Float {
 		return self.pinGuide.leading
 	}
 	
-	public var trailing: CGFloat {
+	public var trailing: Float {
 		return self.pinGuide.trailing
 	}
 	
@@ -110,19 +110,19 @@ extension HorizontalPinGuideRepresentable {
 
 extension VerticalPinGuideRepresentable {
 	
-	public var top: CGFloat {
+	public var top: Float {
 		return self.pinGuide.top
 	}
 	
-	public var middle: CGFloat {
+	public var middle: Float {
 		return self.pinGuide.middle
 	}
 	
-	public var bottom: CGFloat {
+	public var bottom: Float {
 		return self.pinGuide.bottom
 	}
 	
-	public func vertical(at relativePosition: CGFloat) -> CGFloat {
+	public func vertical(at relativePosition: Float) -> Float {
 		return self.pinGuide.vertical(at: relativePosition)
 	}
 	
@@ -130,71 +130,71 @@ extension VerticalPinGuideRepresentable {
 
 extension PointPinGuideRepresentable {
 	
-	public var topLeft: CGPoint {
+	public var topLeft: Point {
 		return self.pinGuide.topLeft
 	}
 	
-	public var topCenter: CGPoint {
+	public var topCenter: Point {
 		return self.pinGuide.topCenter
 	}
 	
-	public var topRight: CGPoint {
+	public var topRight: Point {
 		return self.pinGuide.topRight
 	}
 	
-	public var middleLeft: CGPoint {
+	public var middleLeft: Point {
 		return self.pinGuide.middleLeft
 	}
 	
-	public var middleCenter: CGPoint {
+	public var middleCenter: Point {
 		return self.pinGuide.middleCenter
 	}
 	
-	public var middleRight: CGPoint {
+	public var middleRight: Point {
 		return self.pinGuide.middleRight
 	}
 	
-	public var bottomLeft: CGPoint {
+	public var bottomLeft: Point {
 		return self.pinGuide.bottomLeft
 	}
 	
-	public var bottomCenter: CGPoint {
+	public var bottomCenter: Point {
 		return self.pinGuide.bottomCenter
 	}
 	
-	public var bottomRight: CGPoint {
+	public var bottomRight: Point {
 		return self.pinGuide.bottomRight
 	}
 	
-	public func point(at relativePosition: CGPoint) -> CGPoint {
+	public func point(at relativePosition: Point) -> Point {
 		return self.pinGuide.point(at: relativePosition)
 	}
 	
-	public func pointAt(x: CGFloat, y: CGFloat) -> CGPoint {
+	public func pointAt(x: Float, y: Float) -> Point {
 		return self.pinGuide.pointAt(x: x, y: y)
 	}
 	
-	public var topLeading: CGPoint {
+	public var topLeading: Point {
 		return self.pinGuide.topLeading
 	}
 	
-	public var topTrailing: CGPoint {
+	public var topTrailing: Point {
 		return self.pinGuide.topTrailing
 	}
 	
-	public var midddleLeading: CGPoint {
+	public var midddleLeading: Point {
 		return self.pinGuide.midddleLeading
 	}
 	
-	public var middleTrailing: CGPoint {
+	public var middleTrailing: Point {
 		return self.pinGuide.middleTrailing
 	}
 	
-	public var bottomLeading: CGPoint {
+	public var bottomLeading: Point {
 		return self.pinGuide.bottomLeading
 	}
 	
-	public var bottomTrailing: CGPoint {
+	public var bottomTrailing: Point {
 		return self.pinGuide.bottomTrailing
 	}
 	

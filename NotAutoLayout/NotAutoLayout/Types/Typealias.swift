@@ -10,8 +10,8 @@ import Foundation
 
 public typealias IndividualFrameCalculationParameters = (targetView: UIView, guides: ViewLayoutGuides)
 
-public typealias IndividualFrameCalculation = (IndividualFrameCalculationParameters) -> CGRect
+public typealias IndividualFrameCalculation = (IndividualFrameCalculationParameters) -> Rect
 
 public typealias SequentialFrameCalculationParameters = (targetViews: [UIView], guides: ViewLayoutGuides)
 
-public typealias SequentialFrameCalculation = (SequentialFrameCalculationParameters) -> [CGRect]
+public typealias SequentialFrameCalculation = (SequentialFrameCalculationParameters) -> [Rect]

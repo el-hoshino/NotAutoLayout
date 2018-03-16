@@ -16,33 +16,33 @@ extension LayoutElement {
 	
 	public enum Horizontal {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Horizontal) -> CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Horizontal) -> Float)
 		
 	}
 	
 	public enum Vertical {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
-		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Vertical) -> CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Vertical) -> Float)
 		
 	}
 	
 	public enum Point {
 		
-		case constant(CGPoint)
-		case byParent((ViewLayoutGuides) -> CGPoint)
-		case byReference(referenceGetter: () -> UIView?,(ViewPinGuides.Point) -> CGPoint)
+		case constant(NotAutoLayout.Point)
+		case byParent((ViewLayoutGuides) -> NotAutoLayout.Point)
+		case byReference(referenceGetter: () -> UIView?,(ViewPinGuides.Point) -> NotAutoLayout.Point)
 		
 	}
 	
 	public enum Length {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
-		case fits(CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
+		case fits(Float)
 		
 	}
 	
@@ -50,16 +50,16 @@ extension LayoutElement {
 		
 		public enum AspectSizing {
 			
-			case fit(CGFloat?)
-			case fill(CGFloat?)
+			case fit(Float?)
+			case fill(Float?)
 			
 			@available(iOS 11.0, *)
-			case safeAreaFit(CGFloat?, safeAreaOnly: Bool)
+			case safeAreaFit(Float?, safeAreaOnly: Bool)
 			
 			@available(iOS 11.0, *)
-			case safeAreaFill(CGFloat?, safeAreaOnly: Bool)
+			case safeAreaFill(Float?, safeAreaOnly: Bool)
 			
-			var ratio: CGFloat? {
+			var ratio: Float? {
 				switch self {
 				case .fit(let ratio):
 					return ratio
@@ -112,39 +112,39 @@ extension LayoutElement {
 			
 		}
 		
-		case constant(CGSize)
-		case byParent((ViewLayoutGuides) -> CGSize)
-		case fits(CGSize)
+		case constant(NotAutoLayout.Size)
+		case byParent((ViewLayoutGuides) -> NotAutoLayout.Size)
+		case fits(NotAutoLayout.Size)
 		case aspect(AspectSizing)
 		
 	}
 	
 	public enum Rect {
 		
-		case constant(CGRect)
-		case byParent((ViewLayoutGuides) -> CGRect)
+		case constant(NotAutoLayout.Rect)
+		case byParent((ViewLayoutGuides) -> NotAutoLayout.Rect)
 		
 	}
 	
 	public enum Insets {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
 		case equalsToMargin
 		
 	}
 	
 	public enum HorizontalMargin {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
 		
 	}
 	
 	public enum VerticalMargin {
 		
-		case constant(CGFloat)
-		case byParent((ViewLayoutGuides) -> CGFloat)
+		case constant(Float)
+		case byParent((ViewLayoutGuides) -> Float)
 		
 	}
 	
@@ -152,7 +152,7 @@ extension LayoutElement {
 
 extension LayoutElement.Horizontal {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Float {
 		
 		switch self {
 		case .constant(let value):
@@ -171,7 +171,7 @@ extension LayoutElement.Horizontal {
 
 extension LayoutElement.Vertical {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Float {
 		
 		switch self {
 		case .constant(let value):
@@ -186,7 +186,7 @@ extension LayoutElement.Vertical {
 		
 	}
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> CGFloat {
+	func evaluated(from parameters: SequentialFrameCalculationParameters) -> Float {
 		
 		switch self {
 		case .constant(let value):
@@ -205,7 +205,7 @@ extension LayoutElement.Vertical {
 
 extension LayoutElement.Point {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGPoint {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Point {
 		
 		switch self {
 		case .constant(let value):
@@ -226,19 +226,19 @@ extension LayoutElement.Length {
 	
 	enum Axis {
 		
-		case width(CGFloat)
-		case height(CGFloat)
+		case width(Float)
+		case height(Float)
 		
-		func fittedTheOtherLength(fittingCalculation: (CGSize) -> CGSize, fittingLength: CGFloat) -> CGFloat {
+		func fittedTheOtherLength(fittingCalculation: (Size) -> Size, fittingLength: Float) -> Float {
 			
 			switch self {
 			case .width(let width):
-				let fittingSize = CGSize(width: width, height: fittingLength)
+				let fittingSize = Size(width: width, height: fittingLength)
 				let fittedSize = fittingCalculation(fittingSize)
 				return fittedSize.height
 				
 			case .height(let height):
-				let fittingSize = CGSize(width: fittingLength, height: height)
+				let fittingSize = Size(width: fittingLength, height: height)
 				let fittedSize = fittingCalculation(fittingSize)
 				return fittedSize.width
 			}
@@ -247,7 +247,7 @@ extension LayoutElement.Length {
 		
 	}
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters, withTheOtherAxis oppositeAxis: Axis) -> CGFloat {
+	func evaluated(from parameters: IndividualFrameCalculationParameters, withTheOtherAxis oppositeAxis: Axis) -> Float {
 		
 		switch self {
 		case .constant(let value):
@@ -266,7 +266,7 @@ extension LayoutElement.Length {
 
 extension LayoutElement.Size {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGSize {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Size {
 		
 		switch self {
 		case .constant(let value):
@@ -284,7 +284,7 @@ extension LayoutElement.Size {
 		
 	}
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [CGSize] {
+	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [Size] {
 		
 		switch self {
 		case .constant(let value):
@@ -306,7 +306,7 @@ extension LayoutElement.Size {
 
 extension LayoutElement.Rect {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		switch self {
 		case .constant(let value):
@@ -322,7 +322,7 @@ extension LayoutElement.Rect {
 
 extension LayoutElement.Insets {
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters, totalWidth: CGFloat, viewWidths: [CGFloat]) -> CGFloat {
+	func evaluated(from parameters: SequentialFrameCalculationParameters, totalWidth: Float, viewWidths: [Float]) -> Float {
 		
 		switch self {
 		case .constant(let value):
@@ -332,7 +332,7 @@ extension LayoutElement.Insets {
 			return calculation(parameters.guides)
 			
 		case .equalsToMargin:
-			return (totalWidth - viewWidths.reduce(0, (+))) / CGFloat(viewWidths.count + 1)
+			return (totalWidth - viewWidths.reduce(0, (+))) / Float(viewWidths.count + 1)
 		}
 		
 	}

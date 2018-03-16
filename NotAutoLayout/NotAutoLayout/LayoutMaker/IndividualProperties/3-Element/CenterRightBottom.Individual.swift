@@ -25,12 +25,12 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.CenterRightBottom {
 	
-	private func makeFrame(center: CGFloat, right: CGFloat, bottom: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(center: Float, right: Float, bottom: Float, height: Float) -> Rect {
 		
-		let width = (right - center).doubled
+		let width = (right - center).double
 		let x = right - width
 		let y = bottom - height
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -42,12 +42,12 @@ extension IndividualProperty.CenterRightBottom {
 // MARK: Height
 extension IndividualProperty.CenterRightBottom: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let right = self.right.evaluated(from: parameters)
 		let bottom = self.bottom.evaluated(from: parameters)
-		let width = (right - center).doubled
+		let width = (right - center).double
 		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(center: center, right: right, bottom: bottom, height: height)

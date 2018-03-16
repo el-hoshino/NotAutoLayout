@@ -23,13 +23,13 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.CenterMiddle {
 	
-	private func makeFrame(center: CGFloat, middle: CGFloat, size: CGSize) -> CGRect {
+	private func makeFrame(center: Float, middle: Float, size: Size) -> Rect {
 		
-		let left = center - size.width.halved
-		let top = middle - size.height.halved
-		let origin = CGPoint(x: left, y: top)
+		let left = center - size.width.half
+		let top = middle - size.height.half
+		let origin = Point(x: left, y: top)
 		let size = size
-		let frame = CGRect(origin: origin, size: size)
+		let frame = Rect(origin: origin, size: size)
 		
 		return frame
 		
@@ -41,7 +41,7 @@ extension IndividualProperty.CenterMiddle {
 // MARK: Size
 extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)

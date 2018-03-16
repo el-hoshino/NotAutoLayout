@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreTopLeftType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 	
-	public func setTopLeft(to topLeft: CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func setTopLeft(to topLeft: Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.constant(topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 		
 	}
 	
-	public func setTopLeft(by topLeft: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func setTopLeft(by topLeft: @escaping (_ property: ViewLayoutGuides) -> Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byParent(topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 		
 	}
 	
-	public func pinTopLeft(to referenceView: UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func pinTopLeft(to referenceView: UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		return self.pinTopLeft(by: { [weak referenceView] in referenceView }, with: topLeft)
 		
 	}
 	
-	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, topLeft)
 		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 
 public protocol LayoutPropertyCanStoreTopLeftToEvaluateFrameType: LayoutPropertyCanStoreTopLeftType {
 	
-	func evaluateFrame(topLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(topLeft: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -63,7 +63,7 @@ extension LayoutPropertyCanStoreTopLeftToEvaluateFrameType {
 	
 	public func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(topLeft: topLeft, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

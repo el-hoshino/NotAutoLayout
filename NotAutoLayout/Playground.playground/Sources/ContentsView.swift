@@ -1,7 +1,7 @@
 import UIKit
 import NotAutoLayout
 
-private let margin: CGFloat = 10
+private let margin: NotAutoLayout.Float = 10
 
 public class ContentsView: UIView {
     
@@ -52,11 +52,11 @@ public class ContentsView: UIView {
     
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
         
-        let fittingSize = CGSize(width: size.width - (margin * 2), height: 0)
+        let fittingSize = CGSize(width: size.width - (margin.cgValue * 2), height: 0)
         let contentsLabelFittedSize = self.contentsLabel.sizeThatFits(fittingSize)
         let timeStampViewFittedSize = self.timeStampView.sizeThatFits(fittingSize)
         let fittedWidth = max(contentsLabelFittedSize.width, timeStampViewFittedSize.width)
-        let fittedHeight = contentsLabelFittedSize.height + timeStampViewFittedSize.height + (margin * 3)
+        let fittedHeight = contentsLabelFittedSize.height + timeStampViewFittedSize.height + (margin.cgValue * 3)
         
         return CGSize(width: fittedWidth, height: fittedHeight)
         

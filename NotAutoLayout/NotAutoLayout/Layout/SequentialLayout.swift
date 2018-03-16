@@ -23,7 +23,7 @@ extension SequentialLayout {
 		self.additionalEvaluations = []
 	}
 	
-	init(frame: @escaping (SequentialFrameCalculationParameters) -> [CGRect]) {
+	init(frame: @escaping (SequentialFrameCalculationParameters) -> [Rect]) {
 		self.basicFrameEvaluation = SequentialFrame(frame)
 		self.additionalEvaluations = []
 	}
@@ -56,7 +56,7 @@ extension SequentialLayout {
 
 extension SequentialLayout {
 	
-	func evaluatedFrame(for targetViews: [UIView], from guides: ViewLayoutGuides) -> [CGRect] {
+	func evaluatedFrame(for targetViews: [UIView], from guides: ViewLayoutGuides) -> [Rect] {
 		
 		let parameters: SequentialFrameCalculationParameters = (targetViews, guides)
 		

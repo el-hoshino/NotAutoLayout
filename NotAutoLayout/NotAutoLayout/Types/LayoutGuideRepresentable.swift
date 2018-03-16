@@ -12,157 +12,157 @@ public protocol LayoutGuideRepresentable {
     
     var layoutGuide: ViewLayoutGuides.Guide { get }
     
-    var left: CGFloat { get }
+    var left: Float { get }
     
-    var center: CGFloat { get }
+    var center: Float { get }
     
-    var right: CGFloat { get }
+    var right: Float { get }
     
-    var width: CGFloat { get }
+    var width: Float { get }
     
-    func horizontal(at relativePosition: CGFloat) -> CGFloat
+    func horizontal(at relativePosition: Float) -> Float
     
-    var top: CGFloat { get }
+    var top: Float { get }
     
-    var middle: CGFloat { get }
+    var middle: Float { get }
     
-    var bottom: CGFloat { get }
+    var bottom: Float { get }
     
-    var height: CGFloat { get }
+    var height: Float { get }
     
-    func vertical(at relativePosition: CGFloat) -> CGFloat
+    func vertical(at relativePosition: Float) -> Float
     
-    var topLeft: CGPoint { get }
+    var topLeft: Point { get }
     
-    var topCenter: CGPoint { get }
+    var topCenter: Point { get }
     
-    var topRight: CGPoint { get }
+    var topRight: Point { get }
     
-    var middleLeft: CGPoint { get }
+    var middleLeft: Point { get }
     
-    var middleCenter: CGPoint { get }
+    var middleCenter: Point { get }
     
-    var middleRight: CGPoint { get }
+    var middleRight: Point { get }
     
-    var bottomLeft: CGPoint { get }
+    var bottomLeft: Point { get }
     
-    var bottomCenter: CGPoint { get }
+    var bottomCenter: Point { get }
     
-    var bottomRight: CGPoint { get }
+    var bottomRight: Point { get }
     
-    var size: CGSize { get }
+    var size: Size { get }
     
-    func point(at relativePoint: CGPoint) -> CGPoint
+    func point(at relativePoint: Point) -> Point
     
-    var frame: CGRect { get }
+    var frame: Rect { get }
     
-    func frame(inside insets: UIEdgeInsets) -> CGRect
+    func frame(inside insets: Insets) -> Rect
     
-    var leading: CGFloat { get }
+    var leading: Float { get }
     
-    var trailing: CGFloat { get }
+    var trailing: Float { get }
 
 }
 
 extension LayoutGuideRepresentable {
     
-    public var left: CGFloat {
+    public var left: Float {
         return self.layoutGuide.left
     }
     
-    public var center: CGFloat {
+    public var center: Float {
         return self.layoutGuide.center
     }
     
-    public var right: CGFloat {
+    public var right: Float {
         return self.layoutGuide.right
     }
     
-    public var width: CGFloat {
+    public var width: Float {
         return self.layoutGuide.width
     }
     
-    public func horizontal(at relativePosition: CGFloat) -> CGFloat {
+    public func horizontal(at relativePosition: Float) -> Float {
         return self.layoutGuide.horizontal(at: relativePosition)
     }
     
-    public var top: CGFloat {
+    public var top: Float {
         return self.layoutGuide.top
     }
     
-    public var middle: CGFloat {
+    public var middle: Float {
         return self.layoutGuide.middle
     }
     
-    public var bottom: CGFloat {
+    public var bottom: Float {
         return self.layoutGuide.bottom
     }
     
-    public var height: CGFloat {
+    public var height: Float {
         return self.layoutGuide.height
     }
     
-    public func vertical(at relativePosition: CGFloat) -> CGFloat {
+    public func vertical(at relativePosition: Float) -> Float {
         return self.layoutGuide.vertical(at: relativePosition)
     }
     
-    public var topLeft: CGPoint {
+    public var topLeft: Point {
         return self.layoutGuide.topLeft
     }
     
-    public var topCenter: CGPoint {
+    public var topCenter: Point {
         return self.layoutGuide.topCenter
     }
     
-    public var topRight: CGPoint {
+    public var topRight: Point {
         return self.layoutGuide.topRight
     }
     
-    public var middleLeft: CGPoint {
+    public var middleLeft: Point {
         return self.layoutGuide.middleLeft
     }
     
-    public var middleCenter: CGPoint {
+    public var middleCenter: Point {
         return self.layoutGuide.middleCenter
     }
     
-    public var middleRight: CGPoint {
+    public var middleRight: Point {
         return self.layoutGuide.middleRight
     }
     
-    public var bottomLeft: CGPoint {
+    public var bottomLeft: Point {
         return self.layoutGuide.bottomLeft
     }
     
-    public var bottomCenter: CGPoint {
+    public var bottomCenter: Point {
         return self.layoutGuide.bottomCenter
     }
     
-    public var bottomRight: CGPoint {
+    public var bottomRight: Point {
         return self.layoutGuide.bottomRight
     }
     
-    public var size: CGSize {
+    public var size: Size {
         return self.layoutGuide.size
     }
     
-    public func point(at relativePoint: CGPoint) -> CGPoint {
+    public func point(at relativePoint: Point) -> Point {
         return self.layoutGuide.point(at: relativePoint)
     }
     
-    public var frame: CGRect {
+    public var frame: Rect {
         return self.layoutGuide.frame
     }
     
-    public func frame(inside insets: UIEdgeInsets) -> CGRect {
+    public func frame(inside insets: Insets) -> Rect {
         return self.layoutGuide.frame(inside: insets)
     }
     
-    public var leading: CGFloat {
+    public var leading: Float {
         return self.layoutGuide.leading
     }
     
-    public var trailing: CGFloat {
+    public var trailing: Float {
         return self.layoutGuide.trailing
     }
     
