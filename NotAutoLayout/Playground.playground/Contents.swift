@@ -25,10 +25,12 @@ summaryView.mainTitle = "星野恵瑠＠今日も1日フレンズ㌠"
 summaryView.subTitle = "@lovee"
 contentsView.contents = """
 	Hello, NotAutoLayout!
-	The whole new NotAutoLayout 2.0 now has much better syntax which is:
-	- Easier to write (thanks to method-chain structures)
-	- Easier to read (thanks to more natural English-like statements)
-	- Even supports dynamic view sizes (with commands like `fitSize()`)!
+	The new NotAutoLayout 3.0 now has even better syntax which is:
+	- Easy to write (thanks to method-chain structures)
+	- Easy to read (thanks to more natural English-like statements)
+	- Capable with dynamic view sizes (with commands like `fitSize()`)
+	- Even better closure support to help you set various kinds of layouts with various kinds of properties!
+	- And one more thing: an experienmental sequencial layout engine!
 	"""
 contentsView.timeStamp = Date()
 
@@ -60,9 +62,6 @@ appView.nal.setupSubview(replyView) { $0
 	.addToParent()
 }
 
-appView.setNeedsLayout()
-
-
 let imageViews = (0 ..< 3).map { (_) -> UIImageView in
 	let image = #imageLiteral(resourceName: "avatar.png")
 	let view = UIImageView(image: image)
@@ -72,7 +71,7 @@ let imageViews = (0 ..< 3).map { (_) -> UIImageView in
 
 
 appView.nal.layout(imageViews) { $0
-	.setMiddle(by: { $0.middle })
+	.setMiddle(by: { $0.vertical(at: 0.7) })
 	.fitSize()
 	.setHorizontalInsetsEqualingToMargin()
 }
