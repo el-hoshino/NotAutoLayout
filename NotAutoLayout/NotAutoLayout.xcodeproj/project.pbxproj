@@ -186,6 +186,8 @@
 		79FD2CF21FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */; };
 		79FD2CF41FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */; };
 		BF6199AF205B69C60096F094 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199AE205B69C60096F094 /* Float.swift */; };
+		BF6199B1205B6C890096F094 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B0205B6C890096F094 /* Point.swift */; };
+		BF6199B3205B6CDB0096F094 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B2205B6CDB0096F094 /* Size.swift */; };
 		BF6199B5205B8C790096F094 /* CGTypeConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B4205B8C790096F094 /* CGTypeConvertible.swift */; };
 		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
 		BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2254205A6EE200B9C459 /* LazyBox.swift */; };
@@ -385,6 +387,8 @@
 		79FD2CF11FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreHeightType.swift; sourceTree = "<group>"; };
 		79FD2CF31FB8A4EC00E6661C /* LayoutPropertyCanStoreSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreSizeType.swift; sourceTree = "<group>"; };
 		BF6199AE205B69C60096F094 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		BF6199B0205B6C890096F094 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		BF6199B2205B6CDB0096F094 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		BF6199B4205B8C790096F094 /* CGTypeConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTypeConvertible.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
 		BFBD2254205A6EE200B9C459 /* LazyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyBox.swift; sourceTree = "<group>"; };
@@ -621,6 +625,8 @@
 				BF6199B4205B8C790096F094 /* CGTypeConvertible.swift */,
 				BF6199AE205B69C60096F094 /* Float.swift */,
 				79CDD00C1FED797300A6D168 /* Span.swift */,
+				BF6199B0205B6C890096F094 /* Point.swift */,
+				BF6199B2205B6CDB0096F094 /* Size.swift */,
 				79CDD00E1FED79CC00A6D168 /* Rect.swift */,
 				164EA0A71EF3DA5100C0BB8F /* Bounds.swift */,
 				BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */,
@@ -940,6 +946,7 @@
 				7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */,
 				163007401F0F380C00012C18 /* BottomCenterLeft.Individual.swift in Sources */,
 				79FD2CD81FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */,
+				BF6199B3205B6CDB0096F094 /* Size.swift in Sources */,
 				79D8DDA41EF93FDF00B74593 /* MiddleCenter.Individual.swift in Sources */,
 				164EA0CC1EF3DAE300C0BB8F /* LayoutInfoStoredView.swift in Sources */,
 				1630072E1F0F380C00012C18 /* MiddleCenterLeft.Individual.swift in Sources */,
@@ -1061,6 +1068,7 @@
 				79D8DE181EF9506F00B74593 /* TopRightMiddle.Individual.swift in Sources */,
 				1630073B1F0F380C00012C18 /* BottomLeftRight.Individual.swift in Sources */,
 				79FD2CE61FB8646000E6661C /* LayoutPropertyCanStoreRightType.swift in Sources */,
+				BF6199B1205B6C890096F094 /* Point.swift in Sources */,
 				79FD2CE41FB8621800E6661C /* LayoutPropertyCanStoreCenterType.swift in Sources */,
 				164EA0C31EF3DAE300C0BB8F /* Left.Individual.swift in Sources */,
 				164DB2541EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */,
