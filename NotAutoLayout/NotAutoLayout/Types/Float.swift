@@ -10,9 +10,17 @@ import Foundation
 
 public struct Float {
     
-    private(set) var value: CGFloat
+    private var value: CGFloat
     
-    init(_ float: CGFloat) {
+}
+
+extension Float: CGTypeConvertible {
+    
+    public var cgValue: CGFloat {
+        return self.value
+    }
+    
+    public init(_ float: CGFloat) {
         self.value = float
     }
     
@@ -284,6 +292,14 @@ extension Float: FloatingPoint {
     
     public mutating func round(_ rule: FloatingPointRoundingRule) {
         self.value.round(rule)
+    }
+    
+}
+
+extension Float: CustomStringConvertible {
+    
+    public var description: String {
+        return "\(self.value)"
     }
     
 }
