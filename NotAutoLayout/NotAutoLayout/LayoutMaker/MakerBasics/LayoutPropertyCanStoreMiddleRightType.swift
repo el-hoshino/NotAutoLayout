@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreMiddleRightType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleRightType {
 	
-	public func setMiddleRight(to middleRight: CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
+	public func setMiddleRight(to middleRight: Point) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
 		let middleRight = LayoutElement.Point.constant(middleRight)
 		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleRightType {
 		
 	}
 	
-	public func setMiddleRight(by middleRight: @escaping (_ property: ViewLayoutGuides) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
+	public func setMiddleRight(by middleRight: @escaping (_ property: ViewLayoutGuides) -> Point) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
 		let middleRight = LayoutElement.Point.byParent(middleRight)
 		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleRightType {
 		
 	}
 	
-	public func pinMiddleRight(to referenceView: UIView?, with middleRight: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
+	public func pinMiddleRight(to referenceView: UIView?, with middleRight: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
 		return self.pinMiddleRight(by: { [weak referenceView] in referenceView }, with: middleRight)
 		
 	}
 	
-	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, with middleRight: @escaping (ViewPinGuides.Point) -> CGPoint) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
+	public func pinMiddleRight(by referenceView: @escaping () -> UIView?, with middleRight: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetMiddleRightProperty> {
 		
 		let middleRight = LayoutElement.Point.byReference(referenceGetter: referenceView, middleRight)
 		let maker = self.didSetProperty.storeMiddleRight(middleRight, to: self)
@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreMiddleRightType {
 
 public protocol LayoutPropertyCanStoreMiddleRightToEvaluateFrameType: LayoutPropertyCanStoreMiddleRightType {
 	
-	func evaluateFrame(middleRight: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(middleRight: LayoutElement.Point, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -63,7 +63,7 @@ extension LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
 	
 	public func storeMiddleRight(_ middleRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(middleRight: middleRight, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreRightType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 	
-	public func setRight(to right: CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
+	public func setRight(to right: Float) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.constant(right)
 		let maker = self.didSetProperty.storeRight(right, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 		
 	}
 	
-	public func setRight(by right: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
+	public func setRight(by right: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.byParent(right)
 		let maker = self.didSetProperty.storeRight(right, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 		
 	}
 	
-	public func pinRight(to referenceView: UIView?, with right: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
+	public func pinRight(to referenceView: UIView?, with right: @escaping (ViewPinGuides.Horizontal) -> Float) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		return self.pinRight(by: { [weak referenceView] in referenceView }, with: right)
 		
 	}
 	
-	public func pinRight(by referenceView: @escaping () -> UIView?, with right: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetRightProperty> {
+	public func pinRight(by referenceView: @escaping () -> UIView?, with right: @escaping (ViewPinGuides.Horizontal) -> Float) -> LayoutMaker<Property.WillSetRightProperty> {
 		
 		let right = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, right)
 		let maker = self.didSetProperty.storeRight(right, to: self)
@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreRightType {
 
 public protocol LayoutPropertyCanStoreRightToEvaluateFrameType: LayoutPropertyCanStoreRightType {
 	
-	func evaluateFrame(right: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(right: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -63,7 +63,7 @@ extension LayoutPropertyCanStoreRightToEvaluateFrameType {
 	
 	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(right: right, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

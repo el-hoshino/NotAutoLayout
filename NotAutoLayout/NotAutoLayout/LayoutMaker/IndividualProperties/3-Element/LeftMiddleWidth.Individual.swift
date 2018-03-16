@@ -25,11 +25,11 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.LeftMiddleWidth {
 	
-	private func makeFrame(left: CGFloat, middle: CGFloat, width: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(left: Float, middle: Float, width: Float, height: Float) -> Rect {
 		
 		let x = left
-		let y = middle - height.halved
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let y = middle - height.half
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -41,7 +41,7 @@ extension IndividualProperty.LeftMiddleWidth {
 // MARK: Height
 extension IndividualProperty.LeftMiddleWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)

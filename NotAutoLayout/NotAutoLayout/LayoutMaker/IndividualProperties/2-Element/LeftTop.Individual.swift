@@ -23,11 +23,11 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.LeftTop {
 	
-	private func makeFrame(left: CGFloat, top: CGFloat, size: CGSize) -> CGRect {
+	private func makeFrame(left: Float, top: Float, size: Size) -> Rect {
 		
-		let origin = CGPoint(x: left, y: top)
+		let origin = Point(x: left, y: top)
 		let size = size
-		let frame = CGRect(origin: origin, size: size)
+		let frame = Rect(origin: origin, size: size)
 		
 		return frame
 		
@@ -39,7 +39,7 @@ extension IndividualProperty.LeftTop {
 // MARK: Size
 extension IndividualProperty.LeftTop: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let left = self.left.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

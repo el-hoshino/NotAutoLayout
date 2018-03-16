@@ -35,7 +35,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingLeft(to left: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingLeft(to left: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingLeft(to: { _, _ in left })
 		
@@ -50,7 +50,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingCenter(to center: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingCenter(to center: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingCenter(to: { _, _ in center })
 		
@@ -65,7 +65,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingRight(to right: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingRight(to right: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingRight(to: { _, _ in right })
 		
@@ -84,7 +84,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 
 	}
 	
-	public func movingTop(to top: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingTop(to top: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingTop(to: { _, _ in top })
 		
@@ -99,7 +99,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingMiddle(to middle: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingMiddle(to middle: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingMiddle(to: { _, _ in middle })
 		
@@ -114,7 +114,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingBottom(to bottom: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingBottom(to bottom: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingBottom(to: { _, _ in bottom })
 		
@@ -133,7 +133,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingX(by offset: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingX(by offset: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingX(by: { _, _ in offset })
 		
@@ -148,7 +148,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingY(by offset: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingY(by offset: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingY(by: { _, _ in offset })
 		
@@ -163,7 +163,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func movingOrigin(by offset: CGPoint) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func movingOrigin(by offset: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.movingOrigin(by: { _, _ in offset })
 		
@@ -182,7 +182,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingLeft(to left: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingLeft(to left: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingLeft(to: { _, _ in left })
 		
@@ -197,7 +197,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingLeft(by left: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingLeft(by left: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingLeft(by: { _, _ in left })
 		
@@ -216,7 +216,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingRight(to right: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingRight(to right: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingRight(to: { _, _ in right })
 		
@@ -231,7 +231,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingRight(by right: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingRight(by right: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingRight(by: { _, _ in right })
 		
@@ -250,7 +250,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingTop(to top: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingTop(to top: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingTop(to: { _, _ in top })
 		
@@ -265,7 +265,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingTop(by top: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingTop(by top: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingTop(by: { _, _ in top })
 		
@@ -284,7 +284,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingBottom(to bottom: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingBottom(to bottom: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingBottom(to: { _, _ in bottom })
 		
@@ -299,7 +299,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func pinchingBottom(by bottom: CGFloat) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func pinchingBottom(by bottom: Float) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.pinchingBottom(by: { _, _ in bottom })
 		
@@ -309,7 +309,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 
 extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func expandingWidth(to width: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingWidth(to width: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthTo(width, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -318,13 +318,13 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingWidth(to width: CGFloat, from reference: CGRect.HorizontalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingWidth(to width: Float, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingWidth(to: { _, _ in width }, from: reference)
 		
 	}
 	
-	public func expandingWidth(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: CGRect.HorizontalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingWidth(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthBy(diff, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -333,7 +333,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingWidth(by diff: CGFloat, from reference: CGRect.HorizontalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingWidth(by diff: Float, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingWidth(by: { _, _ in diff }, from: reference)
 		
@@ -343,7 +343,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 
 extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func expandingHeight(to height: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: CGRect.VerticalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingHeight(to height: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightTo(height, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -352,13 +352,13 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingHeight(to height: CGFloat, from reference: CGRect.VerticalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingHeight(to height: Float, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingHeight(to: { _, _ in height }, from: reference)
 		
 	}
 	
-	public func expandingHeight(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: CGRect.VerticalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingHeight(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightBy(diff, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -367,7 +367,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingHeight(by diff: CGFloat, from reference: CGRect.VerticalBaseLine) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingHeight(by diff: Float, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingHeight(by: { _, _ in diff }, from: reference)
 		
@@ -377,7 +377,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 
 extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func expandingSize(to size: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: CGRect.PlaneBasePoint) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingSize(to size: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandSizeTo(size, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -386,13 +386,13 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingSize(to size: CGSize, from reference: CGRect.PlaneBasePoint) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingSize(to size: Size, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingSize(to: { _, _ in size }, from: reference)
 		
 	}
 	
-	public func expandingSize(by diff: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: CGRect.PlaneBasePoint) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingSize(by diff: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandSizeBy(diff, from: reference)
 		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
@@ -401,7 +401,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 		
 	}
 	
-	public func expandingSize(by diff: CGSize, from reference: CGRect.PlaneBasePoint) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+	public func expandingSize(by diff: Size, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		return self.expandingSize(by: { _, _ in diff }, from: reference)
 		

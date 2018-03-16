@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
-	public func setFrame(to frame: CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
+	public func setFrame(to frame: Rect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.constant(frame)
 		let maker = self.didSetProperty.storeFrame(frame, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 		
 	}
 	
-	public func setFrame(by frame: @escaping (_ property: ViewLayoutGuides) -> CGRect) -> LayoutMaker<Property.WillSetFrameProperty> {
+	public func setFrame(by frame: @escaping (_ property: ViewLayoutGuides) -> Rect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent(frame)
 		let maker = self.didSetProperty.storeFrame(frame, to: self)
@@ -40,7 +40,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
-    public func stickOnParent(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
+    public func stickOnParent(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
         
         let frame = LayoutElement.Rect.byParent({ $0.boundsGuide.frame(inside: insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
@@ -50,7 +50,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
     }
     
     @available(iOS 11.0, *)
-    public func stickOnParentSafeArea(withInsets insets: UIEdgeInsets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
+    public func stickOnParentSafeArea(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
         
         let frame = LayoutElement.Rect.byParent({ $0.safeAreaGuide.frame(inside: insets) })
         let maker = self.didSetProperty.storeFrame(frame, to: self)
@@ -63,7 +63,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 
 public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCanStoreFrameType {
     
-    func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> CGRect
+    func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> Rect
     
 }
 
@@ -73,7 +73,7 @@ extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
 	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(frame: frame, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

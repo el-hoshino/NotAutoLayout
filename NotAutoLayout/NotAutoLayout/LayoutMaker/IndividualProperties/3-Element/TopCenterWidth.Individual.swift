@@ -23,11 +23,11 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.TopCenterWidth {
 	
-	private func makeFrame(topCenter: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(topCenter: Point, width: Float, height: Float) -> Rect {
 		
-		let x = topCenter.x - width.halved
+		let x = topCenter.x - width.half
 		let y = topCenter.y
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -39,7 +39,7 @@ extension IndividualProperty.TopCenterWidth {
 // MARK: Height
 extension IndividualProperty.TopCenterWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
         
         let topCenter = self.topCenter.evaluated(from: parameters)
         let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))

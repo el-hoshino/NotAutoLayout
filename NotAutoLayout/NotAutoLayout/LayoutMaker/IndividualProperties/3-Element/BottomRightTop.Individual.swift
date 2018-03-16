@@ -23,12 +23,12 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.BottomRightTop {
 	
-	private func makeFrame(bottomRight: CGPoint, top: CGFloat, width: CGFloat) -> CGRect {
+	private func makeFrame(bottomRight: Point, top: Float, width: Float) -> Rect {
 		
 		let x = bottomRight.x - width
 		let y = top
 		let height = bottomRight.y - top
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -40,7 +40,7 @@ extension IndividualProperty.BottomRightTop {
 // MARK: Width
 extension IndividualProperty.BottomRightTop: LayoutPropertyCanStoreWidthToEvaluateFrameType {
 	
-	public func evaluateFrame(width: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(width: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let bottomRight = self.bottomRight.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

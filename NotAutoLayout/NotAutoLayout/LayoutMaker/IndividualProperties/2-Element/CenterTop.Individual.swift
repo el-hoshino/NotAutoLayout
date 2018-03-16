@@ -23,12 +23,12 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.CenterTop {
 	
-	private func makeFrame(center: CGFloat, top: CGFloat, size: CGSize) -> CGRect {
+	private func makeFrame(center: Float, top: Float, size: Size) -> Rect {
 		
-		let left = center - size.width.halved
-		let origin = CGPoint(x: left, y: top)
+		let left = center - size.width.half
+		let origin = Point(x: left, y: top)
 		let size = size
-		let frame = CGRect(origin: origin, size: size)
+		let frame = Rect(origin: origin, size: size)
 		
 		return frame
 		
@@ -40,7 +40,7 @@ extension IndividualProperty.CenterTop {
 // MARK: Size
 extension IndividualProperty.CenterTop: LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> CGRect {
+	public func evaluateFrame(size: LayoutElement.Size, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = self.center.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)

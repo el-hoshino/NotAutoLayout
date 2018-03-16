@@ -18,7 +18,7 @@ public protocol LayoutPropertyCanStoreLeftType: LayoutMakerPropertyType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 	
-	public func setLeft(to left: CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func setLeft(to left: Float) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		let left = LayoutElement.Horizontal.constant(left)
 		let maker = self.didSetProperty.storeLeft(left, to: self)
@@ -27,7 +27,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 		
 	}
 	
-	public func setLeft(by left: @escaping (_ property: ViewLayoutGuides) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func setLeft(by left: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		let left = LayoutElement.Horizontal.byParent(left)
 		let maker = self.didSetProperty.storeLeft(left, to: self)
@@ -36,13 +36,13 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 		
 	}
 	
-	public func pinLeft(to referenceView: UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func pinLeft(to referenceView: UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> Float) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		return self.pinLeft(by: { [weak referenceView] in referenceView }, with: left)
 		
 	}
 	
-	public func pinLeft(by referenceView: @escaping () -> UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> CGFloat) -> LayoutMaker<Property.WillSetLeftProperty> {
+	public func pinLeft(by referenceView: @escaping () -> UIView?, with left: @escaping (ViewPinGuides.Horizontal) -> Float) -> LayoutMaker<Property.WillSetLeftProperty> {
 		
 		let left = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, left)
 		let maker = self.didSetProperty.storeLeft(left, to: self)
@@ -55,7 +55,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreLeftType {
 
 public protocol LayoutPropertyCanStoreLeftToEvaluateFrameType: LayoutPropertyCanStoreLeftType {
 	
-	func evaluateFrame(left: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> CGRect
+	func evaluateFrame(left: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect
 	
 }
 
@@ -63,7 +63,7 @@ extension LayoutPropertyCanStoreLeftToEvaluateFrameType {
 	
 	func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> CGRect in
+		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(left: left, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)

@@ -23,11 +23,11 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.MiddleLeftWidth {
 	
-	private func makeFrame(middleLeft: CGPoint, width: CGFloat, height: CGFloat) -> CGRect {
+	private func makeFrame(middleLeft: Point, width: Float, height: Float) -> Rect {
 		
 		let x = middleLeft.x
-		let y = middleLeft.y - height.halved
-		let frame = CGRect(x: x, y: y, width: width, height: height)
+		let y = middleLeft.y - height.half
+		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
@@ -39,7 +39,7 @@ extension IndividualProperty.MiddleLeftWidth {
 // MARK: Height
 extension IndividualProperty.MiddleLeftWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> CGRect {
+    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
         
         let middleLeft = self.middleLeft.evaluated(from: parameters)
         let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
