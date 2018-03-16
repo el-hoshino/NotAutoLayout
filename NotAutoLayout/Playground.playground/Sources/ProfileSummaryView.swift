@@ -1,7 +1,7 @@
 import UIKit
 import NotAutoLayout
 
-private let margin: CGFloat = 10
+private let margin: NotAutoLayout.Float = 10
 
 public class ProfileSummaryView: UIView {
     
@@ -109,7 +109,7 @@ extension ProfileSummaryView {
             .setSize(by: { let length = min($0.safeAreaGuide.width, $0.safeAreaGuide.height); return .init(width: length, height: length) })
             .movingX(by: margin)
             .addingProcess(by: { (frame, parameters) in
-                parameters.targetView.layer.cornerRadius = min(frame.width, frame.height) / 2
+                parameters.targetView.layer.cornerRadius = (min(frame.width, frame.height) / 2).cgValue
             })
         }
         

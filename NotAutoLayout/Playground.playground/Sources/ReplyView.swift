@@ -1,10 +1,10 @@
 import UIKit
 import NotAutoLayout
 
-private let margin: CGFloat = 10
+private let margin: NotAutoLayout.Float = 10
 private let padding: CGFloat = 5
 
-public class ReplyView: UIView {
+ public class ReplyView: UIView {
 	
 	private let replyView: UITextView
 	
@@ -72,9 +72,9 @@ extension ReplyView {
 		}
 		self.nal.layout(self.replyView, by: { $0
 			.setFrame(by: { $0.safeAreaGuide.frame })
-			.expandingWidth(by: -margin * 2, from: .center)
+			.expandingWidth(by: -margin * 2, from: .coordinateCenter)
 			.addingProcess(by: { (frame, parameters) in
-				parameters.targetView.layer.cornerRadius = frame.height / 2
+				parameters.targetView.layer.cornerRadius = (frame.height / 2).cgValue
 			})
 		})
 		

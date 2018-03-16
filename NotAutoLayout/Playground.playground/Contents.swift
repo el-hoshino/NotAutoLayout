@@ -15,7 +15,7 @@ controller.view.nal.layout(appView) { $0
 
 
 
-let margin: CGSize = .init(width: 10, height: 10)
+let margin: Size = .init(width: 10, height: 10)
 let summaryView = ProfileSummaryView()
 let contentsView = ContentsView()
 let replyView = ReplyView()
