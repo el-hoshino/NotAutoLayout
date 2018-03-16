@@ -16,7 +16,7 @@ struct IndividualFrame {
 
 extension IndividualFrame {
 	
-	init(_ frame: CGRect) {
+	init(_ frame: Rect) {
 		self.evaluation = { _ in frame }
 	}
 	
@@ -28,7 +28,7 @@ extension IndividualFrame {
 
 extension IndividualFrame {
 	
-	func evaluated(from parameters: IndividualFrameCalculationParameters) -> CGRect {
+	func evaluated(from parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		return self.evaluation(parameters)
 		

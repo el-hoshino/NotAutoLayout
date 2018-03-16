@@ -24,7 +24,7 @@ extension SequentialFrame {
 
 extension SequentialFrame {
 	
-	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [CGRect] {
+	func evaluated(from parameters: SequentialFrameCalculationParameters) -> [Rect] {
 		
 		return self.evaluation(parameters)
 		
