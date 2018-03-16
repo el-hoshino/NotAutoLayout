@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+public protocol CGTypeConvertible {
+    
+    associatedtype CGType
+    
+    var cgValue: CGType { get }
+    
+    init(_ cgValue: CGType)
+    
+}
