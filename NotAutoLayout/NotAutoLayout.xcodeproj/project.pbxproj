@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		160CCA081F0CC57300783D73 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160CCA071F0CC57300783D73 /* CGFloat.swift */; };
 		162B95F91F0C9C6800960B51 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95F81F0C9C6800960B51 /* Calculations.swift */; };
-		162B95FF1F0CA40800960B51 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B95FE1F0CA40800960B51 /* CGSize.swift */; };
 		163007281F0F380C00012C18 /* MiddleLeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE501EF9556400B74593 /* MiddleLeftCenter.Individual.swift */; };
 		163007291F0F380C00012C18 /* MiddleLeftRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE511EF9556400B74593 /* MiddleLeftRight.Individual.swift */; };
 		1630072A1F0F380C00012C18 /* MiddleLeftTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE4E1EF9556400B74593 /* MiddleLeftTop.Individual.swift */; };
@@ -52,7 +50,6 @@
 		164DB2541EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */; };
 		164EA0BD1EF3DAE300C0BB8F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A31EF3DA4900C0BB8F /* Array.swift */; };
 		164EA0BE1EF3DAE300C0BB8F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */; };
-		164EA0BF1EF3DAE300C0BB8F /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164EA0A41EF3DA4900C0BB8F /* CGRect.swift */; };
 		164EA0C01EF3DAE300C0BB8F /* FrameAdditionalEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5A5A31EF3A00C007ACB1C /* FrameAdditionalEvaluation.swift */; };
 		164EA0C21EF3DAE300C0BB8F /* Initial.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AB1EF289F4006DF788 /* Initial.Individual.swift */; };
 		164EA0C31EF3DAE300C0BB8F /* Left.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165FE2AF1EF289F4006DF788 /* Left.Individual.swift */; };
@@ -207,16 +204,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		160CCA071F0CC57300783D73 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		162B95F81F0C9C6800960B51 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
-		162B95FE1F0CA40800960B51 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		164319EE1F79FD8E003FA7DA /* LayoutPropertyCanAddAdditionalEvaluationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanAddAdditionalEvaluationType.swift; sourceTree = "<group>"; };
 		164319F01F7A1903003FA7DA /* IndividualFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualFrame.swift; sourceTree = "<group>"; };
 		164DB24F1EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableLayoutControlling.swift; sourceTree = "<group>"; };
 		164DB2531EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableOtherPublicAPIs.swift; sourceTree = "<group>"; };
 		164EA09E1EF3D98B00C0BB8F /* IndividualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualLayout.swift; sourceTree = "<group>"; };
 		164EA0A31EF3DA4900C0BB8F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		164EA0A41EF3DA4900C0BB8F /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		164EA0A71EF3DA5100C0BB8F /* Bounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bounds.swift; sourceTree = "<group>"; };
 		164EA0A81EF3DA5100C0BB8F /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
@@ -423,9 +417,6 @@
 			children = (
 				164EA0A31EF3DA4900C0BB8F /* Array.swift */,
 				164EA0A51EF3DA4900C0BB8F /* Dictionary.swift */,
-				160CCA071F0CC57300783D73 /* CGFloat.swift */,
-				162B95FE1F0CA40800960B51 /* CGSize.swift */,
-				164EA0A41EF3DA4900C0BB8F /* CGRect.swift */,
 				7994E2C9205AD5E8001AA4F6 /* UIView.swift */,
 				166C41561F6945330060C3E6 /* UIEdgeInsets.swift */,
 				162B95F81F0C9C6800960B51 /* Calculations.swift */,
@@ -938,7 +929,6 @@
 				79D8DDE21EF94B5200B74593 /* RightMiddleWidth.Individual.swift in Sources */,
 				163007331F0F380C00012C18 /* MiddleCenterHeight.Individual.swift in Sources */,
 				79D8DDAE1EF9406E00B74593 /* BottomCenter.Individual.swift in Sources */,
-				164EA0BF1EF3DAE300C0BB8F /* CGRect.swift in Sources */,
 				79D8DD9C1EF93EB300B74593 /* TopRight.Individual.swift in Sources */,
 				1630072A1F0F380C00012C18 /* MiddleLeftTop.Individual.swift in Sources */,
 				79D8DDEE1EF94C5B00B74593 /* LeftMiddleBottom.Individual.swift in Sources */,
@@ -977,7 +967,6 @@
 				79D8DDF41EF94CBF00B74593 /* CenterMiddleBottom.Individual.swift in Sources */,
 				79D8DDA21EF93FC700B74593 /* MiddleLeft.Individual.swift in Sources */,
 				79D8DDE61EF94B9500B74593 /* RightBottomWidth.Individual.swift in Sources */,
-				160CCA081F0CC57300783D73 /* CGFloat.swift in Sources */,
 				79D8DDF61EF94CE200B74593 /* RightTopMiddle.Individual.swift in Sources */,
 				79D8DE141EF9503600B74593 /* TopRightLeft.Individual.swift in Sources */,
 				79D8DE081EF94F4E00B74593 /* TopCenterLeft.Individual.swift in Sources */,
@@ -996,7 +985,6 @@
 				163007481F0F380C00012C18 /* BottomRightTop.Individual.swift in Sources */,
 				163007341F0F380C00012C18 /* MiddleRightLeft.Individual.swift in Sources */,
 				BF6199B5205B8C790096F094 /* CGTypeConvertible.swift in Sources */,
-				162B95FF1F0CA40800960B51 /* CGSize.swift in Sources */,
 				79D8DD6E1EF9343D00B74593 /* Center.Individual.swift in Sources */,
 				79D8DDFA1EF94D2B00B74593 /* RightMiddleBottom.Individual.swift in Sources */,
 				163007441F0F380C00012C18 /* BottomCenterWidth.Individual.swift in Sources */,

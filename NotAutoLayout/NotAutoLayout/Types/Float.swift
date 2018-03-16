@@ -302,6 +302,14 @@ extension Float {
         return self / 2
     }
     
+    var double: Float {
+        return self * 2
+    }
+    
+    var isNonZero: Bool {
+        return self.isNaN == false && self.isZero == false
+    }
+    
 }
 
 extension Float: CustomStringConvertible {

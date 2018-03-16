@@ -43,6 +43,14 @@ extension Size: CGTypeConvertible {
 
 extension Size {
     
+    var ratio: Float {
+        return self.width / self.height
+    }
+    
+}
+
+extension Size {
+    
     static func + (lhs: Size, rhs: Size) -> Size {
         return Size(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
     }
@@ -62,6 +70,34 @@ extension Size {
 }
 
 extension Size {
+    
+    static func makeSize(usingWidthIn canvasSize: Size, with ratio: Float) -> Size {
+        
+        guard ratio.isNonZero else {
+            return Size(width: canvasSize.width, height: .greatestFiniteMagnitude)
+        }
+        
+        let width = canvasSize.width
+        let height = width / ratio
+        let size = Size(width: width, height: height)
+        
+        return size
+        
+    }
+    
+    static func makeSize(usingHeightIn canvasSize: Size, with ratio: Float) -> Size {
+        
+        guard ratio.isFinite else {
+            return Size(width: .greatestFiniteMagnitude, height: canvasSize.height)
+        }
+        
+        let height = canvasSize.height
+        let width = height * ratio
+        let size = Size(width: width, height: height)
+        
+        return size
+        
+    }
     
     static func aspectFitSize(in canvasSize: Size, with ratio: Float) -> Size {
         
@@ -85,14 +121,6 @@ extension Size {
             return makeSize(usingHeightIn: canvasSize, with: ratio)
         }
         
-    }
-    
-}
-
-extension Size {
-    
-    var ratio: Float {
-        return self.width / self.height
     }
     
 }
