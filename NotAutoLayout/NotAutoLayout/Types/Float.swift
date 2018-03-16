@@ -296,6 +296,14 @@ extension Float: FloatingPoint {
     
 }
 
+extension Float {
+    
+    var half: Float {
+        return self / 2
+    }
+    
+}
+
 extension Float: CustomStringConvertible {
     
     public var description: String {

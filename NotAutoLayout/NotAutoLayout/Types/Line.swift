@@ -12,15 +12,10 @@ public struct Line {
     
 }
 
+// MARK: - Horizontal
 extension Line {
     
     public struct Horizontal {
-        
-        var value: Float
-        
-    }
-    
-    public struct Vertical {
         
         var value: Float
         
@@ -44,6 +39,33 @@ extension Line.Horizontal: ExpressibleByIntegerLiteral {
     
 }
 
+extension Line.Horizontal {
+    
+    public static let coordinateLeft: Line.Horizontal   = 0.0
+    public static let coordinateCenter: Line.Horizontal = 0.5
+    public static let coordinateRight: Line.Horizontal  = 1.0
+    
+}
+
+extension Line.Horizontal {
+    
+    func geometryOriginOffset(from widthDiff: Float) -> Float {
+        return 0 - (widthDiff * self.value)
+    }
+    
+}
+
+// MARK: - Vertical
+extension Line {
+    
+    public struct Vertical {
+        
+        var value: Float
+        
+    }
+    
+}
+
 extension Line.Vertical: ExpressibleByFloatLiteral {
     
     public init(floatLiteral value: Double) {
@@ -57,14 +79,6 @@ extension Line.Vertical: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Int) {
         self.value = Float(integerLiteral: value)
     }
-    
-}
-
-extension Line.Horizontal {
-    
-    public static let coordinateLeft: Line.Horizontal   = 0.0
-    public static let coordinateCenter: Line.Horizontal = 0.5
-    public static let coordinateRight: Line.Horizontal  = 1.0
     
 }
 

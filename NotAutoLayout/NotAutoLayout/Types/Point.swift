@@ -53,6 +53,26 @@ extension Point {
     
 }
 
+extension Point {
+    
+    static func + (lhs: Point, rhs: Point) -> Point {
+        return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    
+    static func += (lhs: inout Point, rhs: Point) {
+        lhs = lhs + rhs
+    }
+    
+    static func - (lhs: Point, rhs: Point) -> Point {
+        return Point(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    }
+    
+    static func -= (lhs: inout Point, rhs: Point) {
+        lhs = lhs - rhs
+    }
+    
+}
+
 extension Point: CustomStringConvertible {
     
     public var description: String {

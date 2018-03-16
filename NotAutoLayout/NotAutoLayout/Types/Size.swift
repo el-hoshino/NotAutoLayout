@@ -41,6 +41,26 @@ extension Size: CGTypeConvertible {
     
 }
 
+extension Size {
+    
+    static func + (lhs: Size, rhs: Size) -> Size {
+        return Size(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    }
+    
+    static func += (lhs: inout Size, rhs: Size) {
+        lhs = lhs + rhs
+    }
+    
+    static func - (lhs: Size, rhs: Size) -> Size {
+        return Size(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
+    }
+    
+    static func -= (lhs: inout Size, rhs: Size) {
+        lhs = lhs - rhs
+    }
+    
+}
+
 extension Size: CustomStringConvertible {
     
     public var description: String {
