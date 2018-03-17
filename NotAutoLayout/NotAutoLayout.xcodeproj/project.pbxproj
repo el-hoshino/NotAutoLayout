@@ -187,7 +187,6 @@
 		BF6199B7205B8FB40096F094 /* Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B6205B8FB40096F094 /* Insets.swift */; };
 		BF6199B9205B929D0096F094 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B8205B929D0096F094 /* Line.swift */; };
 		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
-		BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2254205A6EE200B9C459 /* LazyBox.swift */; };
 		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
 
@@ -385,7 +384,6 @@
 		BF6199B6205B8FB40096F094 /* Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insets.swift; sourceTree = "<group>"; };
 		BF6199B8205B929D0096F094 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
-		BFBD2254205A6EE200B9C459 /* LazyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyBox.swift; sourceTree = "<group>"; };
 		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -610,7 +608,6 @@
 		7971FAB3203160FA00B63CBC /* Types */ = {
 			isa = PBXGroup;
 			children = (
-				BFBD2254205A6EE200B9C459 /* LazyBox.swift */,
 				BF6199B4205B8C790096F094 /* CGTypeConvertible.swift */,
 				BF6199AE205B69C60096F094 /* Float.swift */,
 				BF6199B8205B929D0096F094 /* Line.swift */,
@@ -918,7 +915,6 @@
 				79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */,
 				163007281F0F380C00012C18 /* MiddleLeftCenter.Individual.swift in Sources */,
 				164EA0C21EF3DAE300C0BB8F /* Initial.Individual.swift in Sources */,
-				BFBD2255205A6EE200B9C459 /* LazyBox.swift in Sources */,
 				79D8DD6A1EF933FF00B74593 /* Right.Individual.swift in Sources */,
 				79D8DDE21EF94B5200B74593 /* RightMiddleWidth.Individual.swift in Sources */,
 				163007331F0F380C00012C18 /* MiddleCenterHeight.Individual.swift in Sources */,
