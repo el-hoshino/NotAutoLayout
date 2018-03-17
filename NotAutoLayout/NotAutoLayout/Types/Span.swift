@@ -12,11 +12,11 @@ public struct Span {
 	
 	public var start: Float
 	public var length: Float
-    
-    public init(start: Float, length: Float) {
-        self.start = start
-        self.length = length
-    }
+	
+	public init(start: Float, length: Float) {
+		self.start = start
+		self.length = length
+	}
 	
 }
 
@@ -43,8 +43,8 @@ extension Span {
 extension Span {
 	
 	public static let zero: Span = .init(start: 0, length: 0)
-    
-    public static let identity: Span = .init(start: 0, length: 1)
+	
+	public static let identity: Span = .init(start: 0, length: 1)
 	
 }
 
@@ -65,9 +65,9 @@ extension Span {
 }
 
 extension Span: CustomStringConvertible {
-    
-    public var description: String {
-        return "(start: \(self.start), length: \(self.length))"
-    }
-    
+	
+	public var description: String {
+		return "(start: \(self.start), length: \(self.length))"
+	}
+	
 }

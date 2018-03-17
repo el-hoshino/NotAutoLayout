@@ -11,12 +11,12 @@ import Foundation
 public struct ViewLayoutGuides {
 	
 	private(set) weak var parentView: UIView?
-    
-    init(parentView: UIView) {
-        
-        self.parentView = parentView
-        
-    }
+	
+	init(parentView: UIView) {
+		
+		self.parentView = parentView
+		
+	}
 	
 }
 
@@ -37,45 +37,45 @@ extension ViewLayoutGuides {
 }
 
 extension ViewLayoutGuides: LayoutGuideRepresentable {
-    
-    public var layoutGuide: Guide {
-        return self.boundsGuide
-    }
-    
+	
+	public var layoutGuide: Guide {
+		return self.boundsGuide
+	}
+	
 }
 
 extension ViewLayoutGuides {
-    
-    public var boundsGuide: Guide {
+	
+	public var boundsGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.boundsRect)
-    }
-    
-    public var layoutMarginsGuide: Guide {
+	}
+	
+	public var layoutMarginsGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.layoutMarginsRect)
-    }
-    
-    public var readableGuide: Guide {
+	}
+	
+	public var readableGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.readableRect)
-    }
-    
-    @available(iOS 11.0, *)
-    public var safeAreaGuide: Guide {
+	}
+	
+	@available(iOS 11.0, *)
+	public var safeAreaGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak parentView] in parentView?.currentDirection }, rect: self.parentView?.safeAreaRect)
-    }
-    
+	}
+	
 }
 
 extension ViewLayoutGuides {
-    
-    public var layoutMargins: Insets {
-        return (self.parentView?.layoutMargins).map({ Insets($0) }) ?? .zero
-    }
-    
-    @available(iOS 11.0, *)
-    public var safeAreaInsets: Insets {
-        return (self.parentView?.safeAreaInsets).map({ Insets($0) }) ?? .zero
-    }
-    
+	
+	public var layoutMargins: Insets {
+		return (self.parentView?.layoutMargins).map({ Insets($0) }) ?? .zero
+	}
+	
+	@available(iOS 11.0, *)
+	public var safeAreaInsets: Insets {
+		return (self.parentView?.safeAreaInsets).map({ Insets($0) }) ?? .zero
+	}
+	
 }
 
 extension ViewLayoutGuides {

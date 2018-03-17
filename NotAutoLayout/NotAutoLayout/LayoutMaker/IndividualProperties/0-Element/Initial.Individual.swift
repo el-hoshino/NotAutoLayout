@@ -19,13 +19,13 @@ extension IndividualProperty {
 // MARK: - Set A Frame -
 extension IndividualProperty.Initial: LayoutPropertyCanStoreFrameToEvaluateFrameType {
 		
-    public func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> Rect {
-        
-        let frame = frame.evaluated(from: parameters)
-        
-        return frame
-        
-    }
+	public func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let frame = frame.evaluated(from: parameters)
+		
+		return frame
+		
+	}
 	
 }
 

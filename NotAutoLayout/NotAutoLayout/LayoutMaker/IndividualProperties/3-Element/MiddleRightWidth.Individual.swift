@@ -39,14 +39,14 @@ extension IndividualProperty.MiddleRightWidth {
 // MARK: Height
 extension IndividualProperty.MiddleRightWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
-        
-        let middleRight = self.middleRight.evaluated(from: parameters)
-        let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
-        return self.makeFrame(middleRight: middleRight, width: width, height: height)
-        
-    }
-    
+		let middleRight = self.middleRight.evaluated(from: parameters)
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+		
+		return self.makeFrame(middleRight: middleRight, width: width, height: height)
+		
+	}
+	
 }

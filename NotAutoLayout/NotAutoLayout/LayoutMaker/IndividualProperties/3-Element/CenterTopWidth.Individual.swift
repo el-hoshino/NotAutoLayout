@@ -39,15 +39,15 @@ extension IndividualProperty.CenterTopWidth {
 
 extension IndividualProperty.CenterTopWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
-        
-        let center = self.center.evaluated(from: parameters)
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let center = self.center.evaluated(from: parameters)
 		let top = self.top.evaluated(from: parameters)
 		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
 		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
 		
 		return self.makeFrame(center: center, top: top, width: width, height: height)
 		
-    }
+	}
 
 }

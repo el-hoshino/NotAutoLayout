@@ -10,7 +10,7 @@ import Foundation
 
 public struct LayoutMaker<Property: LayoutMakerPropertyType> {
 	
-    // FIXME: Due to a Swift compiler bug currently store an `unowned NSObject` property in a `struct` will cause a crash while trying to print the `struct` instance, which always happens in Playgrounds. After this bug fixed, the `parentView` should be declared as `unowned`, if this could cause a memory leak
+	// FIXME: Due to a Swift compiler bug currently store an `unowned NSObject` property in a `struct` will cause a crash while trying to print the `struct` instance, which always happens in Playgrounds. After this bug fixed, the `parentView` should be declared as `unowned`, if this could cause a memory leak
 	let parentView: UIView
 	
 	let didSetProperty: Property

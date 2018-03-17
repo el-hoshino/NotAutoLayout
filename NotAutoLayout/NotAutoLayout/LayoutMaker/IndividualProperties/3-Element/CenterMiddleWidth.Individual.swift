@@ -41,14 +41,14 @@ extension IndividualProperty.CenterMiddleWidth {
 // MARK: Height
 extension IndividualProperty.CenterMiddleWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
-        
-        let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
-        let x = self.center.evaluated(from: parameters) - width.half
-        let y = self.middle.evaluated(from: parameters) - height.half
-        return Rect(x: x, y: y, width: width, height: height)
-        
-    }
-    
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+		let x = self.center.evaluated(from: parameters) - width.half
+		let y = self.middle.evaluated(from: parameters) - height.half
+		return Rect(x: x, y: y, width: width, height: height)
+		
+	}
+	
 }

@@ -40,31 +40,31 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	
-    public func stickOnParent(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
-        
-        let frame = LayoutElement.Rect.byParent({ $0.boundsGuide.frame(inside: insets) })
-        let maker = self.didSetProperty.storeFrame(frame, to: self)
+	public func stickOnParent(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
+		
+		let frame = LayoutElement.Rect.byParent({ $0.boundsGuide.frame(inside: insets) })
+		let maker = self.didSetProperty.storeFrame(frame, to: self)
 		
 		return maker
-        
-    }
-    
-    @available(iOS 11.0, *)
-    public func stickOnParentSafeArea(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
-        
-        let frame = LayoutElement.Rect.byParent({ $0.safeAreaGuide.frame(inside: insets) })
-        let maker = self.didSetProperty.storeFrame(frame, to: self)
-        
-        return maker
+		
+	}
+	
+	@available(iOS 11.0, *)
+	public func stickOnParentSafeArea(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
+		
+		let frame = LayoutElement.Rect.byParent({ $0.safeAreaGuide.frame(inside: insets) })
+		let maker = self.didSetProperty.storeFrame(frame, to: self)
+		
+		return maker
 
-    }
-    
+	}
+	
 }
 
 public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCanStoreFrameType {
-    
-    func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> Rect
-    
+	
+	func evaluateFrame(frame: LayoutElement.Rect, parameters: IndividualFrameCalculationParameters) -> Rect
+	
 }
 
 extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
@@ -77,9 +77,9 @@ extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 			return self.evaluateFrame(frame: frame, parameters: parameters)
 		})
 		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
-        
-        return maker
-        
-    }
-    
+		
+		return maker
+		
+	}
+	
 }
