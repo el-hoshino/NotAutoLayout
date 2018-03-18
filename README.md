@@ -5,7 +5,7 @@
 [![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-**-The only[^1] layout framework that treats layout human-erros[^2] as a Build-time error-**
+## -The only<a id="q1" href="#a1"><sup>1</sup></a> layout framework that treats layout human-erros<a id="q2" href="#a2"><sup>2</sup></a> as a Build-time error-
 
 NotAutoLayout is a framework to help you layout subviews *without* Auto Layout constraints.
 
@@ -244,16 +244,16 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
  Items | NotAutoLayout | [PinLayout](https://github.com/mirego/PinLayout) | [LayoutKit](https://github.com/linkedin/LayoutKit) | [SnapKit](https://github.com/SnapKit/SnapKit) | [PureLayout](https://github.com/PureLayout/PureLayout) | [Cartography](https://github.com/robb/Cartography)
 ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ----------------
  Written in      | Swift            | Swift (and a little ObjC) | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
- Based on        | `layoutSubvews`  | `layoutSubviews` | `layoutSubvews`  | Auto Layout      | Auto Layout      | Auto Layout
+ Based on        | Pure code        | Pure code        | Pure code        | Auto Layout      | Auto Layout      | Auto Layout
  Platforms       | iOS              | iOS / tvOS       | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
  Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage / CocoaPods / Carthage | CocoaPods / Carthage
  Performance     | ◯                | ◯                | ◯                | ×                | ×                | ×
- Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △[^3]
- Easy to read    | ◯                | △[^4]            | △[^5]            | ◯                | ◯                | ◯
+ Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △<a id="q3" href="#a3"><sup>3</sup></a>
+ Easy to read    | ◯                | △<a id="q4" href="#a4"><sup>4</sup></a> | △<a id="q5" href="#a5"><sup>5</sup></a> | ◯ | ◯ | ◯
  Ex-Short syntax | ×                | ◯                | ×                | ×                | ×                | ×
- Chained methods | ◯                | ◯                | ×                | △[6]             | ×                | ×
- Targeted extensions[^7] | ◯        | ◯                | ×[^8]            | ◯                | ×                | ×
- Behaviour on human-errors[^2] | Build-time Error | Nothing | Build-time Error[^9] | Run-time Warning | Run-time Warning | Run-Time Warning
+ Chained methods | ◯                | ◯                | ×                | △<a id="q6" href="#a6"><sup>6</sup></a> | × | ×
+ Targeted extensions<a id="q7" href="#a7"><sup>7</sup></a> | ◯ | ◯ | ×<a id="q8" href="#a8"><sup>8</sup></a> | ◯ | × | ×
+ Behaviour on human-errors<a id="q2" href="#a2"><sup>2</sup></a> | Build-time Error | Nothing | Build-time Error<a id="q9" href="#a9"><sup>9</sup></a> | Run-time Warning | Run-time Warning | Run-Time Warning
 
 ## Known issues
 
@@ -265,12 +265,16 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
 
 NotAutoLayout is released under the Apache license. See [LICENSE](LICENSE) for details.
 
-[^1]: Maybe. At least I personally haven't found a second one.
-[^2]: Things like Ambiguous Layout on Auto Layout, or just forgot to set an edge for a subview while overriding `layoutSubviews`.
-[^3]: It's not difficult to memorize the syntax, but you have to write global functions rather than methods, which makes it a little bit hard for auto-completion comparing with methods.
-[^4]: Sometimes the method name is too short to understand what it really does.
-[^5]: It's not very difficult to understand, but still takes a while to read the syntax.
-[^6]: SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
-[^7]: A namespaced extension making method [made like this](http://tech.vasily.jp/entry/swift_modern_extensions). One of the famous examples is `.rx` access control in [RxSwift](https://github.com/ReactiveX/RxSwift).
-[^8]: LayoutKit doesn't have a namespaced extension mechanism, but instead it uses local types to avoid possible name-confilictions.
-[^9]: LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
+## Notes
+
+<ul>
+<li id="a1"><a href="#q1">1:</a> Maybe. At least I personally haven't found a second one.</li>
+<li id="a2"><a href="#q2">2:</a> Things like Ambiguous Layout on Auto Layout, or just forgot to set an edge for a subview while overriding `layoutSubviews`.
+<li id="a3"><a href="#q3">3:</a> It's not difficult to memorize the syntax, but you have to write global functions rather than methods, which makes it a little bit hard for auto-completion comparing with methods.
+<li id="a4"><a href="#q4">4:</a> Sometimes the method name is too short to understand what it really does.
+<li id="a5"><a href="#q5">5:</a> It's not very difficult to understand, but still takes a while to read the syntax.
+<li id="a6"><a href="#q6">6:</a> SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
+<li id="a7"><a href="#q7">7:</a> A namespaced extension making method [made like this](http://tech.vasily.jp/entry/swift_modern_extensions). One of the famous examples is `.rx` access control in [RxSwift](https://github.com/ReactiveX/RxSwift).
+<li id="a8"><a href="#q8">8:</a> LayoutKit doesn't have a namespaced extension mechanism, but instead it uses local types to avoid possible name-confilictions.
+<li id="a9"><a href="#q9">9:</a> LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
+</ul>
