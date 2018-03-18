@@ -246,7 +246,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
  Written in      | Swift            | Swift (and a little ObjC) | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
  Based on        | Pure code        | Pure code        | Pure code        | Auto Layout      | Auto Layout      | Auto Layout
  Platforms       | iOS              | iOS / tvOS       | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
- Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage / CocoaPods / Carthage | CocoaPods / Carthage
+ Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage
  Performance     | ◯                | ◯                | ◯                | ×                | ×                | ×
  Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △<a id="q3" href="#a3"><sup>3</sup></a>
  Easy to read    | ◯                | △<a id="q4" href="#a4"><sup>4</sup></a> | △<a id="q5" href="#a5"><sup>5</sup></a> | ◯ | ◯ | ◯
