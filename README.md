@@ -274,7 +274,7 @@ NotAutoLayout is released under the Apache license. See [LICENSE](LICENSE) for d
 <li id="a4"><a href="#q4">4:</a> Sometimes the method name is too short to understand what it really does.
 <li id="a5"><a href="#q5">5:</a> It's not very difficult to understand, but still takes a while to read the syntax.
 <li id="a6"><a href="#q6">6:</a> SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
-<li id="a7"><a href="#q7">7:</a> A namespaced extension making method [made like this](http://tech.vasily.jp/entry/swift_modern_extensions). One of the famous examples is `.rx` access control in [RxSwift](https://github.com/ReactiveX/RxSwift).
+<li id="a7"><a href="#q7">7:</a> A namespaced extension making method <a href="http://tech.vasily.jp/entry/swift_modern_extensions">made like this</a>. One of the famous examples is `.rx` access control in <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.
 <li id="a8"><a href="#q8">8:</a> LayoutKit doesn't have a namespaced extension mechanism, but instead it uses local types to avoid possible name-confilictions.
 <li id="a9"><a href="#q9">9:</a> LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
 </ul>
