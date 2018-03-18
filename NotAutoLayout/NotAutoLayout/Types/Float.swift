@@ -8,6 +8,11 @@
 
 import Foundation
 
+/// A `FloatingPoint` type used in NotAutoLayout.
+///
+/// Basically it's just a `CGFloat` type that every behaviour is just the same as `CGFloat`, but since it's declared as another type just in NotAutoLayout, you can add any extensions you want and that won't affect the system's `CGFloat` type. For example, I have defined `half`, `double` and `isNonZero` property in `Float`. You can safely use them in `Float`, and they will not cause any confliction if you have defined properties with the same names in `CGFloat`.
+///
+/// Confroms to: `CGTypeConvertible`.
 public struct Float {
 	
 	private var value: CGFloat
@@ -302,15 +307,21 @@ extension Float: FloatingPoint {
 
 extension Float {
 	
-	var half: Float {
+	/// Returns `self / 2`.
+	public var half: Float {
 		return self / 2
 	}
 	
-	var double: Float {
+	/// Returns `self * 2`.
+	public var double: Float {
 		return self * 2
 	}
 	
-	var isNonZero: Bool {
+	/// Shows if the current `Float` value is a valid value and it's not `0`.
+	///
+	/// - If the value is `0`, or `isNan` is `true`, then it returns `true`.
+	/// - Otherwise, `false`.
+	public var isNonZero: Bool {
 		return self.isNaN == false && self.isZero == false
 	}
 	
