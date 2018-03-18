@@ -252,7 +252,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
  Easy to read    | ◯                | △<a id="q4" href="#a4"><sup>4</sup></a> | △<a id="q5" href="#a5"><sup>5</sup></a> | ◯ | ◯ | ◯
  Ex-Short syntax | ×                | ◯                | ×                | ×                | ×                | ×
  Chained methods | ◯                | ◯                | ×                | △<a id="q6" href="#a6"><sup>6</sup></a> | × | ×
- Targeted extensions<a id="q7" href="#a7"><sup>7</sup></a> | ◯ | ◯ | ×<a id="q8" href="#a8"><sup>8</sup></a> | ◯ | × | ×
+ Targeted extensions<a id="q7" href="#a7"><sup>7</sup></a> | ◯ | ◯ | ×<a id="q8" href="#a8"><sup>8</sup></a> | ◯ | × | ×<a id="q8" href="#a8"><sup>8</sup></a>
  Behaviour on human-errors<a id="q2" href="#a2"><sup>2</sup></a> | Build-time Error | Nothing | Build-time Error<a id="q9" href="#a9"><sup>9</sup></a> | Run-time Warning | Run-time Warning | Run-Time Warning
 
 ## Known issues
@@ -275,6 +275,6 @@ NotAutoLayout is released under the Apache license. See [LICENSE](LICENSE) for d
 <li id="a5"><a href="#q5">5:</a> It's not very difficult to understand, but still takes a while to read the syntax.
 <li id="a6"><a href="#q6">6:</a> SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
 <li id="a7"><a href="#q7">7:</a> A namespaced extension making method <a href="http://tech.vasily.jp/entry/swift_modern_extensions">made like this</a>. One of the famous examples is `.rx` access control in <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.
-<li id="a8"><a href="#q8">8:</a> LayoutKit doesn't have a namespaced extension mechanism, but instead it uses local types to avoid possible name-confilictions.
+<li id="a8"><a href="#q8">8:</a> LayoutKit and Cartography don't have a namespaced extension mechanism, but instead LayoutKit uses local types, and Cartography uses function to avoid possible name-confilictions.
 <li id="a9"><a href="#q9">9:</a> LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
 </ul>
