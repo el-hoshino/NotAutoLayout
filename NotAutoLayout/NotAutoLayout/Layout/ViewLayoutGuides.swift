@@ -38,8 +38,136 @@ extension ViewLayoutGuides {
 
 extension ViewLayoutGuides: LayoutGuideRepresentable {
 	
-	public var layoutGuide: Guide {
+	private var layoutGuide: Guide {
 		return self.boundsGuide
+	}
+	
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.layoutGuide.direction
+	}
+	
+	public var left: Float {
+		return self.layoutGuide.left
+	}
+	
+	public var center: Float {
+		return self.layoutGuide.center
+	}
+	
+	public var right: Float {
+		return self.layoutGuide.right
+	}
+	
+	public var width: Float {
+		return self.layoutGuide.width
+	}
+	
+	public func horizontal(at coordinatePosition: Float) -> Float {
+		return self.layoutGuide.horizontal(at: coordinatePosition)
+	}
+	
+	public var top: Float {
+		return self.layoutGuide.top
+	}
+	
+	public var middle: Float {
+		return self.layoutGuide.middle
+	}
+	
+	public var bottom: Float {
+		return self.layoutGuide.bottom
+	}
+	
+	public var height: Float {
+		return self.layoutGuide.height
+	}
+	
+	public func vertical(at coordinatePosition: Float) -> Float {
+		return self.layoutGuide.vertical(at: coordinatePosition)
+	}
+	
+	public var topLeft: Point {
+		return self.layoutGuide.topLeft
+	}
+	
+	public var topCenter: Point {
+		return self.layoutGuide.topCenter
+	}
+	
+	public var topRight: Point {
+		return self.layoutGuide.topRight
+	}
+	
+	public var middleLeft: Point {
+		return self.layoutGuide.middleLeft
+	}
+	
+	public var middleCenter: Point {
+		return self.layoutGuide.middleCenter
+	}
+	
+	public var middleRight: Point {
+		return self.layoutGuide.middleRight
+	}
+	
+	public var bottomLeft: Point {
+		return self.layoutGuide.bottomLeft
+	}
+	
+	public var bottomCenter: Point {
+		return self.layoutGuide.bottomCenter
+	}
+	
+	public var bottomRight: Point {
+		return self.layoutGuide.bottomRight
+	}
+	
+	public var size: Size {
+		return self.layoutGuide.size
+	}
+	
+	public func point(at coordinatePoint: Point) -> Point {
+		return self.layoutGuide.point(at: coordinatePoint)
+	}
+	
+	public var frame: Rect {
+		return self.layoutGuide.frame
+	}
+	
+	public func frame(inside insets: Insets) -> Rect {
+		return self.layoutGuide.frame(inside: insets)
+	}
+	
+	public var leading: Float {
+		return self.layoutGuide.leading
+	}
+	
+	public var trailing: Float {
+		return self.layoutGuide.trailing
+	}
+	
+	public var topLeading: Point {
+		return self.layoutGuide.topLeading
+	}
+	
+	public var topTrailing: Point {
+		return self.layoutGuide.topTrailing
+	}
+	
+	public var midddleLeading: Point {
+		return self.layoutGuide.midddleLeading
+	}
+	
+	public var middleTrailing: Point {
+		return self.layoutGuide.middleTrailing
+	}
+	
+	public var bottomLeading: Point {
+		return self.layoutGuide.bottomLeading
+	}
+	
+	public var bottomTrailing: Point {
+		return self.layoutGuide.bottomTrailing
 	}
 	
 }

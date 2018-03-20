@@ -58,14 +58,6 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
-extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
-	
-	public var pinGuide: ViewPinGuides.Horizontal.Guide {
-		return self.frameGuide
-	}
-	
-}
-
 extension ViewPinGuides.Horizontal {
 	
 	public var frameGuide: Guide {
@@ -87,6 +79,42 @@ extension ViewPinGuides.Horizontal {
 	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+	}
+	
+}
+
+extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
+	
+	private var pinGuide: ViewPinGuides.Horizontal.Guide {
+		return self.frameGuide
+	}
+	
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.pinGuide.direction
+	}
+	
+	public var left: Float {
+		return self.pinGuide.left
+	}
+	
+	public var center: Float {
+		return self.pinGuide.center
+	}
+	
+	public var right: Float {
+		return self.pinGuide.right
+	}
+	
+	public func horizontal(at coordinatePosition: Float) -> Float {
+		return self.pinGuide.horizontal(at: coordinatePosition)
+	}
+	
+	public var leading: Float {
+		return self.pinGuide.leading
+	}
+	
+	public var trailing: Float {
+		return self.pinGuide.trailing
 	}
 	
 }
@@ -137,14 +165,6 @@ extension ViewPinGuides.Vertical {
 	
 }
 
-extension ViewPinGuides.Vertical: VerticalPinGuideRepresentable {
-	
-	public var pinGuide: ViewPinGuides.Vertical.Guide {
-		return self.frameGuide
-	}
-	
-}
-
 extension ViewPinGuides.Vertical {
 	
 	public var frameGuide: Guide {
@@ -166,6 +186,30 @@ extension ViewPinGuides.Vertical {
 	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+	}
+	
+}
+
+extension ViewPinGuides.Vertical: VerticalPinGuideRepresentable {
+	
+	private var pinGuide: ViewPinGuides.Vertical.Guide {
+		return self.frameGuide
+	}
+	
+	public var top: Float {
+		return self.pinGuide.top
+	}
+	
+	public var middle: Float {
+		return self.pinGuide.middle
+	}
+	
+	public var bottom: Float {
+		return self.pinGuide.bottom
+	}
+	
+	public func vertical(at coordinatePosition: Float) -> Float {
+		return self.pinGuide.vertical(at: coordinatePosition)
 	}
 	
 }
@@ -216,14 +260,6 @@ extension ViewPinGuides.Point {
 	
 }
 
-extension ViewPinGuides.Point: PointPinGuideRepresentable {
-	
-	public var pinGuide: ViewPinGuides.Point.Guide {
-		return self.frameGuide
-	}
-	
-}
-
 extension ViewPinGuides.Point {
 	
 	public var frameGuide: Guide {
@@ -245,6 +281,86 @@ extension ViewPinGuides.Point {
 	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+	}
+	
+}
+
+extension ViewPinGuides.Point: PointPinGuideRepresentable {
+	
+	private var pinGuide: ViewPinGuides.Point.Guide {
+		return self.frameGuide
+	}
+	
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.pinGuide.direction
+	}
+	
+	public var topLeft: Point {
+		return self.pinGuide.topLeft
+	}
+	
+	public var topCenter: Point {
+		return self.pinGuide.topCenter
+	}
+	
+	public var topRight: Point {
+		return self.pinGuide.topRight
+	}
+	
+	public var middleLeft: Point {
+		return self.pinGuide.middleLeft
+	}
+	
+	public var middleCenter: Point {
+		return self.pinGuide.middleCenter
+	}
+	
+	public var middleRight: Point {
+		return self.pinGuide.middleRight
+	}
+	
+	public var bottomLeft: Point {
+		return self.pinGuide.bottomLeft
+	}
+	
+	public var bottomCenter: Point {
+		return self.pinGuide.bottomCenter
+	}
+	
+	public var bottomRight: Point {
+		return self.pinGuide.bottomRight
+	}
+	
+	public func point(at coordinatePoint: Point) -> Point {
+		return self.pinGuide.point(at: coordinatePoint)
+	}
+	
+	public func pointAt(x coordinateX: Float, y coordinateY: Float) -> Point {
+		return self.pinGuide.pointAt(x: coordinateX, y: coordinateY)
+	}
+	
+	public var topLeading: Point {
+		return self.pinGuide.topLeading
+	}
+	
+	public var topTrailing: Point {
+		return self.pinGuide.topTrailing
+	}
+	
+	public var midddleLeading: Point {
+		return self.pinGuide.midddleLeading
+	}
+	
+	public var middleTrailing: Point {
+		return self.pinGuide.middleTrailing
+	}
+	
+	public var bottomLeading: Point {
+		return self.pinGuide.bottomLeading
+	}
+	
+	public var bottomTrailing: Point {
+		return self.pinGuide.bottomTrailing
 	}
 	
 }

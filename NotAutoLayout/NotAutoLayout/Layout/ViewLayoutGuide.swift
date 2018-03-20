@@ -22,23 +22,11 @@ extension ViewLayoutGuides {
 	
 }
 
-extension ViewLayoutGuides.Guide {
-	
-	var direction: UIUserInterfaceLayoutDirection {
-		return self.directionGetter() ?? .leftToRight
-	}
-	
-}
-
 extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 	
-	public var layoutGuide: ViewLayoutGuides.Guide {
-		return self
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
-	
-}
-
-extension ViewLayoutGuides.Guide {
 	
 	public var left: Float {
 		return self.rect.left
@@ -56,13 +44,9 @@ extension ViewLayoutGuides.Guide {
 		return self.rect.width
 	}
 	
-	public func horizontal(at relativePosition: Float) -> Float {
-		return self.left + (self.width * relativePosition)
+	public func horizontal(at coordinatePosition: Float) -> Float {
+		return self.left + (self.width * coordinatePosition)
 	}
-	
-}
-
-extension ViewLayoutGuides.Guide {
 	
 	public var top: Float {
 		return self.rect.top
@@ -80,13 +64,9 @@ extension ViewLayoutGuides.Guide {
 		return self.rect.height
 	}
 	
-	public func vertical(at relativePosition: Float) -> Float {
-		return self.top + (self.height * relativePosition)
+	public func vertical(at coordinatePosition: Float) -> Float {
+		return self.top + (self.height * coordinatePosition)
 	}
-	
-}
-
-extension ViewLayoutGuides.Guide {
 	
 	public var topLeft: Point {
 		return self.rect.topLeft
@@ -128,15 +108,9 @@ extension ViewLayoutGuides.Guide {
 		return self.rect.size
 	}
 	
-	public func point(at relativePoint: Point) -> Point {
-		let x = self.horizontal(at: relativePoint.x)
-		let y = self.vertical(at: relativePoint.y)
-		return .init(x: x, y: y)
+	public func point(at coordinatePoint: Point) -> Point {
+		return self.rect.pointGeometry(at: coordinatePoint)
 	}
-	
-}
-
-extension ViewLayoutGuides.Guide {
 	
 	public var frame: Rect {
 		return self.rect
@@ -145,10 +119,6 @@ extension ViewLayoutGuides.Guide {
 	public func frame(inside insets: Insets) -> Rect {
 		return self.rect.rect(inside: insets)
 	}
-	
-}
-
-extension ViewLayoutGuides.Guide {
 	
 	public var leading: Float {
 		switch self.direction {
@@ -167,6 +137,66 @@ extension ViewLayoutGuides.Guide {
 			
 		case .rightToLeft:
 			return self.left
+		}
+	}
+	
+	public var topLeading: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.topLeft
+			
+		case .rightToLeft:
+			return self.topRight
+		}
+	}
+	
+	public var topTrailing: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.topRight
+			
+		case .rightToLeft:
+			return self.topLeft
+		}
+	}
+	
+	public var midddleLeading: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.middleLeft
+			
+		case .rightToLeft:
+			return self.middleRight
+		}
+	}
+	
+	public var middleTrailing: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.middleRight
+			
+		case .rightToLeft:
+			return self.middleLeft
+		}
+	}
+	
+	public var bottomLeading: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.bottomLeft
+			
+		case .rightToLeft:
+			return self.bottomRight
+		}
+	}
+	
+	public var bottomTrailing: Point {
+		switch self.direction {
+		case .leftToRight:
+			return self.bottomRight
+			
+		case .rightToLeft:
+			return self.bottomLeft
 		}
 	}
 	
