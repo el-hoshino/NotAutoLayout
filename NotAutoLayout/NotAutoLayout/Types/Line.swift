@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// A struct that shows either a horizontal or a vertical edge position in a view.
+///
+/// Basically this is only used as a namespace, you need to specify either `.Horizontal` or `.Vertical` line in a view.
 public struct Line {
 	
 }
@@ -15,6 +18,7 @@ public struct Line {
 // MARK: - Horizontal
 extension Line {
 	
+	/// Referes to a horizontal position in a view.
 	public struct Horizontal {
 		
 		var value: Float
@@ -58,6 +62,7 @@ extension Line.Horizontal {
 // MARK: - Vertical
 extension Line {
 	
+	/// Referes to a vertical position in a view.
 	public struct Vertical {
 		
 		var value: Float

@@ -8,16 +8,26 @@
 
 import Foundation
 
+/// A struct that shows a rect with origin point and size.
+///
+/// Basically it behaves like a `CGRect` type that has the same properties `origin` and `size`, but since it's declared as another type just in NotAutoLayout, you can add any extensions you want and that won't affect the system's `CGRect` type. For example, I have defined properties like `topLeft` and `bottomRight`, as well as methods like `rect(inside: insets)`. You can safely use them with `Rect` type values, and they will not cause any confliction if you have defined the same functions for `CGRect`.
+///
+/// Conforms to: `CGTypeConvertible`.
 public struct Rect {
 	
+	/// The origin point of the rect.
 	public var origin: Point
+	
+	/// The size of the rect.
 	public var size: Size
 	
+	/// Initializes a `Rect` with origin (as `origin`) and size (as `size`).
 	public init(origin: Point, size: Size) {
 		self.origin = origin
 		self.size = size
 	}
 	
+	/// Initializes a `Rect` with origin's x position (as `x`), origin's y position (as `y`), size's width (as `width`) and size's height (as `height`).
 	public init(x: Float, y: Float, width: Float, height: Float) {
 		self.origin = Point(x: x, y: y)
 		self.size = Size(width: width, height: height)
@@ -27,8 +37,10 @@ public struct Rect {
 
 extension Rect {
 	
+	/// A rect that both `origin` and `size` are `.zero`
 	public static let zero: Rect  = .init(origin: .zero, size: .zero)
 	
+	/// A rect that `origin` is `.zero` and `size` is `.identity`.
 	public static let identity: Rect = .init(origin: .zero, size: .identity)
 	
 }
@@ -50,18 +62,22 @@ extension Rect: CGTypeConvertible {
 
 extension Rect {
 	
+	/// The left position in the rect, which is produced by `self.origin.x`
 	public var left: Float {
 		return self.origin.x
 	}
 	
+	/// The center position in the rect, which is produced by `self.origin.x + (self.size.width * 0.5)`
 	public var center: Float {
 		return self.horizontalGeometry(at: 0.5)
 	}
 	
+	/// The right position in the rect, which is produced by `self.origin.x + self.size.width`
 	public var right: Float {
 		return self.left + self.width
 	}
 	
+	/// The width of the rect, which is produced by `self.size.width`
 	public var width: Float {
 		return self.size.width
 	}
@@ -70,18 +86,22 @@ extension Rect {
 
 extension Rect {
 	
+	/// The top position in the rect, which is produced by `self.origin.y`
 	public var top: Float {
 		return self.origin.y
 	}
 	
+	/// The middle position in the rect, which is produced by `self.origin.y + (self.size.height * 0.5)`
 	public var middle: Float {
 		return self.verticalGeometry(at: 0.5)
 	}
 	
+	/// The bottom position in the rect, which is produced by `self.origin.y + self.size.height`
 	public var bottom: Float {
 		return self.top + self.height
 	}
 	
+	/// The height of the rect, which is produced by `self.size.height`
 	public var height: Float {
 		return self.size.height
 	}
@@ -90,38 +110,47 @@ extension Rect {
 
 extension Rect {
 	
+	/// The top left point in the rect, which is produced by `Point(x: self.left, y: self.top)`
 	public var topLeft: Point {
 		return .init(x: self.left, y: self.top)
 	}
 	
+	/// The top center point in the rect, which is produced by `Point(x: self.center, y: self.top)`
 	public var topCenter: Point {
 		return .init(x: self.center, y: self.top)
 	}
 	
+	/// The top right point in the rect, which is produced by `Point(x: self.right, y: self.top)`
 	public var topRight: Point {
 		return .init(x: self.right, y: self.top)
 	}
 	
+	/// The middle left point in the rect, which is produced by `Point(x: self.left, y: self.middle)`
 	public var middleLeft: Point {
 		return .init(x: self.left, y: self.middle)
 	}
 	
+	/// The middle center point in the rect, which is produced by `Point(x: self.center, y: self.middle)`
 	public var middleCenter: Point {
 		return .init(x: self.center, y: self.middle)
 	}
 	
+	/// The middle right point in the rect, which is produced by `Point(x: self.right, y: self.middle)`
 	public var middleRight: Point {
 		return .init(x: self.right, y: self.middle)
 	}
 	
+	/// The bottom left point in the rect, which is produced by `Point(x: self.left, y: self.bottom)`
 	public var bottomLeft: Point {
 		return .init(x: self.left, y: self.bottom)
 	}
 	
+	/// The bottom center point in the rect, which is produced by `Point(x: self.center, y: self.bottom)`
 	public var bottomCenter: Point {
 		return .init(x: self.center, y: self.bottom)
 	}
 	
+	/// The bottom right point in the rect, which is produced by `Point(x: self.right, y: self.bottom)`
 	public var bottomRight: Point {
 		return .init(x: self.right, y: self.bottom)
 	}
@@ -130,10 +159,12 @@ extension Rect {
 
 extension Rect {
 	
+	/// The horizontal span in the rect, which is produced by `Span(start: self.origin.x, length: self.size.width)`
 	public var horizontalSpan: Span {
 		return Span(horizontalFrom: self)
 	}
 	
+	/// The vertical span in the rect, which is produced by `Span(start: self.origin.y, length: self.size.height)`
 	public var verticalSpan: Span {
 		return Span(verticalFrom: self)
 	}
@@ -142,22 +173,67 @@ extension Rect {
 
 extension Rect {
 	
+	/// The horizontal geometry position at the given coordinate position.
+	///
+	/// e.g.:
+	/// - Pass `0` to `coordinate` will get the left position of the rect.
+	/// - Pass `1` to `coordinate` will get the right position of the rect.
+	/// - Pass `0.75` to `coordinate` will get the horizontal position at 75% of the rect.
+	///
+	/// - Parameters:
+	///   - coordinate: The horizontal coordinate position in the rect.
+	///
+	/// - Returns: The horizontal geometry position at the given horizontal coordinate position in the rect.
 	public func horizontalGeometry(at coordinate: Float) -> Float {
 		return self.origin.x + (self.size.width * coordinate)
 	}
 	
+	/// The vertical geometry position at the given coordinate position.
+	///
+	/// e.g.:
+	/// - Pass `0` to `coordinate` will get the top position of the rect.
+	/// - Pass `1` to `coordinate` will get the bottom position of the rect.
+	/// - Pass `0.75` to `coordinate` will get the vertical position at 75% of the rect.
+	///
+	/// - Parameters:
+	///   - coordinate: The vertical coordinate position in the rect.
+	///
+	/// - Returns: The vertical geometry position at the given vertical coordinate position in the rect.
 	public func verticalGeometry(at coordinate: Float) -> Float {
 		return self.origin.y + (self.size.height * coordinate)
 	}
 	
-	public func pointGeometry(x: Float, y: Float) -> Point {
-		let x = self.horizontalGeometry(at: x)
-		let y = self.verticalGeometry(at: y)
+	/// The geometry point at the given coordinate position (produced from coordinateX and coordinateY).
+	///
+	/// e.g.:
+	/// - Pass `0` to `x` and `0` to `y` will get the top left point of the rect.
+	/// - Pass `0` to `x` and `1` to `y` will get the bottom left point of the rect.
+	/// - Pass `0.75` to `x` and `0.6` to `y` will get the point which horizontally at 75% and vertically at 60% of the rect.
+	///
+	/// - Parameters:
+	///   - coordinateX: The horizontal coordinate position in the rect.
+	///   - coordinateY: The vertical coordinate position in the rect.
+	///
+	/// - Returns: The geometry point at the given coordinate point in the rect.
+	public func pointGeometryAt(x coordinateX: Float, y coordinateY: Float) -> Point {
+		let x = self.horizontalGeometry(at: coordinateX)
+		let y = self.verticalGeometry(at: coordinateY)
 		return .init(x: x, y: y)
 	}
 	
+	/// The geometry point at the given coordinate position.
+	///
+	/// e.g.:
+	/// - Pass `(x: 0, y: 0)` to `coordinate` will get the top left point of the rect.
+	/// - Pass `(x: 0, y: 1)` to `coordinate` will get the bottom left point of the rect.
+	/// - Pass `(x: 0.75, y: 0.6)` to `coordinate` will get the point which horizontally at 75% and vertically at 60% of the rect.
+	///
+	/// - Parameters:
+	///   - coordinate: The coordinate point in the rect.
+	///
+	/// - Returns: The geometry point at the given coordinate point in the rect.
 	public func pointGeometry(at coordinate: Point) -> Point {
-		return self.pointGeometry(x: coordinate.x, y: coordinate.y)
+		return self.pointGeometryAt(x: coordinate.x, y: coordinate.y)
 	}
 	
 }
@@ -186,6 +262,12 @@ extension Rect {
 
 extension Rect {
 	
+	/// Produces a new rect which is inside the current rect with given insets.
+	///
+	/// - Parameters:
+	///   - insets: The insets inside the current rect.
+	///
+	/// - Returns: A new rect inside the current rect with given insets.
 	public func rect(inside insets: Insets) -> Rect {
 		let frame = UIEdgeInsetsInsetRect(self.cgValue, insets.cgValue)
 		return Rect(frame)
