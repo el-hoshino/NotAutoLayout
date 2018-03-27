@@ -2,8 +2,8 @@
 
 [![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
-[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 
 ## -The only<a id="q1" href="#a1"><sup>1</sup></a> layout framework that treats layout human-erros<a id="q2" href="#a2"><sup>2</sup></a> as a Build-time error-
 
@@ -269,12 +269,12 @@ NotAutoLayout is released under the Apache license. See [LICENSE](LICENSE) for d
 
 <ul>
 <li id="a1"><a href="#q1">1:</a> Maybe. At least I personally haven't found a second one.</li>
-<li id="a2"><a href="#q2">2:</a> Things like Ambiguous Layout on Auto Layout, or just forgot to set an edge for a subview while overriding `layoutSubviews`.
+<li id="a2"><a href="#q2">2:</a> Things like Ambiguous Layout on Auto Layout, or just forgot to set an edge for a subview while overriding <code>layoutSubviews</code>.
 <li id="a3"><a href="#q3">3:</a> It's not difficult to memorize the syntax, but you have to write global functions rather than methods, which makes it a little bit hard for auto-completion comparing with methods.
 <li id="a4"><a href="#q4">4:</a> Sometimes the method name is too short to understand what it really does.
 <li id="a5"><a href="#q5">5:</a> It's not very difficult to understand, but still takes a while to read the syntax.
 <li id="a6"><a href="#q6">6:</a> SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
-<li id="a7"><a href="#q7">7:</a> A namespaced extension making method <a href="http://tech.vasily.jp/entry/swift_modern_extensions">made like this</a>. One of the famous examples is `.rx` access control in <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.
+<li id="a7"><a href="#q7">7:</a> A namespaced extension making method <a href="http://tech.vasily.jp/entry/swift_modern_extensions">made like this</a>. One of the famous examples is <code>.rx</code> access control in <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.
 <li id="a8"><a href="#q8">8:</a> LayoutKit and Cartography don't have a namespaced extension mechanism, but instead LayoutKit uses local types, and Cartography uses function to avoid possible name-confilictions.
 <li id="a9"><a href="#q9">9:</a> LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
 </ul>
