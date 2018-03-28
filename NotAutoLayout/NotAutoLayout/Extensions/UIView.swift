@@ -26,7 +26,7 @@ extension UIView {
 	}
 	
 	var layoutMarginsRect: Rect {
-        let insets = Insets(self.layoutMargins)
+		let insets = Insets(self.layoutMargins)
 		return self.boundsRect.rect(inside: insets)
 	}
 	
@@ -38,30 +38,30 @@ extension UIView {
 	
 	@available(iOS 11.0, *)
 	var safeAreaRect: Rect {
-        let insets = Insets(self.safeAreaInsets)
+		let insets = Insets(self.safeAreaInsets)
 		return self.boundsRect.rect(inside: insets)
 	}
-    
-    var frameRect: Rect {
-        return Rect(self.frame)
-    }
-    
-    var identityFrameRect: Rect {
-        return self.frameRect(thatIgnoresTransform: true)
-    }
-    
-    func frameRect(thatIgnoresTransform shouldIgnoreTransform: Bool) -> Rect {
-        return Rect(self.nal.frame(thatIgnoresTransform: shouldIgnoreTransform))
-    }
+	
+	var frameRect: Rect {
+		return Rect(self.frame)
+	}
+	
+	var identityFrameRect: Rect {
+		return self.frameRect(thatIgnoresTransform: true)
+	}
+	
+	func frameRect(thatIgnoresTransform shouldIgnoreTransform: Bool) -> Rect {
+		return Rect(self.nal.frame(thatIgnoresTransform: shouldIgnoreTransform))
+	}
 	
 }
 
 extension UIView {
-    
-    func sizeThatFits(_ size: Size) -> Size {
-        return Size(self.sizeThatFits(size.cgValue))
-    }
-    
+	
+	func sizeThatFits(_ size: Size) -> Size {
+		return Size(self.sizeThatFits(size.cgValue))
+	}
+	
 }
 
 extension UIView {
@@ -76,7 +76,7 @@ extension UIView {
 	
 	func layoutMarginsFrame(in targetView: UIView?) -> Rect {
 		
-        let insets = Insets(self.layoutMargins)
+		let insets = Insets(self.layoutMargins)
 		let checkingFrame = self.identityFrameRect.rect(inside: insets)
 		
 		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
@@ -87,7 +87,7 @@ extension UIView {
 		
 		// FIXME: Get this property without Auto Layout UILayoutGuide
 		let checkingFrame = Rect(origin: self.identityFrameRect.origin,
-                                 size: self.readableRect.size)
+								 size: self.readableRect.size)
 		
 		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)
 		
@@ -96,7 +96,7 @@ extension UIView {
 	@available(iOS 11.0, *)
 	func safeAreaFrame(in targetView: UIView?) -> Rect {
 		
-        let insets = Insets(self.safeAreaInsets)
+		let insets = Insets(self.safeAreaInsets)
 		let checkingFrame = self.identityFrameRect.rect(inside: insets)
 		
 		return checkingFrame.convertedBy(targetView: targetView, superView: self.superview)

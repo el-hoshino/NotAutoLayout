@@ -39,14 +39,14 @@ extension IndividualProperty.TopCenterWidth {
 // MARK: Height
 extension IndividualProperty.TopCenterWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-    public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
-        
-        let topCenter = self.topCenter.evaluated(from: parameters)
-        let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
-        let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
-        return self.makeFrame(topCenter: topCenter, width: width, height: height)
-        
-    }
-    
+		let topCenter = self.topCenter.evaluated(from: parameters)
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(0))
+		let height = height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+		
+		return self.makeFrame(topCenter: topCenter, width: width, height: height)
+		
+	}
+	
 }

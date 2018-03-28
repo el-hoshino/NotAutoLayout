@@ -2,16 +2,16 @@
 
 [![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
-[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 
-NotAutoLayoutView is a framework to help you layout subviews *without* Auto Layout constraints.
+## -The only<a id="q1" href="#a1"><sup>1</sup></a> layout framework that treats layout human-erros<a id="q2" href="#a2"><sup>2</sup></a> as a Build-time error-
+
+NotAutoLayout is a framework to help you layout subviews *without* Auto Layout constraints.
 
 Please note that this framework hasn't been widely tested yet, and currently it's for iOS only.
 
 Please open an issue or send me a pull request if you have any problems, better ideas or any other things you want me to know.
-
-Currently this README.md file doesn't cover the whole project yet, it will be fixed in future releases.
 
 ## Why NotAutoLayout
 
@@ -25,8 +25,8 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 
 ## Requirements
 
-- iOS 8.0+
-- Xcode 9.0+
+- iOS 9.0+
+- Xcode 9.2+
 - Swift 4.0+
 
 ## Installation
@@ -37,7 +37,7 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 - Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
 
 ```txt
-github "el-hoshino/NotAutoLayout" ~> 2.0
+github "el-hoshino/NotAutoLayout" ~> 3.0
 ```
 
 - Run `carthage update`.
@@ -56,7 +56,6 @@ github "el-hoshino/NotAutoLayout" ~> 2.0
 I wrote a barely practical sample code Playground file, which may help you get the idea. Here's the main source code, and you can find the full sample code inside the project
 
 ```swift
-import UIKit
 import PlaygroundSupport
 import NotAutoLayout
 
@@ -68,12 +67,12 @@ appView.backgroundColor = .white
 controller.view.addSubview(appView)
 
 controller.view.nal.layout(appView) { $0
-    .stickOnParent()
+	.stickOnParent()
 }
 
 
 
-let margin: CGSize = .init(width: 10, height: 10)
+let margin: Size = .init(width: 10, height: 10)
 let summaryView = ProfileSummaryView()
 let contentsView = ContentsView()
 let replyView = ReplyView()
@@ -82,43 +81,56 @@ summaryView.avatar = #imageLiteral(resourceName: "avatar.png")
 summaryView.mainTitle = "星野恵瑠＠今日も1日フレンズ㌠"
 summaryView.subTitle = "@lovee"
 contentsView.contents = """
-    Hello, NotAutoLayout!
-    The whole new NotAutoLayout 2.0 now has much better syntax which is:
-    - Easier to write (thanks to method-chain structures)
-    - Easier to read (thanks to more natural English-like statements)
-    - Even supports dynamic view sizes (with commands like `fitSize()`)!
-    """
+	Hello, NotAutoLayout!
+	The new NotAutoLayout 3.0 now has even better syntax which is:
+	- Easy to write (thanks to method-chain structures)
+	- Easy to read (thanks to more natural English-like statements)
+	- Capable with dynamic view sizes (with commands like `fitSize()`)
+	- Even better closure support to help you set various kinds of layouts with various kinds of properties!
+	- And one more thing: an experienmental sequencial layout engine!
+	"""
 contentsView.timeStamp = Date()
 
 appView.nal.setupSubview(summaryView) { $0
-    .makeDefaultLayout { $0
-        .setLeft(by: { $0.boundLeft })
-        .setRight(by: { $0.boundRight })
-        .setTop(by: { $0.boundTop })
-        .setHeight(by: { $0.safeTop + 50 })
-    }
-    .addToParent()
+	.setDefaultLayout { $0
+		.setLeft(by: { $0.left })
+		.setRight(by: { $0.right })
+		.setTop(by: { $0.top })
+		.setHeight(by: { $0.safeAreaGuide.top + 50 })
+	}
+	.addToParent()
 }
 appView.nal.setupSubview(contentsView) { $0
-    .makeDefaultLayout({ $0
-        .pinTopLeft(to: summaryView, s: .bottomLeft)
-        .pinRight(to: summaryView, s: .right)
-        .fitHeight()
-        .movingY(by: margin.height)
-    })
-    .setDefaultOrder(to: 1)
-    .addToParent()
+	.setDefaultLayout({ $0
+		.pinTopLeft(to: summaryView, with: { $0.bottomLeft })
+		.pinRight(to: summaryView, with: { $0.right })
+		.fitHeight()
+		.movingY(by: margin.height)
+	})
+	.setDefaultOrder(to: 1)
+	.addToParent()
 }
 appView.nal.setupSubview(replyView) { $0
-    .makeDefaultLayout({ $0
-        .setBottomLeft(by: { $0.boundBottomLeft })
-        .setRight(by: { $0.boundRight })
-        .setTop(by: { $0.safeBottom - 30 })
-    })
-    .addToParent()
+	.setDefaultLayout({ $0
+		.setBottomLeft(by: { $0.bottomLeft })
+		.setRight(by: { $0.right })
+		.setTop(by: { $0.safeAreaGuide.bottom - 30 })
+	})
+	.addToParent()
 }
 
-appView.setNeedsLayout()
+let imageViews = (0 ..< 3).map { (_) -> UIImageView in
+	let image = #imageLiteral(resourceName: "avatar.png")
+	let view = UIImageView(image: image)
+	appView.addSubview(view)
+	return view
+}
+
+appView.nal.layout(imageViews) { $0
+	.setMiddle(by: { $0.vertical(at: 0.7) })
+	.fitSize()
+	.setHorizontalInsetsEqualingToMargin()
+}
 ```
 
 ![screenshot](README_Resource/PlaygroundSample.png)
@@ -140,92 +152,129 @@ To layout a subview in `layoutSubviews()` method, you can use code like this:
 
 ```swift
 class MyView: UIView {
-    let viewA = UIView()
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        self.nal.layout(self.viewA) { $0
-            .pinTopCenter(to: $0.parentView, s: .topCenter)
-            .setWidth(by: { $0.boundWidth })
-            .fitHeight()
-        }
-
-    }
-
+	
+	let viewA = UIView()
+	let viewB = UIView()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		
+		self.nal.layout(self.viewA) { $0
+			.setTopCenter(by: { $0.topCenter })
+			.setWidth(by: { $0.width })
+			.fitHeight()
+		}
+		
+		self.nal.layout(self.viewB) { $0
+			.pinTopCenter(to: self.viewA, with: { $0.bottomCenter })
+			.setWidth(by: { $0.width })
+			.fitHeight()
+		}
+		
+	}
+	
 }
 ```
 
-which will layout `viewA` to parent's top center, having the same width as its parent, and fit its height automatically.
+which will first layout `viewA`'s top center to parent's top center (which is `MyView`'s top center), having the same width as its parent (which is `MyView`), and fit its height automatically, then layout `viewB`'s top center to `viewA`'s top bottom, having the same width as its parent (which is `MyView`), and fit its height automatically.
 
-To setup the layout for a subview, which the parent must conform `LayoutInfoStorable` protocol, you can use code like this:
+To setup the layout for a subview, which the parent must conform `LayoutInfoStorable` protocol, you can also use code like this:
 
 ```swift
 class ViewController: UIViewController {
-
-    private(set) lazy var mainView = LayoutInfoStoredView()
-    private(set) lazy var viewA = UIView()
-
-    override func loadView() {
-        self.mainView.frame = UIScreen.main.bounds
-        self.view = self.mainView
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.mainView.nal.makeLayout(for: self.viewA) { $0
-            .pinTopCenter(to: $0.parentView, s: .topCenter)
-            .setWidth(by: { $0.boundWidth })
-            .fitHeight
-        }
-
-    }
-
+	
+	private(set) lazy var mainView = LayoutInfoStoredView()
+	private(set) lazy var viewA = UIView()
+	private(set) lazy var viewB = UIView()
+	
+	override func loadView() {
+		self.mainView.frame = UIScreen.main.bounds
+		self.view = self.mainView
+	}
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		self.mainView.nal.setLayout(for: self.viewA) { $0
+			.setTopCenter(by: { $0.topCenter })
+			.setWidth(by: { $0.width })
+			.fitHeight()
+		}
+		
+		self.mainView.nal.setupSubview(self.viewB) { $0
+			.setDefaultLayout({ $0
+				.pinTopCenter(to: self.viewA, with: { $0.bottomCenter })
+				.setWidth(by: { $0.width })
+				.fitHeight()
+			})
+			.setDefaultOrder(to: 1)
+		}
+		
+	}
+	
 }
 ```
 
-which will do the same thing as the code before.
+which will do the same thing as the code before, and the good thing of this way is that you don't have to subclass a `UIView` for to make `mainView`. But since your `viewB`'s layout is based on `viewA`, you'll need to set `viewB`'s layout order to make sure it'll layout `viewB` after it layout `viewA`.
 
 ### How to make a layout
 
-You may call `nal.layout(_ subview: UIView, by making: (_ layoutMaker: InitialLayoutMaker) -> Layout.Individual)` to set a layout for subview from the parent view. The very basic idea is to make layouts through `LayoutMaker`s. With `LayoutMaker`, you can setup a layout by setting each part of a frame step by step to generate a specific layout, and then the parent view will use the generated layout to set the frame of the subview.
+You may call `nal.layout(_ subview: UIView, by making: (_ layoutMaker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>)` to set a layout for subview from the parent view. The very basic idea is to make layouts through `LayoutMaker`s. With `LayoutMaker`, you can setup a layout by setting each part of a frame step by step to generate a specific layout, and then the parent view will use the generated layout to set the frame of the subview.
 
-To setup a layout by `LayoutMaker`, you may call methods like `$0.setTopLeft(to: .zero).fitSize()` in the provided `making` closure. Since it's a `(InitialLayoutMaker) -> Layout.Individual` type closure, it will guarantee that finally you'll get a specific layout that avoids things like ambiguous layout in Auto Layout. And since `InitialLayoutMaker` has lots of chaind methods those lead to a `Layout.Individual`, you can easily write a method chain without missing any part of a frame.
+To setup a layout by `LayoutMaker`, you may call methods like `$0.setTopLeft(to: .zero).fitSize()` in the provided `making` closure. Since it's a `(LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>` type closure, it will guarantee that finally you'll get a specific layout that avoids things like ambiguous layout in Auto Layout. And since `LayoutMaker<IndividualProperty.Initial>` has lots of chaind methods those lead to a `LayoutMaker<IndividualLayout>`, you can easily write a method chain without missing any part of a frame.
 
-To make a certain frame, you'll need 4 elements: 2 unique horizontal positions and 2 unique vertical positions. Horizontal positions may be any of the things like `left`, `center`, `right` or any specific position like `0.3`, and `width` which also can represent a horizontal position. Vertical positions may be any of the things like `top`, `middle`, `bottom` or any specific position like `0.3`, and of course `height`. To set these elements through `LayoutMaker`, there is a approximate order that is:
+Theoretically, to make a certain frame you'll need 4 elements: 2 unique horizontal positions and 2 unique vertical positions. Horizontal positions may be any of the things like `left`, `center`, `right` or any specific position like `0.3`, and `width` which also can represent a horizontal position. Vertical positions may be any of the things like `top`, `middle`, `bottom` or any specific position like `0.3`, and of course `height`. Currently, because there're some `LayoutProperty`s not declared yet, in order to set these elements through `LayoutMaker`, there is an approximate order that is:
 
-1. Set point-specific positions (like `.topLeft`) before line-specific positions (like `.top` or `.left`).
-2. Set line-specific positions before set size elements (`.width`, `.height` and `.size`).
-3. In line-specific positions, set horizontal positions (like `.left`) before vertical positions (like `.top`).
-4. In size elements, set `.width` before `.height` if you set them separately.
+1. Set point-specific positions (like `.setTopLeft`) before line-specific positions (like `.setTop` or `.setLeft`).
+2. Set line-specific positions before set size elements (`.setWidth`, `.setHeight` and `.setSize`).
+3. In line-specific positions, set horizontal positions (like `.setLeft`) before vertical positions (like `.setTop`).
 
 Since you only need 2 unique horizontal positions and 2 unique vertical positions to make a frame, you don't need to write all those 4 categories of statements. For example, you may write `$0.setTopLeft(to: .zero).fitSize()` to make a specific frame, which only have 2 statements.
 
-And in `LayoutMaker`s, you also have some methods that can get the parent view's size and safe area related properties (like `.setLeft(by: { $0.leftSafeAreaInset })`), which can help you in making responsive layouts.
+And in `LayoutMaker`s, you also have some methods that can get the parent view's size and safe area related properties (like `.setLeft(by: { $0.safeAreaGuide.topCenter })`), which can help you in making responsive layouts.
 
 ### How it actually works
 
 NotAutoLayout provides serveral APIs for user to make a specific frame for a subview, like `pinTopCenter` and many others introduced before. As a developer you only need to care how the designer designed the layout of each subview, and then you just need to translate it into code directly. NotAutoLayout's layout engine will take care of how to make that exact `CGRect`.
 
-To provide the API to make a frame, NotAutoLayout contains a lot of `~LayoutMaker`s. With these makers, you can easily understand which elements are required to make a specific frame while writing the code, and easily understand what layout the developer wants to achieve through the code. The initializer of these makers are hidden from you developers, so in order to access it you'll need to use code like `.nal.layout(aSubView)`, then you'll get a maker in the following closure, like the sample code in `### Tell me more`. The `$0` in that sample code is the layout maker. And through those chained mathods like `pinTopCenter` you'll finally get a `LayoutEditor` in the closure. When the closure's calculation is finished, NotAutoLayout's layout engine will extract the layout from the layout editor.
+To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutProperty`s. With these makers, you can easily understand which elements are required to make a specific frame while writing the code, and easily understand what layout the developer wants to achieve through the code. The initializer of these makers are hidden from you developers, so in order to access it you'll need to use code like `.nal.layout(aSubView)`, then you'll get a maker in the following closure, like the sample code in `### Tell me more`. The `$0` in that sample code is the layout maker. And through those chained mathods like `pinTopCenter` you'll finally get a `LayoutMaker<IndividualLayout>` in the closure. When the closure's calculation is finished, NotAutoLayout's layout engine will extract the layout from the `IndividualLayout`.
+
+## Comparison with other layout frameworks
+
+ Items | NotAutoLayout | [PinLayout](https://github.com/mirego/PinLayout) | [LayoutKit](https://github.com/linkedin/LayoutKit) | [SnapKit](https://github.com/SnapKit/SnapKit) | [PureLayout](https://github.com/PureLayout/PureLayout) | [Cartography](https://github.com/robb/Cartography)
+---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ----------------
+ Written in      | Swift            | Swift (and a little ObjC) | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
+ Based on        | Pure code        | Pure code        | Pure code        | Auto Layout      | Auto Layout      | Auto Layout
+ Platforms       | iOS              | iOS / tvOS       | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
+ Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage
+ Performance     | ◯                | ◯                | ◯                | ×                | ×                | ×
+ Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △<a id="q3" href="#a3"><sup>3</sup></a>
+ Easy to read    | ◯                | △<a id="q4" href="#a4"><sup>4</sup></a> | △<a id="q5" href="#a5"><sup>5</sup></a> | ◯ | ◯ | ◯
+ Ex-Short syntax | ×                | ◯                | ×                | ×                | ×                | ×
+ Chained methods | ◯                | ◯                | ×                | △<a id="q6" href="#a6"><sup>6</sup></a> | × | ×
+ Targeted extensions<a id="q7" href="#a7"><sup>7</sup></a> | ◯ | ◯ | ×<a id="q8" href="#a8"><sup>8</sup></a> | ◯ | × | ×<a id="q8" href="#a8"><sup>8</sup></a>
+ Behaviour on human-errors<a id="q2" href="#a2"><sup>2</sup></a> | Build-time Error | Nothing | Build-time Error<a id="q9" href="#a9"><sup>9</sup></a> | Run-time Warning | Run-time Warning | Run-Time Warning
 
 ## Known issues
 
-- [x] README.md file is not finished yet.
 - [ ] Inline documents are not finished yet.
-- [ ] Some `LayoutMaker` methods are not declared yet.
-- [ ] Sequencial layout is not implemented yet.
+- [ ] Some `LayoutProperty`s are not declared yet, 
 - [ ] Matrical layout is not implemented yet.
-
-## Golas for oncoming version 3.0
-
-NotAutoLayout v3.0 will be released along with Swift 4.1 (that means probably on 1st or 2nd quarter in 2018), which may contain some breaking changes to the current API. One of the biggest changes is `pinXxx` API. Currently it's made like `pinLeft(to: someView, s: .right, offsetBy: 10, safeAreaOnly: true)`, which is very long and not very user friendly. In v3.0, it'll be changed to something like `pinLeft(to: someView, at: { $0.safeRight + 10 })`, which much shorter, as well as much easier to read.
-
-Also, currently in v2.x, sequencial and matrical layouts are not implemented yet. Hopefully they'll be implemented in v3.0, or at least v3.1.
-
-For details about version 3.0.0, please take a look at the [3.0.0 Milestone](https://github.com/el-hoshino/NotAutoLayout/milestone/5).
 
 ## License
 
 NotAutoLayout is released under the Apache license. See [LICENSE](LICENSE) for details.
+
+## Notes
+
+<ul>
+<li id="a1"><a href="#q1">1:</a> Maybe. At least I personally haven't found a second one.</li>
+<li id="a2"><a href="#q2">2:</a> Things like Ambiguous Layout on Auto Layout, or just forgot to set an edge for a subview while overriding <code>layoutSubviews</code>.
+<li id="a3"><a href="#q3">3:</a> It's not difficult to memorize the syntax, but you have to write global functions rather than methods, which makes it a little bit hard for auto-completion comparing with methods.
+<li id="a4"><a href="#q4">4:</a> Sometimes the method name is too short to understand what it really does.
+<li id="a5"><a href="#q5">5:</a> It's not very difficult to understand, but still takes a while to read the syntax.
+<li id="a6"><a href="#q6">6:</a> SnapKit does have chained methods to help you making Auto Layout constraints, but you may still need to write more than one statement to make all required constraints.
+<li id="a7"><a href="#q7">7:</a> A namespaced extension making method <a href="http://tech.vasily.jp/entry/swift_modern_extensions">made like this</a>. One of the famous examples is <code>.rx</code> access control in <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.
+<li id="a8"><a href="#q8">8:</a> LayoutKit and Cartography don't have a namespaced extension mechanism, but instead LayoutKit uses local types, and Cartography uses function to avoid possible name-confilictions.
+<li id="a9"><a href="#q9">9:</a> LayoutKit theoretically doesn't make any ambiguous layouts within its syntax, but it still produces some implicitly sizing process.
+</ul>

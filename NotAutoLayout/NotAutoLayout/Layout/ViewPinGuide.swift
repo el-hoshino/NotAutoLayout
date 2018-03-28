@@ -23,23 +23,11 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
-extension ViewPinGuides.Horizontal.Guide {
-	
-	var direction: UIUserInterfaceLayoutDirection {
-		return self.directionGetter() ?? .leftToRight
-	}
-	
-}
-
 extension ViewPinGuides.Horizontal.Guide: HorizontalPinGuideRepresentable {
 	
-	public var pinGuide: ViewPinGuides.Horizontal.Guide {
-		return self
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
-	
-}
-
-extension ViewPinGuides.Horizontal.Guide {
 	
 	public var left: Float {
 		return self.span.start
@@ -53,13 +41,9 @@ extension ViewPinGuides.Horizontal.Guide {
 		return self.span.end
 	}
 	
-	public func horizontal(at relativePosition: Float) -> Float {
-		return self.span.geometry(at: relativePosition)
+	public func horizontal(at coordinatePosition: Float) -> Float {
+		return self.span.geometry(at: coordinatePosition)
 	}
-	
-}
-
-extension ViewPinGuides.Horizontal.Guide {
 	
 	public var leading: Float {
 		switch self.direction {
@@ -98,14 +82,6 @@ extension ViewPinGuides.Vertical {
 
 extension ViewPinGuides.Vertical.Guide: VerticalPinGuideRepresentable {
 	
-	public var pinGuide: ViewPinGuides.Vertical.Guide {
-		return self
-	}
-	
-}
-
-extension ViewPinGuides.Vertical.Guide {
-	
 	public var top: Float {
 		return self.span.start
 	}
@@ -118,8 +94,8 @@ extension ViewPinGuides.Vertical.Guide {
 		return self.span.end
 	}
 	
-	public func vertical(at relativePosition: Float) -> Float {
-		return self.span.geometry(at: relativePosition)
+	public func vertical(at coordinatePosition: Float) -> Float {
+		return self.span.geometry(at: coordinatePosition)
 	}
 	
 }
@@ -139,23 +115,11 @@ extension ViewPinGuides.Point {
 	
 }
 
-extension ViewPinGuides.Point.Guide {
-	
-	var direction: UIUserInterfaceLayoutDirection {
-		return self.directionGetter() ?? .leftToRight
-	}
-	
-}
-
 extension ViewPinGuides.Point.Guide: PointPinGuideRepresentable {
 	
-	public var pinGuide: ViewPinGuides.Point.Guide {
-		return self
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
 	}
-	
-}
-
-extension ViewPinGuides.Point.Guide {
 	
 	public var topLeft: Point {
 		return self.rect.topLeft
@@ -193,12 +157,12 @@ extension ViewPinGuides.Point.Guide {
 		return self.rect.bottomRight
 	}
 	
-	public func point(at relativePosition: Point) -> Point {
-		return self.rect.pointGeometry(at: relativePosition)
+	public func point(at coordinatePoint: Point) -> Point {
+		return self.rect.pointGeometry(at: coordinatePoint)
 	}
 	
-	public func pointAt(x: Float, y: Float) -> Point {
-		return self.rect.pointGeometry(x:x, y:y)
+	public func pointAt(x coordinateX: Float, y coordinateY: Float) -> Point {
+		return self.rect.pointGeometryAt(x: coordinateX, y: coordinateX)
 	}
 	
 	public var topLeading: Point {

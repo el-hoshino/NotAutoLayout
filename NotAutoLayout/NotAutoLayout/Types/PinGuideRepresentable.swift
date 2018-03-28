@@ -8,194 +8,125 @@
 
 import Foundation
 
+/// A protocol that shows the type conforms it is able to represent a horizontal pin guide as `ViewPinGuides.Horizontal.Guide`.
 public protocol HorizontalPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.Horizontal.Guide { get }
+	/// The layout direction in the pin guide.
+	var direction: UIUserInterfaceLayoutDirection { get }
 	
+	/// The left position in the pin guide.
 	var left: Float { get }
 	
+	/// The center position in the pin guide.
 	var center: Float { get }
 	
+	/// The right position in the pin guide.
 	var right: Float { get }
 	
-	func horizontal(at relativePosition: Float) -> Float
+	/// The horizontal geometry position at the given coordinate position in the pin guide.
+	///
+	/// - Parameters:
+	///   - coordinatePosition: The horizontal coordinate position in the pin guide.
+	///
+	/// - Returns: The horizontal geometry position at the given horizontal coordinate position in the pin guide.
+	func horizontal(at coordinatePosition: Float) -> Float
 	
+	/// The leading position in the pin guide, which is either left or right position according to the layout direction.
 	var leading: Float { get }
 	
+	/// The trailing position in the pin guide, which is either left or right position according to the layout direction.
 	var trailing: Float { get }
 	
 }
 
+/// A protocol that shows the type conforms it is able to represent a vertical pin guide as `ViewPinGuides.Vertical.Guide`.
 public protocol VerticalPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.Vertical.Guide { get }
-	
+	/// The top position in the pin guide.
 	var top: Float { get }
 	
+	/// The middle position in the pin guide.
 	var middle: Float { get }
 	
+	/// The bottom position in the pin guide.
 	var bottom: Float { get }
 	
-	func vertical(at relativePosition: Float) -> Float
+	/// The vertical geometry position at the given coordinate position in the pin guide.
+	///
+	/// - Parameters:
+	///   - coordinatePosition: The vertical coordinate position in the pin guide.
+	///
+	/// - Returns: The vertical geometry position at the given vertical coordinate position in the pin guide.
+	func vertical(at coordinatePosition: Float) -> Float
 	
 }
 
+/// A protocol that shows the type conforms it is able to represent a point pin guide as `ViewPinGuides.Point.Guide`.
 public protocol PointPinGuideRepresentable {
 	
-	var pinGuide: ViewPinGuides.Point.Guide { get }
+	/// The layout direction in the pin guide.
+	var direction: UIUserInterfaceLayoutDirection { get }
 	
+	/// The top left point in the pin guide.
 	var topLeft: Point { get }
 	
+	/// The top center point in the pin guide.
 	var topCenter: Point { get }
 	
+	/// The top right point in the pin guide.
 	var topRight: Point { get }
 	
+	/// The middle left point in the pin guide.
 	var middleLeft: Point { get }
 	
+	/// The middle center point in the pin guide.
 	var middleCenter: Point { get }
 	
+	/// The middle right point in the pin guide.
 	var middleRight: Point { get }
 	
+	/// The bottom left point in the pin guide.
 	var bottomLeft: Point { get }
 	
+	/// The bottom center point in the pin guide.
 	var bottomCenter: Point { get }
 	
+	/// The bottom right point in the pin guide.
 	var bottomRight: Point { get }
 	
-	func point(at relativePosition: Point) -> Point
+	/// The geometry point at the given coordinate point in the pin guide.
+	///
+	/// - Parameters:
+	///   - coordinatePoint: The coordinate point in the pin guide.
+	///
+	/// - Returns: The geometry point at the given coordinate point in the pin guide.
+	func point(at coordinatePoint: Point) -> Point
 	
-	func pointAt(x: Float, y: Float) -> Point
+	/// The geometry point at the given coordinate point (produced from coordinateX and coordinateY) in the pin guide.
+	///
+	/// - Parameters:
+	///   - coordinateX: The horizontal coordinate position in the pin guide.
+	///   - coordinateY: The vertical coordinate position in the pin guide.
+	///
+	/// - Returns: The geometry point at the given coordinate point in the pin guide.
+	func pointAt(x coordinateX: Float, y coordinateY: Float) -> Point
 	
+	/// The top leading point in the pin guide, which leading is either left or right position according to the layout direction.
 	var topLeading: Point { get }
 	
+	/// The top trailing point in the pin guide, which trailing is either left or right position according to the layout direction.
 	var topTrailing: Point { get }
 	
+	/// The middle leading point in the pin guide, which leading is either left or right position according to the layout direction.
 	var midddleLeading: Point { get }
 	
+	/// The middle trailing point in the pin guide, which trailing is either left or right position according to the layout direction.
 	var middleTrailing: Point { get }
 	
+	/// The bottom leading point in the pin guide, which leading is either left or right position according to the layout direction.
 	var bottomLeading: Point { get }
 	
+	/// The bottom trailing point in the pin guide, which trailing is either left or right position according to the layout direction.
 	var bottomTrailing: Point { get }
-	
-}
-
-extension HorizontalPinGuideRepresentable {
-	
-	public var left: Float {
-		return self.pinGuide.left
-	}
-	
-	public var center: Float {
-		return self.pinGuide.center
-	}
-	
-	public var right: Float {
-		return self.pinGuide.right
-	}
-	
-	public func horizontal(at relativePosition: Float) -> Float {
-		return self.pinGuide.horizontal(at: relativePosition)
-	}
-	
-	public var leading: Float {
-		return self.pinGuide.leading
-	}
-	
-	public var trailing: Float {
-		return self.pinGuide.trailing
-	}
-	
-}
-
-extension VerticalPinGuideRepresentable {
-	
-	public var top: Float {
-		return self.pinGuide.top
-	}
-	
-	public var middle: Float {
-		return self.pinGuide.middle
-	}
-	
-	public var bottom: Float {
-		return self.pinGuide.bottom
-	}
-	
-	public func vertical(at relativePosition: Float) -> Float {
-		return self.pinGuide.vertical(at: relativePosition)
-	}
-	
-}
-
-extension PointPinGuideRepresentable {
-	
-	public var topLeft: Point {
-		return self.pinGuide.topLeft
-	}
-	
-	public var topCenter: Point {
-		return self.pinGuide.topCenter
-	}
-	
-	public var topRight: Point {
-		return self.pinGuide.topRight
-	}
-	
-	public var middleLeft: Point {
-		return self.pinGuide.middleLeft
-	}
-	
-	public var middleCenter: Point {
-		return self.pinGuide.middleCenter
-	}
-	
-	public var middleRight: Point {
-		return self.pinGuide.middleRight
-	}
-	
-	public var bottomLeft: Point {
-		return self.pinGuide.bottomLeft
-	}
-	
-	public var bottomCenter: Point {
-		return self.pinGuide.bottomCenter
-	}
-	
-	public var bottomRight: Point {
-		return self.pinGuide.bottomRight
-	}
-	
-	public func point(at relativePosition: Point) -> Point {
-		return self.pinGuide.point(at: relativePosition)
-	}
-	
-	public func pointAt(x: Float, y: Float) -> Point {
-		return self.pinGuide.pointAt(x: x, y: y)
-	}
-	
-	public var topLeading: Point {
-		return self.pinGuide.topLeading
-	}
-	
-	public var topTrailing: Point {
-		return self.pinGuide.topTrailing
-	}
-	
-	public var midddleLeading: Point {
-		return self.pinGuide.midddleLeading
-	}
-	
-	public var middleTrailing: Point {
-		return self.pinGuide.middleTrailing
-	}
-	
-	public var bottomLeading: Point {
-		return self.pinGuide.bottomLeading
-	}
-	
-	public var bottomTrailing: Point {
-		return self.pinGuide.bottomTrailing
-	}
 	
 }

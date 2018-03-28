@@ -27,7 +27,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 		}
 		
 	}
-    
+	
 	private func layout(_ view: UIView, with bounds: Bounds) {
 		
 		view.bounds.size = bounds.size
