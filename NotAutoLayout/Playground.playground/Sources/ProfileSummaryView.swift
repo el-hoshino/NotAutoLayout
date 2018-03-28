@@ -1,7 +1,7 @@
 import UIKit
 import NotAutoLayout
 
-private let margin: CGFloat = 10
+private let margin: NotAutoLayout.Float = 10
 
 public class ProfileSummaryView: UIView {
 	
@@ -105,11 +105,11 @@ extension ProfileSummaryView {
 	private func placeAvatarView() {
 		
 		self.nal.layout(self.avatarView) { $0
-			.setTopLeft(by: { $0.safeTopLeft })
-			.setSize(by: { let length = min($0.safeWidth, $0.safeHeight); return .init(width: length, height: length) })
+			.setTopLeft(by: { $0.safeAreaGuide.topLeft })
+			.setSize(by: { let length = min($0.safeAreaGuide.width, $0.safeAreaGuide.height); return .init(width: length, height: length) })
 			.movingX(by: margin)
-			.addingProcess(by: { (view, frame, _) in
-				view.layer.cornerRadius = min(frame.width, frame.height) / 2
+			.addingProcess(by: { (frame, parameters) in
+				parameters.targetView.layer.cornerRadius = (min(frame.width, frame.height) / 2).cgValue
 			})
 		}
 		
@@ -118,9 +118,9 @@ extension ProfileSummaryView {
 	private func placeMainTitleView() {
 		
 		self.nal.layout(self.mainTitleLabel, by: { $0
-			.pinTopLeft(to: self.avatarView, s: .topRight)
-			.setRight(by: { $0.safeRight - margin })
-			.setBottom(by: { $0.safeMiddle })
+			.pinTopLeft(to: self.avatarView, with: { $0.topRight })
+			.setRight(by: { $0.safeAreaGuide.right - margin })
+			.setBottom(by: { $0.safeAreaGuide.middle })
 			.pinchingLeft(by: margin)
 		})
 		
@@ -129,9 +129,9 @@ extension ProfileSummaryView {
 	private func placeSubTitleView() {
 		
 		self.nal.layout(self.subTitleLabel) { $0
-			.pinTopLeft(to: self.mainTitleLabel, s: .bottomLeft)
-			.pinRight(to: self.mainTitleLabel, s: .right)
-			.setBottom(by: { $0.safeTop + ($0.safeBottom - $0.safeTop) * 0.75 })
+			.pinTopLeft(to: self.mainTitleLabel, with: { $0.bottomLeft })
+			.pinRight(to: self.mainTitleLabel, with: { $0.right })
+			.setBottom(by: { $0.safeAreaGuide.top + $0.safeAreaGuide.height * 0.75 })
 		}
 		
 	}
