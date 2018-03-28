@@ -27,23 +27,8 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	@available(*, renamed: "viewFrameProperty")
-	public var layoutControlParameter: ViewFrameProperty {
-		return self.viewFrameProperty
-	}
-	
-	public var viewFrameProperty: ViewFrameProperty {
-		return ViewFrameProperty.initialize(from: self.body)
-	}
-	
-	/// The bound size.
-	public var boundSize: CGSize {
-		return self.viewFrameProperty.boundSize
-	}
-	
-	@available(iOS 11.0, *)
-	public var safeAreaInsets: UIEdgeInsets {
-		return self.viewFrameProperty.safeAreaInsets
+	public var layoutGuides: ViewLayoutGuides {
+		return ViewLayoutGuides(parentView: self.body)
 	}
 	
 }

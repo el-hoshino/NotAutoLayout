@@ -20,19 +20,12 @@ public protocol LayoutInfoStorable: NotAutoLayoutCompatible {
 	/// The property to store the zIndex information for subviews.
 	var zIndexInfo: [ConditionEnum.RawValue: ZIndexInfo] { get set }
 	
-	/// LayoutOptimization property that is used for some specific layout.
-	var layoutOptimization: LayoutOptimization { get }
-	
-	
 	///
-	func getDefaultCondition() -> ConditionEnum
-	
-	///
-	func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum?
+	var conditionGetter: ((_ boundSize: CGSize) -> ConditionEnum)? { get }
 	
 }
 
-// MARK: - Default implement for override-able methods
+// MARK: - Layout condition getters
 extension LayoutInfoStorable {
 	
 	public func getDefaultCondition() -> ConditionEnum {
@@ -40,7 +33,7 @@ extension LayoutInfoStorable {
 	}
 	
 	public func getCondition(underCurrentBoundSize boundSize: CGSize) -> ConditionEnum? {
-		return nil
+		return self.conditionGetter?(boundSize)
 	}
 	
 }
@@ -48,7 +41,7 @@ extension LayoutInfoStorable {
 // MARK: - Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> Layout? {
+	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> IndividualLayout? {
 		
 		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout
@@ -59,40 +52,40 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	func appendLayout(_ layout: @escaping () -> Layout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: Layout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: @escaping () -> Layout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: Layout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: @escaping () -> Layout, for subview: UIView) {
+	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: Layout, for subview: UIView) {
+	func setDefaultLayout(_ layout: IndividualLayout, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
@@ -194,7 +187,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 // MARK: - Internal APIs: ViewInfo Retrieving
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	func layout(in layoutInfo: LayoutInfo) -> Layout? {
+	func layout(in layoutInfo: LayoutInfo) -> IndividualLayout? {
 		return layoutInfo[self.hash]
 	}
 	
