@@ -35,13 +35,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 	
 	public typealias WillSetTopLeftProperty = IndividualProperty.TopLeft
 	
-	public func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.TopLeft> {
+	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualProperty.TopLeft {
 		
 		let topLeft = IndividualProperty.TopLeft(topLeft: topLeft)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topLeft)
-		
-		return maker
+        
+		return topLeft
 		
 	}
 	
@@ -52,13 +50,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopCenterType {
 	
 	public typealias WillSetTopCenterProperty = IndividualProperty.TopCenter
 	
-	public func storeTopCenter(_ topCenter: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.TopCenter> {
+	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> IndividualProperty.TopCenter {
 		
 		let topCenter = IndividualProperty.TopCenter(topCenter: topCenter)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topCenter)
 		
-		return maker
+		return topCenter
 		
 	}
 	
@@ -69,13 +65,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopRightType {
 	
 	public typealias WillSetTopRightProperty = IndividualProperty.TopRight
 	
-	public func storeTopRight(_ topRight: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.TopRight> {
+	public func storeTopRight(_ topRight: LayoutElement.Point) -> IndividualProperty.TopRight {
 		
 		let topRight = IndividualProperty.TopRight(topRight: topRight)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topRight)
 		
-		return maker
+		return topRight
 		
 	}
 	
