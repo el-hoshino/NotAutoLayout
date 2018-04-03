@@ -33,8 +33,6 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreFrameToEvaluateFrame
 // MARK: TopLeft
 extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 	
-	public typealias WillSetTopLeftProperty = IndividualProperty.TopLeft
-	
 	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualProperty.TopLeft {
 		
 		let topLeft = IndividualProperty.TopLeft(topLeft: topLeft)
@@ -47,8 +45,6 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 
 // MARK: TopCenter
 extension IndividualProperty.Initial: LayoutPropertyCanStoreTopCenterType {
-	
-	public typealias WillSetTopCenterProperty = IndividualProperty.TopCenter
 	
 	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> IndividualProperty.TopCenter {
 		
@@ -63,8 +59,6 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopCenterType {
 // MARK: TopRight
 extension IndividualProperty.Initial: LayoutPropertyCanStoreTopRightType {
 	
-	public typealias WillSetTopRightProperty = IndividualProperty.TopRight
-	
 	public func storeTopRight(_ topRight: LayoutElement.Point) -> IndividualProperty.TopRight {
 		
 		let topRight = IndividualProperty.TopRight(topRight: topRight)
@@ -78,15 +72,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopRightType {
 // MARK: MiddleLeft
 extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleLeftType {
 	
-	public typealias WillSetMiddleLeftProperty = IndividualProperty.MiddleLeft
-	
-	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.MiddleLeft> {
+	public func storeMiddleLeft(_ middleLeft: LayoutElement.Point) -> IndividualProperty.MiddleLeft {
 		
 		let middleLeft = IndividualProperty.MiddleLeft(middleLeft: middleLeft)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleLeft)
 		
-		return maker
+		return middleLeft
 		
 	}
 	
@@ -95,15 +85,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleLeftType {
 // MARK: MiddleCenter
 extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleCenterType {
 	
-	public typealias WillSetMiddleCenterProperty = IndividualProperty.MiddleCenter
-	
-	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.MiddleCenter> {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> IndividualProperty.MiddleCenter {
 		
 		let middleCenter = IndividualProperty.MiddleCenter(middleCenter: middleCenter)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleCenter)
 		
-		return maker
+		return middleCenter
 		
 	}
 	
@@ -112,15 +98,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleCenterType {
 // MARK: MiddleRight
 extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleRightType {
 	
-	public typealias WillSetMiddleRightProperty = IndividualProperty.MiddleRight
-	
-	public func storeMiddleRight(_ middleRight: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.MiddleRight> {
+	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> IndividualProperty.MiddleRight {
 		
 		let middleRight = IndividualProperty.MiddleRight(middleRight: middleRight)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleRight)
 		
-		return maker
+		return middleRight
 		
 	}
 	
