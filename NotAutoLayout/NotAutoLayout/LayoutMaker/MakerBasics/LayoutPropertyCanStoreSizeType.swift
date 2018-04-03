@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreSizeType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetSizeProperty: LayoutMakerPropertyType
 	
-	func storeSize(_ size: LayoutElement.Size, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetSizeProperty>
+	func storeSize(_ size: LayoutElement.Size) -> WillSetSizeProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
+	
+	func storeSize(_ size: LayoutElement.Size) -> LayoutMaker<Property.WillSetSizeProperty> {
+		
+		let newProperty = self.didSetProperty.storeSize(size)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func setSize(to size: Size) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.constant(size)
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func setSize(by size: @escaping (_ property: ViewLayoutGuides) -> Size) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.byParent(size)
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -39,7 +52,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func fitSize(by fittingSize: Size = .zero) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.fits(fittingSize)
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -48,7 +61,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func aspectFit(ratio: Float? = nil) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.fit(ratio))
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -57,7 +70,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func aspectFill(ratio: Float? = nil) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.fill(ratio))
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -67,7 +80,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func aspectFit(ratio: Float? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -77,7 +90,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 	public func aspectFill(ratio: Float? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
-		let maker = self.didSetProperty.storeSize(size, to: self)
+		let maker = self.storeSize(size)
 		
 		return maker
 		
@@ -93,14 +106,13 @@ public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCan
 
 extension LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func storeSize(_ size: LayoutElement.Size, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeSize(_ size: LayoutElement.Size) -> IndividualLayout {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(size: size, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	
