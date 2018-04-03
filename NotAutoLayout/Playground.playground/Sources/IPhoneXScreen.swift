@@ -111,7 +111,7 @@ private final class Notch: UIView {
 	
 	override func draw(_ rect: CGRect) {
 		super.draw(rect)
-		self.drawNotch(topRadius: 6, bottomRadius: 20)
+		self.drawNotch(in: rect, topRadius: 6, bottomRadius: 20)
 	}
 	
 	override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -124,16 +124,21 @@ private final class Notch: UIView {
 		
 	}
 	
-	private func drawNotch(topRadius: CGFloat, bottomRadius: CGFloat) {
+	private func drawNotch(in rect: CGRect, topRadius: CGFloat, bottomRadius: CGFloat) {
 		
-		let leftTopArcCenter = CGPoint(x: 0, y: topRadius)
-		let rightTopArcCenter = CGPoint(x: self.bounds.width, y: leftTopArcCenter.y)
-		let leftBottomArcCenter = CGPoint(x: topRadius + bottomRadius, y: self.bounds.height - bottomRadius)
-		let rightBottomArcCenter = CGPoint(x: self.bounds.width - leftBottomArcCenter.x, y: leftBottomArcCenter.y)
+		let topArcCenterXMargin: CGFloat = 0
+		let topArcCenterY = rect.minY + topRadius
+		let bottomArcCenterXMargin = topRadius + bottomRadius
+		let bottomArcCenterY = rect.maxY - bottomRadius
 		
-		let leftBottomArcLeftPoint = CGPoint(x: topRadius, y: leftBottomArcCenter.y)
-		let rightBottomArcBottomPoint = CGPoint(x: self.bounds.width - topRadius - bottomRadius, y: self.bounds.height)
-		let rightTopArcLeftPoint = CGPoint(x: self.bounds.width - topRadius, y: topRadius)
+		let leftTopArcCenter = CGPoint(x: rect.minX + topArcCenterXMargin, y: topArcCenterY)
+		let rightTopArcCenter = CGPoint(x: rect.maxX - topArcCenterXMargin, y: topArcCenterY)
+		let leftBottomArcCenter = CGPoint(x: rect.minX + bottomArcCenterXMargin, y: bottomArcCenterY)
+		let rightBottomArcCenter = CGPoint(x: rect.maxX - bottomArcCenterXMargin, y: bottomArcCenterY)
+		
+		let leftBottomArcLeftPoint = CGPoint(x: leftBottomArcCenter.x - bottomRadius, y: leftBottomArcCenter.y)
+		let rightBottomArcBottomPoint = CGPoint(x: rightBottomArcCenter.x, y: rightBottomArcCenter.y + bottomRadius)
+		let rightTopArcLeftPoint = CGPoint(x: rightTopArcCenter.x - topRadius, y: rightTopArcCenter.y)
 		
 		let path = UIBezierPath()
 		path.addArc(withCenter: leftTopArcCenter, radius: topRadius, startAngle: .pi * 0.5, endAngle: 0, clockwise: true)
