@@ -164,16 +164,12 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreLeftType {
 // MARK: Right
 extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreRightType {
 	
-	public typealias WillSetRightProperty = IndividualProperty.MiddleCenterRight
-	
-	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterRight> {
+	public func storeRight(_ right: LayoutElement.Horizontal) -> IndividualProperty.MiddleCenterRight {
 		
 		let middleCenterRight = IndividualProperty.MiddleCenterRight(middleCenter: self.middleCenter,
-																		right: right)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleCenterRight)
+																	 right: right)
 		
-		return maker
+		return middleCenterRight
 		
 	}
 	

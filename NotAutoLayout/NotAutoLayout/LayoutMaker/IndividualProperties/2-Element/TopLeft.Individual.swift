@@ -162,16 +162,12 @@ extension IndividualProperty.TopLeft: LayoutPropertyCanStoreCenterType {
 // MARK: Right
 extension IndividualProperty.TopLeft: LayoutPropertyCanStoreRightType {
 	
-	public typealias WillSetRightProperty = IndividualProperty.TopLeftRight
-	
-	public func storeRight(_ right: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.TopLeft>) -> LayoutMaker<IndividualProperty.TopLeftRight> {
+	public func storeRight(_ right: LayoutElement.Horizontal) -> IndividualProperty.TopLeftRight {
 		
 		let topLeftRight = IndividualProperty.TopLeftRight(topLeft: self.topLeft,
-															  right: right)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topLeftRight)
+														   right: right)
 		
-		return maker
+		return topLeftRight
 		
 	}
 	
