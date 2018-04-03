@@ -192,16 +192,12 @@ extension IndividualProperty.MiddleLeft: LayoutPropertyCanStoreTopType {
 // MARK: Bottom
 extension IndividualProperty.MiddleLeft: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.MiddleLeftBottom
-	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.MiddleLeft>) -> LayoutMaker<IndividualProperty.MiddleLeftBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.MiddleLeftBottom {
 		
 		let middleLeftBottom = IndividualProperty.MiddleLeftBottom(middleLeft: self.middleLeft,
-																	  bottom: bottom)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleLeftBottom)
+																   bottom: bottom)
 		
-		return maker
+		return middleLeftBottom
 		
 	}
 	

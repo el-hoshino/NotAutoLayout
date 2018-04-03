@@ -57,17 +57,13 @@ extension IndividualProperty.RightMiddle: LayoutPropertyCanStoreSizeToEvaluateFr
 // MARK: Bottom
 extension IndividualProperty.RightMiddle: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.RightMiddleBottom
-	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.RightMiddle>) -> LayoutMaker<IndividualProperty.RightMiddleBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.RightMiddleBottom {
 		
 		let rightMiddleBottom = IndividualProperty.RightMiddleBottom(right: self.right,
-																		middle: self.middle,
-																		bottom: bottom)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: rightMiddleBottom)
+																	 middle: self.middle,
+																	 bottom: bottom)
 		
-		return maker
+		return rightMiddleBottom
 		
 	}
 	

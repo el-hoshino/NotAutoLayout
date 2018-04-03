@@ -192,16 +192,12 @@ extension IndividualProperty.TopCenter: LayoutPropertyCanStoreMiddleType {
 // MARK: Bottom
 extension IndividualProperty.TopCenter: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.TopCenterBottom
-	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.TopCenter>) -> LayoutMaker<IndividualProperty.TopCenterBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.TopCenterBottom {
 		
 		let topCenterBottom = IndividualProperty.TopCenterBottom(topCenter: self.topCenter,
-																	bottom: bottom)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topCenterBottom)
+																 bottom: bottom)
 		
-		return maker
+		return topCenterBottom
 		
 	}
 	
