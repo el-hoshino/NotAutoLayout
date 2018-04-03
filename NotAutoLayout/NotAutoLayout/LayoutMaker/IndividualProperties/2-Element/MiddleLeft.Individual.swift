@@ -150,16 +150,12 @@ extension IndividualProperty.MiddleLeft: LayoutPropertyCanStoreSizeToEvaluateFra
 // MARK: Center
 extension IndividualProperty.MiddleLeft: LayoutPropertyCanStoreCenterType {
 	
-	public typealias WillSetCenterProperty = IndividualProperty.MiddleLeftCenter
-	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.MiddleLeft>) -> LayoutMaker<IndividualProperty.MiddleLeftCenter> {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> IndividualProperty.MiddleLeftCenter {
 		
 		let middleLeftCenter = IndividualProperty.MiddleLeftCenter(middleLeft: self.middleLeft,
-																	  center: center)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleLeftCenter)
+																   center: center)
 		
-		return maker
+		return middleLeftCenter
 		
 	}
 	

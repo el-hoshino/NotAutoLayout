@@ -148,16 +148,12 @@ extension IndividualProperty.TopLeft: LayoutPropertyCanStoreSizeToEvaluateFrameT
 // MARK: Center
 extension IndividualProperty.TopLeft: LayoutPropertyCanStoreCenterType {
 	
-	public typealias WillSetCenterProperty = IndividualProperty.TopLeftCenter
-	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.TopLeft>) -> LayoutMaker<IndividualProperty.TopLeftCenter> {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> IndividualProperty.TopLeftCenter {
 		
 		let topLeftCenter = IndividualProperty.TopLeftCenter(topLeft: self.topLeft,
-																center: center)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topLeftCenter)
+															 center: center)
 		
-		return maker
+		return topLeftCenter
 		
 	}
 	
