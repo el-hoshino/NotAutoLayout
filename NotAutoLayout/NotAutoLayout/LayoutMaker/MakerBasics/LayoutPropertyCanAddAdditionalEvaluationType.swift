@@ -12,24 +12,29 @@ public protocol LayoutPropertyCanAddAdditionalEvaluationType: LayoutMakerPropert
 	
 	associatedtype WillAddAdditionalEvaluationProperty: LayoutMakerPropertyType
 	
-	func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<Self>) -> LayoutMaker<WillAddAdditionalEvaluationProperty>
+	func addEvaluation(_ evaluation: FrameAdditionalEvaluation) -> WillAddAdditionalEvaluationProperty
 	
 }
 
-//extension LayoutMaker {
-//
-//	public var resettingAdditionalEvaluations: LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
-//		return self.settingAdditionalEvaluations(to: [])
-//	}
-//
-//}
+private extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
+	
+	func addEvaluation(_ evaluation: FrameAdditionalEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
+		
+		let newProperty = self.didSetProperty.addEvaluation(evaluation)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
+	
+}
 
 extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationType {
 	
 	public func movingLeft(to left: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveLeftTo(left)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -44,7 +49,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingCenter(to center: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveCenterTo(center)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -59,7 +64,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingRight(to right: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveRightTo(right)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -78,7 +83,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingTop(to top: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveTopTo(top)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 
@@ -93,7 +98,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingMiddle(to middle: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveMiddleTo(middle)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -108,7 +113,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingBottom(to bottom: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveBottomTo(bottom)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -127,7 +132,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingX(by offset: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveXBy(offset)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -142,7 +147,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingY(by offset: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveYBy(offset)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -157,7 +162,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func movingOrigin(by offset: @escaping FrameAdditionalEvaluation.PointEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.moveOriginBy(offset)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -176,7 +181,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingLeft(to left: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchLeftTo(left)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -191,7 +196,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingLeft(by left: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchLeftBy(left)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -210,7 +215,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingRight(to right: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchRightTo(right)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -225,7 +230,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingRight(by right: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchRightBy(right)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -244,7 +249,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingTop(to top: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchTopTo(top)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -259,7 +264,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingTop(by top: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchTopBy(top)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -278,7 +283,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingBottom(to bottom: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchBottomTo(bottom)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -293,7 +298,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func pinchingBottom(by bottom: @escaping FrameAdditionalEvaluation.FloatEvaluation) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.pinchBottomBy(bottom)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -312,7 +317,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingWidth(to width: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthTo(width, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -327,7 +332,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingWidth(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Horizontal) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandWidthBy(diff, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -346,7 +351,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingHeight(to height: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightTo(height, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -361,7 +366,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingHeight(by diff: @escaping FrameAdditionalEvaluation.FloatEvaluation, from reference: Line.Vertical) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandHeightBy(diff, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -380,7 +385,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingSize(to size: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandSizeTo(size, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -395,7 +400,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func expandingSize(by diff: @escaping FrameAdditionalEvaluation.SizeEvaluation, from reference: Point) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.expandSizeBy(diff, from: reference)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		
@@ -414,7 +419,7 @@ extension LayoutMaker where Property: LayoutPropertyCanAddAdditionalEvaluationTy
 	public func addingProcess(by process: @escaping FrameAdditionalEvaluation.Process) -> LayoutMaker<Property.WillAddAdditionalEvaluationProperty> {
 		
 		let evaluation = FrameAdditionalEvaluation.addotionalProcess(process)
-		let maker = self.didSetProperty.addEvaluation(evaluation, to: self)
+		let maker = self.addEvaluation(evaluation)
 		
 		return maker
 		

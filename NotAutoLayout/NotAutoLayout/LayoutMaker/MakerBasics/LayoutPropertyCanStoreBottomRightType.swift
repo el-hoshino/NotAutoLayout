@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreBottomRightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetBottomRightProperty: LayoutMakerPropertyType
 	
-	func storeBottomRight(_ bottomRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomRightProperty>
+	func storeBottomRight(_ bottomRight: LayoutElement.Point) -> WillSetBottomRightProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreBottomRightType {
+	
+	func storeBottomRight(_ bottomRight: LayoutElement.Point) -> LayoutMaker<Property.WillSetBottomRightProperty> {
+		
+		let newProperty = self.didSetProperty.storeBottomRight(bottomRight)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomRightType {
 	public func setBottomRight(to bottomRight: Point) -> LayoutMaker<Property.WillSetBottomRightProperty> {
 		
 		let bottomRight = LayoutElement.Point.constant(bottomRight)
-		let maker = self.didSetProperty.storeBottomRight(bottomRight, to: self)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomRightType {
 	public func setBottomRight(by bottomRight: @escaping (_ property: ViewLayoutGuides) -> Point) -> LayoutMaker<Property.WillSetBottomRightProperty> {
 		
 		let bottomRight = LayoutElement.Point.byParent(bottomRight)
-		let maker = self.didSetProperty.storeBottomRight(bottomRight, to: self)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -45,7 +58,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomRightType {
 	public func pinBottomRight(by referenceView: @escaping () -> UIView?, with bottomRight: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetBottomRightProperty> {
 		
 		let bottomRight = LayoutElement.Point.byReference(referenceGetter: referenceView, bottomRight)
-		let maker = self.didSetProperty.storeBottomRight(bottomRight, to: self)
+		let maker = self.storeBottomRight(bottomRight)
 		
 		return maker
 		
@@ -61,14 +74,13 @@ public protocol LayoutPropertyCanStoreBottomRightToEvaluateFrameType: LayoutProp
 
 extension LayoutPropertyCanStoreBottomRightToEvaluateFrameType {
 	
-	public func storeBottomRight(_ bottomRight: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(bottomRight: bottomRight, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	

@@ -57,17 +57,13 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreSizeToEvaluateF
 // MARK: Bottom
 extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.CenterMiddleBottom
-	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.CenterMiddleBottom {
 		
 		let centerMiddleBottom = IndividualProperty.CenterMiddleBottom(center: self.center,
-																		  middle: self.middle,
-																		  bottom: bottom)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerMiddleBottom)
+																	   middle: self.middle,
+																	   bottom: bottom)
 		
-		return maker
+		return centerMiddleBottom
 		
 	}
 	
@@ -77,17 +73,13 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreBottomType {
 // MARK: Width
 extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = IndividualProperty.CenterMiddleWidth
-	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleWidth> {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualProperty.CenterMiddleWidth {
 		
 		let centerMiddleWidth = IndividualProperty.CenterMiddleWidth(center: self.center,
-																		middle: self.middle,
-																		width: width)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerMiddleWidth)
+																	 middle: self.middle,
+																	 width: width)
 		
-		return maker
+		return centerMiddleWidth
 		
 	}
 	
@@ -96,17 +88,13 @@ extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.CenterMiddle: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.CenterMiddleHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterMiddle>) -> LayoutMaker<IndividualProperty.CenterMiddleHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.CenterMiddleHeight {
 		
 		let centerMiddleHeight = IndividualProperty.CenterMiddleHeight(center: self.center,
-																		  middle: self.middle,
-																		  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerMiddleHeight)
+																	   middle: self.middle,
+																	   height: height)
 		
-		return maker
+		return centerMiddleHeight
 		
 	}
 	

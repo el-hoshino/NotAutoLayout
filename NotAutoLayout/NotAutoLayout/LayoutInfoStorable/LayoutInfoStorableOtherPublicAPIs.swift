@@ -34,7 +34,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 		
 	}
 	
-	public func getCurrentLayout(for view: UIView) -> IndividualLayout? {
+	public func getCurrentLayout(for view: UIView) -> IndividualProperty.Layout? {
 		
 		if let layoutInfo = self.getCurrentLayoutInfo(), let layout = layoutInfo[view] {
 			return layout
@@ -284,7 +284,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	public func addSubview(_ subview: UIView, withDefaultLayout layout: IndividualLayout) {
+	public func addSubview(_ subview: UIView, withDefaultLayout layout: IndividualProperty.Layout) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(to: layout)
@@ -297,7 +297,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	public func setLayout(for subview: UIView, making: (_ maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualLayout>) {
+	public func setLayout(for subview: UIView, making: (_ maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.Layout>) {
 		
 		self.setupSubview(subview) { (wizard) in wizard
 			.setDefaultLayout(making)

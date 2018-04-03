@@ -8,15 +8,19 @@
 
 import Foundation
 
-public struct SequentialLayout: LayoutMakerPropertyType {
+extension SequentialProperty {
 	
-	private var basicFrameEvaluation: SequentialFrame
-	
-	private var additionalEvaluations: [FrameAdditionalEvaluation]
+	public struct Layout: LayoutMakerPropertyType {
+		
+		private var basicFrameEvaluation: SequentialFrame
+		
+		private var additionalEvaluations: [FrameAdditionalEvaluation]
+		
+	}
 	
 }
 
-extension SequentialLayout {
+extension SequentialProperty.Layout {
 	
 	init(frame: SequentialFrame) {
 		self.basicFrameEvaluation = frame
@@ -30,7 +34,7 @@ extension SequentialLayout {
 	
 }
 
-extension SequentialLayout {
+extension SequentialProperty.Layout {
 	
 	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
 		return self.additionalEvaluations
@@ -38,7 +42,7 @@ extension SequentialLayout {
 	
 }
 
-extension SequentialLayout {
+extension SequentialProperty.Layout {
 	
 	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
 		
@@ -54,7 +58,7 @@ extension SequentialLayout {
 	
 }
 
-extension SequentialLayout {
+extension SequentialProperty.Layout {
 	
 	func evaluatedFrame(for targetViews: [UIView], from guides: ViewLayoutGuides) -> [Rect] {
 		

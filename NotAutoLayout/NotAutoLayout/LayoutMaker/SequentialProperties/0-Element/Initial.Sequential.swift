@@ -19,15 +19,11 @@ extension SequentialProperty {
 // MARK: - Set A Point -
 extension SequentialProperty.Initial: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = SequentialProperty.Middle
-	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialProperty.Middle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical) -> SequentialProperty.Middle {
 		
 		let middle = SequentialProperty.Middle(middle: middle)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middle)
 		
-		return maker
+		return middle
 		
 	}
 	

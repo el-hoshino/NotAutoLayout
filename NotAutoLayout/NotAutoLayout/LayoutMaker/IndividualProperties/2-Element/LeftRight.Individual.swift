@@ -24,17 +24,13 @@ extension IndividualProperty {
 // MARK: Top
 extension IndividualProperty.LeftRight: LayoutPropertyCanStoreTopType {
 	
-	public typealias WillSetTopProperty = IndividualProperty.LeftRightTop
-	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftRight>) -> LayoutMaker<IndividualProperty.LeftRightTop> {
+	public func storeTop(_ top: LayoutElement.Vertical) -> IndividualProperty.LeftRightTop {
 		
 		let leftRightTop = IndividualProperty.LeftRightTop(left: self.left,
-															  right: self.right,
-															  top: top)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftRightTop)
+														   right: self.right,
+														   top: top)
 		
-		return maker
+		return leftRightTop
 		
 	}
 	
@@ -43,17 +39,13 @@ extension IndividualProperty.LeftRight: LayoutPropertyCanStoreTopType {
 // MARK: Middle
 extension IndividualProperty.LeftRight: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = IndividualProperty.LeftRightMiddle
-	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftRight>) -> LayoutMaker<IndividualProperty.LeftRightMiddle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical) -> IndividualProperty.LeftRightMiddle {
 		
 		let leftRightMiddle = IndividualProperty.LeftRightMiddle(left: self.left,
-																	right: self.right,
-																	middle: middle)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftRightMiddle)
+																 right: self.right,
+																 middle: middle)
 		
-		return maker
+		return leftRightMiddle
 		
 	}
 	
@@ -62,17 +54,13 @@ extension IndividualProperty.LeftRight: LayoutPropertyCanStoreMiddleType {
 // MARK: Bottom
 extension IndividualProperty.LeftRight: LayoutPropertyCanStoreBottomType {
 	
-	public typealias WillSetBottomProperty = IndividualProperty.LeftRightBottom
-	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftRight>) -> LayoutMaker<IndividualProperty.LeftRightBottom> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.LeftRightBottom {
 		
 		let leftRightBottom = IndividualProperty.LeftRightBottom(left: self.left,
-																	right: self.right,
-																	bottom: bottom)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftRightBottom)
+																 right: self.right,
+																 bottom: bottom)
 		
-		return maker
+		return leftRightBottom
 		
 	}
 	

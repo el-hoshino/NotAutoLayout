@@ -11,9 +11,22 @@ import Foundation
 public protocol LayoutPropertyCanStoreTopLeftType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopLeftProperty: LayoutMakerPropertyType
-	
-	func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetTopLeftProperty>
-	
+    
+    func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftProperty
+    
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
+    
+    func storeTopLeft(_ topLeft: LayoutElement.Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
+        
+        let newProperty = self.didSetProperty.storeTopLeft(topLeft)
+        let newMaker = self.changintProperty(to: newProperty)
+		
+        return newMaker
+        
+    }
+    
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 	public func setTopLeft(to topLeft: Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.constant(topLeft)
-		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 	public func setTopLeft(by topLeft: @escaping (_ property: ViewLayoutGuides) -> Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byParent(topLeft)
-		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -45,7 +58,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
 	public func pinTopLeft(by referenceView: @escaping () -> UIView?, with topLeft: @escaping (ViewPinGuides.Point) -> Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
 		let topLeft = LayoutElement.Point.byReference(referenceGetter: referenceView, topLeft)
-		let maker = self.didSetProperty.storeTopLeft(topLeft, to: self)
+		let maker = self.storeTopLeft(topLeft)
 		
 		return maker
 		
@@ -61,14 +74,13 @@ public protocol LayoutPropertyCanStoreTopLeftToEvaluateFrameType: LayoutProperty
 
 extension LayoutPropertyCanStoreTopLeftToEvaluateFrameType {
 	
-	public func storeTopLeft(_ topLeft: LayoutElement.Point, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(topLeft: topLeft, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	

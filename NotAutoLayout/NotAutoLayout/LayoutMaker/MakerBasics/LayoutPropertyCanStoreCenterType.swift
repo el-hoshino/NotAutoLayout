@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreCenterType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetCenterProperty: LayoutMakerPropertyType
 	
-	func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetCenterProperty>
+	func storeCenter(_ center: LayoutElement.Horizontal) -> WillSetCenterProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
+	
+	func storeCenter(_ center: LayoutElement.Horizontal) -> LayoutMaker<Property.WillSetCenterProperty> {
+		
+		let newProperty = self.didSetProperty.storeCenter(center)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 	public func setCenter(to center: Float) -> LayoutMaker<Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.constant(center)
-		let maker = self.didSetProperty.storeCenter(center, to: self)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 	public func setCenter(by center: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.byParent(center)
-		let maker = self.didSetProperty.storeCenter(center, to: self)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -45,7 +58,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreCenterType {
 	public func pinCenter(by referenceView: @escaping () -> UIView?, with center: @escaping (ViewPinGuides.Horizontal) -> Float) -> LayoutMaker<Property.WillSetCenterProperty> {
 		
 		let center = LayoutElement.Horizontal.byReference(referenceGetter: referenceView, center)
-		let maker = self.didSetProperty.storeCenter(center, to: self)
+		let maker = self.storeCenter(center)
 		
 		return maker
 		
@@ -61,14 +74,13 @@ public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(center: center, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	
