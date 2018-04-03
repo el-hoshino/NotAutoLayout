@@ -150,16 +150,12 @@ extension IndividualProperty.BottomRight: LayoutPropertyCanStoreSizeToEvaluateFr
 // MARK: Left
 extension IndividualProperty.BottomRight: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftProperty = IndividualProperty.BottomRightLeft
-	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.BottomRight>) -> LayoutMaker<IndividualProperty.BottomRightLeft> {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.BottomRightLeft {
 		
 		let bottomRightLeft = IndividualProperty.BottomRightLeft(bottomRight: self.bottomRight,
-																	left: left)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomRightLeft)
+																 left: left)
 		
-		return maker
+		return bottomRightLeft
 		
 	}
 	

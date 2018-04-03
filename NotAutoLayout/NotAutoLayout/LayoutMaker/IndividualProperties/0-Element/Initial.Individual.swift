@@ -151,15 +151,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomRightType {
 // MARK: Left
 extension IndividualProperty.Initial: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftProperty = IndividualProperty.Left
-	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.Left> {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.Left {
 		
 		let left = IndividualProperty.Left(left: left)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: left)
 		
-		return maker
+		return left
 		
 	}
 	

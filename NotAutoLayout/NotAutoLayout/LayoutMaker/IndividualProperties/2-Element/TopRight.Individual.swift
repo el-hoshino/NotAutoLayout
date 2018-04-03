@@ -151,16 +151,12 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreSizeToEvaluateFrame
 // MARK: Left
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftProperty = IndividualProperty.TopRightLeft
-	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.TopRight>) -> LayoutMaker<IndividualProperty.TopRightLeft> {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.TopRightLeft {
 		
 		let topRightLeft = IndividualProperty.TopRightLeft(topRight: self.topRight,
-															  left: left)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topRightLeft)
+														   left: left)
 		
-		return maker
+		return topRightLeft
 		
 	}
 	

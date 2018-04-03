@@ -150,16 +150,12 @@ extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreSizeToEvaluateF
 // MARK: Left
 extension IndividualProperty.MiddleCenter: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftProperty = IndividualProperty.MiddleCenterLeft
-	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.MiddleCenter>) -> LayoutMaker<IndividualProperty.MiddleCenterLeft> {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.MiddleCenterLeft {
 		
 		let middleCenterLeft = IndividualProperty.MiddleCenterLeft(middleCenter: self.middleCenter,
-																	  left: left)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: middleCenterLeft)
+																   left: left)
 		
-		return maker
+		return middleCenterLeft
 		
 	}
 	

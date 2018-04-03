@@ -150,16 +150,12 @@ extension IndividualProperty.TopCenter: LayoutPropertyCanStoreSizeToEvaluateFram
 // MARK: Left
 extension IndividualProperty.TopCenter: LayoutPropertyCanStoreLeftType {
 	
-	public typealias WillSetLeftProperty = IndividualProperty.TopCenterLeft
-	
-	public func storeLeft(_ left: LayoutElement.Horizontal, to maker: LayoutMaker<IndividualProperty.TopCenter>) -> LayoutMaker<IndividualProperty.TopCenterLeft> {
+	public func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.TopCenterLeft {
 		
 		let topCenterLeft = IndividualProperty.TopCenterLeft(topCenter: self.topCenter,
-																left: left)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topCenterLeft)
+															 left: left)
 		
-		return maker
+		return topCenterLeft
 		
 	}
 	
