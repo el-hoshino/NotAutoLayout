@@ -71,17 +71,13 @@ extension IndividualProperty.LeftBottom: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.LeftBottom: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.LeftBottomHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.LeftBottom>) -> LayoutMaker<IndividualProperty.LeftBottomHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.LeftBottomHeight {
 		
 		let leftBottomHeight = IndividualProperty.LeftBottomHeight(left: self.left,
-																	  bottom: self.bottom,
-																	  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftBottomHeight)
+																   bottom: self.bottom,
+																   height: height)
 		
-		return maker
+		return leftBottomHeight
 		
 	}
 	

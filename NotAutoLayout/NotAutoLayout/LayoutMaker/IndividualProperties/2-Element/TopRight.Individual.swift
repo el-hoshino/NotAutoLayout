@@ -222,16 +222,12 @@ extension IndividualProperty.TopRight: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.TopRight: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.TopRightHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.TopRight>) -> LayoutMaker<IndividualProperty.TopRightHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.TopRightHeight {
 		
 		let topRightHeight = IndividualProperty.TopRightHeight(topRight: self.topRight,
-																  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topRightHeight)
+															   height: height)
 		
-		return maker
+		return topRightHeight
 		
 	}
 	

@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetHeightProperty: LayoutMakerPropertyType
 	
-	func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetHeightProperty>
+	func storeHeight(_ height: LayoutElement.Length) -> WillSetHeightProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
+	
+	func storeHeight(_ height: LayoutElement.Length) -> LayoutMaker<Property.WillSetHeightProperty> {
+		
+		let newProperty = self.didSetProperty.storeHeight(height)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	public func setHeight(to height: Float) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.constant(height)
-		let maker = self.didSetProperty.storeHeight(height, to: self)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	public func setHeight(by height: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.byParent(height)
-		let maker = self.didSetProperty.storeHeight(height, to: self)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -39,7 +52,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHeightType {
 	public func fitHeight(by fittingHeight: Float = 0) -> LayoutMaker<Property.WillSetHeightProperty> {
 		
 		let height = LayoutElement.Length.fits(fittingHeight)
-		let maker = self.didSetProperty.storeHeight(height, to: self)
+		let maker = self.storeHeight(height)
 		
 		return maker
 		
@@ -55,14 +68,13 @@ public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualLayout {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(height: height, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	

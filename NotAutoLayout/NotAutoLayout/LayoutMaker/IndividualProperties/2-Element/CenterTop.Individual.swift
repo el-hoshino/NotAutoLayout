@@ -102,17 +102,13 @@ extension IndividualProperty.CenterTop: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.CenterTop: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.CenterTopHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterTop>) -> LayoutMaker<IndividualProperty.CenterTopHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.CenterTopHeight {
 		
 		let centerTopHeight = IndividualProperty.CenterTopHeight(center: self.center,
-																	top: self.top,
-																	height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerTopHeight)
+																 top: self.top,
+																 height: height)
 		
-		return maker
+		return centerTopHeight
 		
 	}
 	

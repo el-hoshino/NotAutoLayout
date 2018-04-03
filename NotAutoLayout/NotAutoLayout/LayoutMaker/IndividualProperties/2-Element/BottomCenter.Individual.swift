@@ -221,16 +221,12 @@ extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.BottomCenter: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.BottomCenterHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.BottomCenter>) -> LayoutMaker<IndividualProperty.BottomCenterHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.BottomCenterHeight {
 		
 		let bottomCenterHeight = IndividualProperty.BottomCenterHeight(bottomCenter: self.bottomCenter,
-																		  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomCenterHeight)
+																	   height: height)
 		
-		return maker
+		return bottomCenterHeight
 		
 	}
 	

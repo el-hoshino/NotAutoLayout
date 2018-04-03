@@ -221,16 +221,12 @@ extension IndividualProperty.TopCenter: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.TopCenter: LayoutPropertyCanStoreHeightType {
 
-	public typealias WillSetHeightProperty = IndividualProperty.TopCenterHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.TopCenter>) -> LayoutMaker<IndividualProperty.TopCenterHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.TopCenterHeight {
 		
 		let topCenterHeight = IndividualProperty.TopCenterHeight(topCenter: self.topCenter,
-																	height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: topCenterHeight)
+																 height: height)
 		
-		return maker
+		return topCenterHeight
 		
 	}
 	

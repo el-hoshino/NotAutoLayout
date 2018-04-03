@@ -102,17 +102,13 @@ extension IndividualProperty.RightTop: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.RightTop: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.RightTopHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightTop>) -> LayoutMaker<IndividualProperty.RightTopHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.RightTopHeight {
 		
 		let rightTopHeight = IndividualProperty.RightTopHeight(right: self.right,
-																  top: self.top,
-																  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: rightTopHeight)
+															   top: self.top,
+															   height: height)
 		
-		return maker
+		return rightTopHeight
 		
 	}
 	
