@@ -179,16 +179,12 @@ extension IndividualProperty.BottomLeft: LayoutPropertyCanStoreRightType {
 // MARK: Top
 extension IndividualProperty.BottomLeft: LayoutPropertyCanStoreTopType {
 	
-	public typealias WillSetTopProperty = IndividualProperty.BottomLeftTop
-	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.BottomLeft>) -> LayoutMaker<IndividualProperty.BottomLeftTop> {
+	public func storeTop(_ top: LayoutElement.Vertical) -> IndividualProperty.BottomLeftTop {
 		
 		let bottomLeftTop = IndividualProperty.BottomLeftTop(bottomLeft: self.bottomLeft,
-																top: top)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomLeftTop)
+															 top: top)
 		
-		return maker
+		return bottomLeftTop
 		
 	}
 	

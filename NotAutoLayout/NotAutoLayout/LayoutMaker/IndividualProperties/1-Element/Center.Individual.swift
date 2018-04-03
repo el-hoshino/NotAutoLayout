@@ -36,16 +36,12 @@ extension IndividualProperty.Center: LayoutPropertyCanStoreRightType {
 // MARK: Top
 extension IndividualProperty.Center: LayoutPropertyCanStoreTopType {
 	
-	public typealias WillSetTopProperty = IndividualProperty.CenterTop
-	
-	public func storeTop(_ top: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.Center>) -> LayoutMaker<IndividualProperty.CenterTop> {
+	public func storeTop(_ top: LayoutElement.Vertical) -> IndividualProperty.CenterTop {
 		
 		let centerTop = IndividualProperty.CenterTop(center: self.center,
-														top: top)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerTop)
+													 top: top)
 		
-		return maker
+		return centerTop
 		
 	}
 	
