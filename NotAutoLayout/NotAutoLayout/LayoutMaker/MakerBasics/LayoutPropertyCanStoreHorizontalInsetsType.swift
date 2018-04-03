@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreHorizontalInsetsType: LayoutMakerPropertyT
 	
 	associatedtype WillSetHorizontalInsetsType: LayoutMakerPropertyType
 	
-	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetHorizontalInsetsType>
+	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets) -> WillSetHorizontalInsetsType
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType {
+	
+	func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets) -> LayoutMaker<Property.WillSetHorizontalInsetsType> {
+		
+		let newProperty = self.didSetProperty.storeHorizontalInsets(horizontalInsets)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreHorizontalInsetsType
 	public func setHorizontalInsetsEqualingToMargin() -> LayoutMaker<Property.WillSetHorizontalInsetsType> {
 		
 		let insets = LayoutElement.Insets.equalsToMargin
-		let maker = self.didSetProperty.storeHorizontalInsets(insets, to: self)
+		let maker = self.storeHorizontalInsets(insets)
 		
 		return maker
 		
@@ -37,14 +50,13 @@ public protocol LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType: Layo
 
 extension LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
-	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets, to maker: LayoutMaker<Self>) -> LayoutMaker<SequentialLayout> {
+	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets) -> SequentialLayout {
 		
 		let layout = SequentialLayout(frame: { (parameters) -> [Rect] in
 			return self.evaluateFrames(horizontalInsets: horizontalInsets, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	
