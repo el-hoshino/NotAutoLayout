@@ -8,21 +8,25 @@
 
 import Foundation
 
-public struct IndividualLayout: LayoutMakerPropertyType {
+extension IndividualProperty {
 	
-	private var basicFrameEvaluation: IndividualFrame
-	
-	private var additionalEvaluations: [FrameAdditionalEvaluation]
-	
-}
-
-extension IndividualLayout {
-	
-	static let dummy: IndividualLayout = IndividualLayout(frame: .zero)
+	public struct Layout: LayoutMakerPropertyType {
+		
+		private var basicFrameEvaluation: IndividualFrame
+		
+		private var additionalEvaluations: [FrameAdditionalEvaluation]
+		
+	}
 	
 }
 
-extension IndividualLayout {
+extension IndividualProperty.Layout {
+	
+	static let dummy: IndividualProperty.Layout = .init(frame: .zero)
+	
+}
+
+extension IndividualProperty.Layout {
 	
 	init(frame: Rect) {
 		self.basicFrameEvaluation = IndividualFrame({ _ in frame })
@@ -41,7 +45,7 @@ extension IndividualLayout {
 	
 }
 
-extension IndividualLayout {
+extension IndividualProperty.Layout {
 	
 	var frameAdditionalEvaluations: [FrameAdditionalEvaluation] {
 		return self.additionalEvaluations
@@ -49,7 +53,7 @@ extension IndividualLayout {
 	
 }
 
-extension IndividualLayout {
+extension IndividualProperty.Layout {
 	
 	mutating func addAdditionalEvaluation(_ evaluation: FrameAdditionalEvaluation) {
 		
@@ -65,7 +69,7 @@ extension IndividualLayout {
 	
 }
 
-extension IndividualLayout {
+extension IndividualProperty.Layout {
 	
 	func evaluatedFrame(for targetView: UIView, from guides: ViewLayoutGuides) -> Rect {
 		

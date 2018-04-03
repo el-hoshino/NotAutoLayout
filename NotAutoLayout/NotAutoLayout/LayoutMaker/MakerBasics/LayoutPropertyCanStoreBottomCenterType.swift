@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreBottomCenterToEvaluateFrameType: LayoutPro
 
 extension LayoutPropertyCanStoreBottomCenterToEvaluateFrameType {
 	
-	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> IndividualLayout {
+	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(bottomCenter: bottomCenter, parameters: parameters)
 		})
 		

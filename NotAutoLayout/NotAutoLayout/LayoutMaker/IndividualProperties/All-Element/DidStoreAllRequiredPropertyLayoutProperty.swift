@@ -8,11 +8,11 @@
 
 import Foundation
 
-typealias DidStoreAllRequiredPropertyLayoutProperty = IndividualLayout
+typealias DidStoreAllRequiredPropertyLayoutProperty = IndividualProperty.Layout
 
 extension DidStoreAllRequiredPropertyLayoutProperty: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation) -> IndividualLayout {
+	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation) -> IndividualProperty.Layout {
 		
 		var property = self
 		property.addAdditionalEvaluation(evaluation)

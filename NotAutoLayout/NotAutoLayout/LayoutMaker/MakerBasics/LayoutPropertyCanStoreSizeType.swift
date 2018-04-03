@@ -106,9 +106,9 @@ public protocol LayoutPropertyCanStoreSizeToEvaluateFrameType: LayoutPropertyCan
 
 extension LayoutPropertyCanStoreSizeToEvaluateFrameType {
 	
-	public func storeSize(_ size: LayoutElement.Size) -> IndividualLayout {
+	public func storeSize(_ size: LayoutElement.Size) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(size: size, parameters: parameters)
 		})
 		

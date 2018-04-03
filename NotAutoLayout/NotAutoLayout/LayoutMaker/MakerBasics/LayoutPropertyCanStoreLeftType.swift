@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreLeftToEvaluateFrameType: LayoutPropertyCan
 
 extension LayoutPropertyCanStoreLeftToEvaluateFrameType {
 	
-	func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualLayout {
+	func storeLeft(_ left: LayoutElement.Horizontal) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(left: left, parameters: parameters)
 		})
 		

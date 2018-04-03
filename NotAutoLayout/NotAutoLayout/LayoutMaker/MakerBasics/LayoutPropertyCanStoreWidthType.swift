@@ -68,9 +68,9 @@ public protocol LayoutPropertyCanStoreWidthToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreWidthToEvaluateFrameType {
 
-	public func storeWidth(_ width: LayoutElement.Length) -> IndividualLayout {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(width: width, parameters: parameters)
 		})
 		

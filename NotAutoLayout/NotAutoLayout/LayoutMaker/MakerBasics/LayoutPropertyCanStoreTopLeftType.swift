@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreTopLeftToEvaluateFrameType: LayoutProperty
 
 extension LayoutPropertyCanStoreTopLeftToEvaluateFrameType {
 	
-	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualLayout {
+	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(topLeft: topLeft, parameters: parameters)
 		})
 		

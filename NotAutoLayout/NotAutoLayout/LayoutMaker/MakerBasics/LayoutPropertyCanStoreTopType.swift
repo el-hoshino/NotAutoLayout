@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreTopToEvaluateFrameType: LayoutPropertyCanS
 
 extension LayoutPropertyCanStoreTopToEvaluateFrameType {
 	
-	public func storeTop(_ top: LayoutElement.Vertical) -> IndividualLayout {
+	public func storeTop(_ top: LayoutElement.Vertical) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(top: top, parameters: parameters)
 		})
 		

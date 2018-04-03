@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreMiddleRightToEvaluateFrameType: LayoutProp
 
 extension LayoutPropertyCanStoreMiddleRightToEvaluateFrameType {
 	
-	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> IndividualLayout {
+	public func storeMiddleRight(_ middleRight: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(middleRight: middleRight, parameters: parameters)
 		})
 		

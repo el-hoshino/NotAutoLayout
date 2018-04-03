@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType: LayoutPro
 
 extension LayoutPropertyCanStoreMiddleCenterToEvaluateFrameType {
 	
-	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> IndividualLayout {
+	public func storeMiddleCenter(_ middleCenter: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(middleCenter: middleCenter, parameters: parameters)
 		})
 		

@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreCenterToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
-	public func storeCenter(_ center: LayoutElement.Horizontal) -> IndividualLayout {
+	public func storeCenter(_ center: LayoutElement.Horizontal) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(center: center, parameters: parameters)
 		})
 		

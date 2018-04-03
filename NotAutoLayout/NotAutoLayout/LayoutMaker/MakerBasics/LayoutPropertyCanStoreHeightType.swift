@@ -68,9 +68,9 @@ public protocol LayoutPropertyCanStoreHeightToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
-	public func storeHeight(_ height: LayoutElement.Length) -> IndividualLayout {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(height: height, parameters: parameters)
 		})
 		

@@ -74,9 +74,9 @@ public protocol LayoutPropertyCanStoreTopCenterToEvaluateFrameType: LayoutProper
 
 extension LayoutPropertyCanStoreTopCenterToEvaluateFrameType {
 	
-	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> IndividualLayout {
+	public func storeTopCenter(_ topCenter: LayoutElement.Point) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(topCenter: topCenter, parameters: parameters)
 		})
 		

@@ -41,7 +41,7 @@ extension LayoutInfoStorable {
 // MARK: - Internal APIs: Layout
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> IndividualLayout? {
+	func getLayout(for view: UIView, from layoutInfo: LayoutInfo?, or alternativeLayoutInfo: LayoutInfo? = nil) -> IndividualProperty.Layout? {
 		
 		let layout = layoutInfo?[view.nal.hash] ?? alternativeLayoutInfo?[view.nal.hash]
 		return layout
@@ -52,40 +52,40 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 
 extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualProperty.Layout, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum.RawValue, for subview: UIView) {
+	func appendLayout(_ layout: IndividualProperty.Layout, under condition: ConditionEnum.RawValue, for subview: UIView) {
 		
 		self.body.layoutInfo[condition, default: [:]].set(layout, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: @escaping () -> IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: @escaping () -> IndividualProperty.Layout, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func appendLayout(_ layout: IndividualLayout, under condition: ConditionEnum, for subview: UIView) {
+	func appendLayout(_ layout: IndividualProperty.Layout, under condition: ConditionEnum, for subview: UIView) {
 		
 		let condition = condition.rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: @escaping () -> IndividualLayout, for subview: UIView) {
+	func setDefaultLayout(_ layout: @escaping () -> IndividualProperty.Layout, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
 		
 	}
 	
-	func setDefaultLayout(_ layout: IndividualLayout, for subview: UIView) {
+	func setDefaultLayout(_ layout: IndividualProperty.Layout, for subview: UIView) {
 		
 		let condition = self.body.getDefaultCondition().rawValue
 		self.appendLayout(layout, under: condition, for: subview)
@@ -187,7 +187,7 @@ extension NotAutoLayoutContainer where Containee: UIView & LayoutInfoStorable {
 // MARK: - Internal APIs: ViewInfo Retrieving
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	func layout(in layoutInfo: LayoutInfo) -> IndividualLayout? {
+	func layout(in layoutInfo: LayoutInfo) -> IndividualProperty.Layout? {
 		return layoutInfo[self.hash]
 	}
 	
