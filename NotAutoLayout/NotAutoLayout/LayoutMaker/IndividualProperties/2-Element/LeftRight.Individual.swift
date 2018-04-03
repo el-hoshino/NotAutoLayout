@@ -39,17 +39,13 @@ extension IndividualProperty.LeftRight: LayoutPropertyCanStoreTopType {
 // MARK: Middle
 extension IndividualProperty.LeftRight: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = IndividualProperty.LeftRightMiddle
-	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftRight>) -> LayoutMaker<IndividualProperty.LeftRightMiddle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical) -> IndividualProperty.LeftRightMiddle {
 		
 		let leftRightMiddle = IndividualProperty.LeftRightMiddle(left: self.left,
-																	right: self.right,
-																	middle: middle)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftRightMiddle)
+																 right: self.right,
+																 middle: middle)
 		
-		return maker
+		return leftRightMiddle
 		
 	}
 	

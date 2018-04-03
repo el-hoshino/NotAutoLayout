@@ -55,17 +55,13 @@ extension IndividualProperty.LeftTop: LayoutPropertyCanStoreSizeToEvaluateFrameT
 // MARK: Middle
 extension IndividualProperty.LeftTop: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = IndividualProperty.LeftTopMiddle
-	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.LeftTop>) -> LayoutMaker<IndividualProperty.LeftTopMiddle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical) -> IndividualProperty.LeftTopMiddle {
 		
 		let leftTopMiddle = IndividualProperty.LeftTopMiddle(left: self.left,
-																top: self.top,
-																middle: middle)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: leftTopMiddle)
+															 top: self.top,
+															 middle: middle)
 		
-		return maker
+		return leftTopMiddle
 		
 	}
 	

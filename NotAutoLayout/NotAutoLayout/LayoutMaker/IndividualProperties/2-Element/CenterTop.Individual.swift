@@ -56,17 +56,13 @@ extension IndividualProperty.CenterTop: LayoutPropertyCanStoreSizeToEvaluateFram
 // MARK: Middle
 extension IndividualProperty.CenterTop: LayoutPropertyCanStoreMiddleType {
 	
-	public typealias WillSetMiddleProperty = IndividualProperty.CenterTopMiddle
-	
-	public func storeMiddle(_ middle: LayoutElement.Vertical, to maker: LayoutMaker<IndividualProperty.CenterTop>) -> LayoutMaker<IndividualProperty.CenterTopMiddle> {
+	public func storeMiddle(_ middle: LayoutElement.Vertical) -> IndividualProperty.CenterTopMiddle {
 		
 		let centerTopMiddle = IndividualProperty.CenterTopMiddle(center: self.center,
-																	top: self.top,
-																	middle: middle)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerTopMiddle)
+																 top: self.top,
+																 middle: middle)
 		
-		return maker
+		return centerTopMiddle
 		
 	}
 	
