@@ -73,17 +73,13 @@ extension IndividualProperty.RightMiddle: LayoutPropertyCanStoreBottomType {
 // MARK: Width
 extension IndividualProperty.RightMiddle: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = IndividualProperty.RightMiddleWidth
-	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightMiddle>) -> LayoutMaker<IndividualProperty.RightMiddleWidth> {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualProperty.RightMiddleWidth {
 		
 		let rightMiddleWidth = IndividualProperty.RightMiddleWidth(right: self.right,
-																	  middle: self.middle,
-																	  width: width)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: rightMiddleWidth)
+																   middle: self.middle,
+																   width: width)
 		
-		return maker
+		return rightMiddleWidth
 		
 	}
 	

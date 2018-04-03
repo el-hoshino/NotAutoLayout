@@ -57,17 +57,13 @@ extension IndividualProperty.RightBottom: LayoutPropertyCanStoreSizeToEvaluateFr
 // MARK: Width
 extension IndividualProperty.RightBottom: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = IndividualProperty.RightBottomWidth
-	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.RightBottom>) -> LayoutMaker<IndividualProperty.RightBottomWidth> {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualProperty.RightBottomWidth {
 		
 		let rightBottomWidth = IndividualProperty.RightBottomWidth(right: self.right,
-																	  bottom: self.bottom,
-																	  width: width)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: rightBottomWidth)
+																   bottom: self.bottom,
+																   width: width)
 		
-		return maker
+		return rightBottomWidth
 		
 	}
 	

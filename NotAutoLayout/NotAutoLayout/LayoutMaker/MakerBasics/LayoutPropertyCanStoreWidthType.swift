@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreWidthType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetWidthProperty: LayoutMakerPropertyType
 	
-	func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetWidthProperty>
+	func storeWidth(_ width: LayoutElement.Length) -> WillSetWidthProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
+	
+	func storeWidth(_ width: LayoutElement.Length) -> LayoutMaker<Property.WillSetWidthProperty> {
+		
+		let newProperty = self.didSetProperty.storeWidth(width)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
 	public func setWidth(to width: Float) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.constant(width)
-		let maker = self.didSetProperty.storeWidth(width, to: self)
+		let maker = self.storeWidth(width)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
 	public func setWidth(by width: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.byParent(width)
-		let maker = self.didSetProperty.storeWidth(width, to: self)
+		let maker = self.storeWidth(width)
 		
 		return maker
 		
@@ -39,7 +52,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreWidthType {
 	public func fitWidth(by fittingWidth: Float = 0) -> LayoutMaker<Property.WillSetWidthProperty> {
 		
 		let width = LayoutElement.Length.fits(fittingWidth)
-		let maker = self.didSetProperty.storeWidth(width, to: self)
+		let maker = self.storeWidth(width)
 		
 		return maker
 		
@@ -55,14 +68,13 @@ public protocol LayoutPropertyCanStoreWidthToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreWidthToEvaluateFrameType {
 
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualLayout {
 		
 		let layout = IndividualLayout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(width: width, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 
