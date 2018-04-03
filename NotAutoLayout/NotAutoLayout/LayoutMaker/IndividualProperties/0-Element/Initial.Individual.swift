@@ -111,15 +111,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreMiddleRightType {
 // MARK: BottomLeft
 extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomLeftType {
 	
-	public typealias WillSetBottomLeftProperty = IndividualProperty.BottomLeft
-	
-	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.BottomLeft> {
+	public func storeBottomLeft(_ bottomLeft: LayoutElement.Point) -> IndividualProperty.BottomLeft {
 		
 		let bottomLeft = IndividualProperty.BottomLeft(bottomLeft: bottomLeft)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomLeft)
 		
-		return maker
+		return bottomLeft
 		
 	}
 	
@@ -128,15 +124,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomLeftType {
 // MARK: BottomCenter
 extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomCenterType {
 	
-	public typealias WillSetBottomCenterProperty = IndividualProperty.BottomCenter
-	
-	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.BottomCenter> {
+	public func storeBottomCenter(_ bottomCenter: LayoutElement.Point) -> IndividualProperty.BottomCenter {
 		
 		let bottomCenter = IndividualProperty.BottomCenter(bottomCenter: bottomCenter)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomCenter)
 		
-		return maker
+		return bottomCenter
 		
 	}
 	
@@ -145,15 +137,11 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomCenterType {
 // MARK: BottomRight
 extension IndividualProperty.Initial: LayoutPropertyCanStoreBottomRightType {
 	
-	public typealias WillSetBottomRightProperty = IndividualProperty.BottomRight
-	
-	public func storeBottomRight(_ bottomRight: LayoutElement.Point, to maker: LayoutMaker<IndividualProperty.Initial>) -> LayoutMaker<IndividualProperty.BottomRight> {
+	public func storeBottomRight(_ bottomRight: LayoutElement.Point) -> IndividualProperty.BottomRight {
 		
 		let bottomRight = IndividualProperty.BottomRight(bottomRight: bottomRight)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: bottomRight)
 		
-		return maker
+		return bottomRight
 		
 	}
 	
