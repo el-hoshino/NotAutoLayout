@@ -50,9 +50,9 @@ public protocol LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType: Layo
 
 extension LayoutPropertyCanStoreHorizontalInsetsToEvaluateFramesType {
 	
-	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets) -> SequentialLayout {
+	public func storeHorizontalInsets(_ horizontalInsets: LayoutElement.Insets) -> SequentialProperty.Layout {
 		
-		let layout = SequentialLayout(frame: { (parameters) -> [Rect] in
+		let layout = SequentialProperty.Layout(frame: { (parameters) -> [Rect] in
 			return self.evaluateFrames(horizontalInsets: horizontalInsets, parameters: parameters)
 		})
 		

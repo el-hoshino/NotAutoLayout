@@ -76,7 +76,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func makeSequentialLayout(_ making: (LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialLayout>) -> SequentialLayout {
+	public func makeSequentialLayout(_ making: (LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialProperty.Layout>) -> SequentialProperty.Layout {
 		
 		let maker = LayoutMaker(parentView: self.body, didSetProperty: SequentialProperty.Initial())
 		let layout = making(maker).didSetProperty
@@ -89,7 +89,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subviews: [UIView], with layout: SequentialLayout) {
+	public func layout(_ subviews: [UIView], with layout: SequentialProperty.Layout) {
 		
 		let frames = layout.evaluatedFrame(for: subviews, from: self.layoutGuides)
 		
@@ -103,7 +103,7 @@ extension NotAutoLayoutContainer where Containee: UIView {
 
 extension NotAutoLayoutContainer where Containee: UIView {
 	
-	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialLayout>) {
+	public func layout(_ subviews: [UIView], by making: (_ layoutMaker: LayoutMaker<SequentialProperty.Initial>) -> LayoutMaker<SequentialProperty.Layout>) {
 		
 		let layout = self.makeSequentialLayout(making)
 		
