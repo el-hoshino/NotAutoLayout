@@ -476,6 +476,15 @@
 		165FE2A81EF289F4006DF788 /* 2-Element */ = {
 			isa = PBXGroup;
 			children = (
+				79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */,
+				79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */,
+				79D8DD9B1EF93EB300B74593 /* TopRight.Individual.swift */,
+				79D8DDA11EF93FC700B74593 /* MiddleLeft.Individual.swift */,
+				79D8DDA31EF93FDF00B74593 /* MiddleCenter.Individual.swift */,
+				79D8DDA51EF93FFC00B74593 /* MiddleRight.Individual.swift */,
+				79D8DDAB1EF9404900B74593 /* BottomLeft.Individual.swift */,
+				79D8DDAD1EF9406E00B74593 /* BottomCenter.Individual.swift */,
+				79D8DDAF1EF9408C00B74593 /* BottomRight.Individual.swift */,
 				79D8DD751EF934DD00B74593 /* LeftCenter.Individual.swift */,
 				79D8DD771EF9352500B74593 /* LeftRight.Individual.swift */,
 				165FE2A91EF289F4006DF788 /* LeftTop.Individual.swift */,
@@ -500,15 +509,6 @@
 				BF413C6420887FC000D1D070 /* MiddleHeight.Individual.swift */,
 				BF413C6620887FFC00D1D070 /* BottomWidth.Individual.swift */,
 				BF413C682088801900D1D070 /* BottomHeight.Individual.swift */,
-				79D8DD971EF93E7500B74593 /* TopLeft.Individual.swift */,
-				79D8DD991EF93E9900B74593 /* TopCenter.Individual.swift */,
-				79D8DD9B1EF93EB300B74593 /* TopRight.Individual.swift */,
-				79D8DDA11EF93FC700B74593 /* MiddleLeft.Individual.swift */,
-				79D8DDA31EF93FDF00B74593 /* MiddleCenter.Individual.swift */,
-				79D8DDA51EF93FFC00B74593 /* MiddleRight.Individual.swift */,
-				79D8DDAB1EF9404900B74593 /* BottomLeft.Individual.swift */,
-				79D8DDAD1EF9406E00B74593 /* BottomCenter.Individual.swift */,
-				79D8DDAF1EF9408C00B74593 /* BottomRight.Individual.swift */,
 			);
 			path = "2-Element";
 			sourceTree = "<group>";
