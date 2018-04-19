@@ -217,6 +217,9 @@
 		BF413C91208888DD00D1D070 /* TopWidthHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C90208888DD00D1D070 /* TopWidthHeight.Individual.swift */; };
 		BF413C932088892F00D1D070 /* MiddleWidthHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C922088892F00D1D070 /* MiddleWidthHeight.Individual.swift */; };
 		BF413C952088894400D1D070 /* BottomWidthHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C942088894400D1D070 /* BottomWidthHeight.Individual.swift */; };
+		BF413C97208897FB00D1D070 /* LeftHeightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C96208897FB00D1D070 /* LeftHeightWidth.Individual.swift */; };
+		BF413C99208898BD00D1D070 /* CenterHeightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C98208898BD00D1D070 /* CenterHeightWidth.Individual.swift */; };
+		BF413C9B208899DE00D1D070 /* RightHeightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C9A208899DE00D1D070 /* RightHeightWidth.Individual.swift */; };
 		BF6199AF205B69C60096F094 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199AE205B69C60096F094 /* Float.swift */; };
 		BF6199B1205B6C890096F094 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B0205B6C890096F094 /* Point.swift */; };
 		BF6199B3205B6CDB0096F094 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B2205B6CDB0096F094 /* Size.swift */; };
@@ -451,6 +454,9 @@
 		BF413C90208888DD00D1D070 /* TopWidthHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWidthHeight.Individual.swift; sourceTree = "<group>"; };
 		BF413C922088892F00D1D070 /* MiddleWidthHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleWidthHeight.Individual.swift; sourceTree = "<group>"; };
 		BF413C942088894400D1D070 /* BottomWidthHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomWidthHeight.Individual.swift; sourceTree = "<group>"; };
+		BF413C96208897FB00D1D070 /* LeftHeightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftHeightWidth.Individual.swift; sourceTree = "<group>"; };
+		BF413C98208898BD00D1D070 /* CenterHeightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterHeightWidth.Individual.swift; sourceTree = "<group>"; };
+		BF413C9A208899DE00D1D070 /* RightHeightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightHeightWidth.Individual.swift; sourceTree = "<group>"; };
 		BF6199AE205B69C60096F094 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		BF6199B0205B6C890096F094 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		BF6199B2205B6CDB0096F094 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
@@ -644,6 +650,7 @@
 				79D8DDC71EF9485F00B74593 /* LeftBottomWidth.Individual.swift */,
 				79D8DDC91EF9487400B74593 /* LeftBottomHeight.Individual.swift */,
 				BF413C822088863B00D1D070 /* LeftWidthHeight.Individual.swift */,
+				BF413C96208897FB00D1D070 /* LeftHeightWidth.Individual.swift */,
 				79D8DDCB1EF9498100B74593 /* CenterRightTop.Individual.swift */,
 				79D8DDCD1EF949BC00B74593 /* CenterRightMiddle.Individual.swift */,
 				79D8DDCF1EF949D600B74593 /* CenterRightBottom.Individual.swift */,
@@ -658,6 +665,7 @@
 				79D8DDD91EF94A9B00B74593 /* CenterBottomWidth.Individual.swift */,
 				79D8DDDB1EF94AB300B74593 /* CenterBottomHeight.Individual.swift */,
 				BF413C8C2088888300D1D070 /* CenterWidthHeight.Individual.swift */,
+				BF413C98208898BD00D1D070 /* CenterHeightWidth.Individual.swift */,
 				79D8DDF51EF94CE200B74593 /* RightTopMiddle.Individual.swift */,
 				79D8DDF71EF94D0D00B74593 /* RightTopBottom.Individual.swift */,
 				79D8DDDD1EF94AFF00B74593 /* RightTopWidth.Individual.swift */,
@@ -668,6 +676,7 @@
 				79D8DDE51EF94B9500B74593 /* RightBottomWidth.Individual.swift */,
 				79D8DDE71EF94BAB00B74593 /* RightBottomHeight.Individual.swift */,
 				BF413C8E208888C000D1D070 /* RightWidthHeight.Individual.swift */,
+				BF413C9A208899DE00D1D070 /* RightHeightWidth.Individual.swift */,
 				BF413C86208887E400D1D070 /* TopMiddleWidth.Individual.swift */,
 				BF413C882088881300D1D070 /* TopBottomWidth.Individual.swift */,
 				BF413C90208888DD00D1D070 /* TopWidthHeight.Individual.swift */,
@@ -994,6 +1003,7 @@
 				79D8DE0E1EF94FA300B74593 /* TopCenterBottom.Individual.swift in Sources */,
 				79D8DDB41EF9432C00B74593 /* LeftCenterTop.Individual.swift in Sources */,
 				164DB2501EF3DBA200426499 /* LayoutInfoStorableLayoutControlling.swift in Sources */,
+				BF413C99208898BD00D1D070 /* CenterHeightWidth.Individual.swift in Sources */,
 				79D8DDE41EF94B6A00B74593 /* RightMiddleHeight.Individual.swift in Sources */,
 				BF413C692088801900D1D070 /* BottomHeight.Individual.swift in Sources */,
 				79D8DDD21EF94A0C00B74593 /* CenterTopWidth.Individual.swift in Sources */,
@@ -1026,6 +1036,7 @@
 				79D8DE1C1EF9509E00B74593 /* TopRightWidth.Individual.swift in Sources */,
 				79D8DE021EF94E6B00B74593 /* TopLeftHeight.Individual.swift in Sources */,
 				164319F11F7A1903003FA7DA /* IndividualFrame.swift in Sources */,
+				BF413C9B208899DE00D1D070 /* RightHeightWidth.Individual.swift in Sources */,
 				79D8DDDC1EF94AB300B74593 /* CenterBottomHeight.Individual.swift in Sources */,
 				79D8DE061EF94EF700B74593 /* TopLeftRight.Individual.swift in Sources */,
 				79C6C1871FB83FA100E32C54 /* LayoutMaker.swift in Sources */,
@@ -1081,6 +1092,7 @@
 				79D8DDF41EF94CBF00B74593 /* CenterMiddleBottom.Individual.swift in Sources */,
 				79D8DDA21EF93FC700B74593 /* MiddleLeft.Individual.swift in Sources */,
 				79D8DDE61EF94B9500B74593 /* RightBottomWidth.Individual.swift in Sources */,
+				BF413C97208897FB00D1D070 /* LeftHeightWidth.Individual.swift in Sources */,
 				79D8DDF61EF94CE200B74593 /* RightTopMiddle.Individual.swift in Sources */,
 				79D8DE141EF9503600B74593 /* TopRightLeft.Individual.swift in Sources */,
 				BF413C8D2088888300D1D070 /* CenterWidthHeight.Individual.swift in Sources */,
