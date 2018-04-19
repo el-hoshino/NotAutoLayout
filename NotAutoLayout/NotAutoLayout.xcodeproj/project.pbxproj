@@ -197,6 +197,8 @@
 		BF413C6520887FC000D1D070 /* MiddleHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C6420887FC000D1D070 /* MiddleHeight.Individual.swift */; };
 		BF413C6720887FFC00D1D070 /* BottomWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C6620887FFC00D1D070 /* BottomWidth.Individual.swift */; };
 		BF413C692088801900D1D070 /* BottomHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C682088801900D1D070 /* BottomHeight.Individual.swift */; };
+		BF413C6B2088809100D1D070 /* WidthHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C6A2088809100D1D070 /* WidthHeight.Individual.swift */; };
+		BF413C6D208880AC00D1D070 /* Size.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF413C6C208880AC00D1D070 /* Size.Individual.swift */; };
 		BF6199AF205B69C60096F094 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199AE205B69C60096F094 /* Float.swift */; };
 		BF6199B1205B6C890096F094 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B0205B6C890096F094 /* Point.swift */; };
 		BF6199B3205B6CDB0096F094 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B2205B6CDB0096F094 /* Size.swift */; };
@@ -411,6 +413,8 @@
 		BF413C6420887FC000D1D070 /* MiddleHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleHeight.Individual.swift; sourceTree = "<group>"; };
 		BF413C6620887FFC00D1D070 /* BottomWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomWidth.Individual.swift; sourceTree = "<group>"; };
 		BF413C682088801900D1D070 /* BottomHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomHeight.Individual.swift; sourceTree = "<group>"; };
+		BF413C6A2088809100D1D070 /* WidthHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthHeight.Individual.swift; sourceTree = "<group>"; };
+		BF413C6C208880AC00D1D070 /* Size.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.Individual.swift; sourceTree = "<group>"; };
 		BF6199AE205B69C60096F094 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		BF6199B0205B6C890096F094 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		BF6199B2205B6CDB0096F094 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 				79D8DDAB1EF9404900B74593 /* BottomLeft.Individual.swift */,
 				79D8DDAD1EF9406E00B74593 /* BottomCenter.Individual.swift */,
 				79D8DDAF1EF9408C00B74593 /* BottomRight.Individual.swift */,
+				BF413C6C208880AC00D1D070 /* Size.Individual.swift */,
 				79D8DD751EF934DD00B74593 /* LeftCenter.Individual.swift */,
 				79D8DD771EF9352500B74593 /* LeftRight.Individual.swift */,
 				165FE2A91EF289F4006DF788 /* LeftTop.Individual.swift */,
@@ -509,6 +514,7 @@
 				BF413C6420887FC000D1D070 /* MiddleHeight.Individual.swift */,
 				BF413C6620887FFC00D1D070 /* BottomWidth.Individual.swift */,
 				BF413C682088801900D1D070 /* BottomHeight.Individual.swift */,
+				BF413C6A2088809100D1D070 /* WidthHeight.Individual.swift */,
 			);
 			path = "2-Element";
 			sourceTree = "<group>";
@@ -1073,6 +1079,7 @@
 				BF413C4920887C8800D1D070 /* Top.Individual.swift in Sources */,
 				79FD2CDE1FB85E1C00E6661C /* LayoutPropertyCanStoreBottomLeftType.swift in Sources */,
 				79D8DDB61EF944ED00B74593 /* LeftCenterMiddle.Individual.swift in Sources */,
+				BF413C6D208880AC00D1D070 /* Size.Individual.swift in Sources */,
 				79FD2CF21FB878B600E6661C /* LayoutPropertyCanStoreHeightType.swift in Sources */,
 				79D8DD7C1EF935F300B74593 /* LeftBottom.Individual.swift in Sources */,
 				79FD2CE21FB860C500E6661C /* LayoutPropertyCanStoreBottomRightType.swift in Sources */,
@@ -1124,6 +1131,7 @@
 				BF6199B9205B929D0096F094 /* Line.swift in Sources */,
 				164EA0C31EF3DAE300C0BB8F /* Left.Individual.swift in Sources */,
 				164DB2541EF3DF5D00426499 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */,
+				BF413C6B2088809100D1D070 /* WidthHeight.Individual.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
