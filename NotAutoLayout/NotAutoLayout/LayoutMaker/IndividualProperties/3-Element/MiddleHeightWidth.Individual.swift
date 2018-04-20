@@ -1,8 +1,8 @@
 //
-//  TopMiddleWidth.Individual.swift
+//  MiddleHeightWidth.Individual.swift
 //  NotAutoLayout
 //
-//  Created by 史 翔新 on 2018/04/19.
+//  Created by 史 翔新 on 2018/04/20.
 //  Copyright © 2018年 史翔新. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import Foundation
 
 extension IndividualProperty {
 	
-	public struct TopMiddleWidth {
-		
-		let top: LayoutElement.Vertical
+	public struct MiddleHeightWidth {
 		
 		let middle: LayoutElement.Vertical
+		
+		let height: LayoutElement.Length
 		
 		let width: LayoutElement.Length
 		
@@ -23,32 +23,31 @@ extension IndividualProperty {
 }
 
 // MARK: - Make Frame
-extension IndividualProperty.TopMiddleWidth {
+extension IndividualProperty.MiddleHeightWidth {
 	
-	private func makeFrame(left: Float, top: Float, middle: Float, width: Float) -> Rect {
+	private func makeFrame(left: Float, middle: Float, height: Float, width: Float) -> Rect {
 		
-		let height = (middle - top).double
 		let x = left
-		let y = top
+		let y = middle
 		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
 		
 	}
 	
-	private func makeFrame(center: Float, top: Float, middle: Float, width: Float) -> Rect {
+	private func makeFrame(center: Float, middle: Float, height: Float, width: Float) -> Rect {
 		
 		let left = center - width.half
 		
-		return self.makeFrame(left: left, top: top, middle: middle, width: width)
+		return self.makeFrame(left: left, middle: middle, height: height, width: width)
 		
 	}
 	
-	private func makeFrame(right: Float, top: Float, middle: Float, width: Float) -> Rect {
+	private func makeFrame(right: Float, middle: Float, height: Float, width: Float) -> Rect {
 		
 		let left = right - width
 		
-		return self.makeFrame(left: left, top: top, middle: middle, width: width)
+		return self.makeFrame(left: left, middle: middle, height: height, width: width)
 		
 	}
 	
@@ -56,51 +55,48 @@ extension IndividualProperty.TopMiddleWidth {
 
 // MARK: - Set A Line -
 // MARK: Left
-extension IndividualProperty.TopMiddleWidth: LayoutPropertyCanStoreLeftToEvaluateFrameType {
+extension IndividualProperty.MiddleHeightWidth: LayoutPropertyCanStoreLeftToEvaluateFrameType {
 	
 	public func evaluateFrame(left: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let left = left.evaluated(from: parameters)
-		let top = self.top.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)
-		let height = (middle - top).double
+		let height = self.height.evaluated(from: parameters, withTheOtherAxis: .width(0))
 		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(height))
 		
-		return self.makeFrame(left: left, top: top, middle: middle, width: width)
+		return self.makeFrame(left: left, middle: middle, height: height, width: width)
 		
 	}
 	
 }
 
 // MARK: Center
-extension IndividualProperty.TopMiddleWidth: LayoutPropertyCanStoreCenterToEvaluateFrameType {
+extension IndividualProperty.MiddleHeightWidth: LayoutPropertyCanStoreCenterToEvaluateFrameType {
 	
 	public func evaluateFrame(center: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let center = center.evaluated(from: parameters)
-		let top = self.top.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)
-		let height = (middle - top).double
+		let height = self.height.evaluated(from: parameters, withTheOtherAxis: .width(0))
 		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(height))
 		
-		return self.makeFrame(center: center, top: top, middle: middle, width: width)
+		return self.makeFrame(center: center, middle: middle, height: height, width: width)
 		
 	}
 	
 }
 
 // MARK: Right
-extension IndividualProperty.TopMiddleWidth: LayoutPropertyCanStoreRightToEvaluateFrameType {
+extension IndividualProperty.MiddleHeightWidth: LayoutPropertyCanStoreRightToEvaluateFrameType {
 	
 	public func evaluateFrame(right: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		let right = right.evaluated(from: parameters)
-		let top = self.top.evaluated(from: parameters)
 		let middle = self.middle.evaluated(from: parameters)
-		let height = (middle - top).double
+		let height = self.height.evaluated(from: parameters, withTheOtherAxis: .width(0))
 		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(height))
 		
-		return self.makeFrame(right: right, top: top, middle: middle, width: width)
+		return self.makeFrame(right: right, middle: middle, height: height, width: width)
 		
 	}
 	
