@@ -3,7 +3,7 @@
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2017/06/20.
-//  Copyright © 2017年 史翔新. All rights reserved.
+//  Copywidth © 2017年 史翔新. All widths reserved.
 //
 
 import Foundation
@@ -23,6 +23,22 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.TopLeftWidth {
 	
+	private func makeFrame(topLeft: Point, width: Float, middle: Float) -> Rect {
+		
+		let height = (middle - topLeft.y).double
+		
+		return self.makeFrame(topLeft: topLeft, width: width, height: height)
+		
+	}
+	
+	private func makeFrame(topLeft: Point, width: Float, bottom: Float) -> Rect {
+		
+		let height = bottom - topLeft.y
+		
+		return self.makeFrame(topLeft: topLeft, width: width, height: height)
+		
+	}
+	
 	private func makeFrame(topLeft: Point, width: Float, height: Float) -> Rect {
 		
 		let x = topLeft.x
@@ -35,8 +51,41 @@ extension IndividualProperty.TopLeftWidth {
 	
 }
 
+// MARK: - Set A Line -
+// MARK: Middle
+extension IndividualProperty.TopLeftWidth: LayoutPropertyCanStoreMiddleToEvaluateFrameType {
+	
+	public func evaluateFrame(middle: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let topLeft = self.topLeft.evaluated(from: parameters)
+		let middle = middle.evaluated(from: parameters)
+		let height = (middle - topLeft.y).double
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(height))
+		
+		return self.makeFrame(topLeft: topLeft, width: width, middle: middle)
+		
+	}
+	
+}
+
+// MARK: Bottom
+extension IndividualProperty.TopLeftWidth: LayoutPropertyCanStoreBottomToEvaluateFrameType {
+	
+	public func evaluateFrame(bottom: LayoutElement.Vertical, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let topLeft = self.topLeft.evaluated(from: parameters)
+		let bottom = bottom.evaluated(from: parameters)
+		let height = bottom - topLeft.y
+		let width = self.width.evaluated(from: parameters, withTheOtherAxis: .height(height))
+		
+		return self.makeFrame(topLeft: topLeft, width: width, bottom: bottom)
+		
+	}
+	
+}
+
 // MARK: - Set A Length -
-// MARK: Width
+// MARK: Height
 extension IndividualProperty.TopLeftWidth: LayoutPropertyCanStoreHeightToEvaluateFrameType {
 	
 	public func evaluateFrame(height: LayoutElement.Length, parameters: IndividualFrameCalculationParameters) -> Rect {
