@@ -23,6 +23,22 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.MiddleRightHeight {
 	
+	private func makeFrame(middleRight: Point, height: Float, left: Float) -> Rect {
+		
+		let width = middleRight.x - left
+		
+		return self.makeFrame(middleRight: middleRight, height: height, width: width)
+		
+	}
+	
+	private func makeFrame(middleRight: Point, height: Float, center: Float) -> Rect {
+		
+		let width = (middleRight.x - center).double
+		
+		return self.makeFrame(middleRight: middleRight, height: height, width: width)
+		
+	}
+	
 	private func makeFrame(middleRight: Point, height: Float, width: Float) -> Rect {
 		
 		let x = middleRight.x - width
@@ -30,6 +46,39 @@ extension IndividualProperty.MiddleRightHeight {
 		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
+		
+	}
+	
+}
+
+// MARK: - Set A Line -
+// MARK: Left
+extension IndividualProperty.MiddleRightHeight: LayoutPropertyCanStoreLeftToEvaluateFrameType {
+	
+	public func evaluateFrame(left: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let middleRight = self.middleRight.evaluated(from: parameters)
+		let left = left.evaluated(from: parameters)
+		let width = middleRight.x - left
+		let height = self.height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+		
+		return self.makeFrame(middleRight: middleRight, height: height, left: left)
+		
+	}
+	
+}
+
+// MARK: Center
+extension IndividualProperty.MiddleRightHeight: LayoutPropertyCanStoreCenterToEvaluateFrameType {
+	
+	public func evaluateFrame(center: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let middleRight = self.middleRight.evaluated(from: parameters)
+		let center = center.evaluated(from: parameters)
+		let width = (middleRight.x - center).double
+		let height = self.height.evaluated(from: parameters, withTheOtherAxis: .width(width))
+		
+		return self.makeFrame(middleRight: middleRight, height: height, center: center)
 		
 	}
 	

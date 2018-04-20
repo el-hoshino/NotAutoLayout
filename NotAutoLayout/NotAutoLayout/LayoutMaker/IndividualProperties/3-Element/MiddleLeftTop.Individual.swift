@@ -23,6 +23,22 @@ extension IndividualProperty {
 // MARK: - Make Frame
 extension IndividualProperty.MiddleLeftTop {
 	
+	private func makeFrame(middleLeft: Point, top: Float, center: Float) -> Rect {
+		
+		let width = (center - middleLeft.x).double
+		
+		return self.makeFrame(middleLeft: middleLeft, top: top, width: width)
+		
+	}
+	
+	private func makeFrame(middleLeft: Point, top: Float, right: Float) -> Rect {
+		
+		let width = right - middleLeft.x
+		
+		return self.makeFrame(middleLeft: middleLeft, top: top, width: width)
+		
+	}
+	
 	private func makeFrame(middleLeft: Point, top: Float, width: Float) -> Rect {
 		
 		let x = middleLeft.x
@@ -31,6 +47,37 @@ extension IndividualProperty.MiddleLeftTop {
 		let frame = Rect(x: x, y: y, width: width, height: height)
 		
 		return frame
+		
+	}
+	
+}
+
+// MARK: - Set A Line -
+// MARK: Center
+extension IndividualProperty.MiddleLeftTop: LayoutPropertyCanStoreCenterToEvaluateFrameType {
+	
+	public func evaluateFrame(center: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let middleLeft = self.middleLeft.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
+		let center = center.evaluated(from: parameters)
+		
+		return self.makeFrame(middleLeft: middleLeft, top: top, center: center)
+		
+	}
+	
+}
+
+// MARK: Right
+extension IndividualProperty.MiddleLeftTop: LayoutPropertyCanStoreRightToEvaluateFrameType {
+	
+	public func evaluateFrame(right: LayoutElement.Horizontal, parameters: IndividualFrameCalculationParameters) -> Rect {
+		
+		let middleLeft = self.middleLeft.evaluated(from: parameters)
+		let top = self.top.evaluated(from: parameters)
+		let right = right.evaluated(from: parameters)
+		
+		return self.makeFrame(middleLeft: middleLeft, top: top, right: right)
 		
 	}
 	
