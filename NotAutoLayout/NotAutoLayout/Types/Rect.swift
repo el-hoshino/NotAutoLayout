@@ -21,6 +21,12 @@ public struct Rect {
 	/// The vertical span in the rect, which is produced by `Span(start: self.origin.y, length: self.size.height)`
 	public var ySpan: Span
 	
+	/// Initializes a `Rect` with a horizontal span (as `xSpan`) and a vertical span (as `ySpan`)
+	public init(xSpan: Span, ySpan: Span) {
+		self.xSpan = xSpan
+		self.ySpan = ySpan
+	}
+	
 	/// Initializes a `Rect` with origin (as `origin`) and size (as `size`).
 	public init(origin: Point, size: Size) {
 		self.xSpan = Span(start: origin.x, length: size.width)
