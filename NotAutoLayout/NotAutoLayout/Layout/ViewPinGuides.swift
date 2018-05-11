@@ -222,6 +222,252 @@ extension ViewPinGuides.VerticalFloat: VerticalFloatPinGuideRepresentable {
 	
 }
 
+// MARK: - HorizontalSpan
+extension ViewPinGuides {
+	
+	public struct HorizontalSpan {
+		
+		private(set) weak var parentView: UIView?
+		private(set) var referenceViewGetter: () -> UIView?
+		
+		init(parentView: UIView?, referenceView: UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = { [weak referenceView] in referenceView }
+		}
+		
+		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = referenceViewGetter
+		}
+		
+	}
+	
+}
+
+extension ViewPinGuides.HorizontalSpan {
+	
+	var referenceView: UIView? {
+		return self.referenceViewGetter()
+	}
+	
+}
+
+extension ViewPinGuides.HorizontalSpan {
+	
+	private func makeGuide(directionGetter: @escaping () -> UIUserInterfaceLayoutDirection?, rect: Rect?) -> Guide {
+		
+		guard let rect = rect else {
+			return .empty
+		}
+		
+		let guide = Guide(directionGetter: directionGetter, originalSpan: rect.horizontalSpan)
+		
+		return guide
+		
+	}
+	
+}
+
+extension ViewPinGuides.HorizontalSpan {
+	
+	public var frameGuide: Guide {
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
+	}
+	
+	public var identityFrameGuide: Guide {
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
+	}
+	
+	public var layoutMarginsGuide: Guide {
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
+	}
+	
+	public var readableGuide: Guide {
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.readableFrame(in: self.parentView))
+	}
+	
+	@available(iOS 11.0, *)
+	public var safeAreaGuide: Guide {
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+	}
+	
+}
+
+extension ViewPinGuides.HorizontalSpan: HorizontalSpanPinGuideRepresentable {
+	
+	public var pinGuide: ViewPinGuides.HorizontalSpan.Guide {
+		return self.frameGuide
+	}
+	
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.pinGuide.direction
+	}
+	
+	public var fromLeftToCenter: Span {
+		return self.pinGuide.fromLeftToCenter
+	}
+	
+	public var fromLeftToRight: Span {
+		return self.pinGuide.fromLeftToRight
+	}
+	
+	public var fromCenterToLeft: Span {
+		return self.pinGuide.fromCenterToLeft
+	}
+	
+	public var fromCenterToRight: Span {
+		return self.pinGuide.fromCenterToRight
+	}
+	
+	public var fromRightToLeft: Span {
+		return self.pinGuide.fromRightToLeft
+	}
+	
+	public var fromRightToCenter: Span {
+		return self.pinGuide.fromRightToCenter
+	}
+	
+	public func horizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		return self.pinGuide.horizontal(from: coordinatePositionA, to: coordinatePositionB)
+	}
+	
+	public var fromLeadingToCenter: Span {
+		return self.pinGuide.fromLeadingToCenter
+	}
+	
+	public var fromLeadingToTrailing: Span {
+		return self.pinGuide.fromLeadingToTrailing
+	}
+	
+	public var fromCenterToLeading: Span {
+		return self.pinGuide.fromCenterToLeading
+	}
+	
+	public var fromCenterToTrailing: Span {
+		return self.pinGuide.fromCenterToTrailing
+	}
+	
+	public var fromTrailingToLeading: Span {
+		return self.pinGuide.fromTrailingToLeading
+	}
+	
+	public var fromTrailingToCenter: Span {
+		return self.pinGuide.fromTrailingToCenter
+	}
+	
+	public func directionalHorizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		return self.pinGuide.directionalHorizontal(from: coordinatePositionA, to: coordinatePositionB)
+	}
+	
+}
+
+// MARK: - VerticalSpan
+extension ViewPinGuides {
+	
+	public struct VerticalSpan {
+		
+		private(set) weak var parentView: UIView?
+		private(set) var referenceViewGetter: () -> UIView?
+		
+		init(parentView: UIView?, referenceView: UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = { [weak referenceView] in referenceView }
+		}
+		
+		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = referenceViewGetter
+		}
+		
+	}
+	
+}
+
+extension ViewPinGuides.VerticalSpan {
+	
+	var referenceView: UIView? {
+		return self.referenceViewGetter()
+	}
+	
+}
+
+extension ViewPinGuides.VerticalSpan {
+	
+	private func makeGuide(rect: Rect?) -> Guide {
+		
+		guard let rect = rect else {
+			return .empty
+		}
+		
+		let guide = Guide(originalSpan: rect.verticalSpan)
+		
+		return guide
+		
+	}
+	
+}
+
+extension ViewPinGuides.VerticalSpan {
+	
+	public var frameGuide: Guide {
+		return self.makeGuide(rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
+	}
+	
+	public var identityFrameGuide: Guide {
+		return self.makeGuide(rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
+	}
+	
+	public var layoutMarginsGuide: Guide {
+		return self.makeGuide(rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
+	}
+	
+	public var readableGuide: Guide {
+		return self.makeGuide(rect: self.referenceView?.readableFrame(in: self.parentView))
+	}
+	
+	@available(iOS 11.0, *)
+	public var safeAreaGuide: Guide {
+		return self.makeGuide(rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+	}
+	
+}
+
+extension ViewPinGuides.VerticalSpan: VerticalSpanPinGuideRepresentable {
+	
+	public var pinGuide: ViewPinGuides.VerticalSpan.Guide {
+		return self.frameGuide
+	}
+	
+	public var fromTopToMiddle: Span {
+		return self.pinGuide.fromTopToMiddle
+	}
+	
+	public var fromTopToBottom: Span {
+		return self.pinGuide.fromTopToBottom
+	}
+	
+	public var fromMiddleToTop: Span {
+		return self.pinGuide.fromMiddleToTop
+	}
+	
+	public var fromMiddleToBottom: Span {
+		return self.pinGuide.fromMiddleToBottom
+	}
+	
+	public var fromBottomToTop: Span {
+		return self.pinGuide.fromBottomToTop
+	}
+	
+	public var fromBottomToMiddle: Span {
+		return self.pinGuide.fromBottomToMiddle
+	}
+	
+	public func vertical(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		return self.pinGuide.vertical(from: coordinatePositionA, to: coordinatePositionB)
+	}
+	
+}
+
 // MARK: - Point
 extension ViewPinGuides {
 	

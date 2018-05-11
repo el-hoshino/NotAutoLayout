@@ -73,6 +73,82 @@ public protocol VerticalFloatPinGuideRepresentable {
 	
 }
 
+/// A protocol that shows the type conforms it is able to represent a horizontal span pin guide as `ViewPinGuides.HorizontalSpan.Guide`.
+public protocol HorizontalSpanPinGuideRepresentable {
+	
+	/// The layout direction in the pin guide.
+	var direction: UIUserInterfaceLayoutDirection { get }
+	
+	/// The span from left to center in the pin guide.
+	var fromLeftToCenter: Span { get }
+	
+	/// The span from left to right in the pin guide.
+	var fromLeftToRight: Span { get }
+	
+	/// The span from center to left in the pin guide.
+	var fromCenterToLeft: Span { get }
+	
+	/// The span from center to right in the pin guide.
+	var fromCenterToRight: Span { get }
+	
+	/// The span from right to left in the pin guide.
+	var fromRightToLeft: Span { get }
+	
+	/// The span from right to center in the pin guide.
+	var fromRightToCenter: Span { get }
+	
+	/// The span from a horizontal geometry position at the given horizontal coordinate position to the other in the pin guide.
+	func horizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span
+	
+	/// The span from leading to center in the pin guide.
+	var fromLeadingToCenter: Span { get }
+	
+	/// The span from leading to trailing in the pin guide.
+	var fromLeadingToTrailing: Span { get }
+	
+	/// The span from center to leading in the pin guide.
+	var fromCenterToLeading: Span { get }
+	
+	/// The span from center to trailing in the pin guide.
+	var fromCenterToTrailing: Span { get }
+	
+	/// The span from trailing to leading in the pin guide.
+	var fromTrailingToLeading: Span { get }
+	
+	/// The span from trailing to center in the pin guide.
+	var fromTrailingToCenter: Span { get }
+	
+	/// The span from a directional horizontal geometry position at the given directional horizontal coordinate position to the other in the pin guide.
+	func directionalHorizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span
+	
+}
+
+/// A protocol that shows the type conforms it is able to represent a horizontal span pin guide as `ViewPinGuides.HorizontalSpan.Guide`.
+public protocol VerticalSpanPinGuideRepresentable {
+	
+	/// The span from top to middle in the pin guide.
+	var fromTopToMiddle: Span { get }
+	
+	/// The span from top to bottom in the pin guide.
+	var fromTopToBottom: Span { get }
+	
+	/// The span from middle to top in the pin guide.
+	var fromMiddleToTop: Span { get }
+	
+	/// The span from middle to bottom in the pin guide.
+	var fromMiddleToBottom: Span { get }
+	
+	/// The span from bottom to top in the pin guide.
+	var fromBottomToTop: Span { get }
+	
+	/// The span from bottom to middle in the pin guide.
+	var fromBottomToMiddle: Span { get }
+	
+	/// The span from a horizontal geometry position at the given horizontal coordinate position to the other in the pin guide.
+	func vertical(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span
+	
+}
+
 /// A protocol that shows the type conforms it is able to represent a point pin guide as `ViewPinGuides.Point.Guide`.
 public protocol PointPinGuideRepresentable {
 	

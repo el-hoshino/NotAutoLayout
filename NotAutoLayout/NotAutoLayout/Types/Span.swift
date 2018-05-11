@@ -63,6 +63,86 @@ public struct Span {
 
 extension Span {
 	
+	init(left: Float, width: Float) {
+		self.start = left
+		self.length = width
+	}
+	
+	init(left: Float, right: Float) {
+		let width = right - left
+		self.start = left
+		self.length = width
+	}
+	
+	init(left: Float, center: Float) {
+		let width = (center - left).double
+		self.start = left
+		self.length = width
+	}
+	
+	init(center: Float, width: Float) {
+		let left = center - width.half
+		self.start = left
+		self.length = width
+	}
+	
+	init(center: Float, right: Float) {
+		let width = (right - center).double
+		let left = right - width
+		self.start = left
+		self.length = width
+	}
+	
+	init(right: Float, width: Float) {
+		let left = right - width
+		self.start = left
+		self.length = width
+	}
+	
+}
+
+extension Span {
+	
+	init(top: Float, height: Float) {
+		self.start = top
+		self.length = height
+	}
+	
+	init(top: Float, bottom: Float) {
+		let height = bottom - top
+		self.start = top
+		self.length = height
+	}
+	
+	init(top: Float, middle: Float) {
+		let height = (middle - top).double
+		self.start = top
+		self.length = height
+	}
+	
+	init(middle: Float, height: Float) {
+		let top = middle - height.half
+		self.start = top
+		self.length = height
+	}
+	
+	init(middle: Float, bottom: Float) {
+		let height = (bottom - middle).double
+		let top = bottom - height
+		self.start = top
+		self.length = height
+	}
+	
+	init(bottom: Float, height: Float) {
+		let top = bottom - height
+		self.start = top
+		self.length = height
+	}
+	
+}
+
+extension Span {
+	
 	init(horizontalFrom rect: Rect) {
 		
 		self.start = rect.left
@@ -120,117 +200,43 @@ extension Span {
 	
 }
 
-extension Span: CustomStringConvertible {
+extension Span {
 	
-	public var description: String {
-		return "(start: \(self.start), length: \(self.length))"
+	/// A span from self's start to self's half
+	public var startToHalf: Span {
+		return .init(start: self.start, end: self.half)
+	}
+	
+	/// A span from self's half to self's end
+	public var halfToStart: Span {
+		return .init(start: self.half, end: self.start)
+	}
+	
+	/// A span from self's half to self's end
+	var halfToEnd: Span {
+		return .init(start: self.half, end: self.end)
+	}
+	
+	/// A span from self's end to self's half
+	var endToHalf: Span {
+		return .init(start: self.end, end: self.half)
+	}
+	
+	/// A span from self's end to self's start
+	var endToStart: Span {
+		return .init(start: self.end, end: self.start)
+	}
+	
+	func geometry(from coordinateStart: Float, to coordinateEnd: Float) -> Span {
+		return .init(start: self.geometry(at: coordinateStart), end: self.geometry(at: coordinateEnd))
 	}
 	
 }
 
-// This section is for meta programming, which I'm planning in the future.
-extension Span {
+extension Span: CustomStringConvertible {
 	
-	internal enum Horizontal {
-		case left(Float)
-		case center(Float)
-		case right(Float)
-		case width(Float)
-	}
-	
-	internal enum Vertical {
-		case top(Float)
-		case middle(Float)
-		case bottom(Float)
-		case height(Float)
-	}
-	
-	init(_ a: Horizontal, _ b: Horizontal) {
-		switch (a, b) {
-		case (.left(let left), .center(let center)):
-			self.init(start: left, half: center)
-			
-		case (.left(let left), .right(let right)):
-			self.init(start: left, end: right)
-			
-		case (.left(let left), .width(let width)):
-			self.init(start: left, length: width)
-			
-		case (.center(let center), .left(let left)):
-			self.init(start: left, half: center)
-			
-		case (.center(let center), .right(let right)):
-			self.init(half: center, end: right)
-			
-		case (.center(let center), .width(let width)):
-			self.init(half: center, length: width)
-			
-		case (.right(let right), .left(let left)):
-			self.init(start: left, end: right)
-			
-		case (.right(let right), .center(let center)):
-			self.init(half: center, end: right)
-			
-		case (.right(let right), .width(let width)):
-			self.init(end: right, length: width)
-			
-		case (.width(let width), .left(let left)):
-			self.init(start: left, length: width)
-			
-		case (.width(let width), .center(let center)):
-			self.init(half: center, length: width)
-			
-		case (.width(let width), .right(let right)):
-			self.init(end: right, length: width)
-			
-		case (.left, .left), (.center, .center), (.right, .right), (.width, .width):
-			assertionFailure("Failed to create a span from 2 horizontal elements. These 2 should be different from each other")
-			self = .zero
-		}
-	}
-	
-	init(_ a: Vertical, _ b: Vertical) {
-		switch (a, b) {
-		case (.top(let top), .middle(let middle)):
-			self.init(start: top, half: middle)
-			
-		case (.top(let top), .bottom(let bottom)):
-			self.init(start: top, end: bottom)
-			
-		case (.top(let top), .height(let height)):
-			self.init(start: top, length: height)
-			
-		case (.middle(let middle), .top(let top)):
-			self.init(start: top, half: middle)
-			
-		case (.middle(let middle), .bottom(let bottom)):
-			self.init(half: middle, end: bottom)
-			
-		case (.middle(let middle), .height(let height)):
-			self.init(half: middle, length: height)
-			
-		case (.bottom(let bottom), .top(let top)):
-			self.init(start: top, end: bottom)
-			
-		case (.bottom(let bottom), .middle(let middle)):
-			self.init(half: middle, end: bottom)
-			
-		case (.bottom(let bottom), .height(let height)):
-			self.init(end: bottom, length: height)
-			
-		case (.height(let height), .top(let top)):
-			self.init(start: top, length: height)
-			
-		case (.height(let height), .middle(let middle)):
-			self.init(half: middle, length: height)
-			
-		case (.height(let height), .bottom(let bottom)):
-			self.init(end: bottom, length: height)
-			
-		case (.top, .top), (.middle, .middle), (.bottom, .bottom), (.height, .height):
-			assertionFailure("Failed to create a span from 2 vertical elements. These 2 should be different from each other")
-			self = .zero
-		}
+	public var description: String {
+		return "(start: \(self.start), length: \(self.length))"
 	}
 	
 }

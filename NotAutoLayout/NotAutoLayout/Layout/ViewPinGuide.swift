@@ -17,7 +17,7 @@ extension ViewPinGuides.HorizontalFloat {
 		let span: Span
 		
 		static let empty: ViewPinGuides.HorizontalFloat.Guide = .init(directionGetter: { nil },
-																 span: .zero)
+																	  span: .zero)
 		
 	}
 	
@@ -106,6 +106,172 @@ extension ViewPinGuides.VerticalFloat.Guide: VerticalFloatPinGuideRepresentable 
 	
 	public func vertical(at coordinatePosition: Float) -> Float {
 		return self.span.geometry(at: coordinatePosition)
+	}
+	
+}
+
+// MARK: - HorizontalSpanGuide
+extension ViewPinGuides.HorizontalSpan {
+	
+	public struct Guide {
+		
+		let directionGetter: () -> UIUserInterfaceLayoutDirection?
+		let originalSpan: Span
+		
+		static let empty: ViewPinGuides.HorizontalSpan.Guide = .init(directionGetter: { nil },
+																	 originalSpan: .zero)
+		
+	}
+	
+}
+
+extension ViewPinGuides.HorizontalSpan.Guide: HorizontalSpanPinGuideRepresentable {
+	
+	public var direction: UIUserInterfaceLayoutDirection {
+		return self.directionGetter() ?? .leftToRight
+	}
+	
+	public var fromLeftToCenter: Span {
+		return self.originalSpan.startToHalf
+	}
+	
+	public var fromLeftToRight: Span {
+		return self.originalSpan
+	}
+	
+	public var fromCenterToLeft: Span {
+		return self.originalSpan.halfToStart
+	}
+	
+	public var fromCenterToRight: Span {
+		return self.originalSpan.halfToEnd
+	}
+	
+	public var fromRightToLeft: Span {
+		return self.originalSpan.endToStart
+	}
+	
+	public var fromRightToCenter: Span {
+		return self.originalSpan.endToHalf
+	}
+	
+	public func horizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		return self.originalSpan.geometry(from: coordinatePositionA, to: coordinatePositionB)
+	}
+	
+	public var fromLeadingToCenter: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromLeftToCenter
+			
+		case .rightToLeft:
+			return self.fromRightToCenter
+		}
+	}
+	
+	public var fromLeadingToTrailing: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromLeftToRight
+			
+		case .rightToLeft:
+			return self.fromRightToLeft
+		}
+	}
+	
+	public var fromCenterToLeading: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromCenterToLeft
+			
+		case .rightToLeft:
+			return self.fromCenterToRight
+		}
+	}
+	
+	public var fromCenterToTrailing: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromCenterToRight
+			
+		case .rightToLeft:
+			return self.fromCenterToLeft
+		}
+	}
+	
+	public var fromTrailingToCenter: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromRightToCenter
+			
+		case .rightToLeft:
+			return self.fromLeftToCenter
+		}
+	}
+	
+	public var fromTrailingToLeading: Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.fromRightToLeft
+			
+		case .rightToLeft:
+			return self.fromLeftToRight
+		}
+	}
+	
+	public func directionalHorizontal(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		switch self.direction {
+		case .leftToRight:
+			return self.horizontal(from: coordinatePositionA, to: coordinatePositionB)
+			
+		case .rightToLeft:
+			return self.horizontal(from: 1 - coordinatePositionA, to: 1 - coordinatePositionB)
+		}
+	}
+	
+}
+
+// MARK: - VerticalSpanGuide
+extension ViewPinGuides.VerticalSpan {
+	
+	public struct Guide {
+		
+		let originalSpan: Span
+		
+		static let empty: ViewPinGuides.VerticalSpan.Guide = .init(originalSpan: .zero)
+		
+	}
+	
+}
+
+extension ViewPinGuides.VerticalSpan.Guide: VerticalSpanPinGuideRepresentable {
+	
+	public var fromTopToMiddle: Span {
+		return self.originalSpan.startToHalf
+	}
+	
+	public var fromTopToBottom: Span {
+		return self.originalSpan
+	}
+	
+	public var fromMiddleToTop: Span {
+		return self.originalSpan.halfToStart
+	}
+	
+	public var fromMiddleToBottom: Span {
+		return self.originalSpan.halfToEnd
+	}
+	
+	public var fromBottomToTop: Span {
+		return self.originalSpan.endToStart
+	}
+	
+	public var fromBottomToMiddle: Span {
+		return self.originalSpan.endToHalf
+	}
+	
+	public func vertical(from coordinatePositionA: Float, to coordinatePositionB: Float) -> Span {
+		return self.originalSpan.geometry(from: coordinatePositionA, to: coordinatePositionB)
 	}
 	
 }
