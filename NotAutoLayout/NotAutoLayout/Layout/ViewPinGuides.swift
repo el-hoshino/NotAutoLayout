@@ -12,10 +12,12 @@ public struct ViewPinGuides {
 	
 }
 
-// MARK: - Horizontal
+// MARK: - HorizontalFloat
 extension ViewPinGuides {
 	
-	public struct Horizontal {
+	@available(*, renamed: "HorizontalFloat")
+	typealias Horizontal = HorizontalFloat
+	public struct HorizontalFloat {
 		
 		private(set) weak var parentView: UIView?
 		private(set) var referenceViewGetter: () -> UIView?
@@ -34,7 +36,7 @@ extension ViewPinGuides {
 	
 }
 
-extension ViewPinGuides.Horizontal {
+extension ViewPinGuides.HorizontalFloat {
 	
 	var referenceView: UIView? {
 		return self.referenceViewGetter()
@@ -42,7 +44,7 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
-extension ViewPinGuides.Horizontal {
+extension ViewPinGuides.HorizontalFloat {
 	
 	private func makeGuide(directionGetter: @escaping () -> UIUserInterfaceLayoutDirection?, rect: Rect?) -> Guide {
 		
@@ -58,7 +60,7 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
-extension ViewPinGuides.Horizontal {
+extension ViewPinGuides.HorizontalFloat {
 	
 	public var frameGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
@@ -83,9 +85,9 @@ extension ViewPinGuides.Horizontal {
 	
 }
 
-extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
+extension ViewPinGuides.HorizontalFloat: HorizontalFloatPinGuideRepresentable {
 	
-	private var pinGuide: ViewPinGuides.Horizontal.Guide {
+	private var pinGuide: ViewPinGuides.HorizontalFloat.Guide {
 		return self.frameGuide
 	}
 	
@@ -117,12 +119,18 @@ extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
 		return self.pinGuide.trailing
 	}
 	
+	public func directionalHorizontal(at coordinatePosition: Float) -> Float {
+		return self.pinGuide.directionalHorizontal(at: coordinatePosition)
+	}
+	
 }
 
-// MARK: - Vertical
+// MARK: - VerticalFloat
 extension ViewPinGuides {
 	
-	public struct Vertical {
+	@available(*, renamed: "VerticalFloat")
+	typealias Vertical = VerticalFloat
+	public struct VerticalFloat {
 		
 		private(set) weak var parentView: UIView?
 		private(set) var referenceViewGetter: () -> UIView?
@@ -141,7 +149,7 @@ extension ViewPinGuides {
 	
 }
 
-extension ViewPinGuides.Vertical {
+extension ViewPinGuides.VerticalFloat {
 	
 	var referenceView: UIView? {
 		return self.referenceViewGetter()
@@ -149,7 +157,7 @@ extension ViewPinGuides.Vertical {
 	
 }
 
-extension ViewPinGuides.Vertical {
+extension ViewPinGuides.VerticalFloat {
 	
 	private func makeGuide(rect: Rect?) -> Guide {
 		
@@ -165,7 +173,7 @@ extension ViewPinGuides.Vertical {
 	
 }
 
-extension ViewPinGuides.Vertical {
+extension ViewPinGuides.VerticalFloat {
 	
 	public var frameGuide: Guide {
 		return self.makeGuide(rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
@@ -190,9 +198,9 @@ extension ViewPinGuides.Vertical {
 	
 }
 
-extension ViewPinGuides.Vertical: VerticalPinGuideRepresentable {
+extension ViewPinGuides.VerticalFloat: VerticalFloatPinGuideRepresentable {
 	
-	private var pinGuide: ViewPinGuides.Vertical.Guide {
+	private var pinGuide: ViewPinGuides.VerticalFloat.Guide {
 		return self.frameGuide
 	}
 	

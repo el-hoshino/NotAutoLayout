@@ -8,8 +8,10 @@
 
 import Foundation
 
-/// A protocol that shows the type conforms it is able to represent a horizontal pin guide as `ViewPinGuides.Horizontal.Guide`.
-public protocol HorizontalPinGuideRepresentable {
+/// A protocol that shows the type conforms it is able to represent a horizontal float pin guide as `ViewPinGuides.HorizontalFloat.Guide`.
+@available(*, renamed: "HorizontalFloatPinGuideRepresentable")
+typealias HorizontalPinGuideRepresentable = HorizontalFloatPinGuideRepresentable
+public protocol HorizontalFloatPinGuideRepresentable {
 	
 	/// The layout direction in the pin guide.
 	var direction: UIUserInterfaceLayoutDirection { get }
@@ -37,10 +39,20 @@ public protocol HorizontalPinGuideRepresentable {
 	/// The trailing position in the pin guide, which is either left or right position according to the layout direction.
 	var trailing: Float { get }
 	
+	/// The directional horizontal geometry position at the given coordinate position in the pin guide.
+	///
+	/// - Parameters:
+	///   - coordinatePosition: The directional horizontal coordinate position in the pin guide.
+	///
+	/// - Returns: The directional horizontal geometry position at the given directional horizontal coordinate position in the pin guide.
+	func directionalHorizontal(at coordinatePosition: Float) -> Float
+	
 }
 
-/// A protocol that shows the type conforms it is able to represent a vertical pin guide as `ViewPinGuides.Vertical.Guide`.
-public protocol VerticalPinGuideRepresentable {
+/// A protocol that shows the type conforms it is able to represent a vertical float pin guide as `ViewPinGuides.VerticalFloat.Guide`.
+@available(*, renamed: "VerticalFloatPinGuideRepresentable")
+typealias VerticalPinGuideRepresentable = VerticalFloatPinGuideRepresentable
+public protocol VerticalFloatPinGuideRepresentable {
 	
 	/// The top position in the pin guide.
 	var top: Float { get }

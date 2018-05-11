@@ -8,22 +8,22 @@
 
 import Foundation
 
-// MARK: - HorizontalGuide
-extension ViewPinGuides.Horizontal {
+// MARK: - HorizontalFloatGuide
+extension ViewPinGuides.HorizontalFloat {
 	
 	public struct Guide {
 		
 		let directionGetter: () -> UIUserInterfaceLayoutDirection?
 		let span: Span
 		
-		static let empty: ViewPinGuides.Horizontal.Guide = .init(directionGetter: { nil },
+		static let empty: ViewPinGuides.HorizontalFloat.Guide = .init(directionGetter: { nil },
 																 span: .zero)
 		
 	}
 	
 }
 
-extension ViewPinGuides.Horizontal.Guide: HorizontalPinGuideRepresentable {
+extension ViewPinGuides.HorizontalFloat.Guide: HorizontalFloatPinGuideRepresentable {
 	
 	public var direction: UIUserInterfaceLayoutDirection {
 		return self.directionGetter() ?? .leftToRight
@@ -65,22 +65,32 @@ extension ViewPinGuides.Horizontal.Guide: HorizontalPinGuideRepresentable {
 		}
 	}
 	
+	public func directionalHorizontal(at coordinatePosition: Float) -> Float {
+		switch self.direction {
+		case .leftToRight:
+			return self.horizontal(at: coordinatePosition)
+			
+		case .rightToLeft:
+			return self.horizontal(at: 1 - coordinatePosition)
+		}
+	}
+	
 }
 
-// MARK: - VerticalGuide
-extension ViewPinGuides.Vertical {
+// MARK: - VerticalFloatGuide
+extension ViewPinGuides.VerticalFloat {
 	
 	public struct Guide {
 		
 		let span: Span
 		
-		static let empty: ViewPinGuides.Vertical.Guide = .init(span: .zero)
+		static let empty: ViewPinGuides.VerticalFloat.Guide = .init(span: .zero)
 		
 	}
 	
 }
 
-extension ViewPinGuides.Vertical.Guide: VerticalPinGuideRepresentable {
+extension ViewPinGuides.VerticalFloat.Guide: VerticalFloatPinGuideRepresentable {
 	
 	public var top: Float {
 		return self.span.start
