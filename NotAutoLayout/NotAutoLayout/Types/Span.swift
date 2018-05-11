@@ -23,6 +23,42 @@ public struct Span {
 		self.length = length
 	}
 	
+	/// Initializes a `Span` with the start position (as `start`) and end position (as `end`)
+	public init(start: Float, end: Float) {
+		let length = end - start
+		self.start = start
+		self.length = length
+	}
+	
+	/// Initializes a `Span` with the start position (as `start`) and half position (as `half`)
+	public init(start: Float, half: Float) {
+		let length = (half - start).double
+		self.start = start
+		self.length = length
+	}
+	
+	/// Initializes a `Span` with the half position (as `half`) and length (as `length`)
+	public init(half: Float, length: Float) {
+		let start = half - length.half
+		self.start = start
+		self.length = length
+	}
+	
+	/// Initializes a `Span` with the half position (as `half`) and end position (as `end`)
+	public init(half: Float, end: Float) {
+		let length = (end - half).double
+		let start = end - length
+		self.start = start
+		self.length = length
+	}
+	
+	/// Initializes a `Span` with the end position (as `end`) and length (as `length`)
+	public init(end: Float, length: Float) {
+		let start = end - length
+		self.start = start
+		self.length = length
+	}
+	
 }
 
 extension Span {
