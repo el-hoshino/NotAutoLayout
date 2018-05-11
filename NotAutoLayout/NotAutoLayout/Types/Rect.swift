@@ -15,22 +15,36 @@ import Foundation
 /// Conforms to: `CGTypeConvertible`.
 public struct Rect {
 	
-	/// The origin point of the rect.
-	public var origin: Point
+	/// The horizontal span in the rect, which is produced by `Span(start: self.origin.x, length: self.size.width)`
+	public var xSpan: Span
 	
-	/// The size of the rect.
-	public var size: Size
+	/// The vertical span in the rect, which is produced by `Span(start: self.origin.y, length: self.size.height)`
+	public var ySpan: Span
 	
 	/// Initializes a `Rect` with origin (as `origin`) and size (as `size`).
 	public init(origin: Point, size: Size) {
-		self.origin = origin
-		self.size = size
+		self.xSpan = Span(start: origin.x, length: size.width)
+		self.ySpan = Span(start: origin.y, length: size.height)
 	}
 	
 	/// Initializes a `Rect` with origin's x position (as `x`), origin's y position (as `y`), size's width (as `width`) and size's height (as `height`).
 	public init(x: Float, y: Float, width: Float, height: Float) {
-		self.origin = Point(x: x, y: y)
-		self.size = Size(width: width, height: height)
+		self.xSpan = Span(start: x, length: width)
+		self.ySpan = Span(start: y, length: height)
+	}
+	
+}
+
+extension Rect {
+	
+	@available(*, renamed: "xSpan")
+	var horizontalSpan: Span {
+		return self.xSpan
+	}
+	
+	@available(*, renamed: "ySpan")
+	var verticalSpan: Span {
+		return self.ySpan
 	}
 	
 }
@@ -53,8 +67,7 @@ extension Rect: CGTypeConvertible {
 	
 	public init(_ rect: CGRect) {
 		
-		self.origin = Point(rect.origin)
-		self.size = Size(rect.size)
+		self.init(origin: Point(rect.origin), size: Size(rect.size))
 		
 	}
 	
@@ -64,22 +77,22 @@ extension Rect {
 	
 	/// The left position in the rect, which is produced by `self.origin.x`
 	public var left: Float {
-		return self.origin.x
+		return self.xSpan.start
 	}
 	
 	/// The center position in the rect, which is produced by `self.origin.x + (self.size.width * 0.5)`
 	public var center: Float {
-		return self.horizontalGeometry(at: 0.5)
+		return self.xSpan.half
 	}
 	
 	/// The right position in the rect, which is produced by `self.origin.x + self.size.width`
 	public var right: Float {
-		return self.left + self.width
+		return self.xSpan.end
 	}
 	
 	/// The width of the rect, which is produced by `self.size.width`
 	public var width: Float {
-		return self.size.width
+		return self.xSpan.length
 	}
 	
 }
@@ -88,22 +101,22 @@ extension Rect {
 	
 	/// The top position in the rect, which is produced by `self.origin.y`
 	public var top: Float {
-		return self.origin.y
+		return self.ySpan.start
 	}
 	
 	/// The middle position in the rect, which is produced by `self.origin.y + (self.size.height * 0.5)`
 	public var middle: Float {
-		return self.verticalGeometry(at: 0.5)
+		return self.ySpan.half
 	}
 	
 	/// The bottom position in the rect, which is produced by `self.origin.y + self.size.height`
 	public var bottom: Float {
-		return self.top + self.height
+		return self.ySpan.end
 	}
 	
 	/// The height of the rect, which is produced by `self.size.height`
 	public var height: Float {
-		return self.size.height
+		return self.ySpan.length
 	}
 	
 }
@@ -159,14 +172,14 @@ extension Rect {
 
 extension Rect {
 	
-	/// The horizontal span in the rect, which is produced by `Span(start: self.origin.x, length: self.size.width)`
-	public var horizontalSpan: Span {
-		return Span(horizontalFrom: self)
+	/// The origin point of the rect.
+	public var origin: Point {
+		return Point(x: self.xSpan.start, y: self.ySpan.start)
 	}
 	
-	/// The vertical span in the rect, which is produced by `Span(start: self.origin.y, length: self.size.height)`
-	public var verticalSpan: Span {
-		return Span(verticalFrom: self)
+	/// The size of the rect.
+	public var size: Size {
+		return Size(width: self.xSpan.length, height: self.ySpan.length)
 	}
 	
 }
@@ -185,7 +198,7 @@ extension Rect {
 	///
 	/// - Returns: The horizontal geometry position at the given horizontal coordinate position in the rect.
 	public func horizontalGeometry(at coordinate: Float) -> Float {
-		return self.origin.x + (self.size.width * coordinate)
+		return self.xSpan.geometry(at: coordinate)
 	}
 	
 	/// The vertical geometry position at the given coordinate position.
@@ -200,7 +213,7 @@ extension Rect {
 	///
 	/// - Returns: The vertical geometry position at the given vertical coordinate position in the rect.
 	public func verticalGeometry(at coordinate: Float) -> Float {
-		return self.origin.y + (self.size.height * coordinate)
+		return self.ySpan.geometry(at: coordinate)
 	}
 	
 	/// The geometry point at the given coordinate position (produced from coordinateX and coordinateY).
@@ -278,129 +291,135 @@ extension Rect {
 extension Rect {
 	
 	mutating func moveLeft(to xGoal: Float) {
-		self.origin.x = xGoal
+		self.xSpan.start = xGoal
 	}
 	
 	mutating func moveCenter(to xGoal: Float) {
-		self.origin.x = xGoal - self.width.half
+		self.xSpan.start = xGoal - self.width.half
 	}
 	
 	mutating func moveRight(to xGoal: Float) {
-		self.origin.x = xGoal - self.width
+		self.xSpan.start = xGoal - self.width
 	}
 	
 	mutating func moveTop(to yGoal: Float) {
-		self.origin.y = yGoal
+		self.ySpan.start = yGoal
 	}
 	
 	mutating func moveMiddle(to yGoal: Float) {
-		self.origin.y = yGoal - self.height.half
+		self.ySpan.start = yGoal - self.height.half
 	}
 	
 	mutating func moveBottom(to yGoal: Float) {
-		self.origin.y = yGoal - self.height
+		self.ySpan.start = yGoal - self.height
 	}
 	
 	mutating func moveX(by xOffset: Float) {
-		self.origin.x += xOffset
+		self.xSpan.start += xOffset
 	}
 	
 	mutating func moveY(by yOffset: Float) {
-		self.origin.y += yOffset
+		self.ySpan.start += yOffset
 	}
 	
 	mutating func moveOrigin(by offset: Point) {
-		self.origin.x += offset.x
-		self.origin.y += offset.y
+		self.xSpan.start += offset.x
+		self.ySpan.start += offset.y
 	}
 	
 	mutating func pinchLeft(to xGoal: Float) {
 		let widthDiff = self.left - xGoal
-		self.origin.x = xGoal
-		self.size.width += widthDiff
+		self.xSpan.start = xGoal
+		self.xSpan.length += widthDiff
 	}
 	
 	mutating func pinchLeft(by xOffset: Float) {
 		let widthDiff = -xOffset
-		self.origin.x += xOffset
-		self.size.width += widthDiff
+		self.xSpan.start += xOffset
+		self.xSpan.length += widthDiff
 	}
 	
 	mutating func pinchRight(to xGoal: Float) {
 		let widthDiff = xGoal - self.right
-		self.size.width += widthDiff
+		self.xSpan.length += widthDiff
 	}
 	
 	mutating func pinchRight(by xOffset: Float) {
 		let widthDiff = xOffset
-		self.size.width += widthDiff
+		self.xSpan.length += widthDiff
 	}
 	
 	mutating func pinchTop(to yGoal: Float) {
 		let heightDiff = self.top - yGoal
-		self.origin.y = yGoal
-		self.size.height += heightDiff
+		self.ySpan.start = yGoal
+		self.ySpan.length += heightDiff
 	}
 	
 	mutating func pinchTop(by yOffset: Float) {
 		let heightDiff = -yOffset
-		self.origin.y += yOffset
-		self.size.height += heightDiff
+		self.ySpan.start += yOffset
+		self.ySpan.length += heightDiff
 	}
 	
 	mutating func pinchBottom(to yGoal: Float) {
 		let heightDiff = yGoal - self.bottom
-		self.size.height += heightDiff
+		self.ySpan.length += heightDiff
 	}
 	
 	mutating func pinchBottom(by yOffset: Float) {
 		let heightDiff = yOffset
-		self.size.height += heightDiff
+		self.ySpan.length += heightDiff
 	}
 	
 	mutating func expandWidth(to widthGoal: Float, from coordinateBaseline: Line.Horizontal) {
 		
 		let widthDiff = widthGoal - self.width
-		self.size.width = widthGoal
-		self.origin.x += self.geometryOriginXDiff(fromCoordinateBaseline: coordinateBaseline, withWidthDiff: widthDiff)
+		self.xSpan.length = widthGoal
+		self.xSpan.start += self.geometryOriginXDiff(fromCoordinateBaseline: coordinateBaseline, withWidthDiff: widthDiff)
 		
 	}
 	
 	mutating func expandWidth(by widthDiff: Float, from baseline: Line.Horizontal) {
 		
-		self.size.width += widthDiff
-		self.origin.x += self.geometryOriginXDiff(fromCoordinateBaseline: baseline, withWidthDiff: widthDiff)
+		self.xSpan.length += widthDiff
+		self.xSpan.start += self.geometryOriginXDiff(fromCoordinateBaseline: baseline, withWidthDiff: widthDiff)
 		
 	}
 	
 	mutating func expandHeight(to heightGoal: Float, from baseline: Line.Vertical) {
 		
 		let heightDiff = heightGoal - self.height
-		self.size.height = heightGoal
-		self.origin.y += self.geometryOriginYDiff(fromCoordinateBaseline: baseline, withHeightDiff: heightDiff)
+		self.ySpan.length = heightGoal
+		self.ySpan.start += self.geometryOriginYDiff(fromCoordinateBaseline: baseline, withHeightDiff: heightDiff)
 		
 	}
 	
 	mutating func expandHeight(by heightDiff: Float, from baseline: Line.Vertical) {
 		
-		self.size.height += heightDiff
-		self.origin.y += self.geometryOriginYDiff(fromCoordinateBaseline: baseline, withHeightDiff: heightDiff)
+		self.ySpan.length += heightDiff
+		self.ySpan.start += self.geometryOriginYDiff(fromCoordinateBaseline: baseline, withHeightDiff: heightDiff)
 		
 	}
 	
 	mutating func expandSize(to sizeGoal: Size, from basepoint: Point) {
 		
 		let sizeDiff = sizeGoal - self.size
-		self.size = sizeGoal
-		self.origin = self.geometryOriginDiff(fromCoordinateBasePoint: basepoint, withSizeDiff: sizeDiff)
+		let originGoal = self.geometryOriginDiff(fromCoordinateBasePoint: basepoint, withSizeDiff: sizeDiff)
+		self.xSpan.length = sizeGoal.width
+		self.ySpan.length = sizeGoal.height
+		self.xSpan.start = originGoal.x
+		self.ySpan.start = originGoal.y
 		
 	}
 	
 	mutating func expandSize(by sizeDiff: Size, from basepoint: Point) {
 		
-		self.size += sizeDiff
-		self.origin += self.geometryOriginDiff(fromCoordinateBasePoint: basepoint, withSizeDiff: sizeDiff)
-		
+		let originGoal = self.geometryOriginDiff(fromCoordinateBasePoint: basepoint, withSizeDiff: sizeDiff)
+		self.xSpan.length += sizeDiff.width
+		self.ySpan.length += sizeDiff.height
+		self.xSpan.start = originGoal.x
+		self.ySpan.start = originGoal.y
+
 	}
 	
 }
