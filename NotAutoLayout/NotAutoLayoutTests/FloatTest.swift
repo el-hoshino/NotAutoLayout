@@ -21,30 +21,18 @@ class FloatTest: XCTestCase {
         super.tearDown()
     }
     
-    func testOperations() {
-		
-		let a: NotAutoLayout.Float = 1.23
-		let b: NotAutoLayout.Float = 4.56
-		
-		let aPlusB = a + b
-		let aMinusB = a - b
-		let aTimesB = a * b
-		let aDevidedByB = a / b
-		
-		XCTAssert(aPlusB == 1.23 + 4.56)
-		XCTAssert(aMinusB == 1.23 - 4.56)
-		XCTAssert(aTimesB == 1.23 * 4.56)
-		XCTAssert(aDevidedByB == 1.23 / 4.56)
-		
-    }
-	
 	func testProperties() {
 		
 		let a: NotAutoLayout.Float = 7.89
 		
-		XCTAssert(a.half == 7.89 / 2)
-		XCTAssert(a.double == 7.89 * 2)
+		XCTAssert(a.half == 3.945)
+		XCTAssert(a.double == 15.78)
 		XCTAssert(a.isNonZero == true)
+		
+		let b: NotAutoLayout.Float = 0
+		XCTAssert(b.half == 0)
+		XCTAssert(b.double == 0)
+		XCTAssert(b.isNonZero == false)
 		
 	}
     
