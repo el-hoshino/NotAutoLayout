@@ -10,18 +10,18 @@ import XCTest
 @testable import NotAutoLayout
 
 class LineTest: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testProperties() {
+	
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
+	
+	func testProperties() {
 		
 		let span50to250 = Span(start: 50, length: 200)
 		
@@ -57,6 +57,6 @@ class LineTest: XCTestCase {
 		XCTAssert(span0to1.geometry(at: 2) == 2)
 		XCTAssert(span0to1.geometry(at: -2) == -2)
 		
-    }
-    
+	}
+	
 }
