@@ -189,6 +189,7 @@
 		BF6199B7205B8FB40096F094 /* Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B6205B8FB40096F094 /* Insets.swift */; };
 		BF6199B9205B929D0096F094 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6199B8205B929D0096F094 /* Line.swift */; };
 		BF76650420A977C300110256 /* SizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650320A977C300110256 /* SizeTest.swift */; };
+		BF76650620A979D800110256 /* RectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650520A979D800110256 /* RectTest.swift */; };
 		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
 		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
@@ -389,6 +390,7 @@
 		BF6199B6205B8FB40096F094 /* Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insets.swift; sourceTree = "<group>"; };
 		BF6199B8205B929D0096F094 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		BF76650320A977C300110256 /* SizeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; };
+		BF76650520A979D800110256 /* RectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectTest.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
 		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -738,6 +740,7 @@
 				79D10B5120A82CD100B54CD5 /* FloatTest.swift */,
 				79D10B5320A8447C00B54CD5 /* SpanTest.swift */,
 				BF76650320A977C300110256 /* SizeTest.swift */,
+				BF76650520A979D800110256 /* RectTest.swift */,
 				7983789B1E4CB2B200D3E1C2 /* Info.plist */,
 			);
 			path = NotAutoLayoutTests;
@@ -1076,6 +1079,7 @@
 				BF76650420A977C300110256 /* SizeTest.swift in Sources */,
 				79D10B5220A82CD100B54CD5 /* FloatTest.swift in Sources */,
 				7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */,
+				BF76650620A979D800110256 /* RectTest.swift in Sources */,
 				79D10B5420A8447C00B54CD5 /* SpanTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

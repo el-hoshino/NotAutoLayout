@@ -104,6 +104,14 @@ extension Point {
 	
 }
 
+extension Point: Equatable {
+	
+	public static func == (lhs: Point, rhs: Point) -> Bool {
+		return lhs.x == rhs.x && lhs.y == rhs.y
+	}
+	
+}
+
 extension Point: CustomStringConvertible {
 	
 	public var description: String {
