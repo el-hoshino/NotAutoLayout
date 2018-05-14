@@ -737,10 +737,7 @@
 			isa = PBXGroup;
 			children = (
 				798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */,
-				79D10B5120A82CD100B54CD5 /* FloatTest.swift */,
-				79D10B5320A8447C00B54CD5 /* SpanTest.swift */,
-				BF76650320A977C300110256 /* SizeTest.swift */,
-				BF76650520A979D800110256 /* RectTest.swift */,
+				BF76650720A9899900110256 /* TypesTest */,
 				7983789B1E4CB2B200D3E1C2 /* Info.plist */,
 			);
 			path = NotAutoLayoutTests;
@@ -775,6 +772,17 @@
 				7971FACE20347E1300B63CBC /* 3-Element */,
 			);
 			path = SequentialProperties;
+			sourceTree = "<group>";
+		};
+		BF76650720A9899900110256 /* TypesTest */ = {
+			isa = PBXGroup;
+			children = (
+				79D10B5120A82CD100B54CD5 /* FloatTest.swift */,
+				79D10B5320A8447C00B54CD5 /* SpanTest.swift */,
+				BF76650320A977C300110256 /* SizeTest.swift */,
+				BF76650520A979D800110256 /* RectTest.swift */,
+			);
+			path = TypesTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
