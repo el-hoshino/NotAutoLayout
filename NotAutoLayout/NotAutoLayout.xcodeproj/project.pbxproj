@@ -192,6 +192,7 @@
 		BF76650620A979D800110256 /* RectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650520A979D800110256 /* RectTest.swift */; };
 		BF76650A20A989E000110256 /* ArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650920A989E000110256 /* ArrayTest.swift */; };
 		BF76650C20A98BA300110256 /* DictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650B20A98BA200110256 /* DictionaryTest.swift */; };
+		BF76650F20AA722300110256 /* NotAutoLayoutContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650E20AA722300110256 /* NotAutoLayoutContainerTest.swift */; };
 		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
 		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
@@ -395,6 +396,7 @@
 		BF76650520A979D800110256 /* RectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectTest.swift; sourceTree = "<group>"; };
 		BF76650920A989E000110256 /* ArrayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTest.swift; sourceTree = "<group>"; };
 		BF76650B20A98BA200110256 /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
+		BF76650E20AA722300110256 /* NotAutoLayoutContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutContainerTest.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
 		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -743,6 +745,7 @@
 				798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */,
 				BF76650720A9899900110256 /* TypesTest */,
 				BF76650820A989C100110256 /* ExtensionsTest */,
+				BF76650D20AA71E200110256 /* NotAutoLayoutCompatibleTest */,
 				7983789B1E4CB2B200D3E1C2 /* Info.plist */,
 			);
 			path = NotAutoLayoutTests;
@@ -797,6 +800,14 @@
 				BF76650B20A98BA200110256 /* DictionaryTest.swift */,
 			);
 			path = ExtensionsTest;
+			sourceTree = "<group>";
+		};
+		BF76650D20AA71E200110256 /* NotAutoLayoutCompatibleTest */ = {
+			isa = PBXGroup;
+			children = (
+				BF76650E20AA722300110256 /* NotAutoLayoutContainerTest.swift */,
+			);
+			path = NotAutoLayoutCompatibleTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1102,6 +1113,7 @@
 				79D10B5220A82CD100B54CD5 /* FloatTest.swift in Sources */,
 				7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */,
 				BF76650C20A98BA300110256 /* DictionaryTest.swift in Sources */,
+				BF76650F20AA722300110256 /* NotAutoLayoutContainerTest.swift in Sources */,
 				BF76650620A979D800110256 /* RectTest.swift in Sources */,
 				79D10B5420A8447C00B54CD5 /* SpanTest.swift in Sources */,
 				BF76650A20A989E000110256 /* ArrayTest.swift in Sources */,
