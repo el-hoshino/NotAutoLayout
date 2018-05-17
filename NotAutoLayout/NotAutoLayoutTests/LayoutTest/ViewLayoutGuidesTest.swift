@@ -1,5 +1,5 @@
 //
-//  ViewLayoutGuideTest.swift
+//  ViewLayoutGuidesTest.swift
 //  NotAutoLayoutTests
 //
 //  Created by 史 翔新 on 2018/05/15.
