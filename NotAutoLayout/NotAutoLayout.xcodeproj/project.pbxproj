@@ -194,6 +194,7 @@
 		BF76650C20A98BA300110256 /* DictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650B20A98BA200110256 /* DictionaryTest.swift */; };
 		BF76650F20AA722300110256 /* NotAutoLayoutContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF76650E20AA722300110256 /* NotAutoLayoutContainerTest.swift */; };
 		BF77687720AA8E90007BFCBF /* ViewLayoutGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF77687620AA8E90007BFCBF /* ViewLayoutGuidesTest.swift */; };
+		BF92B9B420AD31A900FD7797 /* ViewPinGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92B9B320AD31A900FD7797 /* ViewPinGuidesTest.swift */; };
 		BFBD2253205A5C3C00B9C459 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */; };
 		BFBD2257205A769200B9C459 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */; };
 /* End PBXBuildFile section */
@@ -399,6 +400,7 @@
 		BF76650B20A98BA200110256 /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
 		BF76650E20AA722300110256 /* NotAutoLayoutContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutContainerTest.swift; sourceTree = "<group>"; };
 		BF77687620AA8E90007BFCBF /* ViewLayoutGuidesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuidesTest.swift; sourceTree = "<group>"; };
+		BF92B9B320AD31A900FD7797 /* ViewPinGuidesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuidesTest.swift; sourceTree = "<group>"; };
 		BFBD2252205A5C3C00B9C459 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
 		BFBD2256205A769200B9C459 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -817,6 +819,7 @@
 			isa = PBXGroup;
 			children = (
 				BF77687620AA8E90007BFCBF /* ViewLayoutGuidesTest.swift */,
+				BF92B9B320AD31A900FD7797 /* ViewPinGuidesTest.swift */,
 			);
 			path = LayoutTest;
 			sourceTree = "<group>";
@@ -1123,6 +1126,7 @@
 				BF76650420A977C300110256 /* SizeTest.swift in Sources */,
 				79D10B5220A82CD100B54CD5 /* FloatTest.swift in Sources */,
 				7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */,
+				BF92B9B420AD31A900FD7797 /* ViewPinGuidesTest.swift in Sources */,
 				BF76650C20A98BA300110256 /* DictionaryTest.swift in Sources */,
 				BF77687720AA8E90007BFCBF /* ViewLayoutGuidesTest.swift in Sources */,
 				BF76650F20AA722300110256 /* NotAutoLayoutContainerTest.swift in Sources */,
