@@ -152,11 +152,14 @@ class ViewPinGuidesTest: XCTestCase {
 		
 	}
 	
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testPerformance() {
+		
         self.measure {
-            // Put the code you want to measure the time of here.
+			_ = self.horizontalPinGuides.layoutMarginsGuide.center
+			_ = self.verticalPinGuides.layoutMarginsGuide.middle
+			_ = self.pointPinGuides.layoutMarginsGuide.middleCenter
         }
+		
     }
     
 }

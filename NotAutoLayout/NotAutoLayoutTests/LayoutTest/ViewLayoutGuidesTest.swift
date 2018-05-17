@@ -163,7 +163,7 @@ class ViewLayoutGuidesTest: XCTestCase {
 		
 	}
     
-    func testPerformanceExample() {
+    func testPerformance() {
 		
         self.measure {
             _ = self.guides.layoutMarginsGuide.frame
