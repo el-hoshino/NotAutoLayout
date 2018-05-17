@@ -162,7 +162,7 @@ extension ViewPinGuides.Point.Guide: PointPinGuideRepresentable {
 	}
 	
 	public func pointAt(x coordinateX: Float, y coordinateY: Float) -> Point {
-		return self.rect.pointGeometryAt(x: coordinateX, y: coordinateX)
+		return self.rect.pointGeometryAt(x: coordinateX, y: coordinateY)
 	}
 	
 	public var topLeading: Point {
