@@ -21,18 +21,18 @@ class ViewPinGuidesTest: XCTestCase {
 	private var pointPinGuides: ViewPinGuides.Point {
 		return .init(parentView: self.vc.view, referenceView: self.vc.guideView)
 	}
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testDefaultGuide() {
+	
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
+	
+	func testDefaultGuide() {
 		
 		let horizontal = self.horizontalPinGuides
 		let vertical = self.verticalPinGuides
@@ -60,8 +60,8 @@ class ViewPinGuidesTest: XCTestCase {
 		XCTAssertEqual(point.pointAt(x: 0.2, y: 0.1), .init(x: horizontal.horizontal(at: 0.2), y: vertical.vertical(at: 0.1)))
 		XCTAssertEqual(point.point(at: .init(x: 0.2, y: 0.1)), .init(x: horizontal.horizontal(at: 0.2), y: vertical.vertical(at: 0.1)))
 		
-    }
-    
+	}
+	
 	func testFrameGuide() {
 		
 		let horizontal = self.horizontalPinGuides.frameGuide
@@ -152,16 +152,16 @@ class ViewPinGuidesTest: XCTestCase {
 		
 	}
 	
-    func testPerformance() {
+	func testPerformance() {
 		
-        self.measure {
+		self.measure {
 			_ = self.horizontalPinGuides.layoutMarginsGuide.center
 			_ = self.verticalPinGuides.layoutMarginsGuide.middle
 			_ = self.pointPinGuides.layoutMarginsGuide.middleCenter
-        }
+		}
 		
-    }
-    
+	}
+	
 }
 
 private final class TestViewController: UIViewController {

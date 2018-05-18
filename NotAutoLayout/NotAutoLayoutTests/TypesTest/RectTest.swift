@@ -10,18 +10,18 @@ import XCTest
 @testable import NotAutoLayout
 
 class RectTest: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testProperties() {
+	
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
+	
+	func testProperties() {
 		
 		let rect = Rect(x: 100, y: 200, width: 300, height: 400)
 		
@@ -57,7 +57,7 @@ class RectTest: XCTestCase {
 		XCTAssertEqual(rect.pointGeometry(at: .init(x: 0.4, y: 0.8)), Point(x: 100 + (300 * 0.4),
 																			y: 200 + (400 * 0.8)))
 		
-    }
+	}
 	
 	func testMutatingMethods() {
 		
@@ -157,5 +157,5 @@ class RectTest: XCTestCase {
 									  height: 800))
 		
 	}
-    
+	
 }

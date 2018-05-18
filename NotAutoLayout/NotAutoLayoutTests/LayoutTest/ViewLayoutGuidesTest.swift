@@ -15,18 +15,18 @@ class ViewLayoutGuidesTest: XCTestCase {
 	private var guides: ViewLayoutGuides {
 		return self.vc.view.nal.layoutGuides
 	}
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testDefaultGuide() {
+	
+	override func setUp() {
+		super.setUp()
+		// Put setup code here. This method is called before the invocation of each test method in the class.
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+		super.tearDown()
+	}
+	
+	func testDefaultGuide() {
 		
 		let guide = self.guides
 		
@@ -60,7 +60,7 @@ class ViewLayoutGuidesTest: XCTestCase {
 		let insets = Insets(top: 100, left: 200, bottom: 300, right: 400)
 		XCTAssertEqual(guide.frame(inside: insets), Rect(x: 200, y: 100, width: 800 - (200 + 400), height: 600 - (100 + 300)))
 		
-    }
+	}
 	
 	func testBoundsGuide() {
 		
@@ -162,15 +162,15 @@ class ViewLayoutGuidesTest: XCTestCase {
 //		XCTAssertEqual(guide.frame, .init(x: 120, y: 110, width: 540, height: 360))
 		
 	}
-    
-    func testPerformance() {
+	
+	func testPerformance() {
 		
-        self.measure {
-            _ = self.guides.layoutMarginsGuide.frame
-        }
+		self.measure {
+			_ = self.guides.layoutMarginsGuide.frame
+		}
 		
-    }
-    
+	}
+	
 }
 
 private final class TestViewController: UIViewController {

@@ -394,7 +394,7 @@
 		BF6199B4205B8C790096F094 /* CGTypeConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTypeConvertible.swift; sourceTree = "<group>"; };
 		BF6199B6205B8FB40096F094 /* Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insets.swift; sourceTree = "<group>"; };
 		BF6199B8205B929D0096F094 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		BF76650320A977C300110256 /* SizeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; };
+		BF76650320A977C300110256 /* SizeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; usesTabs = 1; };
 		BF76650520A979D800110256 /* RectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectTest.swift; sourceTree = "<group>"; };
 		BF76650920A989E000110256 /* ArrayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTest.swift; sourceTree = "<group>"; };
 		BF76650B20A98BA200110256 /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
