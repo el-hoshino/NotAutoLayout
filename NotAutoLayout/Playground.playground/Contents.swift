@@ -3,6 +3,7 @@ import PlaygroundSupport
 import NotAutoLayout
 
 let controller = IPhoneXScreenController()
+controller.rotate(to: .portrait)
 PlaygroundPage.current.liveView = controller.view
 
 let appView = LayoutInfoStoredView()

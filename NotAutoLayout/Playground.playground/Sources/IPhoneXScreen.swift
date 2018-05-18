@@ -2,6 +2,15 @@ import UIKit
 
 public final class IPhoneXScreen: UIView {
 	
+	public enum Orientation: Int {
+		case up
+		case down
+		case left
+		case right
+	}
+	
+	private(set) public var orientation: Orientation = .up
+	
 	private let notch = Notch()
 	
 	public override init(frame: CGRect) {
@@ -23,16 +32,18 @@ public final class IPhoneXScreen: UIView {
 extension IPhoneXScreen {
 	
 	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		return CGSize(width: 375, height: 812)
+		switch self.orientation {
+		case .up, .down:
+			return CGSize(width: 375, height: 812)
+			
+		case .left, .right:
+			return CGSize(width: 812, height: 375)
+		}
 	}
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		
-		self.nal.layout(self.notch) { $0
-			.setTopCenter(by: { $0.topCenter })
-			.fitSize()
-		}
+		self.layoutNotch()
 	}
 	
 	public override func addSubview(_ view: UIView) {
@@ -63,6 +74,17 @@ extension IPhoneXScreen {
 
 extension IPhoneXScreen {
 	
+	public func rotate(to orientation: Orientation) {
+		
+		self.orientation = orientation
+		self.setNeedsLayout()
+		
+	}
+	
+}
+
+extension IPhoneXScreen {
+	
 	private func assertNotch(with view: UIView) {
 		assert((view == self.notch) == false)
 	}
@@ -81,6 +103,34 @@ extension IPhoneXScreen {
 		
 		self.notch.sizeToFit()
 		super.addSubview(self.notch)
+		
+	}
+	
+	private func layoutNotch() {
+		
+		self.notch.sizeToFit()
+		
+		switch self.orientation {
+		case .up:
+			self.notch.transform = .identity
+			self.notch.center.x = self.bounds.midX
+			self.notch.center.y = self.bounds.minY + self.notch.bounds.midY
+			
+		case .down:
+			self.notch.transform = .init(rotationAngle: .pi)
+			self.notch.center.x = self.bounds.midX
+			self.notch.center.y = self.bounds.maxY - self.notch.bounds.midY
+			
+		case .left:
+			self.notch.transform = .init(rotationAngle: .pi / -2)
+			self.notch.center.x = self.bounds.minX + self.notch.bounds.midY
+			self.notch.center.y = self.bounds.midY
+			
+		case .right:
+			self.notch.transform = .init(rotationAngle: .pi / 2)
+			self.notch.center.x = self.bounds.maxX - self.notch.bounds.midY
+			self.notch.center.y = self.bounds.midY
+		}
 		
 	}
 	
