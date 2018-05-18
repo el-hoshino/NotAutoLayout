@@ -76,7 +76,7 @@
 		7971FAD020347E2D00B63CBC /* MiddleSize.Sequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FACF20347E2D00B63CBC /* MiddleSize.Sequential.swift */; };
 		7971FAD2203481C700B63CBC /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7971FAD1203481C700B63CBC /* LayoutPropertyCanStoreHorizontalInsetsType.swift */; };
 		798378951E4CB2B200D3E1C2 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7983788B1E4CB2B100D3E1C2 /* NotAutoLayout.framework */; };
-		7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */; };
+		7983789A1E4CB2B200D3E1C2 /* LayoutControllingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798378991E4CB2B200D3E1C2 /* LayoutControllingTests.swift */; };
 		7983789C1E4CB2B200D3E1C2 /* NotAutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7985F689201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */; };
 		798C6EAD1FEC0A4A00D2A370 /* ViewPinGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */; };
@@ -246,7 +246,7 @@
 		7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotAutoLayout.h; sourceTree = "<group>"; };
 		7983788F1E4CB2B100D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		798378941E4CB2B200D3E1C2 /* NotAutoLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotAutoLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutTests.swift; sourceTree = "<group>"; };
+		798378991E4CB2B200D3E1C2 /* LayoutControllingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllingTests.swift; sourceTree = "<group>"; };
 		7983789B1E4CB2B200D3E1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7985F688201436100074E18D /* DidStoreAllRequiredPropertyLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreAllRequiredPropertyLayoutProperty.swift; sourceTree = "<group>"; };
 		798C6EAC1FEC0A4A00D2A370 /* ViewPinGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuides.swift; sourceTree = "<group>"; };
@@ -746,11 +746,11 @@
 		798378981E4CB2B200D3E1C2 /* NotAutoLayoutTests */ = {
 			isa = PBXGroup;
 			children = (
-				798378991E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift */,
 				BF76650720A9899900110256 /* TypesTest */,
 				BF76650820A989C100110256 /* ExtensionsTest */,
 				BF76650D20AA71E200110256 /* NotAutoLayoutCompatibleTest */,
 				BF77687520AA8E6D007BFCBF /* LayoutTest */,
+				BFAFE99320AE6B3200F5DF3C /* LayoutControlTest */,
 				7983789B1E4CB2B200D3E1C2 /* Info.plist */,
 			);
 			path = NotAutoLayoutTests;
@@ -822,6 +822,14 @@
 				BF92B9B320AD31A900FD7797 /* ViewPinGuidesTest.swift */,
 			);
 			path = LayoutTest;
+			sourceTree = "<group>";
+		};
+		BFAFE99320AE6B3200F5DF3C /* LayoutControlTest */ = {
+			isa = PBXGroup;
+			children = (
+				798378991E4CB2B200D3E1C2 /* LayoutControllingTests.swift */,
+			);
+			path = LayoutControlTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1125,7 +1133,7 @@
 			files = (
 				BF76650420A977C300110256 /* SizeTest.swift in Sources */,
 				79D10B5220A82CD100B54CD5 /* FloatTest.swift in Sources */,
-				7983789A1E4CB2B200D3E1C2 /* NotAutoLayoutTests.swift in Sources */,
+				7983789A1E4CB2B200D3E1C2 /* LayoutControllingTests.swift in Sources */,
 				BF92B9B420AD31A900FD7797 /* ViewPinGuidesTest.swift in Sources */,
 				BF76650C20A98BA300110256 /* DictionaryTest.swift in Sources */,
 				BF77687720AA8E90007BFCBF /* ViewLayoutGuidesTest.swift in Sources */,
