@@ -14,9 +14,7 @@ controller.view.nal.layout(appView) { $0
 	.stickOnParent()
 }
 
-
-
-let margin: Size = .init(width: 10, height: 10)
+let padding: NotAutoLayout.Float = 10
 let summaryView = ProfileSummaryView()
 let contentsView = ContentsView()
 let replyView = ReplyView()
@@ -37,42 +35,42 @@ contentsView.timeStamp = Date()
 
 appView.nal.setupSubview(summaryView) { $0
 	.setDefaultLayout { $0
-		.setLeft(by: { $0.left })
-		.setRight(by: { $0.right })
-		.setTop(by: { $0.top })
-		.setHeight(by: { $0.safeAreaGuide.top + 50 })
+		.setLeft(by: { $0.layoutMarginsGuide.left })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+		.setTop(by: { $0.layoutMarginsGuide.top })
+		.setHeight(to: 50)
 	}
 	.addToParent()
 }
 appView.nal.setupSubview(contentsView) { $0
 	.setDefaultLayout({ $0
-		.pinTopLeft(to: summaryView, with: { $0.bottomLeft })
-		.pinRight(to: summaryView, with: { $0.right })
+		.setLeft(by: { $0.layoutMarginsGuide.left })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+        .pinTop(to: summaryView, with: { $0.bottom + padding })
 		.fitHeight()
-		.movingY(by: margin.height)
 	})
 	.setDefaultOrder(to: 1)
 	.addToParent()
 }
 appView.nal.setupSubview(replyView) { $0
 	.setDefaultLayout({ $0
-		.setBottomLeft(by: { $0.bottomLeft })
-		.setRight(by: { $0.right })
-		.setTop(by: { $0.safeAreaGuide.bottom - 30 })
+		.setBottomLeft(by: { $0.layoutMarginsGuide.bottomLeft })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+		.setHeight(to: 30)
 	})
 	.addToParent()
 }
 
 let imageViews = (0 ..< 3).map { (_) -> UIImageView in
-	let image = #imageLiteral(resourceName: "avatar.png")
-	let view = UIImageView(image: image)
-	appView.addSubview(view)
-	return view
+    let image = #imageLiteral(resourceName: "avatar.png")
+    let view = UIImageView(image: image)
+    appView.addSubview(view)
+    return view
 }
 
 
 appView.nal.layout(imageViews) { $0
-	.setMiddle(by: { $0.vertical(at: 0.7) })
-	.fitSize()
-	.setHorizontalInsetsEqualingToMargin()
+    .setMiddle(by: { $0.vertical(at: 0.7) })
+    .fitSize()
+    .setHorizontalInsetsEqualingToMargin()
 }
