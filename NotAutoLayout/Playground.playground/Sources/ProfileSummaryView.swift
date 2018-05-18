@@ -1,8 +1,6 @@
 import UIKit
 import NotAutoLayout
 
-private let margin: NotAutoLayout.Float = 10
-
 public class ProfileSummaryView: UIView {
 	
 	private let avatarView: UIImageView
@@ -105,9 +103,8 @@ extension ProfileSummaryView {
 	private func placeAvatarView() {
 		
 		self.nal.layout(self.avatarView) { $0
-			.setTopLeft(by: { $0.safeAreaGuide.topLeft })
-			.setSize(by: { let length = min($0.safeAreaGuide.width, $0.safeAreaGuide.height); return .init(width: length, height: length) })
-			.movingX(by: margin)
+			.setTopLeft(by: { $0.layoutMarginsGuide.topLeft })
+			.setSize(by: { let length = min($0.layoutMarginsGuide.width, $0.safeAreaGuide.height); return .init(width: length, height: length) })
 			.addingProcess(by: { (frame, parameters) in
 				parameters.targetView.layer.cornerRadius = (min(frame.width, frame.height) / 2).cgValue
 			})
@@ -119,9 +116,9 @@ extension ProfileSummaryView {
 		
 		self.nal.layout(self.mainTitleLabel, by: { $0
 			.pinTopLeft(to: self.avatarView, with: { $0.topRight })
-			.setRight(by: { $0.safeAreaGuide.right - margin })
+			.setRight(by: { $0.layoutMarginsGuide.right })
 			.setBottom(by: { $0.safeAreaGuide.middle })
-			.pinchingLeft(by: margin)
+			.pinchingLeft(by: 10)
 		})
 		
 	}
