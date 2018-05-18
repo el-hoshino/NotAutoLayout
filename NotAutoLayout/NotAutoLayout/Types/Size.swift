@@ -141,6 +141,14 @@ extension Size {
 	
 }
 
+extension Size: Equatable {
+	
+	public static func == (lhs: Size, rhs: Size) -> Bool {
+		return lhs.width == rhs.width && lhs.height == rhs.height
+	}
+	
+}
+
 extension Size: CustomStringConvertible {
 	
 	public var description: String {

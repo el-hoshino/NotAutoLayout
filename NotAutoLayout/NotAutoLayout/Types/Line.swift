@@ -51,14 +51,6 @@ extension Line.Horizontal {
 	
 }
 
-extension Line.Horizontal {
-	
-	func geometryOriginOffset(from widthDiff: Float) -> Float {
-		return 0 - (widthDiff * self.value)
-	}
-	
-}
-
 // MARK: - Vertical
 extension Line {
 	

@@ -77,6 +77,11 @@ extension Rect {
 		return self.left + self.width
 	}
 	
+	/// The origin's x position of the rect, which is produced by `self.origin.x`
+	public var x: Float {
+		return self.origin.x
+	}
+	
 	/// The width of the rect, which is produced by `self.size.width`
 	public var width: Float {
 		return self.size.width
@@ -99,6 +104,11 @@ extension Rect {
 	/// The bottom position in the rect, which is produced by `self.origin.y + self.size.height`
 	public var bottom: Float {
 		return self.top + self.height
+	}
+	
+	/// The origin's y position of the rect, which is produced by `self.origin.y`
+	public var y: Float {
+		return self.origin.y
 	}
 	
 	/// The height of the rect, which is produced by `self.size.height`
@@ -419,6 +429,14 @@ extension Rect {
 		let x = 0 - (diff.width * point.x)
 		let y = 0 - (diff.height * point.y)
 		return .init(x: x, y: y)
+	}
+	
+}
+
+extension Rect: Equatable {
+	
+	public static func == (lhs: Rect, rhs: Rect) -> Bool {
+		return lhs.origin == rhs.origin && lhs.size == rhs.size
 	}
 	
 }

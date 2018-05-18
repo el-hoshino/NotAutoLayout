@@ -36,7 +36,7 @@ extension IndividualProperty.Initial: LayoutPropertyCanStoreTopLeftType {
 	public func storeTopLeft(_ topLeft: LayoutElement.Point) -> IndividualProperty.TopLeft {
 		
 		let topLeft = IndividualProperty.TopLeft(topLeft: topLeft)
-        
+		
 		return topLeft
 		
 	}

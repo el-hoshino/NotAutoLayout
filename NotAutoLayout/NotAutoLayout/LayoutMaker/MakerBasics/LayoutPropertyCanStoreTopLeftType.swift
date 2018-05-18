@@ -11,22 +11,22 @@ import Foundation
 public protocol LayoutPropertyCanStoreTopLeftType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetTopLeftProperty: LayoutMakerPropertyType
-    
-    func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftProperty
-    
+	
+	func storeTopLeft(_ topLeft: LayoutElement.Point) -> WillSetTopLeftProperty
+	
 }
 
 private extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
-    
-    func storeTopLeft(_ topLeft: LayoutElement.Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
-        
-        let newProperty = self.didSetProperty.storeTopLeft(topLeft)
-        let newMaker = self.changintProperty(to: newProperty)
+	
+	func storeTopLeft(_ topLeft: LayoutElement.Point) -> LayoutMaker<Property.WillSetTopLeftProperty> {
 		
-        return newMaker
-        
-    }
-    
+		let newProperty = self.didSetProperty.storeTopLeft(topLeft)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
+	
 }
 
 extension LayoutMaker where Property: LayoutPropertyCanStoreTopLeftType {
