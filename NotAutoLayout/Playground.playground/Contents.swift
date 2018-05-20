@@ -46,7 +46,7 @@ appView.nal.setupSubview(contentsView) { $0
 	.setDefaultLayout({ $0
 		.setLeft(by: { $0.layoutMarginsGuide.left })
 		.setRight(by: { $0.layoutMarginsGuide.right })
-        .pinTop(to: summaryView, with: { $0.bottom + padding })
+		.pinTop(to: summaryView, with: { $0.bottom + padding })
 		.fitHeight()
 	})
 	.setDefaultOrder(to: 1)
@@ -62,15 +62,15 @@ appView.nal.setupSubview(replyView) { $0
 }
 
 let imageViews = (0 ..< 3).map { (_) -> UIImageView in
-    let image = #imageLiteral(resourceName: "avatar.png")
-    let view = UIImageView(image: image)
-    appView.addSubview(view)
-    return view
+	let image = #imageLiteral(resourceName: "avatar.png")
+	let view = UIImageView(image: image)
+	appView.addSubview(view)
+	return view
 }
 
 
 appView.nal.layout(imageViews) { $0
-    .setMiddle(by: { $0.vertical(at: 0.7) })
-    .fitSize()
-    .setHorizontalInsetsEqualingToMargin()
+	.setMiddle(by: { $0.vertical(at: 0.7) })
+	.fitSize()
+	.setHorizontalInsetsEqualingToMargin()
 }
