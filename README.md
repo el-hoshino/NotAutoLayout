@@ -257,7 +257,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
 
 ## Known issues
 
-- [ ] Inline documents are not finished yet.
+- [x] Inline documents are not finished yet.
 - [ ] Some `LayoutProperty`s are not declared yet, 
 - [ ] Matrical layout is not implemented yet.
 
