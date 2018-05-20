@@ -57,17 +57,13 @@ extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreSizeToEvaluateF
 // MARK: Width
 extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreWidthType {
 	
-	public typealias WillSetWidthProperty = IndividualProperty.CenterBottomWidth
-	
-	public func storeWidth(_ width: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterBottom>) -> LayoutMaker<IndividualProperty.CenterBottomWidth> {
+	public func storeWidth(_ width: LayoutElement.Length) -> IndividualProperty.CenterBottomWidth {
 		
 		let centerBottomWidth = IndividualProperty.CenterBottomWidth(center: self.center,
-																		bottom: self.bottom,
-																		width: width)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerBottomWidth)
+																	 bottom: self.bottom,
+																	 width: width)
 		
-		return maker
+		return centerBottomWidth
 		
 	}
 	
@@ -76,17 +72,13 @@ extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreWidthType {
 // MARK: Height
 extension IndividualProperty.CenterBottom: LayoutPropertyCanStoreHeightType {
 	
-	public typealias WillSetHeightProperty = IndividualProperty.CenterBottomHeight
-	
-	public func storeHeight(_ height: LayoutElement.Length, to maker: LayoutMaker<IndividualProperty.CenterBottom>) -> LayoutMaker<IndividualProperty.CenterBottomHeight> {
+	public func storeHeight(_ height: LayoutElement.Length) -> IndividualProperty.CenterBottomHeight {
 		
 		let centerBottomHeight = IndividualProperty.CenterBottomHeight(center: self.center,
-																		  bottom: self.bottom,
-																		  height: height)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: centerBottomHeight)
+																	   bottom: self.bottom,
+																	   height: height)
 		
-		return maker
+		return centerBottomHeight
 		
 	}
 	

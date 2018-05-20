@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreBottomType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetBottomProperty: LayoutMakerPropertyType
 	
-	func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetBottomProperty>
+	func storeBottom(_ bottom: LayoutElement.Vertical) -> WillSetBottomProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
+	
+	func storeBottom(_ bottom: LayoutElement.Vertical) -> LayoutMaker<Property.WillSetBottomProperty> {
+		
+		let newProperty = self.didSetProperty.storeBottom(bottom)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 	public func setBottom(to bottom: Float) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		let bottom = LayoutElement.Vertical.constant(bottom)
-		let maker = self.didSetProperty.storeBottom(bottom, to: self)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 	public func setBottom(by bottom: @escaping (_ property: ViewLayoutGuides) -> Float) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		let bottom = LayoutElement.Vertical.byParent(bottom)
-		let maker = self.didSetProperty.storeBottom(bottom, to: self)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -45,7 +58,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreBottomType {
 	public func pinBottom(by referenceView: @escaping () -> UIView?, with bottom: @escaping (ViewPinGuides.Vertical) -> Float) -> LayoutMaker<Property.WillSetBottomProperty> {
 		
 		let bottom = LayoutElement.Vertical.byReference(referenceGetter: referenceView, bottom)
-		let maker = self.didSetProperty.storeBottom(bottom, to: self)
+		let maker = self.storeBottom(bottom)
 		
 		return maker
 		
@@ -61,14 +74,13 @@ public protocol LayoutPropertyCanStoreBottomToEvaluateFrameType: LayoutPropertyC
 
 extension LayoutPropertyCanStoreBottomToEvaluateFrameType {
 	
-	public func storeBottom(_ bottom: LayoutElement.Vertical, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeBottom(_ bottom: LayoutElement.Vertical) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(bottom: bottom, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	

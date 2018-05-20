@@ -1,5 +1,5 @@
 //
-//  DidStoreAllRequiredPropertyLayoutMaker.swift
+//  DidStoreAllRequiredPropertyLayoutProperty.swift
 //  NotAutoLayout
 //
 //  Created by 史翔新 on 2018/01/21.
@@ -8,18 +8,16 @@
 
 import Foundation
 
-typealias DidStoreAllRequiredPropertyLayoutMaker = IndividualLayout
+typealias DidStoreAllRequiredPropertyLayoutProperty = IndividualProperty.Layout
 
-extension DidStoreAllRequiredPropertyLayoutMaker: LayoutPropertyCanAddAdditionalEvaluationType {
+extension DidStoreAllRequiredPropertyLayoutProperty: LayoutPropertyCanAddAdditionalEvaluationType {
 	
-	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation, to maker: LayoutMaker<IndividualLayout>) -> LayoutMaker<IndividualLayout> {
+	public func addEvaluation(_ evaluation: FrameAdditionalEvaluation) -> IndividualProperty.Layout {
 		
 		var property = self
 		property.addAdditionalEvaluation(evaluation)
-		let maker = LayoutMaker(parentView: maker.parentView,
-								didSetProperty: property)
 		
-		return maker
+		return property
 		
 	}
 	

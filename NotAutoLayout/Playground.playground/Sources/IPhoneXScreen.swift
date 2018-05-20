@@ -2,6 +2,15 @@ import UIKit
 
 public final class IPhoneXScreen: UIView {
 	
+	public enum Orientation: Int {
+		case up
+		case down
+		case left
+		case right
+	}
+	
+	private(set) public var orientation: Orientation = .up
+	
 	private let notch = Notch()
 	
 	public override init(frame: CGRect) {
@@ -23,16 +32,18 @@ public final class IPhoneXScreen: UIView {
 extension IPhoneXScreen {
 	
 	public override func sizeThatFits(_ size: CGSize) -> CGSize {
-		return CGSize(width: 375, height: 812)
+		switch self.orientation {
+		case .up, .down:
+			return CGSize(width: 375, height: 812)
+			
+		case .left, .right:
+			return CGSize(width: 812, height: 375)
+		}
 	}
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		
-		self.nal.layout(self.notch) { $0
-			.setTopCenter(by: { $0.topCenter })
-			.fitSize()
-		}
+		self.layoutNotch()
 	}
 	
 	public override func addSubview(_ view: UIView) {
@@ -63,6 +74,17 @@ extension IPhoneXScreen {
 
 extension IPhoneXScreen {
 	
+	public func rotate(to orientation: Orientation) {
+		
+		self.orientation = orientation
+		self.setNeedsLayout()
+		
+	}
+	
+}
+
+extension IPhoneXScreen {
+	
 	private func assertNotch(with view: UIView) {
 		assert((view == self.notch) == false)
 	}
@@ -81,6 +103,34 @@ extension IPhoneXScreen {
 		
 		self.notch.sizeToFit()
 		super.addSubview(self.notch)
+		
+	}
+	
+	private func layoutNotch() {
+		
+		self.notch.sizeToFit()
+		
+		switch self.orientation {
+		case .up:
+			self.notch.transform = .identity
+			self.notch.center.x = self.bounds.midX
+			self.notch.center.y = self.bounds.minY + self.notch.bounds.midY
+			
+		case .down:
+			self.notch.transform = .init(rotationAngle: .pi)
+			self.notch.center.x = self.bounds.midX
+			self.notch.center.y = self.bounds.maxY - self.notch.bounds.midY
+			
+		case .left:
+			self.notch.transform = .init(rotationAngle: .pi / -2)
+			self.notch.center.x = self.bounds.minX + self.notch.bounds.midY
+			self.notch.center.y = self.bounds.midY
+			
+		case .right:
+			self.notch.transform = .init(rotationAngle: .pi / 2)
+			self.notch.center.x = self.bounds.maxX - self.notch.bounds.midY
+			self.notch.center.y = self.bounds.midY
+		}
 		
 	}
 	
@@ -111,7 +161,7 @@ private final class Notch: UIView {
 	
 	override func draw(_ rect: CGRect) {
 		super.draw(rect)
-		self.drawNotch(topRadius: 6, bottomRadius: 20)
+		self.drawNotch(in: rect, topRadius: 6, bottomRadius: 20)
 	}
 	
 	override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -124,16 +174,21 @@ private final class Notch: UIView {
 		
 	}
 	
-	private func drawNotch(topRadius: CGFloat, bottomRadius: CGFloat) {
+	private func drawNotch(in rect: CGRect, topRadius: CGFloat, bottomRadius: CGFloat) {
 		
-		let leftTopArcCenter = CGPoint(x: 0, y: topRadius)
-		let rightTopArcCenter = CGPoint(x: self.bounds.width, y: leftTopArcCenter.y)
-		let leftBottomArcCenter = CGPoint(x: topRadius + bottomRadius, y: self.bounds.height - bottomRadius)
-		let rightBottomArcCenter = CGPoint(x: self.bounds.width - leftBottomArcCenter.x, y: leftBottomArcCenter.y)
+		let topArcCenterXMargin: CGFloat = 0
+		let topArcCenterY = rect.minY + topRadius
+		let bottomArcCenterXMargin = topRadius + bottomRadius
+		let bottomArcCenterY = rect.maxY - bottomRadius
 		
-		let leftBottomArcLeftPoint = CGPoint(x: topRadius, y: leftBottomArcCenter.y)
-		let rightBottomArcBottomPoint = CGPoint(x: self.bounds.width - topRadius - bottomRadius, y: self.bounds.height)
-		let rightTopArcLeftPoint = CGPoint(x: self.bounds.width - topRadius, y: topRadius)
+		let leftTopArcCenter = CGPoint(x: rect.minX + topArcCenterXMargin, y: topArcCenterY)
+		let rightTopArcCenter = CGPoint(x: rect.maxX - topArcCenterXMargin, y: topArcCenterY)
+		let leftBottomArcCenter = CGPoint(x: rect.minX + bottomArcCenterXMargin, y: bottomArcCenterY)
+		let rightBottomArcCenter = CGPoint(x: rect.maxX - bottomArcCenterXMargin, y: bottomArcCenterY)
+		
+		let leftBottomArcLeftPoint = CGPoint(x: leftBottomArcCenter.x - bottomRadius, y: leftBottomArcCenter.y)
+		let rightBottomArcBottomPoint = CGPoint(x: rightBottomArcCenter.x, y: rightBottomArcCenter.y + bottomRadius)
+		let rightTopArcLeftPoint = CGPoint(x: rightTopArcCenter.x - topRadius, y: rightTopArcCenter.y)
 		
 		let path = UIBezierPath()
 		path.addArc(withCenter: leftTopArcCenter, radius: topRadius, startAngle: .pi * 0.5, endAngle: 0, clockwise: true)

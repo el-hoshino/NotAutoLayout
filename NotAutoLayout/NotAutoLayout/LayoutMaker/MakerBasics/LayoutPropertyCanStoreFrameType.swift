@@ -12,7 +12,20 @@ public protocol LayoutPropertyCanStoreFrameType: LayoutMakerPropertyType {
 	
 	associatedtype WillSetFrameProperty: LayoutMakerPropertyType
 	
-	func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<WillSetFrameProperty>
+	func storeFrame(_ frame: LayoutElement.Rect) -> WillSetFrameProperty
+	
+}
+
+private extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
+	
+	func storeFrame(_ frame: LayoutElement.Rect) -> LayoutMaker<Property.WillSetFrameProperty> {
+		
+		let newProperty = self.didSetProperty.storeFrame(frame)
+		let newMaker = self.changintProperty(to: newProperty)
+		
+		return newMaker
+		
+	}
 	
 }
 
@@ -21,7 +34,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	public func setFrame(to frame: Rect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.constant(frame)
-		let maker = self.didSetProperty.storeFrame(frame, to: self)
+		let maker = self.storeFrame(frame)
 		
 		return maker
 		
@@ -30,7 +43,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	public func setFrame(by frame: @escaping (_ property: ViewLayoutGuides) -> Rect) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent(frame)
-		let maker = self.didSetProperty.storeFrame(frame, to: self)
+		let maker = self.storeFrame(frame)
 		
 		return maker
 		
@@ -43,7 +56,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	public func stickOnParent(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent({ $0.boundsGuide.frame(inside: insets) })
-		let maker = self.didSetProperty.storeFrame(frame, to: self)
+		let maker = self.storeFrame(frame)
 		
 		return maker
 		
@@ -53,7 +66,7 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 	public func stickOnParentSafeArea(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent({ $0.safeAreaGuide.frame(inside: insets) })
-		let maker = self.didSetProperty.storeFrame(frame, to: self)
+		let maker = self.storeFrame(frame)
 		
 		return maker
 
@@ -69,14 +82,13 @@ public protocol LayoutPropertyCanStoreFrameToEvaluateFrameType: LayoutPropertyCa
 
 extension LayoutPropertyCanStoreFrameToEvaluateFrameType {
 	
-	public func storeFrame(_ frame: LayoutElement.Rect, to maker: LayoutMaker<Self>) -> LayoutMaker<IndividualLayout> {
+	public func storeFrame(_ frame: LayoutElement.Rect) -> IndividualProperty.Layout {
 		
-		let layout = IndividualLayout(frame: { (parameters) -> Rect in
+		let layout = IndividualProperty.Layout(frame: { (parameters) -> Rect in
 			return self.evaluateFrame(frame: frame, parameters: parameters)
 		})
-		let maker = LayoutMaker(parentView: maker.parentView, didSetProperty: layout)
 		
-		return maker
+		return layout
 		
 	}
 	

@@ -84,6 +84,14 @@ extension Span {
 	
 }
 
+extension Span: Equatable {
+	
+	public static func == (lhs: Span, rhs: Span) -> Bool {
+		return lhs.start == rhs.start && lhs.length == rhs.length
+	}
+	
+}
+
 extension Span: CustomStringConvertible {
 	
 	public var description: String {

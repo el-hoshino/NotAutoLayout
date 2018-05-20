@@ -20,3 +20,16 @@ public struct LayoutMaker<Property: LayoutMakerPropertyType> {
 public protocol LayoutMakerPropertyType {
 	
 }
+
+extension LayoutMaker {
+	
+	func changintProperty <T: LayoutMakerPropertyType> (to property: T) -> LayoutMaker<T> {
+		
+		let maker = LayoutMaker<T>(parentView: self.parentView,
+								   didSetProperty: property)
+		
+		return maker
+		
+	}
+	
+}

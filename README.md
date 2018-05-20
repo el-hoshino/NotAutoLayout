@@ -60,6 +60,7 @@ import PlaygroundSupport
 import NotAutoLayout
 
 let controller = IPhoneXScreenController()
+controller.rotate(to: .portrait)
 PlaygroundPage.current.liveView = controller.view
 
 let appView = LayoutInfoStoredView()
@@ -70,9 +71,7 @@ controller.view.nal.layout(appView) { $0
 	.stickOnParent()
 }
 
-
-
-let margin: Size = .init(width: 10, height: 10)
+let padding: NotAutoLayout.Float = 10
 let summaryView = ProfileSummaryView()
 let contentsView = ContentsView()
 let replyView = ReplyView()
@@ -93,28 +92,28 @@ contentsView.timeStamp = Date()
 
 appView.nal.setupSubview(summaryView) { $0
 	.setDefaultLayout { $0
-		.setLeft(by: { $0.left })
-		.setRight(by: { $0.right })
-		.setTop(by: { $0.top })
-		.setHeight(by: { $0.safeAreaGuide.top + 50 })
+		.setLeft(by: { $0.layoutMarginsGuide.left })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+		.setTop(by: { $0.layoutMarginsGuide.top })
+		.setHeight(to: 50)
 	}
 	.addToParent()
 }
 appView.nal.setupSubview(contentsView) { $0
 	.setDefaultLayout({ $0
-		.pinTopLeft(to: summaryView, with: { $0.bottomLeft })
-		.pinRight(to: summaryView, with: { $0.right })
+		.setLeft(by: { $0.layoutMarginsGuide.left })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+		.pinTop(to: summaryView, with: { $0.bottom + padding })
 		.fitHeight()
-		.movingY(by: margin.height)
 	})
 	.setDefaultOrder(to: 1)
 	.addToParent()
 }
 appView.nal.setupSubview(replyView) { $0
 	.setDefaultLayout({ $0
-		.setBottomLeft(by: { $0.bottomLeft })
-		.setRight(by: { $0.right })
-		.setTop(by: { $0.safeAreaGuide.bottom - 30 })
+		.setBottomLeft(by: { $0.layoutMarginsGuide.bottomLeft })
+		.setRight(by: { $0.layoutMarginsGuide.right })
+		.setHeight(to: 30)
 	})
 	.addToParent()
 }
@@ -125,6 +124,7 @@ let imageViews = (0 ..< 3).map { (_) -> UIImageView in
 	appView.addSubview(view)
 	return view
 }
+
 
 appView.nal.layout(imageViews) { $0
 	.setMiddle(by: { $0.vertical(at: 0.7) })
@@ -257,7 +257,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
 
 ## Known issues
 
-- [ ] Inline documents are not finished yet.
+- [x] Inline documents are not finished yet.
 - [ ] Some `LayoutProperty`s are not declared yet, 
 - [ ] Matrical layout is not implemented yet.
 

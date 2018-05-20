@@ -91,7 +91,7 @@ extension ViewInfo : ExpressibleByDictionaryLiteral {
 	
 }
 
-public typealias LayoutInfo = ViewInfo<IndividualLayout>
+public typealias LayoutInfo = ViewInfo<IndividualProperty.Layout>
 
 public typealias OrderInfo = ViewInfo<Int>
 
