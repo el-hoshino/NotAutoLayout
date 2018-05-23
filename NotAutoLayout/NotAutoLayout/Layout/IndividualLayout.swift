@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension IndividualProperty {
+public struct IndividualProperty {
 	
 	public struct Layout: LayoutMakerPropertyType {
 		
