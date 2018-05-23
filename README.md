@@ -34,7 +34,7 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 ### Use Carthage
 
 - Download and install [Carthage](https://github.com/Carthage/Carthage#installing-carthage).
-- Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile).
+- Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile):
 
 ```txt
 github "el-hoshino/NotAutoLayout" ~> 3.0
@@ -42,6 +42,17 @@ github "el-hoshino/NotAutoLayout" ~> 3.0
 
 - Run `carthage update`.
 - Add the framework to your project.
+
+### Use CocoaPods
+
+- Download and install [CocoaPods](https://cocoapods.org).
+- Specify NotAutoLayout in your [Podfile](https://guides.cocoapods.org/syntax/podfile.html) like following:
+
+```txt
+pod 'NotAutoLayout'
+```
+
+- Run `pod install`.
 
 ### Manually
 
