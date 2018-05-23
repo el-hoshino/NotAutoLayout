@@ -8,12 +8,8 @@
 
 import Foundation
 
+// MARK: - Declarations -
 public struct ViewPinGuides {
-	
-}
-
-// MARK: - Horizontal
-extension ViewPinGuides {
 	
 	public struct Horizontal {
 		
@@ -32,8 +28,44 @@ extension ViewPinGuides {
 		
 	}
 	
+	public struct Vertical {
+		
+		private(set) weak var parentView: UIView?
+		private(set) var referenceViewGetter: () -> UIView?
+		
+		init(parentView: UIView?, referenceView: UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = { [weak referenceView] in referenceView }
+		}
+		
+		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = referenceViewGetter
+		}
+		
+	}
+	
+	public struct Point {
+		
+		private(set) weak var parentView: UIView?
+		private(set) var referenceViewGetter: () -> UIView?
+		
+		init(parentView: UIView?, referenceView: UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = { [weak referenceView] in referenceView }
+		}
+		
+		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
+			self.parentView = parentView
+			self.referenceViewGetter = referenceViewGetter
+		}
+		
+	}
+	
 }
 
+// MARK: - Implementations -
+// MARK: - Horizontal
 extension ViewPinGuides.Horizontal {
 	
 	var referenceView: UIView? {
@@ -120,27 +152,6 @@ extension ViewPinGuides.Horizontal: HorizontalPinGuideRepresentable {
 }
 
 // MARK: - Vertical
-extension ViewPinGuides {
-	
-	public struct Vertical {
-		
-		private(set) weak var parentView: UIView?
-		private(set) var referenceViewGetter: () -> UIView?
-		
-		init(parentView: UIView?, referenceView: UIView?) {
-			self.parentView = parentView
-			self.referenceViewGetter = { [weak referenceView] in referenceView }
-		}
-		
-		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
-			self.parentView = parentView
-			self.referenceViewGetter = referenceViewGetter
-		}
-		
-	}
-	
-}
-
 extension ViewPinGuides.Vertical {
 	
 	var referenceView: UIView? {
@@ -215,27 +226,6 @@ extension ViewPinGuides.Vertical: VerticalPinGuideRepresentable {
 }
 
 // MARK: - Point
-extension ViewPinGuides {
-	
-	public struct Point {
-		
-		private(set) weak var parentView: UIView?
-		private(set) var referenceViewGetter: () -> UIView?
-		
-		init(parentView: UIView?, referenceView: UIView?) {
-			self.parentView = parentView
-			self.referenceViewGetter = { [weak referenceView] in referenceView }
-		}
-		
-		init(parentView: UIView?, referenceViewGetter: @escaping () -> UIView?) {
-			self.parentView = parentView
-			self.referenceViewGetter = referenceViewGetter
-		}
-		
-	}
-	
-}
-
 extension ViewPinGuides.Point {
 	
 	var referenceView: UIView? {
