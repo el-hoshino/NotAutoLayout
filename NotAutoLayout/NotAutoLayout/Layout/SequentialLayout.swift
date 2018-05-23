@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension SequentialProperty {
+public struct SequentialProperty {
 	
 	public struct Layout: LayoutMakerPropertyType {
 		
