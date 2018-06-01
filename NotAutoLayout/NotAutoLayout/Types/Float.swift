@@ -308,7 +308,7 @@ extension Float: FloatingPoint {
 extension Float {
 	
 	var bitriseValue: Int {
-		return 1
+		return 0
 	}
 	
 }
