@@ -307,6 +307,14 @@ extension Float: FloatingPoint {
 
 extension Float {
 	
+	var bitriseValue: Int {
+		return 1
+	}
+	
+}
+
+extension Float {
+	
 	/// Returns `self / 2`.
 	public var half: Float {
 		return self / 2

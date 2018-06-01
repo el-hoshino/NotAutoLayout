@@ -21,6 +21,11 @@ class FloatTest: XCTestCase {
 		super.tearDown()
 	}
 	
+	func testBitrise() {
+		let a: NotAutoLayout.Float = 1
+		XCTAssertEqual(a.bitriseValue, 0)
+	}
+	
 	func testProperties() {
 		
 		let a: NotAutoLayout.Float = 7.89
