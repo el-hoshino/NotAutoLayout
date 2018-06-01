@@ -23,7 +23,7 @@ class FloatTest: XCTestCase {
 	
 	func testBitrise() {
 		let a: NotAutoLayout.Float = 1
-		XCTAssertEqual(a.bitriseValue, 0)
+		XCTAssertEqual(a.bitriseValue, 1)
 	}
 	
 	func testProperties() {
