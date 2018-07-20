@@ -12,10 +12,15 @@ extension ViewLayoutGuides {
 	
 	public struct Guide {
 		
-		let directionGetter: () -> UIUserInterfaceLayoutDirection?
-		let rect: Rect
+		let _direction: UIUserInterfaceLayoutDirection
+		let _rect: Rect
 		
-		static let empty: ViewLayoutGuides.Guide = .init(directionGetter: { nil },
+		init(direction: UIUserInterfaceLayoutDirection, rect: Rect) {
+			self._direction = direction
+			self._rect = rect
+		}
+		
+		static let empty: ViewLayoutGuides.Guide = .init(direction: .leftToRight,
 														 rect: .zero)
 		
 	}
@@ -25,23 +30,23 @@ extension ViewLayoutGuides {
 extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 	
 	public var direction: UIUserInterfaceLayoutDirection {
-		return self.directionGetter() ?? .leftToRight
+		return self._direction
 	}
 	
 	public var left: Float {
-		return self.rect.left
+		return self._rect.left
 	}
 	
 	public var center: Float {
-		return self.rect.center
+		return self._rect.center
 	}
 	
 	public var right: Float {
-		return self.rect.right
+		return self._rect.right
 	}
 	
 	public var width: Float {
-		return self.rect.width
+		return self._rect.width
 	}
 	
 	public func horizontal(at coordinatePosition: Float) -> Float {
@@ -49,19 +54,19 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 	}
 	
 	public var top: Float {
-		return self.rect.top
+		return self._rect.top
 	}
 	
 	public var middle: Float {
-		return self.rect.middle
+		return self._rect.middle
 	}
 	
 	public var bottom: Float {
-		return self.rect.bottom
+		return self._rect.bottom
 	}
 	
 	public var height: Float {
-		return self.rect.height
+		return self._rect.height
 	}
 	
 	public func vertical(at coordinatePosition: Float) -> Float {
@@ -69,55 +74,55 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 	}
 	
 	public var topLeft: Point {
-		return self.rect.topLeft
+		return self._rect.topLeft
 	}
 	
 	public var topCenter: Point {
-		return self.rect.topCenter
+		return self._rect.topCenter
 	}
 	
 	public var topRight: Point {
-		return self.rect.topRight
+		return self._rect.topRight
 	}
 	
 	public var middleLeft: Point {
-		return self.rect.middleLeft
+		return self._rect.middleLeft
 	}
 	
 	public var middleCenter: Point {
-		return self.rect.middleCenter
+		return self._rect.middleCenter
 	}
 	
 	public var middleRight: Point {
-		return self.rect.middleRight
+		return self._rect.middleRight
 	}
 	
 	public var bottomLeft: Point {
-		return self.rect.bottomLeft
+		return self._rect.bottomLeft
 	}
 	
 	public var bottomCenter: Point {
-		return self.rect.bottomCenter
+		return self._rect.bottomCenter
 	}
 	
 	public var bottomRight: Point {
-		return self.rect.bottomRight
+		return self._rect.bottomRight
 	}
 	
 	public var size: Size {
-		return self.rect.size
+		return self._rect.size
 	}
 	
 	public func point(at coordinatePoint: Point) -> Point {
-		return self.rect.pointGeometry(at: coordinatePoint)
+		return self._rect.pointGeometry(at: coordinatePoint)
 	}
 	
 	public var frame: Rect {
-		return self.rect
+		return self._rect
 	}
 	
 	public func frame(inside insets: Insets) -> Rect {
-		return self.rect.rect(inside: insets)
+		return self._rect.rect(inside: insets)
 	}
 	
 	public var leading: Float {
