@@ -254,9 +254,9 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
 
  Items | NotAutoLayout | [PinLayout](https://github.com/mirego/PinLayout) | [LayoutKit](https://github.com/linkedin/LayoutKit) | [SnapKit](https://github.com/SnapKit/SnapKit) | [PureLayout](https://github.com/PureLayout/PureLayout) | [Cartography](https://github.com/robb/Cartography)
 ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ----------------
- Written in      | Swift            | Swift (and a little ObjC) | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
+ Written in      | Swift            | Swift            | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
  Based on        | Pure code        | Pure code        | Pure code        | Auto Layout      | Auto Layout      | Auto Layout
- Platforms       | iOS              | iOS / tvOS       | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
+ Platforms       | iOS              | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
  Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage
  Performance     | ◯                | ◯                | ◯                | ×                | ×                | ×
  Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △<a id="q3" href="#a3"><sup>3</sup></a>
@@ -264,7 +264,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
  Ex-Short syntax | ×                | ◯                | ×                | ×                | ×                | ×
  Chained methods | ◯                | ◯                | ×                | △<a id="q6" href="#a6"><sup>6</sup></a> | × | ×
  Targeted extensions<a id="q7" href="#a7"><sup>7</sup></a> | ◯ | ◯ | ×<a id="q8" href="#a8"><sup>8</sup></a> | ◯ | × | ×<a id="q8" href="#a8"><sup>8</sup></a>
- Behaviour on human-errors<a id="q2" href="#a2"><sup>2</sup></a> | Build-time Error | Nothing | Build-time Error<a id="q9" href="#a9"><sup>9</sup></a> | Run-time Warning | Run-time Warning | Run-Time Warning
+ Behaviour on human-errors<a id="q2" href="#a2"><sup>2</sup></a> | Build-time Error | Run-time Warning | Build-time Error<a id="q9" href="#a9"><sup>9</sup></a> | Run-time Warning | Run-time Warning | Run-Time Warning
 
 ## Known issues
 

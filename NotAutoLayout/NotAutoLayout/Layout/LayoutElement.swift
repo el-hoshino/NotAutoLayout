@@ -50,8 +50,8 @@ extension LayoutElement {
 		
 		public enum AspectSizing {
 			
-			case fit(Float?)
-			case fill(Float?)
+			case fit(Float?, layoutGuideGetter: (ViewLayoutGuides) -> LayoutGuideRepresentable)
+			case fill(Float?, layoutGuideGetter: (ViewLayoutGuides) -> LayoutGuideRepresentable)
 			
 			@available(iOS 11.0, *)
 			case safeAreaFit(Float?, safeAreaOnly: Bool)
@@ -61,10 +61,10 @@ extension LayoutElement {
 			
 			var ratio: Float? {
 				switch self {
-				case .fit(let ratio):
+				case .fit(let ratio, _):
 					return ratio
 					
-				case .fill(let ratio):
+				case .fill(let ratio, _):
 					return ratio
 					
 				case .safeAreaFit(let ratio, safeAreaOnly: _):
@@ -108,6 +108,26 @@ extension LayoutElement {
 				case .fill, .safeAreaFill:
 					return true
 				}
+			}
+			
+			func layougGuide(in guides: ViewLayoutGuides) -> LayoutGuideRepresentable {
+				
+				switch self {
+				case .fit(_, layoutGuideGetter: let getter):
+					return getter(guides)
+					
+				case .fill(_, layoutGuideGetter: let getter):
+					return getter(guides)
+					
+				case .safeAreaFill, .safeAreaFit:
+					if #available(iOS 11.0, *) {
+						return guides.safeAreaGuide
+					} else {
+						return guides
+					}
+					
+				}
+				
 			}
 			
 		}
