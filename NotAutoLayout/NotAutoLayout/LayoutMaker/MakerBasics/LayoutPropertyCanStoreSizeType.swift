@@ -58,18 +58,18 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	public func aspectFit(ratio: Float? = nil) -> LayoutMaker<Property.WillSetSizeProperty> {
+	public func aspectFit(ratio: Float? = nil, in layoutGuideGetter: @escaping ((ViewLayoutGuides) -> LayoutGuideRepresentable) = { $0 }) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.fit(ratio))
+		let size = LayoutElement.Size.aspect(.fit(ratio, layoutGuideGetter: layoutGuideGetter))
 		let maker = self.storeSize(size)
 		
 		return maker
 		
 	}
 	
-	public func aspectFill(ratio: Float? = nil) -> LayoutMaker<Property.WillSetSizeProperty> {
+	public func aspectFill(ratio: Float? = nil, in layoutGuideGetter: @escaping ((ViewLayoutGuides) -> LayoutGuideRepresentable) = { $0 }) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
-		let size = LayoutElement.Size.aspect(.fill(ratio))
+		let size = LayoutElement.Size.aspect(.fill(ratio, layoutGuideGetter: layoutGuideGetter))
 		let maker = self.storeSize(size)
 		
 		return maker

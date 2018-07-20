@@ -228,19 +228,7 @@ extension ViewLayoutGuides {
 	
 	func evaluateSize(for view: UIView, from aspect: LayoutElement.Size.AspectSizing) -> Size {
 		
-		let canvasSize = { (safeAreaOnly: Bool) -> Size in
-			switch safeAreaOnly {
-			case true:
-				if #available(iOS 11.0, *) {
-					return self.safeAreaGuide.size
-				} else {
-					fallthrough
-				}
-				
-			case false:
-				return self.boundsGuide.size
-			}
-		}(aspect.safeAreaOnly)
+		let canvasSize = aspect.layougGuide(in: self).size
 		
 		let targetRatio = aspect.ratio ?? { (targetView: UIView?) in
 			return targetView?.sizeThatFits(.zero).ratio
