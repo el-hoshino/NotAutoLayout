@@ -131,6 +131,38 @@ class NotAutoLayoutTests: XCTestCase {
 		
 	}
 	
+	func testCase4() {
+		
+		/*======================================================
+		0┇      200┇      400┇      600┇      800┇
+		┅┌───────────────────────────────────────┐
+		 │view┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓    │
+		2│    ┃target                       ┃    │
+		0│    ┃                             ┃    │
+		0│    ┃                             ┃    │
+		┅│    ┃                             ┃    │
+		 │    ┃                             ┃    │
+		4│    ┃                             ┃    │
+		0│    ┃                             ┃    │
+		0│    ┃                             ┃    │
+		┅│    ┃                             ┃    │
+		 │    ┃                             ┃    │
+		6│    ┃                             ┃    │
+		0│    ┃                             ┃    │
+		0│    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛    │
+		┅└───────────────────────────────────────┘
+		
+		======================================================*/
+		
+		self.view.nal.layout(self.target) { $0
+			.setTopCenter(by: { $0.layoutMarginsGuide.topCenter })
+			.aspectFit(ratio: 1, in: { $0.layoutMarginsGuide })
+		}
+		
+		XCTAssertEqual(self.target.frame, .init(x: 110, y: 10, width: 560, height: 560))
+		
+	}
+	
 	func testPerformance() {
 		
 		self.measure {
