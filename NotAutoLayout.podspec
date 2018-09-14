@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "NotAutoLayout"
-  s.version      = "3.1.2"
+  s.version      = "3.2.0"
   s.summary      = "Layout your views without Auto Layout constraints, in a much more swifty way."
 
   # This description is used to generate tags and improve search results.
@@ -62,7 +62,7 @@ Pod::Spec.new do |s|
   #
 
   s.platform     = :ios, "9.0"
-  s.swift_version = "4.0"
+  s.swift_version = "4.2"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
