@@ -3,7 +3,7 @@
 [![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Build Status](https://www.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
+[![Build Status](https://app.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 
 ## -The only<a id="q1" href="#a1"><sup>1</sup></a> layout framework that treats layout human-erros<a id="q2" href="#a2"><sup>2</sup></a> as a Build-time error-
 
@@ -26,8 +26,8 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 ## Requirements
 
 - iOS 9.0+
-- Xcode 9.2+
-- Swift 4.0+
+- Xcode 10.0+
+- Swift 4.2+
 
 ## Installation
 
@@ -37,7 +37,7 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 - Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile):
 
 ```txt
-github "el-hoshino/NotAutoLayout" ~> 3.0
+github "el-hoshino/NotAutoLayout" ~> 3.2
 ```
 
 - Run `carthage update`.
@@ -49,7 +49,7 @@ github "el-hoshino/NotAutoLayout" ~> 3.0
 - Specify NotAutoLayout in your [Podfile](https://guides.cocoapods.org/syntax/podfile.html) like following:
 
 ```txt
-pod 'NotAutoLayout'
+pod 'NotAutoLayout', `~> 3.2`
 ```
 
 - Run `pod install`.
@@ -257,7 +257,7 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
  Written in      | Swift            | Swift            | Swift (and a little ObjC) | Swift | ObjC (and a little Swift) | Swift
  Based on        | Pure code        | Pure code        | Pure code        | Auto Layout      | Auto Layout      | Auto Layout
  Platforms       | iOS              | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS / tvOS | iOS / macOS
- Dependency Manager | Carthage      | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage
+ Dependency Manager | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage | CocoaPods / Carthage
  Performance     | ◯                | ◯                | ◯                | ×                | ×                | ×
  Easy to write   | ◯                | ◯                | ×                | ◯                | ◯                | △<a id="q3" href="#a3"><sup>3</sup></a>
  Easy to read    | ◯                | △<a id="q4" href="#a4"><sup>4</sup></a> | △<a id="q5" href="#a5"><sup>5</sup></a> | ◯ | ◯ | ◯
