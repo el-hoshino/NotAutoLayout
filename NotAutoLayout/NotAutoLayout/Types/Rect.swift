@@ -279,7 +279,7 @@ extension Rect {
 	///
 	/// - Returns: A new rect inside the current rect with given insets.
 	public func rect(inside insets: Insets) -> Rect {
-		let frame = UIEdgeInsetsInsetRect(self.cgValue, insets.cgValue)
+		let frame = self.cgValue.inset(by: insets.cgValue)
 		return Rect(frame)
 	}
 	

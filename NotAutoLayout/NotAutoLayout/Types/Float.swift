@@ -136,43 +136,7 @@ extension Float: FloatingPoint {
 		self.value = CGFloat(signOf: signOf.value, magnitudeOf: magnitudeOf.value)
 	}
 	
-	public init(_ value: UInt8) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: Int8) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: UInt16) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: Int16) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: UInt32) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: Int32) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: UInt64) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: Int64) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: UInt) {
-		self.value = CGFloat(value)
-	}
-	
-	public init(_ value: Int) {
+	public init<Source>(_ value: Source) where Source : BinaryInteger {
 		self.value = CGFloat(value)
 	}
 	
@@ -200,20 +164,16 @@ extension Float: FloatingPoint {
 		return Float(CGFloat.pi)
 	}
 	
+	public var ulp: Float {
+		return Float(self.value.ulp)
+	}
+	
 	public static var leastNormalMagnitude: Float {
 		return Float(CGFloat.leastNormalMagnitude)
 	}
 	
 	public static var leastNonzeroMagnitude: Float {
 		return Float(CGFloat.leastNonzeroMagnitude)
-	}
-	
-	public static func /(lhs: Float, rhs: Float) -> Float {
-		return Float(lhs.value / rhs.value)
-	}
-	
-	public static func /=(lhs: inout Float, rhs: Float) {
-		lhs = lhs / rhs
 	}
 	
 	public var sign: FloatingPointSign {
@@ -228,12 +188,52 @@ extension Float: FloatingPoint {
 		return Float(self.value.significand)
 	}
 	
-	public var ulp: Float {
-		return Float(self.value.ulp)
+	public static func /(lhs: Float, rhs: Float) -> Float {
+		return Float(lhs.value / rhs.value)
+	}
+	
+	public static func /=(lhs: inout Float, rhs: Float) {
+		lhs = lhs / rhs
+	}
+	
+	public mutating func round(_ rule: FloatingPointRoundingRule) {
+		self.value.round(rule)
+	}
+	
+	public mutating func formRemainder(dividingBy other: Float) {
+		self.value.formRemainder(dividingBy: other.value)
+	}
+	
+	public mutating func formTruncatingRemainder(dividingBy other: Float) {
+		self.value.formTruncatingRemainder(dividingBy: other.value)
+	}
+	
+	public mutating func formSquareRoot() {
+		self.value.formSquareRoot()
+	}
+	
+	public mutating func addProduct(_ lhs: Float, _ rhs: Float) {
+		self.value.addProduct(lhs.value, rhs.value)
 	}
 	
 	public var nextUp: Float {
 		return Float(self.value.nextUp)
+	}
+	
+	public func isEqual(to other: Float) -> Bool {
+		return self.value.isEqual(to: other.value)
+	}
+	
+	public func isLess(than other: Float) -> Bool {
+		return self.value.isLess(than: other.value)
+	}
+	
+	public func isLessThanOrEqualTo(_ other: Float) -> Bool {
+		return self.value.isLessThanOrEqualTo(other.value)
+	}
+	
+	public func isTotallyOrdered(belowOrEqualTo other: Float) -> Bool {
+		return self.value.isTotallyOrdered(belowOrEqualTo: other.value)
 	}
 	
 	public var isNormal: Bool {
@@ -266,41 +266,6 @@ extension Float: FloatingPoint {
 	
 	public var isCanonical: Bool {
 		return self.value.isCanonical
-	}
-	public func isEqual(to other: Float) -> Bool {
-		return self.value.isEqual(to: other.value)
-	}
-	
-	public func isLess(than other: Float) -> Bool {
-		return self.value.isLess(than: other.value)
-	}
-	
-	public func isLessThanOrEqualTo(_ other: Float) -> Bool {
-		return self.value.isLessThanOrEqualTo(other.value)
-	}
-	
-	public func isTotallyOrdered(belowOrEqualTo other: Float) -> Bool {
-		return self.value.isTotallyOrdered(belowOrEqualTo: other.value)
-	}
-	
-	public mutating func formRemainder(dividingBy other: Float) {
-		self.value.formRemainder(dividingBy: other.value)
-	}
-	
-	public mutating func formTruncatingRemainder(dividingBy other: Float) {
-		self.value.formTruncatingRemainder(dividingBy: other.value)
-	}
-	
-	public mutating func formSquareRoot() {
-		self.value.formSquareRoot()
-	}
-	
-	public mutating func addProduct(_ lhs: Float, _ rhs: Float) {
-		self.value.addProduct(lhs.value, rhs.value)
-	}
-	
-	public mutating func round(_ rule: FloatingPointRoundingRule) {
-		self.value.round(rule)
 	}
 	
 }
