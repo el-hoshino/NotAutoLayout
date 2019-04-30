@@ -49,8 +49,8 @@ extension Float: Equatable {
 
 extension Float: Hashable {
 	
-	public var hashValue: Int {
-		return self.value.hashValue
+	public func hash(into hasher: inout Hasher) {
+		self.value.hash(into: &hasher)
 	}
 	
 }
