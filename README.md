@@ -26,8 +26,8 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 ## Requirements
 
 - iOS 9.0+
-- Xcode 10.0+
-- Swift 4.2+
+- Xcode 10.2+
+- Swift 5.0+
 
 ## Installation
 
@@ -37,7 +37,7 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 - Add the following line to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile):
 
 ```txt
-github "el-hoshino/NotAutoLayout" ~> 3.2
+github "el-hoshino/NotAutoLayout" ~> 3.3
 ```
 
 - Run `carthage update`.
@@ -49,7 +49,7 @@ github "el-hoshino/NotAutoLayout" ~> 3.2
 - Specify NotAutoLayout in your [Podfile](https://guides.cocoapods.org/syntax/podfile.html) like following:
 
 ```txt
-pod 'NotAutoLayout', `~> 3.2`
+pod 'NotAutoLayout', `~> 3.3`
 ```
 
 - Run `pod install`.
@@ -271,6 +271,12 @@ To provide the API to make a frame, NotAutoLayout contains a lot of `LayoutPrope
 - [x] Inline documents are not finished yet.
 - [ ] Some `LayoutProperty`s are not declared yet, 
 - [ ] Matrical layout is not implemented yet.
+
+## Expects in version 4.0
+
+You may notice that I've made a new framework [SteinsKit](https://github.com/el-hoshino/SteinsKit). In that framework, I've made the structure more refined with bootstrap scripts, Danger implements for better CI runnings, and the most important thing, Sourcery implements for meta programming! These features will join NotAutoLayout in version 4.0!
+
+But the problem is, I don't have an actual plan yet for when exactly to release 4.0. Hopefully I can implement them after WWDC or some time.
 
 ## License
 
