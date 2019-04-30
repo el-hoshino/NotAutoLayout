@@ -905,10 +905,9 @@
 			};
 			buildConfigurationList = 798378851E4CB2B100D3E1C2 /* Build configuration list for PBXProject "NotAutoLayout" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 			);
 			mainGroup = 798378811E4CB2B100D3E1C2;
