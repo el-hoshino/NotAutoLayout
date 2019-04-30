@@ -132,6 +132,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.right
+			
+		@unknown default:
+			assertionFailure()
+			return self.left
 		}
 	}
 	
@@ -142,6 +146,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.left
+			
+		@unknown default:
+			assertionFailure()
+			return self.right
 		}
 	}
 	
@@ -152,6 +160,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.topRight
+			
+		@unknown default:
+			assertionFailure()
+			return self.topLeft
 		}
 	}
 	
@@ -162,6 +174,9 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.topLeft
+			
+		@unknown default:
+			return self.topRight
 		}
 	}
 	
@@ -172,6 +187,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.middleRight
+			
+		@unknown default:
+			assertionFailure()
+			return self.middleLeft
 		}
 	}
 	
@@ -182,6 +201,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.middleLeft
+			
+		@unknown default:
+			assertionFailure()
+			return self.middleRight
 		}
 	}
 	
@@ -192,6 +215,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.bottomRight
+			
+		@unknown default:
+			assertionFailure()
+			return self.bottomLeft
 		}
 	}
 	
@@ -202,6 +229,10 @@ extension ViewLayoutGuides.Guide: LayoutGuideRepresentable {
 			
 		case .rightToLeft:
 			return self.bottomLeft
+			
+		@unknown default:
+			assertionFailure()
+			return self.bottomRight
 		}
 	}
 	
