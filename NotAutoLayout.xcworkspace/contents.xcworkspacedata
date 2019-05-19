@@ -3,6 +3,42 @@
    version = "1.0">
    <Group
       location = "container:"
+      name = "OSS Information">
+      <Group
+         location = "container:"
+         name = "GitHub Issue Template">
+         <FileRef
+            location = "group:.github/ISSUE_TEMPLATE/bug_report.md">
+         </FileRef>
+         <FileRef
+            location = "group:.github/ISSUE_TEMPLATE/feature_request.md">
+         </FileRef>
+      </Group>
+      <Group
+         location = "container:"
+         name = "GitHub Pull Request Template">
+         <FileRef
+            location = "group:.github/PULL_REQUEST_TEMPLATE/issue.md">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+      <FileRef
+         location = "group:LICENSE">
+      </FileRef>
+      <FileRef
+         location = "group:CHANGELOG.md">
+      </FileRef>
+      <FileRef
+         location = "group:CODE_OF_CONDUCT.md">
+      </FileRef>
+      <FileRef
+         location = "group:CONTRIBUTING.md">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
       name = "Environment">
       <FileRef
          location = "group:bootstrap.sh">
