@@ -78,6 +78,7 @@ extension Float: Numeric {
 	}
 	
 	public static func +=(lhs: inout Float, rhs: Float) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs + rhs
 	}
 	public static func -(lhs: Float, rhs: Float) -> Float {
@@ -85,6 +86,7 @@ extension Float: Numeric {
 	}
 	
 	public static func -=(lhs: inout Float, rhs: Float) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs - rhs
 	}
 	
@@ -93,6 +95,7 @@ extension Float: Numeric {
 	}
 	
 	public static func *=(lhs: inout Float, rhs: Float) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs * rhs
 	}
 	
@@ -193,6 +196,7 @@ extension Float: FloatingPoint {
 	}
 	
 	public static func /=(lhs: inout Float, rhs: Float) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs / rhs
 	}
 	

@@ -89,6 +89,7 @@ extension Point {
 	
 	/// Adds 2 `Point` type values and assign the result to the 1st one. The reult's `x` will be the sum of 2 `Point`'s `x`, and `y` will be the sum of 2 `Point`'s `y`.
 	public static func += (lhs: inout Point, rhs: Point) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs + rhs
 	}
 	
@@ -99,6 +100,7 @@ extension Point {
 	
 	/// Subtracts the 2nd `Point` type value from the 1st `Point` type value and assign the result to the 1st one. The result's `x` will be the 1st `Point`'s `x` minus the 2nd `Point`'s `x`, and `y` will be the 1st `Point`'s `y` minus the 2nd `Point`'s `y`.
 	public static func -= (lhs: inout Point, rhs: Point) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs - rhs
 	}
 	
