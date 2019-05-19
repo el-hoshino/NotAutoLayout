@@ -1,0 +1,40 @@
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - NotAutoLayout/SourceryGenerated/
+  - NotAutoLayoutTests
+
+disabled_rules:
+  - trailing_comma
+  - trailing_newline
+  - trailing_whitespace
+  - vertical_whitespace
+
+identifier_name:
+  max_length: 50
+  excluded:
+    - n
+    - x
+    - y
+    - id
+    - on
+    - to
+    - us
+    - at
+    - vc
+
+line_length:
+  ignores_function_declarations: true
+  ignores_comments: true
+  warning: 175
+
+type_name:
+  max_length: 50
+
+nesting:
+  type_level:
+    warning: 2
+  statement_level:
+    warning: 5
+
+function_parameter_count:
+  warning: 7
+  error: 10

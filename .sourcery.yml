@@ -1,0 +1,10 @@
+project:
+  file: NotAutoLayout.xcodeproj
+  target:
+    name: NotAutoLayout
+
+templates:
+  - NotAutoLayout/LayoutMaker/Blank.stencil
+
+output:
+  NotAutoLayout/SourceryGenerated

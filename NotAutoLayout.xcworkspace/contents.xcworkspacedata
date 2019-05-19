@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "Environment">
+      <FileRef
+         location = "group:bootstrap.sh">
+      </FileRef>
+      <FileRef
+         location = "group:Brewfile">
+      </FileRef>
+      <FileRef
+         location = "group:Dangerfile">
+      </FileRef>
+      <FileRef
+         location = "group:.sourcery.yml">
+      </FileRef>
+      <FileRef
+         location = "group:.swiftlint.yml">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Playground.playground">
    </FileRef>
