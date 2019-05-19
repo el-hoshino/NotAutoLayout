@@ -3,6 +3,16 @@
    version = "1.0">
    <Group
       location = "container:"
+      name = "Repository Settings">
+      <FileRef
+         location = "group:.gitignore">
+      </FileRef>
+      <FileRef
+         location = "group:.gitattribute">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
       name = "OSS Information">
       <Group
          location = "container:"
