@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -165,8 +165,9 @@
 		79D8DE1A1EF9508600B74593 /* TopRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE191EF9508600B74593 /* TopRightBottom.Individual.swift */; };
 		79D8DE1C1EF9509E00B74593 /* TopRightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1B1EF9509E00B74593 /* TopRightWidth.Individual.swift */; };
 		79D8DE1E1EF950B500B74593 /* TopRightHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1D1EF950B500B74593 /* TopRightHeight.Individual.swift */; };
-		79F2F8CC229118CC00934EC3 /* Blank.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2F8CB229118CC00934EC3 /* Blank.generated.swift */; };
-		79F2F8CE2291211300934EC3 /* Blank.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 79F2F8CD2291211300934EC3 /* Blank.stencil */; };
+		79F2F8CE2291211300934EC3 /* LayoutProperty.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 79F2F8CD2291211300934EC3 /* LayoutProperty.stencil */; };
+		79F2F8D322912B8700934EC3 /* Stencil.xcfilelist in Resources */ = {isa = PBXBuildFile; fileRef = 79F2F8D222912B7100934EC3 /* Stencil.xcfilelist */; };
+		79F2F8D52291341F00934EC3 /* LayoutProperty.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2F8D42291341F00934EC3 /* LayoutProperty.generated.swift */; };
 		79FD2CD01FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */; };
 		79FD2CD21FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */; };
 		79FD2CD81FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */; };
@@ -372,8 +373,10 @@
 		79D8DE661EF9564300B74593 /* BottomCenterLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterLeft.Individual.swift; sourceTree = "<group>"; };
 		79D8DE671EF9564400B74593 /* BottomLeftHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftHeight.Individual.swift; sourceTree = "<group>"; };
 		79D8DE681EF9564400B74593 /* BottomRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightTop.Individual.swift; sourceTree = "<group>"; };
-		79F2F8CB229118CC00934EC3 /* Blank.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blank.generated.swift; sourceTree = "<group>"; };
-		79F2F8CD2291211300934EC3 /* Blank.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Blank.stencil; sourceTree = "<group>"; };
+		79F2F8CD2291211300934EC3 /* LayoutProperty.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LayoutProperty.stencil; sourceTree = "<group>"; };
+		79F2F8D122912B0800934EC3 /* Stencil.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Stencil.xcfilelist; sourceTree = "<group>"; };
+		79F2F8D222912B7100934EC3 /* Stencil.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = Stencil.xcfilelist; sourceTree = "<group>"; };
+		79F2F8D42291341F00934EC3 /* LayoutProperty.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutProperty.generated.swift; sourceTree = "<group>"; };
 		79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreFrameType.swift; sourceTree = "<group>"; };
 		79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopLeftType.swift; sourceTree = "<group>"; };
 		79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleLeftType.swift; sourceTree = "<group>"; };
@@ -649,7 +652,8 @@
 		7971FAB4203161BC00B63CBC /* LayoutMaker */ = {
 			isa = PBXGroup;
 			children = (
-				79F2F8CD2291211300934EC3 /* Blank.stencil */,
+				79F2F8D122912B0800934EC3 /* Stencil.xcfilelist */,
+				79F2F8CD2291211300934EC3 /* LayoutProperty.stencil */,
 				7971FAB920332D4A00B63CBC /* MakerBasics */,
 				799559372036A8B300DE492D /* IndividualProperties */,
 				799559382036A8CF00DE492D /* SequentialProperties */,
@@ -793,7 +797,8 @@
 		79F2F8CA229118CC00934EC3 /* SourceryGenerated */ = {
 			isa = PBXGroup;
 			children = (
-				79F2F8CB229118CC00934EC3 /* Blank.generated.swift */,
+				79F2F8D222912B7100934EC3 /* Stencil.xcfilelist */,
+				79F2F8D42291341F00934EC3 /* LayoutProperty.generated.swift */,
 			);
 			path = SourceryGenerated;
 			sourceTree = "<group>";
@@ -943,7 +948,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79F2F8CE2291211300934EC3 /* Blank.stencil in Resources */,
+				79F2F8CE2291211300934EC3 /* LayoutProperty.stencil in Resources */,
+				79F2F8D322912B8700934EC3 /* Stencil.xcfilelist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,11 +969,13 @@
 			files = (
 			);
 			inputFileListPaths = (
+				"$(SRCROOT)/NotAutoLayout/LayoutMaker/Stencil.xcfilelist",
 			);
 			inputPaths = (
 			);
 			name = "Run Sourcery";
 			outputFileListPaths = (
+				"$(SRCROOT)/NotAutoLayout/SourceryGenerated/Stencil.xcfilelist",
 			);
 			outputPaths = (
 			);
@@ -1008,6 +1016,7 @@
 				79D8DDE41EF94B6A00B74593 /* RightMiddleHeight.Individual.swift in Sources */,
 				79D8DDD21EF94A0C00B74593 /* CenterTopWidth.Individual.swift in Sources */,
 				79FD2CE01FB85F4B00E6661C /* LayoutPropertyCanStoreBottomCenterType.swift in Sources */,
+				79F2F8D52291341F00934EC3 /* LayoutProperty.generated.swift in Sources */,
 				79D8DE0A1EF94F7100B74593 /* TopCenterRight.Individual.swift in Sources */,
 				79D8DD861EF93D7600B74593 /* CenterMiddle.Individual.swift in Sources */,
 				7971FABB20345F5700B63CBC /* LayoutPropertyCanStoreTopCenterType.swift in Sources */,
@@ -1171,7 +1180,6 @@
 				79D8DDC21EF9473900B74593 /* LeftTopHeight.Individual.swift in Sources */,
 				79D8DD9A1EF93E9900B74593 /* TopCenter.Individual.swift in Sources */,
 				79D8DE181EF9506F00B74593 /* TopRightMiddle.Individual.swift in Sources */,
-				79F2F8CC229118CC00934EC3 /* Blank.generated.swift in Sources */,
 				1630073B1F0F380C00012C18 /* BottomLeftRight.Individual.swift in Sources */,
 				79FD2CE61FB8646000E6661C /* LayoutPropertyCanStoreRightType.swift in Sources */,
 				79FD2CE41FB8621800E6661C /* LayoutPropertyCanStoreCenterType.swift in Sources */,
@@ -1318,7 +1326,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1339,7 +1348,11 @@
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1361,7 +1374,11 @@
 				INFOPLIST_FILE = NotAutoLayout/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1375,7 +1392,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = NotAutoLayoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1388,7 +1409,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = NotAutoLayoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
