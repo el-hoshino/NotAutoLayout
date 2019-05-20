@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct MiddleRightWidth {
-		
-		let middleRight: LayoutElement.Point
-		
-		let width: LayoutElement.Length
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.MiddleRightWidth {
 	

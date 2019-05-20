@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct TopRightCenter {
-		
-		let topRight: LayoutElement.Point
-		
-		let center: LayoutElement.Horizontal
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.TopRightCenter {
 	

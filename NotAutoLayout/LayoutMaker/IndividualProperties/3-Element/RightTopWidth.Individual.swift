@@ -8,20 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct RightTopWidth {
-		
-		let right: LayoutElement.Horizontal
-		
-		let top: LayoutElement.Vertical
-		
-		let width: LayoutElement.Length
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.RightTopWidth {
 	

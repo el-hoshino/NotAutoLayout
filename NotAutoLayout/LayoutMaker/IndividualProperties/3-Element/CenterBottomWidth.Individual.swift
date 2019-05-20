@@ -8,20 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct CenterBottomWidth {
-		
-		let center: LayoutElement.Horizontal
-		
-		let bottom: LayoutElement.Vertical
-		
-		let width: LayoutElement.Length
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.CenterBottomWidth {
 	

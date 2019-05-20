@@ -8,20 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct CenterMiddleBottom {
-		
-		let center: LayoutElement.Horizontal
-		
-		let middle: LayoutElement.Vertical
-		
-		let bottom: LayoutElement.Vertical
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.CenterMiddleBottom {
 	
