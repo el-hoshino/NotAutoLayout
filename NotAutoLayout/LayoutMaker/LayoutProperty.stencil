@@ -1,0 +1,194 @@
+{% set hElements "Left,Center,Right"|split:"," %}
+{% set vElements "Top,Middle,Bottom"|split:"," %}
+{% set lElements "Width,Height"|split:"," %}
+
+extension IndividualProperty {
+
+{# 0-element Property #}
+// MARK: - 0-element Property -
+
+    public struct Initial {
+
+    }
+
+{# 1-element Property #}
+// MARK: - 1-element Property -
+{# Horizontal #}
+// MARK: - Horizontal
+{% for element in hElements %}
+
+    public struct {{ element }} {
+
+        let {{ element|lowerFirstLetter }}: LayoutElement.Horizontal
+
+    }
+
+{% endfor %}
+
+{# Vertical #}
+// MARK: - Vertical
+{% for element in vElements %}
+
+    public struct {{ element }} {
+
+        let {{ element|lowerFirstLetter }}: LayoutElement.Vertical
+
+    }
+
+{% endfor %}
+
+{# Length #}
+// MARK: - Length
+{% for element in lElements %}
+
+    public struct {{ element }} {
+
+        let {{ element|lowerFirstLetter }}: LayoutElement.Vertical
+
+    }
+
+{% endfor %}
+
+{# 2-element Property #}
+// MARK: - 2-element Property -
+{# HorizontalHorizontal #}
+// MARK: - HorizontalHorizontal
+{% for i in 0...hElements.count %}
+{% for j in i...hElements.count %}
+{% if i < hElements.count and j < hElements.count and j > i %}
+{% set element1 %}{{ hElements[i] }}{% endset %}
+{% set element2 %}{{ hElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Horizontal
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Horizontal
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# HorizontalLength #}
+// MARK: - HorizontalLength
+{% for i in 0...hElements.count %}
+{% for j in 0...lElements.count %}
+{% if i < hElements.count and j < lElements.count %}
+{% set element1 %}{{ hElements[i] }}{% endset %}
+{% set element2 %}{{ lElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Horizontal
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Horizontal
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# VerticalVertical #}
+// MARK: - VerticalVertical
+{% for i in 0...vElements.count %}
+{% for j in i...vElements.count %}
+{% if i < vElements.count and j < vElements.count and j > i %}
+{% set element1 %}{{ vElements[i] }}{% endset %}
+{% set element2 %}{{ vElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Vertical
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Vertical
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# VerticalLength #}
+// MARK: - VerticalLength
+{% for i in 0...vElements.count %}
+{% for j in 0...lElements.count %}
+{% if i < vElements.count and j < lElements.count %}
+{% set element1 %}{{ vElements[i] }}{% endset %}
+{% set element2 %}{{ lElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Horizontal
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Vertical
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# HorizontalVertical #}
+// MARK: - HorizontalVertical
+{% for i in 0...hElements.count %}
+{% for j in 0...vElements.count %}
+{% if i < hElements.count and j < vElements.count %}
+{% set element1 %}{{ hElements[i] }}{% endset %}
+{% set element2 %}{{ vElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Horizontal
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Vertical
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# VerticalHorizontal (Point) #}
+// MARK: - VerticalHorizontal (Point)
+{% for i in 0...vElements.count %}
+{% for j in 0...hElements.count %}
+{% if i < vElements.count and j < hElements.count %}
+{% set element %}{{ vElements[i] }}{{hElements[j] }}{% endset %}
+
+    public struct {{ element }} {
+
+        let {{ element|lowerFirstLetter }}: LayoutElement.Point
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# WidthHeight #}
+// MARK: - WidthHeight
+{% for i in 0...lElements.count %}
+{% for j in i...lElements.count %}
+{% if i < lElements.count and j < lElements.count and j > i %}
+{% set element1 %}{{ lElements[i] }}{% endset %}
+{% set element2 %}{{ lElements[j] }}{% endset %}
+
+    public struct {{ element1 }}{{ element2 }} {
+
+        let {{ element1|lowerFirstLetter }}: LayoutElement.Length
+        let {{ element2|lowerFirstLetter }}: LayoutElement.Length
+
+    }
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{# Size #}
+// MARK: - Size
+
+    public struct Size {
+
+        let size: LayoutElement.Size
+
+    }
+
+}

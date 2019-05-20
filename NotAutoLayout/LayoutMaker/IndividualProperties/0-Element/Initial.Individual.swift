@@ -8,14 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct Initial {
-		
-	}
-	
-}
-
 // MARK: - Set A Frame -
 extension IndividualProperty.Initial: LayoutPropertyCanStoreFrameToEvaluateFrameType {
 		

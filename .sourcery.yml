@@ -4,7 +4,7 @@ project:
     name: NotAutoLayout
 
 templates:
-  - NotAutoLayout/LayoutMaker/Blank.stencil
+  - NotAutoLayout/LayoutMaker/LayoutProperty.stencil
 
 output:
   NotAutoLayout/SourceryGenerated

@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct CenterTop {
-		
-		let center: LayoutElement.Horizontal
-		
-		let top: LayoutElement.Vertical
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.CenterTop {
 	

@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct LeftRight {
-		
-		let left: LayoutElement.Horizontal
-		
-		let right: LayoutElement.Horizontal
-		
-	}
-	
-}
-
 // MARK: - Set A Line -
 // MARK: Top
 extension IndividualProperty.LeftRight: LayoutPropertyCanStoreTopType {

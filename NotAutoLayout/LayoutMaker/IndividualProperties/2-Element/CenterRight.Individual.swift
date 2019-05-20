@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct CenterRight {
-		
-		let center: LayoutElement.Horizontal
-		
-		let right: LayoutElement.Horizontal
-		
-	}
-	
-}
-
 // MARK: - Set A Line -
 // MARK: Top
 extension IndividualProperty.CenterRight: LayoutPropertyCanStoreTopType {

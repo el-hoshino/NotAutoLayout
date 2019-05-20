@@ -8,18 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct LeftBottom {
-		
-		let left: LayoutElement.Horizontal
-		
-		let bottom: LayoutElement.Vertical
-		
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.LeftBottom {
 	

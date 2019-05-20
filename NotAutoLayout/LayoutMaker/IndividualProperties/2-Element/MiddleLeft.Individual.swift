@@ -8,16 +8,6 @@
 
 import Foundation
 
-extension IndividualProperty {
-	
-	public struct MiddleLeft {
-	
-		let middleLeft: LayoutElement.Point
-	
-	}
-	
-}
-
 // MARK: - Make Frame
 extension IndividualProperty.MiddleLeft {
 	
