@@ -165,6 +165,8 @@
 		79D8DE1A1EF9508600B74593 /* TopRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE191EF9508600B74593 /* TopRightBottom.Individual.swift */; };
 		79D8DE1C1EF9509E00B74593 /* TopRightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1B1EF9509E00B74593 /* TopRightWidth.Individual.swift */; };
 		79D8DE1E1EF950B500B74593 /* TopRightHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D8DE1D1EF950B500B74593 /* TopRightHeight.Individual.swift */; };
+		79F2F8CC229118CC00934EC3 /* Blank.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2F8CB229118CC00934EC3 /* Blank.generated.swift */; };
+		79F2F8CE2291211300934EC3 /* Blank.stencil in Resources */ = {isa = PBXBuildFile; fileRef = 79F2F8CD2291211300934EC3 /* Blank.stencil */; };
 		79FD2CD01FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */; };
 		79FD2CD21FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */; };
 		79FD2CD81FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */; };
@@ -370,6 +372,8 @@
 		79D8DE661EF9564300B74593 /* BottomCenterLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterLeft.Individual.swift; sourceTree = "<group>"; };
 		79D8DE671EF9564400B74593 /* BottomLeftHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftHeight.Individual.swift; sourceTree = "<group>"; };
 		79D8DE681EF9564400B74593 /* BottomRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightTop.Individual.swift; sourceTree = "<group>"; };
+		79F2F8CB229118CC00934EC3 /* Blank.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blank.generated.swift; sourceTree = "<group>"; };
+		79F2F8CD2291211300934EC3 /* Blank.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Blank.stencil; sourceTree = "<group>"; };
 		79FD2CCF1FB8440C00E6661C /* LayoutPropertyCanStoreFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreFrameType.swift; sourceTree = "<group>"; };
 		79FD2CD11FB8463200E6661C /* LayoutPropertyCanStoreTopLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopLeftType.swift; sourceTree = "<group>"; };
 		79FD2CD71FB859C600E6661C /* LayoutPropertyCanStoreMiddleLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleLeftType.swift; sourceTree = "<group>"; };
@@ -645,6 +649,7 @@
 		7971FAB4203161BC00B63CBC /* LayoutMaker */ = {
 			isa = PBXGroup;
 			children = (
+				79F2F8CD2291211300934EC3 /* Blank.stencil */,
 				7971FAB920332D4A00B63CBC /* MakerBasics */,
 				799559372036A8B300DE492D /* IndividualProperties */,
 				799559382036A8CF00DE492D /* SequentialProperties */,
@@ -729,6 +734,7 @@
 			children = (
 				7983788E1E4CB2B100D3E1C2 /* NotAutoLayout.h */,
 				7983788F1E4CB2B100D3E1C2 /* Info.plist */,
+				79F2F8CA229118CC00934EC3 /* SourceryGenerated */,
 				7971FAB3203160FA00B63CBC /* Types */,
 				164EA0A21EF3DA4900C0BB8F /* Extensions */,
 				798C6EAB1FEBF98F00D2A370 /* NotAutoLayoutCompatible */,
@@ -782,6 +788,14 @@
 				7971FACE20347E1300B63CBC /* 3-Element */,
 			);
 			path = SequentialProperties;
+			sourceTree = "<group>";
+		};
+		79F2F8CA229118CC00934EC3 /* SourceryGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				79F2F8CB229118CC00934EC3 /* Blank.generated.swift */,
+			);
+			path = SourceryGenerated;
 			sourceTree = "<group>";
 		};
 		BF76650720A9899900110256 /* TypesTest */ = {
@@ -847,6 +861,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7983789F1E4CB2B200D3E1C2 /* Build configuration list for PBXNativeTarget "NotAutoLayout" */;
 			buildPhases = (
+				79F2F8C7229117DA00934EC3 /* Run Sourcery */,
+				79F2F8C92291186F00934EC3 /* SwiftLint */,
 				798378861E4CB2B100D3E1C2 /* Sources */,
 				798378871E4CB2B100D3E1C2 /* Frameworks */,
 				798378881E4CB2B100D3E1C2 /* Headers */,
@@ -927,6 +943,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F2F8CE2291211300934EC3 /* Blank.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,6 +955,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79F2F8C7229117DA00934EC3 /* Run Sourcery */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Sourcery";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which sourcery >/dev/null; then\n  sourcery\nelse\n  echo \"warning: Sourcery not installed, download from https://github.com/krzysztofzablocki/Sourcery\"\nfi\n";
+		};
+		79F2F8C92291186F00934EC3 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		798378861E4CB2B100D3E1C2 /* Sources */ = {
@@ -1115,6 +1171,7 @@
 				79D8DDC21EF9473900B74593 /* LeftTopHeight.Individual.swift in Sources */,
 				79D8DD9A1EF93E9900B74593 /* TopCenter.Individual.swift in Sources */,
 				79D8DE181EF9506F00B74593 /* TopRightMiddle.Individual.swift in Sources */,
+				79F2F8CC229118CC00934EC3 /* Blank.generated.swift in Sources */,
 				1630073B1F0F380C00012C18 /* BottomLeftRight.Individual.swift in Sources */,
 				79FD2CE61FB8646000E6661C /* LayoutPropertyCanStoreRightType.swift in Sources */,
 				79FD2CE41FB8621800E6661C /* LayoutPropertyCanStoreCenterType.swift in Sources */,

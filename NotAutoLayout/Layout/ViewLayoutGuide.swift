@@ -12,8 +12,10 @@ extension ViewLayoutGuides {
 	
 	public struct Guide {
 		
+		// swiftlint:disable identifier_name
 		let _direction: UIUserInterfaceLayoutDirection
 		let _rect: Rect
+		// swiftlint:enable identifier_name
 		
 		init(direction: UIUserInterfaceLayoutDirection, rect: Rect) {
 			self._direction = direction

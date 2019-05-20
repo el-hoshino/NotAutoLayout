@@ -70,6 +70,7 @@ extension Size {
 	
 	/// Adds 2 `Size` type values and assign the result to the 1st one. The reult's `width` will be the sum of 2 `Size`'s `width`, and `height` will be the sum of 2 `Size`'s `height`.
 	public static func += (lhs: inout Size, rhs: Size) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs + rhs
 	}
 	
@@ -80,6 +81,7 @@ extension Size {
 	
 	/// Subtracts the 2nd `Size` type value from the 1st `Size` type value and assign the result to the 1st one. The reult's `width` will be the 1st `Size`'s `width` minus the 2nd `Size`'s `width`, and `height` will be the 1st `Size`'s `height` minus the 2nd `Size`'s `height`.
 	public static func -= (lhs: inout Size, rhs: Size) {
+		// swiftlint:disable:next shorthand_operator
 		lhs = lhs - rhs
 	}
 	
