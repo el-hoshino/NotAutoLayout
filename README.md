@@ -5,6 +5,14 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Build Status](https://app.bitrise.io/app/a650632c681bd908/status.svg?token=wwCZECU6zvtAwAfY2Jw5hQ&branch=master)](https://www.bitrise.io/app/a650632c681bd908)
 
+## IMPORTANT: Deprecated!!
+
+This project is now **deprecated** because Apple has officially realeased [SwiftUI](https://developer.apple.com/jp/xcode/swiftui/) framework, which has a totally different layout engine from UIKit, which means it's not able to use NotAutoLayout in SwiftUI.
+
+In addition, I made this project because I don't like the Auto Layout approach in UIKit. But in SwiftUI, it's much better so I don't have a motivation to maintain this project anymore.
+
+If you have any interest to improve this project, please feel free to fork it :)
+
 ## -The only<a id="q1" href="#a1"><sup>1</sup></a> layout framework that treats layout human-erros<a id="q2" href="#a2"><sup>2</sup></a> as a Build-time error-
 
 NotAutoLayout is a framework to help you layout subviews *without* Auto Layout constraints.
