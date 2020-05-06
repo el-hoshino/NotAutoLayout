@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		"NotAutoLayout::NotAutoLayoutPackageTests::ProductTarget" /* NotAutoLayoutPackageTests */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_47 /* Build configuration list for PBXAggregateTarget "NotAutoLayoutPackageTests" */;
-			buildPhases = (
-			);
-			dependencies = (
-				OBJ_50 /* PBXTargetDependency */,
-			);
-			name = NotAutoLayoutPackageTests;
-			productName = NotAutoLayoutPackageTests;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		BFCEFCEA2463693A00799354 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCEFC242463693900799354 /* LayoutGuideRepresentable.swift */; };
 		BFCEFCEB2463693A00799354 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCEFC252463693900799354 /* Rect.swift */; };
@@ -209,7 +195,6 @@
 		BFCEFDB42463694800799354 /* LayoutControllingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCEFDA82463694800799354 /* LayoutControllingTests.swift */; };
 		BFCEFDB52463694800799354 /* ViewLayoutGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCEFDAA2463694800799354 /* ViewLayoutGuidesTest.swift */; };
 		BFCEFDB62463694800799354 /* ViewPinGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCEFDAB2463694800799354 /* ViewPinGuidesTest.swift */; };
-		OBJ_45 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_59 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "NotAutoLayout::NotAutoLayout::Product" /* NotAutoLayout.framework */; };
 /* End PBXBuildFile section */
 
@@ -220,13 +205,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = "NotAutoLayout::NotAutoLayout";
 			remoteInfo = NotAutoLayout;
-		};
-		BFB891B92463622E00ABDECA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "NotAutoLayout::NotAutoLayoutTests";
-			remoteInfo = NotAutoLayoutTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -918,20 +896,6 @@
 			productReference = "NotAutoLayout::NotAutoLayoutTests::Product" /* NotAutoLayoutTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		"NotAutoLayout::SwiftPMPackageDescription" /* NotAutoLayoutPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_41 /* Build configuration list for PBXNativeTarget "NotAutoLayoutPackageDescription" */;
-			buildPhases = (
-				OBJ_44 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotAutoLayoutPackageDescription;
-			productName = NotAutoLayoutPackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -954,8 +918,6 @@
 			projectRoot = "";
 			targets = (
 				"NotAutoLayout::NotAutoLayout" /* NotAutoLayout */,
-				"NotAutoLayout::SwiftPMPackageDescription" /* NotAutoLayoutPackageDescription */,
-				"NotAutoLayout::NotAutoLayoutPackageTests::ProductTarget" /* NotAutoLayoutPackageTests */,
 				"NotAutoLayout::NotAutoLayoutTests" /* NotAutoLayoutTests */,
 			);
 		};
@@ -1147,14 +1109,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_44 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_45 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -1175,11 +1129,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_50 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "NotAutoLayout::NotAutoLayoutTests" /* NotAutoLayoutTests */;
-			targetProxy = BFB891B92463622E00ABDECA /* PBXContainerItemProxy */;
-		};
 		OBJ_60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "NotAutoLayout::NotAutoLayout" /* NotAutoLayout */;
@@ -1295,36 +1244,6 @@
 			};
 			name = Release;
 		};
-		OBJ_42 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		OBJ_43 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		OBJ_48 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		OBJ_49 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
 		OBJ_53 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1394,24 +1313,6 @@
 			buildConfigurations = (
 				OBJ_35 /* Debug */,
 				OBJ_36 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_41 /* Build configuration list for PBXNativeTarget "NotAutoLayoutPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_42 /* Debug */,
-				OBJ_43 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_47 /* Build configuration list for PBXAggregateTarget "NotAutoLayoutPackageTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_48 /* Debug */,
-				OBJ_49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
