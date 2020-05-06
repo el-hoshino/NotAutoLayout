@@ -747,7 +747,7 @@
 			path = "2-Element";
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -755,7 +755,6 @@
 				OBJ_208 /* Tests */,
 				OBJ_226 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_65 /* 3-Element */ = {
@@ -947,7 +946,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_226 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1208,6 +1207,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TARGET_NAME = NotAutoLayout;
 			};
 			name = Debug;
@@ -1233,6 +1233,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TARGET_NAME = NotAutoLayout;
 			};
 			name = Release;
