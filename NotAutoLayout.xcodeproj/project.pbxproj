@@ -1,0 +1,1421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"NotAutoLayout::NotAutoLayoutPackageTests::ProductTarget" /* NotAutoLayoutPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_434 /* Build configuration list for PBXAggregateTarget "NotAutoLayoutPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_437 /* PBXTargetDependency */,
+			);
+			name = NotAutoLayoutPackageTests;
+			productName = NotAutoLayoutPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		OBJ_248 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Array.swift */; };
+		OBJ_249 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Dictionary.swift */; };
+		OBJ_250 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* UIView.swift */; };
+		OBJ_251 /* FrameAdditionalEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* FrameAdditionalEvaluation.swift */; };
+		OBJ_252 /* IndividualLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* IndividualLayout.swift */; };
+		OBJ_253 /* LayoutElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* LayoutElement.swift */; };
+		OBJ_254 /* SequentialLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* SequentialLayout.swift */; };
+		OBJ_255 /* ViewLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ViewLayoutGuide.swift */; };
+		OBJ_256 /* ViewLayoutGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* ViewLayoutGuides.swift */; };
+		OBJ_257 /* ViewPinGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ViewPinGuide.swift */; };
+		OBJ_258 /* ViewPinGuides.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ViewPinGuides.swift */; };
+		OBJ_259 /* LayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* LayoutControlling.swift */; };
+		OBJ_260 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Condition.swift */; };
+		OBJ_261 /* LayoutInfoStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* LayoutInfoStorable.swift */; };
+		OBJ_262 /* LayoutInfoStorableLayoutControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* LayoutInfoStorableLayoutControlling.swift */; };
+		OBJ_263 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* LayoutInfoStorableOtherPublicAPIs.swift */; };
+		OBJ_264 /* LayoutInfoStoredScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* LayoutInfoStoredScrollView.swift */; };
+		OBJ_265 /* LayoutInfoStoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* LayoutInfoStoredView.swift */; };
+		OBJ_266 /* SubviewSetupWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* SubviewSetupWizard.swift */; };
+		OBJ_267 /* ViewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ViewInfo.swift */; };
+		OBJ_268 /* Initial.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Initial.Individual.swift */; };
+		OBJ_269 /* Center.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Center.Individual.swift */; };
+		OBJ_270 /* Left.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Left.Individual.swift */; };
+		OBJ_271 /* Right.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Right.Individual.swift */; };
+		OBJ_272 /* BottomCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* BottomCenter.Individual.swift */; };
+		OBJ_273 /* BottomLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* BottomLeft.Individual.swift */; };
+		OBJ_274 /* BottomRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* BottomRight.Individual.swift */; };
+		OBJ_275 /* CenterBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* CenterBottom.Individual.swift */; };
+		OBJ_276 /* CenterMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* CenterMiddle.Individual.swift */; };
+		OBJ_277 /* CenterRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* CenterRight.Individual.swift */; };
+		OBJ_278 /* CenterTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* CenterTop.Individual.swift */; };
+		OBJ_279 /* LeftBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* LeftBottom.Individual.swift */; };
+		OBJ_280 /* LeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* LeftCenter.Individual.swift */; };
+		OBJ_281 /* LeftMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* LeftMiddle.Individual.swift */; };
+		OBJ_282 /* LeftRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* LeftRight.Individual.swift */; };
+		OBJ_283 /* LeftTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* LeftTop.Individual.swift */; };
+		OBJ_284 /* MiddleCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* MiddleCenter.Individual.swift */; };
+		OBJ_285 /* MiddleLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* MiddleLeft.Individual.swift */; };
+		OBJ_286 /* MiddleRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* MiddleRight.Individual.swift */; };
+		OBJ_287 /* RightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* RightBottom.Individual.swift */; };
+		OBJ_288 /* RightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* RightMiddle.Individual.swift */; };
+		OBJ_289 /* RightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* RightTop.Individual.swift */; };
+		OBJ_290 /* TopCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* TopCenter.Individual.swift */; };
+		OBJ_291 /* TopLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* TopLeft.Individual.swift */; };
+		OBJ_292 /* TopRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* TopRight.Individual.swift */; };
+		OBJ_293 /* BottomCenterHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* BottomCenterHeight.Individual.swift */; };
+		OBJ_294 /* BottomCenterLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* BottomCenterLeft.Individual.swift */; };
+		OBJ_295 /* BottomCenterMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* BottomCenterMiddle.Individual.swift */; };
+		OBJ_296 /* BottomCenterRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* BottomCenterRight.Individual.swift */; };
+		OBJ_297 /* BottomCenterTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* BottomCenterTop.Individual.swift */; };
+		OBJ_298 /* BottomCenterWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* BottomCenterWidth.Individual.swift */; };
+		OBJ_299 /* BottomLeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* BottomLeftCenter.Individual.swift */; };
+		OBJ_300 /* BottomLeftHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* BottomLeftHeight.Individual.swift */; };
+		OBJ_301 /* BottomLeftMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* BottomLeftMiddle.Individual.swift */; };
+		OBJ_302 /* BottomLeftRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* BottomLeftRight.Individual.swift */; };
+		OBJ_303 /* BottomLeftTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* BottomLeftTop.Individual.swift */; };
+		OBJ_304 /* BottomLeftWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* BottomLeftWidth.Individual.swift */; };
+		OBJ_305 /* BottomRightCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* BottomRightCenter.Individual.swift */; };
+		OBJ_306 /* BottomRightHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* BottomRightHeight.Individual.swift */; };
+		OBJ_307 /* BottomRightLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* BottomRightLeft.Individual.swift */; };
+		OBJ_308 /* BottomRightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* BottomRightMiddle.Individual.swift */; };
+		OBJ_309 /* BottomRightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* BottomRightTop.Individual.swift */; };
+		OBJ_310 /* BottomRightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* BottomRightWidth.Individual.swift */; };
+		OBJ_311 /* CenterBottomHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* CenterBottomHeight.Individual.swift */; };
+		OBJ_312 /* CenterBottomWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* CenterBottomWidth.Individual.swift */; };
+		OBJ_313 /* CenterMiddleBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* CenterMiddleBottom.Individual.swift */; };
+		OBJ_314 /* CenterMiddleHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* CenterMiddleHeight.Individual.swift */; };
+		OBJ_315 /* CenterMiddleWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* CenterMiddleWidth.Individual.swift */; };
+		OBJ_316 /* CenterRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* CenterRightBottom.Individual.swift */; };
+		OBJ_317 /* CenterRightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* CenterRightMiddle.Individual.swift */; };
+		OBJ_318 /* CenterRightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* CenterRightTop.Individual.swift */; };
+		OBJ_319 /* CenterTopBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* CenterTopBottom.Individual.swift */; };
+		OBJ_320 /* CenterTopHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* CenterTopHeight.Individual.swift */; };
+		OBJ_321 /* CenterTopMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* CenterTopMiddle.Individual.swift */; };
+		OBJ_322 /* CenterTopWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* CenterTopWidth.Individual.swift */; };
+		OBJ_323 /* LeftBottomHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* LeftBottomHeight.Individual.swift */; };
+		OBJ_324 /* LeftBottomWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* LeftBottomWidth.Individual.swift */; };
+		OBJ_325 /* LeftCenterBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* LeftCenterBottom.Individual.swift */; };
+		OBJ_326 /* LeftCenterMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* LeftCenterMiddle.Individual.swift */; };
+		OBJ_327 /* LeftCenterTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* LeftCenterTop.Individual.swift */; };
+		OBJ_328 /* LeftMiddleBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* LeftMiddleBottom.Individual.swift */; };
+		OBJ_329 /* LeftMiddleHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* LeftMiddleHeight.Individual.swift */; };
+		OBJ_330 /* LeftMiddleWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* LeftMiddleWidth.Individual.swift */; };
+		OBJ_331 /* LeftRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* LeftRightBottom.Individual.swift */; };
+		OBJ_332 /* LeftRightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* LeftRightMiddle.Individual.swift */; };
+		OBJ_333 /* LeftRightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* LeftRightTop.Individual.swift */; };
+		OBJ_334 /* LeftTopBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* LeftTopBottom.Individual.swift */; };
+		OBJ_335 /* LeftTopHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* LeftTopHeight.Individual.swift */; };
+		OBJ_336 /* LeftTopMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* LeftTopMiddle.Individual.swift */; };
+		OBJ_337 /* LeftTopWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* LeftTopWidth.Individual.swift */; };
+		OBJ_338 /* MiddleCenterBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* MiddleCenterBottom.Individual.swift */; };
+		OBJ_339 /* MiddleCenterHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_112 /* MiddleCenterHeight.Individual.swift */; };
+		OBJ_340 /* MiddleCenterLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* MiddleCenterLeft.Individual.swift */; };
+		OBJ_341 /* MiddleCenterRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_114 /* MiddleCenterRight.Individual.swift */; };
+		OBJ_342 /* MiddleCenterTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* MiddleCenterTop.Individual.swift */; };
+		OBJ_343 /* MiddleCenterWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* MiddleCenterWidth.Individual.swift */; };
+		OBJ_344 /* MiddleLeftBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* MiddleLeftBottom.Individual.swift */; };
+		OBJ_345 /* MiddleLeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* MiddleLeftCenter.Individual.swift */; };
+		OBJ_346 /* MiddleLeftHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* MiddleLeftHeight.Individual.swift */; };
+		OBJ_347 /* MiddleLeftRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* MiddleLeftRight.Individual.swift */; };
+		OBJ_348 /* MiddleLeftTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MiddleLeftTop.Individual.swift */; };
+		OBJ_349 /* MiddleLeftWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* MiddleLeftWidth.Individual.swift */; };
+		OBJ_350 /* MiddleRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* MiddleRightBottom.Individual.swift */; };
+		OBJ_351 /* MiddleRightCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* MiddleRightCenter.Individual.swift */; };
+		OBJ_352 /* MiddleRightHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* MiddleRightHeight.Individual.swift */; };
+		OBJ_353 /* MiddleRightLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* MiddleRightLeft.Individual.swift */; };
+		OBJ_354 /* MiddleRightTop.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* MiddleRightTop.Individual.swift */; };
+		OBJ_355 /* MiddleRightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* MiddleRightWidth.Individual.swift */; };
+		OBJ_356 /* RightBottomHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* RightBottomHeight.Individual.swift */; };
+		OBJ_357 /* RightBottomWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_130 /* RightBottomWidth.Individual.swift */; };
+		OBJ_358 /* RightMiddleBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* RightMiddleBottom.Individual.swift */; };
+		OBJ_359 /* RightMiddleHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* RightMiddleHeight.Individual.swift */; };
+		OBJ_360 /* RightMiddleWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* RightMiddleWidth.Individual.swift */; };
+		OBJ_361 /* RightTopBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* RightTopBottom.Individual.swift */; };
+		OBJ_362 /* RightTopHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_135 /* RightTopHeight.Individual.swift */; };
+		OBJ_363 /* RightTopMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* RightTopMiddle.Individual.swift */; };
+		OBJ_364 /* RightTopWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* RightTopWidth.Individual.swift */; };
+		OBJ_365 /* TopCenterBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* TopCenterBottom.Individual.swift */; };
+		OBJ_366 /* TopCenterHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* TopCenterHeight.Individual.swift */; };
+		OBJ_367 /* TopCenterLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* TopCenterLeft.Individual.swift */; };
+		OBJ_368 /* TopCenterMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_141 /* TopCenterMiddle.Individual.swift */; };
+		OBJ_369 /* TopCenterRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* TopCenterRight.Individual.swift */; };
+		OBJ_370 /* TopCenterWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_143 /* TopCenterWidth.Individual.swift */; };
+		OBJ_371 /* TopLeftBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_144 /* TopLeftBottom.Individual.swift */; };
+		OBJ_372 /* TopLeftCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_145 /* TopLeftCenter.Individual.swift */; };
+		OBJ_373 /* TopLeftHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* TopLeftHeight.Individual.swift */; };
+		OBJ_374 /* TopLeftMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_147 /* TopLeftMiddle.Individual.swift */; };
+		OBJ_375 /* TopLeftRight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_148 /* TopLeftRight.Individual.swift */; };
+		OBJ_376 /* TopLeftWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* TopLeftWidth.Individual.swift */; };
+		OBJ_377 /* TopRightBottom.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_150 /* TopRightBottom.Individual.swift */; };
+		OBJ_378 /* TopRightCenter.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_151 /* TopRightCenter.Individual.swift */; };
+		OBJ_379 /* TopRightHeight.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_152 /* TopRightHeight.Individual.swift */; };
+		OBJ_380 /* TopRightLeft.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_153 /* TopRightLeft.Individual.swift */; };
+		OBJ_381 /* TopRightMiddle.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_154 /* TopRightMiddle.Individual.swift */; };
+		OBJ_382 /* TopRightWidth.Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_155 /* TopRightWidth.Individual.swift */; };
+		OBJ_383 /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_157 /* DidStoreAllRequiredPropertyLayoutProperty.swift */; };
+		OBJ_384 /* LayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_159 /* LayoutMaker.swift */; };
+		OBJ_385 /* LayoutPropertyCanAddAdditionalEvaluationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_160 /* LayoutPropertyCanAddAdditionalEvaluationType.swift */; };
+		OBJ_386 /* LayoutPropertyCanStoreBottomCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_161 /* LayoutPropertyCanStoreBottomCenterType.swift */; };
+		OBJ_387 /* LayoutPropertyCanStoreBottomLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_162 /* LayoutPropertyCanStoreBottomLeftType.swift */; };
+		OBJ_388 /* LayoutPropertyCanStoreBottomRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_163 /* LayoutPropertyCanStoreBottomRightType.swift */; };
+		OBJ_389 /* LayoutPropertyCanStoreBottomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* LayoutPropertyCanStoreBottomType.swift */; };
+		OBJ_390 /* LayoutPropertyCanStoreCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_165 /* LayoutPropertyCanStoreCenterType.swift */; };
+		OBJ_391 /* LayoutPropertyCanStoreFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_166 /* LayoutPropertyCanStoreFrameType.swift */; };
+		OBJ_392 /* LayoutPropertyCanStoreHeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_167 /* LayoutPropertyCanStoreHeightType.swift */; };
+		OBJ_393 /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_168 /* LayoutPropertyCanStoreHorizontalInsetsType.swift */; };
+		OBJ_394 /* LayoutPropertyCanStoreLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_169 /* LayoutPropertyCanStoreLeftType.swift */; };
+		OBJ_395 /* LayoutPropertyCanStoreMiddleCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_170 /* LayoutPropertyCanStoreMiddleCenterType.swift */; };
+		OBJ_396 /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_171 /* LayoutPropertyCanStoreMiddleLeftType.swift */; };
+		OBJ_397 /* LayoutPropertyCanStoreMiddleRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_172 /* LayoutPropertyCanStoreMiddleRightType.swift */; };
+		OBJ_398 /* LayoutPropertyCanStoreMiddleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_173 /* LayoutPropertyCanStoreMiddleType.swift */; };
+		OBJ_399 /* LayoutPropertyCanStoreRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_174 /* LayoutPropertyCanStoreRightType.swift */; };
+		OBJ_400 /* LayoutPropertyCanStoreSizeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_175 /* LayoutPropertyCanStoreSizeType.swift */; };
+		OBJ_401 /* LayoutPropertyCanStoreTopCenterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_176 /* LayoutPropertyCanStoreTopCenterType.swift */; };
+		OBJ_402 /* LayoutPropertyCanStoreTopLeftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_177 /* LayoutPropertyCanStoreTopLeftType.swift */; };
+		OBJ_403 /* LayoutPropertyCanStoreTopRightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_178 /* LayoutPropertyCanStoreTopRightType.swift */; };
+		OBJ_404 /* LayoutPropertyCanStoreTopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_179 /* LayoutPropertyCanStoreTopType.swift */; };
+		OBJ_405 /* LayoutPropertyCanStoreWidthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_180 /* LayoutPropertyCanStoreWidthType.swift */; };
+		OBJ_406 /* Initial.Sequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_183 /* Initial.Sequential.swift */; };
+		OBJ_407 /* Middle.Sequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_185 /* Middle.Sequential.swift */; };
+		OBJ_408 /* MiddleSize.Sequential.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_187 /* MiddleSize.Sequential.swift */; };
+		OBJ_409 /* NotAutoLayoutCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_189 /* NotAutoLayoutCompatible.swift */; };
+		OBJ_410 /* NotAutoLayoutContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_190 /* NotAutoLayoutContainer.swift */; };
+		OBJ_411 /* Blank.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_192 /* Blank.generated.swift */; };
+		OBJ_412 /* Bounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_194 /* Bounds.swift */; };
+		OBJ_413 /* CGTypeConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_195 /* CGTypeConvertible.swift */; };
+		OBJ_414 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_196 /* Float.swift */; };
+		OBJ_415 /* IndividualFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_197 /* IndividualFrame.swift */; };
+		OBJ_416 /* Insets.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_198 /* Insets.swift */; };
+		OBJ_417 /* LayoutGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_199 /* LayoutGuideRepresentable.swift */; };
+		OBJ_418 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_200 /* Line.swift */; };
+		OBJ_419 /* PinGuideRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_201 /* PinGuideRepresentable.swift */; };
+		OBJ_420 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_202 /* Point.swift */; };
+		OBJ_421 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_203 /* Rect.swift */; };
+		OBJ_422 /* SequentialFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_204 /* SequentialFrame.swift */; };
+		OBJ_423 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_205 /* Size.swift */; };
+		OBJ_424 /* Span.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_206 /* Span.swift */; };
+		OBJ_425 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_207 /* Typealias.swift */; };
+		OBJ_432 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_443 /* ArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_212 /* ArrayTest.swift */; };
+		OBJ_444 /* DictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_213 /* DictionaryTest.swift */; };
+		OBJ_445 /* LayoutControllingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_215 /* LayoutControllingTests.swift */; };
+		OBJ_446 /* ViewLayoutGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_217 /* ViewLayoutGuidesTest.swift */; };
+		OBJ_447 /* ViewPinGuidesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_218 /* ViewPinGuidesTest.swift */; };
+		OBJ_448 /* NotAutoLayoutContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_220 /* NotAutoLayoutContainerTest.swift */; };
+		OBJ_449 /* FloatTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_222 /* FloatTest.swift */; };
+		OBJ_450 /* RectTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_223 /* RectTest.swift */; };
+		OBJ_451 /* SizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_224 /* SizeTest.swift */; };
+		OBJ_452 /* SpanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_225 /* SpanTest.swift */; };
+		OBJ_454 /* NotAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "NotAutoLayout::NotAutoLayout::Product" /* NotAutoLayout.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFCEFDB724636A3000799354 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "NotAutoLayout::NotAutoLayout";
+			remoteInfo = NotAutoLayout;
+		};
+		BFCEFDB824636A3100799354 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "NotAutoLayout::NotAutoLayoutTests";
+			remoteInfo = NotAutoLayoutTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		"NotAutoLayout::NotAutoLayout::Product" /* NotAutoLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotAutoLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"NotAutoLayout::NotAutoLayoutTests::Product" /* NotAutoLayoutTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = NotAutoLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_100 /* LeftCenterTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCenterTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_101 /* LeftMiddleBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMiddleBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_102 /* LeftMiddleHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMiddleHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_103 /* LeftMiddleWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMiddleWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_104 /* LeftRightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_105 /* LeftRightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_106 /* LeftRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_107 /* LeftTopBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTopBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_108 /* LeftTopHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTopHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_109 /* LeftTopMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTopMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_110 /* LeftTopWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTopWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_111 /* MiddleCenterBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_112 /* MiddleCenterHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_113 /* MiddleCenterLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_114 /* MiddleCenterRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_115 /* MiddleCenterTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_116 /* MiddleCenterWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenterWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_117 /* MiddleLeftBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_118 /* MiddleLeftCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_119 /* MiddleLeftHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_12 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		OBJ_120 /* MiddleLeftRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_121 /* MiddleLeftTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_122 /* MiddleLeftWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeftWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_123 /* MiddleRightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_124 /* MiddleRightCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_125 /* MiddleRightHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_126 /* MiddleRightLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_127 /* MiddleRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_128 /* MiddleRightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRightWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_129 /* RightBottomHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottomHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_13 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		OBJ_130 /* RightBottomWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottomWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_131 /* RightMiddleBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddleBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_132 /* RightMiddleHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddleHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_133 /* RightMiddleWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddleWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_134 /* RightTopBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTopBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_135 /* RightTopHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTopHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_136 /* RightTopMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTopMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_137 /* RightTopWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTopWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_138 /* TopCenterBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_139 /* TopCenterHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_14 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		OBJ_140 /* TopCenterLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_141 /* TopCenterMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_142 /* TopCenterRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_143 /* TopCenterWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_144 /* TopLeftBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_145 /* TopLeftCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_146 /* TopLeftHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_147 /* TopLeftMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_148 /* TopLeftRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_149 /* TopLeftWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_150 /* TopRightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_151 /* TopRightCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_152 /* TopRightHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_153 /* TopRightLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_154 /* TopRightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_155 /* TopRightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRightWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_157 /* DidStoreAllRequiredPropertyLayoutProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidStoreAllRequiredPropertyLayoutProperty.swift; sourceTree = "<group>"; };
+		OBJ_159 /* LayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMaker.swift; sourceTree = "<group>"; };
+		OBJ_16 /* FrameAdditionalEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameAdditionalEvaluation.swift; sourceTree = "<group>"; };
+		OBJ_160 /* LayoutPropertyCanAddAdditionalEvaluationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanAddAdditionalEvaluationType.swift; sourceTree = "<group>"; };
+		OBJ_161 /* LayoutPropertyCanStoreBottomCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreBottomCenterType.swift; sourceTree = "<group>"; };
+		OBJ_162 /* LayoutPropertyCanStoreBottomLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreBottomLeftType.swift; sourceTree = "<group>"; };
+		OBJ_163 /* LayoutPropertyCanStoreBottomRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreBottomRightType.swift; sourceTree = "<group>"; };
+		OBJ_164 /* LayoutPropertyCanStoreBottomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreBottomType.swift; sourceTree = "<group>"; };
+		OBJ_165 /* LayoutPropertyCanStoreCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreCenterType.swift; sourceTree = "<group>"; };
+		OBJ_166 /* LayoutPropertyCanStoreFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreFrameType.swift; sourceTree = "<group>"; };
+		OBJ_167 /* LayoutPropertyCanStoreHeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreHeightType.swift; sourceTree = "<group>"; };
+		OBJ_168 /* LayoutPropertyCanStoreHorizontalInsetsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreHorizontalInsetsType.swift; sourceTree = "<group>"; };
+		OBJ_169 /* LayoutPropertyCanStoreLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreLeftType.swift; sourceTree = "<group>"; };
+		OBJ_17 /* IndividualLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualLayout.swift; sourceTree = "<group>"; };
+		OBJ_170 /* LayoutPropertyCanStoreMiddleCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleCenterType.swift; sourceTree = "<group>"; };
+		OBJ_171 /* LayoutPropertyCanStoreMiddleLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleLeftType.swift; sourceTree = "<group>"; };
+		OBJ_172 /* LayoutPropertyCanStoreMiddleRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleRightType.swift; sourceTree = "<group>"; };
+		OBJ_173 /* LayoutPropertyCanStoreMiddleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreMiddleType.swift; sourceTree = "<group>"; };
+		OBJ_174 /* LayoutPropertyCanStoreRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreRightType.swift; sourceTree = "<group>"; };
+		OBJ_175 /* LayoutPropertyCanStoreSizeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreSizeType.swift; sourceTree = "<group>"; };
+		OBJ_176 /* LayoutPropertyCanStoreTopCenterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopCenterType.swift; sourceTree = "<group>"; };
+		OBJ_177 /* LayoutPropertyCanStoreTopLeftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopLeftType.swift; sourceTree = "<group>"; };
+		OBJ_178 /* LayoutPropertyCanStoreTopRightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopRightType.swift; sourceTree = "<group>"; };
+		OBJ_179 /* LayoutPropertyCanStoreTopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreTopType.swift; sourceTree = "<group>"; };
+		OBJ_18 /* LayoutElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutElement.swift; sourceTree = "<group>"; };
+		OBJ_180 /* LayoutPropertyCanStoreWidthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPropertyCanStoreWidthType.swift; sourceTree = "<group>"; };
+		OBJ_183 /* Initial.Sequential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.Sequential.swift; sourceTree = "<group>"; };
+		OBJ_185 /* Middle.Sequential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middle.Sequential.swift; sourceTree = "<group>"; };
+		OBJ_187 /* MiddleSize.Sequential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleSize.Sequential.swift; sourceTree = "<group>"; };
+		OBJ_189 /* NotAutoLayoutCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutCompatible.swift; sourceTree = "<group>"; };
+		OBJ_19 /* SequentialLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialLayout.swift; sourceTree = "<group>"; };
+		OBJ_190 /* NotAutoLayoutContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutContainer.swift; sourceTree = "<group>"; };
+		OBJ_192 /* Blank.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blank.generated.swift; sourceTree = "<group>"; };
+		OBJ_194 /* Bounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bounds.swift; sourceTree = "<group>"; };
+		OBJ_195 /* CGTypeConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGTypeConvertible.swift; sourceTree = "<group>"; };
+		OBJ_196 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		OBJ_197 /* IndividualFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualFrame.swift; sourceTree = "<group>"; };
+		OBJ_198 /* Insets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insets.swift; sourceTree = "<group>"; };
+		OBJ_199 /* LayoutGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGuideRepresentable.swift; sourceTree = "<group>"; };
+		OBJ_20 /* ViewLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuide.swift; sourceTree = "<group>"; };
+		OBJ_200 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		OBJ_201 /* PinGuideRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinGuideRepresentable.swift; sourceTree = "<group>"; };
+		OBJ_202 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		OBJ_203 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		OBJ_204 /* SequentialFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialFrame.swift; sourceTree = "<group>"; };
+		OBJ_205 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		OBJ_206 /* Span.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Span.swift; sourceTree = "<group>"; };
+		OBJ_207 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
+		OBJ_21 /* ViewLayoutGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuides.swift; sourceTree = "<group>"; };
+		OBJ_210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_212 /* ArrayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTest.swift; sourceTree = "<group>"; };
+		OBJ_213 /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
+		OBJ_215 /* LayoutControllingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControllingTests.swift; sourceTree = "<group>"; };
+		OBJ_217 /* ViewLayoutGuidesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayoutGuidesTest.swift; sourceTree = "<group>"; };
+		OBJ_218 /* ViewPinGuidesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuidesTest.swift; sourceTree = "<group>"; };
+		OBJ_22 /* ViewPinGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuide.swift; sourceTree = "<group>"; };
+		OBJ_220 /* NotAutoLayoutContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAutoLayoutContainerTest.swift; sourceTree = "<group>"; };
+		OBJ_222 /* FloatTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTest.swift; sourceTree = "<group>"; };
+		OBJ_223 /* RectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectTest.swift; sourceTree = "<group>"; };
+		OBJ_224 /* SizeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; };
+		OBJ_225 /* SpanTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanTest.swift; sourceTree = "<group>"; };
+		OBJ_23 /* ViewPinGuides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPinGuides.swift; sourceTree = "<group>"; };
+		OBJ_25 /* LayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutControlling.swift; sourceTree = "<group>"; };
+		OBJ_27 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
+		OBJ_28 /* LayoutInfoStorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorable.swift; sourceTree = "<group>"; };
+		OBJ_29 /* LayoutInfoStorableLayoutControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableLayoutControlling.swift; sourceTree = "<group>"; };
+		OBJ_30 /* LayoutInfoStorableOtherPublicAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStorableOtherPublicAPIs.swift; sourceTree = "<group>"; };
+		OBJ_31 /* LayoutInfoStoredScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStoredScrollView.swift; sourceTree = "<group>"; };
+		OBJ_32 /* LayoutInfoStoredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutInfoStoredView.swift; sourceTree = "<group>"; };
+		OBJ_33 /* SubviewSetupWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewSetupWizard.swift; sourceTree = "<group>"; };
+		OBJ_34 /* ViewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInfo.swift; sourceTree = "<group>"; };
+		OBJ_38 /* Initial.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.Individual.swift; sourceTree = "<group>"; };
+		OBJ_40 /* Center.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Center.Individual.swift; sourceTree = "<group>"; };
+		OBJ_41 /* Left.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Left.Individual.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Right.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Right.Individual.swift; sourceTree = "<group>"; };
+		OBJ_44 /* BottomCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_45 /* BottomLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_46 /* BottomRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_47 /* CenterBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_48 /* CenterMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_49 /* CenterRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_50 /* CenterTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_51 /* LeftBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_52 /* LeftCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_53 /* LeftMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_54 /* LeftRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_55 /* LeftTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_56 /* MiddleCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_57 /* MiddleLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_58 /* MiddleRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_59 /* RightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* RightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_61 /* RightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_62 /* TopCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_63 /* TopLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_64 /* TopRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_66 /* BottomCenterHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_67 /* BottomCenterLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_68 /* BottomCenterMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_69 /* BottomCenterRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_70 /* BottomCenterTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_71 /* BottomCenterWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCenterWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_72 /* BottomLeftCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_73 /* BottomLeftHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_74 /* BottomLeftMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_75 /* BottomLeftRight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftRight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_76 /* BottomLeftTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_77 /* BottomLeftWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLeftWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_78 /* BottomRightCenter.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightCenter.Individual.swift; sourceTree = "<group>"; };
+		OBJ_79 /* BottomRightHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_80 /* BottomRightLeft.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightLeft.Individual.swift; sourceTree = "<group>"; };
+		OBJ_81 /* BottomRightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_82 /* BottomRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_83 /* BottomRightWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRightWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_84 /* CenterBottomHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterBottomHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_85 /* CenterBottomWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterBottomWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_86 /* CenterMiddleBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterMiddleBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_87 /* CenterMiddleHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterMiddleHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_88 /* CenterMiddleWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterMiddleWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_89 /* CenterRightBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRightBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_9 /* NotAutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotAutoLayout.h; sourceTree = "<group>"; };
+		OBJ_90 /* CenterRightMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRightMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_91 /* CenterRightTop.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterRightTop.Individual.swift; sourceTree = "<group>"; };
+		OBJ_92 /* CenterTopBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTopBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_93 /* CenterTopHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTopHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_94 /* CenterTopMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTopMiddle.Individual.swift; sourceTree = "<group>"; };
+		OBJ_95 /* CenterTopWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTopWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_96 /* LeftBottomHeight.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBottomHeight.Individual.swift; sourceTree = "<group>"; };
+		OBJ_97 /* LeftBottomWidth.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBottomWidth.Individual.swift; sourceTree = "<group>"; };
+		OBJ_98 /* LeftCenterBottom.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCenterBottom.Individual.swift; sourceTree = "<group>"; };
+		OBJ_99 /* LeftCenterMiddle.Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftCenterMiddle.Individual.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_453 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_454 /* NotAutoLayout.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_11 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_12 /* Array.swift */,
+				OBJ_13 /* Dictionary.swift */,
+				OBJ_14 /* UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_15 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* FrameAdditionalEvaluation.swift */,
+				OBJ_17 /* IndividualLayout.swift */,
+				OBJ_18 /* LayoutElement.swift */,
+				OBJ_19 /* SequentialLayout.swift */,
+				OBJ_20 /* ViewLayoutGuide.swift */,
+				OBJ_21 /* ViewLayoutGuides.swift */,
+				OBJ_22 /* ViewPinGuide.swift */,
+				OBJ_23 /* ViewPinGuides.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		OBJ_156 /* All-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_157 /* DidStoreAllRequiredPropertyLayoutProperty.swift */,
+			);
+			path = "All-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_158 /* MakerBasics */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_159 /* LayoutMaker.swift */,
+				OBJ_160 /* LayoutPropertyCanAddAdditionalEvaluationType.swift */,
+				OBJ_161 /* LayoutPropertyCanStoreBottomCenterType.swift */,
+				OBJ_162 /* LayoutPropertyCanStoreBottomLeftType.swift */,
+				OBJ_163 /* LayoutPropertyCanStoreBottomRightType.swift */,
+				OBJ_164 /* LayoutPropertyCanStoreBottomType.swift */,
+				OBJ_165 /* LayoutPropertyCanStoreCenterType.swift */,
+				OBJ_166 /* LayoutPropertyCanStoreFrameType.swift */,
+				OBJ_167 /* LayoutPropertyCanStoreHeightType.swift */,
+				OBJ_168 /* LayoutPropertyCanStoreHorizontalInsetsType.swift */,
+				OBJ_169 /* LayoutPropertyCanStoreLeftType.swift */,
+				OBJ_170 /* LayoutPropertyCanStoreMiddleCenterType.swift */,
+				OBJ_171 /* LayoutPropertyCanStoreMiddleLeftType.swift */,
+				OBJ_172 /* LayoutPropertyCanStoreMiddleRightType.swift */,
+				OBJ_173 /* LayoutPropertyCanStoreMiddleType.swift */,
+				OBJ_174 /* LayoutPropertyCanStoreRightType.swift */,
+				OBJ_175 /* LayoutPropertyCanStoreSizeType.swift */,
+				OBJ_176 /* LayoutPropertyCanStoreTopCenterType.swift */,
+				OBJ_177 /* LayoutPropertyCanStoreTopLeftType.swift */,
+				OBJ_178 /* LayoutPropertyCanStoreTopRightType.swift */,
+				OBJ_179 /* LayoutPropertyCanStoreTopType.swift */,
+				OBJ_180 /* LayoutPropertyCanStoreWidthType.swift */,
+			);
+			path = MakerBasics;
+			sourceTree = "<group>";
+		};
+		OBJ_181 /* SequentialProperties */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_182 /* 0-Element */,
+				OBJ_184 /* 1-Element */,
+				OBJ_186 /* 3-Element */,
+			);
+			path = SequentialProperties;
+			sourceTree = "<group>";
+		};
+		OBJ_182 /* 0-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_183 /* Initial.Sequential.swift */,
+			);
+			path = "0-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_184 /* 1-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_185 /* Middle.Sequential.swift */,
+			);
+			path = "1-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_186 /* 3-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_187 /* MiddleSize.Sequential.swift */,
+			);
+			path = "3-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_188 /* NotAutoLayoutCompatible */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_189 /* NotAutoLayoutCompatible.swift */,
+				OBJ_190 /* NotAutoLayoutContainer.swift */,
+			);
+			path = NotAutoLayoutCompatible;
+			sourceTree = "<group>";
+		};
+		OBJ_191 /* SourceryGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_192 /* Blank.generated.swift */,
+			);
+			path = SourceryGenerated;
+			sourceTree = "<group>";
+		};
+		OBJ_193 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_194 /* Bounds.swift */,
+				OBJ_195 /* CGTypeConvertible.swift */,
+				OBJ_196 /* Float.swift */,
+				OBJ_197 /* IndividualFrame.swift */,
+				OBJ_198 /* Insets.swift */,
+				OBJ_199 /* LayoutGuideRepresentable.swift */,
+				OBJ_200 /* Line.swift */,
+				OBJ_201 /* PinGuideRepresentable.swift */,
+				OBJ_202 /* Point.swift */,
+				OBJ_203 /* Rect.swift */,
+				OBJ_204 /* SequentialFrame.swift */,
+				OBJ_205 /* Size.swift */,
+				OBJ_206 /* Span.swift */,
+				OBJ_207 /* Typealias.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		OBJ_208 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_209 /* NotAutoLayoutTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_209 /* NotAutoLayoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_210 /* Info.plist */,
+				OBJ_211 /* ExtensionsTest */,
+				OBJ_214 /* LayoutControlTest */,
+				OBJ_216 /* LayoutTest */,
+				OBJ_219 /* NotAutoLayoutCompatibleTest */,
+				OBJ_221 /* TypesTest */,
+			);
+			name = NotAutoLayoutTests;
+			path = Tests/NotAutoLayoutTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_211 /* ExtensionsTest */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_212 /* ArrayTest.swift */,
+				OBJ_213 /* DictionaryTest.swift */,
+			);
+			path = ExtensionsTest;
+			sourceTree = "<group>";
+		};
+		OBJ_214 /* LayoutControlTest */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_215 /* LayoutControllingTests.swift */,
+			);
+			path = LayoutControlTest;
+			sourceTree = "<group>";
+		};
+		OBJ_216 /* LayoutTest */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_217 /* ViewLayoutGuidesTest.swift */,
+				OBJ_218 /* ViewPinGuidesTest.swift */,
+			);
+			path = LayoutTest;
+			sourceTree = "<group>";
+		};
+		OBJ_219 /* NotAutoLayoutCompatibleTest */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_220 /* NotAutoLayoutContainerTest.swift */,
+			);
+			path = NotAutoLayoutCompatibleTest;
+			sourceTree = "<group>";
+		};
+		OBJ_221 /* TypesTest */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_222 /* FloatTest.swift */,
+				OBJ_223 /* RectTest.swift */,
+				OBJ_224 /* SizeTest.swift */,
+				OBJ_225 /* SpanTest.swift */,
+			);
+			path = TypesTest;
+			sourceTree = "<group>";
+		};
+		OBJ_226 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"NotAutoLayout::NotAutoLayoutTests::Product" /* NotAutoLayoutTests.xctest */,
+				"NotAutoLayout::NotAutoLayout::Product" /* NotAutoLayout.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_24 /* LayoutControl */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_25 /* LayoutControlling.swift */,
+			);
+			path = LayoutControl;
+			sourceTree = "<group>";
+		};
+		OBJ_26 /* LayoutInfoStorable */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_27 /* Condition.swift */,
+				OBJ_28 /* LayoutInfoStorable.swift */,
+				OBJ_29 /* LayoutInfoStorableLayoutControlling.swift */,
+				OBJ_30 /* LayoutInfoStorableOtherPublicAPIs.swift */,
+				OBJ_31 /* LayoutInfoStoredScrollView.swift */,
+				OBJ_32 /* LayoutInfoStoredView.swift */,
+				OBJ_33 /* SubviewSetupWizard.swift */,
+				OBJ_34 /* ViewInfo.swift */,
+			);
+			path = LayoutInfoStorable;
+			sourceTree = "<group>";
+		};
+		OBJ_35 /* LayoutMaker */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_36 /* IndividualProperties */,
+				OBJ_158 /* MakerBasics */,
+				OBJ_181 /* SequentialProperties */,
+			);
+			path = LayoutMaker;
+			sourceTree = "<group>";
+		};
+		OBJ_36 /* IndividualProperties */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_37 /* 0-Element */,
+				OBJ_39 /* 1-Element */,
+				OBJ_43 /* 2-Element */,
+				OBJ_65 /* 3-Element */,
+				OBJ_156 /* All-Element */,
+			);
+			path = IndividualProperties;
+			sourceTree = "<group>";
+		};
+		OBJ_37 /* 0-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_38 /* Initial.Individual.swift */,
+			);
+			path = "0-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_39 /* 1-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_40 /* Center.Individual.swift */,
+				OBJ_41 /* Left.Individual.swift */,
+				OBJ_42 /* Right.Individual.swift */,
+			);
+			path = "1-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_43 /* 2-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_44 /* BottomCenter.Individual.swift */,
+				OBJ_45 /* BottomLeft.Individual.swift */,
+				OBJ_46 /* BottomRight.Individual.swift */,
+				OBJ_47 /* CenterBottom.Individual.swift */,
+				OBJ_48 /* CenterMiddle.Individual.swift */,
+				OBJ_49 /* CenterRight.Individual.swift */,
+				OBJ_50 /* CenterTop.Individual.swift */,
+				OBJ_51 /* LeftBottom.Individual.swift */,
+				OBJ_52 /* LeftCenter.Individual.swift */,
+				OBJ_53 /* LeftMiddle.Individual.swift */,
+				OBJ_54 /* LeftRight.Individual.swift */,
+				OBJ_55 /* LeftTop.Individual.swift */,
+				OBJ_56 /* MiddleCenter.Individual.swift */,
+				OBJ_57 /* MiddleLeft.Individual.swift */,
+				OBJ_58 /* MiddleRight.Individual.swift */,
+				OBJ_59 /* RightBottom.Individual.swift */,
+				OBJ_60 /* RightMiddle.Individual.swift */,
+				OBJ_61 /* RightTop.Individual.swift */,
+				OBJ_62 /* TopCenter.Individual.swift */,
+				OBJ_63 /* TopLeft.Individual.swift */,
+				OBJ_64 /* TopRight.Individual.swift */,
+			);
+			path = "2-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_5 = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_208 /* Tests */,
+				OBJ_226 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_65 /* 3-Element */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_66 /* BottomCenterHeight.Individual.swift */,
+				OBJ_67 /* BottomCenterLeft.Individual.swift */,
+				OBJ_68 /* BottomCenterMiddle.Individual.swift */,
+				OBJ_69 /* BottomCenterRight.Individual.swift */,
+				OBJ_70 /* BottomCenterTop.Individual.swift */,
+				OBJ_71 /* BottomCenterWidth.Individual.swift */,
+				OBJ_72 /* BottomLeftCenter.Individual.swift */,
+				OBJ_73 /* BottomLeftHeight.Individual.swift */,
+				OBJ_74 /* BottomLeftMiddle.Individual.swift */,
+				OBJ_75 /* BottomLeftRight.Individual.swift */,
+				OBJ_76 /* BottomLeftTop.Individual.swift */,
+				OBJ_77 /* BottomLeftWidth.Individual.swift */,
+				OBJ_78 /* BottomRightCenter.Individual.swift */,
+				OBJ_79 /* BottomRightHeight.Individual.swift */,
+				OBJ_80 /* BottomRightLeft.Individual.swift */,
+				OBJ_81 /* BottomRightMiddle.Individual.swift */,
+				OBJ_82 /* BottomRightTop.Individual.swift */,
+				OBJ_83 /* BottomRightWidth.Individual.swift */,
+				OBJ_84 /* CenterBottomHeight.Individual.swift */,
+				OBJ_85 /* CenterBottomWidth.Individual.swift */,
+				OBJ_86 /* CenterMiddleBottom.Individual.swift */,
+				OBJ_87 /* CenterMiddleHeight.Individual.swift */,
+				OBJ_88 /* CenterMiddleWidth.Individual.swift */,
+				OBJ_89 /* CenterRightBottom.Individual.swift */,
+				OBJ_90 /* CenterRightMiddle.Individual.swift */,
+				OBJ_91 /* CenterRightTop.Individual.swift */,
+				OBJ_92 /* CenterTopBottom.Individual.swift */,
+				OBJ_93 /* CenterTopHeight.Individual.swift */,
+				OBJ_94 /* CenterTopMiddle.Individual.swift */,
+				OBJ_95 /* CenterTopWidth.Individual.swift */,
+				OBJ_96 /* LeftBottomHeight.Individual.swift */,
+				OBJ_97 /* LeftBottomWidth.Individual.swift */,
+				OBJ_98 /* LeftCenterBottom.Individual.swift */,
+				OBJ_99 /* LeftCenterMiddle.Individual.swift */,
+				OBJ_100 /* LeftCenterTop.Individual.swift */,
+				OBJ_101 /* LeftMiddleBottom.Individual.swift */,
+				OBJ_102 /* LeftMiddleHeight.Individual.swift */,
+				OBJ_103 /* LeftMiddleWidth.Individual.swift */,
+				OBJ_104 /* LeftRightBottom.Individual.swift */,
+				OBJ_105 /* LeftRightMiddle.Individual.swift */,
+				OBJ_106 /* LeftRightTop.Individual.swift */,
+				OBJ_107 /* LeftTopBottom.Individual.swift */,
+				OBJ_108 /* LeftTopHeight.Individual.swift */,
+				OBJ_109 /* LeftTopMiddle.Individual.swift */,
+				OBJ_110 /* LeftTopWidth.Individual.swift */,
+				OBJ_111 /* MiddleCenterBottom.Individual.swift */,
+				OBJ_112 /* MiddleCenterHeight.Individual.swift */,
+				OBJ_113 /* MiddleCenterLeft.Individual.swift */,
+				OBJ_114 /* MiddleCenterRight.Individual.swift */,
+				OBJ_115 /* MiddleCenterTop.Individual.swift */,
+				OBJ_116 /* MiddleCenterWidth.Individual.swift */,
+				OBJ_117 /* MiddleLeftBottom.Individual.swift */,
+				OBJ_118 /* MiddleLeftCenter.Individual.swift */,
+				OBJ_119 /* MiddleLeftHeight.Individual.swift */,
+				OBJ_120 /* MiddleLeftRight.Individual.swift */,
+				OBJ_121 /* MiddleLeftTop.Individual.swift */,
+				OBJ_122 /* MiddleLeftWidth.Individual.swift */,
+				OBJ_123 /* MiddleRightBottom.Individual.swift */,
+				OBJ_124 /* MiddleRightCenter.Individual.swift */,
+				OBJ_125 /* MiddleRightHeight.Individual.swift */,
+				OBJ_126 /* MiddleRightLeft.Individual.swift */,
+				OBJ_127 /* MiddleRightTop.Individual.swift */,
+				OBJ_128 /* MiddleRightWidth.Individual.swift */,
+				OBJ_129 /* RightBottomHeight.Individual.swift */,
+				OBJ_130 /* RightBottomWidth.Individual.swift */,
+				OBJ_131 /* RightMiddleBottom.Individual.swift */,
+				OBJ_132 /* RightMiddleHeight.Individual.swift */,
+				OBJ_133 /* RightMiddleWidth.Individual.swift */,
+				OBJ_134 /* RightTopBottom.Individual.swift */,
+				OBJ_135 /* RightTopHeight.Individual.swift */,
+				OBJ_136 /* RightTopMiddle.Individual.swift */,
+				OBJ_137 /* RightTopWidth.Individual.swift */,
+				OBJ_138 /* TopCenterBottom.Individual.swift */,
+				OBJ_139 /* TopCenterHeight.Individual.swift */,
+				OBJ_140 /* TopCenterLeft.Individual.swift */,
+				OBJ_141 /* TopCenterMiddle.Individual.swift */,
+				OBJ_142 /* TopCenterRight.Individual.swift */,
+				OBJ_143 /* TopCenterWidth.Individual.swift */,
+				OBJ_144 /* TopLeftBottom.Individual.swift */,
+				OBJ_145 /* TopLeftCenter.Individual.swift */,
+				OBJ_146 /* TopLeftHeight.Individual.swift */,
+				OBJ_147 /* TopLeftMiddle.Individual.swift */,
+				OBJ_148 /* TopLeftRight.Individual.swift */,
+				OBJ_149 /* TopLeftWidth.Individual.swift */,
+				OBJ_150 /* TopRightBottom.Individual.swift */,
+				OBJ_151 /* TopRightCenter.Individual.swift */,
+				OBJ_152 /* TopRightHeight.Individual.swift */,
+				OBJ_153 /* TopRightLeft.Individual.swift */,
+				OBJ_154 /* TopRightMiddle.Individual.swift */,
+				OBJ_155 /* TopRightWidth.Individual.swift */,
+			);
+			path = "3-Element";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* NotAutoLayout */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* NotAutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* NotAutoLayout.h */,
+				OBJ_10 /* Info.plist */,
+				OBJ_11 /* Extensions */,
+				OBJ_15 /* Layout */,
+				OBJ_24 /* LayoutControl */,
+				OBJ_26 /* LayoutInfoStorable */,
+				OBJ_35 /* LayoutMaker */,
+				OBJ_188 /* NotAutoLayoutCompatible */,
+				OBJ_191 /* SourceryGenerated */,
+				OBJ_193 /* Types */,
+			);
+			name = NotAutoLayout;
+			path = Sources/NotAutoLayout;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"NotAutoLayout::NotAutoLayout" /* NotAutoLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_244 /* Build configuration list for PBXNativeTarget "NotAutoLayout" */;
+			buildPhases = (
+				OBJ_247 /* Sources */,
+				OBJ_426 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotAutoLayout;
+			productName = NotAutoLayout;
+			productReference = "NotAutoLayout::NotAutoLayout::Product" /* NotAutoLayout.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"NotAutoLayout::NotAutoLayoutTests" /* NotAutoLayoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_439 /* Build configuration list for PBXNativeTarget "NotAutoLayoutTests" */;
+			buildPhases = (
+				OBJ_442 /* Sources */,
+				OBJ_453 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_455 /* PBXTargetDependency */,
+			);
+			name = NotAutoLayoutTests;
+			productName = NotAutoLayoutTests;
+			productReference = "NotAutoLayout::NotAutoLayoutTests::Product" /* NotAutoLayoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"NotAutoLayout::SwiftPMPackageDescription" /* NotAutoLayoutPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_428 /* Build configuration list for PBXNativeTarget "NotAutoLayoutPackageDescription" */;
+			buildPhases = (
+				OBJ_431 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotAutoLayoutPackageDescription;
+			productName = NotAutoLayoutPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "NotAutoLayout" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_226 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"NotAutoLayout::NotAutoLayout" /* NotAutoLayout */,
+				"NotAutoLayout::SwiftPMPackageDescription" /* NotAutoLayoutPackageDescription */,
+				"NotAutoLayout::NotAutoLayoutPackageTests::ProductTarget" /* NotAutoLayoutPackageTests */,
+				"NotAutoLayout::NotAutoLayoutTests" /* NotAutoLayoutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_248 /* Array.swift in Sources */,
+				OBJ_249 /* Dictionary.swift in Sources */,
+				OBJ_250 /* UIView.swift in Sources */,
+				OBJ_251 /* FrameAdditionalEvaluation.swift in Sources */,
+				OBJ_252 /* IndividualLayout.swift in Sources */,
+				OBJ_253 /* LayoutElement.swift in Sources */,
+				OBJ_254 /* SequentialLayout.swift in Sources */,
+				OBJ_255 /* ViewLayoutGuide.swift in Sources */,
+				OBJ_256 /* ViewLayoutGuides.swift in Sources */,
+				OBJ_257 /* ViewPinGuide.swift in Sources */,
+				OBJ_258 /* ViewPinGuides.swift in Sources */,
+				OBJ_259 /* LayoutControlling.swift in Sources */,
+				OBJ_260 /* Condition.swift in Sources */,
+				OBJ_261 /* LayoutInfoStorable.swift in Sources */,
+				OBJ_262 /* LayoutInfoStorableLayoutControlling.swift in Sources */,
+				OBJ_263 /* LayoutInfoStorableOtherPublicAPIs.swift in Sources */,
+				OBJ_264 /* LayoutInfoStoredScrollView.swift in Sources */,
+				OBJ_265 /* LayoutInfoStoredView.swift in Sources */,
+				OBJ_266 /* SubviewSetupWizard.swift in Sources */,
+				OBJ_267 /* ViewInfo.swift in Sources */,
+				OBJ_268 /* Initial.Individual.swift in Sources */,
+				OBJ_269 /* Center.Individual.swift in Sources */,
+				OBJ_270 /* Left.Individual.swift in Sources */,
+				OBJ_271 /* Right.Individual.swift in Sources */,
+				OBJ_272 /* BottomCenter.Individual.swift in Sources */,
+				OBJ_273 /* BottomLeft.Individual.swift in Sources */,
+				OBJ_274 /* BottomRight.Individual.swift in Sources */,
+				OBJ_275 /* CenterBottom.Individual.swift in Sources */,
+				OBJ_276 /* CenterMiddle.Individual.swift in Sources */,
+				OBJ_277 /* CenterRight.Individual.swift in Sources */,
+				OBJ_278 /* CenterTop.Individual.swift in Sources */,
+				OBJ_279 /* LeftBottom.Individual.swift in Sources */,
+				OBJ_280 /* LeftCenter.Individual.swift in Sources */,
+				OBJ_281 /* LeftMiddle.Individual.swift in Sources */,
+				OBJ_282 /* LeftRight.Individual.swift in Sources */,
+				OBJ_283 /* LeftTop.Individual.swift in Sources */,
+				OBJ_284 /* MiddleCenter.Individual.swift in Sources */,
+				OBJ_285 /* MiddleLeft.Individual.swift in Sources */,
+				OBJ_286 /* MiddleRight.Individual.swift in Sources */,
+				OBJ_287 /* RightBottom.Individual.swift in Sources */,
+				OBJ_288 /* RightMiddle.Individual.swift in Sources */,
+				OBJ_289 /* RightTop.Individual.swift in Sources */,
+				OBJ_290 /* TopCenter.Individual.swift in Sources */,
+				OBJ_291 /* TopLeft.Individual.swift in Sources */,
+				OBJ_292 /* TopRight.Individual.swift in Sources */,
+				OBJ_293 /* BottomCenterHeight.Individual.swift in Sources */,
+				OBJ_294 /* BottomCenterLeft.Individual.swift in Sources */,
+				OBJ_295 /* BottomCenterMiddle.Individual.swift in Sources */,
+				OBJ_296 /* BottomCenterRight.Individual.swift in Sources */,
+				OBJ_297 /* BottomCenterTop.Individual.swift in Sources */,
+				OBJ_298 /* BottomCenterWidth.Individual.swift in Sources */,
+				OBJ_299 /* BottomLeftCenter.Individual.swift in Sources */,
+				OBJ_300 /* BottomLeftHeight.Individual.swift in Sources */,
+				OBJ_301 /* BottomLeftMiddle.Individual.swift in Sources */,
+				OBJ_302 /* BottomLeftRight.Individual.swift in Sources */,
+				OBJ_303 /* BottomLeftTop.Individual.swift in Sources */,
+				OBJ_304 /* BottomLeftWidth.Individual.swift in Sources */,
+				OBJ_305 /* BottomRightCenter.Individual.swift in Sources */,
+				OBJ_306 /* BottomRightHeight.Individual.swift in Sources */,
+				OBJ_307 /* BottomRightLeft.Individual.swift in Sources */,
+				OBJ_308 /* BottomRightMiddle.Individual.swift in Sources */,
+				OBJ_309 /* BottomRightTop.Individual.swift in Sources */,
+				OBJ_310 /* BottomRightWidth.Individual.swift in Sources */,
+				OBJ_311 /* CenterBottomHeight.Individual.swift in Sources */,
+				OBJ_312 /* CenterBottomWidth.Individual.swift in Sources */,
+				OBJ_313 /* CenterMiddleBottom.Individual.swift in Sources */,
+				OBJ_314 /* CenterMiddleHeight.Individual.swift in Sources */,
+				OBJ_315 /* CenterMiddleWidth.Individual.swift in Sources */,
+				OBJ_316 /* CenterRightBottom.Individual.swift in Sources */,
+				OBJ_317 /* CenterRightMiddle.Individual.swift in Sources */,
+				OBJ_318 /* CenterRightTop.Individual.swift in Sources */,
+				OBJ_319 /* CenterTopBottom.Individual.swift in Sources */,
+				OBJ_320 /* CenterTopHeight.Individual.swift in Sources */,
+				OBJ_321 /* CenterTopMiddle.Individual.swift in Sources */,
+				OBJ_322 /* CenterTopWidth.Individual.swift in Sources */,
+				OBJ_323 /* LeftBottomHeight.Individual.swift in Sources */,
+				OBJ_324 /* LeftBottomWidth.Individual.swift in Sources */,
+				OBJ_325 /* LeftCenterBottom.Individual.swift in Sources */,
+				OBJ_326 /* LeftCenterMiddle.Individual.swift in Sources */,
+				OBJ_327 /* LeftCenterTop.Individual.swift in Sources */,
+				OBJ_328 /* LeftMiddleBottom.Individual.swift in Sources */,
+				OBJ_329 /* LeftMiddleHeight.Individual.swift in Sources */,
+				OBJ_330 /* LeftMiddleWidth.Individual.swift in Sources */,
+				OBJ_331 /* LeftRightBottom.Individual.swift in Sources */,
+				OBJ_332 /* LeftRightMiddle.Individual.swift in Sources */,
+				OBJ_333 /* LeftRightTop.Individual.swift in Sources */,
+				OBJ_334 /* LeftTopBottom.Individual.swift in Sources */,
+				OBJ_335 /* LeftTopHeight.Individual.swift in Sources */,
+				OBJ_336 /* LeftTopMiddle.Individual.swift in Sources */,
+				OBJ_337 /* LeftTopWidth.Individual.swift in Sources */,
+				OBJ_338 /* MiddleCenterBottom.Individual.swift in Sources */,
+				OBJ_339 /* MiddleCenterHeight.Individual.swift in Sources */,
+				OBJ_340 /* MiddleCenterLeft.Individual.swift in Sources */,
+				OBJ_341 /* MiddleCenterRight.Individual.swift in Sources */,
+				OBJ_342 /* MiddleCenterTop.Individual.swift in Sources */,
+				OBJ_343 /* MiddleCenterWidth.Individual.swift in Sources */,
+				OBJ_344 /* MiddleLeftBottom.Individual.swift in Sources */,
+				OBJ_345 /* MiddleLeftCenter.Individual.swift in Sources */,
+				OBJ_346 /* MiddleLeftHeight.Individual.swift in Sources */,
+				OBJ_347 /* MiddleLeftRight.Individual.swift in Sources */,
+				OBJ_348 /* MiddleLeftTop.Individual.swift in Sources */,
+				OBJ_349 /* MiddleLeftWidth.Individual.swift in Sources */,
+				OBJ_350 /* MiddleRightBottom.Individual.swift in Sources */,
+				OBJ_351 /* MiddleRightCenter.Individual.swift in Sources */,
+				OBJ_352 /* MiddleRightHeight.Individual.swift in Sources */,
+				OBJ_353 /* MiddleRightLeft.Individual.swift in Sources */,
+				OBJ_354 /* MiddleRightTop.Individual.swift in Sources */,
+				OBJ_355 /* MiddleRightWidth.Individual.swift in Sources */,
+				OBJ_356 /* RightBottomHeight.Individual.swift in Sources */,
+				OBJ_357 /* RightBottomWidth.Individual.swift in Sources */,
+				OBJ_358 /* RightMiddleBottom.Individual.swift in Sources */,
+				OBJ_359 /* RightMiddleHeight.Individual.swift in Sources */,
+				OBJ_360 /* RightMiddleWidth.Individual.swift in Sources */,
+				OBJ_361 /* RightTopBottom.Individual.swift in Sources */,
+				OBJ_362 /* RightTopHeight.Individual.swift in Sources */,
+				OBJ_363 /* RightTopMiddle.Individual.swift in Sources */,
+				OBJ_364 /* RightTopWidth.Individual.swift in Sources */,
+				OBJ_365 /* TopCenterBottom.Individual.swift in Sources */,
+				OBJ_366 /* TopCenterHeight.Individual.swift in Sources */,
+				OBJ_367 /* TopCenterLeft.Individual.swift in Sources */,
+				OBJ_368 /* TopCenterMiddle.Individual.swift in Sources */,
+				OBJ_369 /* TopCenterRight.Individual.swift in Sources */,
+				OBJ_370 /* TopCenterWidth.Individual.swift in Sources */,
+				OBJ_371 /* TopLeftBottom.Individual.swift in Sources */,
+				OBJ_372 /* TopLeftCenter.Individual.swift in Sources */,
+				OBJ_373 /* TopLeftHeight.Individual.swift in Sources */,
+				OBJ_374 /* TopLeftMiddle.Individual.swift in Sources */,
+				OBJ_375 /* TopLeftRight.Individual.swift in Sources */,
+				OBJ_376 /* TopLeftWidth.Individual.swift in Sources */,
+				OBJ_377 /* TopRightBottom.Individual.swift in Sources */,
+				OBJ_378 /* TopRightCenter.Individual.swift in Sources */,
+				OBJ_379 /* TopRightHeight.Individual.swift in Sources */,
+				OBJ_380 /* TopRightLeft.Individual.swift in Sources */,
+				OBJ_381 /* TopRightMiddle.Individual.swift in Sources */,
+				OBJ_382 /* TopRightWidth.Individual.swift in Sources */,
+				OBJ_383 /* DidStoreAllRequiredPropertyLayoutProperty.swift in Sources */,
+				OBJ_384 /* LayoutMaker.swift in Sources */,
+				OBJ_385 /* LayoutPropertyCanAddAdditionalEvaluationType.swift in Sources */,
+				OBJ_386 /* LayoutPropertyCanStoreBottomCenterType.swift in Sources */,
+				OBJ_387 /* LayoutPropertyCanStoreBottomLeftType.swift in Sources */,
+				OBJ_388 /* LayoutPropertyCanStoreBottomRightType.swift in Sources */,
+				OBJ_389 /* LayoutPropertyCanStoreBottomType.swift in Sources */,
+				OBJ_390 /* LayoutPropertyCanStoreCenterType.swift in Sources */,
+				OBJ_391 /* LayoutPropertyCanStoreFrameType.swift in Sources */,
+				OBJ_392 /* LayoutPropertyCanStoreHeightType.swift in Sources */,
+				OBJ_393 /* LayoutPropertyCanStoreHorizontalInsetsType.swift in Sources */,
+				OBJ_394 /* LayoutPropertyCanStoreLeftType.swift in Sources */,
+				OBJ_395 /* LayoutPropertyCanStoreMiddleCenterType.swift in Sources */,
+				OBJ_396 /* LayoutPropertyCanStoreMiddleLeftType.swift in Sources */,
+				OBJ_397 /* LayoutPropertyCanStoreMiddleRightType.swift in Sources */,
+				OBJ_398 /* LayoutPropertyCanStoreMiddleType.swift in Sources */,
+				OBJ_399 /* LayoutPropertyCanStoreRightType.swift in Sources */,
+				OBJ_400 /* LayoutPropertyCanStoreSizeType.swift in Sources */,
+				OBJ_401 /* LayoutPropertyCanStoreTopCenterType.swift in Sources */,
+				OBJ_402 /* LayoutPropertyCanStoreTopLeftType.swift in Sources */,
+				OBJ_403 /* LayoutPropertyCanStoreTopRightType.swift in Sources */,
+				OBJ_404 /* LayoutPropertyCanStoreTopType.swift in Sources */,
+				OBJ_405 /* LayoutPropertyCanStoreWidthType.swift in Sources */,
+				OBJ_406 /* Initial.Sequential.swift in Sources */,
+				OBJ_407 /* Middle.Sequential.swift in Sources */,
+				OBJ_408 /* MiddleSize.Sequential.swift in Sources */,
+				OBJ_409 /* NotAutoLayoutCompatible.swift in Sources */,
+				OBJ_410 /* NotAutoLayoutContainer.swift in Sources */,
+				OBJ_411 /* Blank.generated.swift in Sources */,
+				OBJ_412 /* Bounds.swift in Sources */,
+				OBJ_413 /* CGTypeConvertible.swift in Sources */,
+				OBJ_414 /* Float.swift in Sources */,
+				OBJ_415 /* IndividualFrame.swift in Sources */,
+				OBJ_416 /* Insets.swift in Sources */,
+				OBJ_417 /* LayoutGuideRepresentable.swift in Sources */,
+				OBJ_418 /* Line.swift in Sources */,
+				OBJ_419 /* PinGuideRepresentable.swift in Sources */,
+				OBJ_420 /* Point.swift in Sources */,
+				OBJ_421 /* Rect.swift in Sources */,
+				OBJ_422 /* SequentialFrame.swift in Sources */,
+				OBJ_423 /* Size.swift in Sources */,
+				OBJ_424 /* Span.swift in Sources */,
+				OBJ_425 /* Typealias.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_432 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_442 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_443 /* ArrayTest.swift in Sources */,
+				OBJ_444 /* DictionaryTest.swift in Sources */,
+				OBJ_445 /* LayoutControllingTests.swift in Sources */,
+				OBJ_446 /* ViewLayoutGuidesTest.swift in Sources */,
+				OBJ_447 /* ViewPinGuidesTest.swift in Sources */,
+				OBJ_448 /* NotAutoLayoutContainerTest.swift in Sources */,
+				OBJ_449 /* FloatTest.swift in Sources */,
+				OBJ_450 /* RectTest.swift in Sources */,
+				OBJ_451 /* SizeTest.swift in Sources */,
+				OBJ_452 /* SpanTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_437 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "NotAutoLayout::NotAutoLayoutTests" /* NotAutoLayoutTests */;
+			targetProxy = BFCEFDB824636A3100799354 /* PBXContainerItemProxy */;
+		};
+		OBJ_455 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "NotAutoLayout::NotAutoLayout" /* NotAutoLayout */;
+			targetProxy = BFCEFDB724636A3000799354 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_245 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NotAutoLayout.xcodeproj/NotAutoLayout_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_NAME = NotAutoLayout;
+			};
+			name = Debug;
+		};
+		OBJ_246 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NotAutoLayout.xcodeproj/NotAutoLayout_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.NotAutoLayout;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGET_NAME = NotAutoLayout;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_429 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.2.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_435 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_436 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_440 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NotAutoLayout.xcodeproj/NotAutoLayoutTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = NotAutoLayoutTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_441 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = NotAutoLayout.xcodeproj/NotAutoLayoutTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = NotAutoLayoutTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "NotAutoLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_244 /* Build configuration list for PBXNativeTarget "NotAutoLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_245 /* Debug */,
+				OBJ_246 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_428 /* Build configuration list for PBXNativeTarget "NotAutoLayoutPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_429 /* Debug */,
+				OBJ_430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_434 /* Build configuration list for PBXAggregateTarget "NotAutoLayoutPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_435 /* Debug */,
+				OBJ_436 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_439 /* Build configuration list for PBXNativeTarget "NotAutoLayoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_440 /* Debug */,
+				OBJ_441 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
