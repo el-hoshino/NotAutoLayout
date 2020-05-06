@@ -37,7 +37,7 @@ end
 # Check for modifications of Info.plist
 def info_plist_has_been_modified
 
-    modified = git.modified_files.include?("NotAutoLayout/Info.plist")
+    modified = git.modified_files.include?("NotAutoLayout.xcodeproj/NotAutoLayout_Info.plist")
     return modified
 
 end

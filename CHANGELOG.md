@@ -6,7 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.3.0] - 2019-09-14
+## [3.3.1]
+
+### Enhanced
+
+- Xcode 11 Support
+
+### Added
+
+- SwiftPM Support
+
+## [3.3.0]
 
 ### Added
 
