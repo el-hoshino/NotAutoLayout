@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 /// A struct that shows a specific point in a rect.
 ///

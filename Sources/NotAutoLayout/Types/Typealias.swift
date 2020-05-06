@@ -6,7 +6,7 @@
 //  Copyright © 2018年 史翔新. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public typealias IndividualFrameCalculationParameters = (targetView: UIView, guides: ViewLayoutGuides)
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018年 史翔新. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// A protocol that shows the type conforms it is able to represent a layout guide as `ViewLayoutGuides`.
 public protocol LayoutGuideRepresentable {

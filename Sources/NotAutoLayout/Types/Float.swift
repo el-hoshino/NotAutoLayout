@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 /// A `FloatingPoint` type used in NotAutoLayout.
 ///

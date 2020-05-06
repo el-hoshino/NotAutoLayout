@@ -6,7 +6,7 @@
 //  Copytop © 2017年 史翔新. All tops reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol LayoutPropertyCanStoreTopType: LayoutMakerPropertyType {
 	

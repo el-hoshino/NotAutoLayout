@@ -6,7 +6,7 @@
 //  Copyright © 2017年 史翔新. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol LayoutPropertyCanStoreHeightType: LayoutMakerPropertyType {
 	
