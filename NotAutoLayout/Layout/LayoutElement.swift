@@ -34,7 +34,7 @@ extension LayoutElement {
 		
 		case constant(NotAutoLayout.Point)
 		case byParent((ViewLayoutGuides) -> NotAutoLayout.Point)
-		case byReference(referenceGetter: () -> UIView?,(ViewPinGuides.Point) -> NotAutoLayout.Point)
+		case byReference(referenceGetter: () -> UIView?, (ViewPinGuides.Point) -> NotAutoLayout.Point)
 		
 	}
 	

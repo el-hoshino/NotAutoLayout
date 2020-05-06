@@ -38,6 +38,8 @@ extension Line.Horizontal: ExpressibleByFloatLiteral {
 extension Line.Horizontal: ExpressibleByIntegerLiteral {
 	
 	public init(integerLiteral value: Int) {
+		// This is local type NotAutoLayout.Float, not Swift.Float
+		// swiftlint:disable:next compiler_protocol_init
 		self.value = Float(integerLiteral: value)
 	}
 	
@@ -74,6 +76,8 @@ extension Line.Vertical: ExpressibleByFloatLiteral {
 extension Line.Vertical: ExpressibleByIntegerLiteral {
 	
 	public init(integerLiteral value: Int) {
+		// This is local type NotAutoLayout.Float, not Swift.Float
+		// swiftlint:disable:next compiler_protocol_init
 		self.value = Float(integerLiteral: value)
 	}
 	

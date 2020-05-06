@@ -41,7 +41,7 @@ extension Float: ExpressibleByFloatLiteral {
 
 extension Float: Equatable {
 	
-	public static func ==(lhs: Float, rhs: Float) -> Bool {
+	public static func == (lhs: Float, rhs: Float) -> Bool {
 		return lhs.value == rhs.value
 	}
 	
@@ -61,7 +61,7 @@ extension Float: Numeric {
 	
 	public typealias IntegerLiteralType = CGFloat.IntegerLiteralType
 	
-	public init?<T>(exactly source: T) where T : BinaryInteger {
+	public init?<T>(exactly source: T) where T: BinaryInteger {
 		if let value = CGFloat(exactly: source) {
 			self.value = value
 		} else {
@@ -73,28 +73,28 @@ extension Float: Numeric {
 		self.value = CGFloat(integerLiteral: value)
 	}
 	
-	public static func +(lhs: Float, rhs: Float) -> Float {
+	public static func + (lhs: Float, rhs: Float) -> Float {
 		return Float(lhs.value + rhs.value)
 	}
 	
-	public static func +=(lhs: inout Float, rhs: Float) {
+	public static func += (lhs: inout Float, rhs: Float) {
 		// swiftlint:disable:next shorthand_operator
 		lhs = lhs + rhs
 	}
-	public static func -(lhs: Float, rhs: Float) -> Float {
+	public static func - (lhs: Float, rhs: Float) -> Float {
 		return Float(lhs.value - rhs.value)
 	}
 	
-	public static func -=(lhs: inout Float, rhs: Float) {
+	public static func -= (lhs: inout Float, rhs: Float) {
 		// swiftlint:disable:next shorthand_operator
 		lhs = lhs - rhs
 	}
 	
-	public static func *(lhs: Float, rhs: Float) -> Float {
+	public static func * (lhs: Float, rhs: Float) -> Float {
 		return Float(lhs.value * rhs.value)
 	}
 	
-	public static func *=(lhs: inout Float, rhs: Float) {
+	public static func *= (lhs: inout Float, rhs: Float) {
 		// swiftlint:disable:next shorthand_operator
 		lhs = lhs * rhs
 	}
@@ -139,7 +139,7 @@ extension Float: FloatingPoint {
 		self.value = CGFloat(signOf: signOf.value, magnitudeOf: magnitudeOf.value)
 	}
 	
-	public init<Source>(_ value: Source) where Source : BinaryInteger {
+	public init<Source>(_ value: Source) where Source: BinaryInteger {
 		self.value = CGFloat(value)
 	}
 	
@@ -191,11 +191,11 @@ extension Float: FloatingPoint {
 		return Float(self.value.significand)
 	}
 	
-	public static func /(lhs: Float, rhs: Float) -> Float {
+	public static func / (lhs: Float, rhs: Float) -> Float {
 		return Float(lhs.value / rhs.value)
 	}
 	
-	public static func /=(lhs: inout Float, rhs: Float) {
+	public static func /= (lhs: inout Float, rhs: Float) {
 		// swiftlint:disable:next shorthand_operator
 		lhs = lhs / rhs
 	}

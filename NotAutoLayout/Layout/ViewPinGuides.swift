@@ -93,24 +93,29 @@ extension ViewPinGuides.Horizontal {
 extension ViewPinGuides.Horizontal {
 	
 	public var frameGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
 	}
 	
 	public var identityFrameGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
 	}
 	
 	public var layoutMarginsGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
 	}
 	
 	public var readableGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.readableFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.readableFrame(in: self.parentView))
 	}
 	
 	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.safeAreaFrame(in: self.parentView))
 	}
 	
 }
@@ -253,24 +258,29 @@ extension ViewPinGuides.Point {
 extension ViewPinGuides.Point {
 	
 	public var frameGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: false))
 	}
 	
 	public var identityFrameGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.frame(in: self.parentView, ignoresTransform: true))
 	}
 	
 	public var layoutMarginsGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.layoutMarginsFrame(in: self.parentView))
 	}
 	
 	public var readableGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.readableFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.readableFrame(in: self.parentView))
 	}
 	
 	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
-		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection }, rect: self.referenceView?.safeAreaFrame(in: self.parentView))
+		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
+							  rect: self.referenceView?.safeAreaFrame(in: self.parentView))
 	}
 	
 }
