@@ -20,11 +20,16 @@ identifier_name:
     - us
     - at
     - vc
+    - pi
+    - up
 
 line_length:
   ignores_function_declarations: true
   ignores_comments: true
   warning: 175
+
+file_length:
+  warning: 500
 
 type_name:
   max_length: 50

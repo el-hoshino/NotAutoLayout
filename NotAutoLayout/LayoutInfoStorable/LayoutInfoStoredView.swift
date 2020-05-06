@@ -12,8 +12,8 @@ import UIKit
 open class LayoutInfoStoredView: UIView, LayoutInfoStorable {
 	
 	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
-	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
-	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
+	open var orderInfo: [ConditionEnum.RawValue: OrderInfo] = [:]
+	open var zIndexInfo: [ConditionEnum.RawValue: ZIndexInfo] = [:]
 	
 	public var conditionGetter: ((CGSize) -> ConditionEnum)? = { _ in DefaultCondition.default }
 	

@@ -77,7 +77,7 @@ extension ViewInfo {
 	
 }
 
-extension ViewInfo : ExpressibleByDictionaryLiteral {
+extension ViewInfo: ExpressibleByDictionaryLiteral {
 	
 	public init(dictionaryLiteral elements: (UIView, InfoType)...) {
 		

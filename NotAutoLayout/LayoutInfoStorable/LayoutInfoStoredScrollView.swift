@@ -11,8 +11,8 @@ import Foundation
 open class LayoutInfoStoredScrollView: UIScrollView, LayoutInfoStorable {
 	
 	open var layoutInfo: [ConditionEnum.RawValue: LayoutInfo] = [:]
-	open var orderInfo: [ConditionEnum.RawValue : OrderInfo] = [:]
-	open var zIndexInfo: [ConditionEnum.RawValue : ZIndexInfo] = [:]
+	open var orderInfo: [ConditionEnum.RawValue: OrderInfo] = [:]
+	open var zIndexInfo: [ConditionEnum.RawValue: ZIndexInfo] = [:]
 	
 	open var conditionGetter: ((CGSize) -> ConditionEnum)? = { _ in DefaultCondition.default }
 	

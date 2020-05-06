@@ -55,7 +55,7 @@ public enum FrameAdditionalEvaluation {
 
 extension FrameAdditionalEvaluation {
 	
-	// swiftlint:disable:next cyclomatic_complexity
+	// swiftlint:disable:next cyclomatic_complexity function_body_length
 	func evaluated(from frame: Rect, with parameters: IndividualFrameCalculationParameters) -> Rect {
 		
 		var frame = frame
