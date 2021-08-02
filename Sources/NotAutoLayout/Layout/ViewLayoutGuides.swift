@@ -186,7 +186,6 @@ extension ViewLayoutGuides {
 		return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.readableRect)
 	}
 	
-	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(direction: self.parentView?.currentDirection, rect: self.parentView?.safeAreaRect)
 	}
@@ -239,7 +238,6 @@ extension ViewLayoutGuides {
 		return (self.parentView?.layoutMargins).map({ Insets($0) }) ?? .zero
 	}
 	
-	@available(iOS 11.0, *)
 	public var safeAreaInsets: Insets {
 		return (self.parentView?.safeAreaInsets).map({ Insets($0) }) ?? .zero
 	}
