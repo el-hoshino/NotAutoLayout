@@ -62,7 +62,6 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreFrameType {
 		
 	}
 	
-	@available(iOS 11.0, *)
 	public func stickOnParentSafeArea(withInsets insets: Insets = .zero) -> LayoutMaker<Property.WillSetFrameProperty> {
 		
 		let frame = LayoutElement.Rect.byParent({ $0.safeAreaGuide.frame(inside: insets) })

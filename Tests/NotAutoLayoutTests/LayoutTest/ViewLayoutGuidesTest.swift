@@ -128,7 +128,6 @@ class ViewLayoutGuidesTest: XCTestCase {
 		
 	}
 	
-	@available(iOS 11.0, *)
 	func testSafeAreaGuide() {
 		
 		// TODO: Find a way to add the view controller to the view hierarchy, otherwise the views cannot get the correct safe area settings.

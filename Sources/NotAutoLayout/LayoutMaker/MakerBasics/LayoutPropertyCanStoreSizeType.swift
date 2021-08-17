@@ -76,7 +76,6 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	@available(iOS 11.0, *)
 	public func aspectFit(ratio: Float? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFit(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))
@@ -86,7 +85,6 @@ extension LayoutMaker where Property: LayoutPropertyCanStoreSizeType {
 		
 	}
 	
-	@available(iOS 11.0, *)
 	public func aspectFill(ratio: Float? = nil, safeAreaOnly shouldOnlyIncludeSafeArea: Bool) -> LayoutMaker<Property.WillSetSizeProperty> {
 		
 		let size = LayoutElement.Size.aspect(.safeAreaFill(ratio, safeAreaOnly: shouldOnlyIncludeSafeArea))

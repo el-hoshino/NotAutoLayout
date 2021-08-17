@@ -33,7 +33,7 @@ With NotAutoLayout, you don't need to care about anything like constraints or si
 
 ## Requirements
 
-- iOS 9.0+
+- iOS 11.0+
 - Xcode 10.2+
 - Swift 5.0+
 

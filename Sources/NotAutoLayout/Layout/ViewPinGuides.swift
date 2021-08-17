@@ -112,7 +112,6 @@ extension ViewPinGuides.Horizontal {
 							  rect: self.referenceView?.readableFrame(in: self.parentView))
 	}
 	
-	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
 							  rect: self.referenceView?.safeAreaFrame(in: self.parentView))
@@ -199,7 +198,6 @@ extension ViewPinGuides.Vertical {
 		return self.makeGuide(rect: self.referenceView?.readableFrame(in: self.parentView))
 	}
 	
-	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(rect: self.referenceView?.safeAreaFrame(in: self.parentView))
 	}
@@ -277,7 +275,6 @@ extension ViewPinGuides.Point {
 							  rect: self.referenceView?.readableFrame(in: self.parentView))
 	}
 	
-	@available(iOS 11.0, *)
 	public var safeAreaGuide: Guide {
 		return self.makeGuide(directionGetter: { [weak referenceView] in referenceView?.currentDirection },
 							  rect: self.referenceView?.safeAreaFrame(in: self.parentView))

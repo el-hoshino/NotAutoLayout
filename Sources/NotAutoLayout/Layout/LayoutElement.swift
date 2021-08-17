@@ -52,11 +52,7 @@ extension LayoutElement {
 			
 			case fit(Float?, layoutGuideGetter: (ViewLayoutGuides) -> LayoutGuideRepresentable)
 			case fill(Float?, layoutGuideGetter: (ViewLayoutGuides) -> LayoutGuideRepresentable)
-			
-			@available(iOS 11.0, *)
 			case safeAreaFit(Float?, safeAreaOnly: Bool)
-			
-			@available(iOS 11.0, *)
 			case safeAreaFill(Float?, safeAreaOnly: Bool)
 			
 			var ratio: Float? {

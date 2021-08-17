@@ -36,7 +36,6 @@ extension UIView {
 		return Rect(frame)
 	}
 	
-	@available(iOS 11.0, *)
 	var safeAreaRect: Rect {
 		let insets = Insets(self.safeAreaInsets)
 		return self.boundsRect.rect(inside: insets)
@@ -93,7 +92,6 @@ extension UIView {
 		
 	}
 	
-	@available(iOS 11.0, *)
 	func safeAreaFrame(in targetView: UIView?) -> Rect {
 		
 		let insets = Insets(self.safeAreaInsets)
