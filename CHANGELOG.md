@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.2]
+
+### Enhanced
+
+- Xcode 13 Beta Support
+
+### Dropped
+
+- iOS 9 and 10 Not Support
+
 ## [3.3.1]
 
 ### Enhanced
