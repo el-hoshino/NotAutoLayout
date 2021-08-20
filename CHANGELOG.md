@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0-beta]
+
+Adapt a workaround for Xcode 13 Beta.
+https://developer.apple.com/forums/thread/682351
+
+### Enhanced
+
+- Xcode 13 Beta Support
+
+### Breaking Changed
+
+- iOS 9 and 10 Not Support
+
 ## [3.3.1]
 
 ### Enhanced
